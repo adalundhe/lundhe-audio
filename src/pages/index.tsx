@@ -67,7 +67,6 @@ export default function Home() {
                           height="0"
                           sizes="100vw"
                           className="w-3/4 h-full"
-                          placeholder="blur"
                       />
                   </AspectRatio>
                 </CarouselItem>

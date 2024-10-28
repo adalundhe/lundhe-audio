@@ -27,7 +27,7 @@ export default function Studio() {
                     <div className="w-full flex justify-center">   
                         <Separator className="w-3/4 my-8"/>
                     </div>
-                    <div className="flex items-center justify-center my-4 w-full">
+                    <div className="flex items-center justify-center my-4 w-full h-full">
                         <Image
                             src="/studio/studio_front_monochrome.jpg"
                             alt="The front of the studio for Lundhe Audio including Raven MTI2 and Console 1 control, Neve 5060 summing, ExMachina, Focal, and Neuman monitors, and numerous outboard pieces."
@@ -35,7 +35,6 @@ export default function Studio() {
                             height="0"
                             sizes="100vw"
                             className="w-2/3"
-                            placeholder="blur"
                         />
                     </div>
                     <div className="w-2/3">
