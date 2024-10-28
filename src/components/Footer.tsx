@@ -34,11 +34,14 @@ import { ScrollArea } from "~/components/ui/scroll-area"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 
 export const Footer = () => {
 
     const [formOpen, setFormOpen] = useState(false)
+
+    const router = useRouter()
 
     const formSchema = z.object({
         name: z.string().min(2, {
@@ -106,158 +109,161 @@ export const Footer = () => {
     return (    
         <footer className={`w-full h-[80px] pt-8 pb-8 px-3 ${GeistSans.className}`}>
             <div className="h-full w-full flex flex-col justify-center items-center">
-                <Dialog open={formOpen}>
-                    <DialogTrigger asChild onClick={() => setFormOpen(true)}>
-                        <div className="flex items-center cursor-pointer">             
-                            <BiSolidMessageEdit className="pt-1 text-2xl" />
-                            <p className="ml-1">
-                                contact
-                            </p>
-                        </div>
-                    </DialogTrigger>
-                    <DialogContent closeFormOverride={() => setFormOpen(false)} className={`${GeistSans.className} sm:max-w-[425px] rounded-sm`}>   
-                        <ScrollArea className="h-[50vh] w-full my-6">
+                {
+                    router.route.includes("contact") ? null :
+                    <Dialog open={formOpen}>
+                        <DialogTrigger asChild onClick={() => setFormOpen(true)}>
+                            <div className="flex items-center cursor-pointer">             
+                                <BiSolidMessageEdit className="pt-1 text-2xl" />
+                                <p className="ml-1">
+                                    contact
+                                </p>
+                            </div>
+                        </DialogTrigger>
+                        <DialogContent closeFormOverride={() => setFormOpen(false)} className={`${GeistSans.className} sm:max-w-[425px] rounded-sm`}>   
+                            <ScrollArea className="h-[50vh] w-full my-6">
+                                    
+                                <DialogHeader>
+                                    <DialogTitle className="text-center">Get in touch!</DialogTitle>
+                                    <DialogDescription className="text-center">
+                                        Fill out the form below to reach out to us. We usually respond in one business day.
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <Form {...form}>
+                                    <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 mx-8 py-4">
+                                        <FormField
+                                            control={form.control}
+                                            name="name"
+                                            render={({ field }) => (
+                                                <FormItem className="flex flex-col">
+                                                    <FormLabel>Name</FormLabel>
+                                                    <FormDescription>
+                                                        Your first or full name.
+                                                    </FormDescription>
+                                                    <FormControl>
+                                                        <Input placeholder="Please enter your name." {...field} />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="email"
+                                            render={({ field }) => (
+                                                <FormItem className="flex flex-col">
+                                                    <FormLabel>Email</FormLabel>
+                                                    <FormDescription>
+                                                        Your email for us to contact you at.
+                                                    </FormDescription>
+                                                    <FormControl>
+                                                        <Input placeholder="Please enter your email." {...field} type="email" />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="phone"
+                                            render={({ field }) => (
+                                                <FormItem className="flex flex-col">
+                                                    <FormLabel>Phone</FormLabel>
+                                                    <FormDescription>
+                                                        Your phone for us to contact you at.
+                                                    </FormDescription>
+                                                    <FormControl>
+                                                        <Input 
+                                                            placeholder="Please enter your phone." {...field} 
+                                                            type="phone" 
+                                                            onChange={(e) => {
+
+                                                                if (form.formState.errors.phone){
+                                                                    form.clearErrors("phone")
+                                                                }
+
+                                                                form.setValue("phone", formatPhoneNumber(e.target.value, field.value) ?? "")
+                                                            }}
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="service"
+                                            render={({ field }) => (
+                                                <FormItem className="flex flex-col">
+                                                    <FormLabel>Service</FormLabel>
+                                                    <FormDescription>
+                                                        Select the service you intend to enquire about.
+                                                    </FormDescription>
+                                                    <FormControl>
+                                                        <Select {...field}>
+                                                            <SelectTrigger>
+                                                                <SelectValue placeholder="Select a provided service" />
+                                                            </SelectTrigger>
+                                                            <SelectContent className={GeistSans.className}>
+                                                                <SelectItem value="mixing">mixing</SelectItem>
+                                                                <SelectItem value="mastering">mastering</SelectItem>
+                                                                <SelectItem value="sound-design">sound design</SelectItem>
+                                                                <SelectItem value="commercial-audio">commercial audio</SelectItem>
+                                                                <SelectItem value="other">other</SelectItem>
+                                                            </SelectContent>
+                                                        </Select>
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="message"
+                                            render={({ field }) => (
+                                                <FormItem className="flex flex-col">
+                                                    <FormLabel>Message</FormLabel>
+                                                    <FormDescription>
+                                                        Enter a message.
+                                                    </FormDescription>
+                                                    <FormControl>
+                                                        <Textarea placeholder="Please enter a message." {...field} />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="contactConsent"
+                                            render={({ field }) => (
+                                                <FormItem className="flex flex-col">
+                                                    <FormLabel className="text-sm">Accept Terms and Conditions</FormLabel>
+                                                    <FormDescription>
+                                                        You consent to receive SMS messages at {field.value} provided for the express 
+                                                        purpose of service scheduling/confirmation and updates (carrier charges may apply).
+                                                    </FormDescription>
+                                                    <FormControl>
+                                                        <Checkbox
+                                                            checked={field.value}
+                                                            onCheckedChange={field.onChange}                         
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <DialogFooter className="mt-4">
+                                            <Button type="submit">submit</Button>
+                                        </DialogFooter>
+                                    </form>
+                                </Form>
                                 
-                            <DialogHeader>
-                                <DialogTitle className="text-center">Get in touch!</DialogTitle>
-                                <DialogDescription className="text-center">
-                                    Fill out the form below to reach out to us. We usually respond in one business day.
-                                </DialogDescription>
-                            </DialogHeader>
-                            <Form {...form}>
-                                <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 mx-8 py-4">
-                                    <FormField
-                                        control={form.control}
-                                        name="name"
-                                        render={({ field }) => (
-                                            <FormItem className="flex flex-col">
-                                                <FormLabel>Name</FormLabel>
-                                                <FormDescription>
-                                                    Your first or full name.
-                                                </FormDescription>
-                                                <FormControl>
-                                                    <Input placeholder="Please enter your name." {...field} />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <FormField
-                                        control={form.control}
-                                        name="email"
-                                        render={({ field }) => (
-                                            <FormItem className="flex flex-col">
-                                                <FormLabel>Email</FormLabel>
-                                                <FormDescription>
-                                                    Your email for us to contact you at.
-                                                </FormDescription>
-                                                <FormControl>
-                                                    <Input placeholder="Please enter your email." {...field} type="email" />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <FormField
-                                        control={form.control}
-                                        name="phone"
-                                        render={({ field }) => (
-                                            <FormItem className="flex flex-col">
-                                                <FormLabel>Phone</FormLabel>
-                                                <FormDescription>
-                                                    Your phone for us to contact you at.
-                                                </FormDescription>
-                                                <FormControl>
-                                                    <Input 
-                                                        placeholder="Please enter your phone." {...field} 
-                                                        type="phone" 
-                                                        onChange={(e) => {
+                            </ScrollArea>
+                        </DialogContent>
 
-                                                            if (form.formState.errors.phone){
-                                                                form.clearErrors("phone")
-                                                            }
-
-                                                            form.setValue("phone", formatPhoneNumber(e.target.value, field.value) ?? "")
-                                                        }}
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <FormField
-                                        control={form.control}
-                                        name="service"
-                                        render={({ field }) => (
-                                            <FormItem className="flex flex-col">
-                                                <FormLabel>Service</FormLabel>
-                                                <FormDescription>
-                                                    Select the service you intend to enquire about.
-                                                </FormDescription>
-                                                <FormControl>
-                                                    <Select {...field}>
-                                                        <SelectTrigger>
-                                                            <SelectValue placeholder="Select a provided service" />
-                                                        </SelectTrigger>
-                                                        <SelectContent className={GeistSans.className}>
-                                                            <SelectItem value="mixing">mixing</SelectItem>
-                                                            <SelectItem value="mastering">mastering</SelectItem>
-                                                            <SelectItem value="sound-design">sound design</SelectItem>
-                                                            <SelectItem value="commercial-audio">commercial audio</SelectItem>
-                                                            <SelectItem value="other">other</SelectItem>
-                                                        </SelectContent>
-                                                    </Select>
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <FormField
-                                        control={form.control}
-                                        name="message"
-                                        render={({ field }) => (
-                                            <FormItem className="flex flex-col">
-                                                <FormLabel>Message</FormLabel>
-                                                <FormDescription>
-                                                    Enter a message.
-                                                </FormDescription>
-                                                <FormControl>
-                                                    <Textarea placeholder="Please enter a message." {...field} />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <FormField
-                                        control={form.control}
-                                        name="contactConsent"
-                                        render={({ field }) => (
-                                            <FormItem className="flex flex-col">
-                                                <FormLabel className="text-sm">Accept Terms and Conditions</FormLabel>
-                                                <FormDescription>
-                                                    You consent to receive SMS messages at {field.value} provided for the express 
-                                                    purpose of service scheduling/confirmation and updates (carrier charges may apply).
-                                                </FormDescription>
-                                                <FormControl>
-                                                    <Checkbox
-                                                        checked={field.value}
-                                                        onCheckedChange={field.onChange}                         
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <DialogFooter className="mt-4">
-                                        <Button type="submit">submit</Button>
-                                    </DialogFooter>
-                                </form>
-                            </Form>
-                            
-                        </ScrollArea>
-                    </DialogContent>
-
-                </Dialog>
+                    </Dialog>
+                }
                 <p className="text-xs my-2 text-muted-foreground">&#169; ada lundhe 2024</p>
             </div>
         </footer>
