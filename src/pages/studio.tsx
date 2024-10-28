@@ -323,6 +323,7 @@ export default function Studio() {
                             For guitar and instrument recordings, we offer the following ribbon microphones:
                         </p>
                         <ul className="my-4 list-disc list-inside">
+                            <li>Hum Audio ARM-1L</li>
                             <li>Samar VL37</li>
                             <li>Royer 121 (<b>x2</b>)</li>
                             <li>Royer R10 Hot Rod (<b>x2</b>)</li>
