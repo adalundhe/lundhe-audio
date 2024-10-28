@@ -35,6 +35,7 @@ export default function Studio() {
                             height="0"
                             sizes="100vw"
                             className="w-2/3"
+                            placeholder="blur"
                         />
                     </div>
                     <div className="w-2/3">
