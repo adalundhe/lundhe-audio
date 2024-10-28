@@ -1,5 +1,4 @@
 import { GeistSans } from "geist/font/sans";
-import { Avatar, AvatarImage } from "~/components/ui/avatar"
 import { BiSolidMessageEdit } from "react-icons/bi";
 import {
     Dialog,
@@ -9,7 +8,6 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-    DialogClose,
 } from "~/components/ui/dialog"
 import {
     Form,
