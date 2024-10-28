@@ -1,4 +1,5 @@
 import { GeistSans } from "geist/font/sans";
+import Link from "next/link";
 import {
     Card,
     CardContent,
@@ -35,7 +36,7 @@ import { useState } from "react";
 import { Layout } from "~/components/Layout";
 
 
-export default function Home() {
+export default function Contact() {
 
     const [formOpen, setFormOpen] = useState(true)
 
@@ -240,7 +241,11 @@ export default function Home() {
                                 )}
                             />
                             <CardFooter className="mt-4">
-                                <Button type="submit">submit</Button>
+                                <div className="flex flex-col w-full items-center">
+                                    
+                                    <Button type="submit">submit</Button>
+                                    <Link href="/privacy" className="text-xs my-2 text-muted-foreground">privacy</Link>
+                                </div>
                             </CardFooter>
                         </form>
                     </Form>

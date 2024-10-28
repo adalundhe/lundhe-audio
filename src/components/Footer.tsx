@@ -35,6 +35,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 
 export const Footer = () => {
@@ -254,7 +255,11 @@ export const Footer = () => {
                                             )}
                                         />
                                         <DialogFooter className="mt-4">
-                                            <Button type="submit">submit</Button>
+                                            <div className="flex flex-col w-full items-center">
+                                                
+                                                <Button type="submit">submit</Button>
+                                                <Link onClick={() => setFormOpen(false)} href="/privacy" className="text-xs my-2 text-muted-foreground">privacy</Link>
+                                            </div>
                                         </DialogFooter>
                                     </form>
                                 </Form>
