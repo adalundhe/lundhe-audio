@@ -24,7 +24,7 @@ export default function About() {
                     <div className="pt-4">
                         <p>        
                             Lundhe Audio was founded in 2024 by long-time sound designer and engineer Ada Lundhe after 
-                            over a decade of providing mixing, mastering, commercial audio, and sound-design services.
+                            over fifteen years of providing mixing, mastering, commercial audio, and sound-design services.
                         </p>
                         <br/>
                         <p>
