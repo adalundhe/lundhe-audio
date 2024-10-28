@@ -125,7 +125,7 @@ export const Footer = () => {
                                 </DialogDescription>
                             </DialogHeader>
                             <Form {...form}>
-                                <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 mx-4 py-4">
+                                <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 mx-8 py-4">
                                     <FormField
                                         control={form.control}
                                         name="name"
