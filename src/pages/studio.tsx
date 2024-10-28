@@ -178,6 +178,7 @@ export default function Studio() {
                             <li>Manley VariMu TheWorks (t-bar mod and mid/side)</li>
                             <li>Purple Audio MC77 (<b>x2</b>)</li>
                             <li>Retro Instruments Revolver</li>
+                            <li>Rupert Neve Designs Master Bus Processor</li>
                             <li>Rupert Neve Designs 535 Diode Bridge Compressor (<b>x2</b>)</li>
                             <li>Rupert Neve Designs 543 VCA Compressor (<b>x2</b>)</li>
                             <li>Serpent Audio Chimera Optical Compressor (<b>x2</b>)</li>
