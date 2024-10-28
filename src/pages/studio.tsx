@@ -31,7 +31,7 @@ export default function Studio() {
             </div>
             <ScrollArea className="h-[65vh] w-full">
                 <CardContent className="p-0 w-[100%] flex flex-col items-center">       
-                    <div className="flex items-center w-full mb-2">
+                    <div className="flex items-center w-3/4 h-3/4 mb-2">
                         <AspectRatio ratio={4 / 3} className="flex items-center justify-center">
                             <Image
                                 src="/studio/studio_front_monochrome.jpeg"
@@ -39,7 +39,7 @@ export default function Studio() {
                                 width="0"
                                 height="0"
                                 sizes="100vw"
-                                className="w-3/4 h-3/4"
+                                className="w-full h-full"
                                 placeholder="blur"
                                 blurDataURL={blurDataUrl}
                             />
