@@ -119,8 +119,8 @@ export const Footer = () => {
                         <ScrollArea className="h-[50vh] w-full my-6">
                                 
                             <DialogHeader>
-                                <DialogTitle>Get in touch!</DialogTitle>
-                                <DialogDescription>
+                                <DialogTitle className="text-center">Get in touch!</DialogTitle>
+                                <DialogDescription className="text-center">
                                     Fill out the form below to reach out to us. We usually respond in one business day.
                                 </DialogDescription>
                             </DialogHeader>
