@@ -235,7 +235,7 @@ export const Footer = () => {
                                             <FormItem className="flex flex-col">
                                                 <FormLabel className="text-sm">Accept Terms and Conditions</FormLabel>
                                                 <FormDescription>
-                                                    I consent to receive SMS messages at {field.value} provided for the express 
+                                                    You consent to receive SMS messages at {field.value} provided for the express 
                                                     purpose of service scheduling/confirmation and updates (carrier charges may apply).
                                                 </FormDescription>
                                                 <FormControl>
