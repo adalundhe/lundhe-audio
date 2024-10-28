@@ -9,6 +9,7 @@ import {
   import Image from "next/image";
   import { Separator } from "~/components/ui/separator"
   import { ScrollArea } from "~/components/ui/scroll-area"
+  import { AspectRatio } from "~/components/ui/aspect-ratio"
   import { StudioContentSection } from "~/components/StudioContentSection";
 
 
@@ -21,26 +22,28 @@ export default function Studio() {
     <>
       <Layout>
         <Card className="w-full md:w-3/4 h-full rounded-none border-none shadow-none">
-        <CardHeader>
-            <CardTitle>Studio and Gear</CardTitle>
-            <CardDescription>Quality makes all the difference.</CardDescription>
-        </CardHeader>
-        <ScrollArea className="h-[50vh] w-full">
-                <CardContent className="p-0 w-[100%] h-full flex flex-col items-center">       
-                    <div className="w-full flex justify-center">   
-                        <Separator className="w-3/4 my-8"/>
-                    </div>
-                    <div className="flex items-center justify-center my-4 w-full h-full">
-                        <Image
-                            src="/studio/studio_front_monochrome.jpeg"
-                            alt="The front of the studio for Lundhe Audio including Raven MTI2 and Console 1 control, Neve 5060 summing, ExMachina, Focal, and Neuman monitors, and numerous outboard pieces."
-                            width="0"
-                            height="0"
-                            sizes="100vw"
-                            className="w-2/3"
-                            placeholder="blur"
-                            blurDataURL={blurDataUrl}
-                        />
+            <CardHeader className="p-0 mb-4 flex flex-col items-center">
+                <CardTitle className="w-3/4 text-2xl">Studio and Gear</CardTitle>
+                <CardDescription className="w-3/4">Quality makes all the difference.</CardDescription>
+            </CardHeader>
+            <div className="w-full flex justify-center">   
+                <Separator className="w-3/4 mt-4"/>
+            </div>
+            <ScrollArea className="h-[65vh] w-full">
+                <CardContent className="p-0 w-[100%] flex flex-col items-center">       
+                    <div className="flex items-center w-full mb-2">
+                        <AspectRatio ratio={4 / 3} className="flex items-center justify-center">
+                            <Image
+                                src="/studio/studio_front_monochrome.jpeg"
+                                alt="The front of the studio for Lundhe Audio including Raven MTI2 and Console 1 control, Neve 5060 summing, ExMachina, Focal, and Neuman monitors, and numerous outboard pieces."
+                                width="0"
+                                height="0"
+                                sizes="100vw"
+                                className="w-3/4 h-3/4"
+                                placeholder="blur"
+                                blurDataURL={blurDataUrl}
+                            />
+                        </AspectRatio>
                     </div>
                     <div className="w-2/3">
                         <p>

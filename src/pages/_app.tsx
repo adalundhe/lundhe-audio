@@ -22,7 +22,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar />
-      <div className={`${GeistSans.className} flex flex-col`}>
+      <div className={`${GeistSans.className} flex flex-col flex-1`}>
         <Component {...pageProps} />
       </div>
       <Footer />
