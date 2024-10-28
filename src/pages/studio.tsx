@@ -29,7 +29,7 @@ export default function Studio() {
             <div className="w-full flex justify-center">   
                 <Separator className="w-3/4 mt-4"/>
             </div>
-            <ScrollArea className="h-[65vh] w-full">
+            <ScrollArea className="h-[65vh] w-full mt-8">
                 <CardContent className="p-0 w-[100%] flex flex-col items-center">       
                     <div className="flex items-center w-3/4 h-3/4 mb-2">
                         <AspectRatio ratio={4 / 3} className="flex items-center justify-center">
