@@ -30,8 +30,8 @@ export default function Studio() {
                 <Separator className="w-3/4 mt-4"/>
             </div>
             <ScrollArea className="h-[65vh] w-full mt-8">
-                <CardContent className="p-0 w-[100%] flex flex-col items-center">       
-                    <div className="flex items-center w-3/4 h-3/4 mb-2">
+                <CardContent className="p-0 w-[100%] flex flex-col items-center mb-4">       
+                    <div className="flex items-center w-3/4 h-3/4">
                         <AspectRatio ratio={4 / 3} className="flex items-center justify-center">
                             <Image
                                 src="/studio/studio_front_monochrome.jpeg"
@@ -45,7 +45,7 @@ export default function Studio() {
                             />
                         </AspectRatio>
                     </div>
-                    <div className="w-2/3">
+                    <div className="w-2/3 mt-8">
                         <p>
                             Lundhe Audio is equipped to handle almost any need or situation, with top-tier analog equipment, state of the art software, and an ever growing
                             catalogue of instruments and tools to make musical magic happen. Here's some of what we use.
