@@ -104,8 +104,8 @@ export const Footer = () => {
     }
 
     return (    
-        <footer className={`w-full h-[60px] pt-8 pb-8 px-3 ${GeistSans.className}`}>
-            <div className="h-full w-full flex justify-center items-center">
+        <footer className={`w-full h-[80px] pt-8 pb-8 px-3 ${GeistSans.className}`}>
+            <div className="h-full w-full flex flex-col justify-center items-center">
                 <Dialog open={formOpen}>
                     <DialogTrigger asChild onClick={() => setFormOpen(true)}>
                         <div className="flex items-center cursor-pointer">             
@@ -258,6 +258,7 @@ export const Footer = () => {
                     </DialogContent>
 
                 </Dialog>
+                <p className="text-xs my-2 text-muted-foreground">&#169; ada lundhe 2024</p>
             </div>
         </footer>
     )
