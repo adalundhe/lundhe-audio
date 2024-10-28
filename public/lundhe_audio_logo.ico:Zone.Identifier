@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://cloudconvert.com/
+HostUrl=https://us-east.storage.cloudconvert.com/tasks/35418ac4-7a86-463d-9b54-31452544d6d9/lundhe_audio_logo.ico?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=cloudconvert-production%2F20241026%2Fva%2Fs3%2Faws4_request&X-Amz-Date=20241026T213532Z&X-Amz-Expires=86400&X-Amz-Signature=6c73d372ebed520cc75f1c037cc1567d2571573f34e0651b1f32e656a24417b9&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3D%22lundhe_audio_logo.ico%22&response-content-type=image%2Fvnd.microsoft.icon&x-id=GetObject
