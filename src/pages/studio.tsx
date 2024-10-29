@@ -312,6 +312,7 @@ export default function Studio() {
                             <li>Schoeps CMC6 with MK4 Cardioid Capsules (<b>matched pair</b>)</li>
                             <li>Soyuz 013 FET (<b>matched pair</b>)</li>
                             <li>Soyuz 013 TUBE (<b>matched pair</b>)</li>
+                            <li>Telefunken ELA M 260</li>
                         </ul>
                     </StudioContentSection>
                     <StudioContentSection 
