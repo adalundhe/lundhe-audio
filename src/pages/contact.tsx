@@ -38,7 +38,7 @@ import { Layout } from "~/components/Layout";
 
 export default function Contact() {
 
-    const [formOpen, setFormOpen] = useState(true)
+    const [formActive, setFormActive] = useState(true)
 
     const formSchema = z.object({
         name: z.string().min(2, {
@@ -98,7 +98,7 @@ export default function Contact() {
     const onSubmit = (values: z.infer<typeof formSchema>) => {
         const errorsCount = Object.keys(form.formState.errors).length
         if(errorsCount < 1 && values.contactConsent === true){
-            setFormOpen(false)
+            setFormActive(false)
             form.reset()
         }        
     }
@@ -117,7 +117,7 @@ export default function Contact() {
             <ScrollArea className="h-full w-full">
                 <CardContent className="p-0 w-[100%] h-full flex flex-col items-center">
                     <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 mx-8 py-4 h-full">
+                        <form aria-disabled={!formActive} onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 mx-8 py-4 h-full">
                             <FormField
                                 control={form.control}
                                 name="name"
@@ -128,7 +128,10 @@ export default function Contact() {
                                             Your first or full name.
                                         </FormDescription>
                                         <FormControl>
-                                            <Input placeholder="Please enter your name." {...field} />
+                                            <Input 
+                                                disabled={!formActive}
+                                                aria-disabled={!formActive}
+                                                placeholder="Please enter your name." {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -144,7 +147,13 @@ export default function Contact() {
                                             Your email for us to contact you at.
                                         </FormDescription>
                                         <FormControl>
-                                            <Input placeholder="Please enter your email." {...field} type="email" />
+                                            <Input 
+                                                disabled={!formActive}
+                                                aria-disabled={!formActive}
+                                                placeholder="Please enter your email." 
+                                                type="email" 
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -161,6 +170,8 @@ export default function Contact() {
                                         </FormDescription>
                                         <FormControl>
                                             <Input 
+                                                disabled={!formActive} 
+                                                aria-disabled={!formActive}
                                                 placeholder="Please enter your phone." {...field} 
                                                 type="phone" 
                                                 onChange={(e) => {
@@ -187,7 +198,11 @@ export default function Contact() {
                                             Select the service you intend to enquire about.
                                         </FormDescription>
                                         <FormControl>
-                                            <Select {...field}>
+                                            <Select 
+                                                disabled={!formActive} 
+                                                aria-disabled={!formActive} 
+                                                {...field}
+                                            >
                                                 <SelectTrigger>
                                                     <SelectValue placeholder="Select a provided service" />
                                                 </SelectTrigger>
@@ -214,7 +229,11 @@ export default function Contact() {
                                             Enter a message.
                                         </FormDescription>
                                         <FormControl>
-                                            <Textarea placeholder="Please enter a message." {...field} />
+                                            <Textarea
+                                                disabled={!formActive} 
+                                                aria-disabled={!formActive}
+                                                placeholder="Please enter a message." {...field}
+                                            />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -232,6 +251,8 @@ export default function Contact() {
                                         </FormDescription>
                                         <FormControl>
                                             <Checkbox
+                                                disabled={!formActive} 
+                                                aria-disabled={!formActive}
                                                 checked={field.value}
                                                 onCheckedChange={field.onChange}                         
                                             />
@@ -243,8 +264,16 @@ export default function Contact() {
                             <CardFooter className="mt-4">
                                 <div className="flex flex-col w-full items-center">
                                     
-                                    <Button type="submit">submit</Button>
-                                    <Link href="/privacy" className="text-xs my-2 text-muted-foreground">privacy</Link>
+                                    <Button   
+                                        disabled={!formActive} 
+                                        aria-disabled={!formActive}
+                                        type="submit"
+                                        className="w-[100px] h-36px"
+                                    >
+                                        { formActive ? "submit" : "submitted!" }
+                                    </Button>
+                                    <Link onClick={() => setFormActive(false)} href="/privacy" className="text-xs mt-2 text-muted-foreground">privacy</Link>
+                                    <Link onClick={() => setFormActive(false)} href="/terms_of_service" className="text-xs mb-2 text-muted-foreground">terms of service</Link>
                                 </div>
                             </CardFooter>
                         </form>

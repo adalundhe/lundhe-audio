@@ -258,7 +258,8 @@ export const Footer = () => {
                                             <div className="flex flex-col w-full items-center">
                                                 
                                                 <Button type="submit">submit</Button>
-                                                <Link onClick={() => setFormOpen(false)} href="/privacy" className="text-xs my-2 text-muted-foreground">privacy</Link>
+                                                <Link onClick={() => setFormOpen(false)} href="/privacy" className="text-xs mt-2 text-muted-foreground">privacy</Link>
+                                                <Link onClick={() => setFormOpen(false)} href="/terms_of_service" className="text-xs mb-2 text-muted-foreground">terms of service</Link>
                                             </div>
                                         </DialogFooter>
                                     </form>
