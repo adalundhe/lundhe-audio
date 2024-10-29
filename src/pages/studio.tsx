@@ -310,6 +310,7 @@ export default function Studio() {
                             <li>Rhode NTG-3B</li>
                             <li>Schoeps CMIT5U</li>
                             <li>Schoeps CMC6 with MK4 Cardioid Capsules (<b>matched pair</b>)</li>
+                            <li>Soyuz 013 FET (<b>matched pair</b>)</li>
                             <li>Soyuz 013 TUBE (<b>matched pair</b>)</li>
                         </ul>
                     </StudioContentSection>
