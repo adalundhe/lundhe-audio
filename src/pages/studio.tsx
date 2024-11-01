@@ -143,6 +143,7 @@ export default function Studio() {
                             <li>Soyuz Launcher Deluxe</li>
                             <li>Summit Audio MPC-100A Channel Strip (<b>x2</b>)</li>
                             <li>Thermionic Culture Vulture Super 15 Mastering Edition</li>
+                            <li>Tierra Audio Lava Analog Edition Preamp (<b>x2</b>)</li>
                             <li>Tube-Tech MP2A</li>
                             <li>Universal Audio 4110 Quad Pre</li>
                             <li>Wes Audio Phoebe 500 Pre (<b>x2</b>)</li>
@@ -189,6 +190,7 @@ export default function Studio() {
                             <li>Standard Audio Level-OR 500 Compressor (<b>x2</b>)</li>
                             <li>Summit Audio DCL-200</li>
                             <li>Tegeler Audio Creme RC</li>
+                            <li>Tierra Audio Boreal FET Compressor (<b>x2</b>)</li>
                             <li>WesAudio Dione VCA Compressor</li>
                             <li>WesAudio MIMAS FET Compressor (<b>x2</b>)</li>
                             <li>WesAudio RHEA VariMu compressor</li>
