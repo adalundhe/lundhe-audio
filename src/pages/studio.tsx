@@ -292,6 +292,7 @@ export default function Studio() {
                             <li>Chandler Limtied REDD Microphone</li>
                             <li>Lauten Audio Atlantis</li>
                             <li>Lauten Audio Eden</li>
+                            <li>Lewitt LCT 1040 FET/Tube Microphone</li>
                             <li>Soyuz 017 FET</li>
                             <li>Soyuz 017 TUBE</li>
                             <li>Soyuz 023 Bomblet</li>
