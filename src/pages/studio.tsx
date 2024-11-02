@@ -300,6 +300,7 @@ export default function Studio() {
                             <li>Soyuz 017 TUBE</li>
                             <li>Soyuz 023 Bomblet</li>
                             <li>Soyuz 1973 Transformerless LDC Microphone</li>
+                            <li>Violet Designs The Globe - Standard</li>
                         </ul>
                     </StudioContentSection>
                     <StudioContentSection 
