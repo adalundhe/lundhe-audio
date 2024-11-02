@@ -10,7 +10,7 @@ import {
   import { Separator } from "~/components/ui/separator"
   import { ScrollArea } from "~/components/ui/scroll-area"
   import { AspectRatio } from "~/components/ui/aspect-ratio"
-  import { StudioContentSection } from "~/components/StudioContentSection";
+  import { ContentSection } from "~/components/ContentSection";
 
 
 const blurDataUrl = "data:image/jpeg;base64,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AAAAAAAAAAAAAAFQBRAFEAUQAAAAAABRFBRFBVZUGhAGlZUFVlQVWVBVZUFVlQUQBoQBRAFVkBoQBdEAUZAUQBRAFRAFQQFEQFQQFQQARAVEQBFQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABRFBRFBVZUFVlQVWVBVZUFVlQVWQGhAFVlQUQBRAFE0BRDQUQBRAFEQFEAVEAVBAVBAVEAEEAEAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFEAVUAVUAVWVBVZUFVkBoQBoZUFEAVWTQaGV0FNQ0F0TQFGTQa1E00F01NNBdRNNBTU1NBdNTU0F01EBUEBUEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVAFEUFEAVWVBRAGhlQU1AGjWQGtNTTQXTU00F01NNBdNTTQXTU00F01nTQXTU00F01EBdNQBUQBUEBUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFEAUQBVQBRAFEAUQBdEAUQBRAFEAUQBRAAQBRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUBBQEFAQUBBQEFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUBFAAUBBQEFARQAFAQUBEaQEFAQUBBUBBQEFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQABQRQAFARQAFAQUBBVBBQEFARGgGRpAQUBEaAZFARGkBBUBBQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAFAAUAFARRQQUAFAQUBFFBBQEFAQUBEaAZFAQUBkUBEaQERpARGkBEaQEFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFABQAUEUUEUUEUUEUABQAFBBQEFAAABQEFQBFAQUBBQGRQERpARGkBEaQGRQGRUBBUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAFAFBQAUAFABQAUEUABQAAAUBBQEFAQUBBQEFARFAQUBkUBEUBkUBlGkBEUBlGkBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFRQFRQFABRQAUBQAFAAUAFBFAAUBBQAAAAAAAAEFAQVAEUBEUBEaQERpARFAZRpAZRpARFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFABQUBUUBRQAUBUUBQAFAAUAAAUAAAAAFAQUBAAAAQUBEUBBUBBUBBUBEUBlGkBlGkBlGkBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQEFAQUBAAAAFRQFRQFRQUFAUAUFABQAUAFABQAABQAAAAAUBBQEFQAAEFAQAEFQEFQEFQERQGRUBGWkBlGkBkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFBFAAUBFAAAGQAAAFRQFAFBQFAFVFAUAUAFBQAUAABQABQRQAAAAAAAAARQEFQBFAQAEABEUBEVARGkBlGkBlFqAiKgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAAoACgIoAAAwAAACgAoAKqKCqigKAKCgKigKigKACooAKAAACgAAAAAAAAgoCAAgqAIoCIoCIqAgqAiKgIioCVmtVKDNRUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVFAUAFAAAAUAAB5gAAAoAKqKAqKCqigoKAqKCgAoAKACgAKAAKAAAAAAAAAAAAAioAACAAgAIACIqAiNICMtIDNSrUoJWWqgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACgAoKAACgAAAAA8wAAAUAFVFBQUBUUFVFAVFBQAVUUBUUAAFAAUAAAAAFABFAQVAAAAAQABFQBFQBFQERQERUBEVASs1pmglRalBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVUUBUUBUUAABQAAB5AAAAoAKqKCqigKigqooCooKACqigKigKigAAoAAACooAAAACKgAAAAIAAioAioAioCAAiKgIioCVmtVmglSrUoIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACqigKigKigAAoAAAP//Z"
@@ -51,7 +51,7 @@ export default function Studio() {
                             catalogue of instruments and tools to make musical magic happen. Here's some of what we use.
                         </p>
                     </div>             
-                    <StudioContentSection 
+                    <ContentSection 
                         imagePath="/studio/grace_m905.jpg"
                         imageAltTxt="Photo of Lundhe Audio's monitoring."
                         title="Monitoring"
@@ -74,8 +74,8 @@ export default function Studio() {
                         <p>
                             All monitoring is controlled via Grace m905, ensuring no detail goes unheard.
                         </p>
-                    </StudioContentSection>
-                    <StudioContentSection 
+                    </ContentSection>
+                    <ContentSection 
                         imagePath="/studio/500_series_rack_02.jpg"
                         imageAltTxt="Photo of one of Lundhe Audio's Dangerous Convert AD+."
                         title="Conversion"
@@ -94,8 +94,8 @@ export default function Studio() {
                         <p>
                             to ensure nothing gets lost in translation.
                         </p>
-                    </StudioContentSection>
-                    <StudioContentSection 
+                    </ContentSection>
+                    <ContentSection 
                         imagePath="/studio/audeze_lcd5_and_rnd_5060.jpg"
                         imageAltTxt="Photo of the Ruper Neve Designs 5060 with Audeze LCD5s laying on top."
                         title="Console"
@@ -110,8 +110,8 @@ export default function Studio() {
                             with judicious application of Silk harmonics to add warmth and detail. Signal flow is managed by a suite of four Flock Patch units, ensuring
                             fast turnaround and easy recall.
                         </p>
-                    </StudioContentSection>
-                    <StudioContentSection 
+                    </ContentSection>
+                    <ContentSection 
                         imagePath="/studio/preamps_01.jpg"
                         imageAltTxt="Photo of Lundhe Audio's Manley, Tube Tech, Avalon, and LaChapell Audio preamps."
                         title="Preamps"
@@ -151,8 +151,8 @@ export default function Studio() {
                         <p>
                             as well as numerous old-school options like Akai S950 samplers and more.
                         </p>
-                    </StudioContentSection>
-                    <StudioContentSection 
+                    </ContentSection>
+                    <ContentSection 
                         imagePath="/studio/spl_iron_v2.jpg"
                         imageAltTxt="Photo of Lundhe Audio's SPL Iron V2 mastering compressor."
                         title="Dynamics and Compression"
@@ -198,8 +198,8 @@ export default function Studio() {
                         <p>
                             Several of our channel strips also come with dynamics processing options. 
                         </p>
-                    </StudioContentSection>
-                    <StudioContentSection 
+                    </ContentSection>
+                    <ContentSection 
                         imagePath="/studio/spl_passeq.jpg"
                         imageAltTxt="Photo of Lundhe Audio's SPL PassEQ mastering equalizer."
                         title="Equalizers"
@@ -230,8 +230,8 @@ export default function Studio() {
                         <p>
                             Several of our channel strips also come with equalization options. 
                         </p>
-                    </StudioContentSection>
-                    <StudioContentSection 
+                    </ContentSection>
+                    <ContentSection 
                         imagePath="/studio/echofix_efx3.jpg"
                         imageAltTxt="Photo of Lundhe Audio's EchoFix EF-X3 tape delay front panel."
                         title="Effects"
@@ -252,8 +252,8 @@ export default function Studio() {
                             We also offer a vertiable treasure trove of effects pedals to shape your sound, including almost the
                             entire Chase Bliss Audio lineup (past and present), Meris, Game Changer Audio, and more.
                         </p>
-                    </StudioContentSection>
-                    <StudioContentSection 
+                    </ContentSection>
+                    <ContentSection 
                         imagePath="/studio/500_series_rack_01.jpg"
                         imageAltTxt="Photo of one of Lundhe Audio's 500 Series processing racks, containing a multitude of analog equipment."
                         title="Other"
@@ -273,8 +273,8 @@ export default function Studio() {
                         <p>
                             to further productions.
                         </p>
-                    </StudioContentSection>
-                    <StudioContentSection 
+                    </ContentSection>
+                    <ContentSection 
                         imagePath="/studio/soyuz_017_fet.jpg"
                         imageAltTxt="Photo of Lundhe Audio's Soyuz 017 FET Mic."
                         title="Large Diaphragm Condenser Microphones"
@@ -295,8 +295,8 @@ export default function Studio() {
                             <li>Soyuz 023 Bomblet</li>
                             <li>Soyuz 1973 Transformerless LDC Microphone</li>
                         </ul>
-                    </StudioContentSection>
-                    <StudioContentSection 
+                    </ContentSection>
+                    <ContentSection 
                         imagePath="/studio/soyuz_013_tube.jpg"
                         imageAltTxt="Photo of Lundhe Audio's matched pair of Soyuz 013 TUBE microphones."
                         title="Small Diaphragm Condenser Microphones"
@@ -316,8 +316,8 @@ export default function Studio() {
                             <li>Soyuz 013 TUBE (<b>matched pair</b>)</li>
                             <li>Telefunken ELA M 260</li>
                         </ul>
-                    </StudioContentSection>
-                    <StudioContentSection 
+                    </ContentSection>
+                    <ContentSection 
                         imagePath="/studio/royer_r10.jpg"
                         imageAltTxt="Photo of Lundhe Audio's pair of Royer R10 Hot Rod microphones."
                         title="Ribbon Microphones"
@@ -333,7 +333,7 @@ export default function Studio() {
                             <li>Royer R10 Hot Rod (<b>x2</b>)</li>
                             <li>Tierra Audio New Twenties Ribbon</li>
                         </ul>
-                    </StudioContentSection>
+                    </ContentSection>
                     <div className="w-full flex justify-center">   
                         <Separator className="w-3/4 my-8"/>
                     </div>

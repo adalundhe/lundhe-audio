@@ -26,7 +26,7 @@ const StudioContentHeader = ({
 </div>
 
 
-export const StudioContentSection = ({
+export const ContentSection = ({
     imagePath,
     imageAltTxt,
     title,
