@@ -286,7 +286,7 @@ export default function Studio() {
                             microphones:
                         </p>
                         <ul className="my-4 list-disc list-inside">
-                            <li>Austrian Audio OC818</li>
+                            <li>Austrian Audio OC818 (<b>x2</b>)</li>
                             <li>Blue Blueberry FET Condenser Mic (Latvian version)</li>
                             <li>Blue Bottle w/ B6 and B7 Capsules (Latvian version)</li>
                             <li>Blue Kiwi FET Condenser Mic (Latvian version)</li>
