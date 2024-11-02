@@ -265,6 +265,7 @@ export default function Studio() {
                         <ul className="my-4 list-disc list-inside">
                             <li>Black Box HG-2</li>
                             <li>Empirical Labs EL7 Fatso</li>
+                            <li>Rupert Neve Designs Master Bus Transformer</li>
                             <li>Sherman Filterbank Desktop (<b>x2</b>)</li>
                             <li>SPL BIG 500 Stereo Imaging</li>
                             <li>SPL Gemini Mid/Side Mastering Router</li>
@@ -286,6 +287,7 @@ export default function Studio() {
                         </p>
                         <ul className="my-4 list-disc list-inside">
                             <li>Austrian Audio OC818</li>
+                            <li>Blue Bottle w/ B6 and B7 Capsules (Latvian version)</li>
                             <li>Chandler Limtied TG Microphone</li>
                             <li>Chandler Limtied REDD Microphone</li>
                             <li>Lauten Audio Atlantis</li>
