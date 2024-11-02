@@ -331,7 +331,7 @@ export default function Studio() {
                         </p>
                         <ul className="my-4 list-disc list-inside">
                             <li>Hum Audio ARM-1L</li>
-                            <li>Samar VL37</li>
+                            <li>Samar VL37 (<b>x2</b>)</li>
                             <li>Royer 121 (<b>x2</b>)</li>
                             <li>Royer R10 Hot Rod (<b>x2</b>)</li>
                             <li>Tierra Audio New Twenties Ribbon</li>
