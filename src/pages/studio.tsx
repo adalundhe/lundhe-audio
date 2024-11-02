@@ -287,7 +287,10 @@ export default function Studio() {
                         </p>
                         <ul className="my-4 list-disc list-inside">
                             <li>Austrian Audio OC818</li>
+                            <li>Blue Blueberry FET Condenser Mic (Latvian version)</li>
                             <li>Blue Bottle w/ B6 and B7 Capsules (Latvian version)</li>
+                            <li>Blue Kiwi FET Condenser Mic (Latvian version)</li>
+                            <li>Blue Mouse FET Condenser Mic (Latvian version)</li>
                             <li>Chandler Limtied TG Microphone</li>
                             <li>Chandler Limtied REDD Microphone</li>
                             <li>Lauten Audio Atlantis</li>
