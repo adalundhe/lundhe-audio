@@ -300,6 +300,7 @@ export default function Studio() {
                             <li>Soyuz 017 TUBE</li>
                             <li>Soyuz 023 Bomblet</li>
                             <li>Soyuz 1973 Transformerless LDC Microphone</li>
+                            <li>Violet Designs The Globe - Standard</li>
                         </ul>
                     </StudioContentSection>
                     <StudioContentSection 
@@ -316,6 +317,7 @@ export default function Studio() {
                             <li>Austrian Audio CC8 (<b>matched pair</b>)</li>
                             <li>Earthworks QTC50 (<b>x2</b>)</li>
                             <li>Rode NTG-3B</li>
+                            <li>Samar MG20 (<b>x2</b>)</li>
                             <li>Schoeps CMIT5U</li>
                             <li>Schoeps CMC6 with MK4 Cardioid Capsules (<b>matched pair</b>)</li>
                             <li>Soyuz 013 FET (<b>matched pair</b>)</li>
