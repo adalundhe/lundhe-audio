@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { Layout } from "~/components/Layout"
 import {
     Card,
@@ -8,16 +9,20 @@ import {
 } from "~/components/ui/card"
 import { Separator } from "~/components/ui/separator"
 
-export default function About() {
+export default function CommercialAudioService() {
 
-  return (
+    const router = useRouter()
+
+    router.back()
+
+    return (
     <>
-      <Layout>
-        <Card className="w-full md:w-3/4 h-full rounded-none border-none shadow-none">
+        <Layout>
+        <Card className="w-full lg:w-3/4 h-full rounded-none border-none shadow-none">
             <CardContent className="p-0 w-[100%] flex flex-col items-center">
                 <div className="w-3/4 h-full">
                     <CardHeader className="p-0 pb-4 w-full flex flex-col">
-                        <CardTitle className="text-2xl md:text-4xl">What we do...</CardTitle>
+                        <CardTitle className="text-2xl lg:text-4xl">Commercial Audio</CardTitle>
                         <CardDescription>(We do it well)</CardDescription>
                     </CardHeader>
                     <div className="pt-4">
@@ -36,7 +41,7 @@ export default function About() {
                         <Separator className="w-3/4 my-8"/>
                     </div>
                     <CardHeader className="p-0 pb-4 w-full flex flex-col items-end">
-                        <CardTitle className="text-2xl md:text-4xl">Why we do it...</CardTitle>
+                        <CardTitle className="text-2xl lg:text-4xl">Why we do it...</CardTitle>
                         <CardDescription>(Sound is everything)</CardDescription>
                     </CardHeader>
                     <div className="pt-4">
@@ -77,7 +82,7 @@ export default function About() {
                 
             </CardContent>
         </Card>
-      </Layout>
+        </Layout>
     </>
-  );
+    );
 }
