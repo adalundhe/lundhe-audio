@@ -240,7 +240,7 @@ export const NavBar = () => {
                                 <AccordionContent className="p-0">
                                     <Separator/>     
                                     <ul className="list-none pl-4">
-                                        <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50"> 
+                                        <li className="w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50"> 
                                             <PiInfoFill />
                                             <Link href="/about" className="cursor-pointer hover:underline" passHref>                     
                                                 <NavigationMenuLink className={navigationMenuLinkStyle()}>
@@ -249,7 +249,7 @@ export const NavBar = () => {
                                             </Link>
                                         </li>
                                         <Separator/>
-                                        <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
+                                        <li className="w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
                                             <GiGearHammer />
                                             <Link href="/gear" className="cursor-pointer hover:underline">                                                
                                                 <NavigationMenuLink className={navigationMenuLinkStyle()}>
@@ -274,7 +274,7 @@ export const NavBar = () => {
                                 <AccordionContent className="p-0">
                                     <Separator/>     
                                     <ul className="list-none pl-4">
-                                        <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
+                                        <li className="w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
                                             <TbDeviceTvOld/>
                                             <Link href="/services/commercial_audio" className="cursor-pointer hover:underline" passHref>                                                
                                                 <NavigationMenuLink className={navigationMenuLinkStyle()}>
@@ -283,7 +283,7 @@ export const NavBar = () => {
                                             </Link>
                                         </li>
                                         <Separator/>
-                                        <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
+                                        <li className="w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
                                             <GiGrandPiano/>
                                             <Link href="/services/composition" className="cursor-pointer hover:underline" passHref>                                                
                                                 <NavigationMenuLink className={navigationMenuLinkStyle()}>
@@ -292,7 +292,7 @@ export const NavBar = () => {
                                             </Link>
                                         </li>
                                         <Separator/>
-                                        <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
+                                        <li className="w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
                                             <BiSolidSpeaker/>
                                             <Link href="/services/mastering" className="cursor-pointer hover:underline" passHref>                                                
                                                 <NavigationMenuLink className={navigationMenuLinkStyle()}>
@@ -301,7 +301,7 @@ export const NavBar = () => {
                                             </Link>
                                         </li>
                                         <Separator/>
-                                        <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50"> 
+                                        <li className="w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50"> 
                                             <GiDrumKit/>
                                             <Link href="/services/mixing" className="cursor-pointer hover:underline" passHref>                                                
                                                 <NavigationMenuLink className={navigationMenuLinkStyle()}>
@@ -310,7 +310,7 @@ export const NavBar = () => {
                                             </Link>
                                         </li>
                                         <Separator/>
-                                        <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
+                                        <li className="w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
                                             <GiMusicalKeyboard/>
                                             <Link href="/services/sound_design" className="cursor-pointer hover:underline" passHref>                                                
                                                 <NavigationMenuLink className={navigationMenuLinkStyle()}>
@@ -335,7 +335,7 @@ export const NavBar = () => {
                                 <AccordionContent className="p-0">  
                                     <Separator/>        
                                     <ul className="list-none pl-4">
-                                        <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
+                                        <li className="w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
                                             <MdPolicy/>
                                             <Link href="/privacy" className="cursor-pointer hover:underline" passHref>                                                
                                                 <NavigationMenuLink className={navigationMenuLinkStyle()}>
@@ -344,7 +344,7 @@ export const NavBar = () => {
                                             </Link>
                                         </li>
                                         <Separator/>
-                                        <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
+                                        <li className="w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
                                             <LiaFileContractSolid/>
                                             <Link href="/terms_of_service" className="cursor-pointer hover:underline" passHref>                                                
                                                 <NavigationMenuLink className={navigationMenuLinkStyle()}>
