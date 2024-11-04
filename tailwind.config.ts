@@ -1,5 +1,7 @@
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
+import { boolean } from "zod";
+const plugin = require('tailwindcss/plugin')
 
 export default {
     darkMode: ["class"],
@@ -90,5 +92,12 @@ export default {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), plugin(({ addVariant }: {
+	addVariant: (
+		name: string,
+		value: string
+	) => any
+  }) => {
+	addVariant('open', '&[data-state="open"]')
+  })],
 } satisfies Config;

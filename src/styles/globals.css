@@ -82,6 +82,10 @@
   
 }
 
+:root:has(.no-scroll) {
+  overflow:hidden;
+}
+
 html, body {
   overflow-x: hidden;
   height: 100%;
