@@ -261,7 +261,7 @@ export const NavBar = () => {
                                         </ul>
                                     </AccordionContent>
                                 </AccordionItem>
-                                <AccordionItem value="services" className="px-2 hover:bg-gray-50 focus:bg-gray-50">
+                                {/* <AccordionItem value="services" className="px-2 hover:bg-gray-50 focus:bg-gray-50">
                                     <AccordionTrigger className="hover:bg-gray-50 focus:bg-gray-50 p-0 cursor-default py-2">   
                                         <button type="button" className="flex items-center space-x-2 cursor-default">
                                             <PiFadersFill 
@@ -321,7 +321,7 @@ export const NavBar = () => {
                                             </li>
                                         </ul>
                                     </AccordionContent>
-                                </AccordionItem>
+                                </AccordionItem> */}
                                 <AccordionItem value="legal" className="px-2 hover:bg-gray-50 focus:bg-gray-50">
                                     <AccordionTrigger className="hover:bg-gray-50 focus:bg-gray-50 p-0 cursor-default py-2">   
                                         <button type="button" className="flex items-center space-x-2 cursor-default">
