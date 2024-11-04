@@ -214,159 +214,155 @@ export const NavBar = () => {
                             <Separator/>
                         </NavigationMenuList>
                     </NavigationMenuSub>
-                    <ScrollArea className="border bg-white w-[100vw] h-[100vh] flex flex-col w-full lg:hidden">
-                        <Accordion defaultValue="home" type="single" collapsible className="flex flex-col w-full">
-                            <AccordionItem value="home" className="text-lg hover:bg-gray-50 focus:bg-gray-50 py-2 px-2 h-[40px] w-full flex grow-1 items-center space-x-2 hover:bg-gray-50 focus:bg-gray-50">
-                                <MdHome/>
-                                <Link href="/" className="cursor-pointer hover:underline" passHref>
-                                    <NavigationMenuLink className={navigationMenuLinkStyle()}>
-                                        home
-                                    </NavigationMenuLink>
-                                </Link>
-                            </AccordionItem>
-                            <AccordionItem value="studio" className="px-2 hover:bg-gray-50 focus:bg-gray-50">
-                                <AccordionTrigger 
-                                    className="hover:bg-gray-50 focus:bg-gray-50 p-0 cursor-default py-2"
-                                >   
-                                    <button type="button" className="flex items-center space-x-2 cursor-default">
-                                        <GiMusicalNotes 
-                                            aria-hidden="true"
-                                        />
-                                        <p className="hover:underline">
-                                            studio
-                                        </p>
-                                    </button>    
-                                </AccordionTrigger>
-                                <AccordionContent className="p-0">
-                                    <Separator/>     
-                                    <ul className="list-none pl-4">
-                                        <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50"> 
-                                            <PiInfoFill />
-                                            <Link href="/about" className="cursor-pointer hover:underline" passHref>                     
-                                                <NavigationMenuLink className={navigationMenuLinkStyle()}>
-                                                    about
-                                                </NavigationMenuLink>
-                                            </Link>
-                                        </li>
-                                        <Separator/>
-                                        <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
-                                            <GiGearHammer />
-                                            <Link href="/gear" className="cursor-pointer hover:underline">                                                
-                                                <NavigationMenuLink className={navigationMenuLinkStyle()}>
-                                                    gear
-                                                </NavigationMenuLink>
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </AccordionContent>
-                            </AccordionItem>
-                            {/* <AccordionItem value="services" className="px-2 hover:bg-gray-50 focus:bg-gray-50">
-                                <AccordionTrigger className="hover:bg-gray-50 focus:bg-gray-50 p-0 cursor-default py-2">   
-                                    <button type="button" className="flex items-center space-x-2 cursor-default">
-                                        <PiFadersFill 
-                                            aria-hidden="true"
-                                        />
-                                        <p className="hover:underline">
-                                            services
-                                        </p>
-                                    </button>    
-                                </AccordionTrigger>
-                                <AccordionContent className="p-0">
-                                    <Separator/>     
-                                    <ul className="list-none pl-4">
-                                        <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
-                                            <TbDeviceTvOld/>
-                                            <Link href="/services/commercial_audio" className="cursor-pointer hover:underline" passHref>                                                
-                                                <NavigationMenuLink className={navigationMenuLinkStyle()}>
-                                                    commercial audio
-                                                </NavigationMenuLink>                            
-                                            </Link>
-                                        </li>
-                                        <Separator/>
-                                        <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
-                                            <GiGrandPiano/>
-                                            <Link href="/services/composition" className="cursor-pointer hover:underline" passHref>                                                
-                                                <NavigationMenuLink className={navigationMenuLinkStyle()}>
-                                                    composition
-                                                </NavigationMenuLink>
-                                            </Link>
-                                        </li>
-                                        <Separator/>
-                                        <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
-                                            <BiSolidSpeaker/>
-                                            <Link href="/services/mastering" className="cursor-pointer hover:underline" passHref>                                                
-                                                <NavigationMenuLink className={navigationMenuLinkStyle()}>
-                                                    mastering
-                                                </NavigationMenuLink>
-                                            </Link>
-                                        </li>
-                                        <Separator/>
-                                        <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50"> 
-                                            <GiDrumKit/>
-                                            <Link href="/services/mixing" className="cursor-pointer hover:underline" passHref>                                                
-                                                <NavigationMenuLink className={navigationMenuLinkStyle()}>
-                                                    mixing
-                                                </NavigationMenuLink>
-                                            </Link>
-                                        </li>
-                                        <Separator/>
-                                        <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
-                                            <GiMusicalKeyboard/>
-                                            <Link href="/services/sound_design" className="cursor-pointer hover:underline" passHref>                                                
-                                                <NavigationMenuLink className={navigationMenuLinkStyle()}>
-                                                    sound design
-                                                </NavigationMenuLink>
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </AccordionContent>
-                            </AccordionItem> */}
-                            <AccordionItem value="legal" className="px-2 hover:bg-gray-50 focus:bg-gray-50">
-                                <AccordionTrigger className="hover:bg-gray-50 focus:bg-gray-50 p-0 cursor-default py-2">   
-                                    <button type="button" className="flex items-center space-x-2 cursor-default">
-                                        <LiaFileContractSolid 
-                                            aria-hidden="true"
-                                        />
-                                        <p className="hover:underline">
-                                            legal
-                                        </p>
-                                    </button>    
-                                </AccordionTrigger>
-                                <AccordionContent className="p-0">  
-                                    <Separator/>        
-                                    <ul className="list-none pl-4">
-                                        <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
-                                            <MdPolicy/>
-                                            <Link href="/privacy" className="cursor-pointer hover:underline" passHref>                                                
-                                                <NavigationMenuLink className={navigationMenuLinkStyle()}>
-                                                    privacy
-                                                </NavigationMenuLink>
-                                            </Link>
-                                        </li>
-                                        <Separator/>
-                                        <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
-                                            <LiaFileContractSolid/>
-                                            <Link href="/terms_of_service" className="cursor-pointer hover:underline" passHref>                                                
-                                                <NavigationMenuLink className={navigationMenuLinkStyle()}>
-                                                    terms of service
-                                                </NavigationMenuLink>
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </AccordionContent>
-                            </AccordionItem>
-                            <AccordionItem value="contact" className="hover:bg-gray-50 focus:bg-gray-50 py-2 px-2 h-[40px] w-full flex grow-1 items-center space-x-2 hover:bg-gray-50 focus:bg-gray-50">
-                                <IoMdContact/>
-                                <Link href="/contact" className="cursor-pointer hover:underline" passHref>
-                                    <NavigationMenuLink className={navigationMenuLinkStyle()}>
-                                        contact
-                                    </NavigationMenuLink>
-                                </Link>
-                            </AccordionItem>
-
-                        </Accordion>
-
-                    </ScrollArea>
+                    <Accordion defaultValue="home" type="single" collapsible className="flex flex-col w-full border bg-white w-[100vw] h-full flex flex-col w-full lg:hidden">
+                        <AccordionItem value="home" className="text-lg hover:bg-gray-50 focus:bg-gray-50 py-2 px-2 h-[40px] w-full flex grow-1 items-center space-x-2 hover:bg-gray-50 focus:bg-gray-50">
+                            <MdHome/>
+                            <Link href="/" className="cursor-pointer hover:underline" passHref>
+                                <NavigationMenuLink className={navigationMenuLinkStyle()}>
+                                    home
+                                </NavigationMenuLink>
+                            </Link>
+                        </AccordionItem>
+                        <AccordionItem value="studio" className="px-2 hover:bg-gray-50 focus:bg-gray-50">
+                            <AccordionTrigger 
+                                className="hover:bg-gray-50 focus:bg-gray-50 p-0 cursor-default py-2"
+                            >   
+                                <button type="button" className="flex items-center space-x-2 cursor-default">
+                                    <GiMusicalNotes 
+                                        aria-hidden="true"
+                                    />
+                                    <p className="hover:underline">
+                                        studio
+                                    </p>
+                                </button>    
+                            </AccordionTrigger>
+                            <AccordionContent className="p-0">
+                                <Separator/>     
+                                <ul className="list-none pl-4">
+                                    <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50"> 
+                                        <PiInfoFill />
+                                        <Link href="/about" className="cursor-pointer hover:underline" passHref>                     
+                                            <NavigationMenuLink className={navigationMenuLinkStyle()}>
+                                                about
+                                            </NavigationMenuLink>
+                                        </Link>
+                                    </li>
+                                    <Separator/>
+                                    <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
+                                        <GiGearHammer />
+                                        <Link href="/gear" className="cursor-pointer hover:underline">                                                
+                                            <NavigationMenuLink className={navigationMenuLinkStyle()}>
+                                                gear
+                                            </NavigationMenuLink>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </AccordionContent>
+                        </AccordionItem>
+                        {/* <AccordionItem value="services" className="px-2 hover:bg-gray-50 focus:bg-gray-50">
+                            <AccordionTrigger className="hover:bg-gray-50 focus:bg-gray-50 p-0 cursor-default py-2">   
+                                <button type="button" className="flex items-center space-x-2 cursor-default">
+                                    <PiFadersFill 
+                                        aria-hidden="true"
+                                    />
+                                    <p className="hover:underline">
+                                        services
+                                    </p>
+                                </button>    
+                            </AccordionTrigger>
+                            <AccordionContent className="p-0">
+                                <Separator/>     
+                                <ul className="list-none pl-4">
+                                    <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
+                                        <TbDeviceTvOld/>
+                                        <Link href="/services/commercial_audio" className="cursor-pointer hover:underline" passHref>                                                
+                                            <NavigationMenuLink className={navigationMenuLinkStyle()}>
+                                                commercial audio
+                                            </NavigationMenuLink>                            
+                                        </Link>
+                                    </li>
+                                    <Separator/>
+                                    <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
+                                        <GiGrandPiano/>
+                                        <Link href="/services/composition" className="cursor-pointer hover:underline" passHref>                                                
+                                            <NavigationMenuLink className={navigationMenuLinkStyle()}>
+                                                composition
+                                            </NavigationMenuLink>
+                                        </Link>
+                                    </li>
+                                    <Separator/>
+                                    <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
+                                        <BiSolidSpeaker/>
+                                        <Link href="/services/mastering" className="cursor-pointer hover:underline" passHref>                                                
+                                            <NavigationMenuLink className={navigationMenuLinkStyle()}>
+                                                mastering
+                                            </NavigationMenuLink>
+                                        </Link>
+                                    </li>
+                                    <Separator/>
+                                    <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50"> 
+                                        <GiDrumKit/>
+                                        <Link href="/services/mixing" className="cursor-pointer hover:underline" passHref>                                                
+                                            <NavigationMenuLink className={navigationMenuLinkStyle()}>
+                                                mixing
+                                            </NavigationMenuLink>
+                                        </Link>
+                                    </li>
+                                    <Separator/>
+                                    <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
+                                        <GiMusicalKeyboard/>
+                                        <Link href="/services/sound_design" className="cursor-pointer hover:underline" passHref>                                                
+                                            <NavigationMenuLink className={navigationMenuLinkStyle()}>
+                                                sound design
+                                            </NavigationMenuLink>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </AccordionContent>
+                        </AccordionItem> */}
+                        <AccordionItem value="legal" className="px-2 hover:bg-gray-50 focus:bg-gray-50">
+                            <AccordionTrigger className="hover:bg-gray-50 focus:bg-gray-50 p-0 cursor-default py-2">   
+                                <button type="button" className="flex items-center space-x-2 cursor-default">
+                                    <LiaFileContractSolid 
+                                        aria-hidden="true"
+                                    />
+                                    <p className="hover:underline">
+                                        legal
+                                    </p>
+                                </button>    
+                            </AccordionTrigger>
+                            <AccordionContent className="p-0">  
+                                <Separator/>        
+                                <ul className="list-none pl-4">
+                                    <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
+                                        <MdPolicy/>
+                                        <Link href="/privacy" className="cursor-pointer hover:underline" passHref>                                                
+                                            <NavigationMenuLink className={navigationMenuLinkStyle()}>
+                                                privacy
+                                            </NavigationMenuLink>
+                                        </Link>
+                                    </li>
+                                    <Separator/>
+                                    <li className="hover:bg-gray-50 focus:bg-gray-50 w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
+                                        <LiaFileContractSolid/>
+                                        <Link href="/terms_of_service" className="cursor-pointer hover:underline" passHref>                                                
+                                            <NavigationMenuLink className={navigationMenuLinkStyle()}>
+                                                terms of service
+                                            </NavigationMenuLink>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </AccordionContent>
+                        </AccordionItem>
+                        <AccordionItem value="contact" className="hover:bg-gray-50 focus:bg-gray-50 py-2 px-2 h-[40px] w-full flex grow-1 items-center space-x-2 hover:bg-gray-50 focus:bg-gray-50">
+                            <IoMdContact/>
+                            <Link href="/contact" className="cursor-pointer hover:underline" passHref>
+                                <NavigationMenuLink className={navigationMenuLinkStyle()}>
+                                    contact
+                                </NavigationMenuLink>
+                            </Link>
+                        </AccordionItem>
+                    </Accordion>
                 </NavigationMenuContent>
             </NavigationMenuItem>
         </NavigationMenuList>
