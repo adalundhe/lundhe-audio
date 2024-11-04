@@ -213,8 +213,8 @@ export const NavBar = () => {
                             <Separator/>
                         </NavigationMenuList>
                     </NavigationMenuSub>
-                    <Accordion defaultValue="home" type="single" collapsible className="text-sm lg:ml-[100px] border bg-white w-full h-[100vh] flex flex-col w-full lg:hidden font-medium">
-                        <AccordionItem value="home" className="text-medium hover:bg-gray-50 focus:bg-gray-50 py-2 px-2 h-[40px] w-full flex grow-1 items-center space-x-2 hover:bg-gray-50 focus:bg-gray-50">
+                    <Accordion defaultValue="home" type="single" collapsible className="lg:ml-[100px] border bg-white w-full h-[100vh] flex flex-col w-full lg:hidden font-medium">
+                        <AccordionItem value="home" className="text-lg hover:bg-gray-50 focus:bg-gray-50 py-2 px-2 h-[40px] w-full flex grow-1 items-center space-x-2 hover:bg-gray-50 focus:bg-gray-50">
                             <MdHome/>
                             <Link href="/" className="cursor-pointer hover:underline" passHref>
                                 <NavigationMenuLink className={navigationMenuLinkStyle()}>
@@ -224,7 +224,7 @@ export const NavBar = () => {
                         </AccordionItem>
                         <AccordionItem value="studio" className="px-2 hover:bg-gray-50 focus:bg-gray-50">
                             <AccordionTrigger 
-                                className="hover:bg-gray-50 focus:bg-gray-50 p-0 cursor-default py-2 text-medium"
+                                className="hover:bg-gray-50 focus:bg-gray-50 p-0 cursor-default py-2"
                             >   
                                 <button type="button" className="flex items-center space-x-2 cursor-default">
                                     <GiMusicalNotes 
@@ -259,7 +259,7 @@ export const NavBar = () => {
                             </AccordionContent>
                         </AccordionItem>
                         {/* <AccordionItem value="services" className="px-2 hover:bg-gray-50 focus:bg-gray-50">
-                            <AccordionTrigger className="hover:bg-gray-50 focus:bg-gray-50 p-0 cursor-default py-2 text-medium">   
+                            <AccordionTrigger className="hover:bg-gray-50 focus:bg-gray-50 p-0 cursor-default py-2">   
                                 <button type="button" className="flex items-center space-x-2 cursor-default">
                                     <PiFadersFill 
                                         aria-hidden="true"
@@ -320,7 +320,7 @@ export const NavBar = () => {
                             </AccordionContent>
                         </AccordionItem> */}
                         <AccordionItem value="legal" className="px-2 hover:bg-gray-50 focus:bg-gray-50">
-                            <AccordionTrigger className="hover:bg-gray-50 focus:bg-gray-50 p-0 cursor-default py-2 text-medium">   
+                            <AccordionTrigger className="hover:bg-gray-50 focus:bg-gray-50 p-0 cursor-default py-2">   
                                 <button type="button" className="flex items-center space-x-2 cursor-default">
                                     <LiaFileContractSolid 
                                         aria-hidden="true"
@@ -353,7 +353,7 @@ export const NavBar = () => {
                                 </ul>
                             </AccordionContent>
                         </AccordionItem>
-                        <AccordionItem value="contact" className="text-medium hover:bg-gray-50 focus:bg-gray-50 py-2 px-2 h-[40px] w-full flex grow-1 items-center space-x-2 hover:bg-gray-50 focus:bg-gray-50">
+                        <AccordionItem value="contact" className="hover:bg-gray-50 focus:bg-gray-50 py-2 px-2 h-[40px] w-full flex grow-1 items-center space-x-2 hover:bg-gray-50 focus:bg-gray-50">
                             <IoMdContact/>
                             <Link href="/contact" className="cursor-pointer hover:underline" passHref>
                                 <NavigationMenuLink className={navigationMenuLinkStyle()}>
