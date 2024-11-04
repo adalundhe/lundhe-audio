@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { Layout } from "~/components/Layout"
 import {
     Card,
@@ -13,7 +14,9 @@ export default function CommercialAudioService() {
 
     const router = useRouter()
 
-    router.back()
+    useEffect(() => {   
+        router.back()
+    }, )
 
     return (
     <>
