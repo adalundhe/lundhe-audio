@@ -201,12 +201,13 @@ export default function Contact() {
                                             <Select 
                                                 disabled={!formActive} 
                                                 aria-disabled={!formActive} 
-                                                {...field}
+                                                onValueChange={field.onChange}
+                                                value={field.value}
                                             >
                                                 <SelectTrigger>
                                                     <SelectValue placeholder="Select a provided service" />
                                                 </SelectTrigger>
-                                                <SelectContent className={GeistSans.className}>
+                                                <SelectContent className={GeistSans.className} ref={field.ref}>
                                                     <SelectItem value="mixing">mixing</SelectItem>
                                                     <SelectItem value="mastering">mastering</SelectItem>
                                                     <SelectItem value="sound-design">sound design</SelectItem>
