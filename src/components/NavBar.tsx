@@ -18,9 +18,9 @@ import {
     AccordionItem,
     AccordionTrigger,
   } from "~/components/ui/accordion"
+  import { CiMenuBurger } from "react-icons/ci";
 import { GiMusicalNotes } from "react-icons/gi";
 import { MdHome } from "react-icons/md";
-import { RxDropdownMenu } from "react-icons/rx";
 import { Separator } from "~/components/ui/separator"
 import { GiGearHammer } from "react-icons/gi";
 import { PiInfoFill } from "react-icons/pi";
@@ -51,13 +51,13 @@ export const NavBar = () => {
                 </NavigationMenuLink>
             </Avatar>
             <NavigationMenuItem className="h-[40px]">
-                <NavigationMenuTrigger className="lg:mx-[16px] lg:border lg:shadow-sm hover:underline text-sm lg:w-[94px]" asChild>
-                    <button type="button" className="cursor-default lg:flex lg:items-center lg:justify-center lg:space-x-2 lg:hover:bg-gray-50 lg:focus:bg-gray-50">
-                        <RxDropdownMenu 
-                            className="text-2xl lg:text-sm relative top-[1px] transition duration-300 group-data-[state=open]:rotate-180"
+                <NavigationMenuTrigger className="lg:mx-[16px] lg:border lg:shadow-sm hover:underline text-sm w-[94px]" asChild>
+                    <button type="button" className="cursor-default flex items-center justify-center space-x-2 lg:hover:bg-gray-50 lg:focus:bg-gray-50">
+                        <CiMenuBurger 
+                            className="text-2xl top-[1px] transition duration-300 group-data-[state=open]:rotate-90"
                             aria-hidden="true"
                         />
-                        <p className="hidden lg:block">menu</p>
+                        <p className="hidden lg:flex">menu</p>
                     </button>    
                 </NavigationMenuTrigger>     
                 <NavigationMenuContent>
