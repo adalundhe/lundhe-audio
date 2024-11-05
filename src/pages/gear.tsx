@@ -296,6 +296,7 @@ export default function Studio() {
                             <li>Lauten Audio Atlantis</li>
                             <li>Lauten Audio Eden</li>
                             <li>Lewitt LCT 1040 FET/Tube Microphone</li>
+                            <li>Rupert Neve/sE RNT Tube LDC Microphone</li>
                             <li>Sonotronics Mercury</li>
                             <li>Soyuz 017 FET</li>
                             <li>Soyuz 017 TUBE</li>
