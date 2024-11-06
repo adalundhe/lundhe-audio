@@ -16,7 +16,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <SessionProvider session={session}>
+    <>
       <Head>
         <title>Lundhe Audio</title>
         <meta name="description" content="Lundhe Audio, an Austin based post-tracking mixing, mastering, sound design, and commercial audio." />
@@ -28,7 +28,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <Component {...pageProps} />
       </div>
       <Footer />
-    </SessionProvider>
+    </>
   );
 };
 
