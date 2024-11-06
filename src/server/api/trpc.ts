@@ -16,7 +16,7 @@ import { env } from "~/env";
 import { ServerClient } from 'postmark';
 import twilio from 'twilio';
 
-import { getServerAuthSession } from "~/server/auth";
+// import { auth } from "~/server/auth";
 import { db } from "~/server/db";
 
 /**
@@ -62,10 +62,10 @@ const createInnerTRPCContext = (opts: CreateContextOptions) => {
  * @see https://trpc.io/docs/context
  */
 export const createTRPCContext = async (opts: CreateNextContextOptions) => {
-  const { req, res } = opts;
+  const { req } = opts;
 
   // Get the session from the server using the getServerSession wrapper function
-  // const session = await getServerAuthSession({ req, res });
+  // const session = await auth({ req, res });
 
   const innerCtx = createInnerTRPCContext({
     session: null,
@@ -165,7 +165,7 @@ export const publicProcedure = t.procedure.use(timingMiddleware);
 export const protectedProcedure = t.procedure
   .use(timingMiddleware)
   .use(({ ctx, next }) => {
-    if (!ctx.session || !ctx.session.user) {
+    if (ctx.session === null || ctx.session.user === null) {
       throw new TRPCError({ code: "UNAUTHORIZED" });
     }
     return next({

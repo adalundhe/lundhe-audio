@@ -3,11 +3,11 @@ import { type ServerClient } from 'postmark'
 import { type Twilio } from 'twilio'
 import ky, { type HTTPError } from 'ky';
 import { env } from "~/env";
-
 import {
   createTRPCRouter,
   publicProcedure,
 } from "~/server/api/trpc";
+import { contactRequestor } from "~/server/db/schema"
 
 
 interface ContactResponse {
@@ -56,32 +56,41 @@ const submitCaptchaVerification = async ({
 }
 
 const sendEmail = async ({
+    fromEmail,
     toEmail,
     templateId,
+    templateValues,
     client,
+    emailType,
 }: {
+    fromEmail: string,
     toEmail: string,
     templateId: number,
-    client: ServerClient
+    templateValues?: Record<string, unknown>,
+    client: ServerClient,
+    emailType: "outgoing" | "incoming"
 }) => {
 
         const emailResponse = await client.sendEmailWithTemplate({
-            From: env.LUNDHE_AUDIO_EMAIL,
+            From: fromEmail,
             To: toEmail,
             TemplateId: templateId, // Contact received template ID
-            TemplateModel: {},
+            TemplateModel: templateValues ?? {},
             InlineCss: true,
             TrackOpens: true,
         })
 
-        return (
-            emailResponse.ErrorCode > 0 ? {
-                errorCode: emailResponse.ErrorCode,
-                emailError: emailResponse.Message,
-            } : {
-                emailContext: emailResponse.Message,
-            }
-        ) as ContactResponse
+        return {
+            response: (
+                emailResponse.ErrorCode > 0 ? {
+                    errorCode: emailResponse.ErrorCode,
+                    emailError: emailResponse.Message,
+                } : {
+                    emailContext: emailResponse.Message,
+                }
+            ) as ContactResponse,
+            emailType
+        }
 }
 
 
@@ -105,7 +114,7 @@ const sendSMSMessage = async ({
         errorCode: response.errorCode ?? undefined,
         smsError: response.errorMessage ?? undefined,
         smsContext: response.body,
-    } as ContactResponse
+    }
     
 }
 
@@ -129,7 +138,8 @@ export const contactRouter = createTRPCRouter({
         }).max(280, {
             message: "Message cannot be more than 280 characters."
         }),
-        contactConsent: z.boolean(),
+        contactConsent: z.enum(['accepted', 'declined']),
+        submmittedAt: z.date(),
         captchaToken: z.string().min(1, {
             message: "Captcha token cannot be empty string."
         }),
@@ -144,28 +154,68 @@ export const contactRouter = createTRPCRouter({
             return captchaResponse
         }
 
-        const emailResponse = await sendEmail({
-            toEmail: input.email,
-            templateId: 37905639, // Contact received template ID,
-            client: ctx.postmark,
-        })
+        const emailResponses = await Promise.all([
+            sendEmail({
+                fromEmail: env.LUNDHE_AUDIO_EMAIL,
+                toEmail: input.email,
+                templateId: 37905639, // Contact received template ID,
+                client: ctx.postmark,
+                emailType: "outgoing"
+            }),
+            sendEmail({
+                fromEmail: input.email,
+                toEmail: env.LUNDHE_AUDIO_EMAIL,
+                templateId: 37911004, // Contact received template ID,
+                client: ctx.postmark,
+                templateValues: {
+                    name: input.name,
+                    phone: input.phone,
+                    email: input.email,
+                    service: input.service,
+                    message: input.message,
+                    sms_accepted: input.contactConsent,
+                },
+                emailType: "incoming"
+            }),
 
-        if (emailResponse.errorCode){
-            return emailResponse
+        ])
+
+        let response: ContactResponse = Object.assign({}, captchaResponse)
+        for (const emailResponse of emailResponses){
+            if (emailResponse.response.errorCode){
+                return emailResponse.response
+            }
+            
+
+            if (emailResponse.emailType === "outgoing"){
+                response = Object.assign(response, emailResponse.response)
+            }
         }
 
-        if (input.contactConsent){
+        
+        if (input.contactConsent === 'accepted'){
             const textResponse = await sendSMSMessage({
                 toPhone: input.phone,
                 message: "Thanks for contacting Lundhe Audio! We've received your request! We usually respond within about one business day.",
                 client: ctx.twilio,
             })
 
-            return Object.assign(emailResponse, textResponse);
+            return Object.assign(response, textResponse);
 
         }
 
-        return emailResponse;
+        await ctx.db
+            .insert(contactRequestor)
+            .values({
+                name: input.name,
+                phone: input.phone,
+                email: input.email,
+                service: input.service,
+                sms_accepted: input.contactConsent,
+                created_timestamp: input.submmittedAt.toISOString()
+            })
+
+        return response;
 
     }),
 

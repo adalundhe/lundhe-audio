@@ -144,8 +144,10 @@ export const Footer = () => {
                 formStatus: "submitting",
             })
 
-            formMutation.mutate({
+            await formMutation.mutateAsync({
                 ...values,
+                submmittedAt: new Date(),
+                contactConsent: values.contactConsent ? 'accepted' : 'declined',
                 captchaToken,
             }, {
                 onSuccess: ({ 

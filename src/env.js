@@ -8,7 +8,7 @@ export const env = createEnv({
    * isn't built with invalid env vars.
    */
   server: {
-    // DATABASE_URL: z.string().url(),
+    DATABASE_URL: z.string().url(),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -18,6 +18,8 @@ export const env = createEnv({
     TWILIO_CAMPAIGN_ID: z.string(),
     TWILIO_AUTH_TOKEN: z.string(),
     TWILIO_PHONE_NUMBER: z.string(),
+    TURSO_SQLITE_DB_DATABASE_URL: z.string(),
+    TURSO_SQLITE_DB_TOKEN: z.string(),
     // NEXTAUTH_SECRET:
     //   process.env.NODE_ENV === "production"
     //     ? z.string()
@@ -46,7 +48,7 @@ export const env = createEnv({
    * middlewares) or client-side so we need to destruct manually.
    */
   runtimeEnv: {
-    // DATABASE_URL: process.env.DATABASE_URL,
+    DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
     POSTMARK_TOKEN: process.env.POSTMARK_TOKEN,
     LUNDHE_AUDIO_EMAIL: process.env.LUNDHE_AUDIO_EMAIL,
@@ -55,6 +57,8 @@ export const env = createEnv({
     TWILIO_CAMPAIGN_ID: process.env.TWILIO_CAMPAIGN_ID,
     TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN,
     TWILIO_PHONE_NUMBER: process.env.TWILIO_PHONE_NUMBER,
+    TURSO_SQLITE_DB_TOKEN: process.env.TURSO_SQLITE_DB_TOKEN,
+    TURSO_SQLITE_DB_DATABASE_URL: process.env.TURSO_SQLITE_DB_DATABASE_URL,
     // NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     // NEXTAUTH_URL: process.env.NEXTAUTH_URL,
   },

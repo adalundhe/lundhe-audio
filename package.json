@@ -5,19 +5,25 @@
   "type": "module",
   "scripts": {
     "build": "next build",
-    "db:generate": "prisma migrate dev",
-    "db:migrate": "prisma migrate deploy",
-    "db:push": "prisma db push",
-    "db:studio": "prisma studio",
-    "dev": "next dev",
-    "postinstall": "prisma generate",
+    "check": "next lint && tsc --noEmit",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "dev": "next dev --turbo",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
+    "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
     "lint": "next lint",
-    "start": "next start -p 3001"
+    "lint:fix": "next lint --fix",
+    "preview": "next build && next start",
+    "start": "next start -p 3001",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@auth/prisma-adapter": "^1.6.0",
     "@hookform/resolvers": "^3.9.0",
-    "@prisma/client": "^5.14.0",
+    "@libsql/client": "^0.14.0",
+    "@auth/drizzle-adapter": "^1.7.2",
+    "drizzle-orm": "^0.33.0",
     "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-alert-dialog": "^1.1.2",
     "@radix-ui/react-aspect-ratio": "^1.1.0",
@@ -95,7 +101,8 @@
     "prettier-plugin-tailwindcss": "^0.6.5",
     "prisma": "^5.14.0",
     "tailwindcss": "^3.4.3",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.3",
+    "drizzle-kit": "^0.24.0"
   },
   "ct3aMetadata": {
     "initVersion": "7.37.0"
