@@ -12,12 +12,12 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
-      POSTMARK_TOKEN: z.string(),
-      LUNDHE_AUDIO_EMAIL: z.string(),
-      GOOGLE_RECAPTCHA_SECRET_KEY: z.string(),
-      TWILIO_CAMPAIGN_ID: z.string(),
-      TWILIO_AUTH_TOKEN: z.string(),
-      TWILIO_PHONE_NUMBER: z.string(),
+    POSTMARK_TOKEN: z.string(),
+    LUNDHE_AUDIO_EMAIL: z.string(),
+    GOOGLE_RECAPTCHA_SECRET_KEY: z.string(),
+    TWILIO_CAMPAIGN_ID: z.string(),
+    TWILIO_AUTH_TOKEN: z.string(),
+    TWILIO_PHONE_NUMBER: z.string(),
     // NEXTAUTH_SECRET:
     //   process.env.NODE_ENV === "production"
     //     ? z.string()
