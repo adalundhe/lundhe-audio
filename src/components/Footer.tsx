@@ -37,7 +37,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { api } from '~/utils/api';
-import { env } from "~/env"
 import { useReCaptcha } from '~/hooks/use-recaptcha'
 
 export const Footer = () => {
@@ -47,7 +46,7 @@ export const Footer = () => {
     const formMutation = api.contact.submitContactForm.useMutation();
 
     const [formState, setFormState] = useState<{
-        formStatus: "active" | "submitted" | "errored" | "closed",
+        formStatus: "active" | "submitted" | "errored" | "closed" | "submitting",
         formError?: string
     }>({
         formStatus: "closed"
@@ -141,45 +140,45 @@ export const Footer = () => {
         const errorsCount = Object.keys(form.formState.errors).length
         if(errorsCount < 1 && captchaToken){
 
+            setFormState({
+                formStatus: "submitting",
+            })
+
             formMutation.mutate({
                 ...values,
                 captchaToken,
             }, {
                 onSuccess: ({ 
-                    errorCode,
                     captchaError,
                     emailError,
                     smsError,
                  }) => {
 
                     const error = captchaError ?? emailError ?? smsError;
-                    if (errorCode === undefined && error === undefined){
+                    if (!error){
+                        form.reset()
                         setFormState({
                             formStatus: "submitted",
                         })
-                        form.reset()
-                        return
                     }
 
-                    setFormState({
-                        formStatus: "errored",
-                        formError: error
-                    })
+                    if (formState.formStatus === "active" && error){
+                        setFormState({
+                            formStatus: "errored",
+                            formError: error
+                        })
+                    }
 
                 },
                 onError: () => {
-                    setFormState({
-                        formStatus: "errored",
-                        formError: "Encountered an unknown error while submitting the form."
-                    })
+                    if (formState.formStatus === "active"){
+                        setFormState({
+                            formStatus: "errored",
+                            formError: "Encountered an unknown error while submitting the form."
+                        })
+                    }
                 }
             })
-
-            
-            setFormState({
-                formStatus: "submitted",
-            })
-            form.reset()
 
         }        
     }
@@ -189,7 +188,7 @@ export const Footer = () => {
             <div className="h-full w-full flex flex-col justify-center items-center">
                 {
                     router.route.includes("contact") ? null :
-                    <Dialog open={formState.formStatus === "active"}>
+                    <Dialog open={formState.formStatus === "active" || formState.formStatus === "submitting" || formState.formStatus === "errored"}>
                         <DialogTrigger asChild onClick={() => setFormState({
                             formStatus: "active"
                         })}>
@@ -212,7 +211,7 @@ export const Footer = () => {
                                     </DialogDescription>
                                 </DialogHeader>
                                 <Form {...form}>
-                                    <form aria-disabled={formState.formStatus === "submitted"} onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 mx-8 py-4">
+                                    <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 mx-8 py-4">
                                         <FormField
                                             control={form.control}
                                             name="name"
@@ -224,8 +223,8 @@ export const Footer = () => {
                                                     </FormDescription>
                                                     <FormControl>
                                                         <Input 
-                                                            disabled={formState.formStatus === "submitted"}
-                                                            aria-disabled={formState.formStatus === "submitted"}
+                                                            disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"}
+                                                            aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"}
                                                             placeholder="Please enter your name." {...field}
                                                         />
                                                     </FormControl>
@@ -244,8 +243,8 @@ export const Footer = () => {
                                                     </FormDescription>
                                                     <FormControl>
                                                         <Input
-                                                            disabled={formState.formStatus === "submitted"}
-                                                            aria-disabled={formState.formStatus === "submitted"}
+                                                            disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"}
+                                                            aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"}
                                                             placeholder="Please enter your email." {...field} type="email"
                                                         />
                                                     </FormControl>
@@ -264,8 +263,8 @@ export const Footer = () => {
                                                     </FormDescription>
                                                     <FormControl>
                                                         <Input
-                                                            disabled={formState.formStatus === "submitted"}
-                                                            aria-disabled={formState.formStatus === "submitted"}
+                                                            disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"}
+                                                            aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"}
                                                             placeholder="Please enter your phone." {...field} 
                                                             type="phone" 
                                                             onChange={(e) => {
@@ -293,8 +292,8 @@ export const Footer = () => {
                                                     </FormDescription>
                                                     <FormControl>
                                                         <Select 
-                                                            disabled={formState.formStatus === "submitted"} 
-                                                            aria-disabled={formState.formStatus === "submitted"} 
+                                                            disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
+                                                            aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
                                                             onValueChange={field.onChange}
                                                             value={field.value}
                                                         >
@@ -325,8 +324,8 @@ export const Footer = () => {
                                                     </FormDescription>
                                                     <FormControl>
                                                         <Textarea 
-                                                            disabled={formState.formStatus === "submitted"} 
-                                                            aria-disabled={formState.formStatus === "submitted"} 
+                                                            disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
+                                                            aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
                                                             placeholder="Please enter a message." 
                                                             {...field}
                                                         />
@@ -343,8 +342,8 @@ export const Footer = () => {
                                                     <FormLabel  className="mt-[6.5px] text-sm w-full col-span-11 flex items-end">Opt-In SMS Terms and Conditions</FormLabel>
                                                     <FormControl>
                                                         <Checkbox
-                                                            disabled={formState.formStatus === "submitted"} 
-                                                            aria-disabled={formState.formStatus === "submitted"} 
+                                                            disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
+                                                            aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
                                                             checked={field.value}
                                                             onCheckedChange={field.onChange}                         
                                                         />
@@ -361,11 +360,14 @@ export const Footer = () => {
                                             <div className="flex flex-col w-full items-center">
                                                 
                                                 <Button
-                                                    disabled={formState.formStatus === "submitted"} 
-                                                    aria-disabled={formState.formStatus === "submitted"} 
+                                                    disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
+                                                    aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
                                                     type="submit"
                                                 >
-                                                    { formState.formStatus === "submitted" ? "submitted!" : "submit" }
+                                                    { 
+                                                        formState.formStatus === "submitting" ? "submitting..." : 
+                                                        formState.formStatus === "submitted" ? "submitted!" : "submit" 
+                                                    }
                                                 </Button>
                                                 <Link onClick={() => setFormState({
                                                     formStatus: "closed"

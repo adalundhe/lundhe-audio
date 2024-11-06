@@ -2,9 +2,23 @@
 import { env } from '~/env'
 import { useEffect, useState } from 'react'
 
+type CaptchaWindow = Window & typeof globalThis & {
+  grecaptcha: {
+    ready: (
+      callback: () => void
+    ) => void
+    execute: (
+      site_key: string,
+      ctx: {
+        action: string
+      }
+    ) => Promise<string>
+  }
+}
+
 const showBadge = () => {
-  if (!window.grecaptcha) return
-  window.grecaptcha.ready(() => {
+  if (!(window as CaptchaWindow).grecaptcha) return
+  (window as CaptchaWindow).grecaptcha.ready(() => {
     const badge = document.getElementsByClassName('grecaptcha-badge')[0] as HTMLElement
     if (!badge) return
     badge.style.display = 'block'
@@ -13,8 +27,8 @@ const showBadge = () => {
 }
 
 const hideBadge = () => {
-  if (!window.grecaptcha) return
-  window.grecaptcha.ready(() => {
+  if (!(window as CaptchaWindow).grecaptcha) return
+  (window as CaptchaWindow).grecaptcha.ready(() => {
     const badge = document.getElementsByClassName('grecaptcha-badge')[0] as HTMLElement
     if (!badge) return
     badge.style.display = 'none'
@@ -27,7 +41,7 @@ const useReCaptcha = (): { reCaptchaLoaded: boolean; generateReCaptchaToken: (ac
   // Load ReCaptcha script
   useEffect(() => {
     if (typeof window === 'undefined' || reCaptchaLoaded) return
-    if (window.grecaptcha) {
+    if ((window as CaptchaWindow).grecaptcha) {
       showBadge()
       setReCaptchaLoaded(true)
       return
@@ -42,17 +56,21 @@ const useReCaptcha = (): { reCaptchaLoaded: boolean; generateReCaptchaToken: (ac
     document.body.appendChild(script)
   }, [reCaptchaLoaded])
 
+  useEffect(() => hideBadge, [])
+
   // Get token
-  const generateReCaptchaToken = async (action: string): Promise<string> => {
+  const generateReCaptchaToken = (action: string): Promise<string> => {
     return new Promise((resolve, reject) => {
       if (!reCaptchaLoaded) return reject(new Error('ReCaptcha not loaded'))
-      if (typeof window === 'undefined' || !window.grecaptcha) {
+      if (typeof window === 'undefined' || !(window as CaptchaWindow).grecaptcha) {
         setReCaptchaLoaded(false)
         return reject(new Error('ReCaptcha not loaded'))
       }
-      window.grecaptcha.ready(() => {
-        window.grecaptcha.execute(env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY, { action }).then((token: string) => {
+      (window as CaptchaWindow).grecaptcha.ready(() => {
+        (window as CaptchaWindow).grecaptcha.execute(env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY, { action }).then((token: string) => {
           resolve(token)
+        }).catch((reason: string) => {
+          reject(new Error(reason))
         })
       })
     })

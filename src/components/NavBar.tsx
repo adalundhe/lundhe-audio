@@ -6,9 +6,6 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   NavigationMenuContent,
-  NavigationMenuSub,
-  NavigationSubMenuTrigger,
-  NavigationSubMenuContent,
   navigationMenuLinkStyle 
 
 } from "~/components/ui/navigation-menu"
@@ -17,21 +14,15 @@ import {
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
-  } from "~/components/ui/accordion"
-  import { CiMenuBurger } from "react-icons/ci";
+} from "~/components/ui/accordion"
+import { CiMenuBurger } from "react-icons/ci";
 import { GiMusicalNotes } from "react-icons/gi";
 import { MdHome } from "react-icons/md";
 import { Separator } from "~/components/ui/separator"
 import { GiGearHammer } from "react-icons/gi";
 import { PiInfoFill } from "react-icons/pi";
 import Link from "next/link";
-import { GiGrandPiano } from "react-icons/gi";
-import { TbDeviceTvOld } from "react-icons/tb";
 import { Avatar, AvatarImage } from "~/components/ui/avatar"
-import { GiDrumKit } from "react-icons/gi";
-import { PiFadersFill } from "react-icons/pi";
-import { BiSolidSpeaker } from "react-icons/bi";
-import { GiMusicalKeyboard } from "react-icons/gi";
 import { IoMdContact } from "react-icons/io";
 import { MdPolicy } from "react-icons/md";
 import { LiaFileContractSolid } from "react-icons/lia";
@@ -45,11 +36,9 @@ export const NavBar = () => {
       <NavigationMenu className={`h-[80px] max-h-[80px] my-4 px-3 ${GeistSans.className}`}>
         <NavigationMenuList className="flex justify-start">
             <Avatar className="w-[min(80px,calc(100vmin/4))] h-[min(80px,calc(100vmin/4))]">
-                <Link href="/" className="cursor-pointer" passHref>
-                    <NavigationMenuLink>     
-                        <AvatarImage src="/lundhe_audio_logo.png"/>
-                    </NavigationMenuLink>
-                </Link>
+                <NavigationMenuLink href="/" className="cursor-pointer">     
+                    <AvatarImage src="/lundhe_audio_logo.png"/>
+                </NavigationMenuLink>
             </Avatar>
             <NavigationMenuItem className="h-[40px]">
                 <NavigationMenuTrigger className="lg:mx-[16px] lg:border lg:shadow-sm hover:underline text-sm w-[94px]" asChild>
@@ -62,16 +51,14 @@ export const NavBar = () => {
                     </div>    
                 </NavigationMenuTrigger>     
                 <NavigationMenuContent>
-                    <div className="border-t h-[100vh] lg:mt-[34px] w-[100vw] bg-white flex flex-col w-full no-scroll">
+                    <div className="border-t h-[100vh] lg:mt-[34px] w-[100vw] bg-white flex flex-col w-full no-scroll text-sm">
                         <ScrollArea className="h-[60vh]">
                             <Accordion defaultValue="home" type="single" collapsible className="flex flex-col w-full">
-                                <AccordionItem value="home" className=" text-lg hover:bg-gray-50 focus:bg-gray-50 py-2 px-2 h-[40px] w-full flex grow-1 items-center space-x-2 hover:bg-gray-50 focus:bg-gray-50">
+                                <AccordionItem value="home" className=" hover:bg-gray-50 focus:bg-gray-50 py-2 px-2 h-[40px] w-full flex grow-1 items-center space-x-2 hover:bg-gray-50 focus:bg-gray-50">
                                     <MdHome/>
-                                    <Link href="/" className="cursor-pointer hover:underline" passHref>
-                                        <NavigationMenuLink className={navigationMenuLinkStyle()}>
-                                            home
-                                        </NavigationMenuLink>
-                                    </Link>
+                                    <NavigationMenuLink href="/" className="cursor-pointer hover:underline">
+                                        home
+                                    </NavigationMenuLink>
                                 </AccordionItem>
                                 <AccordionItem value="studio" className="px-2 hover:bg-gray-50 focus:bg-gray-50">
                                     <AccordionTrigger 
@@ -100,11 +87,9 @@ export const NavBar = () => {
                                             <Separator/>
                                             <li className="w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
                                                 <GiGearHammer />
-                                                <Link href="/gear" className="cursor-pointer hover:underline">                                                
-                                                    <NavigationMenuLink className={navigationMenuLinkStyle()}>
-                                                        gear
-                                                    </NavigationMenuLink>
-                                                </Link>
+                                                <NavigationMenuLink href="/gear" className="cursor-pointer hover:underline">
+                                                    gear
+                                                </NavigationMenuLink>
                                             </li>
                                         </ul>
                                     </AccordionContent>
@@ -186,31 +171,25 @@ export const NavBar = () => {
                                         <ul className="list-none pl-4">
                                             <li className="w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
                                                 <MdPolicy/>
-                                                <Link href="/privacy" className="cursor-pointer hover:underline" passHref>                                                
-                                                    <NavigationMenuLink className={navigationMenuLinkStyle()}>
-                                                        privacy
-                                                    </NavigationMenuLink>
-                                                </Link>
+                                                <NavigationMenuLink href="/privacy" className="cursor-pointer hover:underline">
+                                                    privacy
+                                                </NavigationMenuLink>
                                             </li>
                                             <Separator/>
                                             <li className="w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
                                                 <LiaFileContractSolid/>
-                                                <Link href="/terms_of_service" className="cursor-pointer hover:underline" passHref>                                                
-                                                    <NavigationMenuLink className={navigationMenuLinkStyle()}>
-                                                        terms of service
-                                                    </NavigationMenuLink>
-                                                </Link>
+                                                <NavigationMenuLink href="/terms_of_service" className="cursor-pointer hover:underline">
+                                                    terms of service
+                                                </NavigationMenuLink>
                                             </li>
                                         </ul>
                                     </AccordionContent>
                                 </AccordionItem>
                                 <AccordionItem value="contact" className="hover:bg-gray-50 focus:bg-gray-50 py-2 px-2 h-[40px] w-full flex grow-1 items-center space-x-2 hover:bg-gray-50 focus:bg-gray-50">
                                     <IoMdContact/>
-                                    <Link href="/contact" className="cursor-pointer hover:underline" passHref>
-                                        <NavigationMenuLink className={navigationMenuLinkStyle()}>
-                                            contact
-                                        </NavigationMenuLink>
-                                    </Link>
+                                    <NavigationMenuLink href="/contact" className="cursor-pointer hover:underline">
+                                        contact
+                                    </NavigationMenuLink>
                                 </AccordionItem>
                             </Accordion>
                         </ScrollArea>

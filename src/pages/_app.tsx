@@ -19,10 +19,10 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <SessionProvider session={session}>
       <Head>
         <title>Lundhe Audio</title>
-        <Script src={`https://www.google.com/recaptcha/api.js?render=${env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY}`} async/>
         <meta name="description" content="Lundhe Audio, an Austin based post-tracking mixing, mastering, sound design, and commercial audio." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Script src={`https://www.google.com/recaptcha/api.js?render=${env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY}`} async/>
       <NavBar />
       <div className={`${GeistSans.className} flex flex-col flex-1`}>
         <Component {...pageProps} />

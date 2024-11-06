@@ -29,7 +29,6 @@ import { Input } from "~/components/ui/input"
 import { Textarea } from "~/components/ui/textarea"
 import { Button } from "~/components/ui/button"
 import { z } from "zod"
-import { ScrollArea } from "~/components/ui/scroll-area"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useState } from "react";
@@ -45,7 +44,7 @@ export default function Contact(){
     const formMutation = api.contact.submitContactForm.useMutation();
 
     const [formState, setFormState] = useState<{
-        formStatus: "active" | "submitted" | "errored"
+        formStatus: "active" | "submitted" | "errored" | "submitting"
         formError?: string
     }>({
         formStatus: "active"
@@ -106,7 +105,7 @@ export default function Contact(){
 
       const onSubmit = async (values: z.infer<typeof formSchema>) => {
 
-        if (!reCaptchaLoaded) {
+        if (!reCaptchaLoaded && formState.formStatus === "active") {
             setFormState({
                 formStatus: "errored",
                 formError: "Err. - Recaptcha not ready or token not provided."
@@ -119,45 +118,45 @@ export default function Contact(){
         const errorsCount = Object.keys(form.formState.errors).length
         if(errorsCount < 1 && captchaToken){
 
+            setFormState({
+                formStatus: "submitting",
+            })
+
             formMutation.mutate({
                 ...values,
                 captchaToken,
             }, {
                 onSuccess: ({ 
-                    errorCode,
                     captchaError,
                     emailError,
                     smsError,
                  }) => {
 
                     const error = captchaError ?? emailError ?? smsError;
-                    if (errorCode === undefined && error === undefined){
+                    if (!error){
                         form.reset()
                         setFormState({
                             formStatus: "submitted",
                         })
-                        return
                     }
 
-                    setFormState({
-                        formStatus: "errored",
-                        formError: error
-                    })
+                    if (formState.formStatus === "active" && error){
+                        setFormState({
+                            formStatus: "errored",
+                            formError: error
+                        })
+                    }
 
                 },
                 onError: () => {
-                    setFormState({
-                        formStatus: "errored",
-                        formError: "Encountered an unknown error while submitting the form."
-                    })
+                    if (formState.formStatus === "active"){
+                        setFormState({
+                            formStatus: "errored",
+                            formError: "Encountered an unknown error while submitting the form."
+                        })
+                    }
                 }
             })
-
-            
-            setFormState({
-                formStatus: "submitted",
-            })
-            form.reset()
 
         }        
     }
@@ -175,7 +174,7 @@ export default function Contact(){
             </CardHeader>
             <CardContent className="p-0 w-[100%] flex flex-col items-center">
                 <Form {...form}>
-                    <form aria-disabled={formState.formStatus === "submitted"} onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 mx-8 py-4 h-full w-full">
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 mx-8 py-4 h-full w-full">
                         <FormField
                             control={form.control}
                             name="name"
@@ -187,8 +186,8 @@ export default function Contact(){
                                     </FormDescription>
                                     <FormControl>
                                         <Input 
-                                            disabled={formState.formStatus === "submitted"}
-                                            aria-disabled={formState.formStatus === "submitted"}
+                                            disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"}
+                                            aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"}
                                             placeholder="Please enter your name." {...field}
                                         />
                                     </FormControl>
@@ -207,8 +206,8 @@ export default function Contact(){
                                     </FormDescription>
                                     <FormControl>
                                         <Input 
-                                            disabled={formState.formStatus === "submitted"}
-                                            aria-disabled={formState.formStatus === "submitted"}
+                                            disabled={formState.formStatus === "submitted" ||formState.formStatus === "submitting"}
+                                            aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"}
                                             placeholder="Please enter your email." 
                                             type="email" 
                                             {...field}
@@ -229,8 +228,8 @@ export default function Contact(){
                                     </FormDescription>
                                     <FormControl>
                                         <Input 
-                                            disabled={formState.formStatus === "submitted"} 
-                                            aria-disabled={formState.formStatus === "submitted"}
+                                            disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
+                                            aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"}
                                             placeholder="Please enter your phone." {...field} 
                                             type="phone" 
                                             onChange={(e) => {
@@ -258,8 +257,8 @@ export default function Contact(){
                                     </FormDescription>
                                     <FormControl>
                                         <Select 
-                                            disabled={formState.formStatus === "submitted"} 
-                                            aria-disabled={formState.formStatus === "submitted"} 
+                                            disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
+                                            aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
                                             onValueChange={field.onChange}
                                             value={field.value}
                                         >
@@ -290,8 +289,8 @@ export default function Contact(){
                                     </FormDescription>
                                     <FormControl>
                                         <Textarea
-                                            disabled={formState.formStatus === "submitted"} 
-                                            aria-disabled={formState.formStatus === "submitted"}
+                                            disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
+                                            aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"}
                                             placeholder="Please enter a message."
                                             {...field}
                                         />
@@ -308,8 +307,8 @@ export default function Contact(){
                                     <FormLabel  className="mt-[6.5px] text-sm w-full col-span-11 flex items-end">Opt-In SMS Terms and Conditions</FormLabel>
                                     <FormControl>
                                         <Checkbox
-                                            disabled={formState.formStatus === "submitted"} 
-                                            aria-disabled={formState.formStatus === "submitted"} 
+                                            disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
+                                            aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
                                             checked={field.value}
                                             onCheckedChange={field.onChange}                         
                                         />
@@ -326,12 +325,15 @@ export default function Contact(){
                             <div className="flex flex-col w-full items-center">
                                 
                                 <Button   
-                                    disabled={formState.formStatus === "submitted"} 
-                                    aria-disabled={formState.formStatus === "submitted"}
+                                    disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
+                                    aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"}
                                     type="submit"
                                     className="w-[100px] h-36px"
                                 >
-                                    { formState.formStatus === "submitted" ? "submitted!" : "submit" }
+                                    { 
+                                        formState.formStatus === "submitting" ? "submitting..." : 
+                                        formState.formStatus === "submitted" ? "submitted!" : "submit" 
+                                    }
                                 </Button>
                                 <Link onClick={() => setFormState({
                                     formStatus: "active"

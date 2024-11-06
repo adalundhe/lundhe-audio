@@ -12,8 +12,6 @@ const NavigationMenu = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <NavigationMenuPrimitive.Root
     ref={ref}
-    onPointerEnter={(event) => event.preventDefault()}
-    onPointerLeave={(event) => event.preventDefault()}
     className={cn(
       "relative z-10 flex flex-1 items-center justify-center w-full [&>div]:w-full space-x-2",
       className
@@ -72,9 +70,7 @@ const NavigationMenuTrigger = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Trigger>
 >(({ className, children, ...props }, ref) => (
   <NavigationMenuPrimitive.Trigger
-    ref={ref}  
-    onPointerEnter={(event) => event.preventDefault()}
-    onPointerLeave={(event) => event.preventDefault()}
+    ref={ref}
     className={cn(navigationMenuTriggerStyle(), "group", className, "h-full py-2")}
     {...props}
   >
@@ -105,8 +101,6 @@ const NavigationMenuContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <NavigationMenuPrimitive.Content
     ref={ref}
-    onPointerEnter={(event) => event.preventDefault()}
-    onPointerLeave={(event) => event.preventDefault()}
     className={cn(
       "bg-transparent w-full left-0 top-0 data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 lg:absolute",
       className

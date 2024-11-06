@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { ServerClient } from 'postmark'
-import { Twilio } from 'twilio'
-import ky, { HTTPError } from 'ky';
+import { type ServerClient } from 'postmark'
+import { type Twilio } from 'twilio'
+import ky, { type HTTPError } from 'ky';
 import { env } from "~/env";
 
 import {
@@ -102,8 +102,8 @@ const sendSMSMessage = async ({
     }) 
     
     return {
-        errorCode: response.errorCode,
-        smsError: response.errorMessage,
+        errorCode: response.errorCode ?? undefined,
+        smsError: response.errorMessage ?? undefined,
         smsContext: response.body,
     } as ContactResponse
     
