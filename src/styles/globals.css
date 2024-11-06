@@ -83,13 +83,14 @@
 }
 
 body:has(.no-scroll) {
-  overflow: hidden;
+  overflow-y: hidden;
 }
 
 html, body {
   overflow-x: hidden;
   height: 100%;
 }
+
 
 body {
   display: flex;

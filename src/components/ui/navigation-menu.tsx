@@ -28,10 +28,11 @@ NavigationMenu.displayName = NavigationMenuPrimitive.Root.displayName
 
 
 const NavigationMenuSub = React.forwardRef<
-  React.ElementRef<typeof NavigationMenuPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Root>
->(({ className, children, ...props }) => (
+  React.ElementRef<typeof NavigationMenuPrimitive.Sub>,
+  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Sub>
+>(({ className, children, ...props }, ref) => (
   <NavigationMenuPrimitive.Sub
+    ref={ref}
     className={className}
     {...props}
   >

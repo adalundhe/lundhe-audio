@@ -12,6 +12,12 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
+      POSTMARK_TOKEN: z.string(),
+      LUNDHE_AUDIO_EMAIL: z.string(),
+      GOOGLE_RECAPTCHA_SECRET_KEY: z.string(),
+      TWILIO_CAMPAIGN_ID: z.string(),
+      TWILIO_AUTH_TOKEN: z.string(),
+      TWILIO_PHONE_NUMBER: z.string(),
     // NEXTAUTH_SECRET:
     //   process.env.NODE_ENV === "production"
     //     ? z.string()
@@ -32,6 +38,7 @@ export const env = createEnv({
    */
   client: {
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
+    NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY: z.string(),
   },
 
   /**
@@ -41,6 +48,13 @@ export const env = createEnv({
   runtimeEnv: {
     // DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
+    POSTMARK_TOKEN: process.env.POSTMARK_TOKEN,
+    LUNDHE_AUDIO_EMAIL: process.env.LUNDHE_AUDIO_EMAIL,
+    NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY: process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY,
+    GOOGLE_RECAPTCHA_SECRET_KEY: process.env.GOOGLE_RECAPTCHA_SECRET_KEY,
+    TWILIO_CAMPAIGN_ID: process.env.TWILIO_CAMPAIGN_ID,
+    TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN,
+    TWILIO_PHONE_NUMBER: process.env.TWILIO_PHONE_NUMBER,
     // NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     // NEXTAUTH_URL: process.env.NEXTAUTH_URL,
   },

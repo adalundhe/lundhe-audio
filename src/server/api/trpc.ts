@@ -12,6 +12,9 @@ import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
 import { type Session } from "next-auth";
 import superjson from "superjson";
 import { ZodError } from "zod";
+import { env } from "~/env";
+import { ServerClient } from 'postmark';
+import twilio from 'twilio';
 
 import { getServerAuthSession } from "~/server/auth";
 import { db } from "~/server/db";
@@ -39,9 +42,16 @@ interface CreateContextOptions {
  * @see https://create.t3.gg/en/usage/trpc#-serverapitrpcts
  */
 const createInnerTRPCContext = (opts: CreateContextOptions) => {
+  
+  const client = new ServerClient(env.POSTMARK_TOKEN);
+  const twilioClient = twilio(env.TWILIO_CAMPAIGN_ID, env.TWILIO_AUTH_TOKEN);
+
   return {
     session: opts.session,
     db,
+    postmark: client,
+    twilio: twilioClient,
+
   };
 };
 
@@ -57,9 +67,16 @@ export const createTRPCContext = async (opts: CreateNextContextOptions) => {
   // Get the session from the server using the getServerSession wrapper function
   const session = await getServerAuthSession({ req, res });
 
-  return createInnerTRPCContext({
+  const innerCtx = createInnerTRPCContext({
     session,
   });
+
+  return {
+    ...innerCtx,
+    url: req.url,
+    headers: req.headers,
+    cookies: req.cookies
+  }
 };
 
 /**

@@ -34,11 +34,22 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useState } from "react";
 import { Layout } from "~/components/Layout";
+import { api } from '~/utils/api';
+import { useReCaptcha } from '~/hooks/use-recaptcha'
 
 
-export default function Contact() {
 
-    const [formActive, setFormActive] = useState(true)
+export default function Contact(){
+    
+    const { reCaptchaLoaded, generateReCaptchaToken } = useReCaptcha();
+    const formMutation = api.contact.submitContactForm.useMutation();
+
+    const [formState, setFormState] = useState<{
+        formStatus: "active" | "submitted" | "errored"
+        formError?: string
+    }>({
+        formStatus: "active"
+    })
 
     const formSchema = z.object({
         name: z.string().min(2, {
@@ -58,9 +69,7 @@ export default function Contact() {
         }).max(280, {
             message: "Message cannot be more than 280 characters."
         }),
-        contactConsent: z.boolean().refine((value)=> value === true,{
-            message: "You must accept the terms and conditions"
-        })
+        contactConsent: z.boolean(),
     })
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -71,7 +80,7 @@ export default function Contact() {
             phone: "",
             service: "mixing",
             message: "",
-            contactConsent: false
+            contactConsent: false,
         },
     })
     
@@ -95,11 +104,61 @@ export default function Contact() {
         return value.length > 0 ? previousValue.slice(0, previousValue.length - 1) : ""
       };
 
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
+      const onSubmit = async (values: z.infer<typeof formSchema>) => {
+
+        if (!reCaptchaLoaded) {
+            setFormState({
+                formStatus: "errored",
+                formError: "Err. - Recaptcha not ready or token not provided."
+            });
+            return;
+        }
+
+        const captchaToken = await generateReCaptchaToken("contactFormSubmit")
+
         const errorsCount = Object.keys(form.formState.errors).length
-        if(errorsCount < 1 && values.contactConsent === true){
-            setFormActive(false)
+        if(errorsCount < 1 && captchaToken){
+
+            formMutation.mutate({
+                ...values,
+                captchaToken,
+            }, {
+                onSuccess: ({ 
+                    errorCode,
+                    captchaError,
+                    emailError,
+                    smsError,
+                 }) => {
+
+                    const error = captchaError ?? emailError ?? smsError;
+                    if (errorCode === undefined && error === undefined){
+                        form.reset()
+                        setFormState({
+                            formStatus: "submitted",
+                        })
+                        return
+                    }
+
+                    setFormState({
+                        formStatus: "errored",
+                        formError: error
+                    })
+
+                },
+                onError: () => {
+                    setFormState({
+                        formStatus: "errored",
+                        formError: "Encountered an unknown error while submitting the form."
+                    })
+                }
+            })
+
+            
+            setFormState({
+                formStatus: "submitted",
+            })
             form.reset()
+
         }        
     }
 
@@ -107,181 +166,185 @@ export default function Contact() {
   return (
     <>
       <Layout>
-        <Card className="w-full md:w-3/4 h-full rounded-none border-none shadow-none flex flex-col items-center justify-center">
-            <CardHeader>
-                <CardTitle className="text-center">Get in touch!</CardTitle>
-                <CardDescription className="text-center">
+        <Card className="w-full md:w-3/4 h-full rounded-none border-none shadow-none">
+            <CardHeader className="p-0 mb-4 flex flex-col items-center">
+                <CardTitle className="w-3/4 text-2xl text-center">Get in touch!</CardTitle>
+                <CardDescription className="text-center w-3/4">
                     Fill out the form below to reach out to us. We usually respond in one business day.
                 </CardDescription>
             </CardHeader>
-            <ScrollArea className="h-full w-full">
-                <CardContent className="p-0 w-[100%] h-full flex flex-col items-center">
-                    <Form {...form}>
-                        <form aria-disabled={!formActive} onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 mx-8 py-4 h-full">
-                            <FormField
-                                control={form.control}
-                                name="name"
-                                render={({ field }) => (
-                                    <FormItem className="flex flex-col">
-                                        <FormLabel>Name</FormLabel>
-                                        <FormDescription>
-                                            Your first or full name.
-                                        </FormDescription>
-                                        <FormControl>
-                                            <Input 
-                                                disabled={!formActive}
-                                                aria-disabled={!formActive}
-                                                placeholder="Please enter your name." {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="email"
-                                render={({ field }) => (
-                                    <FormItem className="flex flex-col">
-                                        <FormLabel>Email</FormLabel>
-                                        <FormDescription>
-                                            Your email for us to contact you at.
-                                        </FormDescription>
-                                        <FormControl>
-                                            <Input 
-                                                disabled={!formActive}
-                                                aria-disabled={!formActive}
-                                                placeholder="Please enter your email." 
-                                                type="email" 
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="phone"
-                                render={({ field }) => (
-                                    <FormItem className="flex flex-col">
-                                        <FormLabel>Phone</FormLabel>
-                                        <FormDescription>
-                                            Your phone for us to contact you at.
-                                        </FormDescription>
-                                        <FormControl>
-                                            <Input 
-                                                disabled={!formActive} 
-                                                aria-disabled={!formActive}
-                                                placeholder="Please enter your phone." {...field} 
-                                                type="phone" 
-                                                onChange={(e) => {
+            <CardContent className="p-0 w-[100%] flex flex-col items-center">
+                <Form {...form}>
+                    <form aria-disabled={formState.formStatus === "submitted"} onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 mx-8 py-4 h-full w-full">
+                        <FormField
+                            control={form.control}
+                            name="name"
+                            render={({ field }) => (
+                                <FormItem className="flex flex-col">
+                                    <FormLabel>Name</FormLabel>
+                                    <FormDescription>
+                                        Your first or full name.
+                                    </FormDescription>
+                                    <FormControl>
+                                        <Input 
+                                            disabled={formState.formStatus === "submitted"}
+                                            aria-disabled={formState.formStatus === "submitted"}
+                                            placeholder="Please enter your name." {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="email"
+                            render={({ field }) => (
+                                <FormItem className="flex flex-col">
+                                    <FormLabel>Email</FormLabel>
+                                    <FormDescription>
+                                        Your email for us to contact you at.
+                                    </FormDescription>
+                                    <FormControl>
+                                        <Input 
+                                            disabled={formState.formStatus === "submitted"}
+                                            aria-disabled={formState.formStatus === "submitted"}
+                                            placeholder="Please enter your email." 
+                                            type="email" 
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="phone"
+                            render={({ field }) => (
+                                <FormItem className="flex flex-col">
+                                    <FormLabel>Phone</FormLabel>
+                                    <FormDescription>
+                                        Your phone for us to contact you at.
+                                    </FormDescription>
+                                    <FormControl>
+                                        <Input 
+                                            disabled={formState.formStatus === "submitted"} 
+                                            aria-disabled={formState.formStatus === "submitted"}
+                                            placeholder="Please enter your phone." {...field} 
+                                            type="phone" 
+                                            onChange={(e) => {
 
-                                                    if (form.formState.errors.phone){
-                                                        form.clearErrors("phone")
-                                                    }
+                                                if (form.formState.errors.phone){
+                                                    form.clearErrors("phone")
+                                                }
 
-                                                    form.setValue("phone", formatPhoneNumber(e.target.value, field.value) ?? "")
-                                                }}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="service"
-                                render={({ field }) => (
-                                    <FormItem className="flex flex-col">
-                                        <FormLabel>Service</FormLabel>
-                                        <FormDescription>
-                                            Select the service you intend to enquire about.
-                                        </FormDescription>
-                                        <FormControl>
-                                            <Select 
-                                                disabled={!formActive} 
-                                                aria-disabled={!formActive} 
-                                                onValueChange={field.onChange}
-                                                value={field.value}
-                                            >
-                                                <SelectTrigger>
-                                                    <SelectValue placeholder="Select a provided service" />
-                                                </SelectTrigger>
-                                                <SelectContent className={GeistSans.className} ref={field.ref}>
-                                                    <SelectItem value="mixing">mixing</SelectItem>
-                                                    <SelectItem value="mastering">mastering</SelectItem>
-                                                    <SelectItem value="sound-design">sound design</SelectItem>
-                                                    <SelectItem value="commercial-audio">commercial audio</SelectItem>
-                                                    <SelectItem value="other">other</SelectItem>
-                                                </SelectContent>
-                                            </Select>
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="message"
-                                render={({ field }) => (
-                                    <FormItem className="flex flex-col">
-                                        <FormLabel>Message</FormLabel>
-                                        <FormDescription>
-                                            Enter a message.
-                                        </FormDescription>
-                                        <FormControl>
-                                            <Textarea
-                                                disabled={!formActive} 
-                                                aria-disabled={!formActive}
-                                                placeholder="Please enter a message." {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="contactConsent"
-                                render={({ field }) => (
-                                    <FormItem className="flex flex-col">
-                                        <FormLabel className="text-sm">Accept Terms and Conditions</FormLabel>
-                                        <FormDescription>
-                                            You consent to receive SMS messages at {field.value} provided for the express 
-                                            purpose of service scheduling/confirmation and updates (carrier charges may apply).
-                                        </FormDescription>
-                                        <FormControl>
-                                            <Checkbox
-                                                disabled={!formActive} 
-                                                aria-disabled={!formActive}
-                                                checked={field.value}
-                                                onCheckedChange={field.onChange}                         
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <CardFooter className="mt-4">
-                                <div className="flex flex-col w-full items-center">
-                                    
-                                    <Button   
-                                        disabled={!formActive} 
-                                        aria-disabled={!formActive}
-                                        type="submit"
-                                        className="w-[100px] h-36px"
-                                    >
-                                        { formActive ? "submit" : "submitted!" }
-                                    </Button>
-                                    <Link onClick={() => setFormActive(false)} href="/privacy" className="text-xs mt-2 text-muted-foreground">privacy</Link>
-                                    <Link onClick={() => setFormActive(false)} href="/terms_of_service" className="text-xs mb-2 text-muted-foreground">terms of service</Link>
-                                </div>
-                            </CardFooter>
-                        </form>
-                    </Form>
-                </CardContent>
-                
-            </ScrollArea>
+                                                form.setValue("phone", formatPhoneNumber(e.target.value, field.value) ?? "")
+                                            }}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="service"
+                            render={({ field }) => (
+                                <FormItem className="flex flex-col">
+                                    <FormLabel>Service</FormLabel>
+                                    <FormDescription>
+                                        Select the service you intend to enquire about.
+                                    </FormDescription>
+                                    <FormControl>
+                                        <Select 
+                                            disabled={formState.formStatus === "submitted"} 
+                                            aria-disabled={formState.formStatus === "submitted"} 
+                                            onValueChange={field.onChange}
+                                            value={field.value}
+                                        >
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select a provided service" />
+                                            </SelectTrigger>
+                                            <SelectContent className={GeistSans.className} ref={field.ref}>
+                                                <SelectItem value="mixing">mixing</SelectItem>
+                                                <SelectItem value="mastering">mastering</SelectItem>
+                                                <SelectItem value="sound-design">sound design</SelectItem>
+                                                <SelectItem value="commercial-audio">commercial audio</SelectItem>
+                                                <SelectItem value="other">other</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="message"
+                            render={({ field }) => (
+                                <FormItem className="flex flex-col">
+                                    <FormLabel>Message</FormLabel>
+                                    <FormDescription>
+                                        Enter a message.
+                                    </FormDescription>
+                                    <FormControl>
+                                        <Textarea
+                                            disabled={formState.formStatus === "submitted"} 
+                                            aria-disabled={formState.formStatus === "submitted"}
+                                            placeholder="Please enter a message."
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="contactConsent"
+                            render={({ field }) => (
+                                <FormItem className="grid grid-cols-12">
+                                    <FormLabel  className="mt-[6.5px] text-sm w-full col-span-11 flex items-end">Opt-In SMS Terms and Conditions</FormLabel>
+                                    <FormControl>
+                                        <Checkbox
+                                            disabled={formState.formStatus === "submitted"} 
+                                            aria-disabled={formState.formStatus === "submitted"} 
+                                            checked={field.value}
+                                            onCheckedChange={field.onChange}                         
+                                        />
+                                    </FormControl>
+                                    <FormDescription className="col-span-12">
+                                        You consent to receive SMS messages at {field.value} provided for the express 
+                                        purpose of service scheduling/confirmation and updates (carrier charges may apply).
+                                    </FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <CardFooter className="mt-4">
+                            <div className="flex flex-col w-full items-center">
+                                
+                                <Button   
+                                    disabled={formState.formStatus === "submitted"} 
+                                    aria-disabled={formState.formStatus === "submitted"}
+                                    type="submit"
+                                    className="w-[100px] h-36px"
+                                >
+                                    { formState.formStatus === "submitted" ? "submitted!" : "submit" }
+                                </Button>
+                                <Link onClick={() => setFormState({
+                                    formStatus: "active"
+                                })} href="/privacy" className="text-xs mt-2 text-muted-foreground">privacy</Link>
+                                <Link onClick={() => setFormState({
+                                    formStatus: "active"
+                                })} href="/terms_of_service" className="text-xs mb-2 text-muted-foreground">terms of service</Link>
+                                <p className={`${formState.formStatus === "errored" ? '' : 'hidden'} text-sm text-red-600`}>{formState.formError ?? "An unknown error occured while submitting the form."}</p>
+                            </div>
+                        </CardFooter>
+                    </form>
+                </Form>
+            </CardContent>
         </Card>
       </Layout>
     </>

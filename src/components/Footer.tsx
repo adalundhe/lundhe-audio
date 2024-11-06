@@ -33,16 +33,45 @@ import { z } from "zod"
 import { ScrollArea } from "~/components/ui/scroll-area"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-
+import { api } from '~/utils/api';
+import { env } from "~/env"
+import { useReCaptcha } from '~/hooks/use-recaptcha'
 
 export const Footer = () => {
 
-    const [formOpen, setFormOpen] = useState(false)
-
     const router = useRouter()
+    const { reCaptchaLoaded, generateReCaptchaToken } = useReCaptcha();
+    const formMutation = api.contact.submitContactForm.useMutation();
+
+    const [formState, setFormState] = useState<{
+        formStatus: "active" | "submitted" | "errored" | "closed",
+        formError?: string
+    }>({
+        formStatus: "closed"
+    })
+
+
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+             const key = e.key;
+             
+             if (key === "Escape"){
+                setFormState({
+                    formStatus: "closed"
+                })
+             }
+             
+        };
+        document.addEventListener('keydown', handleKeyDown, true);
+    
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    
+    }, []);
 
     const formSchema = z.object({
         name: z.string().min(2, {
@@ -62,9 +91,7 @@ export const Footer = () => {
         }).max(280, {
             message: "Message cannot be more than 280 characters."
         }),
-        contactConsent: z.boolean().refine((value)=> value === true,{
-            message: "You must accept the terms and conditions"
-        })
+        contactConsent: z.boolean(),
     })
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -97,13 +124,63 @@ export const Footer = () => {
         }
 
         return value.length > 0 ? previousValue.slice(0, previousValue.length - 1) : ""
-      };
+    };
 
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+
+        if (!reCaptchaLoaded) {
+            setFormState({
+                formStatus: "errored",
+                formError: "Err. - Recaptcha not ready or token not provided."
+            });
+            return;
+        }
+
+        const captchaToken = await generateReCaptchaToken("contactFormSubmit")
+
         const errorsCount = Object.keys(form.formState.errors).length
-        if(errorsCount < 1 && values.contactConsent === true){
-            setFormOpen(false)
+        if(errorsCount < 1 && captchaToken){
+
+            formMutation.mutate({
+                ...values,
+                captchaToken,
+            }, {
+                onSuccess: ({ 
+                    errorCode,
+                    captchaError,
+                    emailError,
+                    smsError,
+                 }) => {
+
+                    const error = captchaError ?? emailError ?? smsError;
+                    if (errorCode === undefined && error === undefined){
+                        setFormState({
+                            formStatus: "submitted",
+                        })
+                        form.reset()
+                        return
+                    }
+
+                    setFormState({
+                        formStatus: "errored",
+                        formError: error
+                    })
+
+                },
+                onError: () => {
+                    setFormState({
+                        formStatus: "errored",
+                        formError: "Encountered an unknown error while submitting the form."
+                    })
+                }
+            })
+
+            
+            setFormState({
+                formStatus: "submitted",
+            })
             form.reset()
+
         }        
     }
 
@@ -112,8 +189,10 @@ export const Footer = () => {
             <div className="h-full w-full flex flex-col justify-center items-center">
                 {
                     router.route.includes("contact") ? null :
-                    <Dialog open={formOpen}>
-                        <DialogTrigger asChild onClick={() => setFormOpen(true)}>
+                    <Dialog open={formState.formStatus === "active"}>
+                        <DialogTrigger asChild onClick={() => setFormState({
+                            formStatus: "active"
+                        })}>
                             <div className="flex items-center cursor-pointer">             
                                 <BiSolidMessageEdit className="pt-1 text-2xl" />
                                 <p className="ml-1">
@@ -121,7 +200,9 @@ export const Footer = () => {
                                 </p>
                             </div>
                         </DialogTrigger>
-                        <DialogContent closeFormOverride={() => setFormOpen(false)} className={`${GeistSans.className} sm:max-w-[425px] rounded-sm`}>   
+                        <DialogContent closeFormOverride={() => setFormState({
+                            formStatus: "closed"
+                        })} className={`${GeistSans.className} sm:max-w-[425px] rounded-sm`}>   
                             <ScrollArea className="h-[50vh] w-full my-6">
                                     
                                 <DialogHeader>
@@ -131,7 +212,7 @@ export const Footer = () => {
                                     </DialogDescription>
                                 </DialogHeader>
                                 <Form {...form}>
-                                    <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 mx-8 py-4">
+                                    <form aria-disabled={formState.formStatus === "submitted"} onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 mx-8 py-4">
                                         <FormField
                                             control={form.control}
                                             name="name"
@@ -142,7 +223,11 @@ export const Footer = () => {
                                                         Your first or full name.
                                                     </FormDescription>
                                                     <FormControl>
-                                                        <Input placeholder="Please enter your name." {...field} />
+                                                        <Input 
+                                                            disabled={formState.formStatus === "submitted"}
+                                                            aria-disabled={formState.formStatus === "submitted"}
+                                                            placeholder="Please enter your name." {...field}
+                                                        />
                                                     </FormControl>
                                                     <FormMessage />
                                                 </FormItem>
@@ -158,7 +243,11 @@ export const Footer = () => {
                                                         Your email for us to contact you at.
                                                     </FormDescription>
                                                     <FormControl>
-                                                        <Input placeholder="Please enter your email." {...field} type="email" />
+                                                        <Input
+                                                            disabled={formState.formStatus === "submitted"}
+                                                            aria-disabled={formState.formStatus === "submitted"}
+                                                            placeholder="Please enter your email." {...field} type="email"
+                                                        />
                                                     </FormControl>
                                                     <FormMessage />
                                                 </FormItem>
@@ -174,7 +263,9 @@ export const Footer = () => {
                                                         Your phone for us to contact you at.
                                                     </FormDescription>
                                                     <FormControl>
-                                                        <Input 
+                                                        <Input
+                                                            disabled={formState.formStatus === "submitted"}
+                                                            aria-disabled={formState.formStatus === "submitted"}
                                                             placeholder="Please enter your phone." {...field} 
                                                             type="phone" 
                                                             onChange={(e) => {
@@ -201,7 +292,12 @@ export const Footer = () => {
                                                         Select the service you intend to enquire about.
                                                     </FormDescription>
                                                     <FormControl>
-                                                        <Select {...field}>
+                                                        <Select 
+                                                            disabled={formState.formStatus === "submitted"} 
+                                                            aria-disabled={formState.formStatus === "submitted"} 
+                                                            onValueChange={field.onChange}
+                                                            value={field.value}
+                                                        >
                                                             <SelectTrigger>
                                                                 <SelectValue placeholder="Select a provided service" />
                                                             </SelectTrigger>
@@ -228,7 +324,12 @@ export const Footer = () => {
                                                         Enter a message.
                                                     </FormDescription>
                                                     <FormControl>
-                                                        <Textarea placeholder="Please enter a message." {...field} />
+                                                        <Textarea 
+                                                            disabled={formState.formStatus === "submitted"} 
+                                                            aria-disabled={formState.formStatus === "submitted"} 
+                                                            placeholder="Please enter a message." 
+                                                            {...field}
+                                                        />
                                                     </FormControl>
                                                     <FormMessage />
                                                 </FormItem>
@@ -238,18 +339,20 @@ export const Footer = () => {
                                             control={form.control}
                                             name="contactConsent"
                                             render={({ field }) => (
-                                                <FormItem className="flex flex-col">
-                                                    <FormLabel className="text-sm">Accept Terms and Conditions</FormLabel>
-                                                    <FormDescription>
-                                                        You consent to receive SMS messages at {field.value} provided for the express 
-                                                        purpose of service scheduling/confirmation and updates (carrier charges may apply).
-                                                    </FormDescription>
+                                                <FormItem className="grid grid-cols-12">
+                                                    <FormLabel  className="mt-[6.5px] text-sm w-full col-span-11 flex items-end">Opt-In SMS Terms and Conditions</FormLabel>
                                                     <FormControl>
                                                         <Checkbox
+                                                            disabled={formState.formStatus === "submitted"} 
+                                                            aria-disabled={formState.formStatus === "submitted"} 
                                                             checked={field.value}
                                                             onCheckedChange={field.onChange}                         
                                                         />
                                                     </FormControl>
+                                                    <FormDescription className="col-span-12">
+                                                        You consent to receive SMS messages at {field.value} provided for the express 
+                                                        purpose of service scheduling/confirmation and updates (carrier charges may apply).
+                                                    </FormDescription>
                                                     <FormMessage />
                                                 </FormItem>
                                             )}
@@ -257,9 +360,20 @@ export const Footer = () => {
                                         <DialogFooter className="mt-4">
                                             <div className="flex flex-col w-full items-center">
                                                 
-                                                <Button type="submit">submit</Button>
-                                                <Link onClick={() => setFormOpen(false)} href="/privacy" className="text-xs mt-2 text-muted-foreground">privacy</Link>
-                                                <Link onClick={() => setFormOpen(false)} href="/terms_of_service" className="text-xs mb-2 text-muted-foreground">terms of service</Link>
+                                                <Button
+                                                    disabled={formState.formStatus === "submitted"} 
+                                                    aria-disabled={formState.formStatus === "submitted"} 
+                                                    type="submit"
+                                                >
+                                                    { formState.formStatus === "submitted" ? "submitted!" : "submit" }
+                                                </Button>
+                                                <Link onClick={() => setFormState({
+                                                    formStatus: "closed"
+                                                })} href="/privacy" className="text-xs mt-2 text-muted-foreground">privacy</Link>
+                                                <Link onClick={() => setFormState({
+                                                    formStatus: "closed"
+                                                })} href="/terms_of_service" className="text-xs mb-2 text-muted-foreground">terms of service</Link>
+                                                <p className={`${formState.formStatus === "errored" ? '' : 'hidden'} text-sm text-red-600`}>{formState.formError ?? "An unknown error occured while submitting the form."}</p>
                                             </div>
                                         </DialogFooter>
                                     </form>
