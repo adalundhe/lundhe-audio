@@ -49,7 +49,7 @@ export default function Studio() {
                             catalogue of instruments and tools to make musical magic happen. Here's some of what we use.
                         </p>
                     </div>     
-                    <Accordion type="single" collapsible className="flex flex-col items-center w-full px-4">              
+                    <Accordion type="single" collapsible className="flex flex-col items-center w-full px-4 w-3/4">              
                         <Separator/>
                         <StudioContentSection 
                             imagePath="/studio/grace_m905.jpg"
