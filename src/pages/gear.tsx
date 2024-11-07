@@ -279,7 +279,7 @@ export default function Studio() {
                         <StudioContentSection 
                             imagePath="/studio/soyuz_017_fet.jpg"
                             imageAltTxt="Photo of Lundhe Audio's Soyuz 017 FET Mic."
-                            title="Large Diaphragm Condenser Microphones"
+                            title="LDC Microphones"
                             headerAlignment="left"
                         >
                             <p>
@@ -309,7 +309,7 @@ export default function Studio() {
                         <StudioContentSection 
                             imagePath="/studio/soyuz_013_tube.jpg"
                             imageAltTxt="Photo of Lundhe Audio's matched pair of Soyuz 013 TUBE microphones."
-                            title="Small Diaphragm Condenser Microphones"
+                            title="SDC Microphones"
                             headerAlignment="right"
                         >
                             <p>
