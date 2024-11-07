@@ -63,6 +63,7 @@ export const NavBar = () => {
                                 <AccordionItem value="studio" className="px-2 hover:bg-gray-50 focus:bg-gray-50">
                                     <AccordionTrigger 
                                         className="hover:bg-gray-50 focus:bg-gray-50 p-0 cursor-default py-2"
+                                        chevronSide="left"
                                     >   
                                         <div className="flex items-center space-x-2 cursor-default">
                                             <GiMusicalNotes 
@@ -156,7 +157,7 @@ export const NavBar = () => {
                                     </AccordionContent>
                                 </AccordionItem> */}
                                 <AccordionItem value="legal" className="px-2 hover:bg-gray-50 focus:bg-gray-50">
-                                    <AccordionTrigger className="hover:bg-gray-50 focus:bg-gray-50 p-0 cursor-default py-2">   
+                                    <AccordionTrigger className="hover:bg-gray-50 focus:bg-gray-50 p-0 cursor-default py-2" chevronSide="left">   
                                         <div className="flex items-center space-x-2 cursor-default">
                                             <LiaFileContractSolid 
                                                 aria-hidden="true"

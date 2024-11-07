@@ -167,8 +167,8 @@ export default function Contact(){
   return (
     <>
       <Layout>
-        <Card className="w-full md:w-3/4 h-full rounded-none border-none shadow-none">
-            <CardHeader className="p-0 mb-4 flex flex-col items-center">
+        <Card className="w-full md:w-3/4 h-full rounded-none border-none shadow-none px-4">
+            <CardHeader className="p-0 flex flex-col items-center">
                 <CardTitle className="w-3/4 text-2xl text-center">Get in touch!</CardTitle>
                 <CardDescription className="text-center w-3/4">
                     Fill out the form below to reach out to us. We usually respond in one business day.
@@ -325,7 +325,6 @@ export default function Contact(){
                         />
                         <CardFooter className="mt-4">
                             <div className="flex flex-col w-full items-center">
-                                
                                 <Button   
                                     disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
                                     aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"}

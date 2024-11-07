@@ -8,7 +8,6 @@ export const env = createEnv({
    * isn't built with invalid env vars.
    */
   server: {
-    DATABASE_URL: z.string().url(),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -48,7 +47,6 @@ export const env = createEnv({
    * middlewares) or client-side so we need to destruct manually.
    */
   runtimeEnv: {
-    DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
     POSTMARK_TOKEN: process.env.POSTMARK_TOKEN,
     LUNDHE_AUDIO_EMAIL: process.env.LUNDHE_AUDIO_EMAIL,

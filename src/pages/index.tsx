@@ -52,7 +52,7 @@ export default function Home() {
     <>
       <Layout>
         <Card className="w-full md:w-3/4 h-3/4 rounded-none border-none shadow-none flex flex-col items-center justify-center">
-        <CardHeader className="flex justify-center items-center p-0 pb-4">
+        <CardHeader className="flex justify-center items-center p-0">
             <CardTitle className="text-2xl md:text-4xl">Lundhe Audio</CardTitle>
             <CardDescription>Sound as it should be.</CardDescription>
         </CardHeader>
@@ -82,7 +82,7 @@ export default function Home() {
           </Carousel>
         </CardContent>
         <CardContent className="p-0 w-[100%] flex flex-col items-center">
-          <div className="w-3/4 pt-4">
+          <div className="w-3/4 text-sm">
             Lundhe Audio is a privately owned and operated mixing and mastering studio out of Austin, Texas. Targeted towards post-tracking mixing, mastering, commercial audio, post-production, and sound design - Lündhé Audio blends top-shelf analog, cutting edge digital, and over fifteen years of experience to bring the creative vision of clients to life with world class quality.
           </div>
         </CardContent>

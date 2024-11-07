@@ -13,7 +13,7 @@ const TermlyTermsOfService = () => {
 
     return createElement('div', {
         name: 'termly-embed',
-        className: "w-full h-full my-8",
+        className: "w-full h-full",
         'data-id': "abd6c341-fce5-4332-9def-55a6f96f71f1",
         'data-type': 'iframe'
       });

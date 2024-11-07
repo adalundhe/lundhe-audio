@@ -88,7 +88,6 @@ body:has(.no-scroll) {
 
 html, body {
   overflow-x: hidden;
-  height: 100%;
 }
 
 

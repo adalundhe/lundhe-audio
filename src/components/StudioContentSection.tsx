@@ -1,7 +1,11 @@
 
 import { Separator } from "~/components/ui/separator"
 import { Avatar, AvatarImage } from "~/components/ui/avatar"
-
+import {
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "~/components/ui/accordion"
 
 const StudioContentHeader = ({
     imagePath,
@@ -13,17 +17,23 @@ const StudioContentHeader = ({
     imageAltTxt: string,
     title: string,
     headerAlignment: "left" | "right"
-}) => headerAlignment === "left" ? <div className="w-full flex items-center justify-start">
+}) => headerAlignment === "left" ? <AccordionTrigger 
+        className="w-full flex items-center justify-start space-x-4 cursor-default"
+        chevronSide={headerAlignment}
+    >
     <Avatar className="w-[80px] h-[80px] rounded-full">
         <AvatarImage src={imagePath} alt={imageAltTxt} />
         </Avatar>
-    <h1 className="text-md font-semibold ml-2">{title}</h1>
-</div> : <div className="w-full flex items-center justify-end">
-    <h1 className="text-md font-semibold mr-2">{title}</h1>
+    <h1 className="text-md font-semibold">{title}</h1>
+</AccordionTrigger> : <AccordionTrigger 
+    className="w-full flex items-center justify-end cursor-default space-x-4"
+    chevronSide={headerAlignment}
+>
+    <h1 className="text-md font-semibold">{title}</h1>
     <Avatar className="w-[80px] h-[80px] rounded-full">
         <AvatarImage src={imagePath} alt={imageAltTxt} />
     </Avatar>
-</div>
+</AccordionTrigger>
 
 
 export const StudioContentSection = ({
@@ -40,21 +50,16 @@ export const StudioContentSection = ({
     headerAlignment: "left" | "right"
 }) => {
     return (
-        <>
-        <div className="w-full flex justify-center">   
-            <Separator className="w-3/4 my-8"/>
-        </div>
-        <div className="w-2/3 flex flex-col justify-center">
+        <AccordionItem value={title.toLowerCase()} className="flex flex-col w-full">
             <StudioContentHeader 
                 imagePath={imagePath}
                 imageAltTxt={imageAltTxt}
                 title={title}
                 headerAlignment={headerAlignment}
             />
-            <div className="w-full my-8">
+            <AccordionContent className="w-full my-4">
             {...children}
-            </div> 
-        </div>
-        </>
+            </AccordionContent> 
+        </AccordionItem>
     )
 }
