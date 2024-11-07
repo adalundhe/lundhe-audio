@@ -43,10 +43,11 @@ export default function Studio() {
                             />
                         </AspectRatio>
                     </div>
-                    <div className="w-2/3 my-4 text-sm">
+                    <div className="w-3/4 my-4 text-sm">
                         <p>
                             Lundhe Audio is equipped to handle almost any need or situation, with top-tier analog equipment, state of the art software, and an ever growing
-                            catalogue of instruments and tools to make musical magic happen. Here's some of what we use.
+                            catalogue of instruments and tools to make musical magic happen. We're not afraid blend cutting-edge music tech with old-school sonics and 
+                            techniquest to create something new. Here's some of what we use.
                         </p>
                     </div>     
                     <Accordion type="single" collapsible className="flex flex-col items-center w-full px-4 w-3/4">              
