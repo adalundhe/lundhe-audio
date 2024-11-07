@@ -23,13 +23,13 @@ export default function Studio() {
     <>
       <Layout>
         <Card className="w-full md:w-3/4 h-full rounded-none border-none shadow-none">
-            <CardHeader className="p-0 mb-4 flex flex-col items-center">
-                <CardTitle className="w-3/4 text-2xl">Studio and Gear</CardTitle>
-                <CardDescription className="w-3/4">Quality makes all the difference.</CardDescription>
+            <CardHeader className="p-0 mb-4 flex flex-col items-center px-4">
+                <CardTitle className="text-2xl">Studio and Gear</CardTitle>
+                <CardDescription>Quality makes all the difference.</CardDescription>
             </CardHeader>
             <div className="w-full mt-4 h-full">
                 <CardContent className="p-0 w-[100%] flex flex-col items-center mb-4">       
-                    <div className="flex items-center w-3/4 h-3/4">
+                    <div className="flex items-center w-full px-4 h-3/4">
                         <AspectRatio ratio={4 / 3} className="flex items-center justify-center">
                             <Image
                                 src="/studio/studio_front_monochrome.jpeg"
@@ -43,15 +43,15 @@ export default function Studio() {
                             />
                         </AspectRatio>
                     </div>
-                    <div className="w-3/4 my-4 text-sm">
+                    <div className="px-4 my-4 text-sm">
                         <p>
                             Lundhe Audio is equipped to handle almost any need or situation, with top-tier analog equipment, state of the art software, and an ever growing
                             catalogue of instruments and tools to make musical magic happen. We're not afraid blend cutting-edge music tech with old-school sonics and 
                             techniquest to create something new. Here's some of what we use.
                         </p>
                     </div>     
-                    <Accordion type="single" collapsible className="flex flex-col items-center w-full px-4 w-3/4">              
-                        <Separator/>
+                    <Accordion type="single" collapsible className="flex flex-col items-center w-full px-4">              
+                        <Separator />
                         <StudioContentSection 
                             imagePath="/studio/grace_m905.jpg"
                             imageAltTxt="Photo of Lundhe Audio's monitoring."

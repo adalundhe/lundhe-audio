@@ -4,6 +4,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "~/components/ui/accordion"
+import { AspectRatio } from "~/components/ui/aspect-ratio"
 
 const StudioContentHeader = ({
     imagePath,
@@ -16,19 +17,19 @@ const StudioContentHeader = ({
     title: string,
     headerAlignment: "left" | "right"
 }) => headerAlignment === "left" ? <AccordionTrigger 
-        className="w-full flex items-center justify-start space-x-4 cursor-default"
+        className="w-full flex items-center justify-start cursor-default"
         chevronSide={headerAlignment}
     >
-    <Avatar className="w-[80px] h-[80px] rounded-full">
+    <Avatar className="w-[60px] h-[60px] rounded-full mr-2">
         <AvatarImage src={imagePath} alt={imageAltTxt} />
-        </Avatar>
-    <h1 className="text-md font-semibold">{title}</h1>
+    </Avatar>
+    <h1 className="text-md font-semibold text-left  w-fit">{title}</h1>
 </AccordionTrigger> : <AccordionTrigger 
-    className="w-full flex items-center justify-end cursor-default space-x-4"
+    className="w-full flex items-center justify-end cursor-default"
     chevronSide={headerAlignment}
 >
-    <h1 className="text-md font-semibold">{title}</h1>
-    <Avatar className="w-[80px] h-[80px] rounded-full">
+    <h1 className="text-md font-semibold text-right w-fit">{title}</h1>
+    <Avatar className="w-[60px] h-[60px] rounded-full ml-2">
         <AvatarImage src={imagePath} alt={imageAltTxt} />
     </Avatar>
 </AccordionTrigger>
