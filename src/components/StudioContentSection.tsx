@@ -1,5 +1,3 @@
-
-import { Separator } from "~/components/ui/separator"
 import { Avatar, AvatarImage } from "~/components/ui/avatar"
 import {
     AccordionContent,

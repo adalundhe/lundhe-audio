@@ -1,7 +1,7 @@
 import { GeistSans } from "geist/font/sans";
 import Head from "next/head";
 import { type Session } from "next-auth";
-import { SessionProvider } from "next-auth/react";
+// import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
 import { NavBar } from "~/components/NavBar"
 import { Footer } from "~/components/Footer"
@@ -11,9 +11,9 @@ import { env } from "~/env"
 
 import "~/styles/globals.css";
 
-const MyApp: AppType<{ session: Session | null }> = ({
+const MyApp: AppType<{ _: Session | null }> = ({
   Component,
-  pageProps: { session, ...pageProps },
+  pageProps: { _, ...pageProps },
 }) => {
   return (
     <>
