@@ -83,7 +83,14 @@ export default function Home() {
         </CardContent>
         <CardContent className="p-0 w-[100%] flex flex-col items-center">
           <div className="w-3/4 text-sm">
-            Lundhe Audio is a privately owned and operated mixing and mastering studio out of Austin, Texas. Targeted towards post-tracking mixing, mastering, commercial audio, post-production, and sound design - Lündhé Audio blends top-shelf analog, cutting edge digital, and over fifteen years of experience to bring the creative vision of clients to life with world class quality.
+            <p>
+              Lundhe Audio is a privately owned and operated mixing and mastering studio out of Austin, Texas.
+            </p>
+            <br/>
+            <p>
+              Targeted towards post-tracking mixing, mastering, commercial audio, post-production, and sound design - Lündhé Audio blends top-shelf analog, 
+              cutting edge digital, and over fifteen years of experience to bring the creative vision of clients to life with world class quality.
+            </p>
           </div>
         </CardContent>
         </Card>
