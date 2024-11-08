@@ -204,16 +204,16 @@ export const contactRouter = createTRPCRouter({
 
         }
 
-        await ctx.db
-            .insert(contactRequestor)
-            .values({
-                name: input.name,
-                phone: input.phone,
-                email: input.email,
-                service: input.service,
-                sms_accepted: input.contactConsent,
-                created_timestamp: input.submmittedAt.toISOString()
-            })
+       // await ctx.db
+          // .insert(contactRequestor)
+          // .values({
+               // name: input.name,
+              // phone: input.phone,
+              // email: input.email,
+              // service: input.service,
+              // sms_accepted: input.contactConsent,
+              // created_timestamp: input.submmittedAt.toISOString()
+          // })
 
         return response;
 
