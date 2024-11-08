@@ -150,8 +150,9 @@ export default function Contact(){
                     }
 
                 },
-                onError: () => {
+                onError: (error: unknown) => {
                     if (formState.formStatus === "active"){
+                        console.error(error)
                         setFormState({
                             formStatus: "errored",
                             formError: "Encountered an unknown error while submitting the form."
