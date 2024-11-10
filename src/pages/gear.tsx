@@ -290,6 +290,7 @@ export default function Studio() {
                                 <li>Austrian Audio OC818 (<b>x2</b>)</li>
                                 <li>Blue Blueberry FET Condenser Mic (Latvian version)</li>
                                 <li>Blue Bottle w/ B0, B1, B3, B6, B7, and B8 Capsules (Latvian version)</li>
+                                <li>Blue Dragonfly Condenser Mic (<b>x2</b>)</li>
                                 <li>Blue Kiwi FET Condenser Mic (Latvian version)</li>
                                 <li>Blue Mouse FET Condenser Mic (Latvian version)</li>
                                 <li>Chandler Limtied TG Microphone</li>
