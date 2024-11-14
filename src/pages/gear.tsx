@@ -128,6 +128,7 @@ export default function Studio() {
                                 <li>Avalon Designs 2022AD Dual Preamp</li>
                                 <li>Avedis MA5 (<b>x2</b>)</li>
                                 <li>Avedis MD7 (<b>x2</b>)</li>
+                                <li>Blue Robbie Tube Mic Preamp</li>
                                 <li>Chandler Limited Germanium 500 Pre (<b>x2</b>)</li>
                                 <li>Chandler Limited Little Devil 500 Pre (<b>x2</b>)</li>
                                 <li>Chandler Limited TG2 500 Pre (<b>x2</b>)</li>
@@ -290,6 +291,7 @@ export default function Studio() {
                                 <li>Austrian Audio OC818 (<b>x2</b>)</li>
                                 <li>Blue Blueberry FET Condenser Mic (Latvian version)</li>
                                 <li>Blue Bottle w/ B0, B1, B3, B6, B7, and B8 Capsules (Latvian version)</li>
+                                <li>Blue Cactus Tube Condenser Mic (Latvian version)</li>
                                 <li>Blue Dragonfly Condenser Mic (<b>x2</b>)</li>
                                 <li>Blue Kiwi FET Condenser Mic (Latvian version)</li>
                                 <li>Blue Mouse FET Condenser Mic (Latvian version)</li>
