@@ -319,11 +319,14 @@ export default function Studio() {
                             </p>
                             <ul className="my-4 list-disc list-inside">
                                 <li>Austrian Audio CC8 (<b>matched pair</b>)</li>
+                                <li>Blue Hummingbird (<b>x2</b>)</li>
                                 <li>Earthworks QTC50 (<b>x2</b>)</li>
+                                <li>Josephson C42 (<b>matched pair</b>)</li>
                                 <li>Rode NTG-3B</li>
                                 <li>Samar MG20 (<b>x2</b>)</li>
                                 <li>Schoeps CMIT5U</li>
                                 <li>Schoeps CMC6 with MK4 Cardioid Capsules (<b>matched pair</b>)</li>
+                                <li>sE Electronics RN17 (<b>matched pair</b>)</li>
                                 <li>Soyuz 013 FET (<b>matched pair</b>)</li>
                                 <li>Soyuz 013 TUBE (<b>matched pair</b>)</li>
                                 <li>Telefunken ELA M 260</li>
@@ -342,6 +345,7 @@ export default function Studio() {
                                 <li>Blue Woodpecker</li>
                                 <li>Hum Audio ARM-1L</li>
                                 <li>Samar VL37A (<b>x2</b>)</li>
+                                <li>sE Electronics RNR1 Active Ribbon Microphone</li>
                                 <li>Royer 121 (<b>x2</b>)</li>
                                 <li>Royer R10 Hot Rod (<b>x2</b>)</li>
                                 <li>Tierra Audio New Twenties Ribbon</li>
