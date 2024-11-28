@@ -218,6 +218,7 @@ export default function Studio() {
                                 <li>Chandler Limited Little Devil Equalizer (<b>x2</b>)</li>
                                 <li>Craneborne Audio Carnby Harmonic Equalizer (<b>x2</b>)</li>
                                 <li>H2 Audio Helios 5011 Equalizer (<b>x4</b>)</li>
+                                <li>Knif Audio Eksa w/ Gain and Filter Option</li>
                                 <li>Kush Audio Clariphonic Mid/Side</li>
                                 <li>Manley Massive Passive</li>
                                 <li>Pultec EQP-500X (<b>x2</b>)</li>
@@ -272,6 +273,7 @@ export default function Studio() {
                                 <li>SPL BIG 500 Stereo Imaging</li>
                                 <li>SPL Gemini Mid/Side Mastering Router</li>
                                 <li>SPL Hermes Mastering Router</li>
+                                <li>Whitestone P331A Tube-Loading Amplifier</li>
                             </ul>
                             <p>
                                 to further productions.
@@ -290,9 +292,9 @@ export default function Studio() {
                             <ul className="my-4 list-disc list-inside">
                                 <li>Austrian Audio OC818 (<b>x2</b>)</li>
                                 <li>Blue Blueberry FET Condenser Mic (Latvian version)</li>
-                                <li>Blue Bottle w/ B0, B1, B3, B6, B7, and B8 Capsules (Latvian version)</li>
+                                <li>Blue Bottle w/ All Capsules (Latvian version - <b>x2</b>)</li>
                                 <li>Blue Cactus Tube Condenser Mic (Latvian version)</li>
-                                <li>Blue Dragonfly Condenser Mic (<b>x2</b>)</li>
+                                <li>Blue Dragonfly Condenser Mic (Latvian version - <b>x2</b>)</li>
                                 <li>Blue Kiwi FET Condenser Mic (Latvian version)</li>
                                 <li>Blue Mouse FET Condenser Mic (Latvian version)</li>
                                 <li>Chandler Limtied TG Microphone</li>
@@ -300,6 +302,8 @@ export default function Studio() {
                                 <li>Lauten Audio Atlantis</li>
                                 <li>Lauten Audio Eden</li>
                                 <li>Lewitt LCT 1040 FET/Tube Microphone</li>
+                                <li>Mojave Audio MA-37</li>
+                                <li>Neumann M149</li>
                                 <li>Rupert Neve/sE RNT Tube LDC Microphone</li>
                                 <li>Sonotronics Mercury</li>
                                 <li>Soyuz 017 FET</li>
