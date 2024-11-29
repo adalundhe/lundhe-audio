@@ -299,10 +299,12 @@ export default function Studio() {
                                 <li>Blue Mouse FET Condenser Mic (Latvian version)</li>
                                 <li>Chandler Limtied TG Microphone</li>
                                 <li>Chandler Limtied REDD Microphone</li>
+                                <li>Hendyamps LDC Microphone</li>
                                 <li>Lauten Audio Atlantis</li>
                                 <li>Lauten Audio Eden</li>
                                 <li>Lewitt LCT 1040 FET/Tube Microphone</li>
                                 <li>Mojave Audio MA-37</li>
+                                <li>Mojave Audio MA-1000</li>
                                 <li>Neumann M149</li>
                                 <li>Rupert Neve/sE RNT Tube LDC Microphone</li>
                                 <li>Sonotronics Mercury</li>
@@ -332,6 +334,7 @@ export default function Studio() {
                                 <li>Samar MG20 (<b>x2</b>)</li>
                                 <li>Schoeps CMIT5U</li>
                                 <li>Schoeps CMC6 with MK4 Cardioid Capsules (<b>matched pair</b>)</li>
+                                <li>Schoeps V4 USM Set - Blue</li>
                                 <li>sE Electronics RN17 (<b>matched pair</b>)</li>
                                 <li>Soyuz 013 FET (<b>matched pair</b>)</li>
                                 <li>Soyuz 013 TUBE (<b>matched pair</b>)</li>
