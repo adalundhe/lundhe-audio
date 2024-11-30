@@ -178,6 +178,7 @@ export default function Studio() {
                                 <li>Elysia Karacter 500</li>
                                 <li>Elysia mPressor 500 (<b>x2</b>)</li>
                                 <li>Elysia nVelope 500</li>
+                                <li>HUM Audio LAAL (Look Ahead Analog Limiter)</li>
                                 <li>Manley VariMu TheWorks (t-bar mod and mid/side)</li>
                                 <li>Purple Audio MC77 (<b>x2</b>)</li>
                                 <li>Retro Instruments Revolver</li>
