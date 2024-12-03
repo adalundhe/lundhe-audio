@@ -365,6 +365,24 @@ export default function Studio() {
                                 <li>Tierra Audio New Twenties Ribbon</li>
                             </ul>
                         </StudioContentSection>
+                        <StudioContentSection 
+                            imagePath="/studio/shure_sm7b.jpeg"
+                            imageAltTxt="Photo of Lundhe Audio's Shure SM7b microphone."
+                            title="Dynamic Microphones"
+                            headerAlignment="right"
+                        >
+                            <p>
+                                No studio is complete without a healthy collection of dynamic microphones
+                                to record demainding sources. We use:
+                            </p>
+                            <ul className="my-4 list-disc list-inside">
+                                <li>Beyerdynamic M88</li>
+                                <li>Sennheiser MD421 MKII (<b>x2</b>)</li>
+                                <li>Shure Beta 57A</li>
+                                <li>Shure Beta 58A</li>
+                                <li>Shure SM7B (<b>x2</b>)</li>
+                            </ul>
+                        </StudioContentSection>
                     </Accordion>        
                 </CardContent>
             </div>
