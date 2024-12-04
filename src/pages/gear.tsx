@@ -551,7 +551,7 @@ export default function Studio() {
                             </ul>
                         </StudioContentSection>
                         <StudioContentSection 
-                            imagePath="/studio/suhr_guitar-monochrome.jpg"
+                            imagePath="/studio/gretsch_duo_jet-monochrome.jpg"
                             imageAltTxt="Photo of Lundhe Audio's Suhr Standard Plus Koa."
                             title="Guitars"
                             headerAlignment="right"
