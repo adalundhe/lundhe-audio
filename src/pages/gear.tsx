@@ -388,7 +388,7 @@ export default function Studio() {
                             imagePath="/studio/gretsch_duo_jet-monochrome.jpg"
                             imageAltTxt="Photo of Lundhe Audio's UDO Super Gemini."
                             title="Synthesizers and Samplers"
-                            headerAlignment="right"
+                            headerAlignment="left"
                         >
                             <p>
                                 Lundhe Audio brings the best of modern and vintage synthesis. From the rich sounds of classics 
@@ -554,7 +554,7 @@ export default function Studio() {
                             imagePath="/studio/suhr_guitar-monochrome.jpg"
                             imageAltTxt="Photo of Lundhe Audio's Suhr Standard Plus Koa."
                             title="Guitars"
-                            headerAlignment="left"
+                            headerAlignment="right"
                         >
                             <p>
                                 We offer the following guitars and basses:
