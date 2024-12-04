@@ -384,6 +384,172 @@ export default function Studio() {
                                 <li>Shure SM7B</li>
                             </ul>
                         </StudioContentSection>
+                        <StudioContentSection 
+                            imagePath="/studio/udo_super_gemini.jpeg"
+                            imageAltTxt="Photo of Lundhe Audio's UDO Super Gemini."
+                            title="Synthesizers and Samplers"
+                            headerAlignment="left"
+                        >
+                            <p>
+                                Lundhe Audio brings the best of modern and vintage synthesis. From the rich sounds of classics 
+                                like the Juno 6 to the cutting tones of modern giants like the Waldorf Quantum, we offer a wealth 
+                                of synthesis options:
+                            </p>
+                            <ul className="my-4 list-disc list-inside">
+                                <li>Access Virus TI</li>
+                                <li>Akai AX-60</li>
+                                <li>Akai AX-80</li>
+                                <li>Akai S5000</li>
+                                <li>Akai S6000</li>
+                                <li>Akai S950 (<b>x2</b>)</li>
+                                <li>Alesis Andromeda A6</li>
+                                <li>Alesis Ion</li>
+                                <li>Analogue Solutions Fusebox X</li>
+                                <li>Analogue Solutions Impulse Command</li>
+                                <li>Analogue Solutions Lezpig V3</li>
+                                <li>Analogue Solutions Vostok V2</li>
+                                <li>Arturia Drumbrute Impact</li>
+                                <li>Arturia Matrixbrute</li>
+                                <li>Arturia MicroFreak</li>
+                                <li>Arturia MiniFreak</li>
+                                <li>Arturia Origin</li>
+                                <li>Arturia Polybrute 12</li>
+                                <li>Black Corporation Deckard's Dream MKII</li>
+                                <li>Black Corportation ISE-NIN</li>
+                                <li>Black Corporation Kijimi MKII</li>
+                                <li>Black Corporation Xerxes MKII</li>
+                                <li>Crumar Seven</li>
+                                <li>Dave Smith Instruments Mopho X4</li>
+                                <li>Dave Smith Instruments OB-6</li>
+                                <li>Dave Smith Instruments Poly Evolver - PE Edition</li>
+                                <li>Dave Smith Instruments Pro-2</li>
+                                <li>Dave Smith Instruments Prophet 6</li>
+                                <li>Dave Smith Instruments Prophet 12</li>
+                                <li>Dave Smith Instruments Prophet Rev 2 - 16 voice</li>
+                                <li>Dave Smiwth Instruments Prophet XL</li>
+                                <li>Dinsync RE-303</li>
+                                <li>Dreadbox Erebus V3</li>
+                                <li>Dreadbox Murmux Adept</li>
+                                <li>Dreadbox Nymphes</li>
+                                <li>Dreadbox Typhon</li>
+                                <li>E-MU E4X4 Ultra</li>
+                                <li>E-MU Orbit 9090</li>
+                                <li>E-MU Proteus 2500 (fully expanded)</li>
+                                <li>Elektron Analog Four MKI</li>
+                                <li>Elektron Analog Four MKII</li>
+                                <li>Elektron Analog Rytm MKII</li>
+                                <li>Elektron Digitakt MKI</li>
+                                <li>Elektron Digitone MKII</li>
+                                <li>Elektron Octotrack MKII</li>
+                                <li>Elta Music Solar 42f</li>
+                                <li>Elta Music Solar 50</li>
+                                <li>Ensoniq ASR10</li>
+                                <li>Ensoniq SQ-80</li>
+                                <li>Erica Synths Bassline DB-01</li>
+                                <li>Erica Synths LXR-02</li>
+                                <li>Erica Synths Perkons HD-01</li>
+                                <li>Erica Synths Syntrx MKI</li>
+                                <li>Future Retro Vecrta</li>
+                                <li>GS Music e7 (<b>x2</b>)</li>
+                                <li>Groove Synthesis 3rd Wave</li>
+                                <li>GRP A4</li>
+                                <li>Hypersynth Xenophone</li>
+                                <li>IK Multimedia Uno Synth Pro</li>
+                                <li>Intellijel Cascadia</li>
+                                <li>Isla Instruments SP2400</li>
+                                <li>Jomox Alpha Base MKI</li>
+                                <li>Kawai SX-210</li>
+                                <li>Kawai SX-240</li>
+                                <li>Kilpatrick Phenol</li>
+                                <li>Korg ARP-2600FS</li>
+                                <li>Korg ARP Odyssey Rev1 (reissue)</li>
+                                <li>Korg Drumalogue</li>
+                                <li>Korg DSS-1</li>
+                                <li>Korg DW-8000</li>
+                                <li>Korg Minikorg 700FS</li>
+                                <li>Korg Minilogue</li>
+                                <li>Korg Modwave</li>
+                                <li>Korg MS-20FS (reissue)</li>
+                                <li>Korg Opsix</li>
+                                <li>Korg Poly-800 MKII</li>
+                                <li>Korg Polysix</li>
+                                <li>Korg Prologue 16</li>
+                                <li>Korg Radias</li>
+                                <li>Korg Wavestate</li>
+                                <li>Majella Implexus</li>
+                                <li>Make Noise 0-Coast</li>
+                                <li>Make Noise Striga</li>
+                                <li>Malekko Manther</li>
+                                <li>Melbourne Instruments Delia</li>
+                                <li>Melbourne Instruments Nina</li>
+                                <li>Modal 002</li>
+                                <li>Modal 008</li>
+                                <li>Modal Argon 8</li>
+                                <li>Modal Cobalt 8</li>
+                                <li>Modor DR-2</li>
+                                <li>Modor NF-1</li>
+                                <li>Moog DFAM (<b>x2</b>)</li>
+                                <li>Moog Labrynth</li>
+                                <li>Moog Mother-32</li>
+                                <li>Moog Grandmother</li>
+                                <li>Moog Matriarch</li>
+                                <li>Moog Model D (2023 reissue)</li>
+                                <li>Moog Little Phatty Stage One MKII - (Limited Editition Toxic Version)</li>
+                                <li>Moog Mavis</li>
+                                <li>Moog Muse</li>
+                                <li>Moog One - 16 Voice</li>
+                                <li>Moog Subharmonicon</li>
+                                <li>Moog Subsequent 37 - CV</li>
+                                <li>Moog Voyager</li>
+                                <li>Motas Electronics Motas 6</li>
+                                <li>Mutable Instruments Ambika</li>
+                                <li>Nonlinear Labs C15</li>
+                                <li>Norand Mono MKII</li>
+                                <li>Novation Bass Station MKII</li>
+                                <li>Novation Summit</li>
+                                <li>Oberheim DX</li>
+                                <li>Oberheim OB-X8</li>
+                                <li>Pittsburgh Modular Lifeforms SV-1</li>
+                                <li>Pittsburgh Modular Microvolt 3900</li>
+                                <li>Pittsburgh Modular Taiga</li>
+                                <li>Pittsburgh Modular Taiga Keys</li>
+                                <li>Pittsburgh Modular Voltage Lab</li>
+                                <li>Pittsburgh Modular Voltage Lab 2</li>
+                                <li>Pioneer Toriaz AS-1</li>
+                                <li>Pioneer Toriaz SP-16</li>
+                                <li>Polyend Medusa</li>
+                                <li>Polyend Play</li>
+                                <li>Polyend Tracker</li>
+                                <li>PWM Malevolent</li>
+                                <li>PWM Mantis</li>
+                                <li>Quasimidi Raveolutio-309 (fully expanded)</li>
+                                <li>Radikal Technologies Spectralis MKI</li>
+                                <li>Roland JD-XA</li>
+                                <li>Roland Jupiter 6 (with Europa Mod)</li>
+                                <li>Roland Juno 6</li>
+                                <li>Roland JX-3P (with Kiwi Mod and Retroaktiv Programmer)</li>
+                                <li>Roland JX-10</li>
+                                <li>Roland SH-101</li>
+                                <li>Roland System-8</li>
+                                <li>Roland TR-8S</li>
+                                <li>Roland V-Synth XT</li>
+                                <li>Sequential Pro-3 SE</li>
+                                <li>Sequential Prophet 10 (reissue)</li>
+                                <li>Sequential Trigon 6</li>
+                                <li>Soma Lyra 8</li>
+                                <li>Soma Pulsar 23</li>
+                                <li>Supercritical Redshift 6</li>
+                                <li>Tasty Chips GR-1 Granular Synth</li>
+                                <li>UDO Super Gemini</li>
+                                <li>Vermona DRM1 - MK4</li>
+                                <li>Vermona PerFourMer MKII</li>
+                                <li>Waldorf Blofeld</li>
+                                <li>Waldorf Kyra</li>
+                                <li>Waldorf M</li>
+                                <li>Waldorf Pulse 2</li>
+                                <li>Waldorf Quantum - MKI</li>
+                            </ul>
+                        </StudioContentSection>
                     </Accordion>        
                 </CardContent>
             </div>
