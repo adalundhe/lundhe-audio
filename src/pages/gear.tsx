@@ -428,6 +428,7 @@ export default function Studio() {
                                 <li>Dave Smiwth Instruments Prophet XL</li>
                                 <li>Dave Smith Instruments Tempest</li>
                                 <li>Dinsync RE-303</li>
+                                <li>Dirtywave M8 MKI</li>
                                 <li>Dreadbox Erebus V3</li>
                                 <li>Dreadbox Murmux Adept</li>
                                 <li>Dreadbox Nymphes</li>
@@ -475,6 +476,11 @@ export default function Studio() {
                                 <li>Korg Polysix</li>
                                 <li>Korg Prologue 16</li>
                                 <li>Korg Radias</li>
+                                <li>Korg Volca Bass</li>
+                                <li>Korg Volca Beats</li>
+                                <li>Korg Volca FM MKI</li>
+                                <li>Korg Volca Keys</li>
+                                <li>Korg Volca Sample MKI</li>
                                 <li>Korg Wavestate</li>
                                 <li>Majella Implexus</li>
                                 <li>Make Noise 0-Coast</li>
@@ -530,6 +536,7 @@ export default function Studio() {
                                 <li>Roland JX-3P (with Kiwi Mod and Retroaktiv Programmer)</li>
                                 <li>Roland JX-10</li>
                                 <li>Roland SH-101</li>
+                                <li>Roland SP-404 MKII</li>
                                 <li>Roland System-8</li>
                                 <li>Roland TR-8S</li>
                                 <li>Roland V-Synth XT</li>
