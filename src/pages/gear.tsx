@@ -385,7 +385,7 @@ export default function Studio() {
                             </ul>
                         </StudioContentSection>
                         <StudioContentSection 
-                            imagePath="/studio/udo_super_gemini.jpeg"
+                            imagePath="/studio/udo_super_gemini.jpg"
                             imageAltTxt="Photo of Lundhe Audio's UDO Super Gemini."
                             title="Synthesizers and Samplers"
                             headerAlignment="left"
@@ -548,6 +548,28 @@ export default function Studio() {
                                 <li>Waldorf M</li>
                                 <li>Waldorf Pulse 2</li>
                                 <li>Waldorf Quantum - MKI</li>
+                            </ul>
+                        </StudioContentSection>
+                        <StudioContentSection 
+                            imagePath="/studio/suhr_guitar-monochrome.jpg"
+                            imageAltTxt="Photo of Lundhe Audio's Suhr Standard Plus Koa."
+                            title="Guitars"
+                            headerAlignment="left"
+                        >
+                            <p>
+                                We offer the following guitars and basses:
+                            </p>
+                            <ul className="my-4 list-disc list-inside">
+                                <li>Collings 290 (with Lollard Gold pickups)</li>
+                                <li>Ernie Ball Singray Special 5HH</li>
+                                <li>Gretsch G6128 Duo Jet Masterbuilt</li>
+                                <li>Gretsch GT6995TG Broadkaster Jr.</li>
+                                <li>Mayones Viking 5</li>
+                                <li>Mood Guitars Moodbender</li>
+                                <li>Oopegg Trailblazer Custom MKII</li>
+                                <li>Suhr Classic P-Bass</li>
+                                <li>Suhr Pete Thorn Standard HSS</li>
+                                <li>Suhr Standard Plus Koa</li>
                             </ul>
                         </StudioContentSection>
                     </Accordion>        
