@@ -388,7 +388,7 @@ export default function Studio() {
                             imagePath="/studio/udo_super_gemini.jpg"
                             imageAltTxt="Photo of Lundhe Audio's UDO Super Gemini."
                             title="Synthesizers and Samplers"
-                            headerAlignment="left"
+                            headerAlignment="right"
                         >
                             <p>
                                 Lundhe Audio brings the best of modern and vintage synthesis. From the rich sounds of classics 
