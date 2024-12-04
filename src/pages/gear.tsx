@@ -385,7 +385,7 @@ export default function Studio() {
                             </ul>
                         </StudioContentSection>
                         <StudioContentSection 
-                            imagePath="/studio/udo_super_gemini.jpg"
+                            imagePath="/studio/udo_super_gemini-monochrome.jpg"
                             imageAltTxt="Photo of Lundhe Audio's UDO Super Gemini."
                             title="Synthesizers and Samplers"
                             headerAlignment="right"
