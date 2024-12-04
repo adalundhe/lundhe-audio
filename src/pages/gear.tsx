@@ -270,7 +270,6 @@ export default function Studio() {
                                 <li>Black Box HG-2</li>
                                 <li>Empirical Labs EL7 Fatso</li>
                                 <li>Rupert Neve Designs Master Bus Transformer</li>
-                                <li>Sherman Filterbank Desktop (<b>x2</b>)</li>
                                 <li>SPL BIG 500 Stereo Imaging</li>
                                 <li>SPL Gemini Mid/Side Mastering Router</li>
                                 <li>SPL Hermes Mastering Router</li>
@@ -427,6 +426,7 @@ export default function Studio() {
                                 <li>Dave Smith Instruments Prophet 12</li>
                                 <li>Dave Smith Instruments Prophet Rev 2 - 16 voice</li>
                                 <li>Dave Smiwth Instruments Prophet XL</li>
+                                <li>Dave Smith Instruments Tempest</li>
                                 <li>Dinsync RE-303</li>
                                 <li>Dreadbox Erebus V3</li>
                                 <li>Dreadbox Murmux Adept</li>
@@ -570,6 +570,84 @@ export default function Studio() {
                                 <li>Suhr Classic P-Bass</li>
                                 <li>Suhr Pete Thorn Standard HSS</li>
                                 <li>Suhr Standard Plus Koa</li>
+                            </ul>
+                        </StudioContentSection>
+                        <StudioContentSection 
+                            imagePath="/studio/chase_bliss_pedals-monochrome.jpg"
+                            imageAltTxt="Photo of Lundhe Audio's collection of Chase Bliss pedals."
+                            title="Pedals and Instrument Effects"
+                            headerAlignment="left"
+                        >
+                            <p>
+                                Pedals and non-rack effects can help spark creativity and bring sounds alive. We
+                                offer dozens of options, including:
+                            </p>
+                            <ul className="my-4 list-disc list-inside">
+                                <li>Aguilar Chorusarus</li>
+                                <li>Boss CE-2W Waza Craft Chorus</li>
+                                <li>Boss DC-2W Waza Craft Dimension C Chorus</li>
+                                <li>Boss DM-2W Waza Craft Delay</li>
+                                <li>Chandler Limited Little Devil Colored Boost</li>
+                                <li>Chandler Limited Germanium Drive</li>
+                                <li>Chase Bliss Automatone Preamp MKII</li>
+                                <li>Chase Bliss Blooper</li>
+                                <li>Chase Bliss Brothers</li>
+                                <li>Chase Bliss Clean</li>
+                                <li>Chase Bliss Automatone CMX 1978</li>
+                                <li>Chase Bliss Condor</li>
+                                <li>Chase Bliss Condor Hi-Fi</li>
+                                <li>Chase Bliss Dark World</li>
+                                <li>Chase Bliss Generation Loss MKII</li>
+                                <li>Chase Bliss Gravitas</li>
+                                <li>Chase Bliss Habit</li>
+                                <li>Chase Bliss Lossy</li>
+                                <li>Chase Bliss Mood MKII</li>
+                                <li>Chase Bliss Onward</li>
+                                <li>Chase Bliss Reverse Mode C</li>
+                                <li>Chase Bliss Thermae</li>
+                                <li>Chase Bliss Tonal Recall - Red Knob</li>
+                                <li>Chase Bliss Warped Vinyl MKI</li>
+                                <li>Chase Bliss Wombtone</li>
+                                <li>Chase Bliss Wombtone - Billy Strings Edition</li>
+                                <li>Darkglass Hyper Luminal Compressor</li>
+                                <li>Diezel Zerrer Dual Channel Preamp</li>
+                                <li>Earthquaker Devices The Warden</li>
+                                <li>Elektron Analog Heat MKII</li>
+                                <li>Empress Effects Echosystem</li>
+                                <li>Empress Effects Reverb</li>
+                                <li>Empress Effects Zoia</li>
+                                <li>Enjoy Electronics Godfather</li>
+                                <li>Erica Synths Acidbox MKIII</li>
+                                <li>Eventide H9 Max</li>
+                                <li>Game Changer Audio Light Pedal</li>
+                                <li>Game Changer Audio Plasma Coil</li>
+                                <li>Game Changer Audio Plasma Pedal</li>
+                                <li>JHS Double Barrel Dual Overdrive - V4</li>
+                                <li>JHS Panther Cub - V2</li>
+                                <li>Jomox Moonwind MKII</li>
+                                <li>Meris Enzo</li>
+                                <li>Meris Hedra</li>
+                                <li>Meris LVX</li>
+                                <li>Meris Mercury 7</li>
+                                <li>Meris MercuryX</li>
+                                <li>Meris Ottobit Jr.</li>
+                                <li>Meris Polymoon</li>
+                                <li>Microcosm Electronics Hologram</li>
+                                <li>OTO Bam Reverb</li>
+                                <li>OTO Baum Drive/Compressor</li>
+                                <li>OTO Bebe Cherie Mixer</li>
+                                <li>OTO Bim Delay</li>
+                                <li>OTO Biscuit</li>
+                                <li>Poly Beebo</li>
+                                <li>Red Witch Empress Chorus</li>
+                                <li>Sherman Filterbank Desktop (<b>x2</b>)</li>
+                                <li>Strymon Big Sky</li>
+                                <li>Strymon Mobius</li>
+                                <li>Strymon NightSky</li>
+                                <li>Strymon Timeline</li>
+                                <li>Vongon Polyphrase</li>
+                                <li>Vongon Ultrasheer</li>
+                                <li>Walrus Audio Silt Pedal</li>
                             </ul>
                         </StudioContentSection>
                     </Accordion>        
