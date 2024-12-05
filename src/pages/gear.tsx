@@ -376,6 +376,7 @@ export default function Studio() {
                             </p>
                             <ul className="my-4 list-disc list-inside">
                                 <li>Beyerdynamic M88</li>
+                                <li>Beyerdynamic M201TG (<b>x2</b>)</li>
                                 <li>Sennheiser MD421 MKII (<b>x2</b>)</li>
                                 <li>Shure SM57 (<b>x4</b>)</li>
                                 <li>Shure Beta 57A</li>
