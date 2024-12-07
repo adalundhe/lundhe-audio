@@ -308,6 +308,7 @@ export default function Studio() {
                                 <li>Mojave Audio MA-1000</li>
                                 <li>Ohma Motif Condenser Microphone</li>
                                 <li>Neumann M149</li>
+                                <li>Neumann TLM67</li>
                                 <li>Rupert Neve/sE RNT Tube LDC Microphone</li>
                                 <li>Sonotronics Mercury</li>
                                 <li>Soyuz 017 FET</li>
@@ -355,6 +356,7 @@ export default function Studio() {
                             <ul className="my-4 list-disc list-inside">
                                 <li>Blue Woodpecker</li>
                                 <li>Hum Audio ARM-1L</li>
+                                <li>Melodium 42bn</li>
                                 <li>Ohma Motif Ribbon Microphone (<b>x2</b>)</li>
                                 <li>Samar VL37A (<b>x2</b>)</li>
                                 <li>sE Electronics RNR1 Active Ribbon Microphone</li>
