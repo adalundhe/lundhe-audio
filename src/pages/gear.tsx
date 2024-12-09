@@ -303,11 +303,15 @@ export default function Studio() {
                                 <li>Heiserman H47 FET</li>
                                 <li>Lauten Audio Atlantis</li>
                                 <li>Lauten Audio Eden</li>
+                                <li>Lauten Audio Snare Mic</li>
                                 <li>Lewitt LCT 1040 FET/Tube Microphone</li>
                                 <li>Mojave Audio MA-37</li>
                                 <li>Mojave Audio MA-1000</li>
+                                <li>Mojave Audio MA-300</li>
+                                <li>Mojave Audio MA-301</li>
                                 <li>Ohma Motif Condenser Microphone</li>
                                 <li>Neumann M149</li>
+                                <li>Neumann TLM67</li>
                                 <li>Rupert Neve/sE RNT Tube LDC Microphone</li>
                                 <li>Sonotronics Mercury</li>
                                 <li>Soyuz 017 FET</li>
@@ -329,6 +333,7 @@ export default function Studio() {
                             </p>
                             <ul className="my-4 list-disc list-inside">
                                 <li>Austrian Audio CC8 (<b>matched pair</b>)</li>
+                                <li>Austrian Audio OC7 (<b>x2</b>)</li>
                                 <li>Blue Hummingbird (<b>x2</b>)</li>
                                 <li>Earthworks QTC50 (<b>x2</b>)</li>
                                 <li>Josephson C42 (<b>matched pair</b>)</li>
@@ -355,6 +360,7 @@ export default function Studio() {
                             <ul className="my-4 list-disc list-inside">
                                 <li>Blue Woodpecker</li>
                                 <li>Hum Audio ARM-1L</li>
+                                <li>Melodium 42bn</li>
                                 <li>Ohma Motif Ribbon Microphone (<b>x2</b>)</li>
                                 <li>Samar VL37A (<b>x2</b>)</li>
                                 <li>sE Electronics RNR1 Active Ribbon Microphone</li>
@@ -375,6 +381,7 @@ export default function Studio() {
                                 to record demainding sources. We use:
                             </p>
                             <ul className="my-4 list-disc list-inside">
+                                <li>Austiran Audio OD5</li>
                                 <li>Beyerdynamic M88</li>
                                 <li>Beyerdynamic M201TG (<b>x2</b>)</li>
                                 <li>Sennheiser MD421 MKII (<b>x2</b>)</li>
