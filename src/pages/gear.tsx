@@ -306,9 +306,9 @@ export default function Studio() {
                                 <li>Lauten Audio Snare Mic</li>
                                 <li>Lewitt LCT 1040 FET/Tube Microphone</li>
                                 <li>Mojave Audio MA-37</li>
-                                <li>Mojave Audio MA-1000</li>
                                 <li>Mojave Audio MA-300</li>
                                 <li>Mojave Audio MA-301</li>
+                                <li>Mojave Audio MA-1000</li>
                                 <li>Ohma Motif Condenser Microphone</li>
                                 <li>Neumann M149</li>
                                 <li>Neumann TLM67</li>
