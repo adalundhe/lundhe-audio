@@ -381,7 +381,7 @@ export default function Studio() {
                                 to record demainding sources. We use:
                             </p>
                             <ul className="my-4 list-disc list-inside">
-                                <li>Austiran Audio OD5</li>
+                                <li>Austiran Audio OD5 (<b>x2</b>)</li>
                                 <li>Beyerdynamic M88</li>
                                 <li>Beyerdynamic M201TG (<b>x2</b>)</li>
                                 <li>Sennheiser MD421 MKII (<b>x2</b>)</li>
