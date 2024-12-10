@@ -341,7 +341,7 @@ export default function Studio() {
                                 <li>Samar MG20 (<b>x2</b>)</li>
                                 <li>Schoeps CMIT5U</li>
                                 <li>Schoeps CMC6 with MK4 Cardioid Capsules (<b>matched pair</b>)</li>
-                                <li>Schoeps V4 USM Set - Blue</li>
+                                <li>Schoeps V4 U Set - Blue</li>
                                 <li>sE Electronics RN17 (<b>matched pair</b>)</li>
                                 <li>Soyuz 013 FET (<b>matched pair</b>)</li>
                                 <li>Soyuz 013 TUBE (<b>matched pair</b>)</li>
