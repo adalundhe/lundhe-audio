@@ -585,6 +585,7 @@ export default function Studio() {
                                 <li>Suhr Classic P-Bass</li>
                                 <li>Suhr Pete Thorn Standard HSS</li>
                                 <li>Suhr Standard Plus Koa</li>
+                                <li>Taylor 724CE Grand Auditorium Koa</li>
                             </ul>
                         </StudioContentSection>
                         <StudioContentSection 
