@@ -301,6 +301,7 @@ export default function Studio() {
                                 <li>Chandler Limtied REDD Microphone</li>
                                 <li>Hendyamps LDC Microphone</li>
                                 <li>Heiserman H47 FET</li>
+                                <li>Heiserman Type 19 (<b>x2</b>)</li>
                                 <li>Lauten Audio Atlantis</li>
                                 <li>Lauten Audio Eden</li>
                                 <li>Lauten Audio Snare Mic</li>
