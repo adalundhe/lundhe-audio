@@ -143,9 +143,12 @@ export default function Studio() {
                                 <li>Rupert Neve Designs 5025 Dual Shelford Pre</li>
                                 <li>Shadow Hills Mono GAMMA 500 Pre (<b>x2</b>)</li>
                                 <li>Soyuz Launcher Deluxe</li>
+                                <li>SSL X-Logic Alpha Channel (<b>x2</b>)</li>
+                                <li>SSL XR621 Superanalogue Mic/Line Preamp (<b>x2</b>)</li>
                                 <li>Summit Audio MPC-100A Channel Strip (<b>x2</b>)</li>
                                 <li>Thermionic Culture Vulture Super 15 Mastering Edition</li>
                                 <li>Tierra Audio Lava Analog Edition Preamp (<b>x2</b>)</li>
+                                <li>TL-Audio Fat Track</li>
                                 <li>Tube-Tech MP2A</li>
                                 <li>Universal Audio 4110 Quad Pre</li>
                                 <li>Wes Audio Phoebe 500 Pre (<b>x2</b>)</li>
@@ -190,6 +193,8 @@ export default function Studio() {
                                 <li>Shadow Hills Dual Vandergraph</li>
                                 <li>Slate Audio Dragon (<b>x2</b>)</li>
                                 <li>SPL Iron V2 Mastering Compressor</li>
+                                <li>SSL XR618 9000-Series Dynamics Processor (<b>x2</b>)</li>
+                                <li>SSL XR626 9000-Series Bus Compressor</li>
                                 <li>Standard Audio Level-OR 500 Compressor (<b>x2</b>)</li>
                                 <li>Summit Audio DCL-200</li>
                                 <li>Tegeler Audio Creme RC</li>
@@ -225,6 +230,7 @@ export default function Studio() {
                                 <li>Pultec EQP-500X (<b>x2</b>)</li>
                                 <li>Pultec MEQ-500 Jack Douglas Edition (<b>x2</b>)</li>
                                 <li>Rupert Neve Designs 551 Inductor Equalizer (<b>x2</b>)</li>
+                                <li>SSL XR425 E-Series Equalizer (<b>x3</b>)</li>
                                 <li>SPL PQ Mastering Equalizer</li>
                                 <li>SPL PassEQ Mastering Equalizer</li>
                                 <li>Tierra Audio Icicle Equalizer (<b>x2</b>)</li>
@@ -431,6 +437,7 @@ export default function Studio() {
                                 <li>Dave Smith Instruments OB-6</li>
                                 <li>Dave Smith Instruments Poly Evolver - PE Edition</li>
                                 <li>Dave Smith Instruments Pro-2</li>
+                                <li>Dave Smith Instruments Prophet 08 PE</li>
                                 <li>Dave Smith Instruments Prophet 6</li>
                                 <li>Dave Smith Instruments Prophet 12</li>
                                 <li>Dave Smith Instruments Prophet Rev 2 - 16 voice</li>
@@ -509,6 +516,7 @@ export default function Studio() {
                                 <li>Moog Grandmother</li>
                                 <li>Moog Matriarch</li>
                                 <li>Moog Model D (2023 reissue)</li>
+                                <li>Moog Little Phatty MKI</li>
                                 <li>Moog Little Phatty Stage One MKII - (Limited Editition Toxic Version)</li>
                                 <li>Moog Mavis</li>
                                 <li>Moog Muse</li>
@@ -549,6 +557,7 @@ export default function Studio() {
                                 <li>Roland System-8</li>
                                 <li>Roland TR-8S</li>
                                 <li>Roland V-Synth XT</li>
+                                <li>Sequential Pro-1</li>
                                 <li>Sequential Pro-3 SE</li>
                                 <li>Sequential Prophet 10 (reissue)</li>
                                 <li>Sequential Trigon 6</li>
