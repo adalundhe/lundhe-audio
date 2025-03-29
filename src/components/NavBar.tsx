@@ -1,47 +1,46 @@
 import { GeistSans } from "geist/font/sans";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuContent,
-  navigationMenuLinkStyle 
-
-} from "~/components/ui/navigation-menu"
+import { CiMenuBurger } from "react-icons/ci";
 import {
     Accordion,
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
-} from "~/components/ui/accordion"
-import { CiMenuBurger } from "react-icons/ci";
-import { GiMusicalNotes } from "react-icons/gi";
-import { MdHome } from "react-icons/md";
-import { Separator } from "~/components/ui/separator"
-import { GiGearHammer } from "react-icons/gi";
-import { PiInfoFill } from "react-icons/pi";
+} from "~/components/ui/accordion";
+import {
+    NavigationMenu,
+    NavigationMenuContent,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    navigationMenuLinkStyle,
+    NavigationMenuList,
+    NavigationMenuTrigger
+} from "~/components/ui/navigation-menu";
+// import { GiMusicalNotes } from "react-icons/gi";
+// import { MdHome } from "react-icons/md";
+import { Separator } from "~/components/ui/separator";
+// import { GiGearHammer } from "react-icons/gi";
+// import { PiInfoFill } from "react-icons/pi";
 import Link from "next/link";
-import { Avatar, AvatarImage } from "~/components/ui/avatar"
-import { IoMdContact } from "react-icons/io";
-import { MdPolicy } from "react-icons/md";
-import { LiaFileContractSolid } from "react-icons/lia";
-import { ScrollArea } from "~/components/ui/scroll-area"
+// import { IoMdContact } from "react-icons/io";
+import { Avatar, AvatarImage } from "~/components/ui/avatar";
+// import { MdPolicy } from "react-icons/md";
+// import { LiaFileContractSolid } from "react-icons/lia";
+import { ScrollArea } from "~/components/ui/scroll-area";
 
 
 export const NavBar = () => {
     
     return (
         
-      <NavigationMenu className={`h-[80px] max-h-[80px] my-4 px-3 ${GeistSans.className}`}>
+      <NavigationMenu className={`h-[100px] max-h-[100px] my-4 px-3 ${GeistSans.className}`}>
         <NavigationMenuList className="flex justify-start">
             <Avatar className="w-[min(80px,calc(100vmin/4))] h-[min(80px,calc(100vmin/4))]">
                 <NavigationMenuLink href="/" className="cursor-pointer">     
                     <AvatarImage src="/lundhe_audio_logo.png"/>
                 </NavigationMenuLink>
             </Avatar>
-            <NavigationMenuItem className="h-[40px]">
-                <NavigationMenuTrigger className="lg:mx-[16px] lg:border lg:shadow-sm hover:underline text-sm w-[94px]" asChild>
+            <NavigationMenuItem className="h-[100px]">
+                <NavigationMenuTrigger className="lg:mx-[16px] hover:underline text-xl lg:w-[120px] w-[60px]" asChild>
                     <div className="cursor-default flex items-center justify-center space-x-2 lg:hover:bg-gray-50 lg:focus:bg-gray-50">
                         <CiMenuBurger 
                             className="text-2xl top-[1px] transition duration-300 group-data-[state=open]:rotate-90"
@@ -51,24 +50,24 @@ export const NavBar = () => {
                     </div>    
                 </NavigationMenuTrigger>     
                 <NavigationMenuContent>
-                    <div className="border-t h-[100vh] lg:mt-[34px] w-[100vw] bg-white flex flex-col w-full no-scroll text-sm">
+                    <div className="border-t h-[100vh] lg:mt-[34px] w-[100vw] bg-white flex flex-col w-full no-scroll text-lg font-light">
                         <ScrollArea className="h-[60vh]">
                             <Accordion defaultValue="home" type="single" collapsible className="flex flex-col w-full">
                                 <AccordionItem value="home" className=" hover:bg-gray-50 focus:bg-gray-50 py-2 px-2 h-[40px] w-full flex grow-1 items-center space-x-2 hover:bg-gray-50 focus:bg-gray-50">
-                                    <MdHome/>
-                                    <NavigationMenuLink href="/" className="cursor-pointer hover:underline">
+                                    {/* <MdHome/> */}
+                                    <NavigationMenuLink href="/" className={navigationMenuLinkStyle()}>
                                         home
                                     </NavigationMenuLink>
                                 </AccordionItem>
                                 <AccordionItem value="studio" className="px-2 hover:bg-gray-50 focus:bg-gray-50">
                                     <AccordionTrigger 
-                                        className="hover:bg-gray-50 focus:bg-gray-50 p-0 cursor-default py-2"
+                                        className="hover:bg-gray-50 focus:bg-gray-50 p-0 cursor-default py-2 text-lg font-light"
                                         chevronSide="left"
                                     >   
                                         <div className="flex items-center space-x-2 cursor-default">
-                                            <GiMusicalNotes 
+                                            {/* <GiMusicalNotes 
                                                 aria-hidden="true"
-                                            />
+                                            /> */}
                                             <p className="hover:underline">
                                                 studio
                                             </p>
@@ -78,17 +77,17 @@ export const NavBar = () => {
                                         <Separator/>     
                                         <ul className="list-none pl-4">
                                             <li className="w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50"> 
-                                                <PiInfoFill />
+                                                {/* <PiInfoFill /> */}
                                                 <Link href="/about" className="cursor-pointer hover:underline" passHref>                     
-                                                    <NavigationMenuLink className={navigationMenuLinkStyle()}>
+                                                    <NavigationMenuLink className={navigationMenuLinkStyle()} >
                                                         about
                                                     </NavigationMenuLink>
                                                 </Link>
                                             </li>
                                             <Separator/>
                                             <li className="w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
-                                                <GiGearHammer />
-                                                <NavigationMenuLink href="/gear" className="cursor-pointer hover:underline">
+                                                {/* <GiGearHammer /> */}
+                                                <NavigationMenuLink href="/gear" className={navigationMenuLinkStyle()}>
                                                     gear
                                                 </NavigationMenuLink>
                                             </li>
@@ -157,11 +156,11 @@ export const NavBar = () => {
                                     </AccordionContent>
                                 </AccordionItem> */}
                                 <AccordionItem value="legal" className="px-2 hover:bg-gray-50 focus:bg-gray-50">
-                                    <AccordionTrigger className="hover:bg-gray-50 focus:bg-gray-50 p-0 cursor-default py-2" chevronSide="left">   
+                                    <AccordionTrigger className="hover:bg-gray-50 focus:bg-gray-50 p-0 cursor-default py-2 text-lg font-light" chevronSide="left">   
                                         <div className="flex items-center space-x-2 cursor-default">
-                                            <LiaFileContractSolid 
+                                            {/* <LiaFileContractSolid 
                                                 aria-hidden="true"
-                                            />
+                                            /> */}
                                             <p className="hover:underline">
                                                 legal
                                             </p>
@@ -171,15 +170,15 @@ export const NavBar = () => {
                                         <Separator/>        
                                         <ul className="list-none pl-4">
                                             <li className="w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
-                                                <MdPolicy/>
-                                                <NavigationMenuLink href="/privacy" className="cursor-pointer hover:underline">
+                                                {/* <MdPolicy/> */}
+                                                <NavigationMenuLink href="/privacy" className={navigationMenuLinkStyle()}>
                                                     privacy
                                                 </NavigationMenuLink>
                                             </li>
                                             <Separator/>
                                             <li className="w-full py-2 flex items-center space-x-2 grow-1 hover:bg-gray-50 focus:bg-gray-50">
-                                                <LiaFileContractSolid/>
-                                                <NavigationMenuLink href="/terms_of_service" className="cursor-pointer hover:underline">
+                                                {/* <LiaFileContractSolid/> */}
+                                                <NavigationMenuLink href="/terms_of_service" className={navigationMenuLinkStyle()}>
                                                     terms of service
                                                 </NavigationMenuLink>
                                             </li>
@@ -187,7 +186,7 @@ export const NavBar = () => {
                                     </AccordionContent>
                                 </AccordionItem>
                                 <AccordionItem value="contact" className="hover:bg-gray-50 focus:bg-gray-50 py-2 px-2 h-[40px] w-full flex grow-1 items-center space-x-2 hover:bg-gray-50 focus:bg-gray-50">
-                                    <IoMdContact/>
+                                    {/* <IoMdContact/> */}
                                     <NavigationMenuLink href="/contact" className="cursor-pointer hover:underline">
                                         contact
                                     </NavigationMenuLink>

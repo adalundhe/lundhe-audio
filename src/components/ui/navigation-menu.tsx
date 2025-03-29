@@ -1,10 +1,8 @@
-import * as React from "react"
-import { ChevronDownIcon } from "@radix-ui/react-icons"
-import { RxDropdownMenu } from "react-icons/rx";
-import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu"
-import { cva } from "class-variance-authority"
+import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
+import { cva } from "class-variance-authority";
+import * as React from "react";
 
-import { cn } from "~/lib/utils"
+import { cn } from "~/lib/utils";
 
 const NavigationMenu = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Root>,
@@ -58,11 +56,11 @@ NavigationMenuList.displayName = NavigationMenuPrimitive.List.displayName
 const NavigationMenuItem = NavigationMenuPrimitive.Item
 
 const navigationMenuTriggerStyle = cva(
-  "group inline-flex w-max items-center justify-center rounded-sm bg-background px-4 text-sm font-medium transition-colors hover:text-accent-foreground focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50"
+  "group inline-flex w-max items-center justify-center rounded-sm bg-background px-4 text-lg font-medium font-light transition-colors hover:text-accent-foreground focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50"
 )
 
 const navigationMenuLinkStyle = cva(
-  "group inline-flex w-max items-center justify-center rounded-sm bg-background text-sm font-medium transition-colors hover:text-accent-foreground focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50"
+  "group inline-flex w-max items-center justify-center rounded-sm bg-background hover:underline text-lg font-medium font-light transition-colors hover:text-accent-foreground focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50"
 )
 
 const NavigationMenuTrigger = React.forwardRef<
@@ -168,17 +166,6 @@ NavigationMenuIndicator.displayName =
   NavigationMenuPrimitive.Indicator.displayName
 
 export {
-  navigationMenuTriggerStyle,
-  navigationMenuLinkStyle,
-  NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
-  NavigationMenuContent,
-  NavigationSubMenuTrigger,
-  NavigationSubMenuContent,
-  NavigationMenuTrigger,
-  NavigationMenuLink,
-  NavigationMenuIndicator,
-  NavigationMenuViewport,
-  NavigationMenuSub,
-}
+  NavigationMenu, NavigationMenuContent, NavigationMenuIndicator, NavigationMenuItem, NavigationMenuLink, navigationMenuLinkStyle, NavigationMenuList, NavigationMenuSub, NavigationMenuTrigger, navigationMenuTriggerStyle, NavigationMenuViewport, NavigationSubMenuContent, NavigationSubMenuTrigger
+};
+

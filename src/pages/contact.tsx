@@ -1,13 +1,21 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { GeistSans } from "geist/font/sans";
 import Link from "next/link";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Layout } from "~/components/Layout";
+import { Button } from "~/components/ui/button";
+
 import {
     Card,
     CardContent,
     CardDescription,
+    CardFooter,
     CardHeader,
     CardTitle,
-    CardFooter,
-  } from "~/components/ui/card"
+} from "~/components/ui/card";
+import { Checkbox } from "~/components/ui/checkbox";
 import {
     Form,
     FormControl,
@@ -16,25 +24,19 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from "~/components/ui/form"
+} from "~/components/ui/form";
+import { Input } from "~/components/ui/input";
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "~/components/ui/select"
-import { Checkbox } from "~/components/ui/checkbox"
-import { Input } from "~/components/ui/input"
-import { Textarea } from "~/components/ui/textarea"
-import { Button } from "~/components/ui/button"
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { useState } from "react";
-import { Layout } from "~/components/Layout";
+} from "~/components/ui/select";
+import { Separator } from "~/components/ui/separator";
+import { Textarea } from "~/components/ui/textarea";
+import { useReCaptcha } from '~/hooks/use-recaptcha';
 import { api } from '~/utils/api';
-import { useReCaptcha } from '~/hooks/use-recaptcha'
 
 
 
@@ -168,27 +170,30 @@ export default function Contact(){
   return (
     <>
       <Layout>
-        <Card className="w-full md:w-3/4 h-full rounded-none border-none shadow-none px-4">
+        <Card className="w-full md:w-3/4 h-full rounded-none border-none shadow-none px-4 text-xl">
             <CardHeader className="p-0 flex flex-col items-center">
-                <CardTitle className="w-3/4 text-2xl text-center">Get in touch!</CardTitle>
-                <CardDescription className="text-center w-3/4">
+                <CardTitle className="w-3/4 text-4xl text-center">Get in touch!</CardTitle>
+                <CardDescription className="text-center w-3/4 text-xl font-light">
                     Fill out the form below to reach out to us. We usually respond in one business day.
                 </CardDescription>
             </CardHeader>
             <CardContent className="p-0 w-[100%] flex flex-col items-center">
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 mx-8 py-4 h-full w-full">
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 mx-8 py-4 my-4 h-full w-full">
                         <FormField
+                        
                             control={form.control}
                             name="name"
                             render={({ field }) => (
-                                <FormItem className="flex flex-col">
-                                    <FormLabel>Name</FormLabel>
-                                    <FormDescription>
+                                <FormItem className="flex flex-col my-4">
+                                    <FormLabel className="text-xl font-normal">Name</FormLabel>
+                                    <Separator/>
+                                    <FormDescription className="text-md font-normal">
                                         Your first or full name.
                                     </FormDescription>
                                     <FormControl>
                                         <Input 
+                                            className="text-lg font-light"
                                             disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"}
                                             aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"}
                                             placeholder="Please enter your name." {...field}
@@ -202,13 +207,15 @@ export default function Contact(){
                             control={form.control}
                             name="email"
                             render={({ field }) => (
-                                <FormItem className="flex flex-col">
-                                    <FormLabel>Email</FormLabel>
-                                    <FormDescription>
+                                <FormItem className="flex flex-col my-4">
+                                    <FormLabel className="text-xl font-normal">Email</FormLabel>
+                                    <Separator/>
+                                    <FormDescription className="text-md font-normal">
                                         Your email for us to contact you at.
                                     </FormDescription>
                                     <FormControl>
                                         <Input 
+                                            className="text-lg font-light"
                                             disabled={formState.formStatus === "submitted" ||formState.formStatus === "submitting"}
                                             aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"}
                                             placeholder="Please enter your email." 
@@ -224,13 +231,15 @@ export default function Contact(){
                             control={form.control}
                             name="phone"
                             render={({ field }) => (
-                                <FormItem className="flex flex-col">
-                                    <FormLabel>Phone</FormLabel>
-                                    <FormDescription>
+                                <FormItem className="flex flex-col my-4">
+                                    <FormLabel className="text-xl font-normal">Phone</FormLabel>
+                                    <Separator/>
+                                    <FormDescription className="text-md font-normal">
                                         Your phone for us to contact you at.
                                     </FormDescription>
                                     <FormControl>
                                         <Input 
+                                            className="text-lg font-light"
                                             disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
                                             aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"}
                                             placeholder="Please enter your phone." {...field} 
@@ -253,9 +262,10 @@ export default function Contact(){
                             control={form.control}
                             name="service"
                             render={({ field }) => (
-                                <FormItem className="flex flex-col">
-                                    <FormLabel>Service</FormLabel>
-                                    <FormDescription>
+                                <FormItem className="flex flex-col my-4">
+                                    <FormLabel className="text-xl font-normal">Service</FormLabel>
+                                    <Separator/>
+                                    <FormDescription className="text-md font-normal">
                                         Select the service you intend to enquire about.
                                     </FormDescription>
                                     <FormControl>
@@ -265,10 +275,10 @@ export default function Contact(){
                                             onValueChange={field.onChange}
                                             value={field.value}
                                         >
-                                            <SelectTrigger>
-                                                <SelectValue placeholder="Select a provided service" />
+                                            <SelectTrigger className="text-lg font-light">
+                                                <SelectValue className="text-lg font-light" placeholder="Select a provided service" />
                                             </SelectTrigger>
-                                            <SelectContent className={GeistSans.className} ref={field.ref}>
+                                            <SelectContent className={`${GeistSans.className} text-2xl font-thin`} ref={field.ref}>
                                                 <SelectItem value="mixing">mixing</SelectItem>
                                                 <SelectItem value="mastering">mastering</SelectItem>
                                                 <SelectItem value="sound-design">sound design</SelectItem>
@@ -285,13 +295,15 @@ export default function Contact(){
                             control={form.control}
                             name="message"
                             render={({ field }) => (
-                                <FormItem className="flex flex-col">
-                                    <FormLabel>Message</FormLabel>
-                                    <FormDescription>
+                                <FormItem className="flex flex-col my-4">
+                                    <FormLabel className="text-xl font-normal">Message</FormLabel>
+                                    <Separator/>
+                                    <FormDescription className="text-md font-noraml">
                                         Enter a message.
                                     </FormDescription>
                                     <FormControl>
                                         <Textarea
+                                            className="text-lg font-light"
                                             disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
                                             aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"}
                                             placeholder="Please enter a message."
@@ -306,20 +318,25 @@ export default function Contact(){
                             control={form.control}
                             name="contactConsent"
                             render={({ field }) => (
-                                <FormItem className="grid grid-cols-12">
-                                    <FormLabel  className="mt-[6.5px] text-sm w-full col-span-11 flex items-end">Opt-In SMS Terms and Conditions</FormLabel>
+                                <FormItem className="grid grid-cols-12 my-4">
+                                    <FormLabel  className="mt-[6.5px] text-xl font-normal w-full col-span-12 flex items-end">Opt-In SMS Terms and Conditions</FormLabel>
+                                    <div className="col-span-12 my-2">
+
+                                        <Separator/>
+                                    </div>
+                                    <FormDescription className="col-span-10 text-md font-light flex self-end">
+                                        You consent to receive SMS messages at {field.value} provided for the express 
+                                        purpose of service scheduling/confirmation and updates (carrier charges may apply).
+                                    </FormDescription>
                                     <FormControl>
                                         <Checkbox
+                                            className="col-span-2 flex justify-self-center self-start rounded-full border shadow-lg h-[20px] w-[20px]"
                                             disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
                                             aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
                                             checked={field.value}
                                             onCheckedChange={field.onChange}                         
                                         />
                                     </FormControl>
-                                    <FormDescription className="col-span-12">
-                                        You consent to receive SMS messages at {field.value} provided for the express 
-                                        purpose of service scheduling/confirmation and updates (carrier charges may apply).
-                                    </FormDescription>
                                     <FormMessage />
                                 </FormItem>
                             )}
@@ -330,7 +347,7 @@ export default function Contact(){
                                     disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
                                     aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"}
                                     type="submit"
-                                    className="w-[100px] h-36px"
+                                    className="w-[150px] h-[48px] text-xl font-light"
                                 >
                                     { 
                                         formState.formStatus === "submitting" ? "submitting..." : 
@@ -339,10 +356,10 @@ export default function Contact(){
                                 </Button>
                                 <Link onClick={() => setFormState({
                                     formStatus: "active"
-                                })} href="/privacy" className="text-xs mt-2 text-muted-foreground">privacy</Link>
+                                })} href="/privacy" className="my-2 text-lg font-light text-muted-foreground">privacy</Link>
                                 <Link onClick={() => setFormState({
                                     formStatus: "active"
-                                })} href="/terms_of_service" className="text-xs mb-2 text-muted-foreground">terms of service</Link>
+                                })} href="/terms_of_service" className="text-lg font-light mb-2 text-muted-foreground">terms of service</Link>
                                 <p className={`${formState.formStatus === "errored" ? '' : 'hidden'} text-sm text-red-600`}>{formState.formError ?? "An unknown error occured while submitting the form."}</p>
                             </div>
                         </CardFooter>

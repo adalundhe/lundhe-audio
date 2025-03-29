@@ -1,12 +1,12 @@
-import { Layout } from "~/components/Layout"
+import { Layout } from "~/components/Layout";
 import {
     Card,
     CardContent,
     CardDescription,
     CardHeader,
     CardTitle,
-} from "~/components/ui/card"
-import { Separator } from "~/components/ui/separator"
+} from "~/components/ui/card";
+import { Separator } from "~/components/ui/separator";
 
 export default function About() {
 
@@ -18,9 +18,9 @@ export default function About() {
                 <div className="w-3/4 h-full">
                     <CardHeader className="p-0 w-full flex flex-col">
                         <CardTitle className="text-2xl md:text-4xl">What we do...</CardTitle>
-                        <CardDescription>(We do it well)</CardDescription>
+                        <CardDescription className="text-md font-light">(We do well)</CardDescription>
                     </CardHeader>
-                    <div className="pt-4 text-sm">
+                    <div className="pt-4 text-lg font-thin">
                         <p>        
                             Lundhe Audio was founded in 2024 by long-time sound designer and engineer Ada Lundhe after 
                             over fifteen years of providing mixing, mastering, commercial audio, and sound-design services.
@@ -37,9 +37,9 @@ export default function About() {
                     </div>
                     <CardHeader className="p-0 w-full flex flex-col items-end">
                         <CardTitle className="text-2xl md:text-4xl">Why we do it...</CardTitle>
-                        <CardDescription>(Sound is everything)</CardDescription>
+                        <CardDescription className="text-md font-light">(Sound is everything)</CardDescription>
                     </CardHeader>
-                    <div className="pt-4 text-sm">
+                    <div className="pt-4 text-lg font-thin">
                             <p>        
                                 Lundhe Audio is a passion project borne out of a love for everything sound. Whether a product of field recordings, 
                                 beloved traditional instruments, or wild modular synthesis - we love making noise and helping others fall in love 

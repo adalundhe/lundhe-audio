@@ -1,18 +1,18 @@
-import { Layout } from "~/components/Layout"
+import Image from "next/image";
+import { Layout } from "~/components/Layout";
+import { StudioContentSection } from "~/components/StudioContentSection";
+import {
+    Accordion,
+} from "~/components/ui/accordion";
+import { AspectRatio } from "~/components/ui/aspect-ratio";
 import {
     Card,
     CardContent,
     CardDescription,
     CardHeader,
     CardTitle,
-  } from "~/components/ui/card"
-import Image from "next/image";
-import { Separator } from "~/components/ui/separator"
-import { AspectRatio } from "~/components/ui/aspect-ratio"
-import { StudioContentSection } from "~/components/StudioContentSection";
-import {
-    Accordion,
-} from "~/components/ui/accordion"
+} from "~/components/ui/card";
+import { Separator } from "~/components/ui/separator";
 
 const blurDataUrl = "data:image/jpeg;base64,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AAAAAAAAAAAAAAFQBRAFEAUQAAAAAABRFBRFBVZUGhAGlZUFVlQVWVBVZUFVlQUQBoQBRAFVkBoQBdEAUZAUQBRAFRAFQQFEQFQQFQQARAVEQBFQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABRFBRFBVZUFVlQVWVBVZUFVlQVWQGhAFVlQUQBRAFE0BRDQUQBRAFEQFEAVEAVBAVBAVEAEEAEAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFEAVUAVUAVWVBVZUFVkBoQBoZUFEAVWTQaGV0FNQ0F0TQFGTQa1E00F01NNBdRNNBTU1NBdNTU0F01EBUEBUEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVAFEUFEAVWVBRAGhlQU1AGjWQGtNTTQXTU00F01NNBdNTTQXTU00F01nTQXTU00F01EBdNQBUQBUEBUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFEAUQBVQBRAFEAUQBdEAUQBRAFEAUQBRAAQBRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUBBQEFAQUBBQEFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUBFAAUBBQEFARQAFAQUBEaQEFAQUBBUBBQEFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQABQRQAFARQAFAQUBBVBBQEFARGgGRpAQUBEaAZFARGkBBUBBQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAFAAUAFARRQQUAFAQUBFFBBQEFAQUBEaAZFAQUBkUBEaQERpARGkBEaQEFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFABQAUEUUEUUEUUEUABQAFBBQEFAAABQEFQBFAQUBBQGRQERpARGkBEaQGRQGRUBBUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAFAFBQAUAFABQAUEUABQAAAUBBQEFAQUBBQEFARFAQUBkUBEUBkUBlGkBEUBlGkBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFRQFRQFABRQAUBQAFAAUAFBFAAUBBQAAAAAAAAEFAQVAEUBEUBEaQERpARFAZRpAZRpARFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFABQUBUUBRQAUBUUBQAFAAUAAAUAAAAAFAQUBAAAAQUBEUBBUBBUBBUBEUBlGkBlGkBlGkBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQEFAQUBAAAAFRQFRQFRQUFAUAUFABQAUAFABQAABQAAAAAUBBQEFQAAEFAQAEFQEFQEFQERQGRUBGWkBlGkBkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFBFAAUBFAAAGQAAAFRQFAFBQFAFVFAUAUAFBQAUAABQABQRQAAAAAAAAARQEFQBFAQAEABEUBEVARGkBlGkBlFqAiKgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAAoACgIoAAAwAAACgAoAKqKCqigKAKCgKigKigKACooAKAAACgAAAAAAAAgoCAAgqAIoCIoCIqAgqAiKgIioCVmtVKDNRUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVFAUAFAAAAUAAB5gAAAoAKqKAqKCqigoKAqKCgAoAKACgAKAAKAAAAAAAAAAAAAioAACAAgAIACIqAiNICMtIDNSrUoJWWqgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACgAoKAACgAAAAA8wAAAUAFVFBQUBUUFVFAVFBQAVUUBUUAAFAAUAAAAAFABFAQVAAAAAQABFQBFQBFQERQERUBEVASs1pmglRalBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVUUBUUBUUAABQAAB5AAAAoAKqKCqigKigqooCooKACqigKigKigAAoAAACooAAAACKgAAAAIAAioAioAioCAAiKgIioCVmtVmglSrUoIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACqigKigKigAAoAAAP//Z"
 
@@ -24,12 +24,12 @@ export default function Studio() {
       <Layout>
         <Card className="w-full md:w-3/4 h-full rounded-none border-none shadow-none">
             <CardHeader className="p-0 mb-4 flex flex-col items-center px-4">
-                <CardTitle className="text-2xl">Studio and Gear</CardTitle>
-                <CardDescription>Quality makes all the difference.</CardDescription>
+                <CardTitle className="text-4xl">Studio and Gear</CardTitle>
+                <CardDescription className="text-lg font-light">Quality makes all the difference.</CardDescription>
             </CardHeader>
             <div className="w-full mt-4 h-full">
                 <CardContent className="p-0 w-[100%] flex flex-col items-center mb-4">       
-                    <div className="flex items-center w-full px-4 h-3/4">
+                    <div className="flex items-center w-2/3 px-4 h-2/3">
                         <AspectRatio ratio={4 / 3} className="flex items-center justify-center">
                             <Image
                                 src="/studio/studio_front_monochrome.jpeg"
@@ -43,7 +43,7 @@ export default function Studio() {
                             />
                         </AspectRatio>
                     </div>
-                    <div className="px-4 my-4 text-sm">
+                    <div className="px-4 my-4 text-xl font-thin my-8">
                         <p>
                             Lundhe Audio is equipped to handle almost any need or situation, with top-tier analog equipment, state of the art software, and an ever growing
                             catalogue of instruments and tools to make musical magic happen. We're not afraid blend cutting-edge music tech with old-school sonics and 
@@ -66,7 +66,7 @@ export default function Studio() {
                             <p>
                                 We exclusively use Audeze headphones - including:
                             </p>
-                            <ul className="my-4 list-disc list-inside">
+                            <ul className="my-4 list-disc list-inside font-normal">
                                 <li>LCD5</li>
                                 <li>LCD4</li>
                                 <li>LCD3</li>
@@ -86,10 +86,12 @@ export default function Studio() {
                                 Conversion is paramount to quality mixing and mastering. At Lundhe Audio we use top-shelf A/D
                                 and D/A, including:
                             </p>
-                            <ul className="my-4 list-disc list-inside">
+                            <ul className="my-4 list-disc list-inside font-normal">
                                 <li>Universal Audio Apollo X16 (x4)</li>
                                 <li>Dangerous Convert AD+</li>
                                 <li>SPL Mercury Mastering D/A</li>
+                                <li>Prism Sound Orpheus (x2)</li>
+                                <li>RME Fireface 802</li>
                                 <li>Crane Song Interstellar Mastering A/D</li>
                             </ul>
                             <p>
@@ -121,11 +123,12 @@ export default function Studio() {
                             <p>
                                 Lundhe Audio provides a wealth of preamp options both for recording and re-amping existing material. We offer:
                             </p>
-                            <ul className="my-4 list-disc list-inside">
+                            <ul className="my-4 list-disc list-inside font-normal">
                                 <li>A-Designs Pacifica</li>
                                 <li>A-Designs REDDI V2 Dual Channel DI</li>
                                 <li>API 512V 500 Pre (<b>x2</b>)</li>
                                 <li>Avalon Designs 2022AD Dual Preamp</li>
+                                <li>Avalon Designs V5 Preamp</li>
                                 <li>Avedis MA5 (<b>x2</b>)</li>
                                 <li>Avedis MD7 (<b>x2</b>)</li>
                                 <li>Blue Robbie Tube Mic Preamp</li>
@@ -138,7 +141,8 @@ export default function Studio() {
                                 <li>Kerwax Replica</li>
                                 <li>LaChapell Audio 992EG</li>
                                 <li>Manley Core Channel Strip</li>
-                                <li>Overstayer Modular Channel 8755DM (with transformers and mic preamps)</li>
+                                <li>Overstayer Modular Channel 8755DM (w/ transformers)</li>
+                                <li>Radial HDI DI-Box</li>
                                 <li>Retro Instruments 500 Pre (<b>x2</b>)</li>
                                 <li>Rupert Neve Designs 5025 Dual Shelford Pre</li>
                                 <li>Shadow Hills Mono GAMMA 500 Pre (<b>x2</b>)</li>
@@ -158,7 +162,7 @@ export default function Studio() {
                             </p>
                         </StudioContentSection>
                         <StudioContentSection 
-                            imagePath="/studio/spl_iron_v2.jpg"
+                            imagePath="/studio/ssl_xrack_monochrome.jpg"
                             imageAltTxt="Photo of Lundhe Audio's SPL Iron V2 mastering compressor."
                             title="Dynamics and Compression"
                             headerAlignment="left"
@@ -168,7 +172,7 @@ export default function Studio() {
                                 tools for sound design, fun, and profit. We're picky though, and it's reflected in our choice
                                 of tools:
                             </p>
-                            <ul className="my-4 list-disc list-inside">
+                            <ul className="my-4 list-disc list-inside font-normal">
                                 <li>API 2500+ Bus Compressor</li>
                                 <li>Bettermaker Mastering Limiter</li>
                                 <li>Buzz Audio SOC-20 Optical Compressor</li>
@@ -217,7 +221,7 @@ export default function Studio() {
                                 EQing is for more than fixing tracks! It's a means of enhancing a performance, bringing
                                 out or shaping details and fundamentally controlling the energy of the music. We employ:
                             </p>
-                            <ul className="my-4 list-disc list-inside">
+                            <ul className="my-4 list-disc list-inside font-normal">
                                 <li>API 550B 500 Equalizer (<b>x2</b>)</li>
                                 <li>Avedis E27 (<b>x6</b>)</li>
                                 <li>Chandler Limited Curve Bender Mastering Equalizer</li>
@@ -251,7 +255,7 @@ export default function Studio() {
                                 Reverb, delay, and other effects bring space and depth to music that simply would not
                                 be possible otherwise. We use:
                             </p>
-                            <ul className="my-4 list-disc list-inside">
+                            <ul className="my-4 list-disc list-inside font-normal">
                                 <li>Bricast M7</li>
                                 <li>EchoFix EF-X3</li>
                                 <li>Ensoniq DP/4 Multi-Effects</li>
@@ -272,13 +276,14 @@ export default function Studio() {
                             <p>
                                 Our studio also contains some unique equipment, including:
                             </p>
-                            <ul className="my-4 list-disc list-inside">
+                            <ul className="my-4 list-disc list-inside font-normal">
                                 <li>Black Box HG-2</li>
                                 <li>Empirical Labs EL7 Fatso</li>
                                 <li>Rupert Neve Designs Master Bus Transformer</li>
                                 <li>SPL BIG 500 Stereo Imaging</li>
                                 <li>SPL Gemini Mid/Side Mastering Router</li>
                                 <li>SPL Hermes Mastering Router</li>
+                                <li>Vertigo VSM-2 Mix Satellite</li>
                                 <li>Whitestone P331A Tube-Loading Amplifier</li>
                             </ul>
                             <p>
@@ -295,7 +300,7 @@ export default function Studio() {
                                 We offer a carefully curated selection of excellent large diaphragm condenser 
                                 microphones:
                             </p>
-                            <ul className="my-4 list-disc list-inside">
+                            <ul className="my-4 list-disc list-inside font-normal">
                                 <li>Austrian Audio OC818 (<b>x2</b>)</li>
                                 <li>Blue Blueberry FET Condenser Mic (Latvian version)</li>
                                 <li>Blue Bottle w/ All Capsules (Latvian version - <b>x2</b>)</li>
@@ -338,7 +343,7 @@ export default function Studio() {
                                 For instrument and field recordings, we also offer a like curated selection of small
                                 diaphragm condenser microphones:
                             </p>
-                            <ul className="my-4 list-disc list-inside">
+                            <ul className="my-4 list-disc list-inside font-normal">
                                 <li>Austrian Audio CC8 (<b>matched pair</b>)</li>
                                 <li>Austrian Audio OC7 (<b>x2</b>)</li>
                                 <li>Blue Hummingbird (<b>x2</b>)</li>
@@ -364,7 +369,7 @@ export default function Studio() {
                             <p>
                                 For guitar and instrument recordings, we offer the following ribbon microphones:
                             </p>
-                            <ul className="my-4 list-disc list-inside">
+                            <ul className="my-4 list-disc list-inside font-normal">
                                 <li>Blue Woodpecker</li>
                                 <li>Hum Audio ARM-1L</li>
                                 <li>Melodium 42bn</li>
@@ -387,7 +392,7 @@ export default function Studio() {
                                 No studio is complete without a healthy collection of dynamic microphones
                                 to record demainding sources. We use:
                             </p>
-                            <ul className="my-4 list-disc list-inside">
+                            <ul className="my-4 list-disc list-inside font-normal">
                                 <li>Austiran Audio OD5 (<b>x2</b>)</li>
                                 <li>Beyerdynamic M88</li>
                                 <li>Beyerdynamic M201TG (<b>x2</b>)</li>
@@ -409,7 +414,7 @@ export default function Studio() {
                                 like the Juno 6 to the cutting tones of modern giants like the Waldorf Quantum, we offer a wealth 
                                 of synthesis options:
                             </p>
-                            <ul className="my-4 list-disc list-inside">
+                            <ul className="my-4 list-disc list-inside font-normal">
                                 <li>Access Virus TI</li>
                                 <li>Akai AX-60</li>
                                 <li>Akai AX-80</li>
@@ -584,7 +589,7 @@ export default function Studio() {
                             <p>
                                 We offer the following guitars and basses:
                             </p>
-                            <ul className="my-4 list-disc list-inside">
+                            <ul className="my-4 list-disc list-inside font-normal">
                                 <li>Collings 290 (with Lollard Gold pickups)</li>
                                 <li>Ernie Ball Singray Special 5HH</li>
                                 <li>Gretsch G6128 Duo Jet Masterbuilt</li>
@@ -608,7 +613,7 @@ export default function Studio() {
                                 Pedals and non-rack effects can help spark creativity and bring sounds alive. We
                                 offer dozens of options, including:
                             </p>
-                            <ul className="my-4 list-disc list-inside">
+                            <ul className="my-4 list-disc list-inside font-normal">
                                 <li>Aguilar Chorusarus</li>
                                 <li>Boss CE-2W Waza Craft Chorus</li>
                                 <li>Boss DC-2W Waza Craft Dimension C Chorus</li>
