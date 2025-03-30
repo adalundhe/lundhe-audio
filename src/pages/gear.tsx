@@ -109,7 +109,7 @@ export default function Studio() {
                             </p>
                             <br/>
                             <p>
-                                Mixes are sweetend through <i>ninety-six</i> channels of legendary Rupert Neve designs summing - including four 5059 satellites and a 5060 centerpiece -
+                                Mixes are sweetend through <i>ninety-six</i> channels of legendary Rupert Neve designs summing - including six 5059 satellites and a 5060 centerpiece -
                                 with judicious application of Silk harmonics to add warmth and detail. Signal flow is managed by a suite of four Flock Patch units, ensuring
                                 fast turnaround and easy recall.
                             </p>
