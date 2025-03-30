@@ -117,11 +117,11 @@ export default function Studio() {
                         <StudioContentSection 
                             imagePath="/studio/preamps_01.jpg"
                             imageAltTxt="Photo of Lundhe Audio's Manley, Tube Tech, Avalon, and LaChapell Audio preamps."
-                            title="Preamps"
+                            title="Preamps and DI"
                             headerAlignment="right"
                         >
                             <p>
-                                Lundhe Audio provides a wealth of preamp options both for recording and re-amping existing material. We offer:
+                                Lundhe Audio provides a wealth of preamp and DI box options both for recording and re-amping existing material. We offer:
                             </p>
                             <ul className="my-4 list-disc list-inside font-normal">
                                 <li>A-Designs Pacifica</li>
@@ -135,6 +135,7 @@ export default function Studio() {
                                 <li>Chandler Limited Germanium 500 Pre (<b>x2</b>)</li>
                                 <li>Chandler Limited Little Devil 500 Pre (<b>x2</b>)</li>
                                 <li>Chandler Limited TG2 500 Pre (<b>x2</b>)</li>
+                                <li>Focusrite ISA One</li>
                                 <li>Focusrite Liquid Channel (<b>x2</b>)</li>
                                 <li>Focusrite Red 1 Quad Pre</li>
                                 <li>H2 Audio Helios 2128 500 Pre (<b>x2</b>)</li>
@@ -150,6 +151,7 @@ export default function Studio() {
                                 <li>SSL X-Logic Alpha Channel (<b>x2</b>)</li>
                                 <li>SSL XR621 Superanalogue Mic/Line Preamp (<b>x2</b>)</li>
                                 <li>Summit Audio MPC-100A Channel Strip (<b>x2</b>)</li>
+                                <li>Summit Audio TD-100</li>
                                 <li>Thermionic Culture Vulture Super 15 Mastering Edition</li>
                                 <li>Tierra Audio Lava Analog Edition Preamp (<b>x2</b>)</li>
                                 <li>TL-Audio Fat Track</li>
@@ -664,6 +666,8 @@ export default function Studio() {
                                 <li>Meris Ottobit Jr.</li>
                                 <li>Meris Polymoon</li>
                                 <li>Microcosm Electronics Hologram</li>
+                                <li>Moog Moogerfooger MF-102 Ring Modulator</li>
+                                <li>Moog Moogerfooger MF-103 12 Stage Phaser </li>
                                 <li>OTO Bam Reverb</li>
                                 <li>OTO Baum Drive/Compressor</li>
                                 <li>OTO Bebe Cherie Mixer</li>
