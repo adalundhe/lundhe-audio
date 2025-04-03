@@ -128,7 +128,7 @@ export default function Studio() {
                                 <li>A-Designs REDDI V2 Dual Channel DI</li>
                                 <li>API 512V 500 Pre (<b>x2</b>)</li>
                                 <li>Avalon Designs 2022AD Dual Preamp</li>
-                                <li>Avalon Designs V5 Preamp</li>
+                                <li>Avalon Designs V5 Preamp (<b>x2</b>)</li>
                                 <li>Avedis MA5 (<b>x2</b>)</li>
                                 <li>Avedis MD7 (<b>x2</b>)</li>
                                 <li>Blue Robbie Tube Mic Preamp</li>
@@ -145,6 +145,7 @@ export default function Studio() {
                                 <li>Overstayer Modular Channel 8755DM (w/ transformers)</li>
                                 <li>Radial HDI DI-Box</li>
                                 <li>Retro Instruments 500 Pre (<b>x2</b>)</li>
+                                <li>Rupert Neve Designs Portico 5017 Microphone Preamp and Compressor</li>
                                 <li>Rupert Neve Designs 5025 Dual Shelford Pre</li>
                                 <li>Shadow Hills Mono GAMMA 500 Pre (<b>x2</b>)</li>
                                 <li>Soyuz Launcher Deluxe</li>
