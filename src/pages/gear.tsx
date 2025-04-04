@@ -143,7 +143,7 @@ export default function Studio() {
                                 <li>LaChapell Audio 992EG</li>
                                 <li>Manley Core Channel Strip</li>
                                 <li>Overstayer Modular Channel 8755DM (w/ transformers)</li>
-                                <li>Radial HDI DI-Box</li>
+                                <li>Radial HDI DI-Box (<b>x2</b>)</li>
                                 <li>Retro Instruments 500 Pre (<b>x2</b>)</li>
                                 <li>Rupert Neve Designs Portico 5017 Microphone Preamp and Compressor</li>
                                 <li>Rupert Neve Designs 5025 Dual Shelford Pre</li>
