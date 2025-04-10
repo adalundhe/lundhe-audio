@@ -131,6 +131,7 @@ export default function Studio() {
                                 <li>Avalon Designs V5 Preamp (<b>x2</b>)</li>
                                 <li>Avedis MA5 (<b>x2</b>)</li>
                                 <li>Avedis MD7 (<b>x2</b>)</li>
+                                <li>BAE 1073DMP</li>
                                 <li>Blue Robbie Tube Mic Preamp</li>
                                 <li>Chandler Limited Germanium 500 Pre (<b>x2</b>)</li>
                                 <li>Chandler Limited Little Devil 500 Pre (<b>x2</b>)</li>
@@ -188,6 +189,7 @@ export default function Studio() {
                                 <li>Elysia Karacter 500</li>
                                 <li>Elysia mPressor 500 (<b>x2</b>)</li>
                                 <li>Elysia nVelope 500</li>
+                                <li>Empirical Labs EL8X Distressor (<b>x2</b>)</li>
                                 <li>HUM Audio LAAL (Look Ahead Analog Limiter)</li>
                                 <li>Manley VariMu TheWorks (t-bar mod and mid/side)</li>
                                 <li>Purple Audio MC77 (<b>x2</b>)</li>
