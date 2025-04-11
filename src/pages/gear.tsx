@@ -235,6 +235,7 @@ export default function Studio() {
                                 <li>Chandler Limited Curve Bender Mastering Equalizer</li>
                                 <li>Chandler Limited Little Devil Equalizer (<b>x2</b>)</li>
                                 <li>Craneborne Audio Carnby Harmonic Equalizer (<b>x2</b>)</li>
+                                <li>Drawmer 1961 Stereo Vacuum Tube Equalizer</li>
                                 <li>H2 Audio Helios 5011 Equalizer (<b>x4</b>)</li>
                                 <li>Knif Audio Eksa w/ Gain and Filter Option</li>
                                 <li>Kush Audio Clariphonic Mid/Side</li>
