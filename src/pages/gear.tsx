@@ -136,6 +136,8 @@ export default function Studio() {
                                 <li>Chandler Limited Germanium 500 Pre (<b>x2</b>)</li>
                                 <li>Chandler Limited Little Devil 500 Pre (<b>x2</b>)</li>
                                 <li>Chandler Limited TG2 500 Pre (<b>x2</b>)</li>
+                                <li>Drawmer 1960 Vacuum Tube Stereo Pre</li>
+                                <li>DBX 786 Stereo Preamp</li>
                                 <li>Focusrite ISA One</li>
                                 <li>Focusrite Liquid Channel (<b>x2</b>)</li>
                                 <li>Focusrite Red 1 Quad Pre</li>
@@ -184,6 +186,7 @@ export default function Studio() {
                                 <li>Chanlder Limited Little Devil 500 (<b>x2</b>)</li>
                                 <li>Chandler Limited Zener Limiter</li>
                                 <li>DBX 160SL</li>
+                                <li>Drawmer 1973 Stereo Multiband Compressor</li>
                                 <li>Dramastic Audio Obsidian 500</li>
                                 <li>Elysia Alpha</li>
                                 <li>Elysia Karacter 500</li>
@@ -283,6 +286,7 @@ export default function Studio() {
                             </p>
                             <ul className="my-4 list-disc list-inside font-normal">
                                 <li>Black Box HG-2</li>
+                                <li>Drawmer 1976 Stereo Saturation and Width Processor</li>
                                 <li>Empirical Labs EL7 Fatso</li>
                                 <li>Rupert Neve Designs Master Bus Transformer</li>
                                 <li>SPL BIG 500 Stereo Imaging</li>
