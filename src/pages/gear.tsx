@@ -151,6 +151,7 @@ export default function Studio() {
                                 <li>Rupert Neve Designs Portico 5017 Microphone Preamp and Compressor</li>
                                 <li>Rupert Neve Designs 5025 Dual Shelford Pre</li>
                                 <li>Shadow Hills Mono GAMMA 500 Pre (<b>x2</b>)</li>
+                                <li>Soyuz Lakeside Preamp (<b>x2</b>)</li>
                                 <li>Soyuz Launcher Deluxe</li>
                                 <li>SSL X-Logic Alpha Channel (<b>x2</b>)</li>
                                 <li>SSL XR621 Superanalogue Mic/Line Preamp (<b>x2</b>)</li>
@@ -236,6 +237,7 @@ export default function Studio() {
                                 <li>Chandler Limited Little Devil Equalizer (<b>x2</b>)</li>
                                 <li>Craneborne Audio Carnby Harmonic Equalizer (<b>x2</b>)</li>
                                 <li>Drawmer 1961 Stereo Vacuum Tube Equalizer</li>
+                                <li>Drawner 1971 Dual 4-Band Parametric Equalizer</li>
                                 <li>H2 Audio Helios 5011 Equalizer (<b>x4</b>)</li>
                                 <li>Knif Audio Eksa w/ Gain and Filter Option</li>
                                 <li>Kush Audio Clariphonic Mid/Side</li>
