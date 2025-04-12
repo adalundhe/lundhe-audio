@@ -661,6 +661,8 @@ export default function Studio() {
                                 <li>Empress Effects Zoia</li>
                                 <li>Enjoy Electronics Godfather</li>
                                 <li>Erica Synths Acidbox MKIII</li>
+                                <li>Erica Synths Echolocator</li>
+                                <li>Erica Synths Nightverb</li>
                                 <li>Eventide H9 Max</li>
                                 <li>Game Changer Audio Light Pedal</li>
                                 <li>Game Changer Audio Plasma Coil</li>
@@ -678,6 +680,7 @@ export default function Studio() {
                                 <li>Microcosm Electronics Hologram</li>
                                 <li>Moog Moogerfooger MF-102 Ring Modulator</li>
                                 <li>Moog Moogerfooger MF-103 12 Stage Phaser </li>
+                                <li>Origin Effects Cali-76</li>
                                 <li>OTO Bam Reverb</li>
                                 <li>OTO Baum Drive/Compressor</li>
                                 <li>OTO Bebe Cherie Mixer</li>
