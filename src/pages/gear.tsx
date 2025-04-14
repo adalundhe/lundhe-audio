@@ -604,6 +604,7 @@ export default function Studio() {
                             <ul className="my-4 list-disc list-inside font-normal">
                                 <li>Collings 290 (with Lollard Gold pickups)</li>
                                 <li>Ernie Ball Singray Special 5HH</li>
+                                <li>Gibson Acoustic Dealer Select Hummingbird Standard</li>
                                 <li>Gretsch G6128 Duo Jet Masterbuilt</li>
                                 <li>Gretsch GT6995TG Broadkaster Jr.</li>
                                 <li>Mayones Viking 5</li>
