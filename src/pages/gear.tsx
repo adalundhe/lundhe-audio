@@ -117,7 +117,7 @@ export default function Studio() {
                         <StudioContentSection 
                             imagePath="/studio/preamps_01.jpg"
                             imageAltTxt="Photo of Lundhe Audio's Manley, Tube Tech, Avalon, and LaChapell Audio preamps."
-                            title="Preamps and DI"
+                            title="Preamps"
                             headerAlignment="right"
                         >
                             <p>
@@ -125,7 +125,6 @@ export default function Studio() {
                             </p>
                             <ul className="my-4 list-disc list-inside font-normal">
                                 <li>A-Designs Pacifica</li>
-                                <li>A-Designs REDDI V2 Dual Channel DI</li>
                                 <li>API 512V 500 Pre (<b>x2</b>)</li>
                                 <li>Avalon Designs 2022AD Dual Preamp</li>
                                 <li>Avalon Designs V5 Preamp (<b>x2</b>)</li>
@@ -146,7 +145,6 @@ export default function Studio() {
                                 <li>LaChapell Audio 992EG</li>
                                 <li>Manley Core Channel Strip</li>
                                 <li>Overstayer Modular Channel 8755DM (w/ transformers)</li>
-                                <li>Radial HDI DI-Box (<b>x2</b>)</li>
                                 <li>Retro Instruments 500 Pre (<b>x2</b>)</li>
                                 <li>Rupert Neve Designs Portico 5017 Microphone Preamp and Compressor</li>
                                 <li>Rupert Neve Designs 5025 Dual Shelford Pre</li>
@@ -156,7 +154,6 @@ export default function Studio() {
                                 <li>SSL X-Logic Alpha Channel (<b>x2</b>)</li>
                                 <li>SSL XR621 Superanalogue Mic/Line Preamp (<b>x2</b>)</li>
                                 <li>Summit Audio MPC-100A Channel Strip (<b>x2</b>)</li>
-                                <li>Summit Audio TD-100</li>
                                 <li>Thermionic Culture Vulture Super 15 Mastering Edition</li>
                                 <li>Tierra Audio Lava Analog Edition Preamp (<b>x2</b>)</li>
                                 <li>TL-Audio Fat Track</li>
@@ -169,10 +166,29 @@ export default function Studio() {
                             </p>
                         </StudioContentSection>
                         <StudioContentSection 
+                            imagePath="/studio/bae_1073dmp.jpg"
+                            imageAltTxt="Photo of Lundhe Audio's Manley, Tube Tech, Avalon, and LaChapell Audio preamps."
+                            title="Direct Boxes"
+                            headerAlignment="left"
+                        >
+                            <p>
+                                We also offer a growing collection of DI-only boxes:
+                            </p>
+                            <ul className="my-4 list-disc list-inside font-normal">
+                                <li>A-Designs REDDI V2 Dual Channel DI</li>
+                                <li>Little Labs Pepper</li>
+                                <li>Radial HDI DI-Box (<b>x2</b>)</li>
+                                <li>Summit Audio TD-100</li>
+                            </ul>
+                            <p>
+                                for capturing clean takes and reamplification.
+                            </p>
+                        </StudioContentSection>
+                        <StudioContentSection 
                             imagePath="/studio/ssl_xrack_monochrome.jpg"
                             imageAltTxt="Photo of Lundhe Audio's SPL Iron V2 mastering compressor."
                             title="Dynamics and Compression"
-                            headerAlignment="left"
+                            headerAlignment="right"
                         >
                             <p>
                                 We love compressors at Lundhe Audio - not just for shaping sounds or enhancing groove, but as creative
@@ -224,7 +240,7 @@ export default function Studio() {
                             imagePath="/studio/spl_passeq.jpg"
                             imageAltTxt="Photo of Lundhe Audio's SPL PassEQ mastering equalizer."
                             title="Equalizers"
-                            headerAlignment="right"
+                            headerAlignment="left"
                         >
                             <p>
                                 EQing is for more than fixing tracks! It's a means of enhancing a performance, bringing
@@ -260,7 +276,7 @@ export default function Studio() {
                             imagePath="/studio/echofix_efx3.jpg"
                             imageAltTxt="Photo of Lundhe Audio's EchoFix EF-X3 tape delay front panel."
                             title="Effects"
-                            headerAlignment="left"
+                            headerAlignment="right"
                         >
                             <p>
                                 Reverb, delay, and other effects bring space and depth to music that simply would not
@@ -282,7 +298,7 @@ export default function Studio() {
                             imagePath="/studio/500_series_rack_01.jpg"
                             imageAltTxt="Photo of one of Lundhe Audio's 500 Series processing racks, containing a multitude of analog equipment."
                             title="Other"
-                            headerAlignment="right"
+                            headerAlignment="left"
                         >
                             <p>
                                 Our studio also contains some unique equipment, including:
@@ -306,7 +322,7 @@ export default function Studio() {
                             imagePath="/studio/soyuz_017_fet.jpg"
                             imageAltTxt="Photo of Lundhe Audio's Soyuz 017 FET Mic."
                             title="LDC Microphones"
-                            headerAlignment="left"
+                            headerAlignment="right"
                         >
                             <p>
                                 We offer a carefully curated selection of excellent large diaphragm condenser 
@@ -349,7 +365,7 @@ export default function Studio() {
                             imagePath="/studio/soyuz_013_tube.jpg"
                             imageAltTxt="Photo of Lundhe Audio's matched pair of Soyuz 013 TUBE microphones."
                             title="SDC Microphones"
-                            headerAlignment="right"
+                            headerAlignment="left"
                         >
                             <p>
                                 For instrument and field recordings, we also offer a like curated selection of small
@@ -376,7 +392,7 @@ export default function Studio() {
                             imagePath="/studio/royer_r10.jpg"
                             imageAltTxt="Photo of Lundhe Audio's pair of Royer R10 Hot Rod microphones."
                             title="Ribbon Microphones"
-                            headerAlignment="left"
+                            headerAlignment="right"
                         >
                             <p>
                                 For guitar and instrument recordings, we offer the following ribbon microphones:
@@ -398,7 +414,7 @@ export default function Studio() {
                             imagePath="/studio/shure_sm7b.jpeg"
                             imageAltTxt="Photo of Lundhe Audio's Shure SM7b microphone."
                             title="Dynamic Microphones"
-                            headerAlignment="right"
+                            headerAlignment="left"
                         >
                             <p>
                                 No studio is complete without a healthy collection of dynamic microphones
@@ -419,7 +435,7 @@ export default function Studio() {
                             imagePath="/studio/udo_super_gemini-monochrome.jpg"
                             imageAltTxt="Photo of Lundhe Audio's UDO Super Gemini."
                             title="Synthesizers and Samplers"
-                            headerAlignment="left"
+                            headerAlignment="right"
                         >
                             <p>
                                 Lundhe Audio brings the best of modern and vintage synthesis. From the rich sounds of classics 
@@ -596,7 +612,7 @@ export default function Studio() {
                             imagePath="/studio/gretsch_duo_jet-monochrome.jpg"
                             imageAltTxt="Photo of Lundhe Audio's Suhr Standard Plus Koa."
                             title="Guitars"
-                            headerAlignment="right"
+                            headerAlignment="left"
                         >
                             <p>
                                 We offer the following guitars and basses:
@@ -620,7 +636,7 @@ export default function Studio() {
                             imagePath="/studio/chase_bliss_pedals-monochrome.jpg"
                             imageAltTxt="Photo of Lundhe Audio's collection of Chase Bliss pedals."
                             title="Pedals and Instrument Effects"
-                            headerAlignment="left"
+                            headerAlignment="right"
                         >
                             <p>
                                 Pedals and non-rack effects can help spark creativity and bring sounds alive. We
