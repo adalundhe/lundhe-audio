@@ -264,6 +264,7 @@ export default function Studio() {
                                 <li>SSL XR425 E-Series Equalizer (<b>x3</b>)</li>
                                 <li>SPL PQ Mastering Equalizer</li>
                                 <li>SPL PassEQ Mastering Equalizer</li>
+                                <li>Summit Audio FEQ-50 (<b>x2</b>)</li>
                                 <li>Tierra Audio Icicle Equalizer (<b>x2</b>)</li>
                                 <li>WesAudio Hyperion</li>
                                 <li>WesAudio Prometheus Passive Equalizer</li>
