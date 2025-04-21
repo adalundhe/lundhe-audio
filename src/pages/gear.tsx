@@ -177,6 +177,7 @@ export default function Studio() {
                             <ul className="my-4 list-disc list-inside font-normal">
                                 <li>A-Designs REDDI V2 Dual Channel DI</li>
                                 <li>Little Labs Pepper</li>
+                                <li>Hazelrigg VDI</li>
                                 <li>Radial HDI DI-Box (<b>x2</b>)</li>
                                 <li>Summit Audio TD-100</li>
                             </ul>
