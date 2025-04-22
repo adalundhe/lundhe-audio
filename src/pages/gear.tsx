@@ -291,6 +291,9 @@ export default function Studio() {
                                 <li>Ensoniq DP/4 Multi-Effects</li>
                                 <li>Eventide H9000</li>
                                 <li>T-Rex Binson Echorec</li>
+                                <li>TC Electronic D-Two</li>
+                                <li>TC Electronic FireworX</li>
+                                <li>TC Electronic Powercore 6000</li>
                             </ul>
                             <p>
                                 We also offer a vertiable treasure trove of effects pedals to shape your sound, including almost the
