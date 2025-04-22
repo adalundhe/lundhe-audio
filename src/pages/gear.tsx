@@ -121,7 +121,7 @@ export default function Studio() {
                             headerAlignment="right"
                         >
                             <p>
-                                Lundhe Audio provides a wealth of preamp and DI box options both for recording and re-amping existing material. We offer:
+                                Lundhe Audio provides a wealth of preamp options, including:
                             </p>
                             <ul className="my-4 list-disc list-inside font-normal">
                                 <li>A-Designs Pacifica</li>
@@ -172,7 +172,7 @@ export default function Studio() {
                             headerAlignment="left"
                         >
                             <p>
-                                We also offer a growing collection of DI-only boxes:
+                                We also offer a growing collection of direct inject and reamplification units:
                             </p>
                             <ul className="my-4 list-disc list-inside font-normal">
                                 <li>A-Designs REDDI V2 Dual Channel DI</li>
