@@ -180,6 +180,7 @@ export default function Studio() {
                                 <li>Hazelrigg VDI</li>
                                 <li>Radial HDI DI-Box (<b>x2</b>)</li>
                                 <li>Summit Audio TD-100</li>
+                                <li>Undertone Audio GB Tracker II</li>
                             </ul>
                             <p>
                                 for capturing clean takes and reamplification.
