@@ -615,6 +615,7 @@ export default function Studio() {
                                 <li>Soma Lyra 8</li>
                                 <li>Soma Pulsar 23</li>
                                 <li>Supercritical Redshift 6</li>
+                                <li>Suzuki Omnichord OM-108</li>
                                 <li>Tasty Chips GR-1 Granular Synth</li>
                                 <li>UDO Super Gemini</li>
                                 <li>Vermona DRM1 - MK4</li>
@@ -661,7 +662,13 @@ export default function Studio() {
                                 offer dozens of options, including:
                             </p>
                             <ul className="my-4 list-disc list-inside font-normal">
+                                <li>29 Pedals EUNA</li>
+                                <li>29 Pedals FLWR</li>
+                                <li>29 Pedals JFET</li>
+                                <li>29 Pedals OAMP</li>
+                                <li>29 Pedals TOKI</li>
                                 <li>Aguilar Chorusarus</li>
+                                <li>Alexander Pedals Forget Me Not</li>
                                 <li>Boss CE-2W Waza Craft Chorus</li>
                                 <li>Boss DC-2W Waza Craft Dimension C Chorus</li>
                                 <li>Boss DM-2W Waza Craft Delay</li>
@@ -670,6 +677,7 @@ export default function Studio() {
                                 <li>Chase Bliss Automatone Preamp MKII</li>
                                 <li>Chase Bliss Blooper</li>
                                 <li>Chase Bliss Brothers</li>
+                                <li>Chase Bliss Brothers AM</li>
                                 <li>Chase Bliss Clean</li>
                                 <li>Chase Bliss Automatone CMX 1978</li>
                                 <li>Chase Bliss Condor</li>
@@ -688,6 +696,7 @@ export default function Studio() {
                                 <li>Chase Bliss Wombtone</li>
                                 <li>Chase Bliss Wombtone - Billy Strings Edition</li>
                                 <li>Darkglass Hyper Luminal Compressor</li>
+                                <li>Death by Audio Absolute Destruction</li>
                                 <li>Diezel Zerrer Dual Channel Preamp</li>
                                 <li>Earthquaker Devices The Warden</li>
                                 <li>Elektron Analog Heat MKII</li>
@@ -699,6 +708,9 @@ export default function Studio() {
                                 <li>Erica Synths Echolocator</li>
                                 <li>Erica Synths Nightverb</li>
                                 <li>Eventide H9 Max</li>
+                                <li>Fairfield Circuitry 20 Percent More</li>
+                                <li>Fairfield Circuitry Meet Maude</li>
+                                <li>Fairfield Circuitry Shallow Water</li>
                                 <li>Game Changer Audio Light Pedal</li>
                                 <li>Game Changer Audio Plasma Coil</li>
                                 <li>Game Changer Audio Plasma Pedal</li>
@@ -706,6 +718,7 @@ export default function Studio() {
                                 <li>JHS Panther Cub - V2</li>
                                 <li>Jomox Moonwind MKII</li>
                                 <li>Meris Enzo</li>
+                                <li>Meris EnzoX</li>
                                 <li>Meris Hedra</li>
                                 <li>Meris LVX</li>
                                 <li>Meris Mercury 7</li>
@@ -722,15 +735,18 @@ export default function Studio() {
                                 <li>OTO Bim Delay</li>
                                 <li>OTO Biscuit</li>
                                 <li>Poly Beebo</li>
+                                <li>Polyend Press</li>
                                 <li>Red Witch Empress Chorus</li>
                                 <li>Sherman Filterbank Desktop (<b>x2</b>)</li>
                                 <li>Strymon Big Sky</li>
                                 <li>Strymon Mobius</li>
                                 <li>Strymon NightSky</li>
                                 <li>Strymon Timeline</li>
+                                <li>Strymon Volante</li>
                                 <li>Vongon Polyphrase</li>
                                 <li>Vongon Ultrasheer</li>
                                 <li>Walrus Audio Silt Pedal</li>
+                                <li>Walrus Audio Qi Etherializer</li>
                             </ul>
                         </StudioContentSection>
                     </Accordion>        
