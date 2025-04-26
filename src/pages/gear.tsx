@@ -264,7 +264,7 @@ export default function Studio() {
                                 <li>Chandler Limited Curve Bender Mastering Equalizer</li>
                                 <li>Chandler Limited Little Devil Equalizer (<b>x2</b>)</li>
                                 <li>Craneborne Audio Carnby Harmonic Equalizer (<b>x2</b>)</li>
-                                <li>Drawmer 1961 Stereo Vacuum Tube Equalizer</li>git config pull.rebase falsegit config pull.rebase false
+                                <li>Drawmer 1961 Stereo Vacuum Tube Equalizer</li>
                                 <li>Drawmer 1971 Dual 4-Band Parametric Equalizer</li>
                                 <li>H2 Audio Helios 5011 Equalizer (<b>x4</b>)</li>
                                 <li>Hendyamp Michaelangelo XL</li>
@@ -317,7 +317,7 @@ export default function Studio() {
                             title="Other"
                             headerAlignment="left"
                         >
-                            <p>git config pull.rebase false
+                            <p>
                                 Our studio also contains some unique equipment, including:
                             </p>
                             <ul className="my-4 list-disc list-inside font-normal">
