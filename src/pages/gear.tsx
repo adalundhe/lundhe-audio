@@ -121,7 +121,7 @@ export default function Studio() {
                             headerAlignment="right"
                         >
                             <p>
-                                Lundhe Audio provides a wealth of preamp and DI box options both for recording and re-amping existing material. We offer:
+                                Lundhe Audio provides a wealth of preamp options, including:
                             </p>
                             <ul className="my-4 list-disc list-inside font-normal">
                                 <li>A-Designs Pacifica</li>
@@ -181,7 +181,7 @@ export default function Studio() {
                             headerAlignment="left"
                         >
                             <p>
-                                We also offer a growing collection of DI-only boxes:
+                                We also offer a growing collection of direct inject and reamplification units:
                             </p>
                             <ul className="my-4 list-disc list-inside font-normal">
                                 <li>A-Designs REDDI V2 Dual Channel DI</li>
@@ -264,9 +264,10 @@ export default function Studio() {
                                 <li>Chandler Limited Curve Bender Mastering Equalizer</li>
                                 <li>Chandler Limited Little Devil Equalizer (<b>x2</b>)</li>
                                 <li>Craneborne Audio Carnby Harmonic Equalizer (<b>x2</b>)</li>
-                                <li>Drawmer 1961 Stereo Vacuum Tube Equalizer</li>
+                                <li>Drawmer 1961 Stereo Vacuum Tube Equalizer</li>git config pull.rebase falsegit config pull.rebase false
                                 <li>Drawmer 1971 Dual 4-Band Parametric Equalizer</li>
                                 <li>H2 Audio Helios 5011 Equalizer (<b>x4</b>)</li>
+                                <li>Hendyamp Michaelangelo XL</li>
                                 <li>Knif Audio Eksa w/ Gain and Filter Option</li>
                                 <li>Kush Audio Clariphonic Mid/Side</li>
                                 <li>Manley Massive Passive</li>
@@ -276,6 +277,7 @@ export default function Studio() {
                                 <li>SSL XR425 E-Series Equalizer (<b>x3</b>)</li>
                                 <li>SPL PQ Mastering Equalizer</li>
                                 <li>SPL PassEQ Mastering Equalizer</li>
+                                <li>Summit Audio FEQ-50 (<b>x4</b>)</li>
                                 <li>Tierra Audio Icicle Equalizer (<b>x2</b>)</li>
                                 <li>WesAudio Hyperion</li>
                                 <li>WesAudio Prometheus Passive Equalizer</li>
@@ -300,6 +302,9 @@ export default function Studio() {
                                 <li>Ensoniq DP/4 Multi-Effects</li>
                                 <li>Eventide H9000</li>
                                 <li>T-Rex Binson Echorec</li>
+                                <li>TC Electronic D-Two</li>
+                                <li>TC Electronic FireworX</li>
+                                <li>TC Electronic Powercore 6000</li>
                             </ul>
                             <p>
                                 We also offer a vertiable treasure trove of effects pedals to shape your sound, including almost the
@@ -312,13 +317,14 @@ export default function Studio() {
                             title="Other"
                             headerAlignment="left"
                         >
-                            <p>
+                            <p>git config pull.rebase false
                                 Our studio also contains some unique equipment, including:
                             </p>
                             <ul className="my-4 list-disc list-inside font-normal">
                                 <li>Black Box HG-2</li>
                                 <li>Drawmer 1976 Stereo Saturation and Width Processor</li>
                                 <li>Empirical Labs EL7 Fatso</li>
+                                <li>Hendyamps The Oven</li>
                                 <li>Rupert Neve Designs Master Bus Transformer</li>
                                 <li>SPL BIG 500 Stereo Imaging</li>
                                 <li>SPL Gemini Mid/Side Mastering Router</li>
