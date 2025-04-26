@@ -125,6 +125,7 @@ export default function Studio() {
                             </p>
                             <ul className="my-4 list-disc list-inside font-normal">
                                 <li>A-Designs Pacifica</li>
+                                <li>Acme Audio MTP-66</li>
                                 <li>API 512V 500 Pre (<b>x2</b>)</li>
                                 <li>Avalon Designs 2022AD Dual Preamp</li>
                                 <li>Avalon Designs V5 Preamp (<b>x2</b>)</li>
@@ -140,11 +141,15 @@ export default function Studio() {
                                 <li>Focusrite ISA One</li>
                                 <li>Focusrite Liquid Channel (<b>x2</b>)</li>
                                 <li>Focusrite Red 1 Quad Pre</li>
+                                <li>Great River MP-1NV</li>
                                 <li>H2 Audio Helios 2128 500 Pre (<b>x2</b>)</li>
+                                <li>Kerwax Melodium P22T Stereo Set</li>
                                 <li>Kerwax Replica</li>
                                 <li>LaChapell Audio 992EG</li>
                                 <li>Manley Core Channel Strip</li>
+                                <li>Millennia HV-36P</li>
                                 <li>Overstayer Modular Channel 8755DM (w/ transformers)</li>
+                                <li>Phoenix Audio Ascent One EQ</li>
                                 <li>Retro Instruments 500 Pre (<b>x2</b>)</li>
                                 <li>Rupert Neve Designs Portico 5017 Microphone Preamp and Compressor</li>
                                 <li>Rupert Neve Designs 5025 Dual Shelford Pre</li>
@@ -153,12 +158,16 @@ export default function Studio() {
                                 <li>Soyuz Launcher Deluxe</li>
                                 <li>SSL X-Logic Alpha Channel (<b>x2</b>)</li>
                                 <li>SSL XR621 Superanalogue Mic/Line Preamp (<b>x2</b>)</li>
+                                <li>Summit Audio 2BA-221</li>
                                 <li>Summit Audio MPC-100A Channel Strip (<b>x2</b>)</li>
                                 <li>Thermionic Culture Vulture Super 15 Mastering Edition</li>
                                 <li>Tierra Audio Lava Analog Edition Preamp (<b>x2</b>)</li>
                                 <li>TL-Audio Fat Track</li>
                                 <li>Tube-Tech MP2A</li>
                                 <li>Universal Audio 4110 Quad Pre</li>
+                                <li>Universal Audio 610 Solo</li>
+                                <li>Useful Arts SFP-60</li>
+                                <li>Useful Arts SFP-30</li>
                                 <li>Wes Audio Phoebe 500 Pre (<b>x2</b>)</li>
                             </ul>
                             <p>
@@ -177,8 +186,11 @@ export default function Studio() {
                             <ul className="my-4 list-disc list-inside font-normal">
                                 <li>A-Designs REDDI V2 Dual Channel DI</li>
                                 <li>Little Labs Pepper</li>
+                                <li>Hazelrigg VDI</li>
                                 <li>Radial HDI DI-Box (<b>x2</b>)</li>
                                 <li>Summit Audio TD-100</li>
+                                <li>Thermionic Culture The Robin (Passive DI)</li>
+                                <li>Undertone Audio GB Tracker II</li>
                             </ul>
                             <p>
                                 for capturing clean takes and reamplification.
