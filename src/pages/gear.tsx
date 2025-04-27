@@ -166,6 +166,7 @@ export default function Studio() {
                                 <li>Tube-Tech MP2A</li>
                                 <li>Universal Audio 4110 Quad Pre</li>
                                 <li>Universal Audio 610 Solo</li>
+                                <li>Universal Audio 710 Twin-Finity Preamp</li>
                                 <li>Useful Arts SFP-60</li>
                                 <li>Useful Arts SFP-30</li>
                                 <li>Wes Audio Phoebe 500 Pre (<b>x2</b>)</li>
