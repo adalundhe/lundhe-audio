@@ -126,6 +126,7 @@ export default function Studio() {
                             <ul className="my-4 list-disc list-inside font-normal">
                                 <li>A-Designs Pacifica</li>
                                 <li>Acme Audio MTP-66</li>
+                                <li>AEA TRP3</li>
                                 <li>API 512V 500 Pre (<b>x2</b>)</li>
                                 <li>Avalon Designs 2022AD Dual Preamp</li>
                                 <li>Avalon Designs V5 Preamp (<b>x2</b>)</li>
@@ -154,6 +155,7 @@ export default function Studio() {
                                 <li>Rupert Neve Designs Portico 5017 Microphone Preamp and Compressor</li>
                                 <li>Rupert Neve Designs 5025 Dual Shelford Pre</li>
                                 <li>Shadow Hills Mono GAMMA 500 Pre (<b>x2</b>)</li>
+                                <li>Slate Pro Audjo Fox</li>
                                 <li>Soyuz Lakeside Preamp (<b>x2</b>)</li>
                                 <li>Soyuz Launcher Deluxe</li>
                                 <li>SSL X-Logic Alpha Channel (<b>x2</b>)</li>
@@ -298,6 +300,7 @@ export default function Studio() {
                                 be possible otherwise. We use:
                             </p>
                             <ul className="my-4 list-disc list-inside font-normal">
+                                <li>Benson Amps Studio Tall Bird Tube Spring Reverb</li>
                                 <li>Bricast M7</li>
                                 <li>EchoFix EF-X3</li>
                                 <li>Ensoniq DP/4 Multi-Effects</li>
@@ -729,6 +732,7 @@ export default function Studio() {
                                 <li>Microcosm Electronics Hologram</li>
                                 <li>Moog Moogerfooger MF-102 Ring Modulator</li>
                                 <li>Moog Moogerfooger MF-103 12 Stage Phaser </li>
+                                <li>Moog Moogerfooger MF-104M-SD (Super Delay)</li>
                                 <li>Origin Effects Cali-76</li>
                                 <li>OTO Bam Reverb</li>
                                 <li>OTO Baum Drive/Compressor</li>
