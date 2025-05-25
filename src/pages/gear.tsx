@@ -576,6 +576,7 @@ export default function Studio() {
                                 <li>Moog Mavis</li>
                                 <li>Moog Muse</li>
                                 <li>Moog One - 16 Voice</li>
+                                <li>Moog Spectravox</li>
                                 <li>Moog Subharmonicon</li>
                                 <li>Moog Subsequent 37 - CV</li>
                                 <li>Moog Voyager</li>
