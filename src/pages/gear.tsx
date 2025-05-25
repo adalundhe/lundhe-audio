@@ -802,8 +802,8 @@ export default function Studio() {
                             headerAlignment="left"
                         >
                             <p>
-                                We offer a small (but growing) collection of quality amplifiers so you cand
-                                get your rockstar on! They include:
+                                We offer a small (but growing) collection of quality amplifiers to help
+                                get your rockstar on! The current lineup includes:
                             </p>
                             <ul className="my-4 list-disc list-inside font-normal">
                                 <li>Chandler GAV-19</li>
