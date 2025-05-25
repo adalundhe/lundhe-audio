@@ -670,6 +670,11 @@ export default function Studio() {
                                 <li>29 Pedals TOKI</li>
                                 <li>Aguilar Chorusarus</li>
                                 <li>Alexander Pedals Forget Me Not</li>
+                                <li>BAE Hot Fuzz Dual Boost/Fuzz</li>
+                                <li>Benson Amps Germanium Boost</li>
+                                <li>Benson Amps Germanium Fuzz</li>
+                                <li>Benson Amps Preamp</li>
+                                <li>Benson Amps Storkn BOks (Fuzz)</li>
                                 <li>Boss CE-2W Waza Craft Chorus</li>
                                 <li>Boss DC-2W Waza Craft Dimension C Chorus</li>
                                 <li>Boss DM-2W Waza Craft Delay</li>
@@ -696,12 +701,17 @@ export default function Studio() {
                                 <li>Chase Bliss Warped Vinyl MKI</li>
                                 <li>Chase Bliss Wombtone</li>
                                 <li>Chase Bliss Wombtone - Billy Strings Edition</li>
+                                <li>Caroline Effects Kilobyte 2000</li>
                                 <li>Darkglass Hyper Luminal Compressor</li>
                                 <li>Death by Audio Absolute Destruction</li>
                                 <li>Diezel Zerrer Dual Channel Preamp</li>
+                                <li>Discomfort Designs Phantom Limb (<b>x2</b>)</li>
                                 <li>Earthquaker Devices The Warden</li>
+                                <li>Electronic Audio Experiments OxEAE Fuzz</li>
+                                <li>Electronc Audio Experiments Sending V2</li>
                                 <li>Elektron Analog Heat MKII</li>
                                 <li>Empress Effects Echosystem</li>
+                                <li>Empress Effects ParaEQ MKII</li>
                                 <li>Empress Effects Reverb</li>
                                 <li>Empress Effects Zoia</li>
                                 <li>Enjoy Electronics Godfather</li>
@@ -712,11 +722,25 @@ export default function Studio() {
                                 <li>Fairfield Circuitry 20 Percent More</li>
                                 <li>Fairfield Circuitry Meet Maude</li>
                                 <li>Fairfield Circuitry Shallow Water</li>
+                                <li>Flower Pedals Dahlia Analog Delay</li>
                                 <li>Game Changer Audio Light Pedal</li>
                                 <li>Game Changer Audio Plasma Coil</li>
                                 <li>Game Changer Audio Plasma Pedal</li>
+                                <li>JHS AT+ (Andy Timmons Overdrive)</li>
+                                <li>JHS Bonsai (Tube Screamer)</li>
                                 <li>JHS Double Barrel Dual Overdrive - V4</li>
+                                <li>JHS Emperor V2 (Chorus)</li>
+                                <li>JHS Hard Drive</li>
+                                <li>JHS Good Vibrations</li>
+                                <li>JHS Morning Glory V4</li>
+                                <li>JHS Muffletta (Big Muff)</li>
+                                <li>JHS NOTADUMBLE - V1</li>
+                                <li>JHS Pack Rat (ProCo RAT)</li>
                                 <li>JHS Panther Cub - V2</li>
+                                <li>JHS Pulp n' Peel - V4</li>
+                                <li>JHS Punchline</li>
+                                <li>JHS The Milkman Slap Echo</li>
+                                <li>JHS Unicorn V2 (Uni-Vibe)</li>
                                 <li>Jomox Moonwind MKII</li>
                                 <li>Meris Enzo</li>
                                 <li>Meris EnzoX</li>
@@ -727,9 +751,17 @@ export default function Studio() {
                                 <li>Meris Ottobit Jr.</li>
                                 <li>Meris Polymoon</li>
                                 <li>Microcosm Electronics Hologram</li>
+                                <li>Milkman Sound The Amp Stereo</li>
+                                <li>Moog Moogerfooger MF-101 Lowpass Filter</li>
                                 <li>Moog Moogerfooger MF-102 Ring Modulator</li>
                                 <li>Moog Moogerfooger MF-103 12 Stage Phaser </li>
+                                <li>Moog Moogerfooger MF-104SD Super Delay</li>
+                                <li>Moog Moogerfooger MF-105 MIDI MURF</li>
+                                <li>Moog Moogerfoog MF-106 Analog Time Compressor</li>
+                                <li>Moog Moogerfooger MF-107 FreqBox</li>
+                                <li>Moog Moogerfooger MF-108 Cluster Flux</li>
                                 <li>Origin Effects Cali-76</li>
+                                <li>Origi Effects Revival Drive (Standard)</li>
                                 <li>OTO Bam Reverb</li>
                                 <li>OTO Baum Drive/Compressor</li>
                                 <li>OTO Bebe Cherie Mixer</li>
@@ -737,17 +769,43 @@ export default function Studio() {
                                 <li>OTO Biscuit</li>
                                 <li>Poly Beebo</li>
                                 <li>Polyend Press</li>
+                                <li>Red Witch Cynosium Modulated Delay</li>
                                 <li>Red Witch Empress Chorus</li>
+                                <li>Red Witch Epiphanous Overdrive</li>
+                                <li>Red Witch Euphorium Fuzz</li>
+                                <li>Red Witch Invidium Phaser</li>
+                                <li>Red Witch Plurious Chorus/Vibrato</li>
                                 <li>Sherman Filterbank Desktop (<b>x2</b>)</li>
+                                <li>Spaceman Effects Redstone</li>
+                                <li>Suhr Dark Discover Analog Delay</li>
                                 <li>Strymon Big Sky</li>
                                 <li>Strymon Mobius</li>
                                 <li>Strymon NightSky</li>
                                 <li>Strymon Timeline</li>
                                 <li>Strymon Volante</li>
+                                <li>ThorpyFX Electric Lightning (Overdrive)</li>
                                 <li>Vongon Polyphrase</li>
                                 <li>Vongon Ultrasheer</li>
+                                <li>Walrus Audio Monument V2 (Tremolo)</li>
                                 <li>Walrus Audio Silt Pedal</li>
                                 <li>Walrus Audio Qi Etherializer</li>
+                            </ul>
+                        </StudioContentSection>
+                        <StudioContentSection
+                            imagePath="/studio/chandler_gav_19.jpg"
+                            imageAltTxt="Photo of Lundhe Audio's Chandler GAV19 amplifier."
+                            title="Amplifiers"
+                            headerAlignment="left"
+                        >
+                            <p>
+                                We offer a small (but growing) collection of quality amplifiers so you cand
+                                get your rockstar on! They include:
+                            </p>
+                            <ul className="my-4 list-disc list-inside font-normal">
+                                <li>Chandler GAV-19</li>
+                                <li>Friedman Dirty Shirley 40W Combo Amp</li>
+                                <li>Orange Amplification Gainbaby 100</li>
+                                <li>Victory Amplification Super Kraken (w/ 2x12 matching cabinet)</li>
                             </ul>
                         </StudioContentSection>
                     </Accordion>        
