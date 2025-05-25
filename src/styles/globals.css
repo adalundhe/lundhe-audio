@@ -92,10 +92,11 @@ html, body {
 
 
 body {
-  display: flex;
+  @apply !min-w-full; 
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  
 }
 .content {
   flex: 1 0 auto;

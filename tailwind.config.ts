@@ -1,6 +1,5 @@
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
-import { boolean } from "zod";
 const plugin = require('tailwindcss/plugin')
 
 export default {

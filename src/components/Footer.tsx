@@ -40,11 +40,22 @@ import { Textarea } from "~/components/ui/textarea";
 import { useReCaptcha } from '~/hooks/use-recaptcha';
 import { api } from '~/utils/api';
 
+import { Mail, MailCheck, MailOpen, MailWarning, MailX, SendHorizontal, } from 'lucide-react';
+
 export const Footer = () => {
 
     const router = useRouter()
     const { reCaptchaLoaded, generateReCaptchaToken } = useReCaptcha();
     const formMutation = api.contact.submitContactForm.useMutation();
+
+    const [isHovered, setIsHovered] = useState(false);
+
+    const onMouseEnter = () => {
+        setIsHovered(true);
+    };
+    const onMouseLeave = () => {
+        setIsHovered(false);
+    };
 
     const [formState, setFormState] = useState<{
         formStatus: "active" | "submitted" | "errored" | "closed" | "submitting",
@@ -375,27 +386,36 @@ export const Footer = () => {
                                         )}
                                     />
                                         <DialogFooter className="mt-4">
-                                            <div className="flex flex-col w-full items-center">
-                                                
-                                                <Button
-                                                    disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
-                                                    aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
-                                                    type="submit"
-                                                    className="w-[150px] h-[48px] text-xl font-light"
-                                                >
-                                                    { 
-                                                        formState.formStatus === "submitting" ? "submitting..." : 
-                                                        formState.formStatus === "submitted" ? "submitted!" : "submit" 
-                                                    }
-                                                </Button>
-                                                <Link onClick={() => setFormState({
-                                                    formStatus: "closed"
-                                                })} href="/privacy" className="text-lg font-light my-2 text-muted-foreground">privacy</Link>
-                                                <Link onClick={() => setFormState({
-                                                    formStatus: "closed"
-                                                })} href="/terms_of_service" className="text-lg font-light mb-2 text-muted-foreground">terms of service</Link>
-                                                <p className={`${formState.formStatus === "errored" ? '' : 'hidden'} text-sm text-red-600`}>{formState.formError ?? "An unknown error occured while submitting the form."}</p>
-                                            </div>
+                                        <div className="flex flex-col w-full items-center">
+                                            <Button   
+                                                disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
+                                                aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"}
+                                                type="submit"
+                                                className="w-[150px] h-[48px] text-xl font-light"
+                                                onMouseLeave={onMouseLeave}
+                                                onMouseEnter={onMouseEnter}
+                                            >
+                                                { 
+                                                    formState.formStatus === "submitting" ? "submitting..." : 
+                                                    formState.formStatus === "submitted" ? "submitted!" : "submit" 
+                                                }
+                                                {
+                                                    formState.formStatus === "active" && isHovered ? <SendHorizontal/> : 
+                                                    formState.formStatus === "active" && !isHovered ? <MailOpen/> :
+                                                    formState.formStatus === "submitting" ? <Mail/> :
+                                                    formState.formStatus === "submitted" ? <MailCheck/> :
+                                                    formState.formStatus === "errored" ? <MailX/> :
+                                                    <MailWarning/>
+                                                }
+                                            </Button>
+                                            <Link onClick={() => setFormState({
+                                                formStatus: "active"
+                                            })} href="/privacy" className="my-2 text-lg font-light text-muted-foreground hover:underline">privacy</Link>
+                                            <Link onClick={() => setFormState({
+                                                formStatus: "active"
+                                            })} href="/terms_of_service" className="text-lg font-light mb-2 text-muted-foreground hover:underline">terms of service</Link>
+                                            <p className={`${formState.formStatus === "errored" ? '' : 'hidden'} text-sm text-red-600`}>{formState.formError ?? "An unknown error occured while submitting the form."}</p>
+                                        </div>
                                         </DialogFooter>
                                     </form>
                                 </Form>
@@ -406,6 +426,7 @@ export const Footer = () => {
                     </Dialog>
                 }
                 <p className="text-sm my-2 text-muted-foreground">&#169; ada lundhe 2024</p>
+              
             </div>
         </footer>
     )

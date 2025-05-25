@@ -1,16 +1,17 @@
 import { GeistSans } from "geist/font/sans";
-import Head from "next/head";
 import { type Session } from "next-auth";
+import Head from "next/head";
 // import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
-import { NavBar } from "~/components/NavBar"
-import { Footer } from "~/components/Footer"
-import Script from 'next/script'
+import Script from 'next/script';
+import { Footer } from "~/components/Footer";
+import { NavBar } from "~/components/NavBar";
+import { SettingsProvider } from "~/components/ui/settings-provider";
+import { env } from "~/env";
 import { api } from "~/utils/api";
-import { env } from "~/env"
-import {ShopifyProvider} from '@shopify/hydrogen-react';
-import {CartProvider, useCart} from '@shopify/hydrogen-react';
-import { type CountryCode, type LanguageCode } from "@shopify/hydrogen-react/storefront-api-types";
+// import {ShopifyProvider} from '@shopify/hydrogen-react';
+// import {CartProvider, useCart} from '@shopify/hydrogen-react';
+// import { type CountryCode, type LanguageCode } from "@shopify/hydrogen-react/storefront-api-types";
 
 import "~/styles/globals.css";
 
@@ -18,8 +19,11 @@ const MyApp: AppType<{ _: Session | null }> = ({
   Component,
   pageProps: { _, ...pageProps },
 }) => {
+
   return (
     <>
+
+      <SettingsProvider />
       {/* <ShopifyProvider
         storeDomain={env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN}
         storefrontToken={env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_API_ACCESS_TOKEN}
@@ -35,6 +39,7 @@ const MyApp: AppType<{ _: Session | null }> = ({
             <meta name="description" content="Lundhe Audio, an Austin based post-tracking mixing, mastering, sound design, and commercial audio." />
             <link rel="icon" href="/favicon.ico" />
           </Head>
+          <Script src="/theme.js" strategy="beforeInteractive" />
           <Script src={`https://www.google.com/recaptcha/api.js?render=${env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY}`} async/>
           
           <NavBar />

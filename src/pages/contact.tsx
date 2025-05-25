@@ -38,12 +38,22 @@ import { Textarea } from "~/components/ui/textarea";
 import { useReCaptcha } from '~/hooks/use-recaptcha';
 import { api } from '~/utils/api';
 
+import { Mail, MailCheck, MailOpen, MailWarning, MailX, SendHorizontal, } from 'lucide-react';
 
 
 export default function Contact(){
     
     const { reCaptchaLoaded, generateReCaptchaToken } = useReCaptcha();
     const formMutation = api.contact.submitContactForm.useMutation();
+
+    const [isHovered, setIsHovered] = useState(false);
+
+    const onMouseEnter = () => {
+        setIsHovered(true);
+    };
+    const onMouseLeave = () => {
+        setIsHovered(false);
+    };
 
     const [formState, setFormState] = useState<{
         formStatus: "active" | "submitted" | "errored" | "submitting"
@@ -348,18 +358,28 @@ export default function Contact(){
                                     aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"}
                                     type="submit"
                                     className="w-[150px] h-[48px] text-xl font-light"
+                                    onMouseLeave={onMouseLeave}
+                                    onMouseEnter={onMouseEnter}
                                 >
                                     { 
                                         formState.formStatus === "submitting" ? "submitting..." : 
                                         formState.formStatus === "submitted" ? "submitted!" : "submit" 
                                     }
+                                    {
+                                        formState.formStatus === "active" && isHovered ? <SendHorizontal/> : 
+                                        formState.formStatus === "active" && !isHovered ? <MailOpen/> :
+                                        formState.formStatus === "submitting" ? <Mail/> :
+                                        formState.formStatus === "submitted" ? <MailCheck/> :
+                                        formState.formStatus === "errored" ? <MailX/> :
+                                        <MailWarning/>
+                                    }
                                 </Button>
                                 <Link onClick={() => setFormState({
                                     formStatus: "active"
-                                })} href="/privacy" className="my-2 text-lg font-light text-muted-foreground">privacy</Link>
+                                })} href="/privacy" className="my-2 text-lg font-light text-muted-foreground hover:underline">privacy</Link>
                                 <Link onClick={() => setFormState({
                                     formStatus: "active"
-                                })} href="/terms_of_service" className="text-lg font-light mb-2 text-muted-foreground">terms of service</Link>
+                                })} href="/terms_of_service" className="text-lg font-light mb-2 text-muted-foreground hover:underline">terms of service</Link>
                                 <p className={`${formState.formStatus === "errored" ? '' : 'hidden'} text-sm text-red-600`}>{formState.formError ?? "An unknown error occured while submitting the form."}</p>
                             </div>
                         </CardFooter>
