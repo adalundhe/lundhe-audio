@@ -732,6 +732,7 @@ export default function Studio() {
                                 <li>Game Changer Audio Plasma Pedal</li>
                                 <li>JHS AT+ (Andy Timmons Overdrive)</li>
                                 <li>JHS Bonsai (Tube Screamer)</li>
+                                <li>JHS Colourbox - V2</li>
                                 <li>JHS Double Barrel Dual Overdrive - V4</li>
                                 <li>JHS Emperor V2 (Chorus)</li>
                                 <li>JHS Hard Drive</li>
