@@ -711,6 +711,7 @@ export default function Studio() {
                                 <li>Diezel Zerrer Dual Channel Preamp</li>
                                 <li>Discomfort Designs Phantom Limb (<b>x2</b>)</li>
                                 <li>Earthquaker Devices The Warden</li>
+                                <li>Electronic Audio Experiments OxEAE Boost</li>
                                 <li>Electronic Audio Experiments OxEAE Fuzz</li>
                                 <li>Electronc Audio Experiments Sending V2</li>
                                 <li>Elektron Analog Heat MKII</li>
