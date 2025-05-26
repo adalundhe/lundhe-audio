@@ -19,10 +19,12 @@ export const NavBarImage = () => {
     
     return (
 
-        <Avatar className="w-[min(80px,calc(100vmin/4))] h-[min(80px,calc(100vmin/4))]">
-            <NavigationMenuLink href="/" className="cursor-pointer">     
-                <AvatarImage src={mode === 'light' ? "/lundhe_audio_logo.png" : "/lundhe_audio_inverted.png"}/>
-            </NavigationMenuLink>
-        </Avatar>
+        <div className="px-4">
+            <Avatar className="w-[min(80px,calc(100vmin/4))] h-[min(80px,calc(100vmin/4))]">
+                <NavigationMenuLink href="/" className="cursor-pointer">     
+                    <AvatarImage src={mode === 'light' ? "/lundhe_audio_logo.png" : "/lundhe_audio_inverted.png"}/>
+                </NavigationMenuLink>
+            </Avatar>
+        </div>
     )
 }

@@ -36,21 +36,25 @@ const courierPrime = Courier_Prime({
 
 
 export const NavBar = () => (
-    <NavigationMenu className={`h-[100px] max-h-[100px] my-4 px-3 ${courierPrime.className}`}>
-      <NavigationMenuList className="flex justify-start">
+    <NavigationMenu className={`h-[100px] max-h-[100px] my-4 ${courierPrime.className}`}>
+      <NavigationMenuList className="flex justify-start w-full">
           <NavBarImage />
-          <NavigationMenuItem className="h-[100px] flex flex-row items-center justify-items-center">
-              <div className="flex flex-row items-center justify-items-center">
-                  <NavigationMenuTrigger className="lg:mx-[16px] hover:underline text-xl lg:w-[120px] w-[60px]" asChild>
-                      <div className="cursor-default flex items-center justify-center space-x-2">
-                          <Menu 
-                              className="text-2xl top-[1px] transition duration-300 group-data-[state=open]:rotate-90"
-                              aria-hidden="true"
-                          />
-                          <p className="hidden lg:flex">menu</p>
-                      </div> 
-                  </NavigationMenuTrigger>
-                  <ModeToggle />     
+          <NavigationMenuItem className="h-[100px] flex flex-row items-center justify-center w-full">
+              <div className="grid grid-cols-12 w-full">
+                  <div className='col-span-2 flex flex-col w-full justify-center'>
+                    <NavigationMenuTrigger className="lg:mx-[16px] hover:underline text-xl w-[60px] lg:w-[120px]" asChild>
+                        <div className="cursor-default flex items-center justify-center space-x-2">
+                            <Menu 
+                                className="text-2xl top-[1px] transition duration-300 group-data-[state=open]:rotate-90"
+                                aria-hidden="true"
+                            />
+                            <p className="hidden lg:flex">menu</p>
+                        </div> 
+                    </NavigationMenuTrigger>
+                  </div>
+                  <div className='col-span-10 flex flex-col items-center justify-center px-4'>
+                    <ModeToggle align='end' />     
+                  </div>
               </div>       
               <NavigationMenuContent>
                   <div  className={`border-t h-[100vh] lg:mt-[34px] w-[100vw] flex flex-col w-full no-scroll text-lg font-light bg-white dark:bg-black`}>
