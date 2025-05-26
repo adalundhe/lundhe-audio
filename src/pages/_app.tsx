@@ -41,7 +41,7 @@ const MyApp: AppType<{ _: Session | null }> = ({
         > */}
           <Head>
             <title>Lundhe Audio</title>
-            <meta name="description" content="Lundhe Audio, an Austin based post-tracking mixing, mastering, sound design, and commercial audio." />
+            <meta name="description" content="Lundhe Audio, an Austin based post-tracking mixing, mastering, sound design, and commercial audio studio." />
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <Script src="/theme.js" strategy="beforeInteractive" />
