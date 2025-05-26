@@ -4,7 +4,7 @@ export const Paragraph = ({
 }: {
     children: string,
     side: 'left' | 'center' | 'right' | 'justify'
-}) => <div className={`w-full text-[1vmin] mb-4 ${
+}) => <div className={`w-full text-[2.5vmin] mb-4 ${
     side === 'left' ? 'text-left' :  
     side == 'center' ? 'text-center' : 
     side == 'justify' ? 'text-justify' : 'text-right'}`}>
