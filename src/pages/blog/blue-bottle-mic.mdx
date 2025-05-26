@@ -1,0 +1,109 @@
+import {Top} from '~/components/blog/top'
+import {Content} from '~/components/blog/content'
+import {Paragraph} from '~/components/blog/paragraph'
+import {Header} from '~/components/blog/header'
+import {Separator} from '~/components/ui/separator'
+import {Frame} from '~/components/blog/frame'
+import {BlogLink} from '~/components/blog/blog-link'
+import {Subsection} from '~/components/blog/subsection'
+import Link from 'next/link'
+
+
+<Separator/>
+<Top/>
+<Header
+    text="The Blue Bottle"
+    description="Taking a look a Blue's legendary modular mic masterpiece"
+    section="intro"
+/>
+<Content>
+    <Paragraph>
+        Blue (Baltic Latvian Universal Electronics) is one of the most legendary microphone manufacturers
+        on the planet. Although now primarily known for the Yeti desktop condenser mic, Blue's original
+        claim to fame was as a prolific designer and manufacturer of high-end professional microphones and preamps
+        used in countless recordings during the '90s and '00s.
+    </Paragraph>
+    <div className='flex flex-row gap-4 items-center mb-4'>
+        <Frame
+            src="/studio/blue_bottle_mic.jpg"
+            alt="A Blue Bottle microphone with the B-11 Bottle Cap Capsule"
+            size={50}
+            styles="mr-2 self-center w-1/2"
+            subtext="One of Lündhé Audio's two Blue Bottle microphones"
+        />
+        <Paragraph styles="w-1/2 self-center ml-2" align='left'>
+            Of these modern classics, the hulking Bottle valve condenser microphone was the crown jewel. Featuring
+            Blue's yet-to-be-replicated modular "bottle cap" capsule system and built using premium components, the Bottle
+            was manufacturered primarily during the '00s and '10s, being silently discontinued at some point between 
+            2017-2020 after Logitech acquired the brand.
+        </Paragraph>
+    </div>
+    <Paragraph>
+        The Bottle never achieved the same level of popularity as
+        many of its contemporaries - mostly due to an eyewatering MSRP of $4000 USD (in '00s dollars at that) - 
+        albeit this included three of the initial set of nine capsules that were released with the mic. 
+        Combined with the additional cost of about $700 USD per bottle cap, and owning even just the 
+        initial set of nine capsules easily drove the total cost upwards of $8000 USD!
+    </Paragraph>
+    <Paragraph>
+        Since its quiet discontinuance, newer microphones have attempted to replicate the Bottle's utility, albeit none with the same versatility
+        and style. The Bottle enjoys a healthy demand on the used market, with used prices ranging from $3000 USD for the main body
+        and a single capsule to upwards of $10k for a full capsule kit. This continues to make it a expensive statement piece for most
+        studios - especially if that studio owns either the original capsule set of nine bottle caps or expanded capsule set of twelve. While 
+        not as fashionable as older, vintage Neumann or Telefunken microphones, the Bottle is both beautiful and imposing - larger than your forearm
+        and <i>significantly</i> heavier than almost any other microphone produced.
+    </Paragraph>
+    <Paragraph>
+        The Bottle and its capsules also remain repairable thanks to the expertise of of ex-Blue staff, including Andrew Monheim of
+        <BlogLink to="https://monheimmicrophones.com/">Monheim Microphones</BlogLink> and ex-Blue cofounder Juris Zarins of 
+        <BlogLink to="https://usashop.jzmic.com/">JZ Microphones</BlogLink>. The original set of nine capsules can easily be found on the used market
+        for $500 USD - $600 USD a piece, so failing or aging bottle caps can readily be replaced. The extended capsule set - i.e. the 
+        <BlogLink to="https://www.sweetwater.com/store/detail/BottleCapB9--blue-microphones-bottle-cap-b9">B9</BlogLink>,
+        <BlogLink to="https://www.sweetwater.com/store/detail/BottleCapB9--blue-microphones-bottle-cap-10">B10</BlogLink>, and
+        <BlogLink to="https://www.sweetwater.com/store/detail/BottleCapB9--blue-microphones-bottle-cap-11">B11</BlogLink> bottle caps - are 
+        practically unobtanium, usually only showing up as parts of (very expensive) used complete capsule sets.
+    </Paragraph>
+</Content>
+<Top/>
+<Subsection
+    text="The Bottle Caps"
+    description="A closer look at each bottle cap capsule"
+    section="bottle-caps"
+    side="right"
+/>
+<Content>
+    <Paragraph>
+        Each Bottle Cap is its own unique entity with its own character and utility. Where possible, we'll do our best to cite which
+        famous microphones used as the basis for each capsule.
+    </Paragraph>
+    <div className='flex flex-row gap-4 items-center mb-4' id="blue-b1-cap">
+        <Paragraph styles="w-1/2 mr-2 self-center" align='left'>
+            <div className='mb-4'>
+                <Link href="#blue-b1-cap" className='text-[2vmax]'>
+                    <b className='hover:underline'>Blue B1 Bottle Cap</b>
+                </Link>
+            </div>
+            <div className='text-[1.5vmax] mt-4 mb-2'>
+                <b>Overview</b>
+            </div>
+            <div className='pb-4'>
+                The Blue B1 Bottle Cap is based off of the Schoeps 221B and is a small diaphragm cardiod condenser capsule. The B1
+                focuses on clarity and precision - coloring the sound little if at all.
+            </div>
+            <div className='text-[1.5vmax] mt-4 mb-2'>
+                <b>What's the Use Case?</b>
+            </div>
+            <div className='pb-4'>
+                The B1 is ideal for recording delicate, nuanced sources such as acoustic guitars, strings, or acoustic percussion. At Lündhé Audio,
+                we often utilize the B1 for close-micing sources or for acoustic-instrument based sampling, as its speed and transparency are unrivaled.
+            </div>
+        </Paragraph>
+        <Frame
+            src="/studio/blue_b1_cap.jpg"
+            alt="A Blue B-1 Bottle Cap Capsule"
+            size={50}
+            styles="ml-2 self-center w-1/2"
+            subtext="One of Lündhé Audio's three Blue B1 Bottle Cap capsules"
+        />
+    </div>
+</Content>

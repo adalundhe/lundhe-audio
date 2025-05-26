@@ -21,6 +21,8 @@ export default function Blog() {
 
     const postData = posts as Blog[];
 
+    console.log(postData)
+
     return (
         <>
             <Layout>
@@ -32,7 +34,7 @@ export default function Blog() {
                     <div className="w-full mt-4 h-full">
                         {
                             postData.map((post, idx) => (
-                                <div key={`blog-${idx}-${post.date}`}>
+                                <div key={`blog-${idx}-${post.date}`} className='mb-4'>
                                     <BlogNavCard
                                         title={post.title}
                                         description={post.description}

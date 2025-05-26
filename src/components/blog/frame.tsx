@@ -8,30 +8,32 @@ export const Frame = ({
     src,
     alt,
     size,
+    subtext,
+    styles,
     side = 'left',
 }: {
     src: string,
     alt: string,
     size: number,
+    styles?: string
+    subtext?: string,
     side: 'left' | 'center' | 'right'
-}) => (
-    <div className="min-w-full flex flex-col justify-center items-center mb-4">
-        <div className={`max-w-[75%] w-full flex flex-col ${side === 'left' ? 'items-start' : 'items-end'}`}>
-            <div className={`flex items-center w-fit h-fit border-none`}>
-                {/* <AspectRatio ratio={4 / 3} className="flex items-center justify-center border-none">
-                    
-                </AspectRatio> */}
-                <Image
-                        src={src}
-                        alt={alt}
-                        width={"0"}
-                        height={"0"}
-                        sizes={`${size}vmin`}
-                        className="w-full h-full border-none"
-                        placeholder="blur"
-                        blurDataURL={blurDataUrl}
-                    />
-            </div>
+}) => ( 
+    <div className={`max-w-[${size}%] w-[${size}%] text-wrap ${styles ? styles  : ""}`}>
+        <div className={`mb-4 max-w-full w-fit flex flex-col ${side === 'left' ? 'items-start' : side === 'center' ? 'items-center' : 'items-end'}`}>
+            <Image
+                    src={src}
+                alt={alt}
+                width={"0"}
+                height={"0"}
+                sizes={`${size}vw`}
+                className={`w-full h-fit border-none`}
+                placeholder="blur"
+                blurDataURL={blurDataUrl}
+            />
+        </div>
+        <div className={`relative text-center max-w-[100%] w-[100%] text-[1.25vmax] text-slate-700/75 dark:text-slate-100/50 ${side === 'left' ? 'self-start' : 'self-end'}`}>
+            {subtext}
         </div>
     </div>
 )

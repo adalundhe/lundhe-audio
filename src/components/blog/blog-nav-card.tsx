@@ -29,7 +29,7 @@ export const BlogNavCard = ({
 
     return (
         <Link href={`/blog/${link}`} className="cursor-pointer">
-            <Card className="w-full h-full rounded-none border shadow-none transition-all motion-reduce:transition-none duration-700 hover:scale-110 motion-reduce:hover:scale-100"
+            <Card className="bg-(--background) w-full h-full rounded-none border shadow-none transition-all motion-reduce:transition-none duration-700 hover:scale-110 motion-reduce:hover:scale-100"
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
             >

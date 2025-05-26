@@ -33,7 +33,7 @@ export default function Studio() {
                         <AspectRatio ratio={4 / 3} className="flex items-center justify-center">
                             <Image
                                 src="/studio/studio_front_monochrome.jpeg"
-                                alt="The front of the studio for Lundhe Audio including Raven MTI2 and Console 1 control, Neve 5060 summing, ExMachina, Focal, and Neuman monitors, and numerous outboard pieces."
+                                alt="The front of the studio for Lündhé Audio including Raven MTI2 and Console 1 control, Neve 5060 summing, ExMachina, Focal, and Neuman monitors, and numerous outboard pieces."
                                 width="0"
                                 height="0"
                                 sizes="100vw"
@@ -45,7 +45,7 @@ export default function Studio() {
                     </div>
                     <div className="px-4 my-4 text-xl font-thin my-8">
                         <p>
-                            Lundhe Audio is equipped to handle almost any need or situation, with top-tier analog equipment, state of the art software, and an ever growing
+                            Lündhé Audio is equipped to handle almost any need or situation, with top-tier analog equipment, state of the art software, and an ever growing
                             catalogue of instruments and tools to make musical magic happen. We're not afraid blend cutting-edge music tech with old-school sonics and 
                             techniquest to create something new. Here's some of what we use.
                         </p>
@@ -54,12 +54,12 @@ export default function Studio() {
                         <Separator />
                         <StudioContentSection 
                             imagePath="/studio/grace_m905.jpg"
-                            imageAltTxt="Photo of Lundhe Audio's monitoring."
+                            imageAltTxt="Photo of Lündhé Audio's monitoring."
                             title="Monitoring"
                             headerAlignment="left"
                         >
                             <p>
-                                Lundhe Audio uses ExMachina Quasar MKII loudspeakers for primary monitoring, with Focal Twin 6 BE (a personal favorite)
+                                Lündhé Audio uses ExMachina Quasar MKII loudspeakers for primary monitoring, with Focal Twin 6 BE (a personal favorite)
                                 and Klein and Hummel KH80DSP as secondary monitoring options.
                             </p>
                             <br/>
@@ -78,12 +78,12 @@ export default function Studio() {
                         </StudioContentSection>
                         <StudioContentSection 
                             imagePath="/studio/500_series_rack_02.jpg"
-                            imageAltTxt="Photo of one of Lundhe Audio's Dangerous Convert AD+."
+                            imageAltTxt="Photo of one of Lündhé Audio's Dangerous Convert AD+."
                             title="Conversion"
                             headerAlignment="right"
                         >
                             <p>
-                                Conversion is paramount to quality mixing and mastering. At Lundhe Audio we use top-shelf A/D
+                                Conversion is paramount to quality mixing and mastering. At Lündhé Audio we use top-shelf A/D
                                 and D/A, including:
                             </p>
                             <ul className="my-4 list-disc list-inside font-normal">
@@ -116,12 +116,12 @@ export default function Studio() {
                         </StudioContentSection>
                         <StudioContentSection 
                             imagePath="/studio/preamps_01.jpg"
-                            imageAltTxt="Photo of Lundhe Audio's Manley, Tube Tech, Avalon, and LaChapell Audio preamps."
+                            imageAltTxt="Photo of Lündhé Audio's Manley, Tube Tech, Avalon, and LaChapell Audio preamps."
                             title="Preamps"
                             headerAlignment="right"
                         >
                             <p>
-                                Lundhe Audio provides a wealth of preamp options, including:
+                                Lündhé Audio provides a wealth of preamp options, including:
                             </p>
                             <ul className="my-4 list-disc list-inside font-normal">
                                 <li>A-Designs Pacifica</li>
@@ -179,7 +179,7 @@ export default function Studio() {
                         </StudioContentSection>
                         <StudioContentSection 
                             imagePath="/studio/bae_1073dmp.jpg"
-                            imageAltTxt="Photo of Lundhe Audio's Manley, Tube Tech, Avalon, and LaChapell Audio preamps."
+                            imageAltTxt="Photo of Lündhé Audio's Manley, Tube Tech, Avalon, and LaChapell Audio preamps."
                             title="Direct Boxes"
                             headerAlignment="left"
                         >
@@ -201,12 +201,12 @@ export default function Studio() {
                         </StudioContentSection>
                         <StudioContentSection 
                             imagePath="/studio/ssl_xrack_monochrome.jpg"
-                            imageAltTxt="Photo of Lundhe Audio's SPL Iron V2 mastering compressor."
+                            imageAltTxt="Photo of Lündhé Audio's SPL Iron V2 mastering compressor."
                             title="Dynamics and Compression"
                             headerAlignment="right"
                         >
                             <p>
-                                We love compressors at Lundhe Audio - not just for shaping sounds or enhancing groove, but as creative
+                                We love compressors at Lündhé Audio - not just for shaping sounds or enhancing groove, but as creative
                                 tools for sound design, fun, and profit. We're picky though, and it's reflected in our choice
                                 of tools:
                             </p>
@@ -253,7 +253,7 @@ export default function Studio() {
                         </StudioContentSection>
                         <StudioContentSection 
                             imagePath="/studio/spl_passeq.jpg"
-                            imageAltTxt="Photo of Lundhe Audio's SPL PassEQ mastering equalizer."
+                            imageAltTxt="Photo of Lündhé Audio's SPL PassEQ mastering equalizer."
                             title="Equalizers"
                             headerAlignment="left"
                         >
@@ -291,7 +291,7 @@ export default function Studio() {
                         </StudioContentSection>
                         <StudioContentSection 
                             imagePath="/studio/echofix_efx3.jpg"
-                            imageAltTxt="Photo of Lundhe Audio's EchoFix EF-X3 tape delay front panel."
+                            imageAltTxt="Photo of Lündhé Audio's EchoFix EF-X3 tape delay front panel."
                             title="Effects"
                             headerAlignment="right"
                         >
@@ -317,7 +317,7 @@ export default function Studio() {
                         </StudioContentSection>
                         <StudioContentSection 
                             imagePath="/studio/500_series_rack_01.jpg"
-                            imageAltTxt="Photo of one of Lundhe Audio's 500 Series processing racks, containing a multitude of analog equipment."
+                            imageAltTxt="Photo of one of Lündhé Audio's 500 Series processing racks, containing a multitude of analog equipment."
                             title="Other"
                             headerAlignment="left"
                         >
@@ -342,7 +342,7 @@ export default function Studio() {
                         </StudioContentSection>
                         <StudioContentSection 
                             imagePath="/studio/soyuz_017_fet.jpg"
-                            imageAltTxt="Photo of Lundhe Audio's Soyuz 017 FET Mic."
+                            imageAltTxt="Photo of Lündhé Audio's Soyuz 017 FET Mic."
                             title="LDC Microphones"
                             headerAlignment="right"
                         >
@@ -385,7 +385,7 @@ export default function Studio() {
                         </StudioContentSection>
                         <StudioContentSection 
                             imagePath="/studio/soyuz_013_tube.jpg"
-                            imageAltTxt="Photo of Lundhe Audio's matched pair of Soyuz 013 TUBE microphones."
+                            imageAltTxt="Photo of Lündhé Audio's matched pair of Soyuz 013 TUBE microphones."
                             title="SDC Microphones"
                             headerAlignment="left"
                         >
@@ -412,7 +412,7 @@ export default function Studio() {
                         </StudioContentSection>
                         <StudioContentSection 
                             imagePath="/studio/royer_r10.jpg"
-                            imageAltTxt="Photo of Lundhe Audio's pair of Royer R10 Hot Rod microphones."
+                            imageAltTxt="Photo of Lündhé Audio's pair of Royer R10 Hot Rod microphones."
                             title="Ribbon Microphones"
                             headerAlignment="right"
                         >
@@ -434,7 +434,7 @@ export default function Studio() {
                         </StudioContentSection>
                         <StudioContentSection 
                             imagePath="/studio/shure_sm7b.jpeg"
-                            imageAltTxt="Photo of Lundhe Audio's Shure SM7b microphone."
+                            imageAltTxt="Photo of Lündhé Audio's Shure SM7b microphone."
                             title="Dynamic Microphones"
                             headerAlignment="left"
                         >
@@ -455,12 +455,12 @@ export default function Studio() {
                         </StudioContentSection>
                         <StudioContentSection 
                             imagePath="/studio/udo_super_gemini-monochrome.jpg"
-                            imageAltTxt="Photo of Lundhe Audio's UDO Super Gemini."
+                            imageAltTxt="Photo of Lündhé Audio's UDO Super Gemini."
                             title="Synthesizers and Samplers"
                             headerAlignment="right"
                         >
                             <p>
-                                Lundhe Audio brings the best of modern and vintage synthesis. From the rich sounds of classics 
+                                Lündhé Audio brings the best of modern and vintage synthesis. From the rich sounds of classics 
                                 like the Juno 6 to the cutting tones of modern giants like the Waldorf Quantum, we offer a wealth 
                                 of synthesis options:
                             </p>
@@ -634,7 +634,7 @@ export default function Studio() {
                         </StudioContentSection>
                         <StudioContentSection 
                             imagePath="/studio/gretsch_duo_jet-monochrome.jpg"
-                            imageAltTxt="Photo of Lundhe Audio's Suhr Standard Plus Koa."
+                            imageAltTxt="Photo of Lündhé Audio's Suhr Standard Plus Koa."
                             title="Guitars"
                             headerAlignment="left"
                         >
@@ -658,7 +658,7 @@ export default function Studio() {
                         </StudioContentSection>
                         <StudioContentSection 
                             imagePath="/studio/chase_bliss_pedals-monochrome.jpg"
-                            imageAltTxt="Photo of Lundhe Audio's collection of Chase Bliss pedals."
+                            imageAltTxt="Photo of Lündhé Audio's collection of Chase Bliss pedals."
                             title="Pedals and Instrument Effects"
                             headerAlignment="right"
                         >
@@ -799,7 +799,7 @@ export default function Studio() {
                         </StudioContentSection>
                         <StudioContentSection
                             imagePath="/studio/chandler_gav_19.jpg"
-                            imageAltTxt="Photo of Lundhe Audio's Chandler GAV19 amplifier."
+                            imageAltTxt="Photo of Lündhé Audio's Chandler GAV19 amplifier."
                             title="Amplifiers"
                             headerAlignment="left"
                         >

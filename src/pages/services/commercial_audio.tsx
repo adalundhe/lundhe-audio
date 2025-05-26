@@ -30,12 +30,12 @@ export default function CommercialAudioService() {
                     </CardHeader>
                     <div className="pt-4">
                         <p>        
-                            Lundhe Audio was founded in 2024 by long-time sound designer and engineer Ada Lundhe after 
+                            Lündhé Audio was founded in 2024 by long-time sound designer and engineer Ada Lundhe after 
                             over fifteen years of providing mixing, mastering, commercial audio, and sound-design services.
                         </p>
                         <br/>
                         <p>
-                        Lundhe Audio is more than just a remote mixing and mastering facility - it's place where sound is 
+                        Lündhé Audio is more than just a remote mixing and mastering facility - it's place where sound is 
                         pushed to the limits. We develop cutting edge DSP and software, create sound libraries and instruments
                         to inspire creativity, and blend the best of analog with the latest in digital to accomplish the impossible. 
                         </p>
@@ -49,7 +49,7 @@ export default function CommercialAudioService() {
                     </CardHeader>
                     <div className="pt-4">
                             <p>        
-                                Lundhe Audio is a passion project borne out of a love for everything sound. Whether a product of field recordings, 
+                                Lündhé Audio is a passion project borne out of a love for everything sound. Whether a product of field recordings, 
                                 beloved traditional instruments, or wild modular synthesis - we love making noise and helping others fall in love 
                                 with it too.
                             </p>

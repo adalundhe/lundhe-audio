@@ -177,3 +177,8 @@ div[data-radix-aspect-ratio-wrapper] {
 }
 
 
+.paragraph-text {
+  text-justify: distribute;
+  word-spacing: -0.05em;
+  hyphens: auto;
+}
