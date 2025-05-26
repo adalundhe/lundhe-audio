@@ -83,7 +83,7 @@ export default function Home() {
         </CardContent>
         <Separator className="w-1/2" />
         <CardContent className="p-0 w-[100%] flex flex-col items-center mt-4">
-          <div className="w-3/4 text-xl font-thin">
+          <div className="w-3/4 text-xl font-thin text-center">
             <p>
               Lündhé Audio is a privately owned and operated mixing and mastering studio out of Austin, Texas.
             </p>
