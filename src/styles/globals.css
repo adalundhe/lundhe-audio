@@ -117,3 +117,63 @@ footer {
   margin-top: auto;
 }
 
+pre:has(.hljs), .hljs {
+  color: #c9d1d9;
+  background: #0d1117;
+}
+
+figure {
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+
+}
+
+figure > pre {
+
+  border-radius: 0.25rem;
+}
+
+figure > * {
+  max-width: 75%;
+  width: 100%;
+  font-size: 1.75vmin;
+  padding: 1rem 1vmax;
+}
+
+code[data-line-numbers] {
+  counter-reset: line;
+}
+ 
+code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+ 
+  /* Other styling */
+  display: inline-block;
+  width: 0.5rem;
+  margin-right: 2vmin;
+  text-align: left;
+  color: gray;
+}
+ 
+code[data-line-numbers-max-digits="2"] > [data-line]::before {
+  width: 1.25rem;
+}
+ 
+code[data-line-numbers-max-digits="3"] > [data-line]::before {
+  width: 1.75rem;
+}
+ 
+code[data-line-numbers-max-digits="4"] > [data-line]::before {
+  width: 2.25rem;
+}
+
+div[data-radix-aspect-ratio-wrapper] {
+  border: none;
+}
+
+

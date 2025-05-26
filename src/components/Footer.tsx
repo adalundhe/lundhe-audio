@@ -1,10 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { GeistSans } from "geist/font/sans";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 // import { BiSolidMessageEdit } from "react-icons/bi";
+import { Courier_Prime } from 'next/font/google';
 import { z } from "zod";
 import { Button } from "~/components/ui/button";
 import { Checkbox } from "~/components/ui/checkbox";
@@ -41,6 +41,12 @@ import { useReCaptcha } from '~/hooks/use-recaptcha';
 import { api } from '~/utils/api';
 
 import { Mail, MailCheck, MailOpen, MailWarning, MailX, SendHorizontal, } from 'lucide-react';
+
+const courierPrime = Courier_Prime({
+  weight: "400",
+  subsets: ['latin']
+})
+
 
 export const Footer = () => {
 
@@ -198,7 +204,7 @@ export const Footer = () => {
     }
 
     return (    
-        <footer className={`w-full h-[80px] pt-8 pb-8 px-3 ${GeistSans.className}`}>
+        <footer className={`w-full h-[80px] pt-8 pb-8 px-3 ${courierPrime.className}`}>
             <div className="h-full w-full flex flex-col justify-center items-center text-xl font-normal">
                 {
                     router.route.includes("contact") ? null :
@@ -214,7 +220,7 @@ export const Footer = () => {
                         </DialogTrigger>
                         <DialogContent closeFormOverride={() => setFormState({
                             formStatus: "closed"
-                        })} className={`${GeistSans.className} sm:max-w-[800px] rounded-sm`}>   
+                        })} className={`${courierPrime.className} sm:max-w-[800px] rounded-sm`}>   
                             <ScrollArea className="h-[50vh] w-full my-6">
                                     
                                 <DialogHeader className="p-0 flex flex-col items-center">
@@ -322,7 +328,7 @@ export const Footer = () => {
                                                         <SelectTrigger className="text-lg font-light">
                                                             <SelectValue className="text-lg font-light" placeholder="Select a provided service" />
                                                         </SelectTrigger>
-                                                        <SelectContent className={`${GeistSans.className} text-2xl font-thin`} ref={field.ref}>
+                                                        <SelectContent className={`${courierPrime.className} text-2xl font-thin`} ref={field.ref}>
                                                             <SelectItem value="mixing">mixing</SelectItem>
                                                             <SelectItem value="mastering">mastering</SelectItem>
                                                             <SelectItem value="sound-design">sound design</SelectItem>

@@ -2,18 +2,19 @@
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
  * for Docker builds.
  */
+import laserwave from 'shiki/themes/laserwave.mjs';
 
 await import("./src/env.js");
+Object.assign(process.env, { NEXT_TELEMETRY_DISABLED: '1' });
 
-/** @type {import("next").NextConfig} */
-const config = {
-  reactStrictMode: true,
+import createMDX from '@next/mdx';
+import rehypePrettyCode from 'rehype-pretty-code';
+import rehypeSlug from 'rehype-slug';
+import rehypeStringify from 'rehype-stringify';
+import remarkParse from 'remark-parse';
 
-  /**
-   * If you are using `appDir` then you must comment the below `i18n` config out.
-   *
-   * @see https://github.com/vercel/next.js/issues/41980
-   */
+const nextConfig = {
+  pageExtensions: ['md', 'mdx', 'tsx', 'ts', 'jsx', 'js'],
   i18n: {
     locales: ["en"],
     defaultLocale: "en",
@@ -21,4 +22,19 @@ const config = {
   transpilePackages: ["geist"],
 };
 
-export default config;
+const options = {
+  theme: laserwave,
+};
+
+
+const withMDX = createMDX({
+  extension: /\.(md|mdx)$/,
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [remarkParse, [rehypePrettyCode, options], rehypeSlug, rehypeStringify],
+  },
+})
+
+
+
+export default withMDX(nextConfig)

@@ -1,5 +1,5 @@
-import { GeistSans } from "geist/font/sans";
 import { Moon, Sun } from "lucide-react";
+import { Courier_Prime } from 'next/font/google';
  
 import { Button } from "~/components/ui/button";
 import {
@@ -9,6 +9,11 @@ import {
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import { useSettings } from "~/hooks/use-settings";
+
+const courierPrime = Courier_Prime({
+  weight: "400",
+  subsets: ['latin']
+})
  
 export const ModeToggle = () => {
   const { updateMode } = useSettings()
@@ -17,12 +22,12 @@ export const ModeToggle = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <Sun className="h-[2rem] w-[2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <Moon className="absolute h-[2rem] w-[2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className={`h-[130px] max-h-[130px] my-4 px-3 ${GeistSans.className}`}>
+      <DropdownMenuContent align="center" className={`h-[130px] max-h-[130px] px-3 ${courierPrime.className}`}>
         <DropdownMenuItem className="text-lg" onClick={() => updateMode("light")}>
           Light
         </DropdownMenuItem>

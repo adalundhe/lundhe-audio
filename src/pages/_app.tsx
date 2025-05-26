@@ -1,8 +1,8 @@
-import { GeistSans } from "geist/font/sans";
 import { type Session } from "next-auth";
 import Head from "next/head";
 // import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
+import { Courier_Prime } from 'next/font/google';
 import Script from 'next/script';
 import { Footer } from "~/components/Footer";
 import { NavBar } from "~/components/NavBar";
@@ -14,6 +14,11 @@ import { api } from "~/utils/api";
 // import { type CountryCode, type LanguageCode } from "@shopify/hydrogen-react/storefront-api-types";
 
 import "~/styles/globals.css";
+
+const courierPrime = Courier_Prime({
+  weight: "400",
+  subsets: ['latin']
+})
 
 const MyApp: AppType<{ _: Session | null }> = ({
   Component,
@@ -43,7 +48,7 @@ const MyApp: AppType<{ _: Session | null }> = ({
           <Script src={`https://www.google.com/recaptcha/api.js?render=${env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY}`} async/>
           
           <NavBar />
-          <div className={`${GeistSans.className} flex flex-col h-full`}>
+          <div className={`${courierPrime.className} flex flex-col h-full`}>
             <Component {...pageProps} />
           </div>
           <Footer />
