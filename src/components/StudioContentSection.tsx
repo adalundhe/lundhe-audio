@@ -7,6 +7,9 @@ import { AspectRatio } from "~/components/ui/aspect-ratio";
 import { Avatar, AvatarImage } from "~/components/ui/avatar";
 
 
+import type { JSX } from "react";
+
+
 const StudioContentHeader = ({
     imagePath,
     imageAltTxt,

@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { GeistSans } from "geist/font/sans";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -7,6 +6,8 @@ import { z } from "zod";
 import { Layout } from "~/components/Layout";
 import { Button } from "~/components/ui/button";
 
+import { Mail, MailCheck, MailOpen, MailWarning, MailX, SendHorizontal, } from 'lucide-react';
+import { Courier_Prime } from 'next/font/google';
 import {
     Card,
     CardContent,
@@ -38,8 +39,10 @@ import { Textarea } from "~/components/ui/textarea";
 import { useReCaptcha } from '~/hooks/use-recaptcha';
 import { api } from '~/utils/api';
 
-import { Mail, MailCheck, MailOpen, MailWarning, MailX, SendHorizontal, } from 'lucide-react';
-
+const courierPrime = Courier_Prime({
+  weight: "400",
+  subsets: ['latin']
+})
 
 export default function Contact(){
     
@@ -288,7 +291,7 @@ export default function Contact(){
                                             <SelectTrigger className="text-lg font-light">
                                                 <SelectValue className="text-lg font-light" placeholder="Select a provided service" />
                                             </SelectTrigger>
-                                            <SelectContent className={`${GeistSans.className} text-2xl font-thin`} ref={field.ref}>
+                                            <SelectContent className={`${courierPrime.className} text-2xl font-thin`} ref={field.ref}>
                                                 <SelectItem value="mixing">mixing</SelectItem>
                                                 <SelectItem value="mastering">mastering</SelectItem>
                                                 <SelectItem value="sound-design">sound design</SelectItem>

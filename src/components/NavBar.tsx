@@ -1,4 +1,3 @@
-import { GeistSans } from "geist/font/sans";
 import { CiMenuBurger } from "react-icons/ci";
 import {
     Accordion,
@@ -25,11 +24,18 @@ import Link from "next/link";
 import { Avatar, AvatarImage } from "~/components/ui/avatar";
 // import { MdPolicy } from "react-icons/md";
 // import { LiaFileContractSolid } from "react-icons/lia";
+import { Courier_Prime } from 'next/font/google';
 import { useEffect } from "react";
 import { ScrollArea } from "~/components/ui/scroll-area";
 import { Mode } from '~/components/ui/settings-provider';
 import { useSettings } from "~/hooks/use-settings";
 import { ModeToggle } from './ModeToggle';
+
+const courierPrime = Courier_Prime({
+    weight: "400",
+    subsets: ['latin']
+  })
+  
 
 
 export const NavBar = () => {
@@ -46,7 +52,7 @@ export const NavBar = () => {
     
     return (
         
-      <NavigationMenu className={`h-[100px] max-h-[100px] my-4 px-3 ${GeistSans.className}`}>
+      <NavigationMenu className={`h-[100px] max-h-[100px] my-4 px-3 ${courierPrime.className}`}>
         <NavigationMenuList className="flex justify-start">
             <Avatar className="w-[min(80px,calc(100vmin/4))] h-[min(80px,calc(100vmin/4))]">
                 <NavigationMenuLink href="/" className="cursor-pointer">     
@@ -111,6 +117,12 @@ export const NavBar = () => {
                                             </li>
                                         </ul>
                                     </AccordionContent>
+                                </AccordionItem>
+                                <AccordionItem value="blog" className="py-2 px-2 h-[40px] w-full flex grow-1 items-center space-x-2">
+                                    {/* <IoMdContact/> */}
+                                    <NavigationMenuLink href="/blog" className="cursor-pointer hover:underline">
+                                        blog
+                                    </NavigationMenuLink>
                                 </AccordionItem>
                                 {/* <AccordionItem value="services" className="px-2 lg:hover:bg-gray-50 lg:focus:bg-gray-50">
                                     <AccordionTrigger className="lg:hover:bg-gray-50 lg:focus:bg-gray-50 p-0 cursor-default py-2">   

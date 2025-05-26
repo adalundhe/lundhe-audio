@@ -1,5 +1,5 @@
 import { Separator } from "~/components/ui/separator"
-import React from "react";
+import React, { type JSX } from "react";
 
 export const Layout = ({
     children
