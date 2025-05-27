@@ -1,10 +1,6 @@
-import Link from 'next/link'
-import { ArrowRight, ArrowDown } from 'lucide-react'
-import { Separator } from '~/components/ui/separator'
 import { useState } from 'react';
 import { type ContentsListing, ContentsItem } from './contents-item'
  
-import { Button } from "~/components/ui/button";
 import {
   Accordion,
   AccordionContent,
