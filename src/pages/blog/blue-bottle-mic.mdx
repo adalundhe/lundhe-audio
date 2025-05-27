@@ -6,6 +6,8 @@ import {Separator} from '~/components/ui/separator'
 import {Frame} from '~/components/blog/frame'
 import {BlogLink} from '~/components/blog/blog-link'
 import {Subsection} from '~/components/blog/subsection'
+import {TableOfContents} from '~/components/blog/table-of-contents'
+import {ScrollToTop} from '~/components/ui/scroll-to-top'
 import Link from 'next/link'
 
 
@@ -17,6 +19,68 @@ import Link from 'next/link'
     section="intro"
 />
 <Content>
+    <TableOfContents contents={[
+        {
+            text: "Intro",
+            slug: "intro"
+        },
+        {
+            text: "The Bottle Caps",
+            slug: "bottle-caps",
+            subsections: [
+                {
+                    text: "Blue B0 Bottle Cap",
+                    slug: "blue-b0-cap"
+                },
+                {
+                    text: "Blue B1 Bottle Cap",
+                    slug: "blue-b1-cap"
+                },
+                {
+                    text: "Blue B2 Bottle Cap",
+                    slug: "blue-b2-cap"
+                },
+                {
+                    text: "Blue B3 Bottle Cap",
+                    slug: "blue-b3-cap"
+                },
+                {
+                    text: "Blue B4 Bottle Cap",
+                    slug: "blue-b4-cap"
+                },
+                {
+                    text: "Blue B5 Bottle Cap",
+                    slug: "blue-b5-cap"
+                },
+                {
+                    text: "Blue B6 Bottle Cap",
+                    slug: "blue-b6-cap"
+                },
+                {
+                    text: "Blue B7 Bottle Cap",
+                    slug: "blue-b7-cap"
+                },
+                {
+                    text: "Blue B8 Bottle Cap",
+                    slug: "blue-b8-cap"
+                },
+                {
+                    text: "Blue B9 Bottle Cap",
+                    slug: "blue-b9-cap"
+                },
+                {
+                    text: "Blue B10 Bottle Cap",
+                    slug: "blue-b10-cap"
+                },
+                {
+                    text: "Blue B11 Bottle Cap",
+                    slug: "blue-b11-cap"
+                }
+            ]
+
+        },
+    ]} 
+    />
     <Paragraph>
         Blue (Baltic Latvian Universal Electronics) is one of the most legendary microphone manufacturers
         on the planet. Although now primarily known for the Yeti desktop condenser mic, Blue's original
@@ -71,39 +135,404 @@ import Link from 'next/link'
     section="bottle-caps"
     side="right"
 />
-<Content>
-    <Paragraph>
+<Content styles='gap-4'>
+    <Paragraph styles='mb-4'>
         Each Bottle Cap is its own unique entity with its own character and utility. Where possible, we'll do our best to cite which
         famous microphones used as the basis for each capsule.
     </Paragraph>
-    <div className='flex flex-row gap-4 items-center mb-4' id="blue-b1-cap">
-        <Paragraph styles="w-1/2 mr-2 self-center" align='left'>
-            <div className='mb-4'>
+    <div className='mt-4 mb-4 w-full' id="blue-b0-cap">
+        <Paragraph styles="w-full ml-2 self-start text-tighter flex flex-col gap-4" align='justify'>
+            <div className='mb-4 self-center w-3/4'>
+                <BlogLink to="#blue-b0-cap" styles='text-[2vmax]' linkType='internal'>
+                    <b className='hover:underline'>Blue B0 Bottle Cap</b>
+                </BlogLink>
+            </div>
+            <Frame
+                src="/studio/Blue_B0_Cap.jpg"
+                alt="A Blue B0 Bottle Cap Capsule"
+                size={50}
+                styles="self-center w-3/4 max-h-[80%]"
+                subtext="One of Lündhé Audio's two Blue B0 Bottle Cap capsules"
+            />
+            <div className='self-center w-3/4 flex flex-col gap-4'>
+                <div className='text-[1.5vmax]'>
+                    <b>Overview</b>
+                </div>
+                <div>
+                    The Blue B0 Bottle Cap is Blue's take on the legendary
+                    <BlogLink to="https://recordinghacks.com/microphones/Telefunken/ElaM-251">Telefunken ELA M 251</BlogLink>,
+                    arguably one-of-if-not-the most popular vocal microphones of all time. It has a "silky" and "detailed" sound
+                    that makes it ideal for capturing the nuances of vocalists and acoustic instrumentation.
+                </div>
+                <div className='text-[1.5vmax]'>
+                    <b>What's the Use Case?</b>
+                </div>
+                <div>
+                    The B0 manages to achieve the ELA M 251's sparkling top without sounding harsh. For that reason alone, we love
+                    to use it on vocalists at Lündhé Audio. We also often use it on acoustic strummed instruments or percussion, where 
+                    its presence gives transients a natural clarity.
+                    <br/>
+                    Since its debut, the B0 capsule remains one of the better sounding ELA M 251 inspired capsules - it lacks the sputtery
+                    sizzle plagues cheaper clones while having reduced noise when compared to vintage 251s. Telefunken has since reissued the
+                    ELA M 251 as the 251E, and while that reissue is stellar - we personally find Blue's interpretation equally convincing.
+                    <br/>
+                    Unfortunately, unlike a real 251 (or its reissue), the B0 bottle cap is cardiod-only.
+                </div>
+            </div>
+        </Paragraph>
+    </div>
+    <div className='mb-4 w-full' id="blue-b1-cap">
+        <Paragraph styles="w-full mr-2 self-start flex flex-col gap-4" align='justify'>
+            <div className='mb-4 w-3/4 self-center'>
                 <Link href="#blue-b1-cap" className='text-[2vmax]'>
                     <b className='hover:underline'>Blue B1 Bottle Cap</b>
                 </Link>
             </div>
-            <div className='text-[1.5vmax] mt-4 mb-2'>
-                <b>Overview</b>
-            </div>
-            <div className='pb-4'>
-                The Blue B1 Bottle Cap is based off of the Schoeps 221B and is a small diaphragm cardiod condenser capsule. The B1
-                focuses on clarity and precision - coloring the sound little if at all.
-            </div>
-            <div className='text-[1.5vmax] mt-4 mb-2'>
-                <b>What's the Use Case?</b>
-            </div>
-            <div className='pb-4'>
-                The B1 is ideal for recording delicate, nuanced sources such as acoustic guitars, strings, or acoustic percussion. At Lündhé Audio,
-                we often utilize the B1 for close-micing sources or for acoustic-instrument based sampling, as its speed and transparency are unrivaled.
+            <Frame
+                src="/studio/blue_b1_cap.jpg"
+                alt="A Blue B1 Bottle Cap Capsule"
+                size={50}
+                styles="self-center w-3/4 max-h-[80%]"
+                subtext="One of Lündhé Audio's three Blue B1 Bottle Cap capsules"
+            />
+            <div className='self-center w-3/4 flex flex-col gap-4'>
+                <div className='text-[1.5vmax]'>
+                    <b>Overview</b>
+                </div>
+                <div>
+                    The Blue B1 Bottle Cap is based off of the Schoeps 221B and is a small diaphragm cardiod condenser capsule. The B1
+                    focuses on clarity and precision - coloring the sound little if at all.
+                </div>
+                <div className='text-[1.5vmax]'>
+                    <b>What's the Use Case?</b>
+                </div>
+                <div>
+                    The B1 is ideal for recording delicate, nuanced sources such as acoustic guitars, strings, or acoustic percussion. At Lündhé Audio,
+                    we often utilize the B1 for close-micing sources or for acoustic-instrument based sampling, as its speed and transparency are unrivaled.
+                    The cardiod pattern <i>does</i> mean a more "focused" sound than the 
+                    <BlogLink to="#blue-b4-cap" linkType='internal'>B4 bottle cap</BlogLink>, but that focus also allows sounds 
+                    it picks up to cut through any mix with a natural ease. 
+                    <br/>
+                    For those looking to "try out" the B1 Bottle Cap without committing to a full Blue Bottle microphone setup, the superb
+                    <BlogLink to="https://www.soundonsound.com/reviews/blue-hummingbird">Blue Hummingbird</BlogLink> can be found used for often
+                    less that $200 USD and has a unique swivel-head that allows for far more flexible placemen than the massive Blue Bottle. In fact,
+                    we like the B1 Bottle Cap and Hummingbird Microphone so much at Lündhé Audio that we have three!
+                </div>
             </div>
         </Paragraph>
-        <Frame
-            src="/studio/blue_b1_cap.jpg"
-            alt="A Blue B-1 Bottle Cap Capsule"
-            size={50}
-            styles="ml-2 self-center w-1/2"
-            subtext="One of Lündhé Audio's three Blue B1 Bottle Cap capsules"
-        />
+    </div>
+    <div className='mb-4 w-full' id="blue-b2-cap">
+        <Paragraph styles="w-full mr-2 self-start flex flex-col gap-4" align='justify'>
+            <div className='mb-4 w-3/4 self-center'>
+                <Link href="#blue-b2-cap" className='text-[2vmax]'>
+                    <b className='hover:underline'>Blue B2 Bottle Cap</b>
+                </Link>
+            </div>
+              <Frame
+                src="/studio/Blue_B2_Cap.jpg"
+                alt="A Blue B2 Bottle Cap Capsule"
+                size={50}
+                styles="self-center w-3/4 max-h-[80%]"
+                subtext="One of Lündhé Audio's two Blue B2 Bottle Cap capsules"
+            />
+            <div className='self-center w-3/4 flex flex-col gap-4'>
+                <div className='text-[1.5vmax]'>
+                    <b>Overview</b>
+                </div>
+                <div>
+                    The Blue B2 Bottle Cap is the dark horse of the Blue bottle cap family, based on the famous
+                    <BlogLink to="https://vintageking.com/rca-44-a?srsltid=AfmBOororqOIeYXZzlLmoY-jtKmsrIiMawehjRppWDXq5kt9PMZBe72C">RCA 44 Ribbon Microphone</BlogLink>.
+                    The capsule is a figure-eight pattern and shares the velvety, rich sound of classic ribbon microphones (without the 
+                    worries of damaging the ribbon).
+                </div>
+                <div className='text-[1.5vmax]'>
+                    <b>What's the Use Case?</b>
+                </div>
+                <div >
+                    The B2 is a challeing capsule in that it's effectively a condenser microphone capsule voiced to act 
+                    like a classic ribbon microphone. It brings aspects of each of these types of microphones, which makes it unique
+                    but also endows it with the steepest learning curve of any of Blue's bottle caps.
+                    <br/>
+                    At first, you'll be tempted to use the B2 bottle cap either as a condenser or drop-in ribbon replacement. This will
+                    lead to some frustration, as the B2 bottle cap is simultaneously both of these things and neither of them. At 
+                    Lündhé Audio, we've personally encountered the greatest success when utilizing the B2 bottle cap as a room mic or 
+                    on guitar cabs. Using it to mic up acoustic stringed instruments can lead to muddy sound.
+                    <br/>
+                    We've likewise had great success with the B2 bottle cap as a kick mic, where its decidedly vintage sound is greate at mellowing
+                    out the snap of modern kick drums.
+                </div>
+            </div>
+        </Paragraph>
+    </div>
+    <div className='mb-4 w-full' id="blue-b3-cap">
+        <Paragraph styles="w-full mr-2 self-start flex flex-col gap-4" align='justify'>
+            <div className='mb-4 w-3/4 self-center'>
+                <Link href="#blue-b3-cap" className='text-[2vmax]'>
+                    <b className='hover:underline'>Blue B3 Bottle Cap</b>
+                </Link>
+            </div>
+            <Frame
+                src="/studio/Blue_B3_Cap.jpg"
+                alt="A Blue B3 Bottle Cap Capsule"
+                size={50}
+                styles="self-center w-3/4 max-h-[80%]"
+                subtext="One of Lündhé Audio's two Blue B3 Bottle Cap capsules"
+            />
+            <div className='self-center w-3/4 flex flex-col gap-4'>
+                <div className='text-[1.5vmax]'>
+                    <b>Overview</b>
+                </div>
+                <div>
+                    The Blue B3 Bottle Cap is based off of
+                </div>
+                <div className='text-[1.5vmax]'>
+                    <b>What's the Use Case?</b>
+                </div>
+                <div>
+                    The B3 is ideal for
+                </div>
+            </div>
+        </Paragraph>
+    </div>
+    <div className='w-full mt-4 mb-4' id="blue-b4-cap">
+        <Paragraph styles="w-full ml-2 self-start flex flex-col gap-4" align='justify'>
+            <div className='mb-4 w-3/4 self-center'>
+                <Link href="#blue-b4-cap" className='text-[2vmax]'>
+                    <b className='hover:underline'>Blue B4 Bottle Cap</b>
+                </Link>
+            </div>
+            <Frame
+                src="/studio/Blue_B4_Cap.jpg"
+                alt="A Blue B4 Bottle Cap Capsule"
+                size={50}
+                styles="self-center w-3/4 max-h-[80%]"
+                subtext="One of Lündhé Audio's two Blue B4 Bottle Cap capsules"
+            />
+            <div className='self-center w-3/4 flex flex-col gap-4'>
+                <div className='text-[1.5vmax]'>
+                    <b>Overview</b>
+                </div>
+                <div>
+                    The Blue B4 Bottle Cap
+                </div>
+                <div className='text-[1.5vmax]'>
+                    <b>What's the Use Case?</b>
+                </div>
+                <div>
+                    The B4 is ideal for
+                </div>
+            </div>
+        </Paragraph>
+    </div>
+    <div className='w-full mt-4 mb-4' id="blue-b5-cap">
+        <Paragraph styles="w-full mr-2 self-start flex flex-col gap-4" align='justify'>
+            <div className='mb-4 w-3/4 self-center'>
+                <Link href="#blue-b5-cap" className='text-[2vmax]'>
+                    <b className='hover:underline'>Blue B5 Bottle Cap</b>
+                </Link>
+            </div>
+            <Frame
+                src="/studio/Blue_B5_Cap.jpg"
+                alt="A Blue B5 Bottle Cap Capsule"
+                size={50}
+                styles="self-center w-3/4 max-h-[80%]"
+                subtext="One of Lündhé Audio's two Blue B5 Bottle Cap capsules"
+            />
+            <div className='self-center w-3/4 flex flex-col gap-4'>
+                <div className='text-[1.5vmax]'>
+                    <b>Overview</b>
+                </div>
+                <div>
+                    The Blue B5 Bottle Cap is based off of
+                </div>
+                <div className='text-[1.5vmax]'>
+                    <b>What's the Use Case?</b>
+                </div>
+                <div>
+                    The B5 is ideal for
+                </div>
+            </div>
+        </Paragraph>
+    </div>
+    <div className='w-full mt-4 mb-4' id="blue-b6-cap">
+        <Paragraph styles="w-full ml-2 self-start flex flex-col gap-4" align='justify'>
+            <div className='mb-4 w-3/4 self-center'>
+                <Link href="#blue-b6-cap" className='text-[2vmax]'>
+                    <b className='hover:underline'>Blue B6 Bottle Cap</b>
+                </Link>
+            </div>
+            <Frame
+                src="/studio/blue_b6_cap.jpg"
+                alt="A Blue B6 Bottle Cap Capsule"
+                size={50}
+                styles="self-center w-3/4 max-h-[80%]"
+                subtext="One of Lündhé Audio's three Blue B6 Bottle Cap capsules"
+            />
+            <div className='self-center w-3/4 flex flex-col gap-4'>
+                <div className='text-[1.5vmax]'>
+                    <b>Overview</b>
+                </div>
+                <div>
+                    The Blue B6 Bottle Cap
+                </div>
+                <div className='text-[1.5vmax]'>
+                    <b>What's the Use Case?</b>
+                </div>
+                <div>
+                    The B6 is ideal for
+                </div>
+            </div>
+        </Paragraph>
+    </div>
+    <div className='w-full mt-4 mb-4' id="blue-b7-cap">
+        <Paragraph styles="w-full mr-2 self-start flex flex-col gap-4" align='justify'>
+            <div className='mb-4 w-3/4 self-center'>
+                <Link href="#blue-b7-cap" className='text-[2vmax]'>
+                    <b className='hover:underline'>Blue B7 Bottle Cap</b>
+                </Link>
+            </div>
+            <Frame
+                src="/studio/Blue_B7_Cap.jpg"
+                alt="A Blue B7 Bottle Cap Capsule"
+                size={50}
+                styles="self-center w-3/4 max-h-[80%]"
+                subtext="One of Lündhé Audio's two Blue B7 Bottle Cap capsules"
+            />
+            <div className='self-center w-3/4 flex flex-col gap-4'>
+                <div className='text-[1.5vmax]'>
+                    <b>Overview</b>
+                </div>
+                <div>
+                    The Blue B7 Bottle Cap is based off of
+                </div>
+                <div className='text-[1.5vmax]'>
+                    <b>What's the Use Case?</b>
+                </div>
+                <div>
+                    The B7 is ideal for
+                </div>
+            </div>
+        </Paragraph>
+    </div>
+    <div className='w-full mt-4 mb-4' id="blue-b8-cap">
+        <Paragraph styles="w-full ml-2 self-start flex flex-col gap-4" align='justify'>
+            <div className='mb-4 self-center w-3/4'>
+                <Link href="#blue-b8-cap" className='text-[2vmax]'>
+                    <b className='hover:underline'>Blue B8 Bottle Cap</b>
+                </Link>
+            </div>
+            <Frame
+                src="/studio/Blue_B8_Cap.jpg"
+                alt="A Blue B8 Bottle Cap Capsule"
+                size={50}
+                styles="self-center w-3/4 max-h-[80%]"
+                subtext="One of Lündhé Audio's three Blue B8 Bottle Cap capsules"
+            />
+            <div className='self-center w-3/4 flex flex-col gap-4'>
+                <div className='text-[1.5vmax]'>
+                    <b>Overview</b>
+                </div>
+                <div>
+                    The Blue B8 Bottle Cap
+                </div>
+                <div className='text-[1.5vmax]'>
+                    <b>What's the Use Case?</b>
+                </div>
+                <div>
+                    The B8 is ideal for
+                </div>
+            </div>
+        </Paragraph>
+    </div>
+    <div className='w-full mt-4 mb-4' id="blue-b9-cap">
+        <Paragraph styles="w-full ml-2 self-start flex flex-col gap-4" align='justify'>
+            <div className='mb-4 self-center w-3/4'>
+                <Link href="#blue-b9-cap" className='text-[2vmax]'>
+                    <b className='hover:underline'>Blue B9 Bottle Cap</b>
+                </Link>
+            </div>
+            <Frame
+                src="/studio/Blue_B9_Cap.jpg"
+                alt="A Blue B9 Bottle Cap Capsule"
+                size={50}
+                styles="self-center w-3/4 max-h-[80%]"
+                subtext="Lündhé Audio's rare Blue B9 Bottle Cap capsule"
+            />
+            <div className='self-center w-3/4 flex flex-col gap-4'>
+                <div className='text-[1.5vmax]'>
+                    <b>Overview</b>
+                </div>
+                <div>
+                    The Blue B9 Bottle Cap
+                </div>
+                <div className='text-[1.5vmax]'>
+                    <b>What's the Use Case?</b>
+                </div>
+                <div>
+                    The B9 is ideal for
+                </div>
+            </div>
+        </Paragraph>
+    </div>
+    <div className='w-full mt-4 mb-4' id="blue-b10-cap">
+        <Paragraph styles="w-full ml-2 self-start flex flex-col gap-4" align='justify'>
+            <div className='mb-4 self-center w-3/4'>
+                <Link href="#blue-b10-cap" className='text-[2vmax]'>
+                    <b className='hover:underline'>Blue B10 Bottle Cap</b>
+                </Link>
+            </div>
+            <Frame
+                src="/studio/Blue_B10_Cap.jpg"
+                alt="A Blue B10 Bottle Cap Capsule"
+                size={50}
+                styles="self-center w-3/4 max-h-[80%]"
+                subtext="Lündhé Audio's rare Blue B10 Bottle Cap capsule"
+            />
+            <div className='self-center w-3/4 flex flex-col gap-4'>
+                <div className='text-[1.5vmax]'>
+                    <b>Overview</b>
+                </div>
+                <div>
+                    The Blue B10 Bottle Cap
+                </div>
+                <div className='text-[1.5vmax]'>
+                    <b>What's the Use Case?</b>
+                </div>
+                <div>
+                    The B10 is ideal for
+                </div>
+            </div>
+        </Paragraph>
+    </div>
+    <div className='w-full mt-4 mb-4' id="blue-b11-cap">
+        <Paragraph styles="w-full ml-2 self-start flex flex-col gap-4" align='justify'>
+            <div className='mb-4 self-center w-3/4'>
+                <Link href="#blue-b11-cap" className='text-[2vmax]'>
+                    <b className='hover:underline'>Blue B11 Bottle Cap</b>
+                </Link>
+            </div>
+            <Frame
+                src="/studio/Blue_B11_Cap.jpg"
+                alt="A Blue B11 Bottle Cap Capsule"
+                size={50}
+                styles="self-center w-3/4 max-h-[80%]"
+                subtext="Lündhé Audio's rare Blue B11 Bottle Cap capsule"
+            />
+            <div className='self-center w-3/4 flex flex-col gap-4'>
+                <div className='text-[1.5vmax]'>
+                    <b>Overview</b>
+                </div>
+                <div>
+                    The Blue B11 Bottle Cap
+                </div>
+                <div className='text-[1.5vmax]'>
+                    <b>What's the Use Case?</b>
+                </div>
+                <div>
+                    The B11 is ideal for
+                </div>
+            </div>
+        </Paragraph>
     </div>
 </Content>
+<ScrollToTop minHeight={100} scrollTo={0}/>

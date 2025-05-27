@@ -182,3 +182,13 @@ div[data-radix-aspect-ratio-wrapper] {
   word-spacing: -0.05em;
   hyphens: auto;
 }
+
+.\[\&_svg\]\:size-4 svg {
+  width: 3vmax !important;
+  height: 3vmax !important;
+}
+
+.scoll-to-top {
+  display: inline-block;
+}
+
