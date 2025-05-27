@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { Separator } from '~/components/ui/separator'
 import { useState } from 'react';
 
 
@@ -30,7 +29,7 @@ export const ContentsItem = ({
 
     return (
         <div
-            className='flex gap-4'
+            className='flex gap-4 h-[1.5vmax] my-2 items-center'
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
         >
@@ -41,7 +40,7 @@ export const ContentsItem = ({
                 text
             }</Link>
             {
-                isHovered ? <ArrowRight className='text-[1.5vmax] text-cyan-500'/> : null
+                isHovered ? <ArrowRight className='text-[1vmax] text-cyan-500'/> : null
             }
         </div>
     )
