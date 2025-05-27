@@ -34,7 +34,7 @@ export const TableOfContents = ({
                     >
                          <h1 className='text-[2.5vmax] text-slate-500/90 hover:text-cyan-500'>Contents</h1>
                     </AccordionTrigger>
-                    <AccordionContent>
+                    <AccordionContent className={`${courierPrime.className}`}>
                             {
                         contents.map((item, idx) => (
                             <li
