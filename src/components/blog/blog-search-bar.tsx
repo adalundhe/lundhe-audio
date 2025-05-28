@@ -23,7 +23,7 @@ export const BlogSearchBar = () => {
     })))
 
     return (
-        <div className="w-full flex items-center md:gap-4 gap-2 h-[4vmax] mb-4">
+        <div className="md:w-full w-[90%] flex items-center md:gap-4 gap-2 h-[4vmax] mb-4">
             <Button
                 className='p-0 justify-self-start'
                 onClick={() => update({
