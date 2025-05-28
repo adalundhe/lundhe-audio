@@ -20,15 +20,15 @@ export const Frame = ({
     subtext?: string,
     side: 'left' | 'center' | 'right'
 }) => ( 
-    <div className={`max-w-[${size}%] w-[${size}%] text-wrap ${styles ? styles  : ""}`}>
-        <div className={`mb-4 max-w-full w-fit flex flex-col ${side === 'left' ? 'items-start' : side === 'center' ? 'items-center' : 'items-end'}`}>
+    <div className={`max-w-[${size}%] w-[${size}%] text-wrap flex flex-col ${styles ? styles  : ""} ${side === 'left' ? 'items-start' : side === 'center' ? 'items-center' : 'items-end'}`}>
+        <div className={`mb-4 max-w-fit w-fit flex flex-col`}>
             <Image
                 src={src}
                 alt={alt}
                 width={"0"}
                 height={"0"}
                 sizes={`${size}vw`}
-                className={`w-full h-fit border-none`}
+                className={`w-full h-fit border-none flex items-center`}
                 placeholder="blur"
                 blurDataURL={blurDataUrl}
             />
