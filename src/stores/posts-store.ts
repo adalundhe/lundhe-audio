@@ -88,8 +88,7 @@ const sortPosts = ({
     direction: SortDirection,
     field: SortField,
 }) => {
-    let sorted = direction == 'ASC' ? posts.sort((a, b) => sortPost(a, b, field)) : posts.sort((a, b) => sortPost(a, b, field)).reverse()
-    
+    const sorted = direction == 'ASC' ? posts.sort((a, b) => sortPost(a, b, field)) : posts.sort((a, b) => sortPost(a, b, field)).reverse()
 
     return ({
         posts: [...sorted.map(post => ({...post}))],
