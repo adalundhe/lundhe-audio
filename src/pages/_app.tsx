@@ -9,6 +9,8 @@ import { NavBar } from "~/components/NavBar";
 import { SettingsProvider } from "~/components/ui/settings-provider";
 import { env } from "~/env";
 import { api } from "~/utils/api";
+
+import {ScrollToTop} from '~/components/ui/scroll-to-top'
 // import {ShopifyProvider} from '@shopify/hydrogen-react';
 // import {CartProvider, useCart} from '@shopify/hydrogen-react';
 // import { type CountryCode, type LanguageCode } from "@shopify/hydrogen-react/storefront-api-types";
@@ -52,6 +54,7 @@ const MyApp: AppType<{ _: Session | null }> = ({
             <Component {...pageProps} />
           </div>
           <Footer />
+          <ScrollToTop minHeight={100} scrollTo={0}/>
         {/* </CartProvider>
       </ShopifyProvider> */}
     </>
