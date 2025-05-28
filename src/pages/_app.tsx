@@ -9,6 +9,8 @@ import { NavBar } from "~/components/NavBar";
 import { SettingsProvider } from "~/components/ui/settings-provider";
 import { env } from "~/env";
 import { api } from "~/utils/api";
+
+import {ScrollToTop} from '~/components/ui/scroll-to-top'
 // import {ShopifyProvider} from '@shopify/hydrogen-react';
 // import {CartProvider, useCart} from '@shopify/hydrogen-react';
 // import { type CountryCode, type LanguageCode } from "@shopify/hydrogen-react/storefront-api-types";
@@ -40,8 +42,8 @@ const MyApp: AppType<{ _: Session | null }> = ({
           
         > */}
           <Head>
-            <title>Lundhe Audio</title>
-            <meta name="description" content="Lundhe Audio, an Austin based post-tracking mixing, mastering, sound design, and commercial audio studio." />
+            <title>Lündhé Audio</title>
+            <meta name="description" content="Lündhé Audio, an Austin based post-tracking mixing, mastering, sound design, and commercial audio studio." />
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <Script src="/theme.js" strategy="beforeInteractive" />
@@ -52,6 +54,7 @@ const MyApp: AppType<{ _: Session | null }> = ({
             <Component {...pageProps} />
           </div>
           <Footer />
+          <ScrollToTop minHeight={100} scrollTo={0}/>
         {/* </CartProvider>
       </ShopifyProvider> */}
     </>

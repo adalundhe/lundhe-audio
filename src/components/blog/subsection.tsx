@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const Header = ({
+export const Subsection = ({
     text,
     description,
     section,
@@ -12,7 +12,7 @@ export const Header = ({
     side: 'left' | 'right'
 }) => <div className="min-w-full flex flex-col justify-center items-center mb-4">
     <div className="max-w-[75%] w-full flex flex-col">
-        <p className={`text-[3vmax] w-full ${side === 'left' ? 'text-left' : 'text-right'}`} id={section}>{
+        <p className={`text-[2vmax] w-full ${side === 'left' ? 'text-left' : 'text-right'}`} id={section}>{
             
             <Link href={`#${section}`} className="hover:underline text-cyan-500">
                 {text}

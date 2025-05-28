@@ -28,23 +28,23 @@ export default function Home() {
   }[] = useMemo(() => [
     {
       src: "/studio/under_desk_gear.jpeg",
-      altTxt: "A photo of Lundhe Audio's analog equipment - including Retro Instruments, Buzz Audio, Empirical Labs, Manley, and more."
+      altTxt: "A photo of Lündhé Audio's analog equipment - including Retro Instruments, Buzz Audio, Empirical Labs, Manley, and more."
     },
     {
       src: "/studio/chandler_redd_mic.jpeg",
-      altTxt: "A photo of Lundhe Audio's Chandler REDD mic."
+      altTxt: "A photo of Lündhé Audio's Chandler REDD mic."
     },
     {
       src: "/studio/grp_a4.jpeg",
-      altTxt: "A photo of Lundhe Audio's GRP A4 synth."
+      altTxt: "A photo of Lündhé Audio's GRP A4 synth."
     },
     {
       src: "/studio/modular_01.jpeg",
-      altTxt: "A photo of one of many of Lundhe Audio's Eurorack synthesizers."
+      altTxt: "A photo of one of many of Lündhé Audio's Eurorack synthesizers."
     },
     {
       src: "/studio/moog_and_pedals.jpeg",
-      altTxt: "A photo of Lundhe Audio's Moog Model D and two Chase Bliss pedals."
+      altTxt: "A photo of Lündhé Audio's Moog Model D and two Chase Bliss pedals."
     }
   ], [])
 
@@ -53,7 +53,7 @@ export default function Home() {
       <Layout>
         <Card className="w-full md:w-3/4 h-3/4 rounded-none border-none shadow-none flex flex-col items-center justify-center">
         <CardHeader className="flex justify-center items-center p-0">
-            <CardTitle className="text-2xl md:text-4xl">Lundhe Audio</CardTitle>
+            <CardTitle className="text-2xl md:text-4xl">Lündhé Audio</CardTitle>
             <CardDescription>Sound as it should be.</CardDescription>
         </CardHeader>
         <CardContent className="p-0 w-[100%] flex flex-col items-center mb-4">

@@ -196,7 +196,7 @@ export const contactRouter = createTRPCRouter({
         if (input.contactConsent === 'accepted'){
             const textResponse = await sendSMSMessage({
                 toPhone: input.phone,
-                message: "Thanks for contacting Lundhe Audio! We've received your request! We usually respond within about one business day.",
+                message: "Thanks for contacting Lündhé Audio! We've received your request! We usually respond within about one business day.",
                 client: ctx.twilio,
             })
 

@@ -2,6 +2,8 @@ import type { MDXComponents } from 'mdx/types';
  
 import { Check, Clipboard } from 'lucide-react';
 import { DetailedHTMLProps, HTMLAttributes, useRef, useState } from 'react';
+import Link from 'next/link'
+
 
 export default function Pre({
   children,

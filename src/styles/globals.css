@@ -177,3 +177,26 @@ div[data-radix-aspect-ratio-wrapper] {
 }
 
 
+.paragraph-text {
+  text-justify: distribute;
+  word-spacing: -0.05em;
+  hyphens: auto;
+}
+
+.\[\&_svg\]\:size-4 svg {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+svg {
+  width: none !important;
+  height: none !important;
+}
+
+
+.scoll-to-top {
+  display: inline-block;
+}
+
+
+
