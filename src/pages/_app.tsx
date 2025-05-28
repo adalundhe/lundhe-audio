@@ -45,8 +45,8 @@ const MyApp: AppType<{ _: Session | null }> = ({
             <title>Lündhé Audio</title>
             <meta name="description" content="Lündhé Audio, an Austin based post-tracking mixing, mastering, sound design, and commercial audio studio." />
             <link rel="icon" href="/favicon.ico" />
+            <script src="/theme.js" async/>
           </Head>
-          <Script src="/theme.js" strategy="beforeInteractive" />
           <Script src={`https://www.google.com/recaptcha/api.js?render=${env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY}`} async/>
           
           <NavBar />

@@ -6,7 +6,7 @@ export const Paragraph = ({
     side = 'left',
     align = 'justify'
 }: {
-    children: string | JSX.Element ,
+    children: string | JSX.Element | JSX.Element[],
     styles?: string,
     side: 'left' | 'center' | 'right'
     align: 'left' | 'center' | 'right' | 'justify'
