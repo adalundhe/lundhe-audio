@@ -1,5 +1,4 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
 import postsData from "~/data/posts.json";
 
 
@@ -97,57 +96,52 @@ const sortPosts = ({
 
 
 export const usePostsStore = create<PostsState>()(
-    persist(
-        (set, get) => ({
-            posts: postsData.sort((a, b) => sortPost(a, b, "date")).reverse() as Blog[],
-            filters: [],
-            operations: [],
-            direction: "DESC",
-            field: "date",
-            query: "",
-            update: (update: Update) => {
-                         
-    
-                const filters = get().filters
-                if (update.type === 'filter' && !filters.includes(update.value)){
-                    filters.push(update.value)
-                } else if (update.type === 'filter') {
-                    filters.splice(
-                        filters.indexOf(update.value),
-                        1
-                    )
-                }
+    (set, get) => ({
+        posts: postsData.sort((a, b) => sortPost(a, b, "date")).reverse() as Blog[],
+        filters: [],
+        operations: [],
+        direction: "DESC",
+        field: "date",
+        query: "",
+        update: (update: Update) => {
+                        
 
-                let direction = get().direction
-                if (update.type === 'sort') {
-                    direction = update.value as SortDirection
-                }
+            const filters = get().filters
+            if (update.type === 'filter' && !filters.includes(update.value)){
+                filters.push(update.value)
+            } else if (update.type === 'filter') {
+                filters.splice(
+                    filters.indexOf(update.value),
+                    1
+                )
+            }
 
-                const posts = postsData;
-                const query = get().query
-                const field = update.field ?? get().field
-                let state = sortPosts({
-                    posts: posts,
-                    direction: direction,
-                    field: field,
+            let direction = get().direction
+            if (update.type === 'sort') {
+                direction = update.value as SortDirection
+            }
+
+            const posts = postsData;
+            const query = get().query
+            const field = update.field ?? get().field
+            let state = sortPosts({
+                posts: posts,
+                direction: direction,
+                field: field,
+            })
+
+            state = {
+                ...state,
+                ...filterPosts({
+                    posts: state.posts,
+                    filters: filters,
+                    query: update.type === 'search' ? update.value : query
                 })
+            }
 
-                state = {
-                    ...state,
-                    ...filterPosts({
-                        posts: state.posts,
-                        filters: filters,
-                        query: update.type === 'search' ? update.value : query
-                    })
-                }
 
-    
-                set(() => (state))
+            set(() => (state))
 
-            },
-        }),
-        {
-            name: 'posts-storage'
-        }
-    )
+        },
+    })
 )
