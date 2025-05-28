@@ -28,10 +28,15 @@ export const ModeToggle = ({
         <DropdownMenuTrigger asChild className="mr-4">
           <Button className="focus:outline-none border-transparent p-0">
             <div className="h-full flex items-center justify-end w-[50px]">
+              <div className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 xl:w-[1.5vmax] xl:h-[1.5vmax] lg:w-[2vmax] lg:h-[2vmax] md:w-[2.5vmax] md:h-[2.5vmax] w-[3vmax] h-[3vmax]  flex items-center justify-center">
 
-              <Sun size={26} className="focus:outline-none border-transparent rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon size={26} className="focus:outline-none border-transparent absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            </div>
+                <Sun className="focus:outline-none border-transparent" />
+              </div>
+           
+              <div className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 xl:w-[1.5vmax] xl:h-[1.5vmax] lg:w-[2vmax] lg:h-[2vmax] md:w-[2.5vmax] md:h-[2.5vmax] w-[3vmax] h-[3vmax] flex items-center justify-center">
+                <Moon className="focus:outline-none border-transparent" />
+              </div>
+             </div>
             <span className="sr-only">Toggle theme</span>
           </Button>
         </DropdownMenuTrigger>

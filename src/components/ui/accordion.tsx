@@ -30,13 +30,15 @@ const AccordionTrigger = React.forwardRef<
       <AccordionPrimitive.Trigger
         ref={ref}
         className={cn(
-          "flex flex-1 items-center justify-start py-4 text-sm font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",
+          "flex flex-1 items-center justify-start py-4 text-sm font-medium transition-all hover:underline [&[data-state=open]>div]:rotate-180",
           className
         )}
         {...props}
       >
         {children}
-        <ChevronDownIcon className="ml-2 h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" />
+        <div className="w-[1vmax] h-[1vmax] flex flex-col items-center justify-center ml-2 shrink-0 text-muted-foreground transition-transform duration-200">
+          <ChevronDownIcon  />
+        </div>
       </AccordionPrimitive.Trigger>
       </> 
       : 
@@ -44,12 +46,14 @@ const AccordionTrigger = React.forwardRef<
         <AccordionPrimitive.Trigger
           ref={ref}
           className={cn(
-            "flex flex-1 items-center justify-end py-4 text-sm font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",
+            "flex flex-1 items-center justify-end py-4 text-sm font-medium transition-all hover:underline [&[data-state=open]>div]:rotate-180",
             className
           )}
           {...props}
         >
-          <ChevronDownIcon className="mr-2 h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" />
+          <div className="w-[1vmax] h-[1vmax] flex flex-col items-center justify-center mr-2 shrink-0 text-muted-foreground transition-transform duration-200">
+            <ChevronDownIcon  />
+          </div>
           {children}
         </AccordionPrimitive.Trigger>
       </>

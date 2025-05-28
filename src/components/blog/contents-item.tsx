@@ -29,7 +29,7 @@ export const ContentsItem = ({
 
     return (
         <div
-            className='flex gap-4 h-[1.5vmax] my-2 items-center'
+            className='flex gap-4 w-full h-[1.5vmax] my-2 items-center'
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
         >
@@ -40,7 +40,12 @@ export const ContentsItem = ({
                 text
             }</Link>
             {
-                isHovered ? <ArrowRight className='text-[1vmax] text-cyan-500'/> : null
+                isHovered
+                ?  
+                <div className='w-[1vmax] h-[1vmax]'>
+                    <ArrowRight className='text-cyan-500'/>
+                </div>
+                : null
             }
         </div>
     )
