@@ -97,7 +97,8 @@ const sortPosts = ({
 
 
 export const usePostsStore = create<PostsState>()(
-    (set, get) => ({
+    persist(
+        (set, get) => ({
             posts: postsData.sort((a, b) => sortPost(a, b, "date")).reverse() as Blog[],
             filters: [],
             operations: [],
@@ -144,5 +145,9 @@ export const usePostsStore = create<PostsState>()(
                 set(() => (state))
 
             },
-        })
+        }),
+        {
+            name: 'posts-storage'
+        }
+    )
 )
