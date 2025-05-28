@@ -97,26 +97,16 @@ const sortPosts = ({
 
 
 export const usePostsStore = create<PostsState>()(
-    persist(
-        (set, get) => ({
-            posts: postsData as Blog[],
+    (set, get) => ({
+            posts: postsData.sort((a, b) => sortPost(a, b, "date")).reverse() as Blog[],
             filters: [],
             operations: [],
             direction: "DESC",
             field: "date",
             query: "",
             update: (update: Update) => {
-
-
-
-                const operations = get().operations
-                operations.push(update.type)
-
                          
-                
-                const field = update.field ?? get().field
-       
-
+    
                 const filters = get().filters
                 if (update.type === 'filter' && !filters.includes(update.value)){
                     filters.push(update.value)
@@ -134,6 +124,7 @@ export const usePostsStore = create<PostsState>()(
 
                 const posts = postsData;
                 const query = get().query
+                const field = update.field ?? get().field
                 let state = sortPosts({
                     posts: posts,
                     direction: direction,
@@ -150,13 +141,8 @@ export const usePostsStore = create<PostsState>()(
                 }
 
     
-
                 set(() => (state))
 
             },
-        }),
-        {
-            name: 'posts-storage'
-        }
-    )
+        })
 )
