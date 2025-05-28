@@ -40,24 +40,24 @@ export const BlogNavCard = ({
                     <div className='grid grid-cols-8'>
 
                         <h1 className='col-span-6 flex items-start text-2xl w-full'>{title}</h1>
-                        <div className='col-span-2 items-start w-full'>
-                            <div className={`w-full text-[1.5vmax] flex justify-end items-center space-x-2 ${isHovered ? 'hover:text-cyan-500' : 'text-slate-900/80 dark:text-neutral-100/80'}`}>
+                        <div className='col-span-2 flex items-start justify-end w-full'>
+                            <div className={`w-fit flex justify-end items-center space-x-2 ${isHovered ? 'hover:text-cyan-500' : 'text-slate-900/80 dark:text-neutral-100/80'}`}>
 
                                 <Link href={`/blog/${link}`} className="cursor-pointer">
-                                    <p>
+                                    <p className='lg:text-[1.5vmax] md:text-[2vmax] text-[2.5vmax]'>
                                         read
                                     </p>
                                 </Link>
-                                <div className='h-[1.5vmax] w-[1.5vmax]'>
+                                <div className='w-full'>
                                 {
-                                    isHovered ? <BookOpen/> : <Book/>
+                                    isHovered ? <BookOpen className='md:h-[1.5vmax] md:w-[1.5vmax] h-[2vmax] w-[2vmax]'/> : <Book className='md:h-[2vmax] md:w-[2vmax] h-[2vmax] w-[2vmax]'/>
                                 }
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className='grid grid-cols-8'>
-                        <p className='col-span-6 flex items-start justify-start'>{description}</p>
+                        <p className='col-span-6 flex items-start justify-start text-[1.5vmax]'>{description}</p>
                         <p className='col-span-2 flex justify-end items-start text-md text-slate-900/50 dark:text-neutral-100/50'>{date}</p>
                     </div>
                     <div className='flex my-4 gap-4 w-full md:justify-start items-center justify-center'>
