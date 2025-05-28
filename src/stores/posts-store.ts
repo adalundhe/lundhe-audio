@@ -112,6 +112,11 @@ export const usePostsStore = create<PostsState>()(
                 const operations = get().operations
                 operations.push(update.type)
 
+                         
+                
+                const field = update.field ?? get().field
+       
+
                 const filters = get().filters
                 if (update.type === 'filter' && !filters.includes(update.value)){
                     filters.push(update.value)
@@ -129,23 +134,22 @@ export const usePostsStore = create<PostsState>()(
 
                 const posts = postsData;
                 const query = get().query
-                let state = filterPosts({
+                let state = sortPosts({
                     posts: posts,
-                    filters: filters,
-                    query: update.type === 'search' ? update.value : query
-                }) 
+                    direction: direction,
+                    field: field,
+                })
 
-             
-                
-                const field = update.field ?? get().field
                 state = {
                     ...state,
-                    ...sortPosts({
+                    ...filterPosts({
                         posts: state.posts,
-                        direction: direction,
-                        field: field,
+                        filters: filters,
+                        query: update.type === 'search' ? update.value : query
                     })
                 }
+
+    
 
                 set(() => (state))
 
