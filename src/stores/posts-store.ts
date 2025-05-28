@@ -71,7 +71,7 @@ const sortPost = (postA: Blog, postB: Blog, field: SortField) => {
         case 'title':
             return postA[field].localeCompare(postB[field])
         case 'date':
-            return Date.parse(postA[field]) - Date.parse(postB[field])
+            return postA[field].localeCompare(postB[field])
         default:
             return 0
     }
