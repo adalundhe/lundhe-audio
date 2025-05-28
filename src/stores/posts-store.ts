@@ -24,7 +24,7 @@ type Operation = 'filter' | 'sort' | 'search'
 
 type Update = {
     type: Operation
-    value: string | SortDirection
+    value: string
     field?: SortField
 }
 
