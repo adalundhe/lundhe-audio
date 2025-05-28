@@ -23,7 +23,7 @@ export function ScrollToTop({
 
   return (
     <div
-        className={`fixed left-0 md:left-3 lg:left-6 flex transition-all ease-in-out duration-1000 ${visible ? 'bottom-10' : '-bottom-80'}`}
+        className={`fixed -left-1 md:left-4 lg:left-10 flex transition-all ease-in-out duration-1000 ${visible ? 'bottom-10' : '-bottom-80'}`}
     >
       
         <Button
@@ -35,9 +35,7 @@ export function ScrollToTop({
                 })
             }
         >
-            <span className="scroll-to-top">
-                <CircleArrowUp className="scroll-to-top-svg"/>
-            </span>
+          <CircleArrowUp size={26} className="scroll-to-top-svg"/>
         </Button>
 
     </div> 

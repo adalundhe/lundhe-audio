@@ -23,12 +23,15 @@ export const ModeToggle = ({
   const { updateMode } = useSettings()
  
   return (
-    <div className={`self-${align} mr-4 flex flex-col items-center justify-center`}>
+    <div className={`self-${align} mr-4 flex flex-col items-center justify-center h-full`}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild className="mr-4">
-          <Button variant="outline" className="w-[1vmax] h-[1vmax]" size="icon">
-            <Sun className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <Button className="focus:outline-none border-transparent p-0">
+            <div className="h-full flex items-center justify-end w-[50px]">
+
+              <Sun size={26} className="focus:outline-none border-transparent rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon size={26} className="focus:outline-none border-transparent absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            </div>
             <span className="sr-only">Toggle theme</span>
           </Button>
         </DropdownMenuTrigger>

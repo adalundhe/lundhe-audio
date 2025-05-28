@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { type ContentsListing, ContentsItem } from './contents-item'
  
 import {
@@ -21,8 +20,6 @@ export const TableOfContents = ({
 }: {
     contents: ContentsListing[]
 }) => {
-
-    const [open, _] = useState(false)
 
     return (
         <div className='md:w-1/2 w-full mb-4 md:mt-4'>

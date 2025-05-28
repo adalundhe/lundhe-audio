@@ -184,9 +184,15 @@ div[data-radix-aspect-ratio-wrapper] {
 }
 
 .\[\&_svg\]\:size-4 svg {
-  width: 2.5vmax !important;
-  height: 2.5vmax !important;
+  width: 100% !important;
+  height: 100% !important;
 }
+
+svg {
+  width: none !important;
+  height: none !important;
+}
+
 
 .scoll-to-top {
   display: inline-block;
