@@ -1,25 +1,26 @@
-import { Button, ButtonProps } from "~/components/ui/button";
-import { useEffect, useState } from "react";
+import { Button, type ButtonProps } from "~/components/ui/button";
+import { useEffect, useRef, useState } from "react";
 import { CircleArrowUp } from 'lucide-react'
 
 export function ScrollToTop({
   minHeight, // Height from which button will be visible
   scrollTo, // Height to go on scroll to top
-  ...props
 }: ButtonProps & { minHeight?: number; scrollTo?: number }) {
   const [visible, setVisible] = useState(false);
+
+  const minHeightRef = useRef(minHeight ?? 0)
 
   useEffect(() => {
     const onScroll = () => {
         console.log('SCROLL', document.documentElement.scrollTop, visible)
-      setVisible(document.documentElement.scrollTop >= (minHeight ?? 0));
+      setVisible(document.documentElement.scrollTop >= minHeightRef.current);
     };
 
     onScroll();
     document.addEventListener("scroll", onScroll);
 
     return () => document.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [minHeightRef, visible]);
 
   return (
     <div

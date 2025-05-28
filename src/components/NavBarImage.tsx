@@ -2,27 +2,30 @@
 import { Avatar, AvatarImage } from "~/components/ui/avatar";
 import { NavigationMenuLink } from "~/components/ui/navigation-menu";
 import { useSettings } from "~/hooks/use-settings";
-import { useEffect } from "react";
-import { Mode } from '~/components/ui/settings-provider';
+import { useEffect, useState } from "react";
+import { type Mode } from '~/components/ui/settings-provider';
 
 
 export const NavBarImage = () => {
-    let {mode} = useSettings()
+    const {mode} = useSettings()
+    const [navBarMode, setMode] = useState<typeof mode>(mode)
     
     useEffect(() => {
 
         if (mode === 'system') {
-            mode = localStorage.getItem('ui-mode') as Mode
+            setMode(localStorage.getItem('ui-mode') as Mode)
+        } else {
+            setMode(mode)
         }
 
-    }, [mode])
+    }, [mode, setMode])
     
     return (
 
         <div className="px-4">
             <Avatar className="w-[min(80px,calc(100vmin/4))] h-[min(80px,calc(100vmin/4))]">
                 <NavigationMenuLink href="/" className="cursor-pointer">     
-                    <AvatarImage src={mode === 'light' ? "/lundhe_audio_logo.png" : "/lundhe_audio_inverted.png"}/>
+                    <AvatarImage src={navBarMode === 'light' ? "/lundhe_audio_logo.png" : "/lundhe_audio_inverted.png"}/>
                 </NavigationMenuLink>
             </Avatar>
         </div>

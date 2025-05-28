@@ -1,23 +1,18 @@
-import {Top} from '~/components/blog/top'
-import {Content} from '~/components/blog/content'
 import {Paragraph} from '~/components/blog/paragraph'
-import {Header} from '~/components/blog/header'
-import {Separator} from '~/components/ui/separator'
+import {BlogSection} from '~/components/blog/blog-section'
 import {Frame} from '~/components/blog/frame'
 import {BlogLink} from '~/components/blog/blog-link'
-import {Subsection} from '~/components/blog/subsection'
+import {BlogSplitCard} from '~/components/blog/blog-split-card'
+import {BlogSubsectionCard} from '~/components/blog/blog-subsection-card'
 import {TableOfContents} from '~/components/blog/table-of-contents'
-import Link from 'next/link'
 
 
-<Separator/>
-<Top/>
-<Header
-    text="The Blue Bottle"
+<BlogSection
+    title="The Blue Bottle"
     description="Taking a look a Blue's legendary modular mic masterpiece"
     section="intro"
-/>
-<Content>
+
+>
     <TableOfContents contents={[
         {
             text: "Intro",
@@ -81,6 +76,10 @@ import Link from 'next/link'
         {
             text: "The Blue Bottle at Lündhé Audio",
             slug: "lundhe-audio-blue-bottle"
+        },
+        {
+            text: "Personal Thoughts and Hot Takes",
+            slug: "personal-thoughts"
         }
     ]} 
     />
@@ -90,21 +89,20 @@ import Link from 'next/link'
         claim to fame was as a prolific designer and manufacturer of high-end professional microphones and preamps
         used in countless recordings during the '90s and '00s.
     </Paragraph>
-    <div className='flex flex-row gap-4 items-center mb-4'>
-        <Frame
-            src="/studio/blue_bottle_mic.jpg"
-            alt="A Blue Bottle microphone with the B-11 Bottle Cap Capsule"
-            size={50}
-            styles="self-center w-1/2"
-            subtext="One of Lündhé Audio's two Blue Bottle microphones"
-        />
-        <Paragraph styles="w-1/2 self-center" align='left'>
-            Of these modern classics, the hulking Bottle valve condenser microphone was the crown jewel. Featuring
-            Blue's yet-to-be-replicated modular "bottle cap" capsule system and built using premium components, the Bottle
-            was manufacturered primarily during the '00s and '10s, being silently discontinued at some point between 
-            2017-2020 after Logitech acquired the brand.
-        </Paragraph>
-    </div>
+    <BlogSplitCard
+        left={<Frame
+                src="/studio/blue_bottle_mic.jpg"
+                alt="A Blue Bottle microphone with the B-11 Bottle Cap Capsule"
+                size={50}
+                subtext="One of Lündhé Audio's two Blue Bottle microphones"
+            />}
+        right={<Paragraph align='left'>
+                Of these modern classics, the hulking Bottle valve condenser microphone was the crown jewel. Featuring
+                Blue's yet-to-be-replicated modular "bottle cap" capsule system and built using premium components, the Bottle
+                was manufacturered primarily during the '00s and '10s, being silently discontinued at some point between 
+                2017-2020 after Logitech acquired the brand.
+            </Paragraph>}
+    />
     <Paragraph>
         The Bottle never achieved the same level of popularity as
         many of its contemporaries - mostly due to an eyewatering MSRP of $4000 USD (in '00s dollars at that) - 
@@ -130,550 +128,468 @@ import Link from 'next/link'
         <BlogLink to="https://www.sweetwater.com/store/detail/BottleCapB9--blue-microphones-bottle-cap-11">B11</BlogLink> bottle caps - are 
         practically unobtanium, usually only showing up as parts of (very expensive) used complete capsule sets.
     </Paragraph>
-</Content>
-<Top/>
-<Subsection
-    text="The Bottle Caps"
+</BlogSection>
+<BlogSection
+    title="The Bottle Caps"
     description="A closer look at each bottle cap capsule"
     section="bottle-caps"
-    side="right"
-/>
-<Content styles='gap-4'>
+    position="right"
+    type='subsection'
+>
     <Paragraph styles='mb-4'>
         Each Bottle Cap is its own unique entity with its own character and utility. Where possible, we'll do our best to cite which
         famous microphones used as the basis for each capsule.
     </Paragraph>
-    <div className='mt-4 mb-4 w-full' id="blue-b0-cap">
-        <Paragraph styles="w-full self-start text-tighter flex flex-col gap-4" align='justify'>
-            <div className='mb-4 self-center w-3/4 text-center'>
-                <BlogLink to="#blue-b0-cap" styles='text-[2vmax]' linkType='internal'>
-                    <b className='hover:underline'>Blue B0 Bottle Cap</b>
-                </BlogLink>
-            </div>
-            <Frame
-                src="/studio/Blue_B0_Cap.jpg"
-                alt="A Blue B0 Bottle Cap Capsule"
-                size={50}
-                side='center'
-                styles="self-center w-3/4 max-h-[80%]"
-                subtext="One of Lündhé Audio's two Blue B0 Bottle Cap capsules"
-            />
-            <div className='self-center w-3/4 flex flex-col gap-4'>
-                <div className='text-[1.5vmax]'>
-                    <b>Overview</b>
-                </div>
-                <div>
-                    The Blue B0 Bottle Cap is Blue's take on the legendary
-                    <BlogLink to="https://recordinghacks.com/microphones/Telefunken/ElaM-251">Telefunken ELA M 251</BlogLink>,
-                    arguably one-of-if-not-the most popular vocal microphones of all time. It has a "silky" and "detailed" sound
-                    that makes it ideal for capturing the nuances of vocalists and acoustic instrumentation.
-                </div>
-                <div className='text-[1.5vmax]'>
-                    <b>What's the Use Case?</b>
-                </div>
-                <div>
-                    The B0 manages to achieve the ELA M 251's sparkling top without sounding harsh. For that reason alone, we love
-                    to use it on vocalists at Lündhé Audio. We also often use it on acoustic strummed instruments or percussion, where 
-                    its presence gives transients a natural clarity.
-                    <br/>
-                    Since its debut, the B0 capsule remains one of the better sounding ELA M 251 inspired capsules - it lacks the sputtery
-                    sizzle plagues cheaper clones while having reduced noise when compared to vintage 251s. Telefunken has since reissued the
-                    ELA M 251 as the 251E, and while that reissue is stellar - we personally find Blue's interpretation equally convincing.
-                    <br/>
-                    Unfortunately, unlike a real 251 (or its reissue), the B0 bottle cap is cardiod-only.
-                </div>
-            </div>
-        </Paragraph>
-    </div>
-    <div className='mb-4 w-full' id="blue-b1-cap">
-        <Paragraph styles="w-full self-start flex flex-col gap-4" align='justify'>
-            <div className='mb-4 self-center w-3/4 text-center'>
-                <BlogLink to="#blue-b1-cap" styles='text-[2vmax]' linkType='internal'>
-                    <b className='hover:underline'>Blue B1 Bottle Cap</b>
-                </BlogLink>
-            </div>
-            <Frame
-                src="/studio/blue_b1_cap.jpg"
-                alt="A Blue B1 Bottle Cap Capsule"
-                size={50}
-                side='center'
-                styles="self-center w-3/4 max-h-[80%]"
-                subtext="One of Lündhé Audio's three Blue B1 Bottle Cap capsules"
-            />
-            <div className='self-center w-3/4 flex flex-col gap-4'>
-                <div className='text-[1.5vmax]'>
-                    <b>Overview</b>
-                </div>
-                <div>
-                    The Blue B1 Bottle Cap is based off of the <BlogLink to="recordinghacks.com/microphones/Schoeps/M-221-B">Schoeps 221B</BlogLink> and is a small diaphragm cardiod condenser capsule. The B1
-                    focuses on clarity and precision - coloring the sound little if at all.
-                </div>
-                <div className='text-[1.5vmax]'>
-                    <b>What's the Use Case?</b>
-                </div>
-                <div>
-                    The B1 is ideal for recording delicate, nuanced sources such as acoustic guitars, strings, or acoustic percussion. At Lündhé Audio,
-                    we often utilize the B1 for close-micing sources or for acoustic-instrument based sampling, as its speed and transparency are unrivaled.
-                    The cardiod pattern <i>does</i> mean a more "focused" sound than the 
-                    <BlogLink to="#blue-b4-cap" linkType='internal'>B4 bottle cap</BlogLink>, but that focus also allows sounds 
-                    it picks up to cut through any mix with a natural ease. 
-                    <br/>
-                    For those looking to "try out" the B1 Bottle Cap without committing to a full Blue Bottle microphone setup, the superb
-                    <BlogLink to="https://www.soundonsound.com/reviews/blue-hummingbird">Blue Hummingbird</BlogLink> can be found used for often
-                    less that $200 USD and has a unique swivel-head that allows for far more flexible placemen than the massive Blue Bottle. In fact,
-                    we like the B1 Bottle Cap and Hummingbird Microphone so much at Lündhé Audio that we have three!
-                </div>
-            </div>
-        </Paragraph>
-    </div>
-    <div className='mb-4 w-full' id="blue-b2-cap">
-        <Paragraph styles="w-full self-start flex flex-col gap-4" align='justify'>
-            <div className='mb-4 self-center w-3/4 text-center'>
-                <BlogLink to="#blue-b2-cap" styles='text-[2vmax]' linkType='internal'>
-                    <b className='hover:underline'>Blue B2 Bottle Cap</b>
-                </BlogLink>
-            </div>
-              <Frame
-                src="/studio/Blue_B2_Cap.jpg"
-                alt="A Blue B2 Bottle Cap Capsule"
-                size={50}
-                side='center'
-                styles="self-center w-3/4 max-h-[80%]"
-                subtext="One of Lündhé Audio's two Blue B2 Bottle Cap capsules"
-            />
-            <div className='self-center w-3/4 flex flex-col gap-4'>
-                <div className='text-[1.5vmax]'>
-                    <b>Overview</b>
-                </div>
-                <div>
-                    The Blue B2 Bottle Cap is the dark horse of the Blue bottle cap family, based on the famous
-                    <BlogLink to="https://vintageking.com/rca-44-a?srsltid=AfmBOororqOIeYXZzlLmoY-jtKmsrIiMawehjRppWDXq5kt9PMZBe72C">RCA 44 Ribbon Microphone</BlogLink>.
-                    The capsule is a figure-eight pattern and shares the velvety, rich sound of classic ribbon microphones (without the 
-                    worries of damaging the ribbon).
-                </div>
-                <div className='text-[1.5vmax]'>
-                    <b>What's the Use Case?</b>
-                </div>
-                <div >
-                    The B2 is a challeing capsule in that it's effectively a condenser microphone capsule voiced to act 
-                    like a classic ribbon microphone. It brings aspects of each of these types of microphones, which makes it unique
-                    but also endows it with the steepest learning curve of any of Blue's bottle caps.
-                    <br/>
-                    At first, you'll be tempted to use the B2 bottle cap either as a condenser or drop-in ribbon replacement. This will
-                    lead to some frustration, as the B2 bottle cap is simultaneously both of these things and neither of them. At 
-                    Lündhé Audio, we've personally encountered the greatest success when utilizing the B2 bottle cap as a room mic or 
-                    on guitar cabs. Using it to mic up acoustic stringed instruments can lead to muddy sound.
-                    <br/>
-                    We've likewise had great success with the B2 bottle cap as a kick mic, where its decidedly vintage sound is greate at mellowing
-                    out the snap of modern kick drums.
-                </div>
-            </div>
-        </Paragraph>
-    </div>
-    <div className='mb-4 w-full' id="blue-b3-cap">
-        <Paragraph styles="w-full self-start flex flex-col gap-4" align='justify'>
-            <div className='mb-4 self-center w-3/4 text-center'>
-                <BlogLink to="#blue-b3-cap" styles='text-[2vmax]' linkType='internal'>
-                    <b className='hover:underline'>Blue B3 Bottle Cap</b>
-                </BlogLink>
-            </div>
-            <Frame
-                src="/studio/Blue_B3_Cap.jpg"
-                alt="A Blue B3 Bottle Cap Capsule"
-                size={50}
-                side='center'
-                styles="self-center w-3/4 max-h-[80%]"
-                subtext="One of Lündhé Audio's two Blue B3 Bottle Cap capsules"
-            />
-            <div className='self-center w-3/4 flex flex-col gap-4'>
-                <div className='text-[1.5vmax]'>
-                    <b>Overview</b>
-                </div>
-                <div>
-                    The Blue B3 Bottle Cap is based off of <BlogLink to="https://micpedia.com/microphone/neumann-tlm-170-i/">Neumann TLM170</BlogLink> - a transformerless FET microphone designed for 
-                    transparency and low self noise. The B4 bottle cap has a cardiod pickup pattern and neutral frequency
-                    response.
-                </div>
-                <div className='text-[1.5vmax]'>
-                    <b>What's the Use Case?</b>
-                </div>
-                <div>
-                    The B3 is shockingly transparent for a Blue microphone capsule. While it's often tempting to go for
-                    more "exciting" options like the <BlogLink to="#blue-b0-cap" linkType="internal">B0 capsule</BlogLink> or 
-                    <BlogLink to="#blue-b10-cap" linkType="internal">B10 capsule</BlogLink>, the B3 bottle cap offers a clean, clear, honest
-                    capture that ensures later processing can work to the best of its ability.
-                    <br/>
-                    At Lündhé Audio, we often use the B3 capsule to record acousting instruments and foley material. The B3 capsule simply
-                    stays out of the way, letting us work with recorded material unimpeded.
-                </div>
-            </div>
-        </Paragraph>
-    </div>
-    <div className='w-full mb-4' id="blue-b4-cap">
-        <Paragraph styles="w-full self-start flex flex-col gap-4" align='justify'>
-            <div className='mb-4 self-center w-3/4 text-center'>
-                <BlogLink to="#blue-b4-cap" styles='text-[2vmax]' linkType='internal'>
-                    <b className='hover:underline'>Blue B4 Bottle Cap</b>
-                </BlogLink>
-            </div>
-            <Frame
-                src="/studio/Blue_B4_Cap.jpg"
-                alt="A Blue B4 Bottle Cap Capsule"
-                size={50}
-                side='center'
-                styles="self-center w-3/4 max-h-[80%]"
-                subtext="One of Lündhé Audio's two Blue B4 Bottle Cap capsules"
-            />
-            <div className='self-center w-3/4 flex flex-col gap-4'>
-                <div className='text-[1.5vmax]'>
-                    <b>Overview</b>
-                </div>
-                <div>
-                    The B4 Bottle Cap is the second small diaphragm offering in Blue's lineup. Based off the 
-                    <BlogLink to ="https://recordinghacks.com/microphones/neumann/m-50">Neumann M50</BlogLink>, the B4 bottle cap has an 
-                    omnidirectional pickup pattern and lush, sweet sound.
-                </div>
-                <div className='text-[1.5vmax]'>
-                    <b>What's the Use Case?</b>
-                </div>
-                <div>
-                    The B4 is one of the most in-demand capsules on the used market, and for good reason - it sounds
-                    utterly fantastic in almost any recording situation. The B4 bottle cap turns the Bottle into a first-class 
-                    room mic, and easily stands shoulders with titans like Schoeps or DPA in its ability to capture the sound 
-                    of the space its in.
-                    <br/>
-                    Unlike some small-diaphragm omni options, the B4 is not clinical - the capsule <i>does</i> have a sound that
-                    slightly flatters like the best Schoeps mics do. Unlike its inspiration, a Blue Bottle with a B4 bottle cap 
-                    has low self-noise. This makes it even more ideal for recording orchestras or capturing similar performances 
-                    where nuance and detail matter.
-                </div>
-            </div>
-        </Paragraph>
-    </div>
-    <div className='w-full mb-4' id="blue-b5-cap">
-        <Paragraph styles="w-full self-start flex flex-col gap-4" align='justify'>
-            <div className='mb-4 self-center w-3/4 text-center'>
-                <BlogLink to="#blue-b5-cap" styles='text-[2vmax]' linkType='internal'>
-                    <b className='hover:underline'>Blue B5 Bottle Cap</b>
-                </BlogLink>
-            </div>
-            <Frame
-                src="/studio/Blue_B5_Cap.jpg"
-                alt="A Blue B5 Bottle Cap Capsule"
-                size={50}
-                side='center'
-                styles="self-center w-3/4 max-h-[80%]"
-                subtext="One of Lündhé Audio's two Blue B5 Bottle Cap capsules"
-            />
-            <div className='self-center w-3/4 flex flex-col gap-4'>
-                <div className='text-[1.5vmax]'>
-                    <b>Overview</b>
-                </div>
-                <div>
-                    The Blue B5 Bottle Cap is based off of the <BlogLink to="https://recordinghacks.com/microphones/Neumann/CMV-563">M55K capsule 
-                    used in the Neumann CMV-563</BlogLink>, Neumann's first measurement microphone. The B5 bottle cap is an omnidirectional 
-                    large-diaphragm capsule.
+    <BlogSubsectionCard
+        title="Blue B0 Bottle Cap"
+        slug="blue-b0-cap"
+        image={{
+            src: "/studio/Blue_B0_Cap.jpg",
+            alt: "A Blue B0 Bottle Cap Capsule",
+            styles: "self-center w-3/4 max-h-[80%]",
+            subtext: "One of Lündhé Audio's two Blue B0 Bottle Cap capsules",
+        }}
+        styles={{
+            title: 'text-center'
+        }}
+    >
+        <div className='text-[1.5vmax]'>
+            <b>Overview</b>
+        </div>
+        <div>
+            The Blue B0 Bottle Cap is Blue's take on the legendary
+            <BlogLink to="https://recordinghacks.com/microphones/Telefunken/ElaM-251">Telefunken ELA M 251</BlogLink>,
+            arguably one-of-if-not-the most popular vocal microphones of all time. It has a "silky" and "detailed" sound
+            that makes it ideal for capturing the nuances of vocalists and acoustic instrumentation.
+        </div>
+        <div className='text-[1.5vmax]'>
+            <b>What's the Use Case?</b>
+        </div>
+        <div>
+            The B0 manages to achieve the ELA M 251's sparkling top without sounding harsh. For that reason alone, we love
+            to use it on vocalists at Lündhé Audio. We also often use it on acoustic strummed instruments or percussion, where 
+            its presence gives transients a natural clarity.
+            <br/>
+            Since its debut, the B0 capsule remains one of the better sounding ELA M 251 inspired capsules - it lacks the sputtery
+            sizzle plagues cheaper clones while having reduced noise when compared to vintage 251s. Telefunken has since reissued the
+            ELA M 251 as the 251E, and while that reissue is stellar - we personally find Blue's interpretation equally convincing.
+            <br/>
+            Unfortunately, unlike a real 251 (or its reissue), the B0 bottle cap is cardiod-only.
+        </div>
+    </BlogSubsectionCard>
+    <BlogSubsectionCard     
+        title="Blue B1 Bottle Cap"
+        slug="blue-b1-cap"
+        image={{
+            src: "/studio/blue_b1_cap.jpg",
+            alt: "A Blue B1 Bottle Cap Capsule",
+            styles: "self-center w-3/4 max-h-[80%]",
+            subtext: "One of Lündhé Audio's three Blue B1 Bottle Cap capsules",
+        }}
+        styles={{
+            title: 'text-center'
+        }}
+    >
+        <div className='text-[1.5vmax]'>
+            <b>Overview</b>
+        </div>
+        <div>
+            The Blue B1 Bottle Cap is based off of the <BlogLink to="recordinghacks.com/microphones/Schoeps/M-221-B">Schoeps 221B</BlogLink> and is a small diaphragm cardiod condenser capsule. The B1
+            focuses on clarity and precision - coloring the sound little if at all.
+        </div>
+        <div className='text-[1.5vmax]'>
+            <b>What's the Use Case?</b>
+        </div>
+        <div>
+            The B1 is ideal for recording delicate, nuanced sources such as acoustic guitars, strings, or acoustic percussion. At Lündhé Audio,
+            we often utilize the B1 for close-micing sources or for acoustic-instrument based sampling, as its speed and transparency are unrivaled.
+            The cardiod pattern <i>does</i> mean a more "focused" sound than the 
+            <BlogLink to="#blue-b4-cap" linkType='internal'>B4 bottle cap</BlogLink>, but that focus also allows sounds 
+            it picks up to cut through any mix with a natural ease. 
+            <br/>
+            For those looking to "try out" the B1 Bottle Cap without committing to a full Blue Bottle microphone setup, the superb
+            <BlogLink to="https://www.soundonsound.com/reviews/blue-hummingbird">Blue Hummingbird</BlogLink> can be found used for often
+            less that $200 USD and has a unique swivel-head that allows for far more flexible placemen than the massive Blue Bottle. In fact,
+            we like the B1 Bottle Cap and Hummingbird Microphone so much at Lündhé Audio that we have three!
+        </div>
+    </BlogSubsectionCard>
+    <BlogSubsectionCard
+        title="Blue B2 Bottle Cap"
+        slug="blue-b2-cap"
+        image={{
+            src: "/studio/Blue_B2_Cap.jpg",
+            alt: "A Blue B2 Bottle Cap Capsule",
+            styles: "self-center w-3/4 max-h-[80%]",
+            subtext: "One of Lündhé Audio's two Blue B2 Bottle Cap capsules",
+        }}
+        styles={{
+            title: 'text-center'
+        }}
+    >
+        <div className='text-[1.5vmax]'>
+            <b>Overview</b>
+        </div>
+        <div>
+            The Blue B2 Bottle Cap is the dark horse of the Blue bottle cap family, based on the famous
+            <BlogLink to="https://vintageking.com/rca-44-a?srsltid=AfmBOororqOIeYXZzlLmoY-jtKmsrIiMawehjRppWDXq5kt9PMZBe72C">RCA 44 Ribbon Microphone</BlogLink>.
+            The capsule is a figure-eight pattern and shares the velvety, rich sound of classic ribbon microphones (without the 
+            worries of damaging the ribbon).
+        </div>
+        <div className='text-[1.5vmax]'>
+            <b>What's the Use Case?</b>
+        </div>
+        <div >
+            The B2 is a challeing capsule in that it's effectively a condenser microphone capsule voiced to act 
+            like a classic ribbon microphone. It brings aspects of each of these types of microphones, which makes it unique
+            but also endows it with the steepest learning curve of any of Blue's bottle caps.
+            <br/>
+            At first, you'll be tempted to use the B2 bottle cap either as a condenser or drop-in ribbon replacement. This will
+            lead to some frustration, as the B2 bottle cap is simultaneously both of these things and neither of them. At 
+            Lündhé Audio, we've personally encountered the greatest success when utilizing the B2 bottle cap as a room mic or 
+            on guitar cabs. Using it to mic up acoustic stringed instruments can lead to muddy sound.
+            <br/>
+            We've likewise had great success with the B2 bottle cap as a kick mic, where its decidedly vintage sound is greate at mellowing
+            out the snap of modern kick drums.
+        </div>
+    </BlogSubsectionCard>
+    <BlogSubsectionCard
+        title="Blue B3 Bottle Cap"
+        slug="blue-b3-cap"
+        image={{
+            src: "/studio/Blue_B3_Cap.jpg",
+            alt: "A Blue B3 Bottle Cap Capsule",
+            styles: "self-center w-3/4 max-h-[80%]",
+            subtext: "One of Lündhé Audio's two Blue B3 Bottle Cap capsules",
+        }}
+        styles={{
+            title: 'text-center'
+        }}
+    >
+        <div className='text-[1.5vmax]'>
+            <b>Overview</b>
+        </div>
+        <div>
+            The Blue B3 Bottle Cap is based off of <BlogLink to="https://micpedia.com/microphone/neumann-tlm-170-i/">Neumann TLM170</BlogLink> - a transformerless FET microphone designed for 
+            transparency and low self noise. The B4 bottle cap has a cardiod pickup pattern and neutral frequency
+            response.
+        </div>
+        <div className='text-[1.5vmax]'>
+            <b>What's the Use Case?</b>
+        </div>
+        <div>
+            The B3 is shockingly transparent for a Blue microphone capsule. While it's often tempting to go for
+            more "exciting" options like the <BlogLink to="#blue-b0-cap" linkType="internal">B0 capsule</BlogLink> or 
+            <BlogLink to="#blue-b10-cap" linkType="internal">B10 capsule</BlogLink>, the B3 bottle cap offers a clean, clear, honest
+            capture that ensures later processing can work to the best of its ability.
+            <br/>
+            At Lündhé Audio, we often use the B3 capsule to record acousting instruments and foley material. The B3 capsule simply
+            stays out of the way, letting us work with recorded material unimpeded.
+        </div>
+    </BlogSubsectionCard>
+    <BlogSubsectionCard
+        title="Blue B4 Bottle Cap"
+        slug="blue-b4-cap"
+        image={{
+            src: "/studio/Blue_B4_Cap.jpg",
+            alt: "A Blue B4 Bottle Cap Capsule",
+            styles: "self-center w-3/4 max-h-[80%]",
+            subtext: "One of Lündhé Audio's two Blue B4 Bottle Cap capsules",
+        }}
+        styles={{
+            title: 'text-center'
+        }}
+    >
+        <div className='text-[1.5vmax]'>
+            <b>Overview</b>
+        </div>
+        <div>
+            The B4 Bottle Cap is the second small diaphragm offering in Blue's lineup. Based off the 
+            <BlogLink to ="https://recordinghacks.com/microphones/neumann/m-50">Neumann M50</BlogLink>, the B4 bottle cap has an 
+            omnidirectional pickup pattern and lush, sweet sound.
+        </div>
+        <div className='text-[1.5vmax]'>
+            <b>What's the Use Case?</b>
+        </div>
+        <div>
+            The B4 is one of the most in-demand capsules on the used market, and for good reason - it sounds
+            utterly fantastic in almost any recording situation. The B4 bottle cap turns the Bottle into a first-class 
+            room mic, and easily stands shoulders with titans like Schoeps or DPA in its ability to capture the sound 
+            of the space its in.
+            <br/>
+            Unlike some small-diaphragm omni options, the B4 is not clinical - the capsule <i>does</i> have a sound that
+            slightly flatters like the best Schoeps mics do. Unlike its inspiration, a Blue Bottle with a B4 bottle cap 
+            has low self-noise. This makes it even more ideal for recording orchestras or capturing similar performances 
+            where nuance and detail matter.
+        </div>
+    </BlogSubsectionCard>
+    <BlogSubsectionCard
+        title="Blue B5 Bottle Cap"
+        slug="blue-b5-cap"
+        image={{
+            src: "/studio/Blue_B5_Cap.jpg",
+            alt: "A Blue B5 Bottle Cap Capsule",
+            styles: "self-center w-3/4 max-h-[80%]",
+            subtext: "One of Lündhé Audio's two Blue B5 Bottle Cap capsules",
+        }}
+        styles={{
+            title: 'text-center'
+        }}
+    >
+        <div className='text-[1.5vmax]'>
+            <b>Overview</b>
+        </div>
+        <div>
+            The Blue B5 Bottle Cap is based off of the <BlogLink to="https://recordinghacks.com/microphones/Neumann/CMV-563">M55K capsule 
+            used in the Neumann CMV-563</BlogLink>, Neumann's first measurement microphone. The B5 bottle cap is an omnidirectional 
+            large-diaphragm capsule.
 
-                </div>
-                <div className='text-[1.5vmax]'>
-                    <b>What's the Use Case?</b>
-                </div>
-                <div>
-                    The B5's sound is summarily "larger than life" - emphasizing low and high frequency content. This can make the B5 bottle cap a
-                    bit of a specialist - its scooped sound is ideal for resuscitating dull instruments, adding additional attack <i>and</i> thump
-                    to percussive instrumentation that lacks authority, or making guitar amps sound wreckingly massive.
-                    <br/>
-                    At Lündhé Audio, we love using the B5 of any thing that needs a bit of extra "juice". The B5 bottle cap is a mainstay on our guitar
-                    cabinets for the massive sound it imparts, and we love to blend it in parallel with more neutral captures to add a bit of magic. It 
-                    pairs perfectly with the <BlogLink to="#blue-b2-cap" linkType="internal">B2 bottle cap</BlogLink>, where the B5's extended highs and 
-                    lows add presence and weight. 
-                </div>
-            </div>
-        </Paragraph>
-    </div>
-    <div className='w-full mb-4' id="blue-b6-cap">
-        <Paragraph styles="w-full self-start flex flex-col gap-4" align='justify'>
-            <div className='mb-4 self-center w-3/4 text-center'>
-                <BlogLink to="#blue-b6-cap" styles='text-[2vmax]' linkType='internal'>
-                    <b className='hover:underline'>Blue B6 Bottle Cap</b>
-                </BlogLink>
-            </div>
-            <Frame
-                src="/studio/blue_b6_cap.jpg"
-                alt="A Blue B6 Bottle Cap Capsule"
-                size={50}
-                side='center'
-                styles="self-center w-3/4 max-h-[80%]"
-                subtext="One of Lündhé Audio's four Blue B6 Bottle Cap capsules"
-            />
-            <div className='self-center w-3/4 flex flex-col gap-4'>
-                <div className='text-[1.5vmax]'>
-                    <b>Overview</b>
-                </div>
-                <div>
-                    The Blue B6 Bottle Cap is based off the legendary <BlogLink to="https://www.abbeyroad.com/news/abbey-road-microphone-collection-the-akg-c12-2906">
-                    AKG C12</BlogLink>, and is Blue's "reference standard". Most used Blue Bottle microphones will come with this capsule de-facto, and it is considered 
-                    to be one of the best in Blue's bottle cap range. The B6 bottle cap is edge-terminated and has a detailed, classic sound and has a cardiod pickup 
-                    pattern.
-                </div>
-                <div className='text-[1.5vmax]'>
-                    <b>What's the Use Case?</b>
-                </div>
-                <div>
-                    The B6 accomplishes its goal of being an AKG C12 with absolute aplomb. The sound is detailed yet never harsh, warm but never boomy of muffled - the 
-                    B6 simply delivers excellent sound almost irrespective of the application, and with modern mivrophone benefits like low self-noise and better 
-                    reliability. This is 
-                    <br/>
-                    This capsule is a popular option at Lündhé Audio - to the point that we carry four of the capsules to ensure both of Blue's Bottle mics always
-                    have access to at least one. It's easier to list the things we don't tend to use the B6 on than those we do - ambient room capture for example -
-                    the capsule is simply that impressive. This also marksthe point in the Bottle Cap lineup where we start to enter the "classic" Blue capsule range.
-                    These are bottle caps that are vaunted for their sound and also readily available on used markets.
-                </div>
-            </div>
-        </Paragraph>
-    </div>
-    <div className='w-full mb-4' id="blue-b7-cap">
-        <Paragraph styles="w-full self-start flex flex-col gap-4" align='justify'>
-            <div className='mb-4 self-center w-3/4 text-center'>
-                <BlogLink to="#blue-b7-cap" styles='text-[2vmax]' linkType='internal'>
-                    <b className='hover:underline'>Blue B7 Bottle Cap</b>
-                </BlogLink>
-            </div>
-            <Frame
-                src="/studio/Blue_B7_Cap.jpg"
-                alt="A Blue B7 Bottle Cap Capsule"
-                size={50}
-                side='center'
-                styles="self-center w-3/4 max-h-[80%]"
-                subtext="One of Lündhé Audio's two Blue B7 Bottle Cap capsules"
-            />
-            <div className='self-center w-3/4 flex flex-col gap-4'>
-                <div className='text-[1.5vmax]'>
-                    <b>Overview</b>
-                </div>
-                <div>
-                    The Blue B7 Bottle Cap is based off of classic <BlogLink to="https://blog.insideblackbird.com/the-neumann-u47-a-legend-in-the-world-of-microphones">Neumann U47</BlogLink>,
-                    arguable the most famous and popular microphone in the world (with Neumann it's always hard to choose). The B7 bottle cap has a more 
-                    relaxed and "vintage" sound, and has a cardiod pickup pattern.
-                </div>
-                <div className='text-[1.5vmax]'>
-                    <b>What's the Use Case?</b>
-                </div>
-                <div>
-                    The B7 is the perfect foil to the <BlogLink to="#blue-b6-cap" linkType='internal'>B6 bottle cap</BlogLink>, with its focus on midrange
-                    and smooth highs. For siblant or naturally "bright" vocalists, the B7 bottle cap is thus a natural choice. Likewise, for those looking 
-                    to capture the sound of classic recordings, the B7 is probably the best option in Blue's bottle cap lineup.
-                    <br/>
-                    The B7 Bottle Cap is Lündhé Audio founder Ada Lündhé's favorite, offering a perfect balance of warm-yet-engaging. The capsule is also 
-                    center-terminated, offering increased dynamic resolution that allows the microphone to handle even the loudest sources. at Lündhé Audio,
-                    we tend to favor the B7 bottle cap on lead vocals, where its sonic signature tends to bring out the best in most any 
-                    performance.
-                </div>
-            </div>
-        </Paragraph>
-    </div>
-    <div className='w-full mb-4' id="blue-b8-cap">
-        <Paragraph styles="w-full self-start flex flex-col gap-4" align='justify'>
-            <div className='mb-4 self-center w-3/4 text-center'>
-                <BlogLink to="#blue-b8-cap" styles='text-[2vmax]' linkType='internal'>
-                    <b className='hover:underline'>Blue B8 Bottle Cap</b>
-                </BlogLink>
-            </div>
-            <Frame
-                src="/studio/Blue_B8_Cap.jpg"
-                alt="A Blue B8 Bottle Cap Capsule"
-                size={50}
-                side='center'
-                styles="self-center w-3/4 max-h-[80%]"
-                subtext="One of Lündhé Audio's three Blue B8 Bottle Cap capsules"
-            />
-            <div className='self-center w-3/4 flex flex-col gap-4'>
-                <div className='text-[1.5vmax]'>
-                    <b>Overview</b>
-                </div>
-                <div>
-                    The Blue B8 Bottle Cap is a design unique to Blue, focused on detailed but natural sound. Blue designed 
-                    the B8 capsule to be the "workhorse" of the Bottle Cap lineup, and it indeed serves as an excellent 
-                    all-rounder. The capsule has a slightly bright sound that helps it capture performance details that the 
-                    more neutral <BlogLink to="#blue-b3-cap" linkType='internal'>B3 bottle cap</BlogLink> might struggle with.
-                    The capsule has a cardoid pickup pattern.
-                </div>
-                <div className='text-[1.5vmax]'>
-                    <b>What's the Use Case?</b>
-                </div>
-                <div>
-                    The B8 is Blue's generalist - a jack of all trades that should be in any Blue Bottle Cap microphone locker.
-                    The B8 does emphasize high-end content of recordings but is never harsh. The midrange is arguably as 
-                    netural as the <BlogLink to="#blue-b3-cap" linkType='internal'>B3 bottle cap</BlogLink>, but the additional
-                    detail information can be useful in reducing mix work down-the-line.
-                    <br/>
-                    At Lündhé Audio, we tend to utilize the B8 bottle cap on sounds that require a bit of additional intimacy or
-                    that need additional transient detail to cut through a mix. It's an excellent and often first-stop choice 
-                    for when we need to capture a source in a way where we know the recording will sound great, but our hands 
-                    won't be tied by the sonic signature of the capsule.
-                </div>
-            </div>
-        </Paragraph>
-    </div>
-    <div className='w-full mb-4' id="blue-b9-cap">
-        <Paragraph styles="w-full self-start flex flex-col gap-4" align='justify'>
-            <div className='mb-4 self-center w-3/4 text-center'>
-                <BlogLink to="#blue-b9-cap" styles='text-[2vmax]' linkType='internal'>
-                    <b className='hover:underline'>Blue B9 Bottle Cap</b>
-                </BlogLink>
-            </div>
-            <Frame
-                src="/studio/Blue_B9_Cap.jpg"
-                alt="A Blue B9 Bottle Cap Capsule"
-                size={50}
-                side='center'
-                styles="self-center w-3/4 max-h-[80%]"
-                subtext="Lündhé Audio's rare Blue B9 Bottle Cap capsule"
-            />
-            <div className='self-center w-3/4 flex flex-col gap-4'>
-                <div className='text-[1.5vmax]'>
-                    <b>Overview</b>
-                </div>
-                <div>
-                    The Blue B9 Bottle Cap has the most extended high-end of any of Blue's bottle caps, with
-                    "liquid" mids that seem to bring out the best in vocal performances Although not officially
-                    acknowledged, it's generally understood the the B9 bottle cap is Blue's take on the inimitable
-                    <BlogLink to="https://pro.sony/ue_US/products/studio-microphones/c-800g#ProductOverviewBlock-c-800g">Sony 
-                    C-800G </BlogLink>, a similarly voiced modern classic.
+        </div>
+        <div className='text-[1.5vmax]'>
+            <b>What's the Use Case?</b>
+        </div>
+        <div>
+            The B5's sound is summarily "larger than life" - emphasizing low and high frequency content. This can make the B5 bottle cap a
+            bit of a specialist - its scooped sound is ideal for resuscitating dull instruments, adding additional attack <i>and</i> thump
+            to percussive instrumentation that lacks authority, or making guitar amps sound wreckingly massive.
+            <br/>
+            At Lündhé Audio, we love using the B5 of any thing that needs a bit of extra "juice". The B5 bottle cap is a mainstay on our guitar
+            cabinets for the massive sound it imparts, and we love to blend it in parallel with more neutral captures to add a bit of magic. It 
+            pairs perfectly with the <BlogLink to="#blue-b2-cap" linkType="internal">B2 bottle cap</BlogLink>, where the B5's extended highs and 
+            lows add presence and weight. 
+        </div>
+    </BlogSubsectionCard>
+    <BlogSubsectionCard
+        title="Blue B6 Bottle Cap"
+        slug="blue-b6-cap"
+        image={{
+            src: "/studio/blue_b6_cap.jpg",
+            alt: "A Blue B6 Bottle Cap Capsule",
+            styles: "self-center w-3/4 max-h-[80%]",
+            subtext: "One of Lündhé Audio's four Blue B6 Bottle Cap capsules",
+        }}
+        styles={{
+            title: 'text-center'
+        }}
+    >
+        <div className='text-[1.5vmax]'>
+            <b>Overview</b>
+        </div>
+        <div>
+            The Blue B6 Bottle Cap is based off the legendary <BlogLink to="https://www.abbeyroad.com/news/abbey-road-microphone-collection-the-akg-c12-2906">
+            AKG C12</BlogLink>, and is Blue's "reference standard". Most used Blue Bottle microphones will come with this capsule de-facto, and it is considered 
+            to be one of the best in Blue's bottle cap range. The B6 bottle cap is edge-terminated and has a detailed, classic sound and has a cardiod pickup 
+            pattern.
+        </div>
+        <div className='text-[1.5vmax]'>
+            <b>What's the Use Case?</b>
+        </div>
+        <div>
+            The B6 accomplishes its goal of being an AKG C12 with absolute aplomb. The sound is detailed yet never harsh, warm but never boomy of muffled - the 
+            B6 simply delivers excellent sound almost irrespective of the application, and with modern mivrophone benefits like low self-noise and better 
+            reliability. This is 
+            <br/>
+            This capsule is a popular option at Lündhé Audio - to the point that we carry four of the capsules to ensure both of Blue's Bottle mics always
+            have access to at least one. It's easier to list the things we don't tend to use the B6 on than those we do - ambient room capture for example -
+            the capsule is simply that impressive. This also marksthe point in the Bottle Cap lineup where we start to enter the "classic" Blue capsule range.
+            These are bottle caps that are vaunted for their sound and also readily available on used markets.
+        </div>
+    </BlogSubsectionCard>
+    <BlogSubsectionCard
+        title="Blue B7 Bottle Cap"
+        slug="blue-b7-cap"
+        image={{
+            src: "/studio/Blue_B7_Cap.jpg",
+            alt: "A Blue B7 Bottle Cap Capsule",
+            styles: "self-center w-3/4 max-h-[80%]",
+            subtext: "One of Lündhé Audio's two Blue B7 Bottle Cap capsules",
+        }}
+        styles={{
+            title: 'text-center'
+        }}
+    >
+        <div className='text-[1.5vmax]'>
+            <b>Overview</b>
+        </div>
+        <div>
+            The Blue B7 Bottle Cap is based off of classic <BlogLink to="https://blog.insideblackbird.com/the-neumann-u47-a-legend-in-the-world-of-microphones">Neumann U47</BlogLink>,
+            arguable the most famous and popular microphone in the world (with Neumann it's always hard to choose). The B7 bottle cap has a more 
+            relaxed and "vintage" sound, and has a cardiod pickup pattern.
+        </div>
+        <div className='text-[1.5vmax]'>
+            <b>What's the Use Case?</b>
+        </div>
+        <div>
+            The B7 is the perfect foil to the <BlogLink to="#blue-b6-cap" linkType='internal'>B6 bottle cap</BlogLink>, with its focus on midrange
+            and smooth highs. For siblant or naturally "bright" vocalists, the B7 bottle cap is thus a natural choice. Likewise, for those looking 
+            to capture the sound of classic recordings, the B7 is probably the best option in Blue's bottle cap lineup.
+            <br/>
+            The B7 Bottle Cap is Lündhé Audio founder Ada Lündhé's favorite, offering a perfect balance of warm-yet-engaging. The capsule is also 
+            center-terminated, offering increased dynamic resolution that allows the microphone to handle even the loudest sources. at Lündhé Audio,
+            we tend to favor the B7 bottle cap on lead vocals, where its sonic signature tends to bring out the best in most any 
+            performance.
+        </div>
+    </BlogSubsectionCard>
+    <BlogSubsectionCard
+        title="Blue B8 Bottle Cap"
+        slug="blue-b8-cap"
+        image={{
+            src: "/studio/Blue_B8_Cap.jpg",
+            alt: "A Blue B8 Bottle Cap Capsule",
+            styles: "self-center w-3/4 max-h-[80%]",
+            subtext: "One of Lündhé Audio's three Blue B8 Bottle Cap capsules",
+        }}
+        styles={{
+            title: 'text-center'
+        }}
+    >
+        <div className='text-[1.5vmax]'>
+            <b>Overview</b>
+        </div>
+        <div>
+            The Blue B8 Bottle Cap is a design unique to Blue, focused on detailed but natural sound. Blue designed 
+            the B8 capsule to be the "workhorse" of the Bottle Cap lineup, and it indeed serves as an excellent 
+            all-rounder. The capsule has a slightly bright sound that helps it capture performance details that the 
+            more neutral <BlogLink to="#blue-b3-cap" linkType='internal'>B3 bottle cap</BlogLink> might struggle with.
+            The capsule has a cardoid pickup pattern.
+        </div>
+        <div className='text-[1.5vmax]'>
+            <b>What's the Use Case?</b>
+        </div>
+        <div>
+            The B8 is Blue's generalist - a jack of all trades that should be in any Blue Bottle Cap microphone locker.
+            The B8 does emphasize high-end content of recordings but is never harsh. The midrange is arguably as 
+            netural as the <BlogLink to="#blue-b3-cap" linkType='internal'>B3 bottle cap</BlogLink>, but the additional
+            detail information can be useful in reducing mix work down-the-line.
+            <br/>
+            At Lündhé Audio, we tend to utilize the B8 bottle cap on sounds that require a bit of additional intimacy or
+            that need additional transient detail to cut through a mix. It's an excellent and often first-stop choice 
+            for when we need to capture a source in a way where we know the recording will sound great, but our hands 
+            won't be tied by the sonic signature of the capsule.
+        </div>
+    </BlogSubsectionCard>
+    <BlogSubsectionCard
+        title="Blue B9 Bottle Cap"
+        slug="blue-b9-cap"
+        image={{
+            src: "/studio/Blue_B9_Cap.jpg",
+            alt: "A Blue B9 Bottle Cap Capsule",
+            styles: "self-center w-3/4 max-h-[80%]",
+            subtext: "Lündhé Audio's rare Blue B9 Bottle Cap capsule",
+        }}
+        styles={{
+            title: 'text-center'
+        }}
+    >
+        <div className='text-[1.5vmax]'>
+            <b>Overview</b>
+        </div>
+        <div>
+            The Blue B9 Bottle Cap has the most extended high-end of any of Blue's bottle caps, with
+            "liquid" mids that seem to bring out the best in vocal performances Although not officially
+            acknowledged, it's generally understood the the B9 bottle cap is Blue's take on the inimitable
+            <BlogLink to="https://pro.sony/ue_US/products/studio-microphones/c-800g#ProductOverviewBlock-c-800g">Sony 
+            C-800G </BlogLink>, a similarly voiced modern classic.
 
-                </div>
-                <div className='text-[1.5vmax]'>
-                    <b>What's the Use Case?</b>
-                </div>
-                <div>
-                    The B9 is <i>bright</i>, even for a Blue microphone capsule. For this reason, it's often best
-                    suited to capturing the crisp ultra-modern vocal performance of modern pop, rap/hip-hop, and R&B.
-                    The B9 is absolutely unforgiving of siblant voices, and almost requires that the Blue be plugged in
-                    to a "vintage" sounding preamp to get the best results.
-                    <br/>
-                    This isn't to paint the B9 as a one-trick pony - it's equally at home at capturing other sources like 
-                    acousting guitars or similar plucked/hammer string instruments. Whatever the B9 bottle cap does capture 
-                    though will absolutely be at the front of the mix.
-                    <br/>
-                    We're also now entering the range of capsules that are "virtually unobtanium". Blue's
-                    <BlogLink to="blue-b9-cap" linkType="internal">B9</BlogLink>, <BlogLink to="blue-b10-cap" linkType="internal">B10</BlogLink>,
-                    and <BlogLink to="blue-b11-cap" linkType="internal">B11</BlogLink> capsules almost <i>never</i> appear 
-                    on the used market, and when they do it is often as part of a (very expensive) complete bottle cap set.
-                </div>
-            </div>
-        </Paragraph>
-    </div>
-    <div className='w-full mb-4' id="blue-b10-cap">
-        <Paragraph styles="w-full self-start flex flex-col gap-4" align='justify'>
-            <div className='mb-4 self-center w-3/4 text-center'>
-                <BlogLink to="#blue-b10-cap" styles='text-[2vmax]' linkType='internal'>
-                    <b className='hover:underline'>Blue B10 Bottle Cap</b>
-                </BlogLink>
-            </div>
-            <Frame
-                src="/studio/Blue_B10_Cap.jpg"
-                alt="A Blue B10 Bottle Cap Capsule"
-                size={50}
-                side='center'
-                styles="self-center w-3/4 max-h-[80%]"
-                subtext="Lündhé Audio's rare Blue B10 Bottle Cap capsule"
-            />
-            <div className='self-center w-3/4 flex flex-col gap-4'>
-                <div className='text-[1.5vmax]'>
-                    <b>Overview</b>
-                </div>
-                <div>
-                    The Blue B10 Bottle Cap is based off the other-other-other legendary microphone, the 
-                    <BlogLink to="https://www.recordingsessionvault.com/featured-gear-microphone">Neumann U67</BlogLink>.
-                    Like the U67, the B10 bottle cap has a warm, rich, smooth sound that harkens back to classic recordings.
-                    The B10 bottle cap has a cardiod pickup pattern.
-                </div>
-                <div className='text-[1.5vmax]'>
-                    <b>What's the Use Case?</b>
-                </div>
-                <div>
-                    The B10 is an interesting foil to Blue's other "vintage voiced" capsule, the <BlogLink to="#blue-b7-cap">B7 
-                    bottle cap </BlogLink> - the lows sound more extended while the highs sound slightly more tamed. This makes 
-                    the B10 bottle cap ideal for recording siblant sources or vocalists looking for that classic touch. While the 
-                    B10 bottle cap certainly isn't "dark" sounding, it may struggle in capturing more complex material, where its 
-                    sultry sound may come across as muddy and wooly.
-                    <br/>
-                    At Lündhé Audio, the B10 bottle cap is almost exclusively relegated to vocal duties, where it's rich sound 
-                    delivers best.
-                </div>
-            </div>
-        </Paragraph>
-    </div>
-    <div className='w-full mb-4' id="blue-b11-cap">
-        <Paragraph styles="w-full self-start flex flex-col gap-4" align='justify'>
-            <div className='mb-4 self-center w-3/4 text-center'>
-                <BlogLink to="#blue-b11-cap" styles='text-[2vmax]' linkType='internal'>
-                    <b className='hover:underline'>Blue B11 Bottle Cap</b>
-                </BlogLink>
-            </div>
-            <Frame
-                src="/studio/Blue_B11_Cap.jpg"
-                alt="A Blue B11 Bottle Cap Capsule"
-                size={50}
-                side='center'
-                styles="self-center w-3/4 max-h-[80%]"
-                subtext="Lündhé Audio's rare Blue B11 Bottle Cap capsule"
-            />
-            <div className='self-center w-3/4 flex flex-col gap-4'>
-                <div className='text-[1.5vmax]'>
-                    <b>Overview</b>
-                </div>
-                <div>
-                    The Blue B11 Bottle Cap is Blue's take on another classic - the venerable 
-                    <BlogLink to="https://germanmasterworks.com/publish/articles/GalleryOfGreats/Neumann-M49.html">Neumann M49</BlogLink>.
-                    Likethe M49, the B11 bottle cap has a "better than real life" sound - making captured 
-                    material sound like the best version of itself without overly emphasizing any particular
-                    frequency range. The B11 bottle cap has a cardiod pickup pattern.
-                </div>
-                <div className='text-[1.5vmax]'>
-                    <b>What's the Use Case?</b>
-                </div>
-                <div>
-                    The B11 brings the best of vintage voicing to modern production - flattering sounds without compromising
-                    their fundamental tone or character. The highs of the B11 bottle cap are silky and smooth without being dark,
-                    the midrange sweet, and the lows extended and natural. The Blue B11 bottle cap simply makes and sound source it
-                    captures - vocal, guitar, percussion, orchestra, or anything else - sound better.
-                    <br/>
-                    This is Lündhé Audio founder Ada Lündhé's other favorite in the Blue lineup. Of the "unobtanium range" of 
-                    Blue capsules, the B11 bottle cap is (subjectively) the most worth pursuing. Its sound is simply unlike any 
-                    other capsule in the Blue bottle cap lineup and unlike any other microphone we've heard.
-                </div>
-            </div>
-        </Paragraph>
-    </div>
-</Content>
-<Top/>
-<Subsection
-    text="The Blue Bottle at Lündhé Audio"
+        </div>
+        <div className='text-[1.5vmax]'>
+            <b>What's the Use Case?</b>
+        </div>
+        <div>
+            The B9 is <i>bright</i>, even for a Blue microphone capsule. For this reason, it's often best
+            suited to capturing the crisp ultra-modern vocal performance of modern pop, rap/hip-hop, and R&B.
+            The B9 is absolutely unforgiving of siblant voices, and almost requires that the Blue be plugged in
+            to a "vintage" sounding preamp to get the best results.
+            <br/>
+            This isn't to paint the B9 as a one-trick pony - it's equally at home at capturing other sources like 
+            acousting guitars or similar plucked/hammer string instruments. Whatever the B9 bottle cap does capture 
+            though will absolutely be at the front of the mix.
+            <br/>
+            We're also now entering the range of capsules that are "virtually unobtanium". Blue's
+            <BlogLink to="blue-b9-cap" linkType="internal">B9</BlogLink>, <BlogLink to="blue-b10-cap" linkType="internal">B10</BlogLink>,
+            and <BlogLink to="blue-b11-cap" linkType="internal">B11</BlogLink> capsules almost <i>never</i> appear 
+            on the used market, and when they do it is often as part of a (very expensive) complete bottle cap set.
+        </div>
+    </BlogSubsectionCard>
+    <BlogSubsectionCard
+        title="Blue B10 Bottle Cap"
+        slug="blue-b10-cap"
+        image={{
+            src: "/studio/Blue_B10_Cap.jpg",
+            alt: "A Blue B10 Bottle Cap Capsule",
+            styles: "self-center w-3/4 max-h-[80%]",
+            subtext: "Lündhé Audio's rare Blue B10 Bottle Cap capsule",
+        }}
+        styles={{
+            title: 'text-center'
+        }}
+    >
+        <div className='text-[1.5vmax]'>
+            <b>Overview</b>
+        </div>
+        <div>
+            The Blue B10 Bottle Cap is based off the other-other-other legendary microphone, the 
+            <BlogLink to="https://www.recordingsessionvault.com/featured-gear-microphone">Neumann U67</BlogLink>.
+            Like the U67, the B10 bottle cap has a warm, rich, smooth sound that harkens back to classic recordings.
+            The B10 bottle cap has a cardiod pickup pattern.
+        </div>
+        <div className='text-[1.5vmax]'>
+            <b>What's the Use Case?</b>
+        </div>
+        <div>
+            The B10 is an interesting foil to Blue's other "vintage voiced" capsule, the <BlogLink to="#blue-b7-cap">B7 
+            bottle cap </BlogLink> - the lows sound more extended while the highs sound slightly more tamed. This makes 
+            the B10 bottle cap ideal for recording siblant sources or vocalists looking for that classic touch. While the 
+            B10 bottle cap certainly isn't "dark" sounding, it may struggle in capturing more complex material, where its 
+            sultry sound may come across as muddy and wooly.
+            <br/>
+            At Lündhé Audio, the B10 bottle cap is almost exclusively relegated to vocal duties, where it's rich sound 
+            delivers best.
+        </div>
+    </BlogSubsectionCard>
+    <BlogSubsectionCard
+        title="Blue B11 Bottle Cap"
+        slug="blue-b11-cap"
+        image={{
+            src: "/studio/Blue_B11_Cap.jpg",
+            alt: "A Blue B11 Bottle Cap Capsule",
+            styles: "self-center w-3/4 max-h-[80%]",
+            subtext: "Lündhé Audio's rare Blue B11 Bottle Cap capsule",
+        }}
+        styles={{
+            title: 'text-center'
+        }}
+    >
+        <div className='text-[1.5vmax]'>
+            <b>Overview</b>
+        </div>
+        <div>
+            The Blue B11 Bottle Cap is Blue's take on another classic - the venerable 
+            <BlogLink to="https://germanmasterworks.com/publish/articles/GalleryOfGreats/Neumann-M49.html">Neumann M49</BlogLink>.
+            Likethe M49, the B11 bottle cap has a "better than real life" sound - making captured 
+            material sound like the best version of itself without overly emphasizing any particular
+            frequency range. The B11 bottle cap has a cardiod pickup pattern.
+        </div>
+        <div className='text-[1.5vmax]'>
+            <b>What's the Use Case?</b>
+        </div>
+        <div>
+            The B11 brings the best of vintage voicing to modern production - flattering sounds without compromising
+            their fundamental tone or character. The highs of the B11 bottle cap are silky and smooth without being dark,
+            the midrange sweet, and the lows extended and natural. The Blue B11 bottle cap simply makes and sound source it
+            captures - vocal, guitar, percussion, orchestra, or anything else - sound better.
+            <br/>
+            This is Lündhé Audio founder Ada Lündhé's other favorite in the Blue lineup. Of the "unobtanium range" of 
+            Blue capsules, the B11 bottle cap is (subjectively) the most worth pursuing. Its sound is simply unlike any 
+            other capsule in the Blue bottle cap lineup and unlike any other microphone we've heard.
+        </div>
+    </BlogSubsectionCard>
+</BlogSection>
+<BlogSection
+    title="The Blue Bottle at Lündhé Audio"
     description="How we use the Blue Bottle at Lündhé Audio"
     section="lundhe-audio-blue-bottle"
-    side="left"
-/>
-<Content styles='gap-4'>
-    <Paragraph styles='mb-4'>
-        Among the many high-quality microphones we offer at Lündhé Audio, our Blue Bottles are truly our favorite, offering unparalleled
-        sound and versatility.
-        <br/>
-        We're fortunate to own not only multiples of the main 
-        <BlogLink to="#blue-b0-cap" linkType="internal">B0</BlogLink>-<BlogLink to="#blue-b8-cap" linkType="internal">B8</BlogLink>
-        bottle cap range but two entire Blue Bottle microphones. This allows us to get the most out of omnidirectional bottle caps like the
-        <BlogLink to="#blue-b4-cap" linkType="internal">B4</BlogLink> or figure-eight capsules like the <BlogLink to="#blue-b2-cap" linkType="internal">B2</BlogLink> in 
-        stereo and to blend the sound of different bottle caps for truly unique captures of performances.
-    </Paragraph>
-</Content>
-<Top/>
-<Subsection
-    text="Lündhé Audio's Blue Bottle Mics"
-    description="How we use the Blue Bottle at Lündhé Audio"
-    section="lundhe-audio-blue-bottle"
-    side="left"
-/>
-<Content styles='gap-4'>
+    type='subsection'
+>
     <Paragraph styles='mb-4'>
         Among the many high-quality microphones we offer at Lündhé Audio, our Blue Bottles are truly our favorite, offering unparalleled
         sound and versatility.
@@ -689,4 +605,26 @@ import Link from 'next/link'
         like to try ou a specific bottle cap or combination of bottle caps, just ask! Due to the scarcity of some capsules and cost, our Blue Bottle
         microphones are <i>not</i> available for rental or use outside of Lündhé Audio's facilities.
     </Paragraph>
-</Content>
+</BlogSection>
+<BlogSection
+    text="Personal Thoughts and Hot Takes"
+    description="But how do you really feel?"
+    section="personal-thoughts"
+    type='subsection'
+    position="right"
+
+>
+    <Paragraph styles='mb-4'>
+        I'd wanted a Blue Bottle and the full Bottle Cap set since I was 19. The Bottle had long been a well-reputed microphone, but
+        the entry price was too hefty for a college student (and an English major at that). I got lucky in 2024 to come across both a 
+        used Blue Bottle with the main nine capsules and the full twelve-capsule line-up, both at arguably bargain prices (about $6k 
+        for both mics and all capsules in total). I then set about purchasing extras of the B0-B5 lineup, as they can be more challenging
+        to find used.
+        <br/>
+        To me, the Bottle is going to be one of those microphones that a decade from now is as esteemed as classics like the 
+        Neumann U47, Telefunken ELA M 251, etc. Blue was really on to something different with the Bottle, and I always feel a bit sad that
+        vintage-fever combined with the runaway success of the Yeti killed whatever momentum Blue's professional line had. I still strongly 
+        feel that Blue was at its best when it was following its own, quirky drummer - making strangly shaped but gorgeous sounding microphones
+        that truly felt and sounded like one-of-a-kind.
+    </Paragraph>
+</BlogSection>

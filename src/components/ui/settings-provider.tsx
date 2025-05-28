@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useSettings } from '~/hooks/use-settings';
 
 export type Mode = "light" | "dark" | "system";
@@ -15,17 +15,18 @@ const checkSystemPreference = (mode: Mode) => {
 
 export const useSystemPreference = () => {
 
-  let { mode } = useSettings();
+  const { mode } = useSettings();
+  const modeRef = useRef<typeof mode>(mode)
 
   useEffect(() => {
     const root = window.document.documentElement;
     root.classList.remove("light", "dark");
-    mode = checkSystemPreference(mode);
-    root.classList.add(mode);
-  }, [mode]);
+    modeRef.current = checkSystemPreference(mode);
+    root.classList.add(modeRef.current);
+  }, [mode, modeRef]);
 
   return { 
-    mode
+    mode: modeRef.current
   }
 
 }

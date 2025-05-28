@@ -8,10 +8,10 @@ export const BlogLink = ({
     styles,
     linkType = 'external'
 }: {
-    children: JSX.Element | JSX.Element[],
+    children: string | JSX.Element | JSX.Element[],
     to: string,
     styles?: string,
-    linkType: 'external' | 'internal'
+    linkType?: 'external' | 'internal'
 }) => {
 
     const blogLinkType = useMemo(() => linkType, [linkType])
