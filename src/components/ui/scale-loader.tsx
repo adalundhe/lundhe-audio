@@ -65,7 +65,7 @@ export const  ScaleLoader = ({
       {[...Array(barCount)].map((_, frameIdx) => (
         <span key={`scale-loader-frame-${frameIdx}`} style={style(frameIdx + 1)}  className={
             cn(
-                "bg-black/75 dark:bg-white",
+                "bg-black/75 dark:bg-white/75",
                 styles,
 
             )
