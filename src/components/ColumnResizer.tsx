@@ -1,5 +1,5 @@
-import { Header } from "@tanstack/react-table";
-import { EquipmentItem} from "~/stores/gear-store";
+import { type Header } from "@tanstack/react-table";
+import { type EquipmentItem} from "~/stores/gear-store";
 
 export const ColumnResizer = ({
   header,

@@ -1,10 +1,10 @@
 
-import { EquipmentItem} from "~/stores/gear-store";
+import { type EquipmentItem } from "~/stores/gear-store";
 import { Button } from "~/components/ui/button"
 import { TableCell } from "~/components/ui/table"
 import {
-    Table,
-    Cell,
+    type Table,
+    type Cell,
     flexRender,
 } from '@tanstack/react-table'
 import { useMemo } from "react";

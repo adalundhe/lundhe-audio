@@ -2,19 +2,19 @@
 
 import * as React from "react"
 import {
-  ColumnDef,
-  ColumnFiltersState,
-  SortingState,
-  VisibilityState,
+  type ColumnDef,
+  type ColumnFiltersState,
+  type SortingState,
+  type VisibilityState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-  ColumnSizingState,
+  type ColumnSizingState,
 } from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, ChevronRight } from "lucide-react"
+import { ArrowUpDown, ChevronDown } from "lucide-react"
 import { Button } from "~/components/ui/button"
 import {
   Accordion,
@@ -38,7 +38,7 @@ import {
   TableRow,
 } from "~/components/ui/table"
 import { Courier_Prime } from 'next/font/google';
-import { EquipmentItem} from "~/stores/gear-store";
+import { type EquipmentItem } from "~/stores/gear-store";
 import { ColumnResizer } from './ColumnResizer'
 import { FilterCell } from './FilterCell'
 import { ScrollArea } from "./ui/scroll-area"
@@ -205,9 +205,7 @@ export const GearTable = ({
   const dataByGroup = React.useMemo(() => data.reduce(function(grouped, item) {
     (grouped[item.group] ??= []).push(item);
     return grouped;
-  }, {} as {
-    [key: string]: EquipmentItem[]
-  }), [data])
+  }, {} as Record<string, EquipmentItem[]>), [data])
   
 
   return (
