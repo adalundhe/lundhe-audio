@@ -45,15 +45,11 @@ type StyleProps = {
 }
 
 export const  ScaleLoader = ({
-  loading = true,
   speedMultiplier = 1,
   styles = "h-[35px] w-[4px] rounded-xs m-2",
   barCount = 5,
   ...additionalprops
 }: StyleProps & { barCount?: number }) => {
-  const wrapper: React.CSSProperties = {
-    display: "inherit"
-  };
 
   const style = useCallback((frameIdx: number): React.CSSProperties => {
     return {
@@ -61,7 +57,7 @@ export const  ScaleLoader = ({
       animation: `${scale} ${1 / speedMultiplier}s ${frameIdx * 0.1}s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08)`,
       animationFillMode: "both",
     };
-  }, []);
+  }, [speedMultiplier]);
 
 
 
