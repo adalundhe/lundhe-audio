@@ -135,7 +135,7 @@
     {
         "name": "Flock Patch",
         "description": "64 x 64 digitally controlled patchbay",
-        "type": "utility",
+        "type": "uti",
         "group": "I/O",
         "quantity": 6
     },

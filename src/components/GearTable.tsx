@@ -154,6 +154,8 @@ export const GearTable = ({
 }: {
     data: EquipmentItem[]
 }) => {
+
+  
   const [sorting, setSorting] = React.useState<SortingState>([
       {
         id: "name",

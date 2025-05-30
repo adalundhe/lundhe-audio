@@ -10,6 +10,7 @@
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
+    "db:update": "tsx src/scripts/update_equipment.ts",
     "dev": "next dev",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
     "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
@@ -122,6 +123,7 @@
     "prettier-plugin-tailwindcss": "^0.6.5",
     "prisma": "^5.14.0",
     "tailwindcss": "^3.4.3",
+    "tsx": "^4.19.4",
     "typescript": "^5.5.3"
   },
   "ct3aMetadata": {
