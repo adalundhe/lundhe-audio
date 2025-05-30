@@ -48,7 +48,7 @@ const courierPrime = Courier_Prime({
 export const columns: ColumnDef<EquipmentItem>[] = [
   {
     accessorKey: "name",
-    minSize: 400,
+    minSize: 300,
     maxSize: 700,
     header: ({ column }) => {
       return (
@@ -67,7 +67,7 @@ export const columns: ColumnDef<EquipmentItem>[] = [
       )
     },
     cell: ({ row }) => (
-      <div className="capitalize h-[1vmax]">{row.getValue("name")}</div>
+      <div className="capitalize h-[1vmax] truncate text-ellipsis">{row.getValue("name")}</div>
     ),
     enableHiding: false
   },
@@ -89,14 +89,14 @@ export const columns: ColumnDef<EquipmentItem>[] = [
       )
     },
     cell: ({ row }) => (
-      <div className=" h-[1vmax]">{row.getValue("description")}</div>
+      <div className=" h-[1vmax] truncate text-ellipsis">{row.getValue("description")}</div>
     ),
     enableSorting: false,
   },
   {
     accessorKey: "type",
-    minSize: 150,
-    maxSize: 200,
+    minSize: 100,
+    maxSize: 150,
     header: ({ column }) => {
       return (
         <Button
@@ -113,7 +113,7 @@ export const columns: ColumnDef<EquipmentItem>[] = [
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase h-[1vmax]">{row.getValue("type")}</div>,
+    cell: ({ row }) => <div className="lowercase h-[1vmax] truncate text-ellipsis">{row.getValue("type")}</div>,
   },
   {
     accessorKey: "quantity",
@@ -323,6 +323,7 @@ export const GearTable = ({
                             width: cell.column.getSize(),
                             minWidth: cell.column.columnDef.minSize
                           }}
+                          className="h-fit"
                         >
                           {flexRender(
                             cell.column.columnDef.cell,
