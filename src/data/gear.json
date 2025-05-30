@@ -3785,6 +3785,20 @@
         "type": "tube amplifier",
         "group": "amplifiers",
         "quantity": 1
+    },
+    {
+        "name": "Earthquaker Devices Data Corrupter",
+        "description": "Waveshaping octaver and pitch shifter pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Earthquaker Devices Gary",
+        "description": "PWM distortion and overdrive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
     }
 
 ]

@@ -6,11 +6,13 @@ import {
 import { equipmentItem } from "~/server/db/schema"
 
 export type EquipmentItem = {
+    id: string
     name: string
     description: string
     type: string
     group: string
     quantity: number
+    created_timestamp: string
 }
 
 

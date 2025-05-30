@@ -38,10 +38,11 @@ import {
   TableRow,
 } from "~/components/ui/table"
 import { Courier_Prime } from 'next/font/google';
-import { type EquipmentItem } from "~/stores/gear-store";
+import { type EquipmentItem } from "~/server/api/routers/equipment";
 import { ColumnResizer } from './ColumnResizer'
 import { FilterCell } from './FilterCell'
 import { ScrollArea } from "./ui/scroll-area"
+import { GearNameCell } from "./GearNameCell"
 
 
 const courierPrime = Courier_Prime({
@@ -50,9 +51,16 @@ const courierPrime = Courier_Prime({
 })
   
 
-
-
 export const columns: ColumnDef<EquipmentItem>[] = [
+  {
+    accessorKey: "id",
+    enableHiding: true,
+  },
+  {
+    id: "added",
+    accessorFn: (row) => row.created_timestamp,
+    enableHiding: true,
+  },
   {
     accessorKey: "name",
     minSize: 300,
@@ -74,9 +82,7 @@ export const columns: ColumnDef<EquipmentItem>[] = [
         </Button>
       )
     },
-    cell: ({ row }) => (
-      <div className="capitalize truncate text-ellipsis">{row.getValue("name")}</div>
-    ),
+    cell: ({ row }) => <GearNameCell row={row} />,
     enableHiding: false
   },
   {
@@ -156,6 +162,7 @@ export const GearTable = ({
     data: EquipmentItem[]
 }) => {
 
+  console.log(data.at(0))
   
   const [sorting, setSorting] = React.useState<SortingState>([
       {
@@ -167,7 +174,10 @@ export const GearTable = ({
     []
   )
   const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({})
+    React.useState<VisibilityState>({
+      id: false,
+      added: false,
+    })
   const [rowSelection, setRowSelection] = React.useState({})
 
   const [colSizing, setColSizing] = React.useState<ColumnSizingState>({});
@@ -317,7 +327,7 @@ export const GearTable = ({
         </DropdownMenu>
       </div>
       <div className="w-full h-[420px]">
-        <div className="rounded-md border">
+        <div className="rounded-md border w-full">
           <Table>
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
@@ -402,6 +412,7 @@ export const GearTable = ({
           <Button
             variant="outline"
             size="sm"
+            className="hover:underline"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
@@ -410,6 +421,7 @@ export const GearTable = ({
           <Button
             variant="outline"
             size="sm"
+            className="hover:underline"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
