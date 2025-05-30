@@ -204,7 +204,7 @@ export const Footer = () => {
     }
 
     return (    
-        <footer className={`w-full h-[80px] pt-8 pb-8 px-3 ${courierPrime.className}`}>
+        <footer className={`w-full top-full h-[80px] pt-8 pb-8 px-3 ${courierPrime.className}`}>
             <div className="h-full w-full flex flex-col justify-center items-center text-xl font-normal">
                 {
                     router.route.includes("contact") ? null :

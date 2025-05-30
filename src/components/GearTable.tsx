@@ -179,7 +179,7 @@ export const GearTable = ({
   
 
   return (
-    <div className="w-full">
+    <div className="w-full h-[600px]">
       <div className="flex items-center py-4 gap-x-8">
         <Input
           placeholder="Filter gear..."
@@ -272,7 +272,7 @@ export const GearTable = ({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="w-full">
+      <div className="w-full h-[420px]">
         <div className="rounded-md border">
           <Table>
             <TableHeader>
