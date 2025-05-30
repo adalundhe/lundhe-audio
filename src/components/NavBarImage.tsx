@@ -5,6 +5,23 @@ import { useSettings } from "~/hooks/use-settings";
 import { useEffect, useState } from "react";
 import { type Mode } from '~/components/ui/settings-provider';
 
+function initTheme() {
+
+    const root = window.document.documentElement;
+    root.classList.remove("light", "dark");
+
+
+    let mode = localStorage.getItem('ui-mode') ?? 'system'
+    if (mode === 'system') {
+        mode = window.matchMedia("(prefers-color-scheme: dark)")
+        .matches
+        ? "dark"
+        : "light"
+    }
+
+
+    return mode as Mode
+}
 
 export const NavBarImage = () => {
     const {mode} = useSettings()
@@ -13,7 +30,7 @@ export const NavBarImage = () => {
     useEffect(() => {
 
         if (mode === 'system') {
-            setMode(localStorage.getItem('ui-mode') as Mode)
+            setMode(initTheme())
         } else {
             setMode(mode)
         }

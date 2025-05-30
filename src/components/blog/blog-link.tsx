@@ -18,9 +18,9 @@ export const BlogLink = ({
 
     return (
         blogLinkType === 'external' ?
-        <a target="_blank" rel="noopener noreferrer" className={`hover:underline  ${styles ? styles : ""} text-cyan-500`} href={to}>{children}</a>
+        <a target="_blank" rel="noopener noreferrer" className={`hover:underline  ${styles ?? ""} text-cyan-500`} href={to}>{children}</a>
         :
-        <Link href={to} className={`hover:underline  ${styles ? styles : ""} text-cyan-500`}>{children}</Link>
+        <Link href={to} className={`hover:underline  ${styles ?? ""} text-cyan-500`}>{children}</Link>
     )
 
 }

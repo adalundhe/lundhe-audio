@@ -18,6 +18,6 @@ export const Paragraph = ({
         side === 'left' ? 'self-start' :
         side === 'center' ? 'self-center' :
         'self-end'
-    } ${styles ? styles  : ""}`}>
+    } ${styles ?? ""}`}>
     {children}
 </div>
