@@ -24,6 +24,8 @@ const client =
 const db = drizzle(client, { schema });
 
 const updateEquipment = async () => {
+
+  await db.delete(schema.equipmentItem)
   
   let inserted = 1;
   const items = Gear.length;

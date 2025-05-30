@@ -40,7 +40,7 @@ export const equipmentItem = createTable(
       .notNull()
       .primaryKey()
       .$defaultFn(() => crypto.randomUUID()),
-    name: text("name", { length: 255 }).notNull(),
+    name: text("name", { length: 255 }).unique().notNull(),
     description: text("description", { length: 255 }).notNull(),
     type: text("type", { length: 255 }).notNull(),
     group: text("group", { length: 255 }).notNull(),
