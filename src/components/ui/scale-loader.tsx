@@ -48,7 +48,6 @@ export const  ScaleLoader = ({
   speedMultiplier = 1,
   styles = "h-[35px] w-[4px] rounded-xs m-2",
   barCount = 5,
-  ...additionalprops
 }: StyleProps & { barCount?: number }) => {
 
   const style = useCallback((frameIdx: number): React.CSSProperties => {
@@ -62,13 +61,11 @@ export const  ScaleLoader = ({
 
 
   return (
-    <span style={{
-        display: "inherit"
-    }} {...additionalprops}>
+    <span className="motion-reduce:hidden">
       {[...Array(barCount)].map((_, frameIdx) => (
         <span key={`scale-loader-frame-${frameIdx}`} style={style(frameIdx + 1)}  className={
             cn(
-                "color-black dark:color-white",
+                "bg-black/75 dark:bg-white",
                 styles,
 
             )
