@@ -202,7 +202,7 @@ export const GearTable = ({
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className={`${courierPrime.className}`}>
             <div>
-              <ScrollArea className="h-[100px] w-full">
+              <ScrollArea className="h-[200px] w-full">
 
               {data.map(item => item.type)
               .reduce(function (types, type) {
