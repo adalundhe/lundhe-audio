@@ -1,8 +1,4 @@
 import { z } from "zod";
-import { type ServerClient } from 'postmark'
-import { type Twilio } from 'twilio'
-import ky, { type HTTPError } from 'ky';
-import { env } from "~/env";
 import {
   createTRPCRouter,
   publicProcedure,
@@ -25,8 +21,6 @@ export const equipmentItemRouter = createTRPCRouter({
         return await ctx.db
             .select()
             .from(equipmentItem)
-
-            
 
     })
 })
