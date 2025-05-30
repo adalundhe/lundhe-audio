@@ -347,11 +347,14 @@ export const GearTable = ({
           </Table>
         </div>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
+      <div className="flex items-center justify-end py-4">
+        <div className="w-1/3">
         {table.getState().pagination.pageIndex + 1} of{" "} {table.getPageCount()}
-        <div className="flex-1 text-sm text-muted-foreground">
         </div>
-        <div className="space-x-2">
+        <div className="w-1/3 text-sm text-muted-foreground text-center">
+          {table.getFilteredRowModel().rows.length} rows
+        </div>
+        <div className="space-x-2 w-1/3 flex items-center justify-end">
           <Button
             variant="outline"
             size="sm"
