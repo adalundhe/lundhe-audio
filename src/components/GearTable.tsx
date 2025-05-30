@@ -43,6 +43,7 @@ import { ColumnResizer } from './ColumnResizer'
 import { FilterCell } from './FilterCell'
 import { ScrollArea } from "./ui/scroll-area"
 
+
 const courierPrime = Courier_Prime({
   weight: "400",
   subsets: ['latin']
@@ -171,7 +172,6 @@ export const GearTable = ({
 
   const [colSizing, setColSizing] = React.useState<ColumnSizingState>({});
 
-
   const table = useReactTable({
     data,
     columns,
@@ -208,6 +208,7 @@ export const GearTable = ({
     (grouped[item.group] ??= []).push(item);
     return grouped;
   }, {} as Record<string, EquipmentItem[]>), [data])
+  
   
 
   return (
