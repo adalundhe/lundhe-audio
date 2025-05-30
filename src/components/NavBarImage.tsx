@@ -32,7 +32,7 @@ export const NavBarImage = () => {
             updateMode(initTheme())
         }
 
-    }, [mode])
+    }, [mode, updateMode])
     
     return (
 
