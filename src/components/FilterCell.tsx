@@ -1,5 +1,5 @@
 
-import { type EquipmentItem } from "~/stores/gear-store";
+import { type EquipmentItem } from "~/server/api/routers/equipment";
 import { Button } from "~/components/ui/button"
 import { TableCell } from "~/components/ui/table"
 import {
