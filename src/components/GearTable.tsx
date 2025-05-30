@@ -272,7 +272,7 @@ export const GearTable = ({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="w-full h-[600px]">
+      <div className="w-full h-[420px]">
         <div className="rounded-md border">
           <Table>
             <TableHeader>
@@ -348,6 +348,7 @@ export const GearTable = ({
         </div>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
+        {table.getState().pagination.pageIndex + 1} of{" "} {table.getPageCount()}
         <div className="flex-1 text-sm text-muted-foreground">
         </div>
         <div className="space-x-2">
