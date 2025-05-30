@@ -44,7 +44,7 @@ export const BlogSection = ({
                 section={section}
                 side={contentSide}
             />
-            <Content side={contentSide} styles={styles ? styles : ''}>
+            <Content side={contentSide} styles={styles ?? ''}>
                 {children}
             </Content>
         </> :
@@ -59,7 +59,7 @@ export const BlogSection = ({
                 section={section}
                 side={contentSide}
             />
-            <Content side={contentSide} styles={`gap-4 ${styles ? styles : ''}`}>
+            <Content side={contentSide} styles={`gap-4 ${styles ?? ''}`}>
                 {children}
             </Content>
         </>

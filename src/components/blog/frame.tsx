@@ -18,7 +18,7 @@ export const Frame = ({
     subtext?: string,
     side: 'left' | 'center' | 'right'
 }) => ( 
-    <div className={`max-w-[${size}%] w-[${size}%] text-wrap flex flex-col ${styles ? styles  : ""} ${side === 'left' ? 'items-start' : side === 'center' ? 'items-center' : 'items-end'}`}>
+    <div className={`max-w-[${size}%] w-[${size}%] text-wrap flex flex-col ${styles ?? ""} ${side === 'left' ? 'items-start' : side === 'center' ? 'items-center' : 'items-end'}`}>
         <div className={`mb-4 max-w-fit w-fit flex flex-col`}>
             <Image
                 src={src}
