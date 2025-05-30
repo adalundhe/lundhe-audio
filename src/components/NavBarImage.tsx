@@ -11,7 +11,7 @@ function initTheme() {
     root.classList.remove("light", "dark");
 
 
-    let mode = localStorage.getItem('ui-mode') || 'system'
+    let mode = localStorage.getItem('ui-mode') ?? 'system'
     if (mode === 'system') {
         mode = window.matchMedia("(prefers-color-scheme: dark)")
         .matches
