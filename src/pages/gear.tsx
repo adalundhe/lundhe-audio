@@ -8,6 +8,7 @@ import {
     CardHeader,
     CardTitle,
 } from "~/components/ui/card";
+import { Spinner } from "~/components/ui/spinner";
 import { GearDisplay } from '~/components/GearDisplay'
 import { Suspense } from "react";
 
@@ -15,6 +16,7 @@ const blurDataUrl = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUND
 
 const Loader = () => <div className="w-full h-[600px] flex flex-col items-center justify-center">
     Loading...
+    <Spinner size="sm" className="bg-black dark:bg-white" />
 </div>
 
 
