@@ -1,0 +1,1 @@
+DROP INDEX IF EXISTS `EquipmentItem_name_unique`;

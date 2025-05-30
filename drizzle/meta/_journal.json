@@ -8,6 +8,20 @@
       "when": 1748630977685,
       "tag": "0000_demonic_doctor_octopus",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1748641896233,
+      "tag": "0001_supreme_hex",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1748642031331,
+      "tag": "0002_hot_network",
+      "breakpoints": true
     }
   ]
 }

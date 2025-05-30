@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX `EquipmentItem_name_unique` ON `EquipmentItem` (`name`);
