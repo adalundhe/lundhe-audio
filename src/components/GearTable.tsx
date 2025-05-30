@@ -14,8 +14,14 @@ import {
   useReactTable,
   ColumnSizingState,
 } from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
+import { ArrowUpDown, ChevronDown, ChevronRight } from "lucide-react"
 import { Button } from "~/components/ui/button"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "~/components/ui/accordion"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -31,7 +37,7 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table"
-import { Courier_Prime, Scope_One } from 'next/font/google';
+import { Courier_Prime } from 'next/font/google';
 import { EquipmentItem} from "~/stores/gear-store";
 import { ColumnResizer } from './ColumnResizer'
 import { FilterCell } from './FilterCell'
@@ -50,6 +56,7 @@ export const columns: ColumnDef<EquipmentItem>[] = [
     accessorKey: "name",
     minSize: 300,
     maxSize: 700,
+    enableMultiSort: true,
     header: ({ column }) => {
       return (
         <Button
@@ -97,6 +104,8 @@ export const columns: ColumnDef<EquipmentItem>[] = [
     accessorKey: "type",
     minSize: 100,
     maxSize: 150,
+    enableMultiSort: true,
+    filterFn: "equalsString",
     header: ({ column }) => {
       return (
         <Button
@@ -117,8 +126,9 @@ export const columns: ColumnDef<EquipmentItem>[] = [
   },
   {
     accessorKey: "quantity",
-    minSize: 100,
-    maxSize: 150,
+    minSize: 75,
+    maxSize: 100,
+    enableMultiSort: true,
     header: ({ column }) => {
       return (
         <Button
@@ -144,7 +154,12 @@ export const GearTable = ({
 }: {
     data: EquipmentItem[]
 }) => {
-  const [sorting, setSorting] = React.useState<SortingState>([])
+  const [sorting, setSorting] = React.useState<SortingState>([
+      {
+        id: "name",
+        desc: false,
+      }
+  ])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   )
@@ -153,6 +168,7 @@ export const GearTable = ({
   const [rowSelection, setRowSelection] = React.useState({})
 
   const [colSizing, setColSizing] = React.useState<ColumnSizingState>({});
+
 
   const table = useReactTable({
     data,
@@ -175,7 +191,23 @@ export const GearTable = ({
       rowSelection,
       columnSizing: colSizing,
     },
+    initialState: {
+      expanded: true,
+      columnFilters: [
+        {
+          id: "type",
+          value: ""
+        }
+      ]
+    }
   })
+
+  const dataByGroup = React.useMemo(() => data.reduce(function(grouped, item) {
+    (grouped[item.group] ??= []).push(item);
+    return grouped;
+  }, {} as {
+    [key: string]: EquipmentItem[]
+  }), [data])
   
 
   return (
@@ -201,43 +233,54 @@ export const GearTable = ({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className={`${courierPrime.className}`}>
-            <div>
-              <ScrollArea className="h-[200px] w-full">
+                <Accordion type="single" collapsible className="flex flex-col w-full">
+                {
+                  Object.keys(dataByGroup).map(group => 
+                      <AccordionItem value={group} key={`equipment-group-${group}`}>
+                        <AccordionTrigger className="h-[2.5em] w-fit flex md:hover:underline hover:no-underline" chevronSide="left">
+                          {group}  
+                        </AccordionTrigger>
+                        <AccordionContent className="p-0">
 
-              {data.map(item => item.type)
-              .reduce(function (types, type) {
-                  if (!types.includes(type)) {
-                      types.push(type);
-                  }
-                  
-                  return types;
-              }, [] as string[])
-              .map((type) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={type}
-                    className="capitalize"
-                    checked={
-                      table.getColumn("type")?.getFilterValue() === type
-                    }
-                    onCheckedChange={() => {
-                      const filter = table.getColumn("type")?.getFilterValue()
-                      table.getColumn("type")?.setFilterValue(
-                        filter === type ?
-                        ""
-                        :
-                        type
-                      )
-                    }
-                      
-                    }
-                  >
-                    {type}
-                  </DropdownMenuCheckboxItem>
-                )
-              })}
-              </ScrollArea>
-            </div>
+                          <ScrollArea className="h-fit w-full">
+                          {dataByGroup[group]?.map(item => item.type)
+                            .reduce(function (types, type) {
+                                if (!types.includes(type)) {
+                                    types.push(type);
+                                }
+                                
+                                return types;
+                            }, [] as string[])
+                            .map((type) => {
+                              return (
+                                <DropdownMenuCheckboxItem
+                                  key={type}
+                                  className="capitalize outline-none border-none"
+                                  checked={
+                                    (table.getColumn("type")?.getFilterValue() ?? "") === type
+                                  }
+                                  onCheckedChange={() => {
+                                    const filter = (table.getColumn("type")?.getFilterValue() ?? "")
+                                    
+                                    table.getColumn("type")?.setFilterValue(
+                                      filter === type ? "" : type
+                                    )
+                                  }
+                                    
+                                  }
+                                >
+                                  {type}
+                                </DropdownMenuCheckboxItem>
+                              )
+                            })}
+                          </ScrollArea>
+                        </AccordionContent>
+                      </AccordionItem>
+                    
+                  )
+                }
+
+                </Accordion>
           </DropdownMenuContent>
         </DropdownMenu>
         <DropdownMenu>
