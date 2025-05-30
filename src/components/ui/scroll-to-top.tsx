@@ -12,7 +12,6 @@ export function ScrollToTop({
 
   useEffect(() => {
     const onScroll = () => {
-        console.log('SCROLL', document.documentElement.scrollTop, visible)
       setVisible(document.documentElement.scrollTop >= minHeightRef.current);
     };
 
