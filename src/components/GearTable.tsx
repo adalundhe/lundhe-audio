@@ -67,7 +67,7 @@ export const columns: ColumnDef<EquipmentItem>[] = [
       )
     },
     cell: ({ row }) => (
-      <div className="capitalize h-[1vmax] truncate text-ellipsis">{row.getValue("name")}</div>
+      <div className="capitalize truncate text-ellipsis">{row.getValue("name")}</div>
     ),
     enableHiding: false
   },
@@ -89,7 +89,7 @@ export const columns: ColumnDef<EquipmentItem>[] = [
       )
     },
     cell: ({ row }) => (
-      <div className=" h-[1vmax] truncate text-ellipsis">{row.getValue("description")}</div>
+      <div className="truncate text-ellipsis">{row.getValue("description")}</div>
     ),
     enableSorting: false,
   },
@@ -113,7 +113,7 @@ export const columns: ColumnDef<EquipmentItem>[] = [
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase h-[1vmax] truncate text-ellipsis">{row.getValue("type")}</div>,
+    cell: ({ row }) => <div className="lowercase truncate text-ellipsis">{row.getValue("type")}</div>,
   },
   {
     accessorKey: "quantity",
@@ -135,7 +135,7 @@ export const columns: ColumnDef<EquipmentItem>[] = [
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase h-[1vmax]">{row.getValue("quantity")}</div>,
+    cell: ({ row }) => <div className="lowercase">{row.getValue("quantity")}</div>,
   },
 ]
 
@@ -179,7 +179,7 @@ export const GearTable = ({
   
 
   return (
-    <div className="w-full h-full flex flex-col">
+    <div className="w-full">
       <div className="flex items-center py-4 gap-x-8">
         <Input
           placeholder="Filter gear..."
@@ -272,7 +272,7 @@ export const GearTable = ({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="w-full h-[420px]">
+      <div className="w-full">
         <div className="rounded-md border">
           <Table>
             <TableHeader>
