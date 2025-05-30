@@ -31,10 +31,11 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table"
-import { Courier_Prime } from 'next/font/google';
+import { Courier_Prime, Scope_One } from 'next/font/google';
 import { EquipmentItem} from "~/stores/gear-store";
 import { ColumnResizer } from './ColumnResizer'
 import { FilterCell } from './FilterCell'
+import { ScrollArea } from "./ui/scroll-area"
 
 const courierPrime = Courier_Prime({
   weight: "400",
@@ -178,20 +179,71 @@ export const GearTable = ({
   
 
   return (
-    <div className="w-full h-full">
-      <div className="flex items-center py-4">
+    <div className="w-full h-full flex flex-col">
+      <div className="flex items-center py-4 gap-x-8">
         <Input
           placeholder="Filter gear..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("name")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm"
+          className="max-w-md justify-self-start"
         />
+        <DropdownMenu modal={false}>
+          <DropdownMenuTrigger asChild className="p-0 ml-auto">
+            <Button className="w-fit flex">
+              <div className="w-fit h-full flex gap-4 items-center justify-center">
+                Types
+                <div className="w-[1.5em] h-[1.5em]">
+                  <ChevronDown />
+                </div>
+              </div>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className={`${courierPrime.className}`}>
+            <div>
+              <ScrollArea className="h-[100px] w-full">
+
+              {data.map(item => item.type)
+              .reduce(function (types, type) {
+                  if (!types.includes(type)) {
+                      types.push(type);
+                  }
+                  
+                  return types;
+              }, [] as string[])
+              .map((type) => {
+                return (
+                  <DropdownMenuCheckboxItem
+                    key={type}
+                    className="capitalize"
+                    checked={
+                      table.getColumn("type")?.getFilterValue() === type
+                    }
+                    onCheckedChange={() => {
+                      const filter = table.getColumn("type")?.getFilterValue()
+                      table.getColumn("type")?.setFilterValue(
+                        filter === type ?
+                        ""
+                        :
+                        type
+                      )
+                    }
+                      
+                    }
+                  >
+                    {type}
+                  </DropdownMenuCheckboxItem>
+                )
+              })}
+              </ScrollArea>
+            </div>
+          </DropdownMenuContent>
+        </DropdownMenu>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button className="ml-auto w-fit flex">
-              <div className="w-fit h-full flex gap-4">
+            <Button className="w-fit flex p-0">
+              <div className="w-fit h-full flex gap-4 items-center justify-end">
                 Columns
                 <div className="w-[1.5em] h-[1.5em]">
                   <ChevronDown />
@@ -220,77 +272,79 @@ export const GearTable = ({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead 
-                      key={header.id} 
-                      className="relative"
-                      style={{
-                        width: header.column.getSize(),
-                        minWidth: header.column.columnDef.minSize,
-                        maxWidth: header.column.columnDef.maxSize,
-                      }}
-                    >
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                      <ColumnResizer header={header} />
-                    </TableHead>
-                  )
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                      cell.getContext().column.id === 'type' ?  <FilterCell
-                        key={cell.id}
-                        cell={cell}
-                        table={table}
-                        filterColumn="type"
-                      /> 
-                      :
-                      <TableCell 
-                        key={cell.id}
+      <div className="w-full h-[600px]">
+        <div className="rounded-md border">
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead 
+                        key={header.id} 
+                        className="relative"
                         style={{
-                          width: cell.column.getSize(),
-                          minWidth: cell.column.columnDef.minSize
+                          width: header.column.getSize(),
+                          minWidth: header.column.columnDef.minSize,
+                          maxWidth: header.column.columnDef.maxSize,
                         }}
                       >
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </TableCell>
-                    ))}
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                        <ColumnResizer header={header} />
+                      </TableHead>
+                    )
+                  })}
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                        cell.getContext().column.id === 'type' ?  <FilterCell
+                          key={cell.id}
+                          cell={cell}
+                          table={table}
+                          filterColumn="type"
+                        /> 
+                        :
+                        <TableCell 
+                          key={cell.id}
+                          style={{
+                            width: cell.column.getSize(),
+                            minWidth: cell.column.columnDef.minSize
+                          }}
+                        >
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </TableCell>
+                      ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={columns.length}
+                    className="h-24 text-center"
+                  >
+                    No results.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
