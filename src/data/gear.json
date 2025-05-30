@@ -1,0 +1,2464 @@
+[
+    {
+        "name": "Audeze LCD5",
+        "description": "Planar magnetic open-back headphones",
+        "type": "headphones",
+        "quantity": 1
+    },
+    {
+        "name": "Audeze LCD4",
+        "description": "Planar magnetic open-back headphones",
+        "type": "headphones",
+        "quantity": 1
+    },
+    {
+        "name": "Audeze LCD3",
+        "description": "Planar magnetic open-back headphones",
+        "type": "headphones",
+        "quantity": 1
+    },
+    {
+        "name": "Audeze LCDX",
+        "description": "Planar magnetic closed-back headphones",
+        "type": "headphones",
+        "quantity": 1
+    },
+    {
+        "name": "ExMachina Quasar MKII",
+        "description": "Sealed cabinet DSP-enabled main monitors",
+        "type": "monitors",
+        "quantity": 2
+    },
+    {
+        "name": "Focal Twin 6 BE",
+        "description": "Original Focal 2.5-way beryllium monitors",
+        "type": "monitors",
+        "quantity": 2
+    },
+    {
+        "name": "Focal Solo 6 BE",
+        "description": "Original Focal 2-way beryllium monitors",
+        "type": "monitors",
+        "quantity": 2
+    },
+    {
+        "name": "Klein & Hummel KH80DSP",
+        "description": "Two-way DSP-enabled compact monitors",
+        "type": "monitors",
+        "quantity": 2
+    },
+    {
+        "name": "Universal Audio Apollo x16",
+        "description": "Sixteen I/O DSP-enabled converter",
+        "type": "converters",
+        "quantity": 4
+    },
+    {
+        "name": "Antellope Audio Orion 32+ Gen 4",
+        "description": "Thirty-two I/O DSP-enabled converter",
+        "type": "converters",
+        "quantity": 1
+    },
+    {
+        "name": "Dangerous Convert AD+",
+        "description": "24-bit A/D mastering converter",
+        "type": "converters",
+        "quantity": 1
+    },
+    {
+        "name": "SPL Mercury",
+        "description": "24-bit D/A mastring converter",
+        "type": "converters",
+        "quantity": 1
+    },
+    {
+        "name": "Cranesong Interstellar",
+        "description": "24-bit A/D mastring converter",
+        "type": "converters",
+        "quantity": 1
+    },
+    {
+        "name": "Prism Sound Orpheus",
+        "description": "24-bit eight channel converter",
+        "type": "converters",
+        "quantity": 2
+    },
+    {
+        "name": "RME Fireface 802",
+        "description": "24-bit 24-channel converter",
+        "type": "converters",
+        "quantity": 1
+    },
+    {
+        "name": "Rupert Neve Designs 5060",
+        "description": "Twenty-four channel summing mixer w/ RND Silk",
+        "type": "summing mixer",
+        "quantity": 1
+    },
+    {
+        "name": "SSL X-Desk",
+        "description": "Sixteen channel summing mixer",
+        "type": "summing mixer",
+        "quantity": 1
+    },
+    {
+        "name": "Tegeler Audio Tube Summing Mixer",
+        "description": "Sixteen channel tube summing mixer",
+        "type": "summing mixer",
+        "quantity": 1
+    },
+    {
+        "name": "Rupert Neve Designs 5059",
+        "description": "Sixteen channel summing mixer w/ RND Silk",
+        "type": "summing mixer",
+        "quantity": 6
+    },
+    {
+        "name": "Flock Patch",
+        "description": "64 x 64 digitally controlled patchbay",
+        "type": "patchbay",
+        "quantity": 6
+    },
+    {
+        "name": "A-Designs Pacifica",
+        "description": "Two channel quad-eight based preamp/DI",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "Acme Audio MTP-66",
+        "description": "Single channel portable tube preamp/DI",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "AEA TRP3",
+        "description": "Two channel high-gain portable preamp/DI",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "API 512V",
+        "description": "Mono 500-Series classic API preamp",
+        "type": "preamp",
+        "quantity": 2
+    },
+    {
+        "name": "Avalon Designs 2022AD",
+        "description": "Two channel Class-A preamp",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "Avalon Designs V5",
+        "description": "Single channel Class-A preamp/DI",
+        "type": "preamp",
+        "quantity": 2
+    },
+    {
+        "name": "Avedis MA5",
+        "description": "Mono 500-series Neve-based preamp",
+        "type": "preamp",
+        "quantity": 2
+    },
+    {
+        "name": "Avedis MD7",
+        "description": "Mono 500-series API-based preamp/DI",
+        "type": "preamp",
+        "quantity": 2
+    },
+    {
+        "name": "BAE 1073 DMP",
+        "description": "Single Channel Neve-based portable preamp/DI",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "Blue Robbie",
+        "description": "Single channel tube preamp/DI",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "Chandler Limited Germanium Pre",
+        "description": "Mono 500-series germanium preamp/DI",
+        "type": "preamp",
+        "quantity": 2
+    },
+    {
+        "name": "Chandler Limited Little Devil Pre",
+        "description": "Mono 500-series preamp/DI",
+        "type": "preamp",
+        "quantity": 2
+    },
+    {
+        "name": "Chandler Limited TG2 Pre",
+        "description": "Mono 500-series TGI console based preamp/DI",
+        "type": "preamp",
+        "quantity": 2
+    },
+    {
+        "name": "Drawmer 1960",
+        "description": "Two channel tube channel strip with mono DI",
+        "type": "channel strip",
+        "quantity": 2
+    },
+    {
+        "name": "DBX 786",
+        "description": "Two channel ultra-clean preamp",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "Focusrite ISA One",
+        "description": "Single channel portable preamp/DI",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "Focusrite Liquid Channel",
+        "description": "Single channel modeling preamp/DI",
+        "type": "preamp",
+        "quantity": 2
+    },
+    {
+        "name": "Focusrite Red 1",
+        "description": "Quad channel classic preamp/DI",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "Great Channel MP-1NV",
+        "description": "Neve-based portable preamp/DI",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "H2 Audio Helios 2128",
+        "description": "Mono 500-series Helios console based preamp",
+        "type": "preamp",
+        "quantity": 2
+    },
+    {
+        "name": "Kerwax Melodium P22T",
+        "description": "Portable stereo-pair tube preamp set",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "Kerwax Replica",
+        "description": "Line-level amplifier and channel strip",
+        "type": "channel strip",
+        "quantity": 1
+    },
+    {
+        "name": "LaChapell Audio 992EG",
+        "description": "Two channel high-gain tube preamp/DI",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "Manley Core Channel strip",
+        "description": "Tube channel strip w/ DI",
+        "type": "channel strip",
+        "quantity": 1
+    },
+    {
+        "name": "Millenia HV-35P",
+        "description": "Single channel portable transformerless preamp/DI",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "Overstayer Modular Channel 8755DM",
+        "description": "Transformer-enabled parallel processing channel strip",
+        "type": "channel strip",
+        "quantity": 1
+    },
+    {
+        "name": "Phoenix Audio Ascent One EQ",
+        "description": "Single channel channel strip with gyrator equalizer",
+        "type": "channel strip",
+        "quantity": 1
+    },
+    {
+        "name": "Retro Instruments 500 Pre",
+        "description": "Mono 500-series tube preamp",
+        "type": "preamp",
+        "quantity": 2
+    },
+    {
+        "name": "Rupert Neve Designs Portico 5017",
+        "description": "Single channel portable channel strip w/ DI",
+        "type": "channel strip",
+        "quantity": 1
+    },
+    {
+        "name": "Rupert Neve Designs 5025",
+        "description": "Two channel dual Shelford preamp with RND silk",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "Shadow Hills Mono GAMMA",
+        "description": "Mono 500-series transformer-switchign preamp",
+        "type": "preamp",
+        "quantity": 2
+    },
+    {
+        "name": "Slate Pro Audio Fox",
+        "description": "Two channel quad-voice preamp/DI",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "Soyuz Lakeside",
+        "description": "Single channel preamp/DI",
+        "type": "preamp",
+        "quantity": 2
+    },
+    {
+        "name": "Soyuz Launcher Deluxe",
+        "description": "Two channel microphone booster",
+        "type": "utility",
+        "quantity": 1
+    },
+    {
+        "name": "SSL X-Logic Alpha Channel",
+        "description": "Single channel VHD channel strip",
+        "type": "channel strip",
+        "quantity": 2
+    },
+    {
+        "name": "SSL XR621",
+        "description": "Single channel Super Analogue preamp",
+        "type": "preamp",
+        "quantity": 2
+    },
+    {
+        "name": "Summit Audio 2BA-221",
+        "description": "Single channel hybrid tube/solid-state premap/DI",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "Summit Audio MPC-100A",
+        "description": "Single channel tube channel strip",
+        "type": "channel strip",
+        "quantity": 2
+    },
+    {
+        "name": "Thermionic Culture Vulture Super 15 ME",
+        "description": "Two channel mastering valve distortion and preamp",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "Tierra Audio Lava Analog Edition",
+        "description": "Single channel classic preamp",
+        "type": "preamp",
+        "quantity": 2
+    },
+    {
+        "name": "TL Audio Fat Track",
+        "description": "Twelve channel tube microphone and line mixer",
+        "type": "channel strip",
+        "quantity": 1
+    },
+    {
+        "name": "Tube-Tech MP2A",
+        "description": "Two channel tube preamp/DI",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "Universal Audio 4110",
+        "description": "Quad channel transformer-switching preamp/DI",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "Universal Audio 610",
+        "description": "Single channel portable tube preamp/DI",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "Universal Audio 710 Twin-Finity",
+        "description": "Single channel portable blending solid-state/tube preamp/DI",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "Useful Arts SFP-60",
+        "description": "Two channel tube preamp/DI",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "Useful Arts SFP-30",
+        "description": "Single channel portable tube preamp",
+        "type": "preamp",
+        "quantity": 1
+    },
+    {
+        "name": "Wes Audio Phoebe",
+        "description": "Mono 500-series classic preamp/DI",
+        "type": "preamp",
+        "quantity": 2
+    },
+    {
+        "name": "A-Designs REDDI V2",
+        "description": "Two channel rackmount active tube DI",
+        "type": "DI",
+        "quantity": 1
+    },
+    {
+        "name": "Little Labs Pepper",
+        "description": "Single channel active DI and re-amp box",
+        "type": "DI",
+        "quantity": 1
+    },
+    {
+        "name": "Hazelrigg VDI",
+        "description": "Single channel active DI",
+        "type": "DI",
+        "quantity": 1
+    },
+    {
+        "name": "Summit Audio TD-100",
+        "description": "Single channel tube instrument preamp and DI",
+        "type": "DI",
+        "quantity": 1
+    },
+    {
+        "name": "Thermionic Culture The Robin",
+        "description": "Single channel passive DI",
+        "type": "DI",
+        "quantity": 1
+    },
+    {
+        "name": "Undertone Audio GB Tracker II",
+        "description": "Single channel instrument preamp/DI and re-amp box",
+        "type": "DI",
+        "quantity": 1
+    },
+    {
+        "name": "API 2500+",
+        "description": "Stereo classic bus compressor",
+        "type": "compressor",
+        "quantity": 1
+    },
+    {
+        "name": "Bettermaker MAstering Limiter",
+        "description": "Stereo digitally controlled mastering limiter",
+        "type": "limiter",
+        "quantity": 1
+    },
+    {
+        "name": "Buzz Audio SOC-20",
+        "description": "Stereo optical FET compressor",
+        "type": "compressor",
+        "quantity": 1
+    },
+    {
+        "name": "Chandler Limited Germanium Compressor",
+        "description": "Single-channel classic germanium compressor",
+        "type": "compressor",
+        "quantity": 2
+    },
+    {
+        "name": "Chandler Limited Little Devil Compressor",
+        "description": "Mono 500-series FET compressor",
+        "type": "compressor",
+        "quantity": 2
+    },
+    {
+        "name": "Chandler Limited Zener Limiter",
+        "description": "Stereo Abbey-Road TGI-based mastering compressor",
+        "type": "compressor",
+        "quantity": 1
+    },
+    {
+        "name": "DBX 160SL",
+        "description": "Stereo quad-VCA compressor",
+        "type": "compressor",
+        "quantity": 1
+    },
+    {
+        "name": "Drawmer 1973",
+        "description": "Stereo analog multiband compressor",
+        "type": "compressor",
+        "quantity": 1
+    },
+    {
+        "name": "Dramastic Audio Obsidian",
+        "description": "Stereo 500-series VCA compressor",
+        "type": "compressor",
+        "quantity": 1
+    },
+    {
+        "name": "Elysia Alpha",
+        "description": "Stereo mastering compressor w/ soft clipping and EQ",
+        "type": "compressor",
+        "quantity": 1
+    },
+    {
+        "name": "Elysia Karacter",
+        "description": "Stereo 500-series saturation unit",
+        "type": "saturator",
+        "quantity": 1
+    },
+    {
+        "name": "Elysia mPressor",
+        "description": "Mono 500-series compressor",
+        "type": "compressor",
+        "quantity": 1
+    },
+    {
+        "name": "Elysia nVelope",
+        "description": "Mono 500-series transient shaper",
+        "type": "transient shaper",
+        "quantity": 1
+    },
+    {
+        "name": "Empirical Labs EL8X",
+        "description": "Single channel compressor",
+        "type": "compressor",
+        "quantity": 1
+    },
+    {
+        "name": "HUM Audio LAAL",
+        "description": "Stereo mastering limiter w/ analog look-ahead",
+        "type": "limiter",
+        "quantity": 1
+    },
+    {
+        "name": "Manley VariMu TheWorks",
+        "description": "Stereo mastering compressor w/ T-Bar mod and mid/side",
+        "type": "compressor",
+        "quantity": 1
+    },
+    {
+        "name": "Purple Audio MC77",
+        "description": "Single channel 1176-style FET compressor",
+        "type": "compressor",
+        "quantity": 2
+    },
+    {
+        "name": "Retro Instruments Revolver",
+        "description": "Stereo tube vari-mu compressor",
+        "type": "compressor",
+        "quantity": 1
+    },
+    {
+        "name": "Rupert Neve Designs Master Bus Processor",
+        "description": "Stereo multi-function mastering processor",
+        "type": "compressor",
+        "quantity": 1
+    },
+    {
+        "name": "Rupert Neve Designs 535",
+        "description": "Mono 500-series diode-bridge compressor",
+        "type": "compressor",
+        "quantity": 2
+    },
+    {
+        "name": "Rupert Neve Designs 543",
+        "description": "Mono 500-series VCA compressor",
+        "type": "compressor",
+        "quantity": 2
+    },
+    {
+        "name": "Serpent Audio Chimera",
+        "description": "Mono 500-series LA-3A based optical compressor",
+        "type": "compressor",
+        "quantity": 2
+    },
+    {
+        "name": "Serpent Audio Splice-500",
+        "description": "Mono 500-series 1176 based FET compressor",
+        "type": "compressor",
+        "quantity": 2
+    },
+    {
+        "name": "Shadow Hills Dual Vandergraph",
+        "description": "Stereo 500-series VCA compressor",
+        "type": "compressor",
+        "quantity": 1
+    },
+    {
+        "name": "Slate Audio Dragon",
+        "description": "Single channel 1176-based FET compressor",
+        "type": "compressor",
+        "quantity": 2
+    },
+    {
+        "name": "SPL Iron V2",
+        "description": "Stereo vari-mu mastering compressor",
+        "type": "compressor",
+        "quantity": 1
+    },
+    {
+        "name": "SSL XR618",
+        "description": "Single channel X-Rack SSL 9K compressor",
+        "type": "compressor",
+        "quantity": 2
+    },
+    {
+        "name": "SSL XR626",
+        "description": "Single channel X-Rack SSL G-Bus compressor",
+        "type": "compressor",
+        "quantity": 1
+    },
+    {
+        "name": "Standard Audio Level-OR 500",
+        "description": "Mono 500-series Level-Loc based compressor",
+        "type": "compressor",
+        "quantity": 2
+    },
+    {
+        "name": "Summit Audio DCL-200",
+        "description": "Two channel hybrid solid-state/tube compressor",
+        "type": "compressor",
+        "quantity": 1
+    },
+    {
+        "name": "Tegeler Audio Creme RC",
+        "description": "Remote controllable VCA compressor w/ passive Pultec-style EQ",
+        "type": "compressor",
+        "quantity": 1
+    },
+    {
+        "name": "Tierra Audio Boreal",
+        "description": "Single channel FET compressor",
+        "type": "compressor",
+        "quantity": 2
+    },
+    {
+        "name": "WesAudio Dione",
+        "description": "Stereo 500-series remote controllable VCA bus compressor",
+        "type": "compressor",
+        "quantity": 1
+    },
+    {
+        "name": "WesAudio MIMAS",
+        "description": "Mono 500-series remote controllable 1176 based FET compressor",
+        "type": "compressor",
+        "quantity": 2
+    },
+    {
+        "name": "WesAudio RHEA",
+        "description": "Stereo 500-series remote controllable vari-mu compressor",
+        "type": "compressor",
+        "quantity": 1
+    },
+    {
+        "name": "API 550B",
+        "description": "Mono 500-series classic equalizer",
+        "type": "equalizer",
+        "quantity": 2
+    },
+    {
+        "name": "Avedis E27",
+        "description": "Mono 500-series equalizer",
+        "type": "equalizer",
+        "quantity": 2
+    },
+    {
+        "name": "Chandler Limited Curve Bender",
+        "description": "Stereo Abbey Road TGI based mastering equalizer",
+        "type": "equalizer",
+        "quantity": 1
+    },
+    {
+        "name": "Chandler Limited Little Devil Equalizer",
+        "description": "Mono 500-series equalizer",
+        "type": "equalizer",
+        "quantity": 2
+    },
+    {
+        "name": "Craneborne Audio Carnby Harmonic Equalizer",
+        "description": "Mono 500-series saturating equalizer",
+        "type": "equalizer",
+        "quantity": 2
+    },
+    {
+        "name": "Drawmer 1961",
+        "description": "Two channel vacuum tube equalizer",
+        "type": "equalizer",
+        "quantity": 1
+    },
+    {
+        "name": "Drawmer 1971",
+        "description": "Two channel four-band equalizer w/ saturation",
+        "type": "equalizer",
+        "quantity": 1
+    },
+    {
+        "name": "H2 Audio Helios 5011",
+        "description": "Mono 500-series Helios console based equalizer",
+        "type": "equalizer",
+        "quantity": 2
+    },
+    {
+        "name": "Hendyamp Michaelangelo XL",
+        "description": "Two channel tube mastering equalizer",
+        "type": "equalizer",
+        "quantity": 1
+    },
+    {
+        "name": "Knif Audio Eksa",
+        "description": "Two channel mastering equalizer w/ Gain and Filter Options",
+        "type": "equalizer",
+        "quantity": 1
+    },
+    {
+        "name": "Kush Audio Clariphonic",
+        "description": "Two channel equalizer with mid/side processing",
+        "type": "equalizer",
+        "quantity": 1
+    },
+    {
+        "name": "Manley Massive Passive",
+        "description": "Two channel four-band tube mastering equalizer",
+        "type": "equalizer",
+        "quantity": 1
+    },
+    {
+        "name": "Pultec EQP-500X",
+        "description": "Mono 500-series transfrmer EQP-1A based equalizer",
+        "type": "equalizer",
+        "quantity": 2
+    },
+    {
+        "name": "Pultec MEQ-500 Jack Douglas Edition",
+        "description": "Mono 500-series transfrmer MEQ-5 based equalizer",
+        "type": "equalizer",
+        "quantity": 2
+    },
+    {
+        "name": "Rupert Neve Designs 551",
+        "description": "Mono 500-series inductor equalizer",
+        "type": "equalizer",
+        "quantity": 2
+    },
+    {
+        "name": "SSL XR425",
+        "description": "Single channel X-Rack SSL 4000-series E based equalizer",
+        "type": "equalizer",
+        "quantity": 2
+    },
+    {
+        "name": "SPL PQ Mastering Equalizer",
+        "description": "Two channel passive mastering equalizer",
+        "type": "equalizer",
+        "quantity": 1
+    },
+    {
+        "name": "SPL PassEQ Mastering Equalizer",
+        "description": "Two channel passive mastering equalizer",
+        "type": "equalizer",
+        "quantity": 1
+    },
+    {
+        "name": "Summit Audio FEQ-50",
+        "description": "Two channel hybrid solid-state/tube passive equalizer",
+        "type": "equalizer",
+        "quantity": 4
+    },
+    {
+        "name": "Tierra Audio Icicle",
+        "description": "Two channel four-band equalizer with saturation",
+        "type": "equalizer",
+        "quantity": 2
+    },
+    {
+        "name": "WesAudio Hyperion",
+        "description": "Stereo 500-series remote controllable equalizer w/ mid/side",
+        "type": "equalizer",
+        "quantity": 1
+    },
+    {
+        "name": "WesAudio Prometheus",
+        "description": "Stereo 500-series remote controllable passive equalizer w/ mid/side",
+        "type": "equalizer",
+        "quantity": 1
+    },
+    {
+        "name": "Benson Amps Studio Tall Bird",
+        "description": "Stereo analog tube spring reverb",
+        "type": "reverb",
+        "quantity": 1
+    },
+    {
+        "name": "Bricast M7",
+        "description": "Stereo digitial reverb",
+        "type": "reverb",
+        "quantity": 1
+    },
+    {
+        "name": "EchoFix EF-X3",
+        "description": "Multi-channel analog tape delay, spring reverb, and chorus",
+        "type": "multi-effect",
+        "quantity": 1
+    },
+    {
+        "name": "Ensoniq DP/4+",
+        "description": "Stereo digital classic 90s effects rack unit",
+        "type": "multi-effect",
+        "quantity": 1
+    },
+    {
+        "name": "Eventide H9000",
+        "description": "Eight channel sixteen-core multi-effects processor",
+        "type": "multi-effect",
+        "quantity": 1
+    },
+    {
+        "name": "T-Rex Binson Echorec",
+        "description": "Single channel analog drum delay",
+        "type": "delay",
+        "quantity": 1
+    },
+    {
+        "name": "TC Electronic D-Two",
+        "description": "Stereo digital tap delay",
+        "type": "delay",
+        "quantity": 1
+    },
+    {
+        "name": "TC Electronic FireworX",
+        "description": "Stereo digital multi-effects processor",
+        "type": "multi-effect",
+        "quantity": 1
+    },
+    {
+        "name": "TC Electronic Powercore 6000",
+        "description": "Firewire multi-effect and mastering DSP processor",
+        "type": "multi-effect",
+        "quantity": 1
+    },
+    {
+        "name": "Black Box HG-2",
+        "description": "Stereo tube mastering saturator",
+        "type": "saturator",
+        "quantity": 1
+    },
+    {
+        "name": "Drawmer 1976",
+        "description": "Stereo saturator w/ stereo field control",
+        "type": "saturator",
+        "quantity": 1
+    },
+    {
+        "name": "Empirical Labs EL7 Fatso",
+        "description": "Stereo saturator and tape emulator",
+        "type": "saturator",
+        "quantity": 1
+    },
+    {
+        "name": "Hendyamps The Oven",
+        "description": "Stereo analog solid-state/tube mastering saturator",
+        "type": "saturator",
+        "quantity": 1
+    },
+    {
+        "name": "Rupert Neve Designs Master Bus Transformer",
+        "description": "Stereo multi-function mastering processor and saturation unit",
+        "type": "saturator",
+        "quantity": 1
+    },
+    {
+        "name": "Rupert Neve Designs 542",
+        "description": "Mono 500-series analog saturator and tape emulator",
+        "type": "saturator",
+        "quantity": 2
+    },
+    {
+        "name": "SPL BIG 500",
+        "description": "Stereo 500-series stereo field editor",
+        "type": "utility",
+        "quantity": 1
+    },
+    {
+        "name": "SPL Gemini",
+        "description": "Two channel stereo field editor and mid/side matrix w/ insert",
+        "type": "utility",
+        "quantity": 1
+    },
+    {
+        "name": "SPL Hermes",
+        "description": "Two channel recallable mastering router",
+        "type": "utility",
+        "quantity": 1
+    },
+    {
+        "name": "Vertigo VSM-2 Mix Satellite",
+        "description": "Two channel multi-band mastering saturator with dual insert and mid/side",
+        "type": "saturator",
+        "quantity": 1
+    },
+    {
+        "name": "Whitestone P331A Tube-Loading Amplifier",
+        "description": "Two channel mastering saturator and line-level preamp",
+        "type": "saturator",
+        "quantity": 1
+    },
+    {
+        "name": "Austrian Audio OC818",
+        "description": "Multi-pattern large diaphragm condenser microphone w/ remote control",
+        "type": "ldc microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Blue Blueberry",
+        "description": "Latvian FET large diaphragm condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Blue Bottle",
+        "description": "Latvian valve large diaphragm condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Blue B0 Bottle Cap",
+        "description": "Large diaphragm Telefunken ELA M 251 based capsule for Blue Bottle",
+        "type": "ldc microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Blue B1 Bottle Cap",
+        "description": "Small diaphragm Schoeps 221B based capsule for Blue Bottle",
+        "type": "sdc microphone",
+        "quantity": 3
+    },
+    {
+        "name": "Blue B2 Bottle Cap",
+        "description": "Large diaphragm RCA 44 based capsule for Blue Bottle",
+        "type": "ldc microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Blue B3 Bottle Cap",
+        "description": "Large diaphragm Neumann TLM170 based capsule for Blue Bottle",
+        "type": "ldc microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Blue B4 Bottle Cap",
+        "description": "Small diaphragm Neumann M50 based capsule for Blue Bottle",
+        "type": "sdc microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Blue B5 Bottle Cap",
+        "description": "Large diaphragm Neumann CMV-563 based capsule for Blue Bottle",
+        "type": "ldc microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Blue B6 Bottle Cap",
+        "description": "Large diaphragm AKG C12 based capsule for Blue Bottle",
+        "type": "ldc microphone",
+        "quantity": 4
+    },
+    {
+        "name": "Blue B7 Bottle Cap",
+        "description": "Large diaphragm Neumann U47 based capsule for Blue Bottle",
+        "type": "ldc microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Blue B8 Bottle Cap",
+        "description": "Large diaphragm neutral sounding capsule for Blue Bottle",
+        "type": "ldc microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Blue B9 Bottle Cap",
+        "description": "Large diaphragm Sony C-800G based capsule for Blue Bottle",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Blue B10 Bottle Cap",
+        "description": "Large diaphragm Neumann U67 based capsule for Blue Bottle",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Blue B11 Bottle Cap",
+        "description": "Large diaphragm Neumann M49 based capsule for Blue Bottle",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Blue Cactus",
+        "description": "Latvian large diaphragm tube condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Blue Dragonfly",
+        "description": "Latvian large diaphragm condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Blue Kiwi",
+        "description": "Latvian large diaphragm FET condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Blue Mouse",
+        "description": "Latvian large diaphragm FET condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Chandler Limited TG Microphone",
+        "description": "Large diaphragm condenser microphone w/ built-in tape head EQ",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Chandler Limtied REDD Microphone",
+        "description": "Large diaphragm condenser microphone w/ built-in TGI console preamp",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Hendyamps LDC Microphone",
+        "description": "Large diaphragm condenser microphone w/ tone control",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Heiserman H47 FET",
+        "description": "Large diaphragm Neumann U47 based FET condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Heiserman Type 19",
+        "description": "Large diaphragm multi-pattern condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 3
+    },
+    {
+        "name": "Lauten Audio Atlantis",
+        "description": "Large diaphragm multi-voice FET condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Lauten Audio Eden",
+        "description": "Large diaphragm multi-voice tube condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Lauten Audio Snare Mic",
+        "description": "Large diaphragm percussion-focused condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Lewitt LCT 1040",
+        "description": "Large diaphragm blendable tube/FET condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Mojave Audio MA-37",
+        "description": "Large diaphragm Sony C37A based tube condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Mojave Audio MA-300",
+        "description": "Large diaphragm multi-pattern tube condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Mojave Audio MA-300",
+        "description": "Large diaphragm multi-pattern FET condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Mojave Audio MA-1000",
+        "description": "Large diaphragm multi-pattern tube condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Ohma Motif",
+        "description": "Large diaphragm multi-pattern condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Neumann M149",
+        "description": "Large diaphragm multi-pattern tube condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Neumann TLM67",
+        "description": "Large diaphragm multi-pattern condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Rupert Neve/sE RNT",
+        "description": "Large diaphragm multi-pattern tube condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Sonotronics Mercury",
+        "description": "Large diaphragm multi-pattern tube condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Soyuz 017 FET",
+        "description": "Large diaphragm multi-pattern FET condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Soyuz 017 TUBE",
+        "description": "Large diaphragm multi-pattern tube condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Soyuz 023 Bomblet",
+        "description": "Large diaphragm multi-pattern FET condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Soyuz 1973",
+        "description": "Large diaphragm multi-pattern transformerless condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Violet Designs Amethyst - Vintage",
+        "description": "Large diaphragm condenser microphone",
+        "type": "ldc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Austrian Audio CC8",
+        "description": "Matched pair of small diaphragm condenser microphones",
+        "type": "sdc microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Austrian Audio OC7",
+        "description": "Cardiod small diaphragm condenser microphone",
+        "type": "sdc microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Blue Hummingbird",
+        "description": "Cardiod small diaphragm condenser microphone",
+        "type": "sdc microphone",
+        "quantity": 3
+    },
+    {
+        "name": "Earthworks QTC50",
+        "description": "Omni-directional small diaphragm condenser microphone",
+        "type": "sdc microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Josephson C42",
+        "description": "Matched pair cardiod small diaphragm condenser microphone",
+        "type": "sdc microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Rode NTG-3B",
+        "description": "Super-cardiod small diaphragm condenser microphone",
+        "type": "sdc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Samar MG20",
+        "description": "Cardiod small diaphragm condenser microphone",
+        "type": "sdc microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Schoeps CMIT5U",
+        "description": "Super-cardiod small diaphragm condenser microphone",
+        "type": "sdc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Schoeps CMC6",
+        "description": "Small diaphragm condenser microphone w/ MK4 capsule",
+        "type": "sdc microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Schoeps V4 U Set",
+        "description": "Small diaphragm condenser microphone",
+        "type": "sdc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "sE Electronics RN17",
+        "description": "Matched pair small diaphragm condenser microphone",
+        "type": "sdc microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Soyuz 013 FET",
+        "description": "Matched pair small diaphragm FET condenser microphone",
+        "type": "sdc microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Soyuz 013 TUBE",
+        "description": "Matched pair small diaphragm tube condenser microphone",
+        "type": "sdc microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Telefunken ELA M 260",
+        "description": "Small diaphragm tube condenser microphone",
+        "type": "sdc microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Austiran Audio OD5",
+        "description": "Dynamic condenser microphone",
+        "type": "dynamic microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Beyerdynamic M88",
+        "description": "Dynamic condenser microphone",
+        "type": "dynamic microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Beyerdynamic M201TG",
+        "description": "Dynamic condenser microphone",
+        "type": "dynamic microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Sennheiser MD421 MKII",
+        "description": "Dynamic condenser microphone",
+        "type": "dynamic microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Shure SM57",
+        "description": "Dynamic condenser microphone",
+        "type": "dynamic microphone",
+        "quantity": 4
+    },
+    {
+        "name": "Shure Beta 57A",
+        "description": "Dynamic condenser microphone",
+        "type": "dynamic microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Shure Beta 58A",
+        "description": "Dynamic condenser microphone",
+        "type": "dynamic microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Shure SM7B",
+        "description": "Dynamic condenser microphone",
+        "type": "dynamic microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Blue Woodpecker",
+        "description": "Active ribbon microphone",
+        "type": "ribbon microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Hum Audio ARM-1L",
+        "description": "High-end active ribbon microphone",
+        "type": "ribbon microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Melodium 42bn",
+        "description": "Recreation of the classic passive Melodium 42b ribbon microphone",
+        "type": "ribbon microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Ohma Motif",
+        "description": "Active ribbon microphone",
+        "type": "ribbon microphone",
+        "quantity": 2
+    },
+    {
+        "name": "Samar VL37A",
+        "description": "Active ribbon microphone",
+        "type": "ribbon microphone",
+        "quantity": 2
+    },
+    {
+        "name": "sE Electronics RNR1",
+        "description": "Active ribbon microphone",
+        "type": "ribbon microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Sontronics Sigma 2",
+        "description": "Active ribbon microphone",
+        "type": "ribbon microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Royer 121",
+        "description": "Classic active ribbon microphone",
+        "type": "ribbon microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Royer R10 Hot Rod",
+        "description": "Active ribbon microphone",
+        "type": "ribbon microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Tierra Audio New Twenties",
+        "description": "Active ribbon microphone",
+        "type": "ribbon microphone",
+        "quantity": 1
+    },
+    {
+        "name": "Access Virus TI",
+        "description": "Classic digital remote controllable polysynth",
+        "type": "digital polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Akai AX-60",
+        "description": "Vintage 80s Akai six-voice analog synth",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Akai AX-80",
+        "description": "Vintage 80s Akai eight-voice analog synth",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Akai S5000",
+        "description": "Multi-channel professional rack sampler",
+        "type": "sampler",
+        "quantity": 1
+    },
+    {
+        "name": "Akai S6000",
+        "description": "Multi-channel professional rack sampler w/ remote",
+        "type": "sampler",
+        "quantity": 1
+    },
+    {
+        "name": "Akai S950",
+        "description": "Classic 90s sampler",
+        "type": "sampler",
+        "quantity": 1
+    },
+    {
+        "name": "Alesis Andromeda A6",
+        "description": "Classic sixteen-voice analog polysynth",
+        "type": "analog polysynth",
+        "quantity": 2
+    },
+    {
+        "name": "Alesis Ion",
+        "description": "Eight-voice digital polysynth",
+        "type": "digital polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Analogue Solutions Fusebox X",
+        "description": "Patchable semi-modular analog synth w/ Patternator",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Analogue Solutions Impulse Command",
+        "description": "Patchable semi-modular percussive analog synth w/ sequencer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Analogue Solutions Lezpig V3",
+        "description": "Aggressive semi-modular analog synth w/ sequencer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Analogue Solutions Vostok V2",
+        "description": "Patchable semi-modular percussive analog synth w/ sequencer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Arturia Drumbrute Impact",
+        "description": "Compact analog drum machine",
+        "type": "analog drum machine",
+        "quantity": 1
+    },
+    {
+        "name": "Arturia Matrixbrute",
+        "description": "Powerful analog monophonic synth",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Arturia MicroFreak",
+        "description": "Compact hybrid paraphonic synth",
+        "type": "hybrid monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Arturia MiniFreak",
+        "description": "Hybrid polyphonic synth",
+        "type": "hybrid polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Arturia Origin",
+        "description": "Modular digital polyphonic synth",
+        "type": "digital polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Arturia Polybrute 12",
+        "description": "Powerful modular digital polyphonic synth",
+        "type": "digital polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Black Corporation Deckard's Dream MKII",
+        "description": "Eight-voice CS80 based desktop analog polysynth",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Black Corportation ISE-NIN",
+        "description": "Eight-voice Jupter 8 based desktop analog polysynth",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Black Corportation Kijimi MKII",
+        "description": "Eight-voice Polykobol based desktop analog polysynth",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Black Corportation Xerxes MKII",
+        "description": "Eight-voice Elka Synthex based desktop analog polysynth",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Crumar Seven",
+        "description": "Rhodes/clavinet/piano physical modeling emulator w/ weighted keys",
+        "type": "performance keyboard",
+        "quantity": 1
+    },
+    {
+        "name": "Dave Smith Instruments Mopho X4",
+        "description": "Four voice DCO analog polysynth",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Dave Smith Instruments OB-6",
+        "description": "Six voice VCO analog polysynth",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Dave Smith Instruments Poly Evolver - PE Edition",
+        "description": "Four voice DCO/wavetable analog/hybrid polysynth",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Dave Smith Instruments Pro-2",
+        "description": "Four voice wavetable hybrid paraphonic synthesizer",
+        "type": "hybrid monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Dave Smith Instruments Prophet 08 PE",
+        "description": "Eight voice DCO polyphonic analog synthesizer",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Dave Smith Instruments Prophet 6",
+        "description": "Six voice VCO polyphonic analog synthesizer",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Dave Smith Instruments Prophet 12",
+        "description": "Twelve voice wavetable polyphonic hybrid synthesizer",
+        "type": "hybrid polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Dave Smith Instruments Prophet Rev 2 - 16",
+        "description": "Sixteen voice DCO polyphonic analog synthesizer",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Dave Smiwth Instruments Prophet XL",
+        "description": "Sample and virtual analog polyphonic hybrid synthesizer",
+        "type": "hybrid polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Dave Smith Instruments Tempest",
+        "description": "Six voice sample and analog based drum machine",
+        "type": "analog drum machine",
+        "quantity": 1
+    },
+    {
+        "name": "Dinsync RE-303",
+        "description": "Roland TB-30 recreation",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Dirtywave M8 MKI",
+        "description": "Portable tracker and synthesizer",
+        "type": "tracker",
+        "quantity": 1
+    },
+    {
+        "name": "Dreadbox Erebus V3",
+        "description": "Desktop analog monophonic synthesizer w/ delay",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Dreadbox Murmux Adept",
+        "description": "Eight voice desktop analog synthesizer w/ delay",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Dreadbox Nymphes",
+        "description": "Six voice desktop analog synthesizer w/ chorus",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Dreadbox Typhon",
+        "description": "Monophonic desktop analog synthesizer w/ SineVibes effects",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "E-MU E4X4 Ultra",
+        "description": "Z-Plane filter equipped rackmount sampler",
+        "type": "sampler",
+        "quantity": 1
+    },
+    {
+        "name": "E-MU Orbit 9090",
+        "description": "Rackmount rompler w/ classic rave sounds",
+        "type": "rompler",
+        "quantity": 1
+    },
+    {
+        "name": "E-MU Proteus 2500",
+        "description": "Fully expanded mount rompler",
+        "type": "rompler",
+        "quantity": 1
+    },
+    {
+        "name": "Elektron Analog Four MKI",
+        "description": "Four voice desktop analog polysynth",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Elektron Analog Four MKII",
+        "description": "Four voice desktop analog polysynth",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Elektron Analog Rytm MKII",
+        "description": "Eight voice desktop analog drum machine",
+        "type": "analog drum machine",
+        "quantity": 1
+    },
+    {
+        "name": "Elektron Digitakt MKI",
+        "description": "Eight voice desktop digital sampler and drum machine",
+        "type": "digital drum machine",
+        "quantity": 1
+    },
+    {
+        "name": "Elektron Digitone MKI",
+        "description": "Eight voice desktop FM synthesizer",
+        "type": "digital polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Elektron Digitone MKI",
+        "description": "Eight voice desktop FM synthesizer",
+        "type": "digital polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Elektron Octotrack MKII",
+        "description": "Eight voice sequencing sampler",
+        "type": "sampler",
+        "quantity": 1
+    },
+    {
+        "name": "Elta Music Solar 42f",
+        "description": "Six voice analog drone synthesizer",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Elta Music Solar 50",
+        "description": "Ten voice analog drone synthesizer",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Ensoniq ASR10",
+        "description": "Classic keyboard sampler",
+        "type": "sampler",
+        "quantity": 1
+    },
+    {
+        "name": "Ensoniq SQ-80",
+        "description": "Vintage 80s hybrid wavetable synth",
+        "type": "hybrid polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Erica Synths Bassline DB-01",
+        "description": "Desktop monophonic analog sequencing synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Erica Synths LXR-02",
+        "description": "Digital drum machine",
+        "type": "digital drum machine",
+        "quantity": 1
+    },
+    {
+        "name": "Erica Synths Perkons HD-01",
+        "description": "Four voice hybrid digitial/analog drum machine",
+        "type": "hybrid drum machine",
+        "quantity": 1
+    },
+    {
+        "name": "Erica Synths Syntrx MKI",
+        "description": "Monophonic Elka Synthex based analog synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Future Retro Vectra",
+        "description": "Four voice hybrid wavetable synthesizer",
+        "type": "hybrid polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "GS Music e7",
+        "description": "Seven voice polyphonic analog synthesizer",
+        "type": "analog polysynth",
+        "quantity": 2
+    },
+    {
+        "name": "Groove Synthesis 3rd Wave",
+        "description": "Twelve voice Waldorf PPGv2 based polyphonic hybrid synthesizer",
+        "type": "hybrid polysynth",
+        "quantity": 2
+    },
+    {
+        "name": "GRP A4",
+        "description": "Massive old-school semi-modular monophonic analog synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Hypersynth Xenophone",
+        "description": "Monophonic desktop analog synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "IK Multimedia Uno Synth Pro",
+        "description": "Compact monophonic desktop analog synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Intellijel Cascadia",
+        "description": "Semi-modular desktop monophonic analog synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Isla Instruments SP2400",
+        "description": "12/24 bit SP1200 based classic desktop sampler",
+        "type": "sampler",
+        "quantity": 1
+    },
+    {
+        "name": "Jomox Alpha Base MKI",
+        "description": "Analog/digital thirteen-part hybrid drum machine",
+        "type": "analog drum machine",
+        "quantity": 1
+    },
+    {
+        "name": "Kawai SX-210",
+        "description": "Vintage 80s six voice analog polysynth",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Kawai SX-240",
+        "description": "Vintage 80s six voice analog polysynth",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Kilpatrick Phenol",
+        "description": "Monophonic desktop patchable anaog synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Korg ARP-2600FS",
+        "description": "Monophonic analog full-size ARP 2600 reissue",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Korg ARP Odyssey Rev1",
+        "description": "Monophonic analog compact ARP Odyssey reissue",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Korg Drumalogue",
+        "description": "Compact analog/digital desktop drum machine",
+        "type": "analog drum machine",
+        "quantity": 1
+    },
+    {
+        "name": "Korg DSS-1",
+        "description": "Vintage 80s additive hybrid polyphonic synthesizer",
+        "type": "hybrid polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Korg DW-8000",
+        "description": "Vintage 80s wavetable hybrid polyphonic synthesizer",
+        "type": "hybrid polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Korg Minikorg 700FS",
+        "description": "Monophonic analog full-size Minikorg 700 reissue",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Korg Minilogue",
+        "description": "Compact monophonic analog synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Korg Modwave",
+        "description": "Compact polyphonic wavetable synthesizer",
+        "type": "digital polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Korg MS-20FS",
+        "description": "Monophonic analog full-size MS-20 reissue",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Korg Opsix",
+        "description": "Compact polyphonic digital FM synthesizer",
+        "type": "digital polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Korg Poly-800 MKII",
+        "description": "Vintage 80s eight voice polyphonic analog synthesizer",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Korg Polysix",
+        "description": "Vintage 80s six voice polyphonic analog synthesizer",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Korg Prologue 16",
+        "description": "Sixteen voice flagship polyphonic analog synthesizer",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Korg Radias",
+        "description": "Desktop polyphonic digital synthesizer w/ vocoder",
+        "type": "digital polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Korg Volca Bass",
+        "description": "Portable monophonic analog synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Korg Volca NuBass",
+        "description": "Portable monophonic analog synthesizer w/ NuTube",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Korg Volca Modular",
+        "description": "Portable monophonic analog semi-modular synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Korg Volca Kick",
+        "description": "Portable monophonic analog kick generator",
+        "type": "analog drum machine",
+        "quantity": 1
+    },
+    {
+        "name": "Korg Volca Drum",
+        "description": "Portable monophonic analog drum machine",
+        "type": "analog drum machine",
+        "quantity": 1
+    },
+    {
+        "name": "Korg Volca Keys",
+        "description": "Portable three voice polyphonic analog synthesizer",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Korg Volca Drum",
+        "description": "Portable digital six voice drum machine",
+        "type": "digital drum machine",
+        "quantity": 1
+    },
+    {
+        "name": "Korg Volca FM MK2",
+        "description": "Portable digital six voice FM synthesizer",
+        "type": "digital polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Korg Volca FM MK1",
+        "description": "Portable digital three voice FM synthesizer",
+        "type": "digital polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Korg Volca Sample MK1",
+        "description": "Portable digital sample player",
+        "type": "rompler",
+        "quantity": 1
+    },
+    {
+        "name": "Korg Volca Sample MK2",
+        "description": "Portable digital sample player",
+        "type": "rompler",
+        "quantity": 1
+    },
+    {
+        "name": "Korg Volca Sample Beats",
+        "description": "Portable analog drummachine",
+        "type": "analog drum machine",
+        "quantity": 1
+    },
+    {
+        "name": "Korg Wavestate",
+        "description": "Compact polyphonic digital wave sequencing synthesizer",
+        "type": "digital polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Majella Implexus",
+        "description": "Compact desktop monophonic analog West Coast synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Make Noise 0-Coast",
+        "description": "Compact desktop monophonic analog semi-modular synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Make Noise Striga",
+        "description": "Compact desktop monophonic analog semi-modular synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Melbourne Instruments Delia",
+        "description": "Six voice hybrid polyphonic synthesizer w/ rotary recall",
+        "type": "hybrid polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Melbourne Instruments Nina",
+        "description": "Twelve voice hybrid polyphonic synthesizer w/ rotary recall",
+        "type": "hybrid polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Modal 002",
+        "description": "Twelve voice hybrid polyphonic wavetable synthesizer",
+        "type": "hybrid polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Modal 008",
+        "description": "Eight voice multi-filter polyphonic analog synthesizer",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Modal Argon 8",
+        "description": "Eight voice polyphonic digital wavetable synthesizer",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Modal Cobalt 8",
+        "description": "Eight voice polyphonic digital virtual analog synthesizer",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Modor DR-2",
+        "description": "Six voice pure digital drum machine",
+        "type": "digital drum machine",
+        "quantity": 1
+    },
+    {
+        "name": "Modor NF-1",
+        "description": "Eight voice multi-algorithm polyphonic digital synthesizer",
+        "type": "digital polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Moog DFAM",
+        "description": "Compact desktop monophonic analog semi-modular drum machine",
+        "type": "analog drum machine",
+        "quantity": 2
+    },
+    {
+        "name": "Moog Labrynth",
+        "description": "Compact desktop monophonic analog semi-modular generative synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Moog Mother 32",
+        "description": "Compact desktop monophonic analog semi-modular synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Moog Grandmother",
+        "description": "Monophonic/duophonic analog synthesizer w/ analog spring reverb",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Moog Matriarch",
+        "description": "Monophonic/paraphonic analog synthesizer w/ analog BBD delay",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Moog Model D",
+        "description": "2023 reissue of the classic monophonic analog synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Moog Little Phatty MKI",
+        "description": "Monophonic analog synthesizer w/ preset recall",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Moog Little Phatty Stage One MKII",
+        "description": "Limited editition Toxic version of the monophonic analog synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Moog Mavis",
+        "description": "Compact desktop analog monophonic synthesizer w/ waveshaping",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Moog Muse",
+        "description": "Eight voice analog polyphonic synthesizer",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Moog One - 16",
+        "description": "Sixteen voice flagship analog polyphonic synthesizer",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Moog Spectravox",
+        "description": "Compact desktop monophonic semi-modular analog vocoder and resonant filterbank",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Moog Subharmonicon",
+        "description": "Compact desktop monophonic semi-modular analog generative polyrhythmic synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Moog Subsequent 37 - CV",
+        "description": "Limited edition monophonic/duophonic analog synthesizer with CV I/O",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Moog Voyager",
+        "description": "Modern monophonic analog synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Motas Electronics Motas 6",
+        "description": "Six-oscillator monophonic analog synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Mutable Instruments Ambika",
+        "description": "Four voice hybrid polyphonic synthesizer",
+        "type": "hybrid polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Nonlinear Labs C15",
+        "description": "Polyphonic dual-ribbon digitial synthesizer",
+        "type": "digital polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Norand Mono MKII",
+        "description": "Compact sequencing monophonic analog synth",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Novation Bass Station MKII",
+        "description": "Compact monophonic analog synthesizer based on the Novation Bass Station",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Novation Summit",
+        "description": "Sixteen voice bi-timbra hybrid polyphonic Oxford oscillator synthesizer",
+        "type": "hybrid polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Oberheim DX",
+        "description": "Vintage 80s digital drum machine",
+        "type": "digital drum machine",
+        "quantity": 1
+    },
+    {
+        "name": "Oberheim OB-X8",
+        "description": "Flagship eight voice analog polysynth",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Pittsburgh Modular Lifeforms SV-1",
+        "description": "Compact desktop monophonic subtractive semi-modular analog synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Pittsburgh Modular Microvolt 3900",
+        "description": "Compact desktop monophonic waveshaping semi-modular analog synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Pittsburgh Modular Taiga",
+        "description": "Compact desktop monophonic waveshaping semi-modular analog synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Pittsburgh Modular Taiga Keys",
+        "description": "Monophonic waveshaping semi-modular analog synthesizer w/ Eurorack bay",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Pittsburgh Modular Voltage Lab",
+        "description": "Rare compact monophonic analog semi-modular desktop synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Pittsburgh Modular Voltage Lab 2",
+        "description": "Desktop Eurorack-compatible monophonic analog West Coast synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Pioneer Toriaz AS-1",
+        "description": "Compact desktop monophonic analog synthesizer w/ effects",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Pioneer Toriaz SP-16",
+        "description": "Desktop sampler w/ built-in Dave Smith analog Prophet 6 Curtis filters",
+        "type": "sampler",
+        "quantity": 1
+    },
+    {
+        "name": "Polyend Medusa",
+        "description": "Analog/digital hybrid sequencing and matrix paraphonic synthesizer",
+        "type": "hybrid monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Polyend Play",
+        "description": "Digital drum machine and sound sequencer",
+        "type": "digital drum machine",
+        "quantity": 1
+    },
+    {
+        "name": "Polyend Tracker",
+        "description": "Eight part desktop tracker",
+        "type": "tracker",
+        "quantity": 1
+    },
+    {
+        "name": "Polyend Tracker Mini",
+        "description": "Eight part portable desktop tracker",
+        "type": "tracker",
+        "quantity": 1
+    },
+    {
+        "name": "PWM Malevolent",
+        "description": "Aggressive semi-modular compact monophonic analog synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "PWM Mantis",
+        "description": "Aggressive semi-modular compact monophonic/duophonic hybrid synthesizer",
+        "type": "hybrid monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Quasimidi Raveolution-309",
+        "description": "Fully expanded classic 90s digital drum machine",
+        "type": "digital drum machine",
+        "quantity": 1
+    },
+    {
+        "name": "Radikal Technologies Spectralis MKI",
+        "description": "Hybrid analog/digital drum machine, synthesizer, and sample player",
+        "type": "hybrid drum machine",
+        "quantity": 1
+    },
+    {
+        "name": "Roland JD-XA",
+        "description": "Hybrid analog/digital polyphonic synthesizer w/ full SuperNatural engine",
+        "type": "hybrid polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Roland Jupiter 6",
+        "description": "Vintage 80s six voice polyphonic analog synthesizer w/ Europa mod",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Roland Juno 6",
+        "description": "Vintage 80s six voice polyphonic analog DCO synthesizer",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Roland JX-3P",
+        "description": "Vintage 80s six voice polyphonic analog synthesizer w/ Kiwi mod and programmer",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Roland JX-10",
+        "description": "Vintage 80s twelve voice polyphonic analog synthesizer",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Roland SH-101",
+        "description": "Vintage 80s monophonic analog synthesizer",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Roland SP-404 MKII",
+        "description": "Compact/portable sampler and effect unit",
+        "type": "sampler",
+        "quantity": 1
+    },
+    {
+        "name": "Roland System-8",
+        "description": "Polyphonic digital analog modeling synthesizer",
+        "type": "digital polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Roland TR-8S",
+        "description": "Polyphonic digital analog modeling drum machine",
+        "type": "digital drum machine",
+        "quantity": 1
+    },
+    {
+        "name": "Roland V-Synth XT",
+        "description": "Polyphonic digital synthesizer/sampler w/ vocoder and D50 expansion",
+        "type": "digital polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Sequential Pro-1",
+        "description": "Vintage 80s aggressive monophonic analog synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Sequential Pro-3 SE",
+        "description": "Monophonic/paraphonic analog/digital tri-filter synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Sequential Prophet 10",
+        "description": "Ten voice flagship polyphonic analog synthesizer and Prophet reissue",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Sequential Trigon 6",
+        "description": "Six voice polyphonic analog synthesizer based on the Memory Moog",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Soma Lyra 8",
+        "description": "Eight voice polyphonic analog drone synthesizer",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Soma Pulsar 23",
+        "description": "Four voice analog semi-modular drum machine",
+        "type": "analog drum machine",
+        "quantity": 1
+    },
+    {
+        "name": "Supercritical Redshift 6",
+        "description": "Six voice variable character DCO analog polysynth",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Suzuki Omnichord OM-108",
+        "description": "Polyphonic analog synthesizer and performance instrument",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Tasty Chips GR-1 Granular Synth",
+        "description": "Polyphonic digitial granular synthesizer",
+        "type": "digital polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "UDO Super Gemini",
+        "description": "Flagship twenty voice binaural hybrid polyphonic synthesizer",
+        "type": "hybrid polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Vermona DRM1 - MK4",
+        "description": "Eight voice pure analog drum machine",
+        "type": "analog drum machine",
+        "quantity": 1
+    },
+    {
+        "name": "Vermona PerFourMer MKII",
+        "description": "Four voice polyphonic analog desktop synthesizer",
+        "type": "analog polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Waldorf Blofeld",
+        "description": "Compact desktop polyphonic digital wavetable sythesizer",
+        "type": "digital polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Waldorf Kyra",
+        "description": "Desktop FPGA polyphonic digital wavetable sythesizer",
+        "type": "digital polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Waldorf M",
+        "description": "Desktop polyphonic hybrid wavetable sythesizer and Waldorf Microwave reissue",
+        "type": "hybrid polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Waldorf Pulse 2",
+        "description": "Compact desktop monophonic/paraphonic analog synthesizer",
+        "type": "analog monosynth",
+        "quantity": 1
+    },
+    {
+        "name": "Waldorf Quantum - MKI",
+        "description": "Flagship eight/sixteen voice sample hybrid multi-algorithm synthesizer",
+        "type": "hybrid polysynth",
+        "quantity": 1
+    },
+    {
+        "name": "Collings 290",
+        "description": "Classic Austin Les Paul influenced six-string with Lollard Gold pickups",
+        "type": "electric guitar",
+        "quantity": 1
+    },
+    {
+        "name": "Ernie Ball Singray Special 5HH",
+        "description": "Five string bass guitar with a punchy sound",
+        "type": "electric bass",
+        "quantity": 1
+    },
+    {
+        "name": "Gibson Acoustic Dealer Select Hummingbird Standard",
+        "description": "Montana, USA manufactured six-string Gibson classic",
+        "type": "acoustic/electric guitar",
+        "quantity": 1
+    },
+    {
+        "name": "Gretsch G6128 Duo Jet",
+        "description": "One-of-a-kind USA masterbuilt six-string Gretsch classic",
+        "type": "electric guitar",
+        "quantity": 1
+    },
+    {
+        "name": "Gretsch GT6995TG Broadkaster Jr.",
+        "description": "Japan-made high-end six-string Gretsch workhorse",
+        "type": "electric guitar",
+        "quantity": 1
+    },
+    {
+        "name": "Mayones Viking 5",
+        "description": "Five-string aggressive bass perfect for metal",
+        "type": "electric bass",
+        "quantity": 1
+    },
+    {
+        "name": "Mood Guitars Moodbender",
+        "description": "Rare six-string with hot-swappable bridge, tunings, and voicings",
+        "type": "acoustic/electric guitar",
+        "quantity": 1
+    },
+    {
+        "name": "Oopegg Trailblazer Custom MKII",
+        "description": "Rare one-of-akind  tri-humbucker six-string",
+        "type": "electric guitar",
+        "quantity": 1
+    },
+    {
+        "name": "Suhr Classic P-Bass",
+        "description": "Suhr USA made quality four-string Fender style P-Bass",
+        "type": "electric bass",
+        "quantity": 1
+    },
+    {
+        "name": "Suhr Pete Thorn Standard HSS",
+        "description": "Suhr USA made quality six-string Fender style Telecaster",
+        "type": "electric guitar",
+        "quantity": 1
+    },
+    {
+        "name": "Suhr Standard Plus Koa",
+        "description": "Suhr USA made quality six-string dual-humbucker Fender style Telecaster",
+        "type": "electric guitar",
+        "quantity": 1
+    },
+    {
+        "name": "Taylor 724CE Grand Auditorium Koa",
+        "description": "High-end USA made large Taylor six-string",
+        "type": "acoustic/electric guitar",
+        "quantity": 1
+    }
+
+
+]
