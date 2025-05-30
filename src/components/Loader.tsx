@@ -6,6 +6,6 @@ export const Loader = () => <div className="w-full h-[600px] flex flex-col items
         <div>
             Loading...
         </div>
-        <Spinner size="sm" className="bg-black/75 dark:bg-white/75" />
+        <Spinner size="sm" className="bg-black dark:bg-white" />
     </div>
 </div>
