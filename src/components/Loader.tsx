@@ -1,4 +1,4 @@
-import { Spinner } from "~/components/ui/spinner";
+import { ScaleLoader } from "./ui/scale-loader"
 
 
 export const Loader = () => <div className="w-full h-[600px] flex flex-col items-center justify-center">
@@ -6,6 +6,6 @@ export const Loader = () => <div className="w-full h-[600px] flex flex-col items
         <div>
             Loading...
         </div>
-        <Spinner size="sm" className="bg-black dark:bg-white" />
+        <ScaleLoader />
     </div>
 </div>
