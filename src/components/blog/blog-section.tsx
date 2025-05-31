@@ -29,7 +29,7 @@ export const BlogSection = ({
     const styles = useMemo(() => contentStyles, [contentStyles])
     const contentSide = useMemo(() => position ?? 'left', [position])
     const sectionType = useMemo(() => type ?? 'main', [type])
-    const sepWidth = useMemo(() => separatorWidth ?? sectionType === 'main' ? 'full' : 'w-3/4', [separatorWidth, sectionType])
+    const sepWidth = useMemo(() => separatorWidth ?? (sectionType === 'main' ? 'w-full' : 'w-3/4'), [separatorWidth, sectionType])
 
     return (
         sectionType === 'main' ?
@@ -50,7 +50,7 @@ export const BlogSection = ({
         </> :
         <>
             <div className='flex items-center justify-center w-full'>
-                <Separator className={`w-${sepWidth}`}/>
+                <Separator className={sepWidth}/>
             </div>
             <Top/>
             <Subsection
