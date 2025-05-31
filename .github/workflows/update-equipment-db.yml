@@ -54,4 +54,4 @@ jobs:
           TURSO_SQLITE_DB_TOKEN: ${{ secrets.TURSO_SQLITE_DB_TOKEN }}
         shell: bash
         run: |
-          pnpm db:update
+          pnpm db:update:equipment

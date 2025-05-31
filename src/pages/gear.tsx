@@ -48,7 +48,7 @@ export default function Studio() {
                             <p>
                                 Lündhé Audio is equipped to handle almost any need or situation, with top-tier analog equipment, state of the art software, and an ever growing
                                 catalogue of instruments and tools to make musical magic happen. We're not afraid blend cutting-edge music tech with old-school sonics and 
-                                techniquest to create something new. Here's what we use.
+                                techniques to create something new. Here's what we use.
                             </p>
                         </div>
                         <Suspense fallback={<Loader/>}>

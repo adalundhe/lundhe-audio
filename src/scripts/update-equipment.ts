@@ -2,6 +2,7 @@ import { createClient, type Client } from "@libsql/client";
 import { drizzle, } from "drizzle-orm/libsql";
 import * as schema from "~/server/db/schema";
 import Gear from '~/data/gear.json'
+import { randomUUID } from "node:crypto";
 
 /**
  * This is a silly little NodeJS script to populate the Gear table in the DB
@@ -25,17 +26,21 @@ const db = drizzle(client, { schema });
 
 const updateEquipment = async () => {
 
-  await db.delete(schema.equipmentItem)
+  const updated = Gear.map(item => item.id ? item : {
+    ...item,
+    id: randomUUID()
+  })
   
   let inserted = 1;
   const items = Gear.length;
-  for (const item of Gear) {
+  for (const item of updated) {
     await db.insert(schema.equipmentItem)
     .values(item)
     .onConflictDoUpdate({
       target: schema.equipmentItem.id,
       set: {
         ...item,
+        updated_timestamp: new Date().toString()
       }
     })
 
