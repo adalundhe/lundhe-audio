@@ -5488,5 +5488,47 @@
         "quantity": 1,
         "created_timestamp": "Sat May 31 2025 08:24:19 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sat May 31 2025 08:39:06 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Earthquaker Devices Zoar",
+        "description": "Transistor overdrive/distortion pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Earthquaker Devices Acapulco Gold",
+        "description": "Distortion pedal based on Model T amp circuitry",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Earthquaker Devices Time Shadows",
+        "description": "Pitch-shifting distortion, delay, and filter pedal",
+        "type": "freq/pitch shifter pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Earthquaker Devices Pyramids",
+        "description": "Stereo flanger pedal",
+        "type": "flanger pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Earthquaker Devices Astral Destiny",
+        "description": "Octaving reverb pedal",
+        "type": "reverb pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Earthquaker Devices Plumes",
+        "description": "Botique distortion pedal based on Ibanez Tube Screamer",
+        "type": "reverb pedal",
+        "group": "pedals",
+        "quantity": 1
     }
 ]
