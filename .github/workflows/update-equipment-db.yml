@@ -61,8 +61,11 @@ jobs:
       
           git branch update-equipment || git checkout update-equipment
 
+
+          UUID=$(uuidgen)
+
           git config pull.rebase false
-          git pull origin update-equipment
+          git pull origin update-equipment --allow-unrelated-histories
 
           git add -A &&
           git commit -m "EquiBot: Syncing equipment"
