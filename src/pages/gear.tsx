@@ -29,6 +29,7 @@ export default function Studio() {
                         <div className="flex items-center w-2/3 px-4 h-2/3">
                             <AspectRatio ratio={4 / 3} className="flex items-center justify-center">
                                 <Image
+                                    loader={() => "/studio/studio_front_monochrome.jpeg"}
                                     src="/studio/studio_front_monochrome.jpeg"
                                     alt="The front of the studio for Lündhé Audio including Raven MTI2 and Console 1 control, Neve 5060 summing, ExMachina, Focal, and Neuman monitors, and numerous outboard pieces."
                                     width="0"

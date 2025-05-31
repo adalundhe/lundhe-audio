@@ -64,6 +64,7 @@ export default function Home() {
                     
                   <AspectRatio ratio={4 / 3} className="flex items-center justify-center my-4 ">
                       <Image
+                          loader={()=> image.src}
                           src={image.src}
                           alt={image.altTxt}
                           width="0"

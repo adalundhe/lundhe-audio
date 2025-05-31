@@ -21,6 +21,7 @@ export const Frame = ({
     <div className={`max-w-[${size}%] w-[${size}%] text-wrap flex flex-col ${styles ?? ""} ${side === 'left' ? 'items-start' : side === 'center' ? 'items-center' : 'items-end'}`}>
         <div className={`mb-4 max-w-fit w-fit flex flex-col`}>
             <Image
+                loader={()=> src}
                 src={src}
                 alt={alt}
                 width={"0"}
