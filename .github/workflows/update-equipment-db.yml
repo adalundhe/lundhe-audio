@@ -71,7 +71,7 @@ jobs:
 
           UUID=$(uuidgen)
 
-          git push origin --delete update-equipment
+          git push origin --delete update-equipment || true
 
           git config pull.rebase false
 
