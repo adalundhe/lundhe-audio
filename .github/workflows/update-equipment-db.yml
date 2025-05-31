@@ -78,7 +78,9 @@ jobs:
 
           UUID=$(uuidgen)
 
-          gh pr create -B main -H ${{ env.BRANCH_NAME }} --title 'Equipment Sync PR - $UUID' --body 'Created by Update Equipment Github Workflow'
+          gh pr close update-equipment || true
+
+          gh pr create -B main -H update-equipment --title 'Equipment Sync PR' --body 'Created by Update Equipment Github Workflow'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
