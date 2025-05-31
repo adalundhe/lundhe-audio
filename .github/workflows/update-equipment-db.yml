@@ -88,7 +88,7 @@ jobs:
           gh pr close update-equipment || true
 
           gh pr create -B main -H update-equipment --title "Equipment Sync PR  ${{ github.event.number }}" --body 'Created by Update Equipment Github Workflow'
-          gh pr merge update-equipment --auto --merge
+          gh pr merge update-equipment --auto --merge --delete-branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
