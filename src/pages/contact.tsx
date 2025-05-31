@@ -333,9 +333,8 @@ export default function Contact(){
                             render={({ field }) => (
                                 <FormItem className="grid grid-cols-12 my-4">
                                     <FormLabel  className="mt-[6.5px] text-xl font-normal w-full col-span-12 flex items-end">Opt-In SMS Terms and Conditions</FormLabel>
-                                    <div className="col-span-12 my-2">
-
-                                        <Separator/>
+                                    <div className="col-span-12">
+                                        <Separator className="my-1"/>
                                     </div>
                                     <FormDescription className="col-span-10 text-md font-light flex self-end">
                                         You consent to receive SMS messages at {field.value} provided for the express 
@@ -360,22 +359,26 @@ export default function Contact(){
                                     disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"} 
                                     aria-disabled={formState.formStatus === "submitted" || formState.formStatus === "submitting"}
                                     type="submit"
-                                    className="w-[150px] h-[48px] text-xl font-light"
+                                    className="w-[150px] h-[48px] text-xl font-light flex items-center"
                                     onMouseLeave={onMouseLeave}
                                     onMouseEnter={onMouseEnter}
                                 >
-                                    { 
-                                        formState.formStatus === "submitting" ? "submitting..." : 
-                                        formState.formStatus === "submitted" ? "submitted!" : "submit" 
-                                    }
-                                    {
-                                        formState.formStatus === "active" && isHovered ? <SendHorizontal/> : 
-                                        formState.formStatus === "active" && !isHovered ? <MailOpen/> :
-                                        formState.formStatus === "submitting" ? <Mail/> :
-                                        formState.formStatus === "submitted" ? <MailCheck/> :
-                                        formState.formStatus === "errored" ? <MailX/> :
-                                        <MailWarning/>
-                                    }
+                                    <div className="xl:text-[1.5vmax] lg:text-[2vmax] md:text-[2.5vmax] text-[3vmax] flex items-center">
+                                        { 
+                                            formState.formStatus === "submitting" ? "submitting..." : 
+                                            formState.formStatus === "submitted" ? "submitted!" : "submit" 
+                                        }
+                                    </div>
+                                    <div className="pb-[0.4em] xl:h-[2vmax] xl:w-[2vmax] lg:w-[2.5vmax] lg:h-[2.5vmax] md:w-[3vmax] md:h-[3vmax] h-[3.5vmax] w-[3.5vmax] flex items-center">
+                                        {
+                                            formState.formStatus === "active" && isHovered ? <SendHorizontal /> : 
+                                            formState.formStatus === "active" && !isHovered ? <MailOpen/> :
+                                            formState.formStatus === "submitting" ? <Mail/> :
+                                            formState.formStatus === "submitted" ? <MailCheck/> :
+                                            formState.formStatus === "errored" ? <MailX/> :
+                                            <MailWarning/>
+                                        }
+                                    </div>
                                 </Button>
                                 <Link onClick={() => setFormState({
                                     formStatus: "active"
