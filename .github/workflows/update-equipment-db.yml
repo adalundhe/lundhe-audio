@@ -56,13 +56,14 @@ jobs:
         run: |
           pnpm db:update:equipment
           pnpm db:dump:equipment
-          
+
       - name: Create Branch and Commit
         shell: bash
         run: |
-          git branch update-equipment
+          git branch update-equipment || git checkout update-equipment
           git add -A &&
-          git git commit -m "EquiBot: Syncing equipment"
+          git commit -m "EquiBot: Syncing equipment"
+          git push origin update-equipment
 
       - name: create pull request
         shell: bash
