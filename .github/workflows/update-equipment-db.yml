@@ -59,35 +59,19 @@ jobs:
 
       - name: Create Branch and Commit
         shell: bash
+        env:
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
         run: |
           git config --global user.email "equipment.bot@lundhe.audio"
           git config --global user.name "EquipBot"
 
           git remote set-url origin https://github:${{ secrets.GITHUB_TOKEN }}@github.com/adalundhe/lundhe-audio
-      
-          git branch update-equipment || git checkout update-equipment
 
 
           UUID=$(uuidgen)
-
-          git push origin --delete update-equipment || true
 
           git config pull.rebase false
 
           git add -A &&
           git commit -m "EquiBot: Syncing equipment"
-          git push origin update-equipment
-
-      - name: create pull request
-        shell: bash
-        run: |
-
-          UUID=$(uuidgen)
-
-          gh pr close update-equipment || true
-
-          gh pr create -B main -H update-equipment --title "Equipment Sync PR  ${{ github.event.number }}" --body 'Created by Update Equipment Github Workflow'
-          gh pr merge update-equipment --auto --merge --delete-branch
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
+          git push origin ${{ github.head_ref || github.ref_name }} 

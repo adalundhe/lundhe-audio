@@ -28,7 +28,8 @@ const updateEquipment = async () => {
 
   const updated = Gear.map(item => item.id ? item : {
     ...item,
-    id: randomUUID()
+    id: randomUUID(),
+    created_timestamp: new Date().toString()
   })
   
   const items = Gear.length;
