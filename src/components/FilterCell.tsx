@@ -32,7 +32,7 @@ export const FilterCell = ({
     const groupFilter = table.getColumn(groupColumn)?.getFilterValue()
 
     const typeFilter = useMemo(() => filterValue, [filterValue])
-    const groupValue = useMemo(() => row.getValue(groupColumn) , [row])
+    const groupValue = useMemo(() => row.getValue(groupColumn) , [row, groupColumn])
     const typeValue = useMemo(() =>  cell.getValue(), [cell])
 
     return (

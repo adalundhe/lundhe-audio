@@ -184,8 +184,6 @@ export const GearTable = ({
 }: {
     data: EquipmentItem[]
 }) => {
-
-  console.log(data.at(0))
   
   const [sorting, setSorting] = React.useState<SortingState>([
       {
@@ -295,8 +293,7 @@ export const GearTable = ({
                                 }
                                 onCheckedChange={() => {
                                       const filter = (table.getColumn("group")?.getFilterValue() ?? "")
-                                      
-                                      console.log(group, filter)
+                        
                                       table.getColumn("group")?.setFilterValue(
                                         filter === group ? "" : group
                                       )
