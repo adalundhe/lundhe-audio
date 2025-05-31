@@ -43,6 +43,7 @@ import { ColumnResizer } from './ColumnResizer'
 import { FilterCell } from './FilterCell'
 import { ScrollArea } from "./ui/scroll-area"
 import { GearNameCell } from "./GearNameCell"
+import { Separator } from "./ui/separator"
 
 
 const courierPrime = Courier_Prime({
@@ -59,6 +60,23 @@ export const columns: ColumnDef<EquipmentItem>[] = [
   {
     id: "added",
     accessorFn: (row) => row.created_timestamp,
+    filterFn: (row, _, filterValue: Date) => {
+
+        const added = new Date(row.getValue("added"))
+        const deltaMilliseconds = Math.abs(filterValue.getTime() - added.getTime())
+
+        const total_seconds = Math.floor(deltaMilliseconds / 1000);
+        const total_minutes = Math.floor(total_seconds / 60);
+        const total_hours = Math.floor(total_minutes / 60);
+
+        return Math.floor(total_hours / 24) < 30
+
+    },
+    enableHiding: true,
+  },
+  {
+    id: "updated",
+    accessorFn: (row) => row.updated_timestamp,
     enableHiding: true,
   },
   {
@@ -177,6 +195,7 @@ export const GearTable = ({
     React.useState<VisibilityState>({
       id: false,
       added: false,
+      updated: false,
     })
   const [rowSelection, setRowSelection] = React.useState({})
 
@@ -236,14 +255,23 @@ export const GearTable = ({
           <DropdownMenuTrigger asChild className="p-0 ml-auto">
             <Button className="w-fit flex">
               <div className="w-fit h-full flex gap-4 items-center justify-center">
-                Types
+                Filter
                 <div className="w-[1.5em] h-[1.5em]">
                   <ChevronDown />
                 </div>
               </div>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className={`${courierPrime.className}`}>
+          <DropdownMenuContent align="end" className={`${courierPrime.className} py-0`}>
+                <Button
+                  className="p-0 h-[2.5em] w-fit flex md:hover:underline hover:no-underline"
+                  onClick={() => table.getColumn("added")?.setFilterValue(
+                     table.getColumn("added")?.getFilterValue() === undefined ? new Date() : undefined
+                  )}
+                >
+                  <b>New!</b>
+                </Button>
+                <Separator/>
                 <Accordion type="single" collapsible className="flex flex-col w-full">
                 {
                   Object.keys(dataByGroup).map(group => 

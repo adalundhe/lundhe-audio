@@ -46,5 +46,6 @@ export const equipmentItem = createTable(
     group: text("group", { length: 255 }).notNull(),
     quantity: integer('quantity').notNull(),
     created_timestamp: text('created_timestamp').notNull().$defaultFn(() => new Date().toString()),
+    updated_timestamp: text('updated_timestamp')
   }
 )

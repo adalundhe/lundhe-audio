@@ -1,0 +1,1 @@
+ALTER TABLE `EquipmentItem` ADD `updated_timestamp` text;

@@ -13,6 +13,7 @@ export type EquipmentItem = {
     group: string
     quantity: number
     created_timestamp: string
+    updated_timestamp: string | null
 }
 
 
