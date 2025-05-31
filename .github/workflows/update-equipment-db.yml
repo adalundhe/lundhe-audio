@@ -57,7 +57,7 @@ jobs:
           git config --global user.email "equipment.bot@lundhe.audio"
           git config --global user.name "EquipBot"
 
-          git remote add origin https://github:${{ secrets.GITHUB_TOKEN }}@github.com/adalundhe/lundhe-audio
+          git remote set-url origin https://github:${{ secrets.GITHUB_TOKEN }}@github.com/adalundhe/lundhe-audio
       
           git branch update-equipment || git checkout update-equipment
 
