@@ -8,8 +8,6 @@ on:
   push:
     paths:
         - src/data/gear.json
-        - src/scripts/update_equipment.ts
-        - .github/workflows/update-equipment-db.yml
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
