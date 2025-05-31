@@ -13,6 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
   type ColumnSizingState,
+  type Table as TanTable,
 } from "@tanstack/react-table"
 import { ArrowUpDown, ChevronDown } from "lucide-react"
 import { Button } from "~/components/ui/button"
@@ -50,6 +51,16 @@ const courierPrime = Courier_Prime({
   weight: "400",
   subsets: ['latin']
 })
+
+const resetFilters = (table: TanTable<EquipmentItem>) => {
+
+  const groupColumn = table.getColumn("group");
+  groupColumn?.getFilterValue() !== "" && groupColumn?.setFilterValue("")
+
+  const typeColumn = table.getColumn("type");
+  typeColumn?.getFilterValue() !== "" && typeColumn?.setFilterValue("")
+
+}
   
 
 export const columns: ColumnDef<EquipmentItem>[] = [
@@ -156,8 +167,8 @@ export const columns: ColumnDef<EquipmentItem>[] = [
   },
   {
     accessorKey: "quantity",
-    minSize: 75,
-    maxSize: 100,
+    minSize: 100,
+    maxSize: 150,
     enableMultiSort: true,
     header: ({ column }) => {
       return (
@@ -290,20 +301,22 @@ export const GearTable = ({
                         </AccordionTrigger>
                         <AccordionContent className="p-0">
                           <ScrollArea className="h-fit w-full">
+                            <Separator className="w-1/4 mb-2"/>
                             <DropdownMenuCheckboxItem
+                                side="right"
                                 key={group}
-                                className="capitalize outline-none border-none"
+                                className="capitalize outline-none border-none w-full pl-0 hover:bg-white dark:hover:bg-black hover:underline"
                                 checked={
                                   (table.getColumn("group")?.getFilterValue() ?? "") === group
                                 }
                                 onCheckedChange={() => {
+                                      resetFilters(table)
                                       const filter = (table.getColumn("group")?.getFilterValue() ?? "")
                         
                                       table.getColumn("group")?.setFilterValue(
                                         filter === group ? "" : group
                                       )
                                     }
-                                    
                                   }
                                 
                             >
@@ -320,19 +333,25 @@ export const GearTable = ({
                               .map((type) => {
                                 return (
                                   <DropdownMenuCheckboxItem
+                                    side="right"
                                     key={type}
-                                    className="capitalize outline-none border-none"
+                                    className="capitalize outline-none border-none w-full pl-0 hover:bg-white dark:hover:bg-black hover:underline"
                                     checked={
                                       (table.getColumn("type")?.getFilterValue() ?? "") === type
                                     }
                                     onCheckedChange={() => {
+                                        resetFilters(table)
                                         const filter = (table.getColumn("type")?.getFilterValue() ?? "")
+                                        const groupFilter = (table.getColumn("group")?.getFilterValue() ?? "")
                                         
+
+                                        table.getColumn("group")?.setFilterValue(
+                                          groupFilter === group ? "" : group
+                                        )
                                         table.getColumn("type")?.setFilterValue(
                                           filter === type ? "" : type
                                         )
                                       }
-                                      
                                     }
                                   >
                                     {type}
