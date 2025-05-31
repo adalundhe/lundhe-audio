@@ -9,6 +9,7 @@ import { NavBar } from "~/components/NavBar";
 import { SettingsProvider } from "~/components/ui/settings-provider";
 import { env } from "~/env";
 import { api } from "~/utils/api";
+import { type Mode } from '~/components/ui/settings-provider';
 
 import {ScrollToTop} from '~/components/ui/scroll-to-top'
 // import {ShopifyProvider} from '@shopify/hydrogen-react';
@@ -16,16 +17,47 @@ import {ScrollToTop} from '~/components/ui/scroll-to-top'
 // import { type CountryCode, type LanguageCode } from "@shopify/hydrogen-react/storefront-api-types";
 
 import "~/styles/globals.css";
+import { useSettings } from "~/hooks/use-settings";
+import { useEffect } from "react";
 
 const courierPrime = Courier_Prime({
   weight: "400",
   subsets: ['latin']
 })
 
+function initTheme() {
+
+    const root = window.document.documentElement;
+    root.classList.remove("light", "dark");
+
+
+    let mode = localStorage.getItem('ui-mode') ?? 'system'
+    if (mode === 'system') {
+        mode = window.matchMedia("(prefers-color-scheme: dark)")
+        .matches
+        ? "dark"
+        : "light"
+    }
+
+
+    return mode as Mode
+}
+
 const MyApp: AppType<{ _: Session | null }> = ({
   Component,
   pageProps: { _, ...pageProps },
 }) => {
+
+
+  const {mode, updateMode} = useSettings()
+  
+  useEffect(() => {
+
+      if (mode === 'system') {
+          updateMode(initTheme())
+      }
+
+  }, [mode, updateMode])
 
   return (
     <>

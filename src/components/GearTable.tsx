@@ -41,7 +41,7 @@ import {
 import { Courier_Prime } from 'next/font/google';
 import { type EquipmentItem } from "~/server/api/routers/equipment";
 import { ColumnResizer } from './ColumnResizer'
-import { FilterCell } from './FilterCell'
+import { FilterCell, resetFilters } from './FilterCell'
 import { ScrollArea } from "./ui/scroll-area"
 import { GearNameCell } from "./GearNameCell"
 import { Separator } from "./ui/separator"
@@ -52,21 +52,6 @@ const courierPrime = Courier_Prime({
   subsets: ['latin']
 })
 
-const resetFilters = (table: TanTable<EquipmentItem>) => {
-
-  const groupColumn = table.getColumn("group");
-  if (groupColumn?.getFilterValue() !== "") {
-    groupColumn?.setFilterValue("")
-  }
-
-  const typeColumn = table.getColumn("type");
-  if (typeColumn?.getFilterValue() !== "") {
-    typeColumn?.setFilterValue("")
-  }
- 
-
-}
-  
 
 export const columns: ColumnDef<EquipmentItem>[] = [
   {

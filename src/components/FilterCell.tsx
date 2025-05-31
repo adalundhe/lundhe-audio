@@ -11,6 +11,22 @@ import {
 import { useMemo } from "react";
 
 
+
+export const resetFilters = (table: Table<EquipmentItem>) => {
+
+  const groupColumn = table.getColumn("group");
+  if (groupColumn?.getFilterValue() !== "") {
+    groupColumn?.setFilterValue("")
+  }
+
+  const typeColumn = table.getColumn("type");
+  if (typeColumn?.getFilterValue() !== "") {
+    typeColumn?.setFilterValue("")
+  }
+ 
+
+}
+
 export const FilterCell = ({
     table,
     row,
@@ -45,12 +61,15 @@ export const FilterCell = ({
         >
         <Button 
             className={`hover:text-cyan-500 p-0 h-fit ${typeFilter === typeValue || groupFilter === groupValue ? 'text-cyan-500' : ''}`}
-            onClick={() => table.getColumn(column)?.setFilterValue(
-                typeFilter === typeValue ?
-                ""
-                :
-                typeValue
-            )}
+            onClick={() => {
+                resetFilters(table)
+                table.getColumn(column)?.setFilterValue(
+                    typeFilter === typeValue ?
+                    ""
+                    :
+                    typeValue
+                )
+            }}
         >
         {flexRender(
             cell.column.columnDef.cell,
