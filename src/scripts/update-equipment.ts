@@ -1,8 +1,10 @@
-import { createClient, type Client } from "@libsql/client";
+import { createClient, ResultSet, type Client } from "@libsql/client";
 import { drizzle, } from "drizzle-orm/libsql";
 import * as schema from "~/server/db/schema";
 import Gear from '~/data/gear.json'
 import { randomUUID } from "node:crypto";
+import { SQLiteInsertBuilder } from "drizzle-orm/sqlite-core";
+import { EquipmentItem } from "~/server/api/routers/equipment";
 
 /**
  * This is a silly little NodeJS script to populate the Gear table in the DB
@@ -31,18 +33,28 @@ const updateEquipment = async () => {
     id: randomUUID()
   })
   
-  let inserted = 1;
   const items = Gear.length;
+  const updates: Array<Promise<ResultSet>> =[]
+
   for (const item of updated) {
-    await db.insert(schema.equipmentItem)
-    .values(item)
-    .onConflictDoUpdate({
-      target: schema.equipmentItem.id,
-      set: {
-        ...item,
-        updated_timestamp: new Date().toString()
-      }
-    })
+
+
+    updates.push(
+      db.insert(schema.equipmentItem)
+      .values(item)
+      .onConflictDoUpdate({
+        target: schema.equipmentItem.id,
+        set: {
+          ...item,
+          updated_timestamp: new Date().toString()
+        }
+      })
+    )
+  }
+
+  await Promise.allSettled(updates)
+  let inserted = 1;
+  for (const item of updated) {
 
     console.log(`Updated: ${item.name} - ${inserted}/${items}`)
     inserted += 1
