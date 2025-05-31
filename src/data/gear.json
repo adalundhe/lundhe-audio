@@ -5581,6 +5581,13 @@
         "quantity": 1
     },
     {
+        "name": "Origin Effects DCX Boost",
+        "description": "Botique and high-end preamp/boost pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
         "name": "Origin Effects M-EQ Driver",
         "description": "Mids-focused boost/drive pedal",
         "type": "preamp/boost pedal",
