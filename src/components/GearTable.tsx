@@ -55,10 +55,15 @@ const courierPrime = Courier_Prime({
 const resetFilters = (table: TanTable<EquipmentItem>) => {
 
   const groupColumn = table.getColumn("group");
-  groupColumn?.getFilterValue() !== "" && groupColumn?.setFilterValue("")
+  if (groupColumn?.getFilterValue() !== "") {
+    groupColumn?.setFilterValue("")
+  }
 
   const typeColumn = table.getColumn("type");
-  typeColumn?.getFilterValue() !== "" && typeColumn?.setFilterValue("")
+  if (typeColumn?.getFilterValue() !== "") {
+    typeColumn?.setFilterValue("")
+  }
+ 
 
 }
   
