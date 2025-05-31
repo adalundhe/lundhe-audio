@@ -193,7 +193,7 @@
         "id": "6a5b906f-ebff-457e-a18c-d638f8eea07c",
         "name": "Flock Patch",
         "description": "64 x 64 digitally controlled patchbay",
-        "type": "uti",
+        "type": "utility",
         "group": "I/O",
         "quantity": 6,
         "created_timestamp": "Fri March 30 2025 23:03:16 GMT+0000 (Coordinated Universal Time)",
