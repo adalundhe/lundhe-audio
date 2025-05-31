@@ -75,6 +75,11 @@ export const columns: ColumnDef<EquipmentItem>[] = [
     enableHiding: true,
   },
   {
+    accessorKey: "group",
+    enableHiding: true,
+    filterFn: "equalsString",
+  },
+  {
     id: "updated",
     accessorFn: (row) => row.updated_timestamp,
     enableHiding: true,
@@ -179,8 +184,6 @@ export const GearTable = ({
 }: {
     data: EquipmentItem[]
 }) => {
-
-  console.log(data.at(0))
   
   const [sorting, setSorting] = React.useState<SortingState>([
       {
@@ -196,6 +199,7 @@ export const GearTable = ({
       id: false,
       added: false,
       updated: false,
+      group: false,
     })
   const [rowSelection, setRowSelection] = React.useState({})
 
@@ -262,7 +266,7 @@ export const GearTable = ({
               </div>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className={`${courierPrime.className} py-0`}>
+          <DropdownMenuContent align="end" className={`${courierPrime.className} py-0 px-2`}>
                 <Button
                   className="p-0 h-[2.5em] w-fit flex md:hover:underline hover:no-underline"
                   onClick={() => table.getColumn("added")?.setFilterValue(
@@ -280,38 +284,56 @@ export const GearTable = ({
                           {group}  
                         </AccordionTrigger>
                         <AccordionContent className="p-0">
-
                           <ScrollArea className="h-fit w-full">
-                          {dataByGroup[group]?.map(item => item.type)
-                            .reduce(function (types, type) {
-                                if (!types.includes(type)) {
-                                    types.push(type);
+                            <DropdownMenuCheckboxItem
+                                key={group}
+                                className="capitalize outline-none border-none"
+                                checked={
+                                  (table.getColumn("group")?.getFilterValue() ?? "") === group
                                 }
+                                onCheckedChange={() => {
+                                      const filter = (table.getColumn("group")?.getFilterValue() ?? "")
+                        
+                                      table.getColumn("group")?.setFilterValue(
+                                        filter === group ? "" : group
+                                      )
+                                    }
+                                    
+                                  }
                                 
-                                return types;
-                            }, [] as string[])
-                            .map((type) => {
-                              return (
-                                <DropdownMenuCheckboxItem
-                                  key={type}
-                                  className="capitalize outline-none border-none"
-                                  checked={
-                                    (table.getColumn("type")?.getFilterValue() ?? "") === type
+                            >
+                              All {group}
+                            </DropdownMenuCheckboxItem>
+                            {dataByGroup[group]?.map(item => item.type)
+                              .reduce(function (types, type) {
+                                  if (!types.includes(type)) {
+                                      types.push(type);
                                   }
-                                  onCheckedChange={() => {
-                                    const filter = (table.getColumn("type")?.getFilterValue() ?? "")
-                                    
-                                    table.getColumn("type")?.setFilterValue(
-                                      filter === type ? "" : type
-                                    )
-                                  }
-                                    
-                                  }
-                                >
-                                  {type}
-                                </DropdownMenuCheckboxItem>
-                              )
-                            })}
+                                  
+                                  return types;
+                              }, [] as string[])
+                              .map((type) => {
+                                return (
+                                  <DropdownMenuCheckboxItem
+                                    key={type}
+                                    className="capitalize outline-none border-none"
+                                    checked={
+                                      (table.getColumn("type")?.getFilterValue() ?? "") === type
+                                    }
+                                    onCheckedChange={() => {
+                                        const filter = (table.getColumn("type")?.getFilterValue() ?? "")
+                                        
+                                        table.getColumn("type")?.setFilterValue(
+                                          filter === type ? "" : type
+                                        )
+                                      }
+                                      
+                                    }
+                                  >
+                                    {type}
+                                  </DropdownMenuCheckboxItem>
+                                )
+                              })}
                           </ScrollArea>
                         </AccordionContent>
                       </AccordionItem>
@@ -395,8 +417,10 @@ export const GearTable = ({
                         cell.getContext().column.id === 'type' ?  <FilterCell
                           key={cell.id}
                           cell={cell}
+                          row={row}
                           table={table}
                           filterColumn="type"
+                          groupColumn="group"
                         /> 
                         :
                         <TableCell 
