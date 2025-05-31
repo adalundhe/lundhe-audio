@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 import { type Row } from "@tanstack/react-table"
 import { type EquipmentItem } from "~/server/api/routers/equipment"
-
+import { Badge } from "~/components/ui/badge"
 
 export const GearNameCell = ({
     row
@@ -28,7 +28,7 @@ export const GearNameCell = ({
     return (
         isNew
         ?
-        <div className="capitalize truncate text-ellipsis">{name as string} <b>NEW!</b></div>
+        <div className="capitalize truncate text-ellipsis flex items-center gap-2">{name as string} <Badge variant={'outline'}>NEW!</Badge></div>
         :
 
         <div className="capitalize truncate text-ellipsis">{name as string}</div>

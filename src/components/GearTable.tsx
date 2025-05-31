@@ -429,12 +429,13 @@ export const GearTable = ({
                             width: cell.column.getSize(),
                             minWidth: cell.column.columnDef.minSize
                           }}
-                          className="h-fit"
                         >
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
+                          {
+                            flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )
+                          }
                         </TableCell>
                       ))}
                   </TableRow>

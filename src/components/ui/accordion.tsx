@@ -21,7 +21,7 @@ AccordionItem.displayName = "AccordionItem"
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> & {
-    chevronSide: 'left' | 'right'
+    chevronSide: 'left' | 'right' | 'none' | 'fit'
   }
 >(({ className, children, chevronSide, ...props }, ref) => (
   <AccordionPrimitive.Header className='flex'>
@@ -42,6 +42,7 @@ const AccordionTrigger = React.forwardRef<
       </AccordionPrimitive.Trigger>
       </> 
       : 
+      chevronSide === 'right' ?
       <>
         <AccordionPrimitive.Trigger
           ref={ref}
@@ -55,6 +56,22 @@ const AccordionTrigger = React.forwardRef<
             <ChevronDownIcon  />
           </div>
           {children}
+        </AccordionPrimitive.Trigger>
+      </>
+      :
+      <>
+        <AccordionPrimitive.Trigger
+          ref={ref}
+          className={cn(
+            "flex flex-1 space-x-2 items-center justify-end py-4 text-sm font-medium transition-all hover:underline [&[data-state=open]>.chevron-div]:rotate-180",
+            className
+          )}
+          {...props}
+        >
+          {children}
+          <div className="chevron-div flex flex-col items-center justify-center mr-2 shrink-0 text-muted-foreground transition-transform duration-200">
+            <ChevronDownIcon  />
+          </div>
         </AccordionPrimitive.Trigger>
       </>
     }
