@@ -27,7 +27,7 @@ export default function Home() {
     altTxt: string
   }[] = useMemo(() => [
     {
-      src: "/studio/under_desk_gear.jpeg",
+      src: "/studio/under_desk_gear.jpg",
       altTxt: "A photo of Lündhé Audio's analog equipment - including Retro Instruments, Buzz Audio, Empirical Labs, Manley, and more."
     },
     {
