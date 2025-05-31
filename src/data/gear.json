@@ -5558,6 +5558,34 @@
         "quantity": 1,
         "created_timestamp": "Sat May 31 2025 20:24:08 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sat May 31 2025 21:11:21 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Origin Effects Halcyon Gold Overdrive",
+        "description": "Klon Centaur based overdrive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Origin Effects Halcyon Green Overdrive",
+        "description": "Ibanez Tube Screamer based overdrive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Origin Effects Halcyon Blue Overdrive",
+        "description": "Bluesbreaker based overdrive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Origin Effects M-EQ Driver",
+        "description": "Mids-focused boost/drive pedal",
+        "type": "preamp/boost pedal",
+        "group": "pedals",
+        "quantity": 1
     }
     
 ]
