@@ -241,8 +241,13 @@ export const GearTable = ({
     (grouped[item.group] ??= []).push(item);
     return grouped;
   }, {} as Record<string, EquipmentItem[]>), [data])
-  
-  
+
+  const invisibleColumns = React.useRef<string[]>([
+    "added",
+    "updated",
+    "id",
+    "group",
+  ])
 
   return (
     <div className="w-full h-[600px]">
@@ -346,7 +351,7 @@ export const GearTable = ({
         </DropdownMenu>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button className="w-fit flex p-0">
+            <Button className="w-fit flex p-0 border-none outline-none">
               <div className="w-fit h-full flex gap-4 items-center justify-end">
                 Columns
                 <div className="w-[1.5em] h-[1.5em]">
@@ -358,7 +363,7 @@ export const GearTable = ({
           <DropdownMenuContent align="end" className={courierPrime.className}>
             {table
               .getAllColumns()
-              .filter((column) => column.getCanHide())
+              .filter((column) => column.getCanHide() && !invisibleColumns.current.includes(column.id))
               .map((column) => {
                 return (
                   <DropdownMenuCheckboxItem
