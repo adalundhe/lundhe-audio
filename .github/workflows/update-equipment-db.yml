@@ -14,6 +14,20 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+permissions:
+  actions: write
+  checks: read
+  contents: write
+  deployments: read
+  discussions: read
+  issues: write
+  metadata: read
+  pages: read
+  packages: read
+  pull-requests: write
+  repository-projects: write
+  security-events: read
+  statuses: read
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -82,7 +96,7 @@ jobs:
 
           gh pr create -B main -H update-equipment --title 'Equipment Sync PR' --body 'Created by Update Equipment Github Workflow'
           gh pr merge update-equipment --auto
-          
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
