@@ -57,19 +57,20 @@ jobs:
           git config --global user.email "equipment.bot@lundhe.audio"
           git config --global user.name "EquipBot"
 
-          git remote set-url origin https://github:${{ secrets.GITHUB_TOKEN }}@github.com/adalundhe/lundhe-audio
+          git remote add origin https://github:${{ secrets.GITHUB_TOKEN }}@github.com/adalundhe/lundhe-audio
       
           git branch update-equipment || git checkout update-equipment
 
 
           UUID=$(uuidgen)
 
+          git push origin --delete update-equipment
+
           git config pull.rebase false
-          git pull origin update-equipment --allow-unrelated-histories
 
           git add -A &&
           git commit -m "EquiBot: Syncing equipment"
-          git push origin -f update-equipment
+          git push origin update-equipment
 
       - name: create pull request
         shell: bash
