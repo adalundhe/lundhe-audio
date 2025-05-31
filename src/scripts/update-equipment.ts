@@ -26,9 +26,13 @@ const db = drizzle(client, { schema });
 
 const updateEquipment = async () => {
 
+  const created = new Date().toString()
+
   const updated = Gear.map(item => item.id ? item : {
     ...item,
-    id: randomUUID()
+    id: randomUUID(),
+    created_timestamp: created,
+    updated_timestamp: created,
   })
   
   const items = Gear.length;
