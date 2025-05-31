@@ -60,6 +60,9 @@ jobs:
       - name: Create Branch and Commit
         shell: bash
         run: |
+          git config --global user.email "equipment.bot@lundhe.audio"
+          git config --global user.name "EquipBot"
+
           git branch update-equipment || git checkout update-equipment
           git add -A &&
           git commit -m "EquiBot: Syncing equipment"
