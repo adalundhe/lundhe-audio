@@ -82,6 +82,7 @@ jobs:
 
           gh pr create -B main -H update-equipment --title 'Equipment Sync PR' --body 'Created by Update Equipment Github Workflow'
           gh pr merge update-equipment --auto
+          
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
