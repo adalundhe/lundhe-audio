@@ -6,13 +6,13 @@ name: Update Equipment DB
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    # branches: [ main ]
     paths:
         - src/data/gear.json
         - src/scripts/update_equipment.ts
         - .github/workflows/update-equipment-db.yml
   pull_request:
-    branches: [ main ]
+    # branches: [ main ]
     paths:
         - src/data/gear.json
         - src/scripts/update_equipment.ts
@@ -26,7 +26,7 @@ jobs:
   update_db:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    # if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout
         id: checkout
@@ -55,3 +55,18 @@ jobs:
         shell: bash
         run: |
           pnpm db:update:equipment
+          pnpm db:dump:equipment
+          
+      - name: Create Branch and Commit
+        shell: bash
+        run: |
+          git branch update-equipment
+          git add -A &&
+          git git commit -m "EquiBot: Syncing equipment"
+
+      - name: create pull request
+        shell: bash
+        run: gh pr create -B main -H ${{ env.BRANCH_NAME }} --title 'Equipment Sync PR' --body 'Created by Update Equipment Github Workflow'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
