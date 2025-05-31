@@ -5,6 +5,7 @@ import { TableCell } from "~/components/ui/table"
 import {
     type Table,
     type Cell,
+    type Row,
     flexRender,
 } from '@tanstack/react-table'
 import { useMemo } from "react";
@@ -12,20 +13,27 @@ import { useMemo } from "react";
 
 export const FilterCell = ({
     table,
+    row,
     cell,
     filterColumn,
+    groupColumn,
 }: {
     table: Table<EquipmentItem>
+    row: Row<EquipmentItem>,
     cell: Cell<EquipmentItem, unknown>,
     filterColumn: string,
+    groupColumn: string,
 }) => {
 
     
     const column = useMemo(() => filterColumn, [filterColumn])
 
     const filterValue = table.getColumn(column)?.getFilterValue()
-    const filter = useMemo(() => filterValue, [filterValue])
-    const value = useMemo(() =>  cell.getValue(), [cell])
+    const groupFilter = table.getColumn(groupColumn)?.getFilterValue()
+
+    const typeFilter = useMemo(() => filterValue, [filterValue])
+    const groupValue = useMemo(() => row.getValue(groupColumn) , [row])
+    const typeValue = useMemo(() =>  cell.getValue(), [cell])
 
     return (
         <TableCell 
@@ -36,12 +44,12 @@ export const FilterCell = ({
         }}
         >
         <Button 
-            className={`hover:text-cyan-500 p-0 h-fit ${filter === value ? 'text-cyan-500' : ''}`}
+            className={`hover:text-cyan-500 p-0 h-fit ${typeFilter === typeValue || groupFilter === groupValue ? 'text-cyan-500' : ''}`}
             onClick={() => table.getColumn(column)?.setFilterValue(
-            filter === value ?
-            ""
-            :
-            value
+                typeFilter === typeValue ?
+                ""
+                :
+                typeValue
             )}
         >
         {flexRender(
