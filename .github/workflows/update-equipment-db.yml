@@ -61,7 +61,7 @@ jobs:
       
           git branch update-equipment || git checkout update-equipment
 
-
+          git config pull.rebase false
           git pull origin update-equipment
 
           git add -A &&
