@@ -76,7 +76,7 @@ jobs:
           git commit -m "EquiBot: Syncing equipment"
           git push origin ${{ github.head_ref || github.ref_name }} 
 
-      - name: create pull request
+      - name: Auto Merge PR
         shell: bash
         run: |
           gh pr merge ${{ github.head_ref || github.ref_name }} --auto --merge --delete-branch
