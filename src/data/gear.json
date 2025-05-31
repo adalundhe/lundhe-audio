@@ -5472,7 +5472,7 @@
     {
         "id": "b6295288-14ec-46aa-8132-9831f6574383",
         "name": "JHS Violet",
-        "description": "Lari Basilio signature distortion/overdrive pedal w/ EQ",
+        "description": "Lari Basilio signature overdrive pedal w/ EQ",
         "type": "distortion pedal",
         "group": "pedals",
         "quantity": 1,
@@ -5489,5 +5489,5 @@
         "created_timestamp": "Sat May 31 2025 08:24:19 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sat May 31 2025 08:29:02 GMT+0000 (Coordinated Universal Time)"
     }
-    
+
 ]
