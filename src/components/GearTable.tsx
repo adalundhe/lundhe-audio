@@ -13,7 +13,6 @@ import {
   getSortedRowModel,
   useReactTable,
   type ColumnSizingState,
-  type Table as TanTable,
 } from "@tanstack/react-table"
 import { ArrowUpDown, ChevronDown } from "lucide-react"
 import { Button } from "~/components/ui/button"
