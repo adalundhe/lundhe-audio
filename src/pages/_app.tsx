@@ -16,9 +16,6 @@ import {ScrollToTop} from '~/components/ui/scroll-to-top'
 // import { type CountryCode, type LanguageCode } from "@shopify/hydrogen-react/storefront-api-types";
 
 import "~/styles/globals.css";
-import { useSettings } from "~/hooks/use-settings";
-import { getInitTheme } from "~/stores/settings";
-import { useEffect } from "react";
 
 const courierPrime = Courier_Prime({
   weight: "400",
@@ -29,17 +26,6 @@ const MyApp: AppType<{ _: Session | null }> = ({
   Component,
   pageProps: { _, ...pageProps },
 }) => {
-
-
-  const {mode, updateMode} = useSettings()
-  
-  useEffect(() => {
-
-      if (mode === 'system') {
-          updateMode(getInitTheme())
-      }
-
-  }, [mode, updateMode])
 
   return (
     <>
