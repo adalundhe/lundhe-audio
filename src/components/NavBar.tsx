@@ -84,12 +84,10 @@ export const NavBar = () => (
                                       <Separator/>     
                                       <ul className="list-none pl-4">
                                           <li className="w-full py-2 flex items-center space-x-2 grow-1"> 
-                                              {/* <PiInfoFill /> */}
-                                              <Link href="/about" className="cursor-pointer hover:underline" passHref>                     
-                                                  <NavigationMenuLink className={navigationMenuLinkStyle()} >
-                                                      about
-                                                  </NavigationMenuLink>
-                                              </Link>
+                                              {/* <PiInfoFill /> */}                   
+                                            <NavigationMenuLink href='/about' className={navigationMenuLinkStyle()} >
+                                                about
+                                            </NavigationMenuLink>
                                           </li>
                                           <Separator/>
                                           <li className="w-full py-2 flex items-center space-x-2 grow-1">
