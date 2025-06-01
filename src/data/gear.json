@@ -5608,5 +5608,27 @@
         "quantity": 1,
         "created_timestamp": "Sat May 31 2025 21:53:48 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sat May 31 2025 21:53:48 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "JHS Angry Charlie - V3",
+        "description": "Marshal JCM800 based overdrive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "JHS Charlie Brown - V4",
+        "description": "Marshal JTM45 based overdrive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "JHS Kodiak - V2"
+        "description": "Multi-waveform tremolo pedal",
+        "type": "tremolo pedal",
+        "group": "pedals",
+        "quantity": 1
     }
+        
 ]
