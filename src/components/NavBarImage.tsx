@@ -3,25 +3,7 @@ import { Avatar, AvatarImage } from "~/components/ui/avatar";
 import { NavigationMenuLink } from "~/components/ui/navigation-menu";
 import { useSettings } from "~/hooks/use-settings";
 import { useEffect } from "react";
-import { type Mode } from '~/components/ui/settings-provider';
-
-function initTheme() {
-
-    const root = window.document.documentElement;
-    root.classList.remove("light", "dark");
-
-
-    let mode = localStorage.getItem('ui-mode') ?? 'system'
-    if (mode === 'system') {
-        mode = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light"
-    }
-
-
-    return mode as Mode
-}
+import { getInitTheme } from "~/stores/settings";
 
 export const NavBarImage = () => {
     const {mode, updateMode} = useSettings()
@@ -29,7 +11,7 @@ export const NavBarImage = () => {
     useEffect(() => {
 
         if (mode === 'system') {
-            updateMode(initTheme())
+            updateMode(getInitTheme())
         }
 
     }, [mode, updateMode])

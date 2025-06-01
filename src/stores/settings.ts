@@ -7,17 +7,34 @@ interface SettingsState {
   updateMode: (mode: Mode) => void
 }
 
+export function getInitTheme() {
+
+    const root = window.document.documentElement;
+    root.classList.remove("light", "dark");
+
+
+    let mode = localStorage.getItem('ui-mode') ?? 'system'
+    if (mode === 'system') {
+        mode = window.matchMedia("(prefers-color-scheme: dark)")
+        .matches
+        ? "dark"
+        : "light"
+    }
+
+
+    return mode as Mode
+}
+
+
 export const useSettingStore = create<SettingsState>()(
     persist(
         (set) => {
 
             let mode: Mode = 'system'
-            if (typeof window !== 'undefined' &&
-                window.document){
-                   mode = (
-                    localStorage.getItem('ui-mode') ?? 'system'
-                   ) as Mode
-                }
+            if (typeof window !== 'undefined' && window.document){
+              mode = getInitTheme()
+            
+            }
 
             return ({
                 mode: mode,
