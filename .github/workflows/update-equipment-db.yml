@@ -41,7 +41,7 @@ jobs:
           MAIN_REV=$(git rev-parse origin/main)
           CURRENT_REV=$(git rev-parse ${{ github.head_ref || github.ref_name }})
 
-          if git diff --exit-code $MAIN_REV $CURRENT_REV -- src/data/gear.json; then
+          if [[ $(git diff --exit-code $MAIN_REV $CURRENT_REV -- src/data/gear.json && echo $?) ]]; then
             echo "Gear updates detected..."
             echo "CHANGED=true" >>${GITHUB_ENV}
           else
