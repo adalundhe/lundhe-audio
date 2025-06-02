@@ -34,7 +34,7 @@ jobs:
       
       - name: Check file differences
         run: |
-          if git diff --exit-code main ${{ github.head_ref || github.ref_name }}  -- src/data/gear.json
+          if git diff --exit-code main ${{ github.head_ref || github.ref_name }} -- src/data/gear.json
             echo "CHANGED=true" >>${GITHUB_ENV}
           else
             echo "CHANGED=false" >>${GITHUB_ENV}
