@@ -35,7 +35,8 @@ jobs:
       - name: Check file differences
         run: |
 
-          git remote add origin https://github:${{ secrets.GITHUB_TOKEN }}@github.com/adalundhe/lundhe-audio
+          git remote set-url origin https://github:${{ secrets.GITHUB_TOKEN }}@github.com/adalundhe/lundhe-audio
+          git fetch
 
           MAIN_REV=$(git rev-parse origin/main)
           CURRENT_REV$(git rev-pase origin/${{ github.head_ref || github.ref_name }})
