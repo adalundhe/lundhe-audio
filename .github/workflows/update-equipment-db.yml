@@ -33,7 +33,6 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Check file differences
-        continue-on-error: true
         run: |
 
           git remote set-url origin https://github:${{ secrets.GITHUB_TOKEN }}@github.com/adalundhe/lundhe-audio
@@ -42,7 +41,7 @@ jobs:
           MAIN_REV=$(git rev-parse origin/main)
           CURRENT_REV=$(git rev-parse ${{ github.head_ref || github.ref_name }})
 
-          FILES_CHANGED=$(git diff --exit-code $MAIN_REV $CURRENT_REV -- src/data/gear.json)
+          local FILES_CHANGED=$(git diff --exit-code $MAIN_REV $CURRENT_REV -- src/data/gear.json)
 
           if [[ $? -gt 0 ]]; then
             echo "Gear updates detected..."
