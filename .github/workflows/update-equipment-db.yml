@@ -43,7 +43,7 @@ jobs:
 
           FILES_CHANGED=$(git diff --exit-code $MAIN_REV $CURRENT_REV -- src/data/gear.json && echo "$?")
 
-          if [[ $? -gt 0 ]]; then
+          if [[ $FILES_CHANGED -gt 0 ]]; then
             echo "Gear updates detected..."
             echo "CHANGED=true" >>${GITHUB_ENV}
           else
