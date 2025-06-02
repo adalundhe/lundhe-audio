@@ -11,9 +11,9 @@ import { env } from "~/env";
 import { api } from "~/utils/api";
 
 import {ScrollToTop} from '~/components/ui/scroll-to-top'
-// import {ShopifyProvider} from '@shopify/hydrogen-react';
-// import {CartProvider, useCart} from '@shopify/hydrogen-react';
-// import { type CountryCode, type LanguageCode } from "@shopify/hydrogen-react/storefront-api-types";
+import {ShopifyProvider} from '@shopify/hydrogen-react';
+import {CartProvider, useCart} from '@shopify/hydrogen-react';
+import { type CountryCode, type LanguageCode } from "@shopify/hydrogen-react/storefront-api-types";
 
 import "~/styles/globals.css";
 
@@ -31,7 +31,7 @@ const MyApp: AppType<{ _: Session | null }> = ({
     <>
 
       <SettingsProvider />
-      {/* <ShopifyProvider
+      <ShopifyProvider
         storeDomain={env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN}
         storefrontToken={env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_API_ACCESS_TOKEN}
         storefrontApiVersion={env.NEXT_PUBLIC_SHOPIFY_APP_API_VERSION}
@@ -40,7 +40,7 @@ const MyApp: AppType<{ _: Session | null }> = ({
       >
         <CartProvider
           
-        > */}
+        >
           <Head>
             <title>Lündhé Audio</title>
             <meta name="description" content="Lündhé Audio, an Austin based post-tracking mixing, mastering, sound design, and commercial audio studio." />
@@ -55,8 +55,8 @@ const MyApp: AppType<{ _: Session | null }> = ({
           </div>
           <Footer />
           <ScrollToTop minHeight={100} scrollTo={0}/>
-        {/* </CartProvider>
-      </ShopifyProvider> */}
+        </CartProvider>
+      </ShopifyProvider>
     </>
   );
 };

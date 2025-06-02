@@ -15,6 +15,10 @@ import { ZodError } from "zod";
 import { env } from "~/env";
 import { ServerClient } from 'postmark';
 import twilio from 'twilio';
+import '@shopify/shopify-api/adapters/node';
+import {LATEST_API_VERSION} from '@shopify/shopify-api';
+import {createAdminApiClient} from '@shopify/admin-api-client';
+
 
 // import { auth } from "~/server/auth";
 import { db } from "~/server/db";
@@ -42,16 +46,33 @@ interface CreateContextOptions {
  * @see https://create.t3.gg/en/usage/trpc#-serverapitrpcts
  */
 const createInnerTRPCContext = (opts: CreateContextOptions) => {
+
+  // const shopify = shopifyApi({
+  //   // The next 4 values are typically read from environment variables for added security
+  //   apiKey: env.SHOPIFY_ADMIN_API_KEY,
+  //   apiSecretKey: env.SHOPIFY_ADMIN_API_SECRET,
+  //   scopes: ['read_products'],
+  //   hostName: env.NODE_ENV === 'production' ? 'lundhe.audio' : 'localhost:3000',
+  //   apiVersion: LATEST_API_VERSION,
+  //   isEmbeddedApp: false,
+  // });
+
+  const shopify = createAdminApiClient({
+    storeDomain: env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN,
+    apiVersion: LATEST_API_VERSION,
+    accessToken: env.SHOPIFY_ADMIN_API_TOKEN,
+  })
   
   const client = new ServerClient(env.POSTMARK_TOKEN);
   const twilioClient = twilio(env.TWILIO_CAMPAIGN_ID, env.TWILIO_AUTH_TOKEN);
+  
 
   return {
     session: opts.session,
     db,
     postmark: client,
     twilio: twilioClient,
-
+    shopify: shopify,
   };
 };
 

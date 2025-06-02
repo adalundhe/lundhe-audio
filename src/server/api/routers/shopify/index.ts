@@ -1,0 +1,1 @@
+export { shopifyFetch } from './shopify-fetch'
