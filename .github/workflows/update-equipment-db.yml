@@ -91,7 +91,6 @@ jobs:
 
           git remote set-url origin https://github:${{ secrets.GITHUB_TOKEN }}@github.com/adalundhe/lundhe-audio
 
-
           UUID=$(uuidgen)
 
           git config pull.rebase false
