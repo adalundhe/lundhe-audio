@@ -35,7 +35,7 @@ jobs:
       - name: Check file differences
         run: |
 
-          FILES_CHANGED=$(git diff --exit-code main ${{ github.head_ref || github.ref_name }} -- src/data/gear.json)
+          FILES_CHANGED=$(git diff --exit-code refs/heads/main ${{ github.head_ref || github.ref_name }} -- src/data/gear.json)
 
           if $FILES_CHANGED; then
             echo "Gear updates detected..."
