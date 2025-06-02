@@ -39,7 +39,9 @@ jobs:
           git fetch
 
           MAIN_REV=$(git rev-parse origin/main)
-          CURRENT_REV=$(git rev-parse ${{ github.head_ref || github.ref_name }})
+          CURRENT_REV=$(git rev-parse origin/${{ github.head_ref || github.ref_name }})
+
+          git diff --exit-code $MAIN_REV $CURRENT_REV -- src/data/gear.json && echo $?
 
           if [[ $(git diff --exit-code $MAIN_REV $CURRENT_REV -- src/data/gear.json && echo $?) ]]; then
             echo "Gear updates detected..."
