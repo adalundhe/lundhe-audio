@@ -6,6 +6,7 @@ name: Update Equipment DB
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
+    branch: [main]
     paths:
         - src/data/gear.json
         - src/scripts/update_equipment.ts
