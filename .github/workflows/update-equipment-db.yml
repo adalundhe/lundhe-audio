@@ -34,9 +34,14 @@ jobs:
       
       - name: Check file differences
         run: |
-          if git diff --exit-code main ${{ github.head_ref || github.ref_name }} -- src/data/gear.json
+
+          FILES_CHANGED=$(git diff --exit-code main ${{ github.head_ref || github.ref_name }} -- src/data/gear.json)
+
+          if $FILES_CHANGED; then
+            echo "Gear updates detected..."
             echo "CHANGED=true" >>${GITHUB_ENV}
           else
+            echo "No gear updates detected..."
             echo "CHANGED=false" >>${GITHUB_ENV}
           fi
 
@@ -93,7 +98,7 @@ jobs:
         if: env.CHANGED == 'true'
         shell: bash
         run: |
-          gh pr create --head ${{ github.head_ref || github.ref_name }} --base main --title "Update Equipment ${{ github.event.number }}" --body "Updating equipment in gear.json"
+          gh pr create --head ${{ github.head_ref || github.ref_name }} --base main --title "Update Equipment ${{ github.event.number }}" --body "Updating equipment in gear.json" || true
           gh pr merge ${{ github.head_ref || github.ref_name }} --auto --merge --delete-branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
