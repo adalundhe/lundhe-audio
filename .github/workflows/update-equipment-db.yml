@@ -39,7 +39,7 @@ jobs:
           git fetch
 
           MAIN_REV=$(git rev-parse origin/main)
-          CURRENT_REV=$(git rev-pase origin/${{ github.head_ref || github.ref_name }})
+          CURRENT_REV=$(git rev-pase ${{ github.head_ref || github.ref_name }})
 
           FILES_CHANGED=$(git diff --exit-code $MAIN_REV $CURRENT_REV -- src/data/gear.json)
 
