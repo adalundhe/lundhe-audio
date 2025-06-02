@@ -41,7 +41,7 @@ jobs:
           MAIN_REV=$(git rev-parse origin/main)
           CURRENT_REV=$(git rev-parse ${{ github.head_ref || github.ref_name }})
 
-          local FILES_CHANGED=$(git diff --exit-code $MAIN_REV $CURRENT_REV -- src/data/gear.json)
+          FILES_CHANGED=$(git diff --exit-code $MAIN_REV $CURRENT_REV -- src/data/gear.json && echo "$?")
 
           if [[ $? -gt 0 ]]; then
             echo "Gear updates detected..."
