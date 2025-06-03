@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 import {
   type ColumnDef,
@@ -333,7 +331,7 @@ export const GearTable = ({
                                         const filter = (table.getColumn("type")?.getFilterValue() ?? "")
                                         const groupFilter = (table.getColumn("group")?.getFilterValue() ?? "")
 
-                                        if (groupFilter === group || filter === type) {
+                                        if (groupFilter === group && filter === type) {
                                           table.resetColumnFilters()
                                         } else {
                                           table.setColumnFilters([
