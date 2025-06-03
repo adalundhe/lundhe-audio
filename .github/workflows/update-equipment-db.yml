@@ -13,6 +13,8 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+env:
+  EVENT_NUMBER: ${{ github.event.number }}
 permissions:
   actions: write
   contents: write
@@ -94,8 +96,8 @@ jobs:
 
           BRANCH_NAME="${{ github.head_ref || github.ref_name }}"
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
-              git checkout -b update-equipment-${{ github.event.number }} || git checkout update-equipment-${{ github.event.number }}
-              BRANCH_NAME="update-equipment-${{ github.event.number }}"
+              git checkout -b update-equipment-${{ env.EVENT_NUMBER }} || git checkout update-equipment-${{ github.event.number }}
+              BRANCH_NAME="update-equipment-${{ env.EVENT_NUMBER }}"
           fi
 
           git config pull.rebase false
@@ -118,7 +120,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH_NAME: ${{ env.BRANCH_NAME }}
         run: |
-          gh pr create --head ${{ env.BRANCH_NAME }} --base main --title "Update Equipment ${{ github.event.number }}" --body "Updating equipment in gear.json" || true
+          gh pr create --head ${{ env.BRANCH_NAME }} --base main --title "Update Equipment ${{ env.EVENT_NUMBER }}" --body "Updating equipment in gear.json" || true
           gh pr merge ${{ env.BRANCH_NAME }} --auto --merge --delete-branch
           
           
