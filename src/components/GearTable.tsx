@@ -333,8 +333,6 @@ export const GearTable = ({
                                         const filter = (table.getColumn("type")?.getFilterValue() ?? "")
                                         const groupFilter = (table.getColumn("group")?.getFilterValue() ?? "")
 
-                              
-
                                         if (groupFilter === group || filter === type) {
                                           table.resetColumnFilters()
                                         } else {
@@ -349,15 +347,7 @@ export const GearTable = ({
                                             }
                                           ])
                                         }
-
           
-
-                                        // table.getColumn("group")?.setFilterValue(
-                                        //   groupFilter === group ? "" : group
-                                        // )
-                                        // table.getColumn("type")?.setFilterValue(
-                                        //   filter === type ? "" : type
-                                        // )
                                       }
                                     }
                                   >
