@@ -106,11 +106,7 @@ jobs:
           git add -A &&
           git commit -m "EquiBot: Syncing equipment"
 
-          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
-            git push origin --force $BRANCH_NAME
-          else
-            git push origin $BRANCH_NAME
-          fi
+          git push origin $BRANCH_NAME
           
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
 
@@ -123,7 +119,7 @@ jobs:
           SHORT_SHA: ${{ env.SHORT_SHA }}
         run: |
           gh pr create --head ${{ env.BRANCH_NAME }} --base main --title "Update Equipment ${{ env.SHORT_SHA}}" --body "Updating equipment in gear.json" || true
-          gh pr merge ${{ env.BRANCH_NAME }} --admin --auto --merge --delete-branch
+          gh pr merge ${{ env.BRANCH_NAME }} --auto --merge --delete-branch
           
           
           
