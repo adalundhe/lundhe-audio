@@ -5663,7 +5663,7 @@
         "name": "Akai MPC Live 2",
         "description": "Proverbial DAW in a box machine",
         "type": "sampler",
-        "group": "pedals",
+        "group": "keyboards/samplers",
         "quantity": 1
     },
     {
