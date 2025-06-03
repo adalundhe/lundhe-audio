@@ -98,7 +98,7 @@ jobs:
           BRANCH_NAME="${{ github.head_ref || github.ref_name }}"
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
               git checkout -b update-equipment-$SHORT_SHA || git checkout update-equipment-$SHORT_SHA
-              BRANCH_NAME="update-equipment-${{ env.EVENT_NUMBER }}"
+              BRANCH_NAME="update-equipment-$SHORT_SHA"
           fi
 
           git config pull.rebase false
