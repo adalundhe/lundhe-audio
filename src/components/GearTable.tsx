@@ -295,16 +295,29 @@ export const GearTable = ({
                                 className="capitalize outline-none border-none w-full pl-0 hover:bg-white dark:hover:bg-black hover:underline"
                                 checked={
                                   (table.getColumn("group")?.getFilterValue() ?? "") === group
+                                  && (table.getColumn("type")?.getFilterValue() ?? "") === ""
                                 }
                                 onCheckedChange={() => {
                                       resetFilters(table)
-                                      const filter = (table.getColumn("group")?.getFilterValue() ?? "")
-                        
-                                      table.getColumn("group")?.setFilterValue(
-                                        filter === group ? "" : group
-                                      )
+                                        const filter = (table.getColumn("type")?.getFilterValue() ?? "")
+                                        const groupFilter = (table.getColumn("group")?.getFilterValue() ?? "")
+
+                                        if (groupFilter === group && filter === "") {
+                                          table.resetColumnFilters()
+                                        } else {
+                                          table.setColumnFilters([
+                                            {
+                                              id: "group",
+                                              value: group,
+                                            },
+                                            {
+                                              id: "type",
+                                              value: "",
+                                            }
+                                          ])
                                     }
                                   }
+                                }
                                 
                             >
                               All {group}
