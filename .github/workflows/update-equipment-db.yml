@@ -41,7 +41,7 @@ jobs:
           MAIN_REV=$(git rev-parse origin/main)
           CURRENT_REV=$(git rev-parse ${{ github.head_ref || github.ref_name }})
 
-          if [[ $(git diff --exit-code $MAIN_REV $CURRENT_REV -- src/data/gear.json && echo $?) ]]; then
+          if [[ $(git diff --exit-code $MAIN_REV $CURRENT_REV -- src/data/gear.json && echo $?) -gt 0 ]]; then
             echo "Gear updates detected..."
             echo "CHANGED=true" >>${GITHUB_ENV}
           else
@@ -89,20 +89,28 @@ jobs:
 
           git remote set-url origin https://github:${{ secrets.GITHUB_TOKEN }}@github.com/adalundhe/lundhe-audio
 
-          UUID=$(uuidgen)
+          BRANCH_NAME="${{ github.head_ref || github.ref_name }}"
+          if [[ "${{ github.ref }}" == "main" ]]; then
+              git checkout -b update-equipment-${{ github.event.number }} || git checkout update-equipment-${{ github.event.number }}
+              BRANCH_NAME="update-equipment-${{ github.event.number }}"
+          fi
 
           git config pull.rebase false
 
           git add -A &&
           git commit -m "EquiBot: Syncing equipment"
-          git push origin ${{ github.head_ref || github.ref_name }} 
+
+          git push origin $BRANCH_NAME
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
 
       - name: Auto Merge PR
         if: env.CHANGED == 'true'
         shell: bash
-        run: |
-          gh pr create --head ${{ github.head_ref || github.ref_name }} --base main --title "Update Equipment ${{ github.event.number }}" --body "Updating equipment in gear.json" || true
-          gh pr merge ${{ github.head_ref || github.ref_name }} --auto --merge --delete-branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
+          BRANCH_NAME: ${{ env.BRANCH_NAME }}
+        run: |
+          gh pr create --head ${{ env.BRANCH_NAME }} --base main --title "Update Equipment ${{ github.event.number }}" --body "Updating equipment in gear.json" || true
+          gh pr merge ${{ env.BRANCH_NAME }} --auto --merge --delete-branch
+          
+          
