@@ -5658,5 +5658,12 @@
         "quantity": 1,
         "created_timestamp": "Mon Jun 02 2025 21:41:48 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Tue Jun 03 2025 01:46:22 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "ThorpyFX Hanami",
+        "description": "Limited edition germanium fuzz pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
     }
 ]
