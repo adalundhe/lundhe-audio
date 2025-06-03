@@ -93,7 +93,7 @@ jobs:
           git remote set-url origin https://github:${{ secrets.GITHUB_TOKEN }}@github.com/adalundhe/lundhe-audio
 
           BRANCH_NAME="${{ github.head_ref || github.ref_name }}"
-          if [[ "${{ github.ref }}" == "main" ]]; then
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
               git checkout -b update-equipment-${{ github.event.number }} || git checkout update-equipment-${{ github.event.number }}
               BRANCH_NAME="update-equipment-${{ github.event.number }}"
           fi
