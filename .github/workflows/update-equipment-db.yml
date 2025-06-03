@@ -125,7 +125,7 @@ jobs:
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
             gh pr merge ${{ env.BRANCH_NAME }} --admin --merge --delete-branch
           else
-            gh pr merge ${{ env.BRANCH_NAME }} --admin --merge --delete-branch
+            gh pr merge ${{ env.BRANCH_NAME }} --auto --merge --delete-branch
           fi
           
           
