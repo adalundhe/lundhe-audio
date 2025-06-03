@@ -332,14 +332,22 @@ export const GearTable = ({
                                         resetFilters(table)
                                         const filter = (table.getColumn("type")?.getFilterValue() ?? "")
                                         const groupFilter = (table.getColumn("group")?.getFilterValue() ?? "")
-                                        
 
-                                        table.getColumn("group")?.setFilterValue(
-                                          groupFilter === group ? "" : group
-                                        )
-                                        table.getColumn("type")?.setFilterValue(
-                                          filter === type ? "" : type
-                                        )
+                                        if (groupFilter === group || filter === type) {
+                                          table.resetColumnFilters()
+                                        } else {
+                                          table.setColumnFilters([
+                                            {
+                                              id: "group",
+                                              value: group,
+                                            },
+                                            {
+                                              id: "type",
+                                              value: type,
+                                            }
+                                          ])
+                                        }
+          
                                       }
                                     }
                                   >
