@@ -5668,25 +5668,5 @@
         "quantity": 1,
         "created_timestamp": "Tue Jun 03 2025 02:29:08 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Tue Jun 03 2025 04:26:57 GMT+0000 (Coordinated Universal Time)"
-    },
-    {
-        "id": "96bd2310-bc71-4a46-81dd-53a3d0e23c00",
-        "name": "ThorpyFX Hanami",
-        "description": "Limited edition germanium fuzz pedal",
-        "type": "distortion pedal",
-        "group": "pedals",
-        "quantity": 1,
-        "created_timestamp": "Tue Jun 03 2025 02:34:19 GMT+0000 (Coordinated Universal Time)",
-        "updated_timestamp": "Tue Jun 03 2025 04:26:57 GMT+0000 (Coordinated Universal Time)"
-    },
-    {
-        "id": "ba215737-5781-45a3-ab74-9a6648f25b54",
-        "name": "ThorpyFX Hanami",
-        "description": "Limited edition germanium fuzz pedal",
-        "type": "distortion pedal",
-        "group": "pedals",
-        "quantity": 1,
-        "created_timestamp": "Tue Jun 03 2025 02:35:32 GMT+0000 (Coordinated Universal Time)",
-        "updated_timestamp": "Tue Jun 03 2025 04:26:57 GMT+0000 (Coordinated Universal Time)"
     }
 ]
