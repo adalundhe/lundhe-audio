@@ -103,7 +103,12 @@ jobs:
           git add -A &&
           git commit -m "EquiBot: Syncing equipment"
 
-          git push origin $BRANCH_NAME
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            git push origin --force $BRANCH_NAME
+          else
+            git push origin $BRANCH_NAME
+          fi
+          
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
 
       - name: Auto Merge PR
