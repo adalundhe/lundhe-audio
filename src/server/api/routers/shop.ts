@@ -3,32 +3,36 @@ import {
   createTRPCRouter,
   publicProcedure,
 } from "~/server/api/trpc";
-import { equipmentItem } from "~/server/db/schema"
-import { shopifyFetch } from "./shopify";
+import { type PageInfo, type Product, type ProductEdge } from "@shopify/hydrogen-react/storefront-api-types";
 
-export type EquipmentItem = {
-    id: string
-    name: string
-    description: string
-    type: string
-    group: string
-    quantity: number
-    created_timestamp: string
-    updated_timestamp: string | null
+
+
+export type Prodcuts = {
+    products: {
+        edges: ProductEdge[]
+        pageInfo: PageInfo
+    }
+}
+
+export type ProductPage = {
+    products: Product[]
+    variantCursors: string[]
+    pageInfo?: PageInfo
+    error?: string
 }
 
 
 export const shopRouter = createTRPCRouter({
     getProducts: publicProcedure
     .input(z.object({
-        productsCursor: z.string().optional(),
+        cursor: z.string().optional(),
         variantsCursor: z.string().optional(),
         limit: z.number().gte(1).default(10),
         variantsLimit: z.number().gte(1).default(10),
         sort: z.enum([ 'title', 'product_type', 'published_at', 'updated_at' ]).default("title")
     }))
     .query(async ({ ctx, input }) => {
-        return await ctx.shopify.request(
+        const response = await ctx.shopify.request<Prodcuts>(
             `query ProductQuery ($sortKey: ProductSortKeys!, $limit: Int!, $variants: Int!, $cursor: String, $variantsCursor: String) {
                     products (sortKey: $sortKey, first: $limit, after: $cursor) {
                     edges{
@@ -44,15 +48,21 @@ export const shopRouter = createTRPCRouter({
                                 alt
                                 mediaContentType
                                 status
+                                preview {
+                                    image {
+                                        url,
+                                        altText,
+                                    }
+                                }
                             }
                             variants(first: $variants, after: $variantsCursor) {
                                 edges {
                                     node {
-                                    id
-                                    title
-                                    displayName
-                                    position
-                                    price
+                                        id
+                                        title
+                                        displayName
+                                        position
+                                        price
                                     }
                                 }
                                 pageInfo {
@@ -77,12 +87,18 @@ export const shopRouter = createTRPCRouter({
                     limit: input.limit,
                     sortKey: input.sort.toLocaleUpperCase(),
                     variants: input.variantsLimit,
-                    cursor: input.productsCursor,
+                    cursor: input.cursor,
                     variantsCursor: input.variantsCursor,
                 }
             }
         )
         
 
+        return {
+            products: response.data?.products.edges.map(edge => edge.node) ?? [] as Prodcuts[],
+            variantCursors: response.data?.products.edges.map(edge => edge.cursor) ?? [] as string[],
+            pageInfo: response.data?.products.pageInfo,
+            error: response.errors?.message
+        } as ProductPage
     })
 })

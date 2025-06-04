@@ -7,6 +7,12 @@ export default {
     content: ["./src/**/*.tsx"],
   theme: {
   	extend: {
+		gridTemplateColumns: {
+			products: "repeat(auto-fill,minmax(275px,1fr))"
+		},
+		gridTemplateRows: {
+			products: "auto"
+		},
   		fontFamily: {
   			sans: [
   				'var(--font-geist-sans)',

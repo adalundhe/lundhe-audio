@@ -66,6 +66,12 @@ export const NavBar = () => (
                                       home
                                   </NavigationMenuLink>
                               </AccordionItem>
+                              <AccordionItem value="blog" className="py-2 px-2 h-[40px] w-full flex grow-1 items-center space-x-2">
+                                  {/* <IoMdContact/> */}
+                                  <NavigationMenuLink href="/shop" className="cursor-pointer hover:underline">
+                                      shop
+                                  </NavigationMenuLink>
+                              </AccordionItem>
                               <AccordionItem value="studio" className="px-2">
                                   <AccordionTrigger 
                                       className="p-0 cursor-default py-2 text-lg font-light"
