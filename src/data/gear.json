@@ -5698,5 +5698,47 @@
         "quantity": 1,
         "created_timestamp": "Tue Jun 03 2025 04:59:17 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Tue Jun 03 2025 05:06:16 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "ThorpyFX Deep Oggin",
+        "description": "All analog chorus and vibrato pedal",
+        "type": "chorus/vibrato pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Morningstar Engineering ML10X",
+        "description": "Stereo reorderable pedal and FX loop switcher",
+        "type": "utility pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Chase Bliss & ZVEX - The Bliss Factory",
+        "description": "Unique germanium fuzz and filter pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Cornerstone Aquarium Vibe",
+        "description": "Uni-vibe based analog chorus/vibrato pedal",
+        "type": "chorus/vibrato pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Chase Bliss Spectre - V2",
+        "description": "Aanalog flanger pedal",
+        "type": "flanger pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Chase Bliss Dirt Bird",
+        "description": "Distortion-focused variant of the Condor pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
     }
 ]
