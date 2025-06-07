@@ -5788,5 +5788,12 @@
         "quantity": 1,
         "created_timestamp": "Sat Jun 07 2025 14:51:19 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sat Jun 07 2025 14:51:19 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Collision Device Singularity",
+        "description": "The opamp fuzz of the Black Hole Symmetry in a pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
     }
 ]
