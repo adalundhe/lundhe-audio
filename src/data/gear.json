@@ -5778,5 +5778,12 @@
         "quantity": 1,
         "created_timestamp": "Sat Jun 07 2025 14:26:54 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sat Jun 07 2025 14:26:54 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "JHS Superbolt - V1",
+        "description": "Overdrive pedal based pff classic Supro amps",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
     }
 ]
