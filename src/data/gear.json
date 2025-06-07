@@ -5740,5 +5740,12 @@
         "type": "distortion pedal",
         "group": "pedals",
         "quantity": 1
+    },
+    {
+        "name": "Collision Devices Black Hole Symmetry",
+        "description": "Opamp fuzz pedal with digital delay and reverb",
+        "type": "multi-effect pedal",
+        "group": "pedals",
+        "quantity": 1
     }
 ]
