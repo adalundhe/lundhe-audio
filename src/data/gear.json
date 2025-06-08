@@ -5798,5 +5798,12 @@
         "quantity": 1,
         "created_timestamp": "Sat Jun 07 2025 15:54:29 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sat Jun 07 2025 15:55:42 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "JHS Sweet Tea - V3",
+        "description": "Medium/high gain overdrive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
     }
 ]
