@@ -5898,5 +5898,33 @@
         "quantity": 1,
         "created_timestamp": "Sun Jun 08 2025 13:40:56 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sun Jun 08 2025 13:40:56 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Strymon Big Sky MX",
+        "description": "IR and algoritmic reverb pedal",
+        "type": "reverb pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Strymon Flint - V2",
+        "description": "Tremolo and reverb pedal",
+        "type": "tremolo pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Strymon El Capistan",
+        "description": "Tape delay emulator pedal",
+        "type": "delay pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Source Audio Ventris",
+        "description": "Stereo dual-reverb pedal",
+        "type": "reverb pedal",
+        "group": "pedals",
+        "quantity": 1
     }
 ]
