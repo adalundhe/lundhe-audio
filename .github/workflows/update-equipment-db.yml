@@ -121,7 +121,7 @@ jobs:
           SHORT_SHA: ${{ env.SHORT_SHA }}
         run: |
 
-          gh pr create --head ${{ env.BRANCH_NAME }} --base main --title "Update Equipment ${{ env.SHORT_SHA}}" --body "Updating equipment in gear.json" || true
+          gh pr create --head ${{ env.BRANCH_NAME }} --base main --title "Update Equipment ${{ env.SHORT_SHA }}" --body "Updating equipment in gear.json" || true
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
             gh pr merge ${{ env.BRANCH_NAME }} --admin --merge --delete-branch
           else
