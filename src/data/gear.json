@@ -5938,5 +5938,41 @@
         "quantity": 1,
         "created_timestamp": "Sun Jun 08 2025 14:53:55 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sun Jun 08 2025 14:53:55 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Red Panda Tensor",
+        "description": "Pitch shift/looper pedal",
+        "type": "freq/pitch shifter pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Red Panda Particle - V2",
+        "description": "Granular delay and pitch shifter pedal",
+        "type": "delay pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Red Panda Radius",
+        "description": "Digital ring-mod pedal",
+        "type": "ring-modulation pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Red Panda Bitmap - V2",
+        "description": "Bit crusher and waveshaper pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Red Panda Raster",
+        "description": "Digital delay pedal",
+        "type": "delay pedal",
+        "group": "pedals",
+        "quantity": 1
     }
+        
 ]
