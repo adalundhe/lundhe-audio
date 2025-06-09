@@ -5988,5 +5988,40 @@
         "quantity": 1,
         "created_timestamp": "Sun Jun 08 2025 17:55:04 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sun Jun 08 2025 17:55:04 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Strymon Lex - V2",
+        "description": "Rotary/leslie emulator and effect pedal",
+        "type": "rotary simulator pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Strymon Sunset",
+        "description": "JFET and DSP dual overdrive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Strymon Riverside",
+        "description": "JFET and DSP tube overdrive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Strymon Compadre",
+        "description": "Dual circuit analog compression pedal",
+        "type": "compressor pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Strymon Iridium",
+        "description": "DSP cabinet and amp simulation pedal",
+        "type": "modeling pedal",
+        "group": "pedals",
+        "quantity": 1
     }
 ]
