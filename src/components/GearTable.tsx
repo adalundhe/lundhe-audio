@@ -269,7 +269,7 @@ export const GearTable = ({
               </div>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className={`${courierPrime.className} py-0 px-2 h-[300px] w-[250px]`}>
+          <DropdownMenuContent align="end" className={`${courierPrime.className} py-0 px-2 h-[300px] w-[240px]`}>
 
               <ScrollArea className="h-full w-full">
                 <Button
