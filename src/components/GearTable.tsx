@@ -269,7 +269,9 @@ export const GearTable = ({
               </div>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className={`${courierPrime.className} py-0 px-2`}>
+          <DropdownMenuContent align="end" className={`${courierPrime.className} py-0 px-2 h-[300px] w-[230px]`}>
+
+              <ScrollArea className="h-full w-full">
                 <Button
                   className="p-0 h-[2.5em] w-fit flex md:hover:underline hover:no-underline"
                   onClick={() => table.getColumn("added")?.setFilterValue(
@@ -287,7 +289,6 @@ export const GearTable = ({
                           {group}  
                         </AccordionTrigger>
                         <AccordionContent className="p-0">
-                          <ScrollArea className="h-fit w-full">
                             <Separator className="w-1/4 mb-2"/>
                             <DropdownMenuCheckboxItem
                                 side="right"
@@ -366,7 +367,6 @@ export const GearTable = ({
                                   </DropdownMenuCheckboxItem>
                                 )
                               })}
-                          </ScrollArea>
                         </AccordionContent>
                       </AccordionItem>
                     
@@ -374,6 +374,8 @@ export const GearTable = ({
                 }
 
                 </Accordion>
+
+              </ScrollArea>
           </DropdownMenuContent>
         </DropdownMenu>
         <DropdownMenu>
