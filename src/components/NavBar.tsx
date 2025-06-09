@@ -19,7 +19,6 @@ import {
 import { Separator } from "~/components/ui/separator";
 // import { GiGearHammer } from "react-icons/gi";
 // import { PiInfoFill } from "react-icons/pi";
-import Link from "next/link";
 // import { IoMdContact } from "react-icons/io";
 // import { MdPolicy } from "react-icons/md";
 // import { LiaFileContractSolid } from "react-icons/lia";
