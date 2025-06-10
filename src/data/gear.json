@@ -6038,5 +6038,33 @@
         "quantity": 1,
         "created_timestamp": "Mon Jun 09 2025 01:37:59 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Mon Jun 09 2025 01:37:59 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "JHS Big Cheese",
+        "description": "Clone of the Lovetone Big Cheese pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Strymon Ola",
+        "description": "DSP bucket brigade chorus/vibrato pedal",
+        "type": "chorus/vibrato pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Strymon Orbit",
+        "description": "DSP bucket brigade flanger pedal",
+        "type": "flanger pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Strymon OB.1",
+        "description": "Clean boost and optical compressor pedal",
+        "type": "compressor pedal",
+        "group": "pedals",
+        "quantity": 1
     }
 ]
