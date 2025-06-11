@@ -2732,8 +2732,8 @@
     {
         "id": "b2c97445-a042-453a-86e6-304d3b0005e9",
         "name": "Elektron Syntakt",
-        "description": "Eight voice desktop FM synthesizer",
-        "type": "digital polysynth",
+        "description": "Twelve track analog/digital groovebox",
+        "type": "hybrid drum machine",
         "group": "keyboards/samplers",
         "quantity": 1,
         "created_timestamp": "Fri March 30 2025 23:03:38 GMT+0000 (Coordinated Universal Time)",
