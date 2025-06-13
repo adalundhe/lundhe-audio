@@ -6098,5 +6098,33 @@
         "quantity": 1,
         "created_timestamp": "Wed Jun 11 2025 05:26:07 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Wed Jun 11 2025 05:26:07 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "EchoFix EF-P2",
+        "description": "True spring reverb pedal",
+        "type": "reverb pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "EchoFix EF-P3",
+        "description": "Analog BBD chorus/vibrato pedal",
+        "type": "chorus/vibrato pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Kinotone Ribbons",
+        "description": "Lo-fi multi-effect pedal",
+        "type": "multi-effect pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Collaboration Devices The Compressor",
+        "description": "SSL G-Bus based compressor pedal",
+        "type": "compressor pedal",
+        "group": "pedals",
+        "quantity": 1
     }
 ]
