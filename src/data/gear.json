@@ -6138,5 +6138,12 @@
         "quantity": 1,
         "created_timestamp": "Fri Jun 13 2025 22:08:37 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Fri Jun 13 2025 22:08:37 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "RhPf Electronics Twin Peaks Eiger-Monch",
+        "description": "Unique dual-circuit delay pedal",
+        "type": "delay pedal",
+        "group": "pedals",
+        "quantity": 1
     }
 ]
