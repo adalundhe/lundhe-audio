@@ -6148,5 +6148,33 @@
         "quantity": 1,
         "created_timestamp": "Sat Jun 14 2025 00:23:30 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sat Jun 14 2025 00:23:30 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Yesterday Effects Unit Shifter",
+        "description": "ElectroHarmonix Polychorus copy pedal",
+        "type": "chorus/vibrato pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "cornerstone Antique - V3",
+        "description": "Overdrive pedal based on the tube screamer",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Cornerstone Nero Fuzz",
+        "description": "Dual-channel overdrive and fuzz pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "KMA Tyler Deluxe",
+        "description": "Parallel frequency splitter pedal",
+        "type": "utility pedal",
+        "group": "pedals",
+        "quantity": 1
     }
 ]
