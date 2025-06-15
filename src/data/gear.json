@@ -6198,5 +6198,33 @@
         "quantity": 1,
         "created_timestamp": "Sat Jun 14 2025 14:20:35 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sat Jun 14 2025 14:20:35 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Universal Audio Golden",
+        "description": "UAD DSP based reverb pedal",
+        "type": "reverb pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Universal Audio Starlight",
+        "description": "UAD DSP based delay pedal",
+        "type": "delay pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Universal Audio Astra",
+        "description": "UAD DSP based modulation pedal",
+        "type": "multi-effect pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Universal Audio MAX",
+        "description": "UAD DSP compressor pedal",
+        "type": "compressor pedal",
+        "group": "pedals",
+        "quantity": 1
     }
 ]
