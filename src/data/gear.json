@@ -6238,5 +6238,19 @@
         "quantity": 1,
         "created_timestamp": "Sun Jun 15 2025 03:16:23 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sun Jun 15 2025 03:16:23 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Hologram Effects Chroma Console",
+        "description": "Lo-fi multi-effect pedal",
+        "type": "multi-effect pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "ThorpyFX Tacit Blue",
+        "description": "Fuzz pedal based on the Fuzz Face",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
     }
 ]
