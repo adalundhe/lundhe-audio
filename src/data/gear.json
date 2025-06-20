@@ -6258,5 +6258,61 @@
         "quantity": 1,
         "created_timestamp": "Mon Jun 16 2025 00:20:12 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Mon Jun 16 2025 00:20:12 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Cosmodio Instruments Pet Yeti",
+        "description": "Analog distortion/fuzz pedal with three voicings",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Browne Amplification Protein - V4",
+        "description": "Modern classic dual boost/overdrive pedal",
+        "type": "preamp/boost pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Asheville Music Tools ACV-1",
+        "description": "Analog BBD chorus/vibrato pedal",
+        "type": "chorus/vibrato pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Yesterday Effects Private Military Auditor",
+        "description": "Limited edition fuzz pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Non-Human Audio Robins",
+        "description": "Classic 90s-voiced fuzz/overdrive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Land Devices Moonbow",
+        "description": "HPF/LPF and overdrive pedal",
+        "type": "filter pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Land Devices Hunter",
+        "description": "Stereo op-amp distortion pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Vemuram Spiritone",
+        "description": "Klon Centaur based buffer/boost pedal",
+        "type": "preamp/boost pedal",
+        "group": "pedals",
+        "quantity": 1
     }
 ]
