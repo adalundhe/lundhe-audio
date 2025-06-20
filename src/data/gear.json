@@ -6310,7 +6310,7 @@
     },
     {
         "name": "Vemuram Spiritone",
-        "description": "Klon Centaur based buffer/boost pedal",
+        "description": "Klon Centaur/Roland CE=1 based pedal",
         "type": "preamp/boost pedal",
         "group": "pedals",
         "quantity": 1
