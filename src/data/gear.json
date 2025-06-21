@@ -6368,5 +6368,26 @@
         "quantity": 1,
         "created_timestamp": "Sat Jun 21 2025 03:00:02 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sat Jun 21 2025 03:00:02 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Benson x Non-Human Florist",
+        "description": "Lo-fi chorusing reverb pedal",
+        "type": "reverb pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Benson Amps Deep Sea Diver",
+        "description": "Fuzz/delay pedal",
+        "type": "delay pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Beetronics Zzombee",
+        "description": "Tremolo and filter pedal",
+        "type": "filter pedal",
+        "group": "pedals",
+        "quantity": 1
     }
 ]
