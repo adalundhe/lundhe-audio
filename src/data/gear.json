@@ -6338,5 +6338,26 @@
         "quantity": 1,
         "created_timestamp": "Fri Jun 20 2025 22:12:59 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Fri Jun 20 2025 22:14:19 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Asheville Music Tools ADG-1",
+        "description": "Analog BBD delay pedal",
+        "type": "delay pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Asheville Music Tools APH-12",
+        "description": "Analog twelve-stage phaser pedal",
+        "type": "phaser pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Asheville Music Tools AFG-1",
+        "description": "Analog dynamic flanger pedal",
+        "type": "flanger pedal",
+        "group": "pedals",
+        "quantity": 1
     }
 ]
