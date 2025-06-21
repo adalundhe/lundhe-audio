@@ -6398,5 +6398,33 @@
         "quantity": 1,
         "created_timestamp": "Sat Jun 21 2025 21:20:30 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sat Jun 21 2025 21:20:30 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Vemuram Shanks - MKII",
+        "description": "Clasically voiced overdrive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Wren and Cuff Fade Font '94",
+        "description": "Fuzz pedal based on the 90's Russian Big Muff",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Blackhawk Amplifiers Mirkwood - MKII",
+        "description": "Limited edition analog BBD delay pedal",
+        "type": "delay pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Blackhawk Amplification Heimdall-3 - MKII",
+        "description": "HM2 based distortion pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
     }
 ]
