@@ -6438,5 +6438,19 @@
         "quantity": 1,
         "created_timestamp": "Sat Jun 21 2025 22:31:07 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sat Jun 21 2025 22:31:07 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Blackhawk Amplification PI",
+        "description": "Big Muff-style fuzz pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Blackhawk Amplification Black Gate",
+        "description": "Loop gate pedal",
+        "type": "utility pedal",
+        "group": "pedals",
+        "quantity": 1
     }
 ]
