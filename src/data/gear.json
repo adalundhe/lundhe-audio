@@ -6449,7 +6449,7 @@
     {
         "name": "Blackhawk Amplification Black Gate",
         "description": "Loop gate pedal",
-        "type": "utility pedal",
+        "type": "gate pedal",
         "group": "pedals",
         "quantity": 1
     }
