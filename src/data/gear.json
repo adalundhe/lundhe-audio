@@ -6458,5 +6458,19 @@
         "quantity": 1,
         "created_timestamp": "Sun Jun 22 2025 05:59:22 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sun Jun 22 2025 06:01:15 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Tefi Vintage Labs Malinconia",
+        "description": "All analog lo-fi pedal",
+        "type": "multi-effect pedal",
+        "group": "pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Walrus Audio Meraki",
+        "description": "Stereo BBD analog delay pedal",
+        "type": "delay pedal",
+        "group": "pedals",
+        "quantity": 1
     }
 ]
