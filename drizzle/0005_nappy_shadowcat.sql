@@ -1,0 +1,1 @@
+ALTER TABLE `EquipmentItem` ADD `manufacturer` text(255) NOT NULL;
