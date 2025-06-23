@@ -269,6 +269,23 @@ export const GearTable = ({
 
   const [activeTab, setActiveTab] = React.useState<'type' | 'brand'> ('type')
 
+  const manufacturerGroups = React.useMemo(() => {
+    return manufacturers.reduce((manufacturersMap, manufacturer) => {
+      const groupKey = manufacturer.at(0)?.toLocaleUpperCase()
+
+      if (groupKey && manufacturersMap.hasOwnProperty(groupKey)){
+        manufacturersMap[groupKey]?.push(manufacturer)
+      } else if (groupKey) {
+        manufacturersMap[groupKey] = [manufacturer]
+      }
+      return manufacturersMap
+      
+    }, {} as Record<string, string[]>)
+
+  }, [manufacturers])
+
+  console.log(manufacturerGroups)
+
   return (
     <div className="w-full h-[600px]">
       <div className="flex items-center py-4 gap-x-8">
@@ -412,41 +429,73 @@ export const GearTable = ({
                   </TabsContent>
                   <TabsContent value="brand" className="h-[300px] w-full mt-0">
                     <ScrollArea className="h-full w-full px-4">
+                        <DropdownMenuCheckboxItem
+                          side="right"
+                          className={
+                            `h-[2.5em] capitalize outline-none border-none w-full pl-0 hover:bg-white dark:hover:bg-black hover:underline ${(table.getColumn("manufacturer")?.getFilterValue() ?? "") === "" ? 'text-cyan-500 dark:hover:text-cyan-500 hover:text-cyan-500' : ''}`
+                        }                             
+                          checked={
+                            (table.getColumn("manufacturer")?.getFilterValue() ?? "") === ""
+                          }
+                          onCheckedChange={() => resetFilters(table)}
+                          
+                      >
+                        <Button className="p-0">
+                          All
+                        </Button>
+                      </DropdownMenuCheckboxItem>
+                    
+                      <Separator/>
+                      <Accordion type="single" collapsible className="flex flex-col w-full">
                       {
-                        manufacturers.map((manufacturer, idx) => 
-                          <DropdownMenuCheckboxItem
-                            side="right"
-                            key={`${manufacturer}-${idx}`}
-                            className={
-                              `capitalize outline-none border-none h-[2.5em] w-full pl-0 hover:bg-white dark:hover:bg-black hover:underline ${(table.getColumn("manufacturer")?.getFilterValue() ?? "") === manufacturer ? "text-cyan-500 hover:text-cyan-500 dark:hover:text-cyan-500" : ''}`
-                            }
-                            checked={
-                              (table.getColumn("manufacturer")?.getFilterValue() ?? "") === manufacturer
-                            }
-                            onCheckedChange={() => {
-                                resetFilters(table)
-                                const selectedManufacturer = (table.getColumn("manufacturer")?.getFilterValue() ?? "")
+                      Object.keys(manufacturerGroups).sort().map(group => 
+                          <AccordionItem value={group} key={`equipment-group-${group}`}>
+                            <AccordionTrigger className="h-[2.5em] w-fit flex md:hover:underline hover:no-underline" chevronSide="left">
+                              {group}  
+                            </AccordionTrigger>
+                            <AccordionContent className="p-0">
+                                <Separator className="w-1/4 mb-2"/>
+                                {manufacturerGroups[group]?.sort()
+                                  .map((manufacturer, idx) => {
+                                    return (
+                                      <DropdownMenuCheckboxItem
+                                        side="right"
+                                        key={`${manufacturer}-${idx}`}
+                                        className={
+                                          `capitalize outline-none border-none w-full pl-0 hover:bg-white dark:hover:bg-black hover:underline ${(table.getColumn("manufacturer")?.getFilterValue() ?? "") === manufacturer ? 'text-cyan-500 dark:hover:text-cyan-500 hover:text-cyan-500' : ''}`
+                                      }                             
+                                        checked={
+                                          (table.getColumn("manufacturer")?.getFilterValue() ?? "") === manufacturer
+                                        }
+                                        onCheckedChange={() => {
+                                            resetFilters(table)
+                                            const selectedManufacturer = (table.getColumn("manufacturer")?.getFilterValue() ?? "")
 
-                                if (manufacturer === selectedManufacturer) {
-                                  table.resetColumnFilters()
-                                } else {
-                                  table.setColumnFilters([
-                                    {
-                                      id: "manufacturer",
-                                      value: manufacturer,
-                                    }
-                                  ])
-                                }
-  
-                              }
-                            }
-                          >
-                            <Button className="h-[1.5em] p-0">
-                              {manufacturer}
-                            </Button>
-                          </DropdownMenuCheckboxItem>
+                                            if (manufacturer === selectedManufacturer) {
+                                              table.resetColumnFilters()
+                                            } else {
+                                              table.setColumnFilters([
+                                                {
+                                                  id: "manufacturer",
+                                                  value: manufacturer,
+                                                }
+                                              ])
+                                            }
+              
+                                          }
+                                        }
+                                      >
+                                        <Button className="p-0 h-[1.5em]">
+                                        {manufacturer}
+                                        </Button>
+                                      </DropdownMenuCheckboxItem>
+                                    )
+                                  })}
+                            </AccordionContent>
+                          </AccordionItem>
                         )
                       }
+                      </Accordion>
                     </ScrollArea>
                   </TabsContent>
                 </Tabs>
