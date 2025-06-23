@@ -35,6 +35,12 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table"
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "~/components/ui/tabs"
 import { Courier_Prime } from 'next/font/google';
 import { type EquipmentItem } from "~/server/api/routers/equipment";
 import { ColumnResizer } from './ColumnResizer'
@@ -175,6 +181,11 @@ export const columns: ColumnDef<EquipmentItem>[] = [
     },
     cell: ({ row }) => <div className="lowercase">{row.getValue("quantity")}</div>,
   },
+  {
+    accessorKey: "manufacturer",
+    enableHiding: true,
+    filterFn: "equalsString",
+  }
 ]
 
 export const GearTable = ({
@@ -192,12 +203,12 @@ export const GearTable = ({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   )
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({
       id: false,
       added: false,
       updated: false,
       group: false,
+      manufacturer: false,
     })
   const [rowSelection, setRowSelection] = React.useState({})
 
@@ -245,7 +256,18 @@ export const GearTable = ({
     "updated",
     "id",
     "group",
+    "manufacturer",
   ])
+
+  const manufacturers = React.useMemo(() =>  [
+      ...new Map(
+          data.map(item => [item.manufacturer, item])
+      ).keys()
+  ].sort((manufacturerA, manufacturerB) => manufacturerA.toLocaleUpperCase().localeCompare(
+    manufacturerB.toLocaleUpperCase()
+  )), [data])
+
+  const [activeTab, setActiveTab] = React.useState<'type' | 'brand'> ('type')
 
   return (
     <div className="w-full h-[600px]">
@@ -269,115 +291,167 @@ export const GearTable = ({
               </div>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className={`${courierPrime.className} py-0 px-2 h-[300px] w-[232px]`}>
-
-              <ScrollArea className="h-full w-full">
-                <Button
-                  className="p-0 h-[2.5em] w-fit flex md:hover:underline hover:no-underline"
-                  onClick={() => table.getColumn("added")?.setFilterValue(
-                     table.getColumn("added")?.getFilterValue() === undefined ? new Date() : undefined
-                  )}
-                >
-                  <b>New!</b>
-                </Button>
-                <Separator/>
-                <Accordion type="single" collapsible className="flex flex-col w-full">
-                {
-                  Object.keys(dataByGroup).map(group => 
-                      <AccordionItem value={group} key={`equipment-group-${group}`}>
-                        <AccordionTrigger className="h-[2.5em] w-fit flex md:hover:underline hover:no-underline" chevronSide="left">
-                          {group}  
-                        </AccordionTrigger>
-                        <AccordionContent className="p-0">
-                            <Separator className="w-1/4 mb-2"/>
-                            <DropdownMenuCheckboxItem
-                                side="right"
-                                key={group}
-                                className="capitalize outline-none border-none w-full pl-0 hover:bg-white dark:hover:bg-black hover:underline"
-                                checked={
-                                  (table.getColumn("group")?.getFilterValue() ?? "") === group
-                                  && (table.getColumn("type")?.getFilterValue() ?? "") === ""
-                                }
-                                onCheckedChange={() => {
-                                      resetFilters(table)
-                                        const filter = (table.getColumn("type")?.getFilterValue() ?? "")
-                                        const groupFilter = (table.getColumn("group")?.getFilterValue() ?? "")
-
-                                        if (groupFilter === group && filter === "") {
-                                          table.resetColumnFilters()
-                                        } else {
-                                          table.setColumnFilters([
-                                            {
-                                              id: "group",
-                                              value: group,
-                                            },
-                                            {
-                                              id: "type",
-                                              value: "",
-                                            }
-                                          ])
-                                    }
-                                  }
-                                }
-                                
-                            >
-                              All {group}
-                            </DropdownMenuCheckboxItem>
-                            {dataByGroup[group]?.map(item => item.type)
-                              .reduce(function (types, type) {
-                                  if (!types.includes(type)) {
-                                      types.push(type);
-                                  }
-                                  
-                                  return types;
-                              }, [] as string[])
-                              .map((type) => {
-                                return (
-                                  <DropdownMenuCheckboxItem
+          <DropdownMenuContent align="end" className={`${courierPrime.className} py-0 px-0 h-[330px] w-[232px]`}>
+          <Tabs 
+            className="w-full"
+            value={activeTab}
+            onValueChange={(value) => setActiveTab(value as 'type' | 'brand')}
+          >
+            <TabsList className="w-full rounded-none w-[232px] p-0 h-full">
+              <TabsTrigger value="type" className="rounded-none w-[116px]">Type</TabsTrigger>
+              <TabsTrigger value="brand" className="rounded-none w-[116px]">Brand</TabsTrigger>
+            </TabsList>
+            <Separator className="w-full"/>
+            <TabsContent value="type" className="mt-0 w-full h-[300px]">
+                <ScrollArea className="h-full w-full px-2">
+                  <Button
+                    className="p-0 h-[2.5em] w-fit flex md:hover:underline hover:no-underline"
+                    onClick={() => table.getColumn("added")?.setFilterValue(
+                      table.getColumn("added")?.getFilterValue() === undefined ? new Date() : undefined
+                    )}
+                  >
+                    <b>New!</b>
+                  </Button>
+                  <Separator/>
+                    <Accordion type="single" collapsible className="flex flex-col w-full">
+                    {
+                      Object.keys(dataByGroup).map(group => 
+                          <AccordionItem value={group} key={`equipment-group-${group}`}>
+                            <AccordionTrigger className="h-[2.5em] w-fit flex md:hover:underline hover:no-underline" chevronSide="left">
+                              {group}  
+                            </AccordionTrigger>
+                            <AccordionContent className="p-0">
+                                <Separator className="w-1/4 mb-2"/>
+                                <DropdownMenuCheckboxItem
                                     side="right"
-                                    key={type}
+                                    key={group}
                                     className="capitalize outline-none border-none w-full pl-0 hover:bg-white dark:hover:bg-black hover:underline"
                                     checked={
-                                      (table.getColumn("type")?.getFilterValue() ?? "") === type
+                                      (table.getColumn("group")?.getFilterValue() ?? "") === group
+                                      && (table.getColumn("type")?.getFilterValue() ?? "") === ""
                                     }
                                     onCheckedChange={() => {
-                                        resetFilters(table)
-                                        const filter = (table.getColumn("type")?.getFilterValue() ?? "")
-                                        const groupFilter = (table.getColumn("group")?.getFilterValue() ?? "")
+                                          resetFilters(table)
+                                            const filter = (table.getColumn("type")?.getFilterValue() ?? "")
+                                            const groupFilter = (table.getColumn("group")?.getFilterValue() ?? "")
 
-                                        if (groupFilter === group && filter === type) {
-                                          table.resetColumnFilters()
-                                        } else {
-                                          table.setColumnFilters([
-                                            {
-                                              id: "group",
-                                              value: group,
-                                            },
-                                            {
-                                              id: "type",
-                                              value: type,
-                                            }
-                                          ])
+                                            if (groupFilter === group && filter === "") {
+                                              table.resetColumnFilters()
+                                            } else {
+                                              table.setColumnFilters([
+                                                {
+                                                  id: "group",
+                                                  value: group,
+                                                },
+                                                {
+                                                  id: "type",
+                                                  value: "",
+                                                }
+                                              ])
                                         }
-          
                                       }
                                     }
-                                  >
-                                    {type}
-                                  </DropdownMenuCheckboxItem>
-                                )
-                              })}
-                        </AccordionContent>
-                      </AccordionItem>
-                    
-                  )
-                }
+                                    
+                                >
+                                  <Button className="p-0 h-[1.5em]">
+                                    all {group}
+                                  </Button>
+                                </DropdownMenuCheckboxItem>
+                                {dataByGroup[group]?.map(item => item.type)
+                                  .reduce(function (types, type) {
+                                      if (!types.includes(type)) {
+                                          types.push(type);
+                                      }
+                                      
+                                      return types;
+                                  }, [] as string[])
+                                  .map((type) => {
+                                    return (
+                                      <DropdownMenuCheckboxItem
+                                        side="right"
+                                        key={type}
+                                        className="capitalize outline-none border-none w-full pl-0 hover:bg-white dark:hover:bg-black hover:underline"
+                                        checked={
+                                          (table.getColumn("type")?.getFilterValue() ?? "") === type
+                                        }
+                                        onCheckedChange={() => {
+                                            resetFilters(table)
+                                            const filter = (table.getColumn("type")?.getFilterValue() ?? "")
+                                            const groupFilter = (table.getColumn("group")?.getFilterValue() ?? "")
 
-                </Accordion>
+                                            if (groupFilter === group && filter === type) {
+                                              table.resetColumnFilters()
+                                            } else {
+                                              table.setColumnFilters([
+                                                {
+                                                  id: "group",
+                                                  value: group,
+                                                },
+                                                {
+                                                  id: "type",
+                                                  value: type,
+                                                }
+                                              ])
+                                            }
+              
+                                          }
+                                        }
+                                      >
+                                        <Button className="p-0 h-[1.5em]">
+                                        {type}
+                                        </Button>
+                                      </DropdownMenuCheckboxItem>
+                                    )
+                                  })}
+                            </AccordionContent>
+                          </AccordionItem>
+                        )
+                      }
+                      </Accordion>
+                    </ScrollArea>
+                  </TabsContent>
+                  <TabsContent value="brand" className="h-[300px] w-full mt-0">
+                    <ScrollArea className="h-full w-full px-2">
+                      {
+                        manufacturers.map((manufacturer, idx) => 
+                          <DropdownMenuCheckboxItem
+                            side="right"
+                            key={`${manufacturer}-${idx}`}
+                            className={
+                              `capitalize outline-none border-none h-[2.5em] w-full pl-0 hover:bg-white dark:hover:bg-black hover:underline ${(table.getColumn("manufacturer")?.getFilterValue() ?? "") === manufacturer ? "text-cyan-500 hover:text-cyan-500 dark:hover:text-cyan-500" : ''}`
+                            }
+                            checked={
+                              (table.getColumn("manufacturer")?.getFilterValue() ?? "") === manufacturer
+                            }
+                            onCheckedChange={() => {
+                                resetFilters(table)
+                                const selectedManufacturer = (table.getColumn("manufacturer")?.getFilterValue() ?? "")
 
-              </ScrollArea>
-          </DropdownMenuContent>
-        </DropdownMenu>
+                                if (manufacturer === selectedManufacturer) {
+                                  table.resetColumnFilters()
+                                } else {
+                                  table.setColumnFilters([
+                                    {
+                                      id: "manufacturer",
+                                      value: manufacturer,
+                                    }
+                                  ])
+                                }
+  
+                              }
+                            }
+                          >
+                            <Button className="h-[1.5em] p-0">
+                              {manufacturer}
+                            </Button>
+                          </DropdownMenuCheckboxItem>
+                        )
+                      }
+                    </ScrollArea>
+                  </TabsContent>
+                </Tabs>
+              </DropdownMenuContent>
+            </DropdownMenu>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button className="w-fit flex p-0 border-none outline-none">
