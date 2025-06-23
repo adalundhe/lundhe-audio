@@ -291,19 +291,19 @@ export const GearTable = ({
               </div>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className={`${courierPrime.className} py-0 px-0 h-[330px] w-[232px]`}>
+          <DropdownMenuContent align="end" className={`${courierPrime.className} py-0 px-0 h-[330px] w-[272px]`}>
           <Tabs 
             className="w-full"
             value={activeTab}
             onValueChange={(value) => setActiveTab(value as 'type' | 'brand')}
           >
-            <TabsList className="w-full rounded-none w-[232px] p-0 h-full">
-              <TabsTrigger value="type" className="rounded-none w-[116px]">Type</TabsTrigger>
-              <TabsTrigger value="brand" className="rounded-none w-[116px]">Brand</TabsTrigger>
+            <TabsList className="w-full rounded-none w-[264px] p-0 h-full">
+              <TabsTrigger value="type" className="rounded-none w-1/2">Type</TabsTrigger>
+              <TabsTrigger value="brand" className="rounded-none w-1/2">Brand</TabsTrigger>
             </TabsList>
             <Separator className="w-full"/>
             <TabsContent value="type" className="mt-0 w-full h-[300px]">
-                <ScrollArea className="h-full w-full px-2">
+                <ScrollArea className="h-full w-full px-4">
                   <Button
                     className="p-0 h-[2.5em] w-fit flex md:hover:underline hover:no-underline"
                     onClick={() => table.getColumn("added")?.setFilterValue(
@@ -411,7 +411,7 @@ export const GearTable = ({
                     </ScrollArea>
                   </TabsContent>
                   <TabsContent value="brand" className="h-[300px] w-full mt-0">
-                    <ScrollArea className="h-full w-full px-2">
+                    <ScrollArea className="h-full w-full px-4">
                       {
                         manufacturers.map((manufacturer, idx) => 
                           <DropdownMenuCheckboxItem
