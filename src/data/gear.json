@@ -7137,5 +7137,61 @@
         "manufacturer": "T-Rex Effects",
         "created_timestamp": "Sun Jun 22 2025 20:43:52 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sun Jun 22 2025 20:43:52 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Origin Effects DELUXE61",
+        "description": "Drive/tremolo pedal based on Fender Brown Deluxe",
+        "type": "tremolo pedal",
+        "group": "pedals",
+        "manufacturer": "Origin Effects",
+        "quantity": 1
+    },
+    {
+        "name": "Origin Effects MAGMA57",
+        "description": "Drive/vibrato pedal based on Magnatone 200 amp",
+        "type": "chorus/vibrato pedal",
+        "group": "pedals",
+        "manufacturer": "Origin Effects",
+        "quantity": 1
+    },
+    {
+        "name": "Origin Effects BassRIG Super Vintage",
+        "description": "Bass preamp pedal based on Ampeg SVT",
+        "type": "preamp/boost pedal",
+        "group": "pedals",
+        "manufacturer": "Origin Effects",
+        "quantity": 1
+    },
+    {
+        "name": "Vemuram DJ1 Bass Overdrive",
+        "description": "Bass preamp and overdrive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Vemuram",
+        "quantity": 1
+    },
+    {
+        "name": "Non-Human Audio Slow Loris",
+        "description": "Lo-fi modulated slapback delay pedal",
+        "type": "delay pedal",
+        "group": "pedals",
+        "manufacturer": "Non-Human Audio",
+        "quantity": 1
+    },
+    {
+        "name": "Silktone Fuzz+",
+        "description": "Gemanium fuzz pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Silktone",
+        "quantity": 1
+    },
+    {
+        "name": "Silktone Overdrive+",
+        "description": "Transistor overdrive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Silktone",
+        "quantity": 1
     }
 ]
