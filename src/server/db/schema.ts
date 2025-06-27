@@ -40,11 +40,12 @@ export const equipmentItem = createTable(
       .notNull()
       .primaryKey()
       .$defaultFn(() => crypto.randomUUID()),
-    name: text("name", { length: 255 }).notNull(),
+    name: text("name", { length: 255 }).unique().notNull(),
     description: text("description", { length: 255 }).notNull(),
     type: text("type", { length: 255 }).notNull(),
     group: text("group", { length: 255 }).notNull(),
     quantity: integer('quantity').notNull(),
+    manufacturer: text("manufacturer", { length: 255 }).notNull(),
     created_timestamp: text('created_timestamp').notNull().$defaultFn(() => new Date().toString()),
     updated_timestamp: text('updated_timestamp')
   }

@@ -26,18 +26,42 @@ jobs:
   update_db:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    if: github.ref != 'refs/heads/main'
+    # if: github.ref != 'refs/heads/main'
     steps:
       - name: Checkout
         id: checkout
         uses: actions/checkout@v4
+      
+      - name: Check file differences
+        run: |
+
+          git remote set-url origin https://github:${{ secrets.GITHUB_TOKEN }}@github.com/adalundhe/lundhe-audio
+          git fetch
+
+          MAIN_REV=$(git rev-parse origin/main)
+          CURRENT_REV=$(git rev-parse ${{ github.head_ref || github.ref_name }})
+
+          DIFF_OUTPUT=$(git diff $MAIN_REV $CURRENT_REV -- src/data/gear.json)
+
+          if [[ "$DIFF_OUTPUT" != "" ]]; then
+            echo "Gear updates detected..."
+            echo "CHANGED=true" >>${GITHUB_ENV}
+          elif [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "Push to main detected..."
+            echo "CHANGED=true" >>${GITHUB_ENV}
+          else
+            echo "No gear updates detected..."
+            echo "CHANGED=false" >>${GITHUB_ENV}
+          fi
 
       - uses: pnpm/action-setup@v4
+        if: env.CHANGED == 'true'
         name: Install pnpm
         with:
           run_install: false
 
       - uses: actions/setup-node@v4
+        if: env.CHANGED == 'true'
         with:
           # Version Spec of the version to use in SemVer notation.
           # It also admits such aliases as lts/*, latest, nightly and canary builds
@@ -46,9 +70,11 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
+        if: env.CHANGED == 'true'
         run: pnpm install 
       
       - name: Update Equipment Records
+        if: env.CHANGED == 'true'
         env:
           TURSO_SQLITE_DB_DATABASE_URL: ${{ secrets.TURSO_SQLITE_DB_DATABASE_URL }}
           TURSO_SQLITE_DB_TOKEN: ${{ secrets.TURSO_SQLITE_DB_TOKEN }}
@@ -58,6 +84,7 @@ jobs:
           pnpm db:dump:equipment
 
       - name: Create Branch and Commit
+        if: env.CHANGED == 'true'
         shell: bash
         env:
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
@@ -67,19 +94,39 @@ jobs:
 
           git remote set-url origin https://github:${{ secrets.GITHUB_TOKEN }}@github.com/adalundhe/lundhe-audio
 
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          echo "SHORT_SHA=$SHORT_SHA" >> $GITHUB_ENV
 
-          UUID=$(uuidgen)
+          BRANCH_NAME="${{ github.head_ref || github.ref_name }}"
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+              git checkout -b update-equipment-$SHORT_SHA || git checkout update-equipment-$SHORT_SHA
+              BRANCH_NAME="update-equipment-$SHORT_SHA"
+          fi
 
           git config pull.rebase false
 
           git add -A &&
           git commit -m "EquiBot: Syncing equipment"
-          git push origin ${{ github.head_ref || github.ref_name }} 
+
+          git push origin $BRANCH_NAME
+          
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
 
       - name: Auto Merge PR
+        if: env.CHANGED == 'true'
         shell: bash
-        run: |
-          gh pr merge ${{ github.head_ref || github.ref_name }} --auto --merge --delete-branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
+          BRANCH_NAME: ${{ env.BRANCH_NAME }}
+          SHORT_SHA: ${{ env.SHORT_SHA }}
+        run: |
+
+          gh pr create --head ${{ env.BRANCH_NAME }} --base main --title "Update Equipment ${{ env.SHORT_SHA }}" --body "Updating equipment in gear.json" || true
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            gh pr merge ${{ env.BRANCH_NAME }} --admin --merge --delete-branch
+          else
+            gh pr merge ${{ env.BRANCH_NAME }} --auto --merge --delete-branch
+          fi
+          
+          
+          

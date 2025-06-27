@@ -19,7 +19,6 @@ import {
 import { Separator } from "~/components/ui/separator";
 // import { GiGearHammer } from "react-icons/gi";
 // import { PiInfoFill } from "react-icons/pi";
-import Link from "next/link";
 // import { IoMdContact } from "react-icons/io";
 // import { MdPolicy } from "react-icons/md";
 // import { LiaFileContractSolid } from "react-icons/lia";
@@ -84,12 +83,10 @@ export const NavBar = () => (
                                       <Separator/>     
                                       <ul className="list-none pl-4">
                                           <li className="w-full py-2 flex items-center space-x-2 grow-1"> 
-                                              {/* <PiInfoFill /> */}
-                                              <Link href="/about" className="cursor-pointer hover:underline" passHref>                     
-                                                  <NavigationMenuLink className={navigationMenuLinkStyle()} >
-                                                      about
-                                                  </NavigationMenuLink>
-                                              </Link>
+                                              {/* <PiInfoFill /> */}                   
+                                            <NavigationMenuLink href='/about' className={navigationMenuLinkStyle()} >
+                                                about
+                                            </NavigationMenuLink>
                                           </li>
                                           <Separator/>
                                           <li className="w-full py-2 flex items-center space-x-2 grow-1">

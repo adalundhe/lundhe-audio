@@ -23,6 +23,11 @@ export const resetFilters = (table: Table<EquipmentItem>) => {
   if (typeColumn?.getFilterValue() !== "") {
     typeColumn?.setFilterValue("")
   }
+
+  const manufacturerColumn = table.getColumn("manufacturer")
+  if (manufacturerColumn?.getFilterValue() !== "") {
+    manufacturerColumn?.setFilterValue("")
+  }
  
 
 }
