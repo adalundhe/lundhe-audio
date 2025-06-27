@@ -7214,5 +7214,37 @@
         "manufacturer": "Silktone",
         "created_timestamp": "Tue Jun 24 2025 01:19:26 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Tue Jun 24 2025 01:19:26 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Abracadabra Audio Ayahuasca",
+        "description": "Rare fuzz/tremolo pedal from Chase Bliss",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Abracadabra Audio",
+        "quantity": 1
+    },
+    {
+        "name": "Totally Wycked Audio Octoverdrive",
+        "description": "Rare octaving overdrive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Totally Wycked Audio",
+        "quantity": 1
+    },
+    {
+        "name": "Vemuram Jan Ray Overdrive",
+        "description": "Classically voiced overdrive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Vemuram",
+        "quantity": 1
+    },
+    {
+        "name": "Totally Wycked Audio Wahxidizer",
+        "description": "Wah/fuzz pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Totally Wycked Audio",
+        "quantity": 1
     }
 ]
