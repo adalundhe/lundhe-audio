@@ -7258,5 +7258,21 @@
         "manufacturer": "Vemuram",
         "created_timestamp": "Fri Jun 27 2025 20:27:54 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Fri Jun 27 2025 20:27:54 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "EchoFix EF-P5",
+        "description": "1176 based FET compressor pedal",
+        "type": "compressor pedal",
+        "group": "pedals",
+        "manufacturer": "Echo Fix",
+        "quantity": 1
+    },
+    {
+        "name": "Non-Human Audio Unclean",
+        "description": "Characterful boost/overdrive pedal",
+        "type": "preamp/boost pedal",
+        "group": "pedals",
+        "manufacturer": "Non-Human Audio",
+        "quantity": 1
     }
 ]
