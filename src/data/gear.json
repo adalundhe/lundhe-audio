@@ -7390,5 +7390,45 @@
         "manufacturer": "REVV Amplification",
         "created_timestamp": "Tue Jul 01 2025 00:45:16 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Tue Jul 01 2025 00:45:16 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Xotic Super Clean",
+        "description": "Compact buffer pedal",
+        "type": "utility pedal",
+        "group": "pedals",
+        "manufacturer": "Xotic",
+        "quantity": 1
+    },
+    {
+        "name": "Beetronics Royal Jelly",
+        "description": "Dual overdrive/fuzz pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Beetronics FX",
+        "quantity": 1
+    },
+    {
+        "name": "Beetronics Vezzpa",
+        "description": "Octaving fuzz pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Beetronics FX",
+        "quantity" : 1
+    },
+    {
+        "name": "Beetronics Nectar",
+        "description": "Overdrive/fuzz pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Beetronics FX",
+        "quantity": 1
+    },
+    {
+        "name": "Old Blood Noise Endeavors Float",
+        "description": "Dual state-variable filter pedal",
+        "type": "filter pedal",
+        "group": "pedals",
+        "manufacturer": "Old Blood Noise Endeavors",
+        "quantity": 1
     }
 ]
