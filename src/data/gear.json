@@ -7280,5 +7280,85 @@
         "manufacturer": "Non-Human Audio",
         "created_timestamp": "Fri Jun 27 2025 20:55:07 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Fri Jun 27 2025 20:55:07 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "ZVex Loop Gate",
+        "description": "Loop gate and tremolo pedal",
+        "type": "gate pedal",
+        "group": "pedals",
+        "manufacturer": "ZVex",
+        "quantity": 1
+    },
+    {
+        "name": "Beetronics Seabee Harmochorus",
+        "description": "Analog chorus/harmonizer pedal",
+        "type": "chorus/vibrato pedal",
+        "group": "pedals",
+        "manufacturer": "Beetronics FX",
+        "quantity": 1
+    },
+    {
+        "name": "Beetronics Swarm",
+        "description": "Analog fuzz/harmonizer pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Beetronics FX",
+        "quantity" : 1
+    },
+    {
+        "name": "Beetronics Larva",
+        "description": "Morphing dual phaser pedal",
+        "type": "phaser pedal",
+        "group": "pedals",
+        "manufacturer": "Beetronics FX",
+        "quantity": 1
+    },
+    {
+        "name": "Beetronics Wannabee",
+        "description": "Dual overdrive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Beetronics FX",
+        "quantity": 1
+    },
+    {
+        "name": "Beetronis Abelha Tropical Fuzz",
+        "description": "Tri-circuit classic fuzz pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Beetronics FX",
+        "quantity": 1
+    },
+    {
+        "name": "Supro Analog Chorus",
+        "description": "BBD analog stereo chorus pedal",
+        "type": "chorus/vibrato pedal",
+        "group": "pedals",
+        "manufacturer": "Supro",
+        "quantity": 1
+    },
+    {
+        "name": "Benson Amps Delay",
+        "description": "Digitial delay pedal",
+        "type": "delay pedal",
+        "group": "pedals",
+        "manufacturer": "Benson Amps",
+        "quantity": 1
+    },
+    {
+        "name": "DOD Overdive/Preamp 250",
+        "description": "Classic overdrive and preamp pedal",
+        "type": "preamp/boost pedal",
+        "group": "pedals",
+        "manufacturer": "DigiTech/DOD",
+        "quantity": 1
+    },
+    {
+        "name": "Revv G8",
+        "description": "Noise-gate pedal",
+        "type": "gate pedal",
+        "group": "pedals",
+        "manufacturer": "REVV Amplification",
+        "quantity": 1
     }
 ]
