@@ -7566,5 +7566,13 @@
         "manufacturer": "Totally Wycked Audio",
         "created_timestamp": "Tue Jul 01 2025 17:54:17 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Tue Jul 01 2025 17:54:17 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Universal Audio Lion '68",
+        "description": "Marshal Super Lead emulation pedal",
+        "type": "modeling pedal",
+        "group": "pedals",
+        "manufacturer": "Universal Audio",
+        "quantity": 1
     }
 ]
