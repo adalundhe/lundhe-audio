@@ -6810,7 +6810,7 @@
     },
     {
         "id": "5eca7ed3-fc83-4584-a901-d3ed1c2b0cd0",
-        "name": "Old Blood Noise Endeavors Dark Light",
+        "name": "OBE Dark Light",
         "description": "Dual-channel reverb pedal",
         "type": "reverb pedal",
         "group": "pedals",
@@ -7437,7 +7437,7 @@
     },
     {
         "id": "226c5a72-2682-4aa2-9025-7c233be82333",
-        "name": "Old Blood Noise Endeavors Float",
+        "name": "OBE Float",
         "description": "Dual state-variable filter pedal",
         "type": "filter pedal",
         "group": "pedals",
@@ -7445,5 +7445,93 @@
         "manufacturer": "Old Blood Noise Endeavors",
         "created_timestamp": "Tue Jul 01 2025 01:56:53 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Tue Jul 01 2025 03:29:50 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Universal Audio Woodrow '55",
+        "description": "5E3 Tweed Deluxe emulation pedal",
+        "type": "modeling pedal",
+        "group": "pedals",
+        "manufacturer": "Universal Audio",
+        "quantity": 1
+    },
+    {
+        "name": "Universal Audio Ruby",
+        "description": "VOX AC30 emulation pedal",
+        "type": "modeling pedal",
+        "group": "pedals",
+        "manufacturer": "Universal Audio",
+        "quantity": 1
+    },
+    {
+        "name": "Universal Audio Dream '65",
+        "description": "Fender Deluxe Reverb emulation pedal",
+        "type": "modeling pedal",
+        "group": "pedals",
+        "manufacturer": "Universal Audio",
+        "quantity": 1
+    },
+    {
+        "name": "Universal Audio Knuckles",
+        "description": "Mesa/Boogie Dual Rectifier emulation pedal",
+        "type": "modeling pedal",
+        "group": "pedals",
+        "manufacturer": "Universal Audio",
+        "quantity": 1
+    },
+    {
+        "name": "Universal Audio Enigmatic '82",
+        "description": "ODS Dumble Amp emulation pedal",
+        "type": "modeling pedal",
+        "group": "pedals",
+        "manufacturer": "Universal Audio",
+        "quantity": 1
+    },
+    {
+        "name": "Universal Audio Anti '92",
+        "description": "Peavy 5150 emulation pedal",
+        "type": "modeling pedal",
+        "group": "pedals",
+        "manufacturer": "Universal Audio",
+        "quantity": 1
+    },
+    {
+        "name": "Vongon Paragraphs II",
+        "description": "Stereo digital filter pedal",
+        "type": "filter pedal",
+        "group": "pedals",
+        "manufacturer": "Vongon",
+        "quantity": 1
+    },
+    {
+        "name": "Poly Josh Smith Flaf V",
+        "description": "Dual circuit boost/drive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Poly Effects",
+        "quantity": 1
+    },
+    {
+        "name": "Cosmodio Gravity Well",
+        "description": "Tremolo/wavefolder pedal",
+        "type": "tremolo pedal",
+        "group": "pedals",
+        "manufacturer": "Cosmodio Instruments",
+        "quantity": 1
+    },
+    {
+        "name": "OBE Black Fountain Stereo",
+        "description": "Stereo digital oil-can delay pedal",
+        "type": "delay pedal",
+        "group": "pedals",
+        "manufacturer": "Old Blood Noise Endeavors",
+        "quantity": 1
+    },
+    {
+        "name": "Totally Wycked Audio Ladditude",
+        "description": "Analog envelope filter pedal",
+        "type": "filter pedal",
+        "group": "pedals",
+        "manufacturer": "Totally Wycked Audio",
+        "quantity": 1
     }
 ]
