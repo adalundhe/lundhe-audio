@@ -7577,5 +7577,125 @@
         "manufacturer": "Universal Audio",
         "created_timestamp": "Tue Jul 01 2025 18:12:33 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Tue Jul 01 2025 18:12:33 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Redshift Effects Mirage Delay",
+        "description": "Botique digitial delay pedal",
+        "type": "delay pedal",
+        "group": "pedals",
+        "manufacturer": "Redshfit Effects",
+        "quantity": 1
+    },
+    {
+        "name": "Prescription Electronics Vibe-Unit",
+        "description": "High-end uni-vibe pedal",
+        "type": "chorus/vibrato pedal",
+        "group": "pedals",
+        "manufacturer": "Prescription Electronics",
+        "quantity": 1
+    },
+    {
+        "name": "Red Witch Medusa",
+        "description": "BBD stereo chorus pedal",
+        "type": "chorus/vibrato pedal",
+        "group": "pedals",
+        "manufacturer": "Red Witch Analog Pedals",
+        "quantity": 1
+    },
+    {
+        "name": "EAE x Benson Halberd + Germanium Boost",
+        "description": "Combo overdrive and boost pedal",
+        "type": "preamp/boost pedal",
+        "group": "pedals",
+        "manufacturer": "Electronic Audio Experiments",
+        "quantity": 1
+    },
+    {
+        "name": "Totally Wycked AUdio Dynamorph",
+        "description": "Dynamic distortion pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Totally Wycked Audio",
+        "quantity": 1
+    },
+    {
+        "name": "Polyend MESS",
+        "description": "Step-sequenced multi-effect pedal",
+        "type": "multi-effect pedal",
+        "group": "pedals",
+        "manufacturer": "Polyend",
+        "quantity": 1
+    },
+    {
+        "name": "ProCo Sterling Vermin",
+        "description": "High-end RAT-based pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "ProCo",
+        "quantity": 1
+    },
+    {
+        "name": "Non-Human Audio Mocking Blur",
+        "description": "Characterful digital delay pedal",
+        "type": "delay pedal",
+        "group": "pedals",
+        "manufacturer": "Non-Human Audio",
+        "quantity": 1
+    },
+    {
+        "name": "GFI System Enieqma",
+        "description": "Five-band stereo digitial EQ pedal",
+        "type": "equalizer pedal",
+        "group": "pedals",
+        "manufacturer": "GFI System",
+        "quantity": 1
+    },
+    {
+        "name": "Dinosaural Cogmeister",
+        "description": "Three-circuit boost/overdrive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Coggins Audio",
+        "quantity": 1
+    },
+    {
+        "name": "JAM Pedals Octarus NOS",
+        "description": "Botique octaving fuzz pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "JAM Pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Landgraff Dynamic Overdrive",
+        "description": "Hand-made overdrive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Landgraff",
+        "quantity": 1
+    },
+    {
+        "name": "Landgraff Mo-D",
+        "description": "Rare and botique distortion pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Landgraff",
+        "quantity": 1
+    },
+    {
+        "name": "Landgraff Clean Boost",
+        "description": "Rare and botique boost pedal",
+        "type": "preamp/boost pedal",
+        "group": "pedals",
+        "manufacturer": "Landgraff",
+        "quantity": 1
+    },
+    {
+        "name": "Landgraff Blues Box",
+        "description": "Rare Blues Breaker type pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Landgraff",
+        "quantity": 1
     }
 ]
