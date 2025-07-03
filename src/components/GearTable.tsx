@@ -314,7 +314,7 @@ export const GearTable = ({
             value={activeTab}
             onValueChange={(value) => setActiveTab(value as 'type' | 'brand')}
           >
-            <TabsList className="w-full rounded-none w-[264px] p-0 h-full">
+            <TabsList className="w-full rounded-none p-0 h-full">
               <TabsTrigger value="type" className="rounded-none w-1/2">Type</TabsTrigger>
               <TabsTrigger value="brand" className="rounded-none w-1/2">Brand</TabsTrigger>
             </TabsList>
