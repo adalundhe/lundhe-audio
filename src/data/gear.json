@@ -7742,5 +7742,133 @@
         "manufacturer": "Landgraff",
         "created_timestamp": "Thu Jul 03 2025 01:47:32 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Thu Jul 03 2025 01:47:32 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Glou-Glou Flancher 5D",
+        "description": "Analog BBD stereo delay pedal",
+        "type": "delay pedal",
+        "group": "pedals",
+        "manufacturer": "Glou-Glou",
+        "quantity": 1
+    },
+    {
+        "name": "Two Rock Bloomfield Drive 100/50",
+        "description": "Botique 100/50W two-channel tube amplifier",
+        "type": "tube amplifier",
+        "group": "amplifiers",
+        "manufacturer": "Two Rock",
+        "quantity": 1
+    },
+    {
+        "name": "Glou-Glou Pralines",
+        "description": "Analogmodulatable phaser/filter pedal",
+        "type": "phaser pedal",
+        "group": "pedals",
+        "manufacturer": "Glou-Glou",
+        "quantity": 1
+    },
+    {
+        "name": "Milkman Sound 20W Creamer Combo",
+        "description": "Botique combo tube amplifier",
+        "type": "tube amplifier",
+        "group": "amplifiers",
+        "manufacturer": "Milkman Sound",
+        "quantity": 1
+    },
+    {
+        "name": "Benson Amps Chimera 30W",
+        "description": "Modern classic botique tube amp",
+        "type": "tube amplifier",
+        "group": "amplifiers",
+        "manufacturer": "Benson Amps",
+        "quantity": 1
+    },
+    {
+        "name": "Non-Human Audio Ram",
+        "description": "Simple but effective buffer/boost pedal",
+        "type": "preamp/boost pedal",
+        "group": "pedals",
+        "manufacturer": "Non-Human Audio",
+        "quantity": 1
+    },
+    {
+        "name": "Yesterday Effects MPF-1",
+        "description": "Three-band parametric equalizer pedal",
+        "type": "equalizer pedal",
+        "group": "pedals",
+        "manufacturer": "Yesterday Effects",
+        "quantity": 1
+    },
+    {
+        "name": "Yesterday Effects MS-20 Filter",
+        "description": "MS-20 based analog filter pedal",
+        "type": "filter pedal",
+        "group": "pedals",
+        "manufacturer": "Yesterday Effects",
+        "quantity": 1
+    },
+    {
+        "name": "Yesterday Effects 8-Bit Fuzz",
+        "description": "Unique lo-fi silicon fuzz pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Yesterday Effects",
+        "quantity": 1
+    },
+    {
+        "name": "Yesterday Effects Recurring",
+        "description": "Vox Repeat Percussion based tremolo pedal",
+        "type": "tremolo pedal",
+        "group": "pedals",
+        "manufacturer": "Yesterday Effects",
+        "quantity": 1
+    },
+    {
+        "name": "Benson Amps Delay",
+        "description": "Hybrid digital/analog delay pedal",
+        "type": "delay pedal",
+        "group": "pedals",
+        "manufacturer": "Benson Amps",
+        "quantity": 1
+    },
+    {
+        "name": "Supro 1307 Analog Chorus",
+        "description": "M3007 stereo analog chorus pedal",
+        "type": "chorus/vibrato pedal",
+        "group": "pedals",
+        "manufacturer": "Supro",
+        "quantity": 1
+    },
+    {
+        "name": "Supro 1313 Analog Delay",
+        "description": "M3007 analog delay pedal",
+        "type": "delay pedal",
+        "group": "pedals",
+        "manufacturer": "Supro",
+        "quantity": 1
+    },
+    {
+        "name": "Hudson Electronics Broadcast AP-II",
+        "description": "Dual-channel preamp/fuzz pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Hudsn Electronics",
+        "quantity": 1
+    },
+    {
+        "name": "Hudson Electronics Broadcast",
+        "description": "Dual-footswitch germanium preamp pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Hudsn Electronics",
+        "quantity": 1
+    },
+    {
+        "name": "Non-Human Audio Water Bear",
+        "description": "Unique botique fuzz pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Non-Human Audio",
+        "quantity": 1
     }
 ]
