@@ -7907,5 +7907,45 @@
         "manufacturer": "Non-Human Audio",
         "created_timestamp": "Sat Jul 05 2025 01:23:16 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sat Jul 05 2025 01:23:16 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Victory Amplification MK Overdrive 100/50W",
+        "description": "Hand-wired botique tube amplifier",
+        "type": "tube amplifier",
+        "group": "amplifiers",
+        "manufacturer": "Victory Amplification",
+        "quantity": 1
+    },
+    {
+        "name": "Victory Amplification MK Clean 100/50W",
+        "description": "Top-line botique tube amplifier",
+        "type": "tube amplifier",
+        "group": "amplifiers",
+        "manufacturer": "Victory Amplification",
+        "quantity": 1
+    },
+    {
+        "name": "Diezel VH4 100W",
+        "description": "Quad channel tube amplifier",
+        "type": "tube amplifier",
+        "group": "amplifiers",
+        "manufacturer": "Diezel Amplification",
+        "quantity": 1
+    },
+    {
+        "name": "3rd Power The Kitchen Sink 40W",
+        "description": "Dual channel botique tube amplifier",
+        "type": "tube amplifier",
+        "group": "amplifiers",
+        "manufacturer": "3rd Power Amplification",
+        "quantity": 1
+    },
+    {
+        "name": "Victoria Sovereign 45W",
+        "description": "Marshall JCM-based tube amplifier",
+        "type": "tube amplifier",
+        "group": "amplifiers",
+        "manufacturer": "Victoria Amplification",
+        "quantity": 1
     }
 ]
