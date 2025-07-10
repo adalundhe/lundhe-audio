@@ -7962,5 +7962,29 @@
         "manufacturer": "Victoria Amplification",
         "created_timestamp": "Tue Jul 08 2025 22:51:47 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Tue Jul 08 2025 22:51:47 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Ampeg SVT Heritage 50th",
+        "description": "300W tube bass amplifier",
+        "type": "tube amplifier",
+        "group": "amplifiers",
+        "manufacturer":"Ampeg",
+        "quantity": 1
+    },
+    {
+        "name": "Jad Freer Volta",
+        "description": "Botique hand-wired bassa amp",
+        "type": "tube amplifier",
+        "group": "amplifiers",
+        "manufacturer": "Jad Freer",
+        "quantity": 1
+    },
+    {
+        "name": "Landgraff Distortion Box",
+        "description": "Tube-screamer based botique pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Landgraff",
+        "quantity": 1
     }
 ]
