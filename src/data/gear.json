@@ -4512,7 +4512,7 @@
     {
         "id": "8d021f1f-85b7-4df4-8047-feddf68f0022",
         "name": "29 Pedals FLWR",
-        "description": "Botique overdrive pedal",
+        "description": "Boutique overdrive pedal",
         "type": "distortion pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4523,7 +4523,7 @@
     {
         "id": "6dfb82c4-c003-4f67-b8a6-ad0dd2419ae3",
         "name": "29 Pedals JFET",
-        "description": "Botique boost pedal",
+        "description": "Boutique boost pedal",
         "type": "preamp/boost pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4534,7 +4534,7 @@
     {
         "id": "6a7a97db-65cb-47a0-8d58-c5fb440f9f22",
         "name": "29 Pedals EUNA",
-        "description": "Botique buffer pedal",
+        "description": "Boutique buffer pedal",
         "type": "utility pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4545,7 +4545,7 @@
     {
         "id": "6fe712af-ee2a-4ac9-a8a1-ecd247cb7e8c",
         "name": "29 Pedals OAMP",
-        "description": "Botique preamp pedal",
+        "description": "Boutique preamp pedal",
         "type": "preamp/boost pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4556,7 +4556,7 @@
     {
         "id": "d763a003-cb3e-41be-8db0-8e53e57c44ca",
         "name": "29 Pedals TOKI",
-        "description": "Botique fuzz pedal",
+        "description": "Boutique fuzz pedal",
         "type": "distortion pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4578,7 +4578,7 @@
     {
         "id": "838f3ac5-9908-4d95-b044-e8bb0403bbe1",
         "name": "Benson Amps Preamp",
-        "description": "Botique preamp and overdrive pedal",
+        "description": "Boutique preamp and overdrive pedal",
         "type": "preamp/boost pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4589,7 +4589,7 @@
     {
         "id": "24b31a3e-24d1-4375-9d0e-d34df7cfab74",
         "name": "BAE Hot Fuzz Dual Boost/Fuzz",
-        "description": "Botique classic boost/fuzz",
+        "description": "Boutique classic boost/fuzz",
         "type": "distortion pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4600,7 +4600,7 @@
     {
         "id": "40050049-b18a-452a-80ac-0059bc4ec17e",
         "name": "Benson Amps Germanium Boost",
-        "description": "Botique boost pedal",
+        "description": "Boutique boost pedal",
         "type": "preamp/boost pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4611,7 +4611,7 @@
     {
         "id": "6183e07a-5a02-4dbf-a487-5caee5688f28",
         "name": "Benson Amps Germanium Fuzz",
-        "description": "Botique fuzz pedal",
+        "description": "Boutique fuzz pedal",
         "type": "distortion pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4633,7 +4633,7 @@
     {
         "id": "adafbe6c-9674-49a8-9e9a-fd0533e1a289",
         "name": "Boss DC-2W Waza Craft Dimension C",
-        "description": "Botique classic chorus/vibrato pedal",
+        "description": "Boutique classic chorus/vibrato pedal",
         "type": "chorus/vibrato pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4655,7 +4655,7 @@
     {
         "id": "75dc5e0b-7e0f-4640-ae40-a8bc2575ebb9",
         "name": "Boss CE-2W Waza Craft",
-        "description": "Botique classic chorus/vibrato pedal",
+        "description": "Boutique classic chorus/vibrato pedal",
         "type": "chorus/vibrato pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4666,7 +4666,7 @@
     {
         "id": "2b109809-cad9-47c9-958b-6809b271f71b",
         "name": "Benson Amps Storkn BOks",
-        "description": "Botique temperature-controlled fuzz pedal",
+        "description": "Boutique temperature-controlled fuzz pedal",
         "type": "distortion pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4699,7 +4699,7 @@
     {
         "id": "29cc347e-ecfb-407a-ba05-b71a6ca83a48",
         "name": "Chase Bliss Blooper",
-        "description": "Botique looper and effect pedal",
+        "description": "Boutique looper and effect pedal",
         "type": "multi-effect pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4710,7 +4710,7 @@
     {
         "id": "e657642b-3104-4f58-8f97-1be4a5c9ea17",
         "name": "Chase Bliss Brothers",
-        "description": "Botique dual-channel overdrive pedal",
+        "description": "Boutique dual-channel overdrive pedal",
         "type": "distortion pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4732,7 +4732,7 @@
     {
         "id": "15806574-bde7-4aed-8231-35de49fce834",
         "name": "Chase Bliss Condor",
-        "description": "Botique three-band equalizer pedal",
+        "description": "Boutique three-band equalizer pedal",
         "type": "equalizer pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4743,7 +4743,7 @@
     {
         "id": "21c6dfc2-7a73-4537-8849-dfb1b2373a16",
         "name": "Chase Bliss Condor Hi-Fi",
-        "description": "Botique high headroom three-band equalizer pedal",
+        "description": "Boutique high headroom three-band equalizer pedal",
         "type": "equalizer pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4776,7 +4776,7 @@
     {
         "id": "616b4d9c-524c-4c16-8af1-2a0aaa1e4a6d",
         "name": "Chase Bliss Clean",
-        "description": "Botique compressor and boost pedal",
+        "description": "Boutique compressor and boost pedal",
         "type": "compressor pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4787,7 +4787,7 @@
     {
         "id": "0652e487-4946-4e44-8b40-177fd971ae7b",
         "name": "Chase Bliss Gravitas",
-        "description": "Botique tremolo pedal",
+        "description": "Boutique tremolo pedal",
         "type": "tremolo pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4798,7 +4798,7 @@
     {
         "id": "5d097e89-c776-4443-857d-7351a19945c5",
         "name": "Chase Bliss Dark World",
-        "description": "Botique dual-channel reverb pedal",
+        "description": "Boutique dual-channel reverb pedal",
         "type": "reverb pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4809,7 +4809,7 @@
     {
         "id": "1ef03df0-5607-423b-8f89-64d9a59d446e",
         "name": "Chase Bliss Generation Loss MKII",
-        "description": "Botique dual-channel delay and effect pedal",
+        "description": "Boutique dual-channel delay and effect pedal",
         "type": "multi-effect pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4820,7 +4820,7 @@
     {
         "id": "090d700a-aa92-49a0-924c-34d4d16b096f",
         "name": "Chase Bliss Lossy",
-        "description": "Botique lo-fi effect pedal",
+        "description": "Boutique lo-fi effect pedal",
         "type": "multi-effect pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4831,7 +4831,7 @@
     {
         "id": "ccebdf9a-faca-4c1d-861f-92da114adbd1",
         "name": "Chase Bliss Mood MKII",
-        "description": "Botique looper and effect pedal",
+        "description": "Boutique looper and effect pedal",
         "type": "multi-effect pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4842,7 +4842,7 @@
     {
         "id": "dbf776e8-7b83-4423-91d4-41edaaa88600",
         "name": "Chase Bliss Reverse Mode",
-        "description": "Botique limited edition delay pedal",
+        "description": "Boutique limited edition delay pedal",
         "type": "delay pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4853,7 +4853,7 @@
     {
         "id": "9820a6e5-c1e0-46a2-848b-ed54368d4c1c",
         "name": "Chase Bliss Onward",
-        "description": "Botique micro-sampler and delay pedal",
+        "description": "Boutique micro-sampler and delay pedal",
         "type": "delay pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4864,7 +4864,7 @@
     {
         "id": "cdeca3ef-57ba-4ea3-8d9d-011f1dcce548",
         "name": "Chase Bliss Thermae",
-        "description": "Botique pitch shifter and delay pedal",
+        "description": "Boutique pitch shifter and delay pedal",
         "type": "delay pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4886,7 +4886,7 @@
     {
         "id": "a2a54300-5558-4ad5-a7b9-4f9e01105560",
         "name": "Chase Bliss Tonal Warped Vinyl MKI",
-        "description": "Botique chorus/vibrato pedal",
+        "description": "Boutique chorus/vibrato pedal",
         "type": "chorus/vibrato pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4897,7 +4897,7 @@
     {
         "id": "9ded5e6f-daa8-43b5-9a0f-bdc9d66a184b",
         "name": "Chase Bliss Wombtone - BSE",
-        "description": "Billy Strings Edition of the botique phaser pedal",
+        "description": "Billy Strings Edition of the boutique phaser pedal",
         "type": "phaser pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4908,7 +4908,7 @@
     {
         "id": "4262e63a-31c8-45ff-86f9-2b8769446d7f",
         "name": "Chase Bliss Wombtone",
-        "description": "Botique phaser pedal",
+        "description": "Boutique phaser pedal",
         "type": "phaser pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4963,7 +4963,7 @@
     {
         "id": "decd6ba6-2e87-4237-9e0e-7e0d51e7a169",
         "name": "Electronic Audio Experiments OxEAE Boost",
-        "description": "Rare botique boost/overdrive pedal",
+        "description": "Rare boutique boost/overdrive pedal",
         "type": "distortion pedal",
         "group": "pedals",
         "quantity": 1,
@@ -4996,7 +4996,7 @@
     {
         "id": "6bd093b6-a8da-41aa-ac71-32ad6c796333",
         "name": "Electronic Audio Experiments OxEAE Fuzz",
-        "description": "Rare botique fuzz pedal",
+        "description": "Rare boutique fuzz pedal",
         "type": "distortion pedal",
         "group": "pedals",
         "quantity": 1,
@@ -5040,7 +5040,7 @@
     {
         "id": "ef6394a2-7ce9-499f-8d6c-c5981a618017",
         "name": "Electronc Audio Experiments Sending V2",
-        "description": "Botique lo-fi BBD delay w/ filter",
+        "description": "Boutique lo-fi BBD delay w/ filter",
         "type": "delay pedal",
         "group": "pedals",
         "quantity": 1,
@@ -5095,7 +5095,7 @@
     {
         "id": "afefbbdb-36f7-4988-8059-00770a69f30e",
         "name": "Erica Synths Nightverb",
-        "description": "Desktop botique reverb effect",
+        "description": "Desktop boutique reverb effect",
         "type": "reverb",
         "group": "effects",
         "quantity": 1,
@@ -5106,7 +5106,7 @@
     {
         "id": "ab0ee34b-1f5b-4d4c-bf59-2fdd67b64341",
         "name": "Fairfield Circuitry 20 Percent More",
-        "description": "Botique fuzz pedal",
+        "description": "Boutique fuzz pedal",
         "type": "distortion pedal",
         "group": "pedals",
         "quantity": 1,
@@ -5128,7 +5128,7 @@
     {
         "id": "d23d8139-1180-4d61-919d-b2e0981c6241",
         "name": "Erica Synths Echolocator",
-        "description": "Desktop botique delay effect",
+        "description": "Desktop boutique delay effect",
         "type": "delay",
         "group": "effects",
         "quantity": 1,
@@ -5139,7 +5139,7 @@
     {
         "id": "669609c5-8b07-4d1e-8c68-fdd3b4a79aad",
         "name": "Fairfield Circuitry Shallow Water",
-        "description": "Botique lo-fi effect pedal",
+        "description": "Boutique lo-fi effect pedal",
         "type": "chorus/vibrato pedal",
         "group": "pedals",
         "quantity": 1,
@@ -5150,7 +5150,7 @@
     {
         "id": "911477c9-790f-478d-bf37-b86d66641a62",
         "name": "Fairfield Circuitry Meet Maude",
-        "description": "Botique analog delay pedal",
+        "description": "Boutique analog delay pedal",
         "type": "delay pedal",
         "group": "pedals",
         "quantity": 1,
@@ -5172,7 +5172,7 @@
     {
         "id": "2e1ac717-923d-4afe-94ab-de7c5fa6c857",
         "name": "Flower Pedals Dahlia Analog Delay",
-        "description": "Botique hgh-end analog BBD delay pedal",
+        "description": "Boutique hgh-end analog BBD delay pedal",
         "type": "delay pedal",
         "group": "pedals",
         "quantity": 1,
@@ -5524,7 +5524,7 @@
     {
         "id": "e0a594d7-af24-481a-a24b-78928298cc04",
         "name": "OTO Bebe Cherie",
-        "description": "Portable six-channel botique mixer",
+        "description": "Portable six-channel boutique mixer",
         "type": "utility",
         "group": "I/O",
         "quantity": 1,
@@ -5535,7 +5535,7 @@
     {
         "id": "afa02816-59fe-45bf-81cf-f94675f3dd75",
         "name": "OTO Bim",
-        "description": "Stereo botique desktop delay",
+        "description": "Stereo boutique desktop delay",
         "type": "delay",
         "group": "effects",
         "quantity": 1,
@@ -5601,7 +5601,7 @@
     {
         "id": "449c6a39-db55-4c09-9456-8b5b805022c7",
         "name": "Origin Effects Cali-76",
-        "description": "Botique 1176-based compressor pedal",
+        "description": "Boutique 1176-based compressor pedal",
         "type": "compressor pedal",
         "group": "pedals",
         "quantity": 1,
@@ -5634,7 +5634,7 @@
     {
         "id": "80122899-29b2-4f4e-ba98-b341b01266a5",
         "name": "OTO Bam Reverb",
-        "description": "Stereo botique desktop reverb",
+        "description": "Stereo boutique desktop reverb",
         "type": "reverb",
         "group": "effects",
         "quantity": 1,
@@ -5645,7 +5645,7 @@
     {
         "id": "992bd7ea-4020-46b6-b07b-dfc448332236",
         "name": "OTO Baum",
-        "description": "Stereo botique desktop drive/filter/compressor",
+        "description": "Stereo boutique desktop drive/filter/compressor",
         "type": "filter",
         "group": "effects",
         "quantity": 1,
@@ -5656,7 +5656,7 @@
     {
         "id": "c7e06a6a-0975-4aff-beda-4f94a4b31cb9",
         "name": "OTO Biscuit",
-        "description": "Stereo botique bit-crusher, filter, and multi-effect",
+        "description": "Stereo boutique bit-crusher, filter, and multi-effect",
         "type": "multi-effect",
         "group": "effects",
         "quantity": 1,
@@ -5832,7 +5832,7 @@
     {
         "id": "078c0ff2-d869-470a-92db-84292d86dc76",
         "name": "ThorpyFX Electric Lightning",
-        "description": "High-end botique valve preamp/boost pedal",
+        "description": "High-end boutique valve preamp/boost pedal",
         "type": "preamp/boost pedal",
         "group": "pedals",
         "quantity": 1,
@@ -5920,7 +5920,7 @@
     {
         "id": "467abbf3-f1d9-4ab4-9364-fe811220f4ca",
         "name": "Chandler Limited GAV-19",
-        "description": "Rare 19W single-channel botique tube amplifier",
+        "description": "Rare 19W single-channel boutique tube amplifier",
         "type": "tube amplifier",
         "group": "amplifiers",
         "quantity": 1,
@@ -6074,7 +6074,7 @@
     {
         "id": "63260aeb-7145-41ab-aa72-7f771fc89ba9",
         "name": "Earthquaker Devices Plumes",
-        "description": "Botique distortion pedal based on Ibanez Tube Screamer",
+        "description": "Boutique distortion pedal based on Ibanez Tube Screamer",
         "type": "reverb pedal",
         "group": "pedals",
         "quantity": 1,
@@ -6162,7 +6162,7 @@
     {
         "id": "3b6476c9-e37f-4c18-bd0b-a66a49236ae7",
         "name": "Origin Effects DCX Boost",
-        "description": "Botique and high-end preamp/boost pedal",
+        "description": "Boutique and high-end preamp/boost pedal",
         "type": "distortion pedal",
         "group": "pedals",
         "quantity": 1,
@@ -7581,7 +7581,7 @@
     {
         "id": "76536b02-38eb-4fdf-af7d-8e6c692be00a",
         "name": "Redshift Effects Mirage Delay",
-        "description": "Botique digitial delay pedal",
+        "description": "Boutique digitial delay pedal",
         "type": "delay pedal",
         "group": "pedals",
         "quantity": 1,
@@ -7691,7 +7691,7 @@
     {
         "id": "cd8c8647-0b38-484d-9e25-96009575218d",
         "name": "JAM Pedals Octarus NOS",
-        "description": "Botique octaving fuzz pedal",
+        "description": "Boutique octaving fuzz pedal",
         "type": "distortion pedal",
         "group": "pedals",
         "quantity": 1,
@@ -7713,7 +7713,7 @@
     {
         "id": "aa8a5537-cd73-4dd4-a938-895249a921d2",
         "name": "Landgraff Mo-D",
-        "description": "Rare and botique distortion pedal",
+        "description": "Rare and boutique distortion pedal",
         "type": "distortion pedal",
         "group": "pedals",
         "quantity": 1,
@@ -7724,7 +7724,7 @@
     {
         "id": "a865d03d-747d-4d44-a643-de4cd3be654e",
         "name": "Landgraff Clean Boost",
-        "description": "Rare and botique boost pedal",
+        "description": "Rare and boutique boost pedal",
         "type": "preamp/boost pedal",
         "group": "pedals",
         "quantity": 1,
@@ -7757,7 +7757,7 @@
     {
         "id": "fea98aa8-163a-4e10-be3e-431e80e0f012",
         "name": "Two Rock Bloomfield Drive 100/50",
-        "description": "Botique 100/50W two-channel tube amplifier",
+        "description": "Boutique 100/50W two-channel tube amplifier",
         "type": "tube amplifier",
         "group": "amplifiers",
         "quantity": 1,
@@ -7779,7 +7779,7 @@
     {
         "id": "7b5a293f-7970-4ade-b050-acc86bbb119a",
         "name": "Milkman Sound 20W Creamer Combo",
-        "description": "Botique combo tube amplifier",
+        "description": "Boutique combo tube amplifier",
         "type": "tube amplifier",
         "group": "amplifiers",
         "quantity": 1,
@@ -7790,7 +7790,7 @@
     {
         "id": "db1cbc3d-e542-4c79-945a-44fcbb0db5f8",
         "name": "Benson Amps Chimera 30W",
-        "description": "Modern classic botique tube amp",
+        "description": "Modern classic boutique tube amp",
         "type": "tube amplifier",
         "group": "amplifiers",
         "quantity": 1,
@@ -7900,7 +7900,7 @@
     {
         "id": "df47c9e8-5892-4d47-9ef1-3083312545d3",
         "name": "Non-Human Audio Water Bear",
-        "description": "Unique botique fuzz pedal",
+        "description": "Unique boutique fuzz pedal",
         "type": "distortion pedal",
         "group": "pedals",
         "quantity": 1,
@@ -7911,7 +7911,7 @@
     {
         "id": "8464fb14-717f-4f83-a4e5-cb6508b0adf2",
         "name": "Victory Amplification MK Overdrive 100/50W",
-        "description": "Hand-wired botique tube amplifier",
+        "description": "Hand-wired boutique tube amplifier",
         "type": "tube amplifier",
         "group": "amplifiers",
         "quantity": 1,
@@ -7922,7 +7922,7 @@
     {
         "id": "c0792ff0-2693-4349-915a-54d8a1c2f13d",
         "name": "Victory Amplification MK Clean 100/50W",
-        "description": "Top-line botique tube amplifier",
+        "description": "Top-line boutique tube amplifier",
         "type": "tube amplifier",
         "group": "amplifiers",
         "quantity": 1,
@@ -7944,7 +7944,7 @@
     {
         "id": "64d60a7c-5e1b-4b98-9d7a-f9b494668a35",
         "name": "3rd Power The Kitchen Sink 40W",
-        "description": "Dual channel botique tube amplifier",
+        "description": "Dual channel boutique tube amplifier",
         "type": "tube amplifier",
         "group": "amplifiers",
         "quantity": 1,
@@ -7977,7 +7977,7 @@
     {
         "id": "d77625e5-05bc-4809-a4f5-c194cd146241",
         "name": "Jad Freer Volta",
-        "description": "Botique hand-wired bassa amp",
+        "description": "Boutique hand-wired bass amp",
         "type": "tube amplifier",
         "group": "amplifiers",
         "quantity": 1,
@@ -7988,7 +7988,7 @@
     {
         "id": "dc703c20-ad77-46f8-9cb7-b6a994bd6b39",
         "name": "Landgraff Distortion Box",
-        "description": "Tube-screamer based botique pedal",
+        "description": "Tube-screamer based boutique pedal",
         "type": "distortion pedal",
         "group": "pedals",
         "quantity": 1,
