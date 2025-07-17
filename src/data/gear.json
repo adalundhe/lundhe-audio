@@ -7995,5 +7995,77 @@
         "manufacturer": "Landgraff",
         "created_timestamp": "Thu Jul 10 2025 00:30:29 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Thu Jul 10 2025 00:34:06 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Soldano SLO-100",
+        "description": "Classic high-gain tube amp",
+        "type": "tube amplifier",
+        "group": "amplifiers",
+        "manufacturer": "Soldano",
+        "quantity": 1
+    },
+    {
+        "name": "Diezel Herbert MKIII",
+        "description": "Three channel high-end tube amp",
+        "type": "tube amplifier",
+        "group": "amplifiers",
+        "manufacturer": "Diezel Amplification",
+        "quantity": 1
+    },
+    {
+        "name": "Blackhawk Amplification Morgoth MKII",
+        "description": "PT2399-based chorus and modulation pedal",
+        "type": "chorus/vibrato pedal",
+        "group": "pedals",
+        "manufacturer": "Blackhawk Amplifiers",
+        "quantity": 1
+    },
+    {
+        "name": "Blackhawk Amplification Lothlorien",
+        "description": "Dual algorithm reverb pedal",
+        "type": "reverb pedal",
+        "group": "pedals",
+        "manufacturer": "Blackhawk Amplifiers",
+        "quantity": 1
+    },
+    {
+        "name": "Blackhawk Amplification Morgul MKII",
+        "description": "LED/mosfet distortion pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Blackhawk Amplifiers",
+        "quantity": 1
+    },
+    {
+        "name": "Blackhawk Amplification Ouroboros",
+        "description": "OTA/dynacomp style compressor pedal",
+        "type": "compressor pedal",
+        "group": "pedals",
+        "manufacturer": "Blackhawk Amplifiers",
+        "quantity": 1
+    },
+    {
+        "name": "Fjord Fuzz Midnattssol",
+        "description": "Fuzz/uni-vibe pedal",
+        "type": "chorus/vibrato pedal",
+        "group": "pedals",
+        "manufacturer": "Fjord Fuzz",
+        "quantity": 1
+    },
+    {
+        "name": "Suhr Alexa",
+        "description": "Dual-channel multi-wave chorus/vibrato pedal",
+        "type": "chorus/vibrato pedal",
+        "group": "pedals",
+        "manufacturer": "Suhr",
+        "quantity": 1
+    },
+    {
+        "name": "Supro 1305 Drive",
+        "description": "Supro amp-based drive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Supro",
+        "quantity": 1
     }
 ]
