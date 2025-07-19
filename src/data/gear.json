@@ -8105,5 +8105,53 @@
         "manufacturer": "Supro",
         "created_timestamp": "Thu Jul 17 2025 12:06:26 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Thu Jul 17 2025 12:06:26 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Empress Effects Heavy",
+        "description": "Aggressive overdrive/distortion pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Empress Effects",
+        "quantity": 1
+    },
+    {
+        "name": "ZVex Wooly Mammoth",
+        "description": "Boutique velcro fuzz pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "ZVex",
+        "quantity": 1
+    },
+    {
+        "name": "Supro 1304 Fuzz",
+        "description": "Vintage-voiced fuzz pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Supro",
+        "quantity": 1
+    },
+    {
+        "name": "KMA Guardians of the Wurm",
+        "description": "HM-3 based distortion/gate pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "KMA Machines",
+        "quantity": 1
+    },
+    {
+        "name": "OBE Signal Blender Stereo",
+        "description": "Stereo parallel wet/dry mix pedal",
+        "type": "utility pedal",
+        "group": "pedals",
+        "manufacturer": "Old Blood Noise Endeavors",
+        "quantity": 1
+    },
+    {
+        "name": "Collision Devices Crushturnal",
+        "description": "Glitch/FSU multi-effect pedal",
+        "type": "multi-effect pedal",
+        "group": "pedals",
+        "manufacturer": "Collaboration Devices",
+        "quantity": 1
     }
 ]
