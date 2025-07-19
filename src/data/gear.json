@@ -4632,7 +4632,7 @@
     },
     {
         "id": "adafbe6c-9674-49a8-9e9a-fd0533e1a289",
-        "name": "Boss DC-2W Waza Craft Dimension C",
+        "name": "Boss DC-2W Dimension C",
         "description": "Boutique classic chorus/vibrato pedal",
         "type": "chorus/vibrato pedal",
         "group": "pedals",
@@ -4643,7 +4643,7 @@
     },
     {
         "id": "92441b40-a148-4464-b911-ef763faf1fe6",
-        "name": "Boss DM-2W Waza Craft Delay",
+        "name": "Boss DM-2W Delay",
         "description": "Classic analog BBD delay pedal",
         "type": "delay pedal",
         "group": "pedals",
@@ -4654,7 +4654,7 @@
     },
     {
         "id": "75dc5e0b-7e0f-4640-ae40-a8bc2575ebb9",
-        "name": "Boss CE-2W Waza Craft",
+        "name": "Boss CE-2W Chorus",
         "description": "Boutique classic chorus/vibrato pedal",
         "type": "chorus/vibrato pedal",
         "group": "pedals",
@@ -8171,5 +8171,93 @@
         "manufacturer": "Collaboration Devices",
         "created_timestamp": "Sat Jul 19 2025 01:42:14 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sat Jul 19 2025 01:42:14 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Supro 1303 Boost",
+        "description": "Clean pre-amp/boost pedal",
+        "type": "preamp/boost pedal",
+        "group": "pedals",
+        "manufacturer": "Supro",
+        "quantity": 1
+    },
+    {
+        "name": "Supro 1309 Flanger",
+        "description": "Analog BBD flanger pedal",
+        "type": "flanger pedal",
+        "group": "pedals",
+        "manufacturer": "Supro",
+        "quantity": 1
+    },
+    {
+        "name": "Supro 1310 Tremolo",
+        "description": "Harmonic/amplitude tremolo pedal",
+        "type": "tremolo pedal", 
+        "group": "pedals",
+        "manufacturer": "Supro",
+        "quantity": 1
+    },
+    {
+        "name": "Boss BD-2W Blues Driver",
+        "description": "High-end classic overdrive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "BOSS",
+        "quantity": 1
+    },
+    {
+        "name": "Boss MT-2W Metal Zone",
+        "description": "High-end heavy distortion pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "BOSS",
+        "quantity": 1
+    },
+    {
+        "name": "Boss SD-1W Super Overdrive",
+        "description": "High-end classic drive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "BOSS",
+        "quantity": 1
+    },
+    {
+        "name": "Boss HM-2W Heavy Metal",
+        "description": "High-end chainsaw distortion pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "BOSS",
+        "quantity": 1
+    },
+    {
+        "name": "Boss DS-1W Distortion",
+        "description": "High-end classic distortion pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "BOSS",
+        "quantity": 1
+    },
+    {
+        "name": "Boss VB-2W Vibrato",
+        "description": "High-end amplitude vibrateo pedal",
+        "type": "chorus/vibrato pedal",
+        "group": "pedals",
+        "manufacturer": "BOSS",
+        "quantity": 1
+    },
+    {
+        "name": "Boss FZ-1W Fuzz",
+        "description": "High-end classic fuzz pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "BOSS",
+        "quantity": 1
+    },
+    {
+        "name": "Boss BP-1W Booster/Preamp",
+        "description": "High-end boost pedal",
+        "type": "preamp/boost pedal",
+        "group": "pedals",
+        "manufacturer": "BOSS",
+        "quantity": 1
     }
 ]
