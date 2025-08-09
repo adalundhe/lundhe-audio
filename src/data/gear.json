@@ -4845,7 +4845,7 @@
         "description": "Boutique limited edition delay pedal",
         "type": "delay pedal",
         "group": "pedals",
-        "quantity": 1,
+        "quantity": 2,
         "manufacturer": "Chase Bliss Audio",
         "created_timestamp": "Fri March 30 2025 23:03:52 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sat Jul 19 2025 16:53:51 GMT+0000 (Coordinated Universal Time)"
@@ -6810,7 +6810,7 @@
     },
     {
         "id": "5eca7ed3-fc83-4584-a901-d3ed1c2b0cd0",
-        "name": "OBE Dark Light",
+        "name": "OBNEDark Light",
         "description": "Dual-channel reverb pedal",
         "type": "reverb pedal",
         "group": "pedals",
@@ -7437,7 +7437,7 @@
     },
     {
         "id": "226c5a72-2682-4aa2-9025-7c233be82333",
-        "name": "OBE Float",
+        "name": "OBNEFloat",
         "description": "Dual state-variable filter pedal",
         "type": "filter pedal",
         "group": "pedals",
@@ -7547,7 +7547,7 @@
     },
     {
         "id": "6b9f6b3c-aab3-4abe-88c8-81e420ffa0f2",
-        "name": "OBE Black Fountain Stereo",
+        "name": "OBNEBlack Fountain Stereo",
         "description": "Stereo digital oil-can delay pedal",
         "type": "delay pedal",
         "group": "pedals",
@@ -7999,7 +7999,7 @@
     {
         "id": "a44a7b00-a828-412e-8a94-926d9bed451d",
         "name": "Two Rock Traditional Clean 100/50W",
-        "description": "Botique pedal platform amp",
+        "description": "Boutique pedal platform amp",
         "type": "tube amplifier",
         "group": "amplifiers",
         "quantity": 1,
@@ -8152,7 +8152,7 @@
     },
     {
         "id": "a10f1766-5d4b-4c62-8cc1-41bc6a80b19a",
-        "name": "OBE Signal Blender Stereo",
+        "name": "OBNESignal Blender Stereo",
         "description": "Stereo parallel wet/dry mix pedal",
         "type": "utility pedal",
         "group": "pedals",
@@ -8292,5 +8292,173 @@
         "manufacturer": "BOSS",
         "created_timestamp": "Sat Jul 19 2025 16:53:51 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sat Jul 19 2025 16:53:51 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Two Rock Sterling Silver Signature 150W",
+        "description": "High-end 6550 tube amplifier",
+        "type": "tube amplifier",
+        "group": "amplifiers",
+        "manufacturer": "Two Rock",
+        "quantity": 1
+    },
+    {
+        "name": "ProCo Fat Rat",
+        "description": "Classic MOSFET/opamp distortion pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "ProCo",
+        "quantity": 1
+    },
+    {
+        "name": "GFI Solis Ventus",
+        "description": "Dual reverb/delay pedal",
+        "type": "multi-effect pedal",
+        "group": "pedals",
+        "manufacturer": "GFI System",
+        "quantity": 1
+    },
+    {
+        "name": "ThorpyFX GE Peacekeeper MKII",
+        "description": "Boutique low-gain drive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "ThorpyFX",
+        "quantity": 1
+    },
+    {
+        "name": "OBNE Bathing",
+        "description": "Liminal delay pedal",
+        "type": "delay pedal",
+        "group": "pedals",
+        "manufacturer": "Old Blood Noise Endeavors",
+        "quantity": 1
+    },
+    {
+        "name": "Coffee Shop London Fog",
+        "description": "Digital tape delay pedal",
+        "type": "delay pedal",
+        "group": "pedals",
+        "manufacturer": "Coffee Shop Pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Coffee Shop Affogato Fuzz",
+        "description": "Asymmetric clipping fuzz pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Coffee Shop Pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Coffee Shop Donut Hole Overdrive",
+        "description": "Unique high-end drive pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Coffee Shop Pedals",
+        "quantity": 1
+    },
+    {
+        "name": "Wren and Cuff Eye See '78",
+        "description": "Mosfet Big Muff clone pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Wren and Cuff",
+        "quantity": 1
+    },
+    {
+        "name": "Wren and Cuff Caprid Black Violet",
+        "description": "Limted Edition Big Muff clone pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Wren and Cuff",
+        "quantity": 1
+    },
+    {
+        "name": "Wren and Cuff Caprid Blue Violet",
+        "description": "Violet era Big Muff clone pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Wren and Cuff",
+        "quantity": 1
+    },
+    {
+        "name": "Wren and Cuff OG Caprid",
+        "description": "Ram's Head Big Muff clone pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Wren and Cuff",
+        "quantity": 1
+    },
+    {
+        "name": "Ftelettronica Schumann PLL",
+        "description": "Schumann based octaver pedal",
+        "type": "synth pedal",
+        "group": "pedals",
+        "manufacturer": "Ftelettronica",
+        "quantity": 1
+    },
+    {
+        "name": "Ftelettronica Anonymous Flange",
+        "description": "Lovetone-based flanger pedal",
+        "type": "flanger pedal",
+        "group": "pedals",
+        "manufacturer": "Ftelettronica",
+        "quantity": 1
+    },
+    {
+        "name": "Ftelettronica Envelope Follower/Filter",
+        "description": "Lovetone-based envelope filter pedal",
+        "type": "filter pedal",
+        "group": "pedals",
+        "manufacturer": "Ftelettronica",
+        "quantity": 1
+    },
+    {
+        "name": "Ftelettronica Two Oscillator Trem/Vibrato",
+        "description": "Lovetone-based trem/vibrato pedal",
+        "type": "tremolo pedal",
+        "group": "pedals",
+        "manufacturer": "Ftelettronica",
+        "quantity": 1
+    },
+    {
+        "name": "Ftelettronica Twin Oscillator Phaser/Vibrato",
+        "description": "Lovetone-based phaser/vibrato pedal",
+        "type": "phaser pedal",
+        "group": "pedals",
+        "manufacturer": "Ftelettronica",
+        "quantity": 1
+    },
+    {
+        "name": "Ftelettronica Instrument Voicing Premaplifier",
+        "description": "Intersound IVP-based preamp/channel pedal",
+        "type": "preamp/boost pedal",
+        "group": "pedals",
+        "manufacturer": "Ftelettronica",
+        "quantity": 1
+    },
+    {
+        "name": "Ftelettronica Transformer Matrix Ring Modulator",
+        "description": "Lovetone-based ring-mod pedal",
+        "type": "ring-modulation pedal",
+        "group": "pedals",
+        "manufacturer": "Ftelettronica",
+        "quantity": 1
+    },
+    {
+        "name": "Ftelettronica Das Model",
+        "description": "Sunn Model-T based distortion pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Ftelettronica",
+        "quantity": 1
+    },
+    {
+        "name": "Chase Bliss Lost + Found",
+        "description": "Botique multi-effect pedal",
+        "type": "multi-effect pedal",
+        "group": "pedals",
+        "manufacturer": "Chase Bliss Audio",
+        "quantity": 1
     }
 ]
