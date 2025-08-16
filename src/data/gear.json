@@ -8523,5 +8523,77 @@
         "manufacturer": "Chase Bliss Audio",
         "created_timestamp": "Sat Aug 09 2025 01:28:28 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sat Aug 09 2025 01:28:28 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Bleak District Electric Tapescape",
+        "description": "Digital lo-fi tape delay pedal",
+        "type": "delay pedal",
+        "group": "pedals",
+        "manufacturer": "Bleak District Electric",
+        "quantity": 1
+    },
+    {
+        "name": "Intensive Care Audio Vena Cava",
+        "description": "Analog filter pedal",
+        "type": "filter pedal",
+        "group": "pedals",
+        "manufacturer": "Intensive Care Audio",
+        "quantity": 1
+    },
+    {
+        "name": "Intensive Car Audio Life Support",
+        "description": "Boost/drive and EQ pedal",
+        "type": "preamp/boost pedal",
+        "group": "pedals",
+        "manufacturer": "Intensive Care Audio",
+        "quantity": 1
+    },
+    {
+        "name": "Intensive Car Audio Recovery Phase",
+        "description": "Bi-phaser/tremolo pedal",
+        "type": "phaser pedal",
+        "group": "pedals",
+        "manufacturer": "Intensive Care Audio",
+        "quantity": 1
+    },
+    {
+        "name": "Intensive Car Audio Fideleater",
+        "description": "Digital delay/chorus pedal",
+        "type": "chorus/vibrato pedal",
+        "group": "pedals",
+        "manufacturer": "Intensive Care Audio",
+        "quantity": 1
+    },
+    {
+        "name": "API Tranzformer GT",
+        "description": "Buffered compressor/EQ/boost DI pedal",
+        "type": "preamp/boost pedal",
+        "group": "pedals",
+        "manufacturer": "API Audio",
+        "quantity": 1
+    },
+    {
+        "name": "JHS 424",
+        "description": "Tascam recorder-based preamp pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "JHS Pedals",
+        "quantity": 1
+    },
+    {
+        "name": "3rd Power DRGN 100W",
+        "description": "Joe Satriani signature tube amplifier",
+        "type": "tube amplifier",
+        "group": "amplifiers",
+        "manufacturer": "3rd Power Amplification",
+        "quantity": 1
+    },
+    {
+        "name": "Swart SST-30",
+        "description": "Vox-based tube amp w/ tremolo and reverb",
+        "type": "tube amplifier",
+        "group": "amplifiers",
+        "manufacturer": "3rd Power Amplification",
+        "quantity": 1
     }
 ]
