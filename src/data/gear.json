@@ -8710,5 +8710,29 @@
         "manufacturer": "Jext Telez Pedals",
         "created_timestamp": "Fri Sep 05 2025 00:26:38 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Fri Sep 05 2025 00:26:38 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Mr. Black Deuce Coupe",
+        "description": "High-gain preamp/drive pedal",
+        "type": "preamp/boost pedal",
+        "group": "pedals",
+        "manufacturer": "Mr. Black Pedal",
+        "quantity": 1
+    },
+    {
+        "name": "Collision Devices Nocturnal",
+        "description": "Digital delay and shimmer reverb pedal",
+        "type": "reverb pedal",
+        "group": "pedals",
+        "manufacturer": "Collision Devices",
+        "quantity": 1
+    },
+    {
+        "name": "Blackhawk Amplification Saruman CMOS Fuzz",
+        "description": "Botique CMOS fuzz pedal",
+        "type": "distortion pedal",
+        "group": "pedals",
+        "manufacturer": "Blackhawk Amplifiers",
+        "quantity": 2
     }
 ]
