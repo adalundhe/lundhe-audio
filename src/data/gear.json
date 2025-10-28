@@ -8743,5 +8743,29 @@
         "manufacturer": "Mr. Black Pedal",
         "created_timestamp": "Fri Sep 05 2025 00:34:27 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Fri Sep 05 2025 12:44:16 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Roland TR-1000",
+        "description": "Hybrid analog/digital drum machine and sampler",
+        "type": "analog drum machine",
+        "group": "keyboards/samplers",
+        "quantity": 1,
+        "manufacturer": "Roland"
+    },
+    { 
+        "name": "Akai MPC Live 3",
+        "description": "Proverbial DAW in a box machine",
+        "type": "sampler",
+        "group": "keyboards/samplers",
+        "quantity": 1,
+        "manufacturer": "Akai Audio",
+    },
+    {
+        "name": "Mystery Magicians M808A",
+        "description": "High-end stereo valve preamp",
+        "type": "preamp",
+        "group": "preamp/DI",
+        "quantity": 1,
+        "manufacturer": "Myster Magicians"
     }
 ]
