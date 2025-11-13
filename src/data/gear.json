@@ -5942,7 +5942,7 @@
     {
         "id": "50843b69-a6e9-49cd-8cd4-742d43534f4c",
         "name": "Victory Amplification Super Kraken",
-        "description": "Single-channel 100W tube amp w/ 2x12 matching cabinet",
+        "description": "Dual-channel 100W tube amp w/ 2x12 matching cabinet",
         "type": "tube amplifier",
         "group": "amplifiers",
         "quantity": 1,
@@ -8776,5 +8776,29 @@
         "manufacturer": "Akai Audio",
         "created_timestamp": "Tue Oct 28 2025 00:35:35 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Tue Oct 28 2025 00:35:35 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Victory Amplification DP40 The Duchess",
+        "description": "Forty-watt signature tube amp",
+        "type": "tube amplifier",
+        "group": "amplifiers",
+        "quantity": 1,
+        "manufacturer": "Victory Amplification"
+    },
+    {
+        "name": "Victory Amplication Super Sheriff 100W",
+        "description": "Dual-channel Marshall-inspired 100W tube amp",
+        "type": "tube amplifier",
+        "group": "amplifiers",
+        "quantity": 1,
+        "manufacturer": "Victoria Amplification"
+    },
+    {
+        "name": "Suhr PT15 I.R.",
+        "description": "Hybrid 15W tube amp w/ load box and I.R. loader",
+        "type": "tube amplifier",
+        "group": "amplifiers",
+        "quantity": 1,
+        "manufacturer": "Suhr"
     }
 ]
