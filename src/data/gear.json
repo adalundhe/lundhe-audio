@@ -8823,7 +8823,7 @@
         "description": "Dual ribbon microphone",
         "type": "ribbon microphone",
         "group": "microphones",
-        "quantity": 1,
+        "quantity": 2,
         "manufacturer": "Beyerdynamic"
     }
 ]
