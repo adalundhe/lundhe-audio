@@ -8809,5 +8809,21 @@
         "manufacturer": "Suhr",
         "created_timestamp": "Thu Nov 13 2025 05:54:41 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Thu Nov 13 2025 05:54:41 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Neumann M49V",
+        "description": "High-end classic tube mic reissue",
+        "type": "ldc microphone",
+        "group": "microphones",
+        "quantity": 1,
+        "manufacturer": "Neumann"
+    },
+    {
+        "name": "Beyerdynamic M160",
+        "description": "Dual ribbon microphone",
+        "type": "ribbon microphone",
+        "group": "microphones",
+        "quantity": 1,
+        "manufacturer": "Beyerdynamic"
     }
 ]
