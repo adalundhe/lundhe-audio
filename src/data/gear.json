@@ -8847,5 +8847,13 @@
         "group": "amplifiers",
         "quantity": 1,
         "manufacturer": "ENGL Amplification"
+    },
+    {
+        "name": "Q2 Audio F670-RS-TX",
+        "description": "Transformer-balanced F670 compressor reissue",
+        "type": "compressor",
+        "group": "dynamics",
+        "quantity": 1,
+        "manufacturer": "Q2 Audio"
     }
 ]
