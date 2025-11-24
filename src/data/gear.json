@@ -2392,7 +2392,7 @@
         "description": "Recreation of the classic passive Melodium 42b ribbon microphone",
         "type": "ribbon microphone",
         "group": "microphones",
-        "quantity": 2Melodium 42,
+        "quantity": 2,
         "manufacturer": "Kerwax",
         "created_timestamp": "Fri March 30 2025 23:03:33 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Wed Nov 19 2025 00:30:54 GMT+0000 (Coordinated Universal Time)"
