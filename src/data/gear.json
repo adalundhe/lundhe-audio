@@ -8864,5 +8864,13 @@
         "manufacturer": "Q2 Audio",
         "created_timestamp": "Mon Nov 24 2025 18:43:21 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Mon Nov 24 2025 18:43:21 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Heiserman H47 w/ M7 Capsule",
+        "description": "Modern recreation of the classi U47 mic",
+        "type": "ldc microphone",
+        "group": "microphones",
+        "quantity": 1,
+        "manufacturer": "Heiserman Audio"
     }
 ]
