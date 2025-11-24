@@ -771,12 +771,12 @@
     },
     {
         "id": "d90d2041-f38e-432e-8cb6-8d996f9a537b",
-        "name": "Wes Audio Phoebe",
+        "name": "WesAudio Phoebe",
         "description": "Mono 500-series classic preamp/DI",
         "type": "preamp",
         "group": "preamp/DI",
         "quantity": 2,
-        "manufacturer": "Wes Audio",
+        "manufacturer": "WesAudio",
         "created_timestamp": "Fri March 30 2025 23:03:21 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Wed Nov 19 2025 00:30:54 GMT+0000 (Coordinated Universal Time)"
     },
@@ -1161,7 +1161,7 @@
         "type": "compressor",
         "group": "dynamics",
         "quantity": 2,
-        "manufacturer": "Wes Audio",
+        "manufacturer": "WesAudio",
         "created_timestamp": "Fri March 30 2025 23:03:24 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Wed Nov 19 2025 00:30:54 GMT+0000 (Coordinated Universal Time)"
     },
@@ -1183,7 +1183,7 @@
         "type": "compressor",
         "group": "dynamics",
         "quantity": 1,
-        "manufacturer": "Wes Audio",
+        "manufacturer": "WesAudio",
         "created_timestamp": "Fri March 30 2025 23:03:24 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Wed Nov 19 2025 00:30:54 GMT+0000 (Coordinated Universal Time)"
     },
@@ -1249,7 +1249,7 @@
         "type": "compressor",
         "group": "dynamics",
         "quantity": 1,
-        "manufacturer": "Wes Audio",
+        "manufacturer": "WesAudio",
         "created_timestamp": "Fri March 30 2025 23:03:24 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Wed Nov 19 2025 00:30:54 GMT+0000 (Coordinated Universal Time)"
     },
@@ -1436,7 +1436,7 @@
         "type": "passive equalizer",
         "group": "equalization",
         "quantity": 1,
-        "manufacturer": "Wes Audio",
+        "manufacturer": "WesAudio",
         "created_timestamp": "Fri March 30 2025 23:03:26 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Wed Nov 19 2025 00:30:54 GMT+0000 (Coordinated Universal Time)"
     },
@@ -1447,7 +1447,7 @@
         "type": "active equalizer",
         "group": "equalization",
         "quantity": 1,
-        "manufacturer": "Wes Audio",
+        "manufacturer": "WesAudio",
         "created_timestamp": "Fri March 30 2025 23:03:26 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Wed Nov 19 2025 00:30:54 GMT+0000 (Coordinated Universal Time)"
     },
@@ -2392,7 +2392,7 @@
         "description": "Recreation of the classic passive Melodium 42b ribbon microphone",
         "type": "ribbon microphone",
         "group": "microphones",
-        "quantity": 1,
+        "quantity": 2Melodium 42,
         "manufacturer": "Kerwax",
         "created_timestamp": "Fri March 30 2025 23:03:33 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Wed Nov 19 2025 00:30:54 GMT+0000 (Coordinated Universal Time)"
@@ -8831,5 +8831,21 @@
         "manufacturer": "Beyerdynamic",
         "created_timestamp": "Wed Nov 19 2025 00:19:28 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Wed Nov 19 2025 00:30:54 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "WesAudio Pandora",
+        "description": "Digitally recallable analog multi-band compressor",
+        "type": "compressor",
+        "group": "dynamics",
+        "quantity": 1,
+        "manufacturer": "WesAudio"
+    },
+    {
+        "name": "ENGL Savage 120W MKII",
+        "description": "Quad-channel German tube amplifier",
+        "type": "tube amplifier",
+        "group": "amplifiers",
+        "quantity": 1,
+        "manufacturer": "ENGL Amplification"
     }
 ]
