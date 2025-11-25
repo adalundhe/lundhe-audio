@@ -8872,5 +8872,29 @@
         "group": "microphones",
         "quantity": 1,
         "manufacturer": "Heiserman Audio"
+    },
+    {
+        "name": "T.H.E Company Control One",
+        "description": "U67-voiced tube condenser mic",
+        "type": "ldc microphone",
+        "group": "microphones",
+        "quantity": 1,
+        "manufacturer": "T.H.E COmpany"
+    },
+    {
+        "name": "Monheim Microphones Royalty",
+        "description": "Vintage U67 voiced mic",
+        "type": "ldc microphone",
+        "group": "microphones",
+        "quantity": 1,
+        "manufacturer": "Monheim Microphones"
+    },
+    {
+        "name": "AEA R44CE",
+        "description": "Recreation of R44 ribbon microphone",
+        "type": "ribbon microphone",
+        "group": "microphones",
+        "quantity": 1,
+        "manufacturer": "AEA Ribbon Mics"
     }
 ]
