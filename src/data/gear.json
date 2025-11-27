@@ -2293,7 +2293,7 @@
         "description": "Dynamic condenser microphone",
         "type": "dynamic microphone",
         "group": "microphones",
-        "quantity": 1,
+        "quantity": 2,
         "manufacturer": "Beyerdynamic",
         "created_timestamp": "Fri March 30 2025 23:03:32 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Tue Nov 25 2025 00:08:50 GMT+0000 (Coordinated Universal Time)"
@@ -8908,5 +8908,37 @@
         "manufacturer": "AEA Ribbon Mics",
         "created_timestamp": "Tue Nov 25 2025 00:08:50 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Tue Nov 25 2025 00:08:50 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Electro-Voice RE-20",
+        "description": "Classic broadcast dynamic microphone",
+        "type": "dynamic microphone",
+        "group": "microphones",
+        "quantity": 1,
+        "manufacturer": "electro-Voice"
+    },
+    {
+        "name": "Sennheiser MD411-U",
+        "description": "Updated classic dynamic microphone",
+        "type": "dynamic microphone",
+        "group": "microphones",
+        "quantity": 1,
+        "manufacturer": "Sennheiser"
+    },
+    {
+        "name": "AKG D12 VR",
+        "description": "Vintage reissue dynamic microphone",
+        "type": "dynamic microphone",
+        "group": "microphones",
+        "quantity": 1,
+        "manufacturer": "AKG Professional Audio"
+    },
+    {
+        "name": "Lauten Audio Kick Mic",
+        "description": "Flexible modern dynamic microphone",
+        "type": "dynamic microphone",
+        "group": "microphones",
+        "quantity": 1,
+        "manufacturer": "Lauten Audio"
     }
 ]
