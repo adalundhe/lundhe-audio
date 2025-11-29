@@ -2029,7 +2029,7 @@
         "description": "Large diaphragm multi-pattern FET condenser microphone",
         "type": "ldc microphone",
         "group": "microphones",
-        "quantity": 1,
+        "quantity": 2,
         "manufacturer": "Mojave Audio",
         "created_timestamp": "Fri March 30 2025 23:03:30 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Thu Nov 27 2025 22:21:57 GMT+0000 (Coordinated Universal Time)"
@@ -8922,7 +8922,7 @@
     },
     {
         "id": "a4ec7d79-f154-481d-9def-5f54570b2068",
-        "name": "Sennheiser MD411-U",
+        "name": "Sennheiser MD441-U",
         "description": "Updated classic dynamic microphone",
         "type": "dynamic microphone",
         "group": "microphones",
@@ -8952,5 +8952,29 @@
         "manufacturer": "Lauten Audio",
         "created_timestamp": "Thu Nov 27 2025 22:21:57 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Thu Nov 27 2025 22:21:57 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Heiserman H251",
+        "description": "High-end classic tube mic clone",
+        "type": "ldc microphone",
+        "group": "microphones",
+        "quantity": 1,
+        "manufacturer": "Heiserman Audio"
+    },
+    {
+        "name": "Telefunken ELA M 251 E",
+        "description": "Reissue of the vintage classic mic",
+        "type": "ldc microphone",
+        "group": "microphones",
+        "quantity": 1,
+        "manufacturer": "Telefunken Elektroakustik"
+    },
+    {
+        "name": "Telefunken M82",
+        "description": "Dynamic kick/high-SPL microphone",
+        "type": "dynamic microphone",
+        "group": "microphones",
+        "quantity": 1,
+        "manufacturer": "Telefunken Elektroakustik"
     }
 ]
