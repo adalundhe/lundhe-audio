@@ -8976,5 +8976,13 @@
         "group": "microphones",
         "quantity": 1,
         "manufacturer": "Telefunken Elektroakustik"
+    },
+    {
+        "name": "AEA R88 MKII",
+        "description": "Passive stereo ribbon mic",
+        "type": "ribbon microphone",
+        "group": "microphones",
+        "quantity": 1,
+        "manufacturer": "AEA Ribbon Mics"
     }
 ]
