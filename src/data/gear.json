@@ -8996,5 +8996,13 @@
         "manufacturer": "AEA Ribbon Mics",
         "created_timestamp": "Sat Nov 29 2025 18:04:24 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sat Nov 29 2025 18:04:24 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Maag Audio EQ4M",
+        "description": "Modern classic six-band EQ",
+        "type": "equalizer",
+        "group": "equalization",
+        "quantity": 1,
+        "manufacturer": "Maag Audio"
     }
 ]
