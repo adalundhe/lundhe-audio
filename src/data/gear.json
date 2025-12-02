@@ -9004,5 +9004,13 @@
         "group": "equalization",
         "quantity": 1,
         "manufacturer": "Maag Audio"
+    },
+    {
+        "name": "Flame Maander",
+        "description": "Desktop hybrid filterbank synth",
+        "type": "hybrid polysynth",
+        "group": "keyboards/samplers",
+        "quantity": 1,
+        "manufacturer": "Flame Instruments"
     }
 ]
