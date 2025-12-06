@@ -2184,7 +2184,7 @@
         "type": "sdc microphone",
         "group": "microphones",
         "quantity": 2,
-        "manufacturer": "Samar Audio",
+        "manufacturer": "Samar Audio Design",
         "created_timestamp": "Fri March 30 2025 23:03:32 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Tue Dec 02 2025 22:11:24 GMT+0000 (Coordinated Universal Time)"
     },
@@ -2415,7 +2415,7 @@
         "type": "ribbon microphone",
         "group": "microphones",
         "quantity": 2,
-        "manufacturer": "Samar Audio",
+        "manufacturer": "Samar Audio Design",
         "created_timestamp": "Fri March 30 2025 23:03:33 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Tue Dec 02 2025 22:11:24 GMT+0000 (Coordinated Universal Time)"
     },
@@ -8878,7 +8878,7 @@
     },
     {
         "id": "8777561e-9c1b-410b-84cc-8c62bc5c12bc",
-        "name": "Monheim Microphones Royalty",
+        "name": "Monheim Royalty",
         "description": "Vintage U67 voiced mic",
         "type": "ldc microphone",
         "group": "microphones",
@@ -8996,5 +8996,37 @@
         "manufacturer": "AEA Ribbon Mics",
         "created_timestamp": "Sat Nov 29 2025 18:04:24 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sat Nov 29 2025 18:04:24 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Earthworks DM20 Gen 2",
+        "description": "Small diaphragm condenser drum microphone",
+        "type": "sdc microphone",
+        "group": "microphones",
+        "quantity": 3,
+        "manufacturer": "Earthquaker Devices"
+    },
+    {
+        "name": "Samar TF10",
+        "description": "Compact large diaphragm condenser microphone",
+        "type": "ldc microphone",
+        "group": "microphones",
+        "quantity": 1,
+        "manufacturer": "Samar Audio Design"
+    },
+    {
+        "name": "Lewitt DTP 640 REX",
+        "description": "Dual-capsule condenser/dynamic bass drum microphone",
+        "type": "dynamic microphone",
+        "group": "microphones",
+        "quantity": 1,
+        "manufacturer": "Lewitt Audio"
+    },
+    {
+        "name": "Monheim Omni High SPL Reference Microphone",
+        "description": "Matched pair high-SPL small diaphragm condenser microphone",
+        "type": "sdc microphone",
+        "group": "microphones",
+        "quantity": 1,
+        "manufacturer": "Monheim Microphones"
     }
 ]
