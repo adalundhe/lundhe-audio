@@ -9028,5 +9028,13 @@
         "group": "microphones",
         "quantity": 1,
         "manufacturer": "Monheim Microphones"
+    },
+    {
+        "name": "Orange Amplification Rockaverb MKIII 100W",
+        "description": "Dual channel classic rock amplifier",
+        "type": "tube amplifier",
+        "group": "amplifiers",
+        "quantity": 1,
+        "manufacturer": "Orange Amplification"
     }
 ]
