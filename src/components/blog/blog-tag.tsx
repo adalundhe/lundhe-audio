@@ -1,3 +1,4 @@
+"use client"
 import { Button } from '~/components/ui/button'
 import { usePostsStore } from '~/stores/posts-store';
 import { useShallow } from 'zustand/react/shallow'

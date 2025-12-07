@@ -1,4 +1,6 @@
+"use client"
 import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 import { Courier_Prime } from 'next/font/google';
  
 import { Button } from "~/components/ui/button";
@@ -8,7 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
-import { useSettings } from "~/hooks/use-settings";
+
 
 const courierPrime = Courier_Prime({
   weight: "400",
@@ -20,7 +22,8 @@ export const ModeToggle = ({
 }: {
   align: 'start' | 'center' | 'end'
 }) => {
-  const { updateMode } = useSettings()
+
+  const { setTheme } = useTheme();
  
   return (
     <div className={`self-${align} mr-4 flex flex-col items-center justify-center h-full`}>
@@ -41,13 +44,20 @@ export const ModeToggle = ({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="center" className={`mt-4 h-[130px] max-h-[130px] px-3 ${courierPrime.className}`}>
-          <DropdownMenuItem className="text-lg" onClick={() => updateMode("light")}>
+          <DropdownMenuItem className="text-lg" onClick={() => setTheme("light")}>
             Light
           </DropdownMenuItem>
-          <DropdownMenuItem  className="text-lg" onClick={() => updateMode("dark")}>
+          <DropdownMenuItem  className="text-lg" onClick={() => setTheme("dark")}>
             Dark
           </DropdownMenuItem>
-          <DropdownMenuItem className="text-lg" onClick={() => updateMode("system")}>
+          <DropdownMenuItem className="text-lg" onClick={() => setTheme(
+            window ? (
+              window.matchMedia("(prefers-color-scheme: dark)")
+              .matches
+              ? "dark"
+              : "light"
+            ) : "dark"
+          )}>
             System
           </DropdownMenuItem>
         </DropdownMenuContent>

@@ -1,34 +1,27 @@
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { Layout } from "~/components/Layout"
+"use client"
+import { Layout } from "~/components/Layout";
 import {
     Card,
     CardContent,
     CardDescription,
     CardHeader,
     CardTitle,
-} from "~/components/ui/card"
-import { Separator } from "~/components/ui/separator"
+} from "~/components/ui/card";
+import { Separator } from "~/components/ui/separator";
 
-export default function CommercialAudioService() {
+export default function About() {
 
-    const router = useRouter()
-
-    useEffect(() => {   
-        router.back()
-    }, )
-
-    return (
+  return (
     <>
-        <Layout>
-        <Card className="w-full lg:w-3/4 h-full rounded-none border-none shadow-none">
+      <Layout>
+        <Card className="w-full md:w-3/4 h-full rounded-none border-none shadow-none">
             <CardContent className="p-0 w-[100%] flex flex-col items-center">
                 <div className="w-3/4 h-full">
-                    <CardHeader className="p-0 pb-4 w-full flex flex-col">
-                        <CardTitle className="text-2xl lg:text-4xl">Commercial Audio</CardTitle>
-                        <CardDescription>(We do it well)</CardDescription>
+                    <CardHeader className="p-0 w-full flex flex-col">
+                        <CardTitle className="text-2xl md:text-4xl">What we do...</CardTitle>
+                        <CardDescription className="text-md font-light">(We do well)</CardDescription>
                     </CardHeader>
-                    <div className="pt-4">
+                    <div className="pt-4 text-lg font-thin">
                         <p>        
                             Lündhé Audio was founded in 2024 by long-time sound designer and engineer Ada Lundhe after 
                             over fifteen years of providing mixing, mastering, commercial audio, and sound-design services.
@@ -41,13 +34,13 @@ export default function CommercialAudioService() {
                         </p>
                     </div>
                     <div className="w-full flex justify-center">   
-                        <Separator className="w-3/4 my-8"/>
+                        <Separator className="w-3/4 my-4"/>
                     </div>
-                    <CardHeader className="p-0 pb-4 w-full flex flex-col items-end">
-                        <CardTitle className="text-2xl lg:text-4xl">Why we do it...</CardTitle>
-                        <CardDescription>(Sound is everything)</CardDescription>
+                    <CardHeader className="p-0 w-full flex flex-col items-end">
+                        <CardTitle className="text-2xl md:text-4xl">Why we do it...</CardTitle>
+                        <CardDescription className="text-md font-light">(Sound is everything)</CardDescription>
                     </CardHeader>
-                    <div className="pt-4">
+                    <div className="pt-4 text-lg font-thin">
                             <p>        
                                 Lündhé Audio is a passion project borne out of a love for everything sound. Whether a product of field recordings, 
                                 beloved traditional instruments, or wild modular synthesis - we love making noise and helping others fall in love 
@@ -85,7 +78,7 @@ export default function CommercialAudioService() {
                 
             </CardContent>
         </Card>
-        </Layout>
+      </Layout>
     </>
-    );
+  );
 }

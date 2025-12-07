@@ -77,6 +77,7 @@
     "embla-carousel-react": "^8.6.0",
     "geist": "^1.5.1",
     "graphql-request": "^7.3.5",
+    "html-react-parser": "^5.2.10",
     "input-otp": "^1.4.2",
     "ky": "^1.14.0",
     "lucide-react": "^0.511.0",

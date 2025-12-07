@@ -1,3 +1,4 @@
+"use client"
 import { Book, BookOpen } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo, useState } from 'react'

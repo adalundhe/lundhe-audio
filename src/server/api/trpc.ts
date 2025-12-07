@@ -15,6 +15,7 @@ import { ZodError } from "zod";
 import { env } from "~/env";
 import { ServerClient } from 'postmark';
 import twilio from 'twilio';
+import { type NextRequest } from "next/server";
 
 // import { auth } from "~/server/auth";
 import { db } from "~/server/db";
@@ -29,6 +30,7 @@ import { db } from "~/server/db";
 
 interface CreateContextOptions {
   session: Session | null;
+  headers?: Headers
 }
 
 /**
@@ -61,7 +63,7 @@ const createInnerTRPCContext = (opts: CreateContextOptions) => {
  *
  * @see https://trpc.io/docs/context
  */
-export const createTRPCContext = async (opts: CreateNextContextOptions) => {
+export const createTRPCContext = async (opts: { req: Partial<NextRequest> }) => {
   const { req } = opts;
 
   // Get the session from the server using the getServerSession wrapper function

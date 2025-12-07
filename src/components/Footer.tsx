@@ -1,6 +1,7 @@
+"use client"
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 // import { BiSolidMessageEdit } from "react-icons/bi";
@@ -203,11 +204,13 @@ export const Footer = () => {
         }        
     }
 
+    const path = usePathname()
+
     return (    
         <footer className={`w-full top-full h-[80px] pt-8 pb-8 px-3 ${courierPrime.className}`}>
             <div className="h-full w-full flex flex-col justify-center items-center text-xl font-normal">
                 {
-                    router.route.includes("contact") ? null :
+                    path?.includes("contact") ? null :
                     <Dialog open={formState.formStatus === "active" || formState.formStatus === "submitting" || formState.formStatus === "errored"}>
                         <DialogTrigger asChild onClick={() => setFormState({
                             formStatus: "active"
@@ -418,12 +421,12 @@ export const Footer = () => {
                                                     }
                                                 </div>
                                             </Button>
-                                            <Link onClick={() => setFormState({
-                                                formStatus: "active"
-                                            })} href="/privacy" className="my-2 text-lg font-light text-muted-foreground hover:underline">privacy</Link>
-                                            <Link onClick={() => setFormState({
-                                                formStatus: "active"
-                                            })} href="/terms_of_service" className="text-lg font-light mb-2 text-muted-foreground hover:underline">terms of service</Link>
+                                            <a onClick={() => setFormState({
+                                                formStatus: "closed"
+                                            })} href="/legal/privacy" className="my-2 text-lg font-light text-muted-foreground hover:underline">privacy</a>
+                                            <a onClick={() => setFormState({
+                                                formStatus: "closed"
+                                            })} href="/legal/terms-of-service" className="text-lg font-light mb-2 text-muted-foreground hover:underline">terms of service</a>
                                             <p className={`${formState.formStatus === "errored" ? '' : 'hidden'} text-sm text-red-600`}>{formState.formError ?? "An unknown error occured while submitting the form."}</p>
                                         </div>
                                         </DialogFooter>
@@ -435,7 +438,7 @@ export const Footer = () => {
 
                     </Dialog>
                 }
-                <p className="text-sm my-2 text-muted-foreground">&#169; ada lundhe 2024</p>
+                <p className="text-sm my-2 text-muted-foreground">&#169; ada lundhe 2025</p>
               
             </div>
         </footer>

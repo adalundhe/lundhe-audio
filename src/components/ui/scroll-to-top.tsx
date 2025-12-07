@@ -1,3 +1,4 @@
+"use client"
 import { Button, type ButtonProps } from "~/components/ui/button";
 import { useEffect, useRef, useState } from "react";
 import { CircleArrowUp } from 'lucide-react'
