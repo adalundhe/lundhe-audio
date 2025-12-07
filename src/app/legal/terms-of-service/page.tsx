@@ -1026,7 +1026,7 @@ export default function TermsOfService(){
         <b className="statement-end-if-in-editor" /> to:
       </span>
     </div>
-    <ul className="list-disc" style={{}}>
+    <ul className="list-disc mx-8" style={{}}>
       <li
         
         data-custom-class="body_text"
@@ -1330,7 +1330,7 @@ export default function TermsOfService(){
         <b className="statement-end-if-in-editor" /> you:
       </span>
     </div>
-    <ul>
+    <ul className="list-disc mx-8">
       <li
         
         data-custom-class="body_text"
@@ -2380,7 +2380,7 @@ export default function TermsOfService(){
               </span>
             </div>
           </div>
-          <ul className="list-disc" style={{color: ""}}>
+          <ul className="list-disc mx-8" style={{color: ""}}>
             <li
               
               data-custom-class="body_text"
@@ -4071,7 +4071,7 @@ export default function TermsOfService(){
             &nbsp;
           </b>
         </div>
-        <ul style={{ fontSize: "medium", textAlign: "left", color: "" }} className="list-disc">
+        <ul style={{ fontSize: "medium", textAlign: "left", color: "" }} className="list-disc mx-8">
           <li data-custom-class="body_text" style={{ lineHeight: "1.5" }}>
             <span style={{ color: "" }}>
               <span style={{ fontSize: 14 }}>
