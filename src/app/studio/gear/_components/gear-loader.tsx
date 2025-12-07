@@ -1,4 +1,3 @@
-"use client"
 import { GearDisplay } from '~/components/GearDisplay'
 import { Loader } from '~/components/Loader'
 import { Suspense } from "react";
