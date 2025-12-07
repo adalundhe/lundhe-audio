@@ -24,7 +24,7 @@ import { Separator } from "~/components/ui/separator";
 // import { LiaFileContractSolid } from "react-icons/lia";
 import { Courier_Prime } from 'next/font/google';
 import { ScrollArea } from "~/components/ui/scroll-area";
-import { NavBarImage } from "./NavBarImage";
+import NavBarImage from "./NavBarImage";
 import { ModeToggle } from './ModeToggle';
 
 const courierPrime = Courier_Prime({
@@ -84,14 +84,14 @@ export const NavBar = () => (
                                       <ul className="list-none pl-4">
                                           <li className="w-full py-2 flex items-center space-x-2 grow-1"> 
                                               {/* <PiInfoFill /> */}                   
-                                            <NavigationMenuLink href='/about' className={navigationMenuLinkStyle()} >
+                                            <NavigationMenuLink href='/studio/about' className={navigationMenuLinkStyle()} >
                                                 about
                                             </NavigationMenuLink>
                                           </li>
                                           <Separator/>
                                           <li className="w-full py-2 flex items-center space-x-2 grow-1">
                                               {/* <GiGearHammer /> */}
-                                              <NavigationMenuLink href="/gear" className={navigationMenuLinkStyle()}>
+                                              <NavigationMenuLink href="/studio/gear" className={navigationMenuLinkStyle()}>
                                                   gear
                                               </NavigationMenuLink>
                                           </li>
@@ -181,14 +181,14 @@ export const NavBar = () => (
                                       <ul className="list-none pl-4">
                                           <li className="w-full py-2 flex items-center space-x-2 grow-1">
                                               {/* <MdPolicy/> */}
-                                              <NavigationMenuLink href="/privacy" className={navigationMenuLinkStyle()}>
+                                              <NavigationMenuLink href="/legal/privacy" className={navigationMenuLinkStyle()}>
                                                   privacy
                                               </NavigationMenuLink>
                                           </li>
                                           <Separator/>
                                           <li className="w-full py-2 flex items-center space-x-2 grow-1">
                                               {/* <LiaFileContractSolid/> */}
-                                              <NavigationMenuLink href="/terms_of_service" className={navigationMenuLinkStyle()}>
+                                              <NavigationMenuLink href="/legal/terms-of-service" className={navigationMenuLinkStyle()}>
                                                   terms of service
                                               </NavigationMenuLink>
                                           </li>

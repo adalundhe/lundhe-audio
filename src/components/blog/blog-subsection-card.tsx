@@ -1,3 +1,4 @@
+"use client"
 import {Paragraph} from '~/components/blog/paragraph'
 import {Frame} from '~/components/blog/frame'
 import {BlogLink} from '~/components/blog/blog-link'

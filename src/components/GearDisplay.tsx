@@ -1,3 +1,4 @@
+"use client"
 import { GearTable } from './GearTable'
 import { api } from '~/utils/api';
 

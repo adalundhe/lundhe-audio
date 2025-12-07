@@ -1,3 +1,5 @@
+"use client"
+
 import { BlogNavCard } from '~/components/blog/blog-nav-card';
 import { BlogSearchBar } from '~/components/blog/blog-search-bar';
 import { Layout } from '~/components/Layout';

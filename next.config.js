@@ -15,10 +15,6 @@ import remarkParse from 'remark-parse';
 
 const nextConfig = {
   pageExtensions: ['md', 'mdx', 'tsx', 'ts', 'jsx', 'js'],
-  i18n: {
-    locales: ["en"],
-    defaultLocale: "en",
-  },
   transpilePackages: ["geist"],
 };
 

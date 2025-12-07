@@ -1,3 +1,4 @@
+"use client"
 import { useMemo, type JSX } from "react";
 import {Top} from '~/components/blog/top'
 import {Content} from '~/components/blog/content'

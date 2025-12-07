@@ -1,60 +1,72 @@
-import Image from "next/image";
-import { Layout } from "~/components/Layout";
-import { AspectRatio } from "~/components/ui/aspect-ratio";
+"use client"
+
+
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "~/components/ui/card";
-import { GearDisplay } from '~/components/GearDisplay'
-import { Loader } from '~/components/Loader'
-import { Suspense } from "react";
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "~/components/ui/carousel";
+import { AspectRatio } from "~/components/ui/aspect-ratio";
+import Image from "next/image";
 
 const blurDataUrl = "data:image/jpeg;base64,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AAAAAAAAAAAAAAFQBRAFEAUQAAAAAABRFBRFBVZUGhAGlZUFVlQVWVBVZUFVlQUQBoQBRAFVkBoQBdEAUZAUQBRAFRAFQQFEQFQQFQQARAVEQBFQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABRFBRFBVZUFVlQVWVBVZUFVlQVWQGhAFVlQUQBRAFE0BRDQUQBRAFEQFEAVEAVBAVBAVEAEEAEAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFEAVUAVUAVWVBVZUFVkBoQBoZUFEAVWTQaGV0FNQ0F0TQFGTQa1E00F01NNBdRNNBTU1NBdNTU0F01EBUEBUEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVAFEUFEAVWVBRAGhlQU1AGjWQGtNTTQXTU00F01NNBdNTTQXTU00F01nTQXTU00F01EBdNQBUQBUEBUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFEAUQBVQBRAFEAUQBdEAUQBRAFEAUQBRAAQBRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUBBQEFAQUBBQEFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUBFAAUBBQEFARQAFAQUBEaQEFAQUBBUBBQEFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQABQRQAFARQAFAQUBBVBBQEFARGgGRpAQUBEaAZFARGkBBUBBQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAFAAUAFARRQQUAFAQUBFFBBQEFAQUBEaAZFAQUBkUBEaQERpARGkBEaQEFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFABQAUEUUEUUEUUEUABQAFBBQEFAAABQEFQBFAQUBBQGRQERpARGkBEaQGRQGRUBBUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAFAFBQAUAFABQAUEUABQAAAUBBQEFAQUBBQEFARFAQUBkUBEUBkUBlGkBEUBlGkBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFRQFRQFABRQAUBQAFAAUAFBFAAUBBQAAAAAAAAEFAQVAEUBEUBEaQERpARFAZRpAZRpARFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFABQUBUUBRQAUBUUBQAFAAUAAAUAAAAAFAQUBAAAAQUBEUBBUBBUBBUBEUBlGkBlGkBlGkBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQEFAQUBAAAAFRQFRQFRQUFAUAUFABQAUAFABQAABQAAAAAUBBQEFQAAEFAQAEFQEFQEFQERQGRUBGWkBlGkBkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFBFAAUBFAAAGQAAAFRQFAFBQFAFVFAUAUAFBQAUAABQABQRQAAAAAAAAARQEFQBFAQAEABEUBEVARGkBlGkBlFqAiKgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAAoACgIoAAAwAAACgAoAKqKCqigKAKCgKigKigKACooAKAAACgAAAAAAAAgoCAAgqAIoCIoCIqAgqAiKgIioCVmtVKDNRUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVFAUAFAAAAUAAB5gAAAoAKqKAqKCqigoKAqKCgAoAKACgAKAAKAAAAAAAAAAAAAioAACAAgAIACIqAiNICMtIDNSrUoJWWqgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACgAoKAACgAAAAA8wAAAUAFVFBQUBUUFVFAVFBQAVUUBUUAAFAAUAAAAAFABFAQVAAAAAQABFQBFQBFQERQERUBEVASs1pmglRalBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVUUBUUBUUAABQAAB5AAAAoAKqKCqigKigqooCooKACqigKigKigAAoAAACooAAAACKgAAAAIAAioAioAioCAAiKgIioCVmtVmglSrUoIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACqigKigKigAAoAAAP//Z"
 
-export default function Studio() {
+const images: {
+    src: string,
+    altTxt: string
+  }[] = [
+    {
+        src: "/studio/under_desk_gear.jpg",
+        altTxt: "A photo of Lündhé Audio's analog equipment - including Retro Instruments, Buzz Audio, Empirical Labs, Manley, and more."
+    },
+    {
+        src: "/studio/chandler_redd_mic.jpeg",
+        altTxt: "A photo of Lündhé Audio's Chandler REDD mic."
+    },
+    {
+        src: "/studio/grp_a4.jpeg",
+        altTxt: "A photo of Lündhé Audio's GRP A4 synth."
+    },
+    {
+        src: "/studio/modular_01.jpeg",
+        altTxt: "A photo of one of many of Lündhé Audio's Eurorack synthesizers."
+    },
+    {
+        src: "/studio/moog_and_pedals.jpeg",
+        altTxt: "A photo of Lündhé Audio's Moog Model D and two Chase Bliss pedals."
+    }
+]
+
+export const HomeCarousel = () => {
 
     return (
-        <>
-        <Layout>
-            <Card className="w-full md:w-3/4 h-full rounded-none border-none shadow-none">
-                <CardHeader className="p-0 mb-4 flex flex-col items-center px-4">
-                    <CardTitle className="text-4xl">Studio and Gear</CardTitle>
-                    <CardDescription className="text-lg font-light">Quality makes all the difference.</CardDescription>
-                </CardHeader>
-                <div className="w-full mt-4 h-full">
-                    <CardContent className="p-0 w-[100%] flex flex-col items-center mb-4">       
-                        <div className="flex items-center w-2/3 px-4 h-2/3">
-                            <AspectRatio ratio={4 / 3} className="flex items-center justify-center">
-                                <Image
-                                    loader={() => "/studio/studio_front_monochrome.jpeg"}
-                                    src="/studio/studio_front_monochrome.jpeg"
-                                    alt="The front of the studio for Lündhé Audio including Raven MTI2 and Console 1 control, Neve 5060 summing, ExMachina, Focal, and Neuman monitors, and numerous outboard pieces."
-                                    width="0"
-                                    height="0"
-                                    sizes="100vw"
-                                    className="w-full h-full"
-                                    placeholder="blur"
-                                    blurDataURL={blurDataUrl}
-                                />
-                            </AspectRatio>
-                        </div>
-                        <div className="px-4 my-4 text-xl font-thin my-8">
-                            <p>
-                                Lündhé Audio is equipped to handle almost any need or situation, with top-tier analog equipment, state of the art software, and an ever growing
-                                catalogue of instruments and tools to make musical magic happen. We're not afraid blend cutting-edge music tech with old-school sonics and 
-                                techniques to create something new. Here's what we use.
-                            </p>
-                        </div>
-                        <Suspense fallback={<Loader/>}>
-                            <GearDisplay/>
-                        </Suspense>
-                    </CardContent>
-                </div>
-            </Card>
-        </Layout>
-    </>
-  );
+
+          <Carousel className="w-3/4 h-3/4">
+            <CarouselContent>
+              {images.map((image, index) => (
+                <CarouselItem key={`studio_image_${index}`} className="flex items-center justify-center w-full">
+                    
+                  <AspectRatio ratio={4 / 3} className="flex items-center justify-center my-4 ">
+                      <Image
+                          loader={()=> image.src}
+                          src={image.src}
+                          alt={image.altTxt}
+                          width="0"
+                          height="0"
+                          sizes="100vw"
+                          className="w-2/3 h-full"
+                          placeholder="blur"
+                          blurDataURL={blurDataUrl}
+                      />
+                  </AspectRatio>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+    )
+
 }
