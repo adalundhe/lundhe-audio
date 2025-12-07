@@ -1,6 +1,6 @@
 import { useMemo } from "react"
 import { type Row } from "@tanstack/react-table"
-import { type EquipmentItem } from "~/server/api/routers/equipment"
+import { type EquipmentItem } from "~/server/db/schema"
 import { Badge } from "~/components/ui/badge"
 
 export const GearNameCell = ({

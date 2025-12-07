@@ -1,5 +1,5 @@
 
-import { type EquipmentItem } from "~/server/api/routers/equipment";
+import { type EquipmentItem } from "~/server/db/schema";
 import { Button } from "~/components/ui/button"
 import { TableCell } from "~/components/ui/table"
 import {
