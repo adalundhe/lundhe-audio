@@ -16,6 +16,7 @@ export const BlogSection = ({
     type,
     position,
     separatorWidth,
+    topSpacer = 'show'
 }: {
     title: string,
     description: string,
@@ -25,6 +26,7 @@ export const BlogSection = ({
     type?: 'main' | 'subsection'
     separatorWidth?: string
     contentStyles?: string
+    topSpacer?: 'show' | 'hide'
 }) => {
 
     const styles = useMemo(() => contentStyles, [contentStyles])
@@ -35,10 +37,17 @@ export const BlogSection = ({
     return (
         sectionType === 'main' ?
         <>
-            <div className='flex items-center justify-center w-full'>
-                <Separator className={`w-${sepWidth}`}/>
-            </div>
-            <Top/>
+            {
+                topSpacer === 'show' ?
+                <>
+                    <div className='flex items-center justify-center w-full'>
+                        <Separator className={`w-${sepWidth}`}/>
+                    </div>
+                    <Top/>
+                </>
+                :
+                null
+            }
             <Header
                 text={title}
                 description={description}

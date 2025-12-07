@@ -44,7 +44,7 @@ import {
   TabsTrigger,
 } from "~/components/ui/tabs"
 import { Courier_Prime } from 'next/font/google';
-import { type EquipmentItem } from "~/server/api/routers/equipment";
+import { type EquipmentItem } from "~/server/db/schema";
 import { ColumnResizer } from './ColumnResizer'
 import { FilterCell, resetFilters } from './FilterCell'
 import { ScrollArea } from "./ui/scroll-area"

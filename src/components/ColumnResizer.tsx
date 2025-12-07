@@ -1,5 +1,5 @@
 import { type Header } from "@tanstack/react-table";
-import { type EquipmentItem } from "~/server/api/routers/equipment";
+import { type EquipmentItem } from "~/server/db/schema";
 
 export const ColumnResizer = ({
   header,
