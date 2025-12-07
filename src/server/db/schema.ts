@@ -17,20 +17,6 @@ import {
  */
 export const createTable = sqliteTableCreator((name) => name);
 
-export type EquipmentItem = {
-    id: string
-    name: string
-    description: string
-    type: string
-    group: string
-    manufacturer: string
-    quantity: number
-    created_timestamp: string
-    updated_timestamp: string | null
-}
-
-
-
 export const contactRequestor = createTable(
   'ContactRequestor',
   {

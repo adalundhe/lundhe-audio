@@ -1,5 +1,5 @@
 
-import { type EquipmentItem } from "~/server/db/schema";
+import { type EquipmentItem } from "~/server/db/types";
 import { Button } from "~/components/ui/button"
 import { TableCell } from "~/components/ui/table"
 import {
