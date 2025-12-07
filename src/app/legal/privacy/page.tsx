@@ -82,7 +82,7 @@ export default function Privacy() {
                   </span>
                 </span>
               </div>
-              <ul>
+              <ul className="list-disc mx-8 my-4">
                 <li data-custom-class="body_text" style={{ lineHeight: "1.5" }}>
                   <span style={{ fontSize: 15,  }}>
                     <span style={{ fontSize: 15,  }}>
@@ -141,7 +141,7 @@ export default function Privacy() {
                     <span style={{ fontSize: 15 }} />
                   </b>
                 </div>
-                <ul>
+                <ul className="list-disc mx-8">
                   <li
                     data-custom-class="body_text"
                     style={{ lineHeight: "1.5" }}
@@ -170,7 +170,7 @@ export default function Privacy() {
                     </span>
                   </span>
                 </div>
-                <ul>
+                <ul className="list-disc mx-8">
                   <li
                     data-custom-class="body_text"
                     style={{ lineHeight: "1.5" }}
@@ -842,7 +842,7 @@ export default function Privacy() {
                     </span>
                   </span>
                 </div>
-                <ul>
+                <ul className="list-disc mx-8">
                   <li
                     data-custom-class="body_text"
                     style={{ lineHeight: "1.5" }}
@@ -873,7 +873,7 @@ export default function Privacy() {
                     </span>
                   </span>
                 </div>
-                <ul>
+                <ul className="list-disc mx-8">
                   <li
                     data-custom-class="body_text"
                     style={{ lineHeight: "1.5" }}
@@ -904,7 +904,7 @@ export default function Privacy() {
                     </span>
                   </span>
                 </div>
-                <ul>
+                <ul className="list-disc mx-8">
                   <li
                     data-custom-class="body_text"
                     style={{ lineHeight: "1.5" }}
@@ -935,7 +935,7 @@ export default function Privacy() {
                     </span>
                   </span>
                 </div>
-                <ul>
+                <ul className="list-disc mx-8">
                   <li
                     data-custom-class="body_text"
                     style={{ lineHeight: "1.5" }}
@@ -1135,7 +1135,7 @@ export default function Privacy() {
                       </span>
                     </span>
                   </div>
-                  <ul>
+                  <ul className="list-disc mx-8">
                     <li
                       data-custom-class="body_text"
                       style={{ lineHeight: "1.5" }}
@@ -1223,7 +1223,7 @@ export default function Privacy() {
                         </span>
                       </span>
                     </div>
-                    <ul>
+                    <ul className="list-disc mx-8">
                       <li
                         data-custom-class="body_text"
                         style={{ lineHeight: "1.5" }}
@@ -1297,7 +1297,7 @@ export default function Privacy() {
                           <span style={{ fontSize: 15 }} />
                         </b>
                       </div>
-                      <ul>
+                      <ul className="list-disc mx-8">
                         <li
                           data-custom-class="body_text"
                           style={{ lineHeight: "1.5" }}
@@ -1348,7 +1348,7 @@ export default function Privacy() {
                             <span style={{ fontSize: 15 }} />
                           </b>
                         </div>
-                        <ul>
+                        <ul className="list-disc mx-8">
                           <li
                             data-custom-class="body_text"
                             style={{ lineHeight: "1.5" }}
@@ -1440,7 +1440,7 @@ export default function Privacy() {
                               <span style={{ fontSize: 15 }} />
                             </b>
                           </p>
-                          <ul>
+                          <ul className="list-disc mx-8">
                             <li
                               data-custom-class="body_text"
                               style={{ lineHeight: "1.5" }}
@@ -1497,7 +1497,7 @@ export default function Privacy() {
                           <p style={{ fontSize: 15, lineHeight: "1.5" }}>
                             <b className="block-component" />
                           </p>
-                          <ul>
+                          <ul className="list-disc mx-8">
                             <li
                               data-custom-class="body_text"
                               style={{ lineHeight: "1.5" }}
@@ -1873,7 +1873,7 @@ export default function Privacy() {
                                                             </span>
                                                           </span>
                                                         </div>
-                                                        <ul>
+                                                        <ul className="list-disc mx-8">
                                                           <li
                                                             data-custom-class="body_text"
                                                             style={{
@@ -6110,7 +6110,7 @@ export default function Privacy() {
                                                                       <b className="block-component" />
                                                                     </span>
                                                                   </div>
-                                                                  <ul>
+                                                                  <ul className="list-disc mx-8">
                                                                     <li
                                                                       data-custom-class="body_text"
                                                                       style={{
@@ -6143,7 +6143,7 @@ export default function Privacy() {
                                                                       <b className="block-component" />
                                                                     </span>
                                                                   </div>
-                                                                  <ul>
+                                                                  <ul className="list-disc mx-8">
                                                                     <li data-custom-class="body_text">
                                                                       <span
                                                                         style={{
@@ -6170,7 +6170,7 @@ export default function Privacy() {
                                                                       <b className="block-component" />
                                                                     </span>
                                                                   </div>
-                                                                  <ul>
+                                                                  <ul className="list-disc mx-8">
                                                                     <li data-custom-class="body_text">
                                                                       <span
                                                                         style={{
@@ -6220,7 +6220,7 @@ export default function Privacy() {
                                                                       <b className="block-component" />
                                                                     </span>
                                                                   </div>
-                                                                  <ul>
+                                                                  <ul className="list-disc mx-8">
                                                                     <li
                                                                       data-custom-class="body_text"
                                                                       style={{
@@ -6254,7 +6254,7 @@ export default function Privacy() {
                                                                       </b>
                                                                     </span>
                                                                   </div>
-                                                                  <ul>
+                                                                  <ul className="list-disc mx-8">
                                                                     <li
                                                                       data-custom-class="body_text"
                                                                       style={{
@@ -7067,7 +7067,7 @@ export default function Privacy() {
                                                                                           <b className="block-component" />
                                                                                         </span>
                                                                                       </div>
-                                                                                      <ul>
+                                                                                      <ul className="list-disc mx-8">
                                                                                         <li
                                                                                           data-custom-class="body_text"
                                                                                           style={{
@@ -7112,7 +7112,7 @@ export default function Privacy() {
                                                                                           <b className="block-component" />
                                                                                         </span>
                                                                                       </div>
-                                                                                      <ul>
+                                                                                      <ul className="list-disc mx-8">
                                                                                         <li
                                                                                           data-custom-class="body_text"
                                                                                           style={{
@@ -7151,7 +7151,7 @@ export default function Privacy() {
                                                                                           <b className="block-component" />
                                                                                         </span>
                                                                                       </div>
-                                                                                      <ul>
+                                                                                      <ul className="list-disc mx-8">
                                                                                         <li
                                                                                           data-custom-class="body_text"
                                                                                           style={{
@@ -7192,7 +7192,7 @@ export default function Privacy() {
                                                                                           <b className="block-component" />
                                                                                         </span>
                                                                                       </div>
-                                                                                      <ul>
+                                                                                      <ul className="list-disc mx-8">
                                                                                         <li
                                                                                           data-custom-class="body_text"
                                                                                           style={{
@@ -7234,7 +7234,7 @@ export default function Privacy() {
                                                                                           <b className="block-component" />
                                                                                         </span>
                                                                                       </div>
-                                                                                      <ul>
+                                                                                      <ul className="list-disc mx-8">
                                                                                         <li
                                                                                           data-custom-class="body_text"
                                                                                           style={{
@@ -7281,7 +7281,7 @@ export default function Privacy() {
                                                                                           <b className="block-component" />
                                                                                         </span>
                                                                                       </div>
-                                                                                      <ul>
+                                                                                      <ul className="list-disc mx-8">
                                                                                         <li
                                                                                           data-custom-class="body_text"
                                                                                           style={{
@@ -7321,7 +7321,7 @@ export default function Privacy() {
                                                                                           <b className="block-component" />
                                                                                         </span>
                                                                                       </div>
-                                                                                      <ul>
+                                                                                      <ul className="list-disc mx-8">
                                                                                         <li
                                                                                           data-custom-class="body_text"
                                                                                           style={{
@@ -7436,7 +7436,7 @@ export default function Privacy() {
                                                                                           <b className="block-component" />
                                                                                         </span>
                                                                                       </div>
-                                                                                      <ul>
+                                                                                      <ul className="list-disc mx-8">
                                                                                         <li
                                                                                           data-custom-class="body_text"
                                                                                           style={{
@@ -7486,7 +7486,7 @@ export default function Privacy() {
                                                                                           <b className="block-component" />
                                                                                         </span>
                                                                                       </div>
-                                                                                      <ul>
+                                                                                      <ul className="list-disc mx-8">
                                                                                         <li
                                                                                           data-custom-class="body_text"
                                                                                           style={{
@@ -7548,7 +7548,7 @@ export default function Privacy() {
                                                                                           />
                                                                                         </b>
                                                                                       </div>
-                                                                                      <ul>
+                                                                                      <ul className="list-disc mx-8">
                                                                                         <li
                                                                                           data-custom-class="body_text"
                                                                                           style={{
@@ -7614,7 +7614,7 @@ export default function Privacy() {
                                                                                           <b className="block-component" />
                                                                                         </span>
                                                                                       </div>
-                                                                                      <ul>
+                                                                                      <ul className="list-disc mx-8">
                                                                                         <li
                                                                                           data-custom-class="body_text"
                                                                                           style={{
@@ -7673,7 +7673,7 @@ export default function Privacy() {
                                                                                           />
                                                                                         </b>
                                                                                       </div>
-                                                                                      <ul>
+                                                                                      <ul className="list-disc mx-8">
                                                                                         <li
                                                                                           data-custom-class="body_text"
                                                                                           style={{
@@ -7729,7 +7729,7 @@ export default function Privacy() {
                                                                                           />
                                                                                         </b>
                                                                                       </div>
-                                                                                      <ul>
+                                                                                      <ul className="list-disc mx-8">
                                                                                         <li
                                                                                           data-custom-class="body_text"
                                                                                           style={{
