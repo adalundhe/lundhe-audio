@@ -2,15 +2,26 @@
 
 import { BlogNavCard } from '~/components/blog/blog-nav-card';
 import { BlogSearchBar } from '~/components/blog/blog-search-bar';
-import { Layout } from '~/components/Layout';
 import {
-    Card,
     CardDescription,
     CardHeader,
     CardTitle
 } from "~/components/ui/card";
 import { usePostsStore, type Blog } from '~/stores/posts-store';
 import { useShallow } from 'zustand/react/shallow'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Lündhé Audio | Blog',
+  description: "Lündhé Audio, an Austin based post-tracking mixing, mastering, sound design, and commercial audio studio.",
+  icons: [
+    {
+      rel: "icon",
+      url: "/favicon.ico",
+    }
+  ],
+}
+
 
 
 
