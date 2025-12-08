@@ -11,7 +11,7 @@ import type { Metadata } from 'next'
 import { ServicesSection } from "../_components/services-section";
 
 export const metadata: Metadata = {
-  title: 'Lündhé Audio | Home',
+  title: 'Lündhé Audio | Services | Mixing',
   description: "Lündhé Audio, an Austin based post-tracking mixing, mastering, sound design, and commercial audio studio.",
   icons: [
     {
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   ],
 }
 
-export default async function Home() {
+export default async function MixingServicesPage() {
 
   return (
     <>
@@ -208,7 +208,7 @@ export default async function Home() {
             >
               <div className="w-full text-xl font-thin my-4">
                 <p>
-                  At Lündhé Audio we strive to get it right te first time, however we also recognize that artistic vision is sophisticated
+                  At Lündhé Audio we strive to get it right the first time, however we also recognize that artistic vision is sophisticated
                   and changes. As a result, we offer a generous, scaling revision policy.
                 </p>
                 <br/>
