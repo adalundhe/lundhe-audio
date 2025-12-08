@@ -13,17 +13,17 @@ export const ServicesSection = ({
     title,
     children,
     group,
-    chevronSide = 'left',
+    side = 'left',
 }: {
     title: string,
     group: string,
     children: ReactNode
-    chevronSide?: 'left' | 'right'
+    side?: 'left' | 'right'
 }) => {
     return (
-        <Accordion type="single" collapsible className="flex flex-col w-1/2">
+        <Accordion type="single" collapsible className={`flex flex-col w-full ${side === 'left' ? 'self-start' : 'self-end'}`}>
             <AccordionItem value={group} key={`service-section-${group}`}>
-                <AccordionTrigger chevronSide={chevronSide} className="text-2xl">
+                <AccordionTrigger chevronSide={side} className="text-2xl">
                     {title}
                 </AccordionTrigger>
                 <AccordionContent className="p-0">
