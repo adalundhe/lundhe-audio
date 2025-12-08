@@ -1,4 +1,3 @@
-"use client";
 import { Layout } from "~/components/Layout";
 import { Card, CardContent } from "~/components/ui/card";
 import type { Metadata } from 'next'
