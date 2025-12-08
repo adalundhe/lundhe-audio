@@ -3,9 +3,20 @@ import { Layout } from '~/components/Layout';
 import {
     Card,
 } from "~/components/ui/card";
+import type { Metadata } from 'next'
 
+export const metadata: Metadata = {
+  title: 'Lündhé Audio | Blog',
+  description: "Lündhé Audio, an Austin based post-tracking mixing, mastering, sound design, and commercial audio studio.",
+  icons: [
+    {
+      rel: "icon",
+      url: "/favicon.ico",
+    }
+  ],
+}
 
-export default function BlogLayout({
+export default  async function BlogLayout({
     children
 }: {
     children: ReactNode
