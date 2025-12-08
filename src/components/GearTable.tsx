@@ -286,7 +286,6 @@ export const GearTable = ({
 
   }, [manufacturers])
 
-  console.log(manufacturerGroups)
 
   return (
     <div className="w-full h-[600px]">
