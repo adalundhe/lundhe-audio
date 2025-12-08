@@ -48,7 +48,7 @@ export default async function MixingServicesPage() {
           </CardContent>
           <Separator className="w-full my-4"/>
           <CardContent className="p-0 w-full flex">
-            <div className="w-1/2 flex flex-col">
+            <div className="lg:w-1/2 flex flex-col">
               <ServicesSection
                 title="how it works"
                 group="how-it-works"
