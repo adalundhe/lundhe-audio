@@ -1,7 +1,7 @@
 import { createTRPCRouter, publicProcedure } from "../trpc"
 import { db } from "~/server/db/client"
 import { products, productOptions, discounts } from "~/server/db/schema"
-import { eq } from "drizzle-orm"
+import { eq, or } from "drizzle-orm"
 
 export const mixQuotesRouter = createTRPCRouter({
   // Product queries
@@ -9,10 +9,27 @@ export const mixQuotesRouter = createTRPCRouter({
   // Get all pricing data in a single call for initial load
   getAllMixingPricingData: publicProcedure.query(async () => {
     const [productsData, optionsData, discountsData] = await Promise.all([
-      db.select().from(products).where(eq(products.productType, "mixing")),
-      db.select().from(productOptions).where(eq(productOptions.productType, "mixing")),
-      db.select().from(discounts).where(eq(discounts.productType, "mixing")),
+      db.select().from(products).where(
+        or(
+          eq(products.productType, "mixing"),
+          eq(products.productType, "mixing-and-mastering"),
+        ),
+      ),
+      db.select().from(productOptions).where(
+        or(
+          eq(productOptions.productType, "mixing"),
+          eq(productOptions.productType, "mixing-and-mastering"),
+        ),
+      ),
+      db.select().from(discounts).where(
+        or(
+          eq(discounts.productType, "mixing"),
+          eq(discounts.productType, "mixing-and-mastering"),
+        ),
+      ),
     ])
+
+    console.log(discountsData)
 
     return {
       products: productsData,
@@ -22,9 +39,24 @@ export const mixQuotesRouter = createTRPCRouter({
   }),
   getAllMasteringPricingData: publicProcedure.query(async () => {
     const [productsData, optionsData, discountsData] = await Promise.all([
-      db.select().from(products).where(eq(products.productType, "mastering")),
-      db.select().from(productOptions).where(eq(productOptions.productType, "mastering")),
-      db.select().from(discounts).where(eq(discounts.productType, "mastering")),
+      db.select().from(products).where(
+        or(
+          eq(products.productType, "mastering"),
+          eq(products.productType, "mixing-and-mastering"),
+        ),
+      ),
+      db.select().from(productOptions).where(
+        or(
+          eq(productOptions.productType, "mastering"),
+          eq(productOptions.productType, "mixing-and-mastering"),
+        ),
+      ),
+      db.select().from(discounts).where(
+        or(
+          eq(discounts.productType, "mastering"),
+          eq(discounts.productType, "mixing-and-mastering"),
+        ),
+      ),
     ])
 
     return {

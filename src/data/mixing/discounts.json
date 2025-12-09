@@ -5,7 +5,7 @@
     "description": "10% discount for projects with 5-9 songs",
     "discountPercentage": 10,
     "category": "volume",
-    "productType": "mixing",
+    "productType": "mixing-and-mastering",
     "minThreshold": 5,
     "maxThreshold": 9
   },
@@ -15,7 +15,7 @@
     "description": "25% discount for projects with 10+ songs",
     "discountPercentage": 25,
     "category": "volume",
-    "productType": "mixing",
+    "productType": "mixing-and-mastering",
     "minThreshold": 10,
     "maxThreshold": null
   },
@@ -25,7 +25,7 @@
     "description": "15% discount when applying same option to 5+ songs",
     "discountPercentage": 15,
     "category": "option_volume",
-    "productType": "mixing",
+    "productType": "mixing-and-mastering",
     "minThreshold": 5,
     "maxThreshold": 9
   },
@@ -35,7 +35,7 @@
     "description": "25% discount when applying same option to 10+ songs",
     "discountPercentage": 25,
     "category": "option_volume",
-    "productType": "mixing",
+    "productType": "mixing-and-mastering",
     "minThreshold": 10,
     "maxThreshold": null
   },
@@ -67,45 +67,6 @@
     "category": "bundle",
     "productType": "mixing",
     "minThreshold": null,
-    "maxThreshold": null
-  },{
-    "id": "ep_deal",
-    "name": "EP Deal",
-    "description": "10% discount for projects with 5-9 songs",
-    "discountPercentage": 10,
-    "category": "volume",
-    "productType": "mastering",
-    "minThreshold": 5,
-    "maxThreshold": 9
-  },
-  {
-    "id": "album_deal",
-    "name": "Album Deal",
-    "description": "20% discount for projects with 10+ songs",
-    "discountPercentage": 20,
-    "category": "volume",
-    "productType": "mastering",
-    "minThreshold": 10,
-    "maxThreshold": null
-  },
-  {
-    "id": "option_volume_5",
-    "name": "Option Volume Discount (5+)",
-    "description": "15% discount when applying same option to 5+ songs",
-    "discountPercentage": 15,
-    "category": "option_volume",
-    "productType": "mastering",
-    "minThreshold": 5,
-    "maxThreshold": 9
-  },
-  {
-    "id": "option_volume_10",
-    "name": "Option Volume Discount (10+)",
-    "description": "25% discount when applying same option to 10+ songs",
-    "discountPercentage": 25,
-    "category": "option_volume",
-    "productType": "mastering",
-    "minThreshold": 10,
     "maxThreshold": null
   },
   {
