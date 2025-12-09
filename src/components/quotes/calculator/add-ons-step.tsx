@@ -239,8 +239,8 @@ export function AddOnsStep({ addOns, setAddOns, songs, pricingData }: AddOnsStep
 
               {isOpen && (
                 <div className="border-t border-border p-4 bg-muted/30">
-                  <div className="flex lg:flex-row lg:my-0 my-2 flex-col items-center justify-between mb-3">
-                    <span className="text-sm text-muted-foreground">
+                  <div className="flex lg:flex-row lg:my-0 my-2 lg:gap-0 gap-4 flex-col items-center justify-between mb-3">
+                    <span className="text-sm lg:text-left text-center text-muted-foreground">
                       Select songs to apply {addon.label.toLowerCase()}:
                     </span>
                     <div className="flex gap-2">
