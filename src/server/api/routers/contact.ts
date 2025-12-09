@@ -1,7 +1,9 @@
 import { z } from "zod";
-import { type ServerClient } from 'postmark'
 import { type Twilio } from 'twilio'
+import { ServerClient } from 'postmark';
 import ky, { type HTTPError } from 'ky';
+
+import twilio from 'twilio';
 import { env } from "~/env";
 import {
   createTRPCRouter,
@@ -146,6 +148,9 @@ export const contactRouter = createTRPCRouter({
      }))
     .mutation(async ({ input, ctx }) => {
 
+
+        const twilioClient = twilio(env.TWILIO_CAMPAIGN_ID, env.TWILIO_AUTH_TOKEN);
+
         const captchaResponse = await submitCaptchaVerification({
             captchaToken: input.captchaToken
         })
@@ -154,19 +159,22 @@ export const contactRouter = createTRPCRouter({
             return captchaResponse
         }
 
+
+        const postmarkClient = new ServerClient(env.POSTMARK_TOKEN);
+
         const emailResponses = await Promise.all([
             sendEmail({
                 fromEmail: env.LUNDHE_AUDIO_EMAIL,
                 toEmail: input.email,
                 templateId: 37905639, // Contact received template ID,
-                client: ctx.postmark,
+                client: postmarkClient,
                 emailType: "outgoing"
             }),
             sendEmail({
                 fromEmail: env.LUNDHE_AUDIO_EMAIL,
                 toEmail: env.LUNDHE_AUDIO_EMAIL,
                 templateId: 37911004, // Contact received template ID,
-                client: ctx.postmark,
+                client: postmarkClient,
                 templateValues: {
                     name: input.name,
                     phone: input.phone,
@@ -197,7 +205,7 @@ export const contactRouter = createTRPCRouter({
             const textResponse = await sendSMSMessage({
                 toPhone: input.phone,
                 message: "Thanks for contacting Lündhé Audio! We've received your request! We usually respond within about one business day.",
-                client: ctx.twilio,
+                client: twilioClient,
             })
 
             return Object.assign(response, textResponse);

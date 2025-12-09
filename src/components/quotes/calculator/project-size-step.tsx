@@ -1,0 +1,381 @@
+"use client"
+
+import { useState } from "react"
+import { Button } from "~/components/ui/button"
+import { Input } from "~/components/ui/input"
+import { Label } from "~/components/ui/label"
+import { Plus, Trash2, ChevronDown, ChevronRight, Info } from "lucide-react"
+import type { PricingData, Song } from "~/lib/mixing/pricing-types"
+import { getVolumeDiscountInfo } from "~/lib/mixing/pricing-calculator"
+import { Card, CardContent } from "~/components/ui/card"
+import { meetsThreshold } from "~/lib/meets-threshold"
+
+type ProjectSizeStepProps = {
+  songs: Song[]
+  setSongs: (songs: Song[]) => void
+  pricingData: PricingData
+}
+
+export function ProjectSizeStep({ songs, setSongs, pricingData }: ProjectSizeStepProps) {
+  const [collapsedSongs, setCollapsedSongs] = useState<Set<string>>(new Set())
+  const [inputValues, setInputValues] = useState<
+    Record<string, { tracks?: string; minutes?: string; seconds?: string }>
+  >({})
+
+  const { products, options, discounts } = pricingData
+  const songMixProduct = products.find((p) => p.id === "song_mix")
+  const highTrackProduct = products.find((p) => p.id === "high_track_count_mix")
+  const { epDeal, albumDeal } = getVolumeDiscountInfo(discounts)
+
+  const lengthFeeOptions = options
+    .filter((o) => o.category === "length_fee")
+    .sort((a, b) => (a.minThreshold ?? 0) - (b.minThreshold ?? 0))
+
+  const HIGH_TRACK_THRESHOLD = 50
+
+  // Determine which deal is active
+  const songCount = songs.length
+  const epDealActive = epDeal && meetsThreshold(songCount, epDeal.minThreshold, epDeal.maxThreshold)
+  const albumDealActive = albumDeal && meetsThreshold(songCount, albumDeal.minThreshold, albumDeal.maxThreshold)
+  const activeDeal = albumDealActive ? albumDeal : epDealActive ? epDeal : null
+
+  const toggleCollapse = (id: string) => {
+    setCollapsedSongs((prev) => {
+      const next = new Set(prev)
+      if (next.has(id)) {
+        next.delete(id)
+      } else {
+        next.add(id)
+      }
+      return next
+    })
+  }
+
+  const addSong = () => {
+    setSongs([...songs, { id: crypto.randomUUID(), title: "", tracks: 1, minutes: 3, seconds: 30 }])
+  }
+
+  const removeSong = (id: string) => {
+    if (songs.length > 1) {
+      setSongs(songs.filter((song) => song.id !== id))
+      setCollapsedSongs((prev) => {
+        const next = new Set(prev)
+        next.delete(id)
+        return next
+      })
+    }
+  }
+
+  const updateSong = (id: string, field: keyof Song, value: string | number) => {
+    setSongs(songs.map((song) => (song.id === id ? { ...song, [field]: value } : song)))
+  }
+
+  const handleNumberInputChange = (
+    songId: string,
+    field: "tracks" | "minutes" | "seconds",
+    value: string,
+    min: number,
+    max: number,
+    defaultValue: number,
+  ) => {
+    setInputValues((prev) => ({
+      ...prev,
+      [songId]: {
+        ...prev[songId],
+        [field]: value,
+      },
+    }))
+
+    if (value === "") {
+      return
+    }
+    const parsed = Number.parseInt(value, 10)
+    if (!isNaN(parsed)) {
+      const clamped = Math.max(min, Math.min(max, parsed))
+      updateSong(songId, field, clamped)
+    }
+  }
+
+  const handleNumberInputBlur = (
+    songId: string,
+    field: "tracks" | "minutes" | "seconds",
+    min: number,
+    defaultValue: number,
+  ) => {
+    const currentInput = inputValues[songId]?.[field]
+    if (currentInput === "" || currentInput === undefined) {
+      updateSong(songId, field, defaultValue)
+      setInputValues((prev) => ({
+        ...prev,
+        [songId]: {
+          ...prev[songId],
+          [field]: undefined,
+        },
+      }))
+    } else {
+      setInputValues((prev) => ({
+        ...prev,
+        [songId]: {
+          ...prev[songId],
+          [field]: undefined,
+        },
+      }))
+    }
+  }
+
+  const getInputValue = (songId: string, field: "tracks" | "minutes" | "seconds", actualValue: number) => {
+    const intermediate = inputValues[songId]?.[field]
+    if (intermediate !== undefined) {
+      return intermediate
+    }
+    return actualValue.toString()
+  }
+  const hasHighTrackCount = (trackCount: number) => trackCount > HIGH_TRACK_THRESHOLD
+
+  const hasExtendedLengthFee = (minutes: number, seconds: number) => {
+    const totalMinutes = minutes + seconds / 60
+    return lengthFeeOptions.some((opt) => totalMinutes > (opt.minThreshold ?? 0))
+  }
+
+  const getExtendedLengthFee = (minutes: number, seconds: number) => {
+    const totalMinutes = minutes + seconds / 60
+    const sortedDesc = [...lengthFeeOptions].sort((a, b) => (b.minThreshold ?? 0) - (a.minThreshold ?? 0))
+    for (const opt of sortedDesc) {
+      if (totalMinutes > (opt.minThreshold ?? 0)) {
+        return opt.price
+      }
+    }
+    return 0
+  }
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h2 className="text-xl font-semibold mb-2">Project Size</h2>
+        <p className="text-muted-foreground">Add songs to your project and specify the details for each.</p>
+      </div>
+
+      <Card className="bg-muted/50 border-border">
+        <CardContent className="p-4 space-y-4">
+          <h3 className="font-semibold flex items-center gap-2">
+            <Info className="!w-[16px] !h-[16px] text-primary" />
+            Pricing Overview
+          </h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div className="space-y-2">
+              <h4 className="font-medium text-foreground">Base Cost Per Song</h4>
+              <ul className="space-y-1 text-muted-foreground">
+                <li>
+                  • 1-10 tracks: <span className="text-foreground font-medium">${songMixProduct?.price ?? 100}</span>
+                </li>
+                <li>
+                  • 11-50 tracks:{" "}
+                  <span className="text-foreground font-medium">${songMixProduct?.price ?? 100} + $75</span> per
+                  additional 10 tracks
+                </li>
+                <li>
+                  • 50+ tracks:{" "}
+                  <span className="text-foreground font-medium">${highTrackProduct?.price ?? 500} + $100</span> per
+                  additional 10 tracks
+                </li>
+              </ul>
+            </div>
+
+            <div className="space-y-2">
+              <h4 className="font-medium text-foreground">Extended Length Fees</h4>
+              <ul className="space-y-1 text-muted-foreground">
+                {lengthFeeOptions.map((opt) => (
+                  <li key={opt.id}>
+                    • Over {opt.minThreshold} minutes:{" "}
+                    <span className="text-foreground font-medium">+${opt.price}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="pt-2 border-t border-border">
+            <h4 className="font-medium text-foreground mb-2">Volume Discounts</h4>
+            <div className="flex flex-wrap gap-3 text-sm">
+              {epDeal && (
+                <span
+                  className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border ${
+                    epDealActive && !albumDealActive
+                      ? "bg-green-500/20 text-green-600 border-green-500/40 ring-2 ring-green-500/20"
+                      : "bg-green-500/10 text-green-600 border-green-500/20"
+                  }`}
+                >
+                  {epDeal.minThreshold}-{epDeal.maxThreshold} songs:{" "}
+                  <span className="font-semibold">{epDeal.discountPercentage}% off</span>
+                  <span className="font-medium">({epDeal.name})</span>
+                </span>
+              )}
+              {albumDeal && (
+                <span
+                  className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border ${
+                    albumDealActive
+                      ? "bg-green-500/20 text-green-600 border-green-500/40 ring-2 ring-green-500/20"
+                      : "bg-green-500/10 text-green-600 border-green-500/20"
+                  }`}
+                >
+                  {albumDeal.minThreshold}+ songs:{" "}
+                  <span className="font-semibold">{albumDeal.discountPercentage}% off</span>
+                  <span className="font-medium">({albumDeal.name})</span>
+                </span>
+              )}
+            </div>
+            {activeDeal && (
+              <div className="mt-3 flex items-center gap-2 text-sm text-green-600">
+                <span className="font-medium">{activeDeal.name} Applied!</span>
+                <span className="text-muted-foreground">
+                  ({activeDeal.discountPercentage}% discount on base song costs)
+                </span>
+              </div>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+
+      <div className="space-y-4">
+        {songs.map((song, index) => {
+          const isCollapsed = collapsedSongs.has(song.id)
+          const isHighTrackCount = hasHighTrackCount(song.tracks)
+          const isExtendedLength = hasExtendedLengthFee(song.minutes, song.seconds)
+          const lengthFee = getExtendedLengthFee(song.minutes, song.seconds)
+
+          return (
+            <div key={song.id} className="border border-border rounded-lg bg-muted/30 overflow-hidden">
+              <div
+                className="flex items-center justify-between p-4 cursor-pointer hover:bg-muted/50 transition-colors"
+                onClick={() => toggleCollapse(song.id)}
+              >
+                <div className="flex items-center gap-2">
+                  {isCollapsed ? (
+                    <ChevronRight className="!w-[16px] !h-[16px] text-muted-foreground" />
+                  ) : (
+                    <ChevronDown className="!w-[16px] !h-[16px] text-muted-foreground" />
+                  )}
+                  <h3 className="font-medium">{song.title || `Song ${index + 1}`}</h3>
+                  {isCollapsed && (
+                    <span className="text-sm text-muted-foreground ml-2">
+                      ({song.tracks} tracks, {song.minutes}:{song.seconds.toString().padStart(2, "0")})
+                    </span>
+                  )}
+                  {isCollapsed && isHighTrackCount && (
+                    <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full ml-1">
+                      High Track Fee
+                    </span>
+                  )}
+                  {isCollapsed && isExtendedLength && (
+                    <span className="text-xs bg-amber-500/10 text-amber-600 px-2 py-0.5 rounded-full ml-1">
+                      +${lengthFee} Length Fee
+                    </span>
+                  )}
+                </div>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    removeSong(song.id)
+                  }}
+                  disabled={songs.length === 1}
+                  className="text-foreground hover:text-destructive"
+                >
+                  <Trash2 className="!w-[16px] !h-[16px]" />
+                  <span className="sr-only">Remove song</span>
+                </Button>
+              </div>
+
+              {!isCollapsed && (
+                <div className="px-4 pb-4 space-y-4">
+                  {isHighTrackCount && (
+                    <div className="flex items-center gap-2 p-3 bg-primary/10 border border-primary/20 rounded-md text-sm">
+                      <Info className="!w-[16px] !h-[16px] text-primary shrink-0" />
+                      <span className="text-foreground">
+                        <strong>High track count fee applies.</strong> Songs with more than {HIGH_TRACK_THRESHOLD}{" "}
+                        tracks incur a higher base rate of ${highTrackProduct?.price ?? 500} plus $100 for every
+                        additional 10 tracks.
+                      </span>
+                    </div>
+                  )}
+
+                  {isExtendedLength && (
+                    <div className="flex items-center gap-2 p-3 bg-amber-500/10 border border-amber-500/20 rounded-md text-sm">
+                      <Info className="!w-[16px] !h-[16px] text-amber-600 shrink-0" />
+                      <span className="text-foreground">
+                        <strong>Extended length fee: +${lengthFee}</strong>
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor={`title-${song.id}`}>Song Title</Label>
+                      <Input
+                        id={`title-${song.id}`}
+                        placeholder="Enter song title"
+                        value={song.title}
+                        onChange={(e) => updateSong(song.id, "title", e.target.value)}
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor={`tracks-${song.id}`}>Number of Tracks</Label>
+                      <Input
+                        id={`tracks-${song.id}`}
+                        type="number"
+                        min={1}
+                        max={200}
+                        value={getInputValue(song.id, "tracks", song.tracks)}
+                        onChange={(e) => handleNumberInputChange(song.id, "tracks", e.target.value, 1, 200, 1)}
+                        onBlur={() => handleNumberInputBlur(song.id, "tracks", 1, 1)}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label>Song Length</Label>
+                    <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2">
+                        <Input
+                          type="number"
+                          min={0}
+                          max={59}
+                          value={getInputValue(song.id, "minutes", song.minutes)}
+                          onChange={(e) => handleNumberInputChange(song.id, "minutes", e.target.value, 0, 59, 0)}
+                          onBlur={() => handleNumberInputBlur(song.id, "minutes", 0, 0)}
+                          className="w-20"
+                        />
+                        <span className="text-muted-foreground">min</span>
+                      </div>
+                      <span className="text-muted-foreground">:</span>
+                      <div className="flex items-center gap-2">
+                        <Input
+                          type="number"
+                          min={0}
+                          max={59}
+                          value={getInputValue(song.id, "seconds", song.seconds)}
+                          onChange={(e) => handleNumberInputChange(song.id, "seconds", e.target.value, 0, 59, 0)}
+                          onBlur={() => handleNumberInputBlur(song.id, "seconds", 0, 0)}
+                          className="w-20"
+                        />
+                        <span className="text-muted-foreground">sec</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </div>
+
+      <Button onClick={addSong} variant="outline" className="w-full bg-transparent flex flex-col border h-fit hover:bg-white hover:text-black">
+        <Plus className="!w-[16px] !h-[16px] mr-2" />
+        Add Song
+      </Button>
+    </div>
+  )
+}
