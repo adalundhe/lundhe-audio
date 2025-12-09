@@ -16,7 +16,7 @@ export type Product = {
     id: string
     name: string
     description: string | null
-    productType: 'mixing' | 'mastering'
+    productType: 'mixing' | 'mastering' | "mixing-and-mastering"
     price: number
 }
 
@@ -27,7 +27,7 @@ export type ProductOption = {
     price: number
     category: "addon" | "delivery" | "track_fee" | "length_fee"
     priceType: "flat" | "per_ten_tracks" | "multiplier" | "per_hour"
-    productType: 'mixing' | 'mastering'
+    productType: 'mixing' | 'mastering' | "mixing-and-mastering"
     minThreshold: number | null
     maxThreshold: number | null
 }
@@ -39,7 +39,7 @@ export type Discount = {
     description: string | null
     discountPercentage: number
     category: "volume" | "option_volume" | "production" | "bundle"
-    productType: 'mixing' | 'mastering'
+    productType: 'mixing' | 'mastering' | "mixing-and-mastering"
     minThreshold: number | null
     maxThreshold: number | null
 

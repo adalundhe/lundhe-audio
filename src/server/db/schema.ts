@@ -61,7 +61,7 @@ export const products = createTable("products", {
   name: text("name").notNull(),
   description: text("description"),
   price: real("price").notNull(),
-  productType: text("productType", { enum: ["mixing", "mastering"]}).notNull(),
+  productType: text("productType", { enum: ["mixing", "mastering", "mixing-and-mastering"]}).notNull(),
   created_timestamp: text('created_timestamp').notNull().$defaultFn(() => new Date().toString()),
   updated_timestamp: text('updated_timestamp')
 })
@@ -77,7 +77,7 @@ export const productOptions = createTable("product_options", {
   price: real("price").notNull(),
   category: text("category", { enum: ["addon", "delivery", "track_fee", "length_fee"] }).notNull(),
   priceType: text("price_type", { enum: ["flat", "per_ten_tracks", "multiplier", "per_hour"] }).notNull(),
-  productType: text("productType", { enum: ["mixing", "mastering"]}).notNull(),
+  productType: text("productType", { enum: ["mixing", "mastering", "mixing-and-mastering"]}).notNull(),
   minThreshold: integer("min_threshold"),
   maxThreshold: integer("max_threshold"),
   created_timestamp: text('created_timestamp').notNull().$defaultFn(() => new Date().toString()),
@@ -94,7 +94,7 @@ export const discounts = createTable("discounts", {
   description: text("description"),
   discountPercentage: real("discount_percentage").notNull(),
   category: text("category", { enum: ["volume", "option_volume", "production", "bundle"] }).notNull(),
-  productType: text("productType", { enum: ["mixing", "mastering"]}).notNull(),
+  productType: text("productType", { enum: ["mixing", "mastering", "mixing-and-mastering"]}).notNull(),
   minThreshold: integer("min_threshold"),
   maxThreshold: integer("max_threshold"),
   created_timestamp: text('created_timestamp').notNull().$defaultFn(() => new Date().toString()),

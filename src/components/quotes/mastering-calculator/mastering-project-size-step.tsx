@@ -149,10 +149,10 @@ export function MasteringProjectSizeStep({ songs, setSongs, pricingData }: Maste
             <div className="flex flex-wrap gap-3 text-sm">
               {epDeal && (
                 <span
-                  className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border ${
+                  className={`inline-flex lg:text-sm text-xs items-center gap-1.5 px-2.5 py-1 rounded-full border ${
                     epDealActive && !albumDealActive
                       ? "bg-green-500/20 text-green-600 border-green-500/40 ring-2 ring-green-500/20"
-                      : "bg-green-500/10 text-green-600 border-green-500/20"
+                      : "bg-green-500/10 text-green-600/30 border-green-500/20"
                   }`}
                 >
                   {epDeal.minThreshold}-{epDeal.maxThreshold} songs:{" "}
@@ -162,10 +162,10 @@ export function MasteringProjectSizeStep({ songs, setSongs, pricingData }: Maste
               )}
               {albumDeal && (
                 <span
-                  className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border ${
+                  className={`inline-flex lg:text-sm text-xs items-center gap-1.5 px-2.5 py-1 rounded-full border ${
                     albumDealActive
                       ? "bg-green-500/20 text-green-600 border-green-500/40 ring-2 ring-green-500/20"
-                      : "bg-green-500/10 text-green-600 border-green-500/20"
+                      : "bg-green-500/10 text-green-600/30 border-green-500/20"
                   }`}
                 >
                   {albumDeal.minThreshold}+ songs:{" "}
@@ -175,7 +175,7 @@ export function MasteringProjectSizeStep({ songs, setSongs, pricingData }: Maste
               )}
             </div>
             {activeDeal && (
-              <div className="mt-3 flex items-center gap-2 text-sm text-green-600">
+              <div className="mt-3 flex lg:flex-row flex-col gap-2 text-sm text-green-600">
                 <span className="font-medium">{activeDeal.name} Applied!</span>
                 <span className="text-muted-foreground">
                   ({activeDeal.discountPercentage}% discount on base song costs)
