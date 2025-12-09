@@ -272,13 +272,13 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
               <button
                 type="button"
                 onClick={() => toggleAddOnOpen(addon.key)}
-                className="w-full flex items-center justify-between p-4 hover:bg-muted/50 transition-colors text-left"
+                className="w-full flex flex lg:flex-row flex-col lg:items-center lg:gap-0 gap-4 justify-between p-4 hover:bg-muted/50 transition-colors text-left"
               >
                 <div className="flex-1">
-                  <div className="flex items-center gap-2">
+                  <div className="flex lg:flex-row flex-col lg:items-center lg:gap-2 gap-4">
                     <span className="text-base font-medium">{addon.label}</span>
                     {selectedCount > 0 && (
-                      <span className="px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full flex items-center gap-1">
+                      <span className="px-2 py-0.5 bg-primary/10 text-primary text-xs lg:rounded-full rounded-md w-fit flex items-center gap-1">
                         {selectedCount} song{selectedCount !== 1 ? "s" : ""} selected
                         {hasAnyDiscount && (
                           <span className="text-green-600">
@@ -314,8 +314,8 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
 
               {isOpen && (
                 <div className="border-t border-border p-4 bg-muted/30">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-sm text-muted-foreground">
+                  <div className="flex lg:flex-row lg:my-0 my-2 lg:gap-0 gap-4 flex-col items-center justify-between mb-3">
+                    <span className="text-sm lg:text-left text-center text-muted-foreground">
                       Select songs to apply {addon.label.toLowerCase()}:
                     </span>
                     <div className="flex gap-2">

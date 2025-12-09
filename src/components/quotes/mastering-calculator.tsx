@@ -87,27 +87,27 @@ export function MasteringCalculator({ pricingData }: MasteringCalculatorProps) {
           {currentStep === 3 && <MasteringSummaryStep quoteData={quoteData} pricingData={pricingData} />}
         </div>
 
-        <div className="flex items-center justify-between mt-8 pt-6 border-t border-border">
-          <Button variant="outline" onClick={handlePrevious} disabled={currentStep === 0}>
-            Previous
-          </Button>
+        <div className="flex flex-col justify-center gap-4 items-center justify-between mt-8 pt-6 border-t border-border">
 
           <div className="flex items-center gap-4">
-            {!isSummaryStep && (
-              <div className="text-right">
-                <p className="text-sm text-muted-foreground">Estimated Total</p>
-                <p className="text-2xl font-bold">${quoteData.costs.total.toFixed(2)}</p>
-              </div>
-            )}
-
+            <Button size="lg" onClick={handlePrevious} disabled={currentStep === 0} className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">
+              Prev
+            </Button>
             {isSummaryStep ? (
               <Button onClick={handleSubmit} size="lg" className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">
-                Submit Quote
+                Add to Cart
               </Button>
             ) : (
               <Button onClick={handleNext} size="lg" className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">Next</Button>
             )}
           </div>
+
+          {!isSummaryStep && (
+            <div className="text-center">
+              <p className="text-sm text-muted-foreground">Estimated Total</p>
+              <p className="text-2xl font-bold">${quoteData.costs.total.toFixed(2)}</p>
+            </div>
+          )}
         </div>
       </CardContent>
     </Card>

@@ -272,10 +272,10 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
 
         {costs.vinylMasteringCost > 0 && (
           <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">
+            <span className="text-muted-foreground lg:block flex flex-col">
               Vinyl Mastering ({summary.vinylMasteringCount} song{summary.vinylMasteringCount !== 1 ? "s" : ""})
               {costs.multimediaDealName && (
-                <span className="text-primary text-xs ml-1">({costs.multimediaDealName})</span>
+                <span className="text-primary text-xs lg:ml-1">({costs.multimediaDealName})</span>
               )}
             </span>
             <span>${costs.vinylMasteringCost.toFixed(2)}</span>
@@ -283,11 +283,11 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
         )}
         {costs.streamingMasteringCost > 0 && (
           <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">
+            <span className="text-muted-foreground lg:block flex flex-col">
               Streaming Mastering ({summary.streamingMasteringCount} song
               {summary.streamingMasteringCount !== 1 ? "s" : ""})
               {costs.multimediaDealName && (
-                <span className="text-primary text-xs ml-1">({costs.multimediaDealName})</span>
+                <span className="text-primary text-xs lg:ml-1">({costs.multimediaDealName})</span>
               )}
             </span>
             <span>${costs.streamingMasteringCost.toFixed(2)}</span>
@@ -295,11 +295,11 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
         )}
         {costs.redbookMasteringCost > 0 && (
           <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">
+            <span className="text-muted-foreground lg:block flex flex-col">
               Redbook CD Mastering ({summary.redbookMasteringCount} song{summary.redbookMasteringCount !== 1 ? "s" : ""}
               )
               {costs.multimediaDealName && (
-                <span className="text-primary text-xs ml-1">({costs.multimediaDealName})</span>
+                <span className="text-primary text-xs lg:ml-1">({costs.multimediaDealName})</span>
               )}
             </span>
             <span>${costs.redbookMasteringCost.toFixed(2)}</span>
@@ -340,11 +340,11 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
         )}
         {costs.highResMasterCost > 0 && (
           <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">
+            <span className="text-muted-foreground lg:block flex flex-col">
               High Resolution Master ({summary.highResMasterCount} song{summary.highResMasterCount !== 1 ? "s" : ""})
               {costs.distributionDealSongCount > 0 && (
-                <span className="text-purple-600 text-xs ml-1">
-                  ({costs.distributionDealSongCount} with Distribution Deal)
+                <span className="text-purple-600 text-xs lg:ml-1">
+                  ({costs.distributionDealSongCount} with {costs.distributionDealName})
                 </span>
               )}
             </span>
@@ -353,11 +353,11 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
         )}
         {costs.ddpImageCost > 0 && (
           <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">
+            <span className="text-muted-foreground lg:block flex flex-col">
               DDP Image ({summary.ddpImageCount} song{summary.ddpImageCount !== 1 ? "s" : ""})
               {costs.distributionDealSongCount > 0 && (
-                <span className="text-purple-600 text-xs ml-1">
-                  ({costs.distributionDealSongCount} with Distribution Deal)
+                <span className="text-purple-600 text-xs lg:ml-1">
+                  ({costs.distributionDealSongCount} with {costs.distributionDealName})
                 </span>
               )}
             </span>
@@ -366,11 +366,11 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
         )}
         {costs.isrcEncodingCost > 0 && (
           <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">
+            <span className="text-muted-foreground lg:block flex flex-col">
               ISRC Encoding ({summary.isrcEncodingCount} song{summary.isrcEncodingCount !== 1 ? "s" : ""})
               {costs.distributionDealSongCount > 0 && (
-                <span className="text-purple-600 text-xs ml-1">
-                  ({costs.distributionDealSongCount} with Distribution Deal)
+                <span className="text-purple-600 text-xs lg:ml-1">
+                  ({costs.distributionDealSongCount} with {costs.distributionDealName})
                 </span>
               )}
             </span>

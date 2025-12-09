@@ -274,29 +274,29 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
 
         {costs.vocalProductionCost > 0 && (
           <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">
+            <span className="text-muted-foreground lg:block flex flex-col">
               Vocal Production ({summary.vocalProductionCount} song
               {summary.vocalProductionCount !== 1 ? "s" : ""})
-              {productionDealName && <span className="text-primary text-xs ml-1">({productionDealName})</span>}
+              {productionDealName && <span className="text-primary text-xs lg:ml-1">({productionDealName})</span>}
             </span>
             <span>${costs.vocalProductionCost.toFixed(2)}</span>
           </div>
         )}
         {costs.drumReplacementCost > 0 && (
           <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">
+            <span className="text-muted-foreground lg:block flex flex-col">
               Drum Replacement ({summary.drumReplacementCount} song
               {summary.drumReplacementCount !== 1 ? "s" : ""})
-              {productionDealName && <span className="text-primary text-xs ml-1">({productionDealName})</span>}
+              {productionDealName && <span className="text-primary text-xs lg:ml-1">({productionDealName})</span>}
             </span>
             <span>${costs.drumReplacementCost.toFixed(2)}</span>
           </div>
         )}
         {costs.guitarReampCost > 0 && (
           <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">
+            <span className="text-muted-foreground lg:block flex flex-col">
               Guitar Re-Amp ({summary.guitarReampCount} song{summary.guitarReampCount !== 1 ? "s" : ""})
-              {productionDealName && <span className="text-primary text-xs ml-1">({productionDealName})</span>}
+              {productionDealName && <span className="text-primary text-xs lg:ml-1">({productionDealName})</span>}
             </span>
             <span>${costs.guitarReampCost.toFixed(2)}</span>
           </div>
@@ -319,11 +319,11 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
         )}
         {costs.highResMixdownCost > 0 && (
           <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">
+            <span className="text-muted-foreground lg:block flex flex-col">
               High Resolution Mixdown ({summary.highResMixdownCount} song
               {summary.highResMixdownCount !== 1 ? "s" : ""})
               {costs.hifiDealSongCount > 0 && (
-                <span className="text-purple-600 text-xs ml-1">({costs.hifiDealSongCount} with Hi-Fi Deal)</span>
+                <span className="text-purple-600 text-xs lg:ml-1">({costs.hifiDealSongCount} with Hi-Fi Deal)</span>
               )}
             </span>
             <span>${costs.highResMixdownCost.toFixed(2)}</span>
@@ -331,10 +331,10 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
         )}
         {costs.filmMixdownCost > 0 && (
           <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">
+            <span className="text-muted-foreground lg:block flex flex-col">
               Film Mixdown ({summary.filmMixdownCount} song{summary.filmMixdownCount !== 1 ? "s" : ""})
               {costs.hifiDealSongCount > 0 && (
-                <span className="text-purple-600 text-xs ml-1">({costs.hifiDealSongCount} with Hi-Fi Deal)</span>
+                <span className="text-purple-600 text-xs lg:ml-1">({costs.hifiDealSongCount} with Hi-Fi Deal)</span>
               )}
             </span>
             <span>${costs.filmMixdownCost.toFixed(2)}</span>

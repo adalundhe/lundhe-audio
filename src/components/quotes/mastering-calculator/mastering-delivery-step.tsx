@@ -214,19 +214,19 @@ export function MasteringDeliveryStep({
               <button
                 type="button"
                 onClick={() => toggleExpanded(option.key)}
-                className="w-full flex items-center justify-between p-4 hover:bg-muted/50 transition-colors text-left"
+                className="w-full flex lg:flex-row flex-col lg:items-center lg:gap-0 gap-4 justify-between p-4 hover:bg-muted/50 transition-colors text-left"
               >
                 <div className="flex-1">
-                  <div className="flex items-center gap-2">
+                  <div className="flex lg:flex-row flex-col lg:items-center lg:gap-2 gap-4">
                     <span className="text-base font-medium">{option.label}</span>
                     {option.isDistributionOption && songsWithDealForThisOption > 0 && (
-                      <span className="text-xs bg-purple-500/10 text-purple-600 px-2 py-0.5 rounded-full flex items-center gap-1">
+                      <span className="text-xs bg-purple-500/10 text-purple-600 px-2 py-0.5 rounded-full w-fit flex items-center gap-1">
                         <Sparkles className="!w-[16px] !h-[16px]" />
-                        Dist.
+                        Distribution Deal
                       </span>
                     )}
                     {hasSelections && (
-                      <span className="px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full">
+                      <span className="px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full w-fit">
                         {selectedSongs.length} song{selectedSongs.length !== 1 ? "s" : ""}
                         {discountPercentage > 0 && !isRushDelivery && (
                           <span className="ml-1 text-green-600">({discountPercentage}% off)</span>
@@ -248,8 +248,8 @@ export function MasteringDeliveryStep({
 
               {isExpanded && (
                 <div className="border-t border-border p-4 bg-muted/30">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-sm text-muted-foreground">
+                  <div className="flex lg:flex-row flex-col items-center lg:gap-0 gap-4 justify-between mb-3">
+                    <span className="text-sm lg:text-left text-center text-muted-foreground">
                       Select songs to apply {option.label.toLowerCase()}:
                     </span>
                     <div className="flex gap-2">
@@ -324,26 +324,29 @@ export function MasteringDeliveryStep({
                           key={song.id}
                           type="button"
                           onClick={() => toggleSongForOption(option.key, song.id)}
-                          className={`w-full flex items-center justify-between p-3 rounded-md border transition-colors ${
+                          className={`w-full flex lg:flex-row flex-col lg:items-center lg:gap-0 gap-4 justify-between p-3 rounded-md border transition-colors ${
                             isSelected ? "border-primary bg-primary/5" : "border-border hover:bg-muted/50"
                           }`}
                         >
-                          <div className="flex items-center gap-3">
-                            <div
-                              className={`!w-[16px] !h-[16px] rounded border flex items-center justify-center ${
-                                isSelected ? "bg-primary border-primary" : "border-muted-foreground"
-                              }`}
-                            >
-                              {isSelected && <Check className="!w-[16px] !h-[16px] text-primary-foreground" />}
+                          <div className="flex lg:flex-row flex-col lg:items-center lg:gap-3 gap-4">
+                            <div className="flex gap-3 lg:items-start items-center">
+                                <div
+                                className={`!w-[16px] !h-[16px] rounded border flex items-center justify-center ${
+                                  isSelected ? "bg-primary border-primary" : "border-muted-foreground"
+                                }`}
+                              >
+                                {isSelected && <Check className="!w-[16px] !h-[16px] text-primary-foreground" />}
+                              </div>
+                              <span className="text-sm font-medium">{song.title || `Song ${index + 1}`}</span>
+
+                              <span className="text-xs text-muted-foreground">
+                                ({song.minutes}:{song.seconds.toString().padStart(2, "0")})
+                              </span>
                             </div>
-                            <span className="text-sm font-medium">{song.title || `Song ${index + 1}`}</span>
-                            <span className="text-xs text-muted-foreground">
-                              ({song.minutes}:{song.seconds.toString().padStart(2, "0")})
-                            </span>
                             {option.isDistributionOption && songDeal.hasDeal && (
-                              <span className="text-xs bg-purple-500/10 text-purple-600 px-1.5 py-0.5 rounded flex items-center gap-1">
+                              <span className="text-xs bg-purple-500/10 text-purple-600 px-1.5 py-0.5 rounded flex items-center gap-1 w-fit">
                                 <Sparkles className="!w-[16px] !h-[16px]" />
-                                {songDeal.isPremium ? "Premium" : "Dist."} -{distributionDealPercent}%
+                                {songDeal.isPremium ? "Premium Distribution Deal" : "Distribution Deal"} -{distributionDealPercent}%
                               </span>
                             )}
                           </div>

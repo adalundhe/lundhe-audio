@@ -197,13 +197,13 @@ export function AddOnsStep({ addOns, setAddOns, songs, pricingData }: AddOnsStep
               <button
                 type="button"
                 onClick={() => toggleAddOnOpen(addon.key)}
-                className="w-full flex items-center justify-between p-4 hover:bg-muted/50 transition-colors text-left"
+                className="w-full flex flex-wrap items-start justify-between lg:flex-row flex-col lg:items-center lg:gap-2 gap-4 p-4 hover:bg-muted/50 transition-colors text-left"
               >
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-wrap items-center gap-2">
                     <span className="text-base font-medium">{addon.label}</span>
                     {selectedCount > 0 && (
-                      <span className="px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full flex items-center gap-1">
+                      <span className="px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full flex items-center gap-1 whitespace-nowrap">
                         {selectedCount} song{selectedCount !== 1 ? "s" : ""} selected
                         {hasAnyDiscount && (
                           <span className="text-green-600">
@@ -217,8 +217,8 @@ export function AddOnsStep({ addOns, setAddOns, songs, pricingData }: AddOnsStep
                   </div>
                   <p className="text-sm text-muted-foreground mt-1">{addon.description}</p>
                 </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-sm font-medium">
+                <div className="flex items-center gap-3 shrink-0">
+                  <span className="text-sm font-medium whitespace-nowrap">
                     {hasAnyDiscount ? (
                       <>
                         <span className="line-through text-muted-foreground">${addon.price}</span>
@@ -239,15 +239,15 @@ export function AddOnsStep({ addOns, setAddOns, songs, pricingData }: AddOnsStep
 
               {isOpen && (
                 <div className="border-t border-border p-4 bg-muted/30">
-                  <div className="flex items-center justify-between mb-3">
+                  <div className="flex lg:flex-row lg:my-0 my-2 flex-col items-center justify-between mb-3">
                     <span className="text-sm text-muted-foreground">
                       Select songs to apply {addon.label.toLowerCase()}:
                     </span>
                     <div className="flex gap-2">
-                      <Button variant="outline" size="sm" onClick={() => selectAllForAddOn(addon.key)}>
+                      <Button variant="outline" size="sm" className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black" onClick={() => selectAllForAddOn(addon.key)}>
                         Select All
                       </Button>
-                      <Button variant="outline" size="sm" onClick={() => deselectAllForAddOn(addon.key)}>
+                      <Button variant="outline" size="sm" className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black" onClick={() => deselectAllForAddOn(addon.key)}>
                         Deselect All
                       </Button>
                     </div>
@@ -276,24 +276,26 @@ export function AddOnsStep({ addOns, setAddOns, songs, pricingData }: AddOnsStep
                           key={song.id}
                           type="button"
                           onClick={() => toggleSongForAddOn(addon.key, song.id)}
-                          className={`w-full flex items-center justify-between p-3 rounded-md border transition-colors ${
+                          className={`w-full flex flex-wrap items-start justify-between gap-2 p-3 rounded-md border transition-colors ${
                             isSelected ? "border-primary bg-primary/5" : "border-border hover:bg-muted/50"
                           }`}
                         >
-                          <div className="flex items-center gap-3">
+                          <div className="flex flex-wrap items-center gap-2 min-w-0 flex-1">
                             <div
-                              className={`!w-[16px] !h-[16px] rounded border flex items-center justify-center ${
+                              className={`!w-[16px] !h-[16px] rounded border flex items-center justify-center shrink-0 ${
                                 isSelected ? "bg-primary border-primary" : "border-muted-foreground"
                               }`}
                             >
                               {isSelected && <Check className="!w-[16px] !h-[16px] text-primary-foreground" />}
                             </div>
-                            <span className="text-sm font-medium">{song.title || `Song ${index + 1}`}</span>
-                            <span className="text-xs text-muted-foreground">
+                            <span className="text-sm font-medium truncate max-w-[150px] sm:max-w-none">
+                              {song.title || `Song ${index + 1}`}
+                            </span>
+                            <span className="text-xs text-muted-foreground whitespace-nowrap">
                               ({song.tracks} tracks, {song.minutes}:{song.seconds.toString().padStart(2, "0")})
                             </span>
                           </div>
-                          <span className="text-sm text-muted-foreground">
+                          <span className="text-sm text-muted-foreground whitespace-nowrap shrink-0">
                             {hasAnyDiscount ? (
                               <>
                                 <span className="line-through">${addon.price}</span>
@@ -317,7 +319,7 @@ export function AddOnsStep({ addOns, setAddOns, songs, pricingData }: AddOnsStep
           <button
             type="button"
             onClick={() => setVirtualSessionOpen(!virtualSessionOpen)}
-            className="w-full flex items-center justify-between p-4 hover:bg-muted/50 transition-colors text-left"
+            className="w-full flex lg:flex-row flex-col lg:items-center lg:gap-0 gap-4 justify-between p-4 hover:bg-muted/50 transition-colors text-left"
           >
             <div className="flex-1">
               <div className="flex items-center gap-2">
