@@ -95,7 +95,7 @@ export function StudioCalculator({ pricingData }: StudioCalculatorProps) {
                 Add to Cart
               </Button>
             ) : (
-              <Button onClick={handleNext} className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">Next</Button>
+              <Button onClick={handleNext} size="lg" className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">Next</Button>
             )}
           </div>
           {!isSummaryStep && (
