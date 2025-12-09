@@ -11,7 +11,7 @@ export default async function QuotesLayout({
     return (
         <main className="min-h-screen py-12 px-4">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-3xl font-bold text-center mb-2">Mix Configurator</h1>
+            <h1 className="text-3xl font-bold text-center mb-2">Mixing</h1>
             <p className="text-muted-foreground text-center mb-8">Calculate the cost of mixing your project</p>
             <Suspense fallback={<QuotesLoader />}>
               {children}

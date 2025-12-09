@@ -9,7 +9,7 @@ on:
     paths:
         - src/data/gear.json
         - src/scripts/update_equipment.ts
-        - .github/workflows/update-equipment-db.yml
+        - .github/workflows/update-db.yml
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

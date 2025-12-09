@@ -40,8 +40,9 @@ export function DeliveryStep({ deliveryOptions, setDeliveryOptions, songs, prici
   const extendedArchivalPrice = extendedArchivalOption?.price ?? 25
 
   // Get discounts from database
-  const optionVolumeDiscounts = discounts.filter((d) => d.category === "option_volume")
+  const optionVolumeDiscounts = discounts.filter((d) => d.category === "bundle")
   const hifiDealDiscount = discounts.find((d) => d.id === "hifi_deal")
+
 
   const getOptionVolumeDiscount = (count: number) => {
     let bestDiscount = 0
@@ -205,20 +206,20 @@ export function DeliveryStep({ deliveryOptions, setDeliveryOptions, songs, prici
           return (
             <div key={option.key} className="border border-border rounded-lg overflow-hidden">
               <div
-                className="flex items-center justify-between p-4 cursor-pointer hover:bg-muted/50 transition-colors"
+                className="flex lg:flex-row flex-col lg:items-center lg:gap-0 gap-4 justify-between p-4 cursor-pointer hover:bg-muted/50 transition-colors"
                 onClick={() => toggleExpanded(option.key)}
               >
                 <div className="flex-1">
-                  <div className="flex items-center gap-2">
+                  <div className="flex lg:flex-row flex-col lg:items-center gap-2">
                     <span className="text-base font-medium">{option.label}</span>
                     {option.isMixdownOption && songsWithMixdownBundle > 0 && (
-                      <span className="text-xs bg-purple-500/10 text-purple-600 px-2 py-0.5 rounded-full flex items-center gap-1">
+                      <span className="text-xs bg-purple-500/10 text-purple-600 px-2 py-0.5 rounded-full flex items-center gap-1 w-fit">
                         <Sparkles className="!w-[16px] !h-[16px]" />
                         Hi-Fi
                       </span>
                     )}
                     {hasSelections && (
-                      <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">
+                      <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 lg:rounded-full rounded-md w-fit">
                         {selectedSongs.length} song{selectedSongs.length !== 1 ? "s" : ""}
                         {discountPercentage > 0 && (
                           <span className="ml-1 text-green-600">({discountPercentage}% off)</span>
@@ -240,7 +241,7 @@ export function DeliveryStep({ deliveryOptions, setDeliveryOptions, songs, prici
 
               {isExpanded && (
                 <div className="border-t border-border p-4 bg-muted/30">
-                  <div className="flex gap-2 mb-3">
+                  <div className="flex lg:flex-row lg:my-0 my-2 flex-col gap-2 mb-3">
                     <Button
                       variant="outline"
                       size="sm"
