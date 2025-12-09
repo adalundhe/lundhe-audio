@@ -1,5 +1,5 @@
 import { GearTable } from './GearTable'
-import { db } from '~/server/db';
+import { db } from '~/server/db/client';
 import { equipmentItem } from "~/server/db/schema"
 
 

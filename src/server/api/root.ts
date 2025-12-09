@@ -1,4 +1,5 @@
 import { contactRouter } from "~/server/api/routers/contact";
+import { mixQuotesRouter } from "./routers/quotes";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 
 /**
@@ -8,6 +9,7 @@ import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
  */
 export const appRouter = createTRPCRouter({
   contact: contactRouter,
+  mixQuotes: mixQuotesRouter,
 });
 
 // export type definition of API

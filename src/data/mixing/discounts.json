@@ -1,0 +1,151 @@
+[
+  {
+    "id": "ep_deal",
+    "name": "EP Deal",
+    "description": "10% discount for projects with 5-9 songs",
+    "discountPercentage": 10,
+    "category": "volume",
+    "productType": "mixing",
+    "minThreshold": 5,
+    "maxThreshold": 9
+  },
+  {
+    "id": "album_deal",
+    "name": "Album Deal",
+    "description": "25% discount for projects with 10+ songs",
+    "discountPercentage": 25,
+    "category": "volume",
+    "productType": "mixing",
+    "minThreshold": 10,
+    "maxThreshold": null
+  },
+  {
+    "id": "option_volume_5",
+    "name": "Option Volume Discount (5+)",
+    "description": "15% discount when applying same option to 5+ songs",
+    "discountPercentage": 15,
+    "category": "option_volume",
+    "productType": "mixing",
+    "minThreshold": 5,
+    "maxThreshold": 9
+  },
+  {
+    "id": "option_volume_10",
+    "name": "Option Volume Discount (10+)",
+    "description": "25% discount when applying same option to 10+ songs",
+    "discountPercentage": 25,
+    "category": "option_volume",
+    "productType": "mixing",
+    "minThreshold": 10,
+    "maxThreshold": null
+  },
+  {
+    "id": "production_deal",
+    "name": "Production Deal",
+    "description": "15% discount when selecting 2 of 3 production add-ons",
+    "discountPercentage": 15,
+    "category": "bundle",
+    "productType": "mixing",
+    "minThreshold": 2,
+    "maxThreshold": 2
+  },
+  {
+    "id": "premium_production_deal",
+    "name": "Premium Production Deal",
+    "description": "25% discount when selecting all 3 production add-ons",
+    "discountPercentage": 25,
+    "category": "bundle",
+    "productType": "mixing",
+    "minThreshold": 3,
+    "maxThreshold": 3
+  },
+  {
+    "id": "hifi_deal",
+    "name": "Hi-Fi Deal",
+    "description": "10% discount when selecting both High Resolution and Film Mixdown for same song",
+    "discountPercentage": 10,
+    "category": "bundle",
+    "productType": "mixing",
+    "minThreshold": null,
+    "maxThreshold": null
+  },{
+    "id": "ep_deal",
+    "name": "EP Deal",
+    "description": "10% discount for projects with 5-9 songs",
+    "discountPercentage": 10,
+    "category": "volume",
+    "productType": "mastering",
+    "minThreshold": 5,
+    "maxThreshold": 9
+  },
+  {
+    "id": "album_deal",
+    "name": "Album Deal",
+    "description": "20% discount for projects with 10+ songs",
+    "discountPercentage": 20,
+    "category": "volume",
+    "productType": "mastering",
+    "minThreshold": 10,
+    "maxThreshold": null
+  },
+  {
+    "id": "option_volume_5",
+    "name": "Option Volume Discount (5+)",
+    "description": "15% discount when applying same option to 5+ songs",
+    "discountPercentage": 15,
+    "category": "option_volume",
+    "productType": "mastering",
+    "minThreshold": 5,
+    "maxThreshold": 9
+  },
+  {
+    "id": "option_volume_10",
+    "name": "Option Volume Discount (10+)",
+    "description": "25% discount when applying same option to 10+ songs",
+    "discountPercentage": 25,
+    "category": "option_volume",
+    "productType": "mastering",
+    "minThreshold": 10,
+    "maxThreshold": null
+  },
+  {
+    "id": "multimedia_deal",
+    "name": "Multimedia Deal",
+    "description": "15% discount when selecting any 2 of Vinyl, Streaming, or Redbook mastering",
+    "discountPercentage": 15,
+    "category": "bundle",
+    "productType": "mastering",
+    "minThreshold": 2,
+    "maxThreshold": 2
+  },
+  {
+    "id": "premium_multimedia_deal",
+    "name": "Premium Multimedia Deal",
+    "description": "25% discount when selecting all 3: Vinyl, Streaming, and Redbook mastering",
+    "discountPercentage": 25,
+    "category": "bundle",
+    "productType": "mastering",
+    "minThreshold": 3,
+    "maxThreshold": 3
+  },
+  {
+    "id": "distribution_deal",
+    "name": "Distribution Deal",
+    "description": "10% discount when selecting any 2 of High Resolution Master, DDP Image, or ISRC Encoding",
+    "discountPercentage": 10,
+    "category": "delivery_bundle",
+    "productType": "mastering",
+    "minThreshold": 2,
+    "maxThreshold": 2
+  },
+  {
+    "id": "premium_distribution_deal",
+    "name": "Premium Distribution Deal",
+    "description": "25% discount when selecting all 3: High Resolution Master, DDP Image, and ISRC Encoding",
+    "discountPercentage": 25,
+    "category": "delivery_bundle",
+    "productType": "mastering",
+    "minThreshold": 3,
+    "maxThreshold": 3
+  }
+]

@@ -8,17 +8,13 @@
  */
 
 import { initTRPC, TRPCError } from "@trpc/server";
-import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
 import { type Session } from "next-auth";
 import superjson from "superjson";
 import { ZodError } from "zod";
-import { env } from "~/env";
-import { ServerClient } from 'postmark';
-import twilio from 'twilio';
 import { type NextRequest } from "next/server";
 
 // import { auth } from "~/server/auth";
-import { db } from "~/server/db";
+import { db } from "~/server/db/client";
 
 /**
  * 1. CONTEXT
@@ -45,14 +41,10 @@ interface CreateContextOptions {
  */
 const createInnerTRPCContext = (opts: CreateContextOptions) => {
   
-  const client = new ServerClient(env.POSTMARK_TOKEN);
-  const twilioClient = twilio(env.TWILIO_CAMPAIGN_ID, env.TWILIO_AUTH_TOKEN);
 
   return {
     session: opts.session,
     db,
-    postmark: client,
-    twilio: twilioClient,
 
   };
 };

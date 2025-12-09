@@ -1,0 +1,30 @@
+[
+  {
+    "id": "song_mix",
+    "name": "Song Mix",
+    "description": "Base mixing service for songs with up to 50 tracks",
+    "productType": "mixing",
+    "price": 100
+  },
+  {
+    "id": "high_track_count_mix",
+    "name": "High Track Count Mix",
+    "description": "Mixing service for songs with more than 50 tracks",
+    "productType": "mixing",
+    "price": 500
+  },
+  {
+    "id": "standard_master",
+    "name": "Standard Master",
+    "description": "Professional mastering for songs up to 10 minutes",
+    "productType": "mastering",
+    "price": 75
+  },
+  {
+    "id": "extended_length_master",
+    "name": "Extended Length Master",
+    "description": "Professional mastering for songs over 10 minutes",
+    "productType": "mastering",
+    "price": 150
+  }
+]
