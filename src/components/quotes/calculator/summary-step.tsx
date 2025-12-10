@@ -376,7 +376,9 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
 
         {costs.productionDealDiscount > 0 && summary.productionDealName && (
           <div className="flex justify-between text-sm text-green-600">
-            <span>{summary.productionDealName} {summary.premiumProductionDealName ? ` and ${summary.premiumProductionDealName}` : ''} Savings</span>
+            <span>{[
+              [summary.productionDealName, summary.premiumProductionDealName].filter(name => name !== undefined).join(" and ")
+            ]} Savings</span>
             <span>-${costs.productionDealDiscount.toFixed(2)}</span>
           </div>
         )}
