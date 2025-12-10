@@ -372,11 +372,14 @@ export function ProjectSizeStep({ songs, setSongs, pricingData }: ProjectSizeSte
           )
         })}
       </div>
+      
 
-      <Button onClick={addSong} variant="outline" className="w-full bg-transparent flex flex-col border h-fit hover:bg-white hover:text-black">
-        <Plus className="!w-[16px] !h-[16px] mr-2" />
-        Add Song
-      </Button>
+      <div className="w-full flex flex-col items-center">
+        <Button onClick={addSong} className="w-fit bg-transparent flex border h-fit hover:bg-white hover:text-black">
+          <Plus className="!w-[16px] !h-[16px] mr-2" />
+          Add Song
+        </Button>
+      </div>
     </div>
   )
 }
