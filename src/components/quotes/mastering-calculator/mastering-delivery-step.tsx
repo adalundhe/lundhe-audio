@@ -291,6 +291,17 @@ export function MasteringDeliveryStep({
             return deal.isPremium
           }).length > 0: false
 
+          const distroSongs = songs.map(
+            song =>
+            option.isDistributionOption
+                ? getSongDistributionDeal(song.id)
+                : undefined
+            ).filter(song => song !== undefined && song.hasDeal)
+
+          
+          const standardDistroSongs = distroSongs.filter(song => song !== undefined && !song.isPremium)
+          const premiumDistroSongs = distroSongs.filter(song => song !== undefined && song.isPremium)
+
 
           return (
             <div key={option.key} className="border border-border rounded-lg overflow-hidden">
@@ -354,8 +365,8 @@ export function MasteringDeliveryStep({
               </button>
 
               {isExpanded && (
-                <div className="border-t border-border p-4 bg-muted/30">
-                  <div className="flex lg:flex-row flex-col items-center lg:gap-0 gap-4 justify-between mb-3">
+                <div className="border-t border-border p-4 bg-muted/30 flex flex-col gap-2 lg:items-start items-center">
+                  <div className="flex lg:flex-row lg:my-0 my-2 lg:gap-0 gap-4 flex-col items-center justify-between mb-3">
                     <span className="text-sm lg:text-left text-center text-muted-foreground">
                       Select songs to apply {option.label.toLowerCase()}:
                     </span>
@@ -385,23 +396,35 @@ export function MasteringDeliveryStep({
                     </div>
                   </div>
                   {!isRushDelivery && selectedCount > 0 && selectedCount < 5 && (
-                    <div className="text-xs text-muted-foreground mb-3 p-2 bg-muted rounded">
+                    <div className="text-xs text-muted-foreground mb-3 p-2 bg-muted rounded lg:w-fit w-full lg:text-left text-center">
                       Select {5 - selectedCount} more song{5 - selectedCount !== 1 ? "s" : ""} for{" "}
                       {fivePlus?.discountPercentage ?? 15}% volume discount
                     </div>
                   )}
                   {!isRushDelivery && selectedCount >= 5 && selectedCount < 10 && (
-                    <div className="text-xs text-green-600 mb-3 p-2 bg-green-500/10 rounded">
+                    <div className="text-xs text-green-600 mb-3 p-2 bg-green-500/10 rounded lg:w-fit w-full lg:text-left text-center">
                       {fivePlus?.discountPercentage ?? 15}% volume discount applied! Select {10 - selectedCount} more
                       song{10 - selectedCount !== 1 ? "s" : ""} for {tenPlus?.discountPercentage ?? 25}% discount
                     </div>
                   )}
                   {!isRushDelivery && selectedCount >= 10 && (
-                    <div className="text-xs text-green-600 mb-3 p-2 bg-green-500/10 rounded">
+                    <div className="text-xs text-green-600 mb-3 p-2 bg-green-500/10 rounded lg:w-fit w-full lg:text-left text-center">
                       {tenPlus?.discountPercentage ?? 25}% maximum volume discount applied!
                     </div>
                   )}
-                  <div className="space-y-2">
+                  {option.isDistributionOption && standardDistroSongs.length > 0 && distributionDeal && (
+                    <span className="flex lg:flex-row flex-col lg:gap-0 gap-2 text-xs bg-purple-500/10 text-purple-600 mb-3 p-2 rounded flex items-center gap-1 lg:w-fit w-full lg:text-left text-center">
+                      <Sparkles className="!w-[16px] !h-[16px]" />
+                      {standardDistroSongs.length} songs with {distributionDeal.name} applied for -{distributionDeal?.discountPercentage}% off!
+                    </span>
+                  )}
+                  {option.isDistributionOption && premiumDistroSongs.length > 0 && premiumDistributionDeal && (
+                    <span className="flex lg:flex-row flex-col lg:gap-0 gap-2 text-xs bg-purple-500/10 text-purple-600 mb-3 p-2 rounded flex items-center gap-1 lg:w-fit w-full lg:text-left text-center">
+                      <Sparkles className="!w-[16px] !h-[16px]" />
+                      {premiumDistroSongs.length} songs with {premiumDistributionDeal.name} applied for -{premiumDistributionDeal?.discountPercentage}% off!
+                    </span>
+                  )}
+                  <div className="space-y-2 w-full">
                     {songs.map((song, index) => {
                       const isSelected = selectedSongs.includes(song.id)
                       const basePrice = option.getPrice ? option.getPrice(song) : option.fixedPrice || 0
@@ -431,31 +454,24 @@ export function MasteringDeliveryStep({
                           key={song.id}
                           type="button"
                           onClick={() => toggleSongForOption(option.key, song.id)}
-                          className={`w-full flex lg:flex-row flex-col lg:items-center lg:gap-0 gap-4 justify-between p-3 rounded-md border transition-colors ${
+                          className={`w-full flex items-center justify-between p-3 rounded-md border transition-colors ${
                             isSelected ? "border-primary bg-primary/5" : "border-border hover:bg-muted/50"
                           }`}
                         >
-                          <div className="flex lg:flex-row flex-col lg:items-center lg:gap-3 gap-4">
-                            <div className="flex gap-3 lg:items-start items-center">
-                                <div
-                                className={`!w-[16px] !h-[16px] rounded border flex items-center justify-center ${
-                                  isSelected ? "bg-primary border-primary" : "border-muted-foreground"
-                                }`}
-                              >
-                                {isSelected && <Check className="!w-[16px] !h-[16px] text-primary-foreground" />}
-                              </div>
-                              <span className="text-sm font-medium">{song.title || `Song ${index + 1}`}</span>
-
-                              <span className="text-xs text-muted-foreground">
-                                ({song.minutes}:{song.seconds.toString().padStart(2, "0")})
-                              </span>
+                          <div className="flex items-center gap-3">
+                            <div
+                              className={`!w-[16px] !h-[16px] rounded border flex items-center justify-center ${
+                                isSelected ? "bg-primary border-primary" : "border-muted-foreground"
+                              }`}
+                            >
+                              {isSelected && <Check className="!w-[16px] !h-[16px] text-primary-foreground" />}
                             </div>
-                            {option.isDistributionOption && songDeal.hasDeal && (
-                              <span className="text-xs bg-purple-500/10 text-purple-600 px-1.5 py-0.5 rounded flex items-center gap-1 w-fit">
-                                <Sparkles className="!w-[16px] !h-[16px]" />
-                                {songDeal.isPremium ? "Premium Distribution Deal" : "Distribution Deal"} -{distributionDealPercent}%
-                              </span>
-                            )}
+                            <span className="text-sm font-medium">{song.title || `Song ${index + 1}`}</span>
+
+                            <span className="text-xs text-muted-foreground">
+                              ({song.minutes}:{song.seconds.toString().padStart(2, "0")})
+                            </span>
+                            
                           </div>
                           <span className="text-sm text-muted-foreground">
                             {hasAnyDiscount ? (
