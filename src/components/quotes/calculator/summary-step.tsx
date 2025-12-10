@@ -11,15 +11,6 @@ type SummaryStepProps = {
 
 export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
   const { songs, costs, totals, summary } = quoteData
-  const { discounts } = pricingData
-
-  const { epDeal, albumDeal } = getVolumeDiscountInfo(discounts)
-
-  const volumeDiscountName = costs.volumeDiscountName
-  const volumeDiscountAmount = costs.volumeDiscount
-
-  const productionDealName = costs.productionDealName
-  const productionDealSavings = costs.productionDealDiscount
 
   const hasAnyPerSongAddOns =
     summary.vocalProductionCount > 0 || summary.drumReplacementCount > 0 || summary.guitarReampCount > 0
@@ -32,6 +23,8 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
     summary.rushDeliveryCount > 0
 
   const formattedTotalLength = `${totals.totalLengthMinutes}m ${totals.totalLengthSeconds}s`
+
+  
 
   return (
     <div className="space-y-6">
@@ -72,35 +65,44 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
         </div>
       </div>
 
-      {volumeDiscountName && (
+      {costs.volumeDiscountName && (
         <div className="flex items-start gap-2 p-3 bg-green-500/10 border border-green-500/20 rounded-md text-sm">
           <Sparkles className="!w-[16px] !h-[16px] text-green-600 shrink-0 mt-0.5" />
           <span className="text-foreground">
-            <span className="font-medium">{volumeDiscountName} Applied!</span>{" "}
-            {volumeDiscountAmount > 0 && (
-              <span className="text-green-600 ml-1">(saving ${volumeDiscountAmount.toFixed(2)})</span>
+            <span className="font-medium">{costs.volumeDiscountName} Applied!</span>{" "}
+            {costs.volumeDiscount > 0 && (
+              <span className="text-green-600 ml-1">(saving ${costs.volumeDiscount.toFixed(2)})</span>
             )}
           </span>
         </div>
       )}
-
-      {productionDealName && (
-        <div className="flex items-start gap-2 p-3 bg-primary/10 border border-primary/20 rounded-md text-sm">
-          <Sparkles className="!w-[16px] !h-[16px] text-primary shrink-0 mt-0.5" />
-          <span className="text-foreground">
-            <span className="font-medium">{productionDealName} Applied!</span>
-            {productionDealSavings > 0 && (
-              <span className="text-green-600 ml-1">(saving ${productionDealSavings.toFixed(2)})</span>
-            )}
-          </span>
-        </div>
-      )}
+      <>
+      {
+        Object.keys(costs.productionDeals).map((deal, idx) =>     
+          <div key={`distro-deal-${idx}`} className="flex items-start gap-2 p-3 bg-primary/10 border border-primary/20 rounded-md text-sm">
+            <Sparkles className="!w-[16px] !h-[16px] text-primary shrink-0 mt-0.5" />
+            <span className="text-foreground">
+              <span className="font-bold">{deal} Applied!</span> discount on Vocal Mixing/Editing, Drum Production,
+              and/or Guitar Re-Amplification for {costs.productionDeals[deal]} song{costs.productionDeals[deal] !== 1 ? "s" : ""}
+              {deal.toLocaleLowerCase().includes("premium") ? costs.premiumProductionDealDiscount > 0 && (
+                <span className="text-green-600 ml-1">(saving ${costs.premiumProductionDealDiscount.toFixed(2)})</span>
+              ) : 
+              costs.standardProductionDealDiscount > 0 ?
+              <span className="text-green-600 ml-1">(saving ${costs.standardProductionDealDiscount.toFixed(2)})</span>
+              :
+              null
+            }
+            </span>
+          </div>
+        )
+      }
+      </> 
 
       {costs.hifiDealSongCount > 0 && (
         <div className="flex items-start gap-2 p-3 bg-purple-500/10 border border-purple-500/20 rounded-md text-sm">
           <Sparkles className="!w-[16px] !h-[16px] text-purple-600 shrink-0 mt-0.5" />
           <span className="text-foreground">
-            <span className="font-medium">Hi-Fi Deal Applied!</span> 10% discount on High Resolution and Film Mixdown
+            <span className="font-bold">Hi-Fi Deal Applied!</span> 10% discount on High Resolution and Film Mixdown
             for {costs.hifiDealSongCount} song{costs.hifiDealSongCount !== 1 ? "s" : ""}
             {costs.hifiDealDiscount > 0 && (
               <span className="text-green-600 ml-1">(saving ${costs.hifiDealDiscount.toFixed(2)})</span>
@@ -242,7 +244,7 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
         </div>
       )}
 
-      <div className="border-t border-border pt-4 space-y-2">
+      <div className="border-t border-border pt-4 space-y-2 flex flex-col lg:gap-0 gap-2">
         <h3 className="font-medium mb-3">Cost Breakdown</h3>
 
         <div className="space-y-1 mb-3">
@@ -260,52 +262,122 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
           ))}
         </div>
 
-        {volumeDiscountAmount > 0 && (
+        {costs.volumeDiscount > 0 && (
           <div className="flex justify-between text-sm text-green-600">
-            <span>{volumeDiscountName}</span>
-            <span>-${volumeDiscountAmount.toFixed(2)}</span>
+            <span>{costs.volumeDiscountName}</span>
+            <span>-${costs.volumeDiscount.toFixed(2)}</span>
           </div>
         )}
 
         <div className="flex justify-between text-sm pt-1 border-t border-border/50">
           <span className="text-muted-foreground font-medium">Songs Subtotal</span>
-          <span>${(costs.baseSongsCost - volumeDiscountAmount).toFixed(2)}</span>
+          <span>${(costs.baseSongsCost - costs.volumeDiscount).toFixed(2)}</span>
         </div>
 
         {costs.vocalProductionCost > 0 && (
-          <div className="flex justify-between text-sm">
+          <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
             <span className="text-muted-foreground lg:block flex flex-col">
               Vocal Production ({summary.vocalProductionCount} song
               {summary.vocalProductionCount !== 1 ? "s" : ""})
-              {productionDealName && <span className="text-primary text-xs lg:ml-1">({productionDealName})</span>}
+              <span className="flex lg:flex-row flex-col gap-2">
+              {
+                costs.dealBreakdown.vocals.premium > 0 &&
+                <span className="text-purple-600 text-xs lg:ml-1">
+                  ({costs.dealBreakdown.vocals.premium} with {summary.premiumProductionDealName})
+                </span>
+              }
+              </span>
+              <span className="flex lg:flex-row flex-col gap-2">
+              {
+                costs.dealBreakdown.vocals.standard > 0 &&
+                <span className="text-purple-600 text-xs lg:ml-1">
+                  ({costs.dealBreakdown.vocals.standard} with {summary.productionDealName})
+                </span>
+              }
+              </span>
             </span>
-            <span>${costs.vocalProductionCost.toFixed(2)}</span>
+            <span>${costs.vocalProductionCost.toFixed(2)} {
+              costs.vocalProductionDiscount > 0
+              ?
+              <>
+                {" "}
+                <span className="text-sm text-green-600">(-${costs.vocalProductionDiscount.toFixed(2)} off)</span>
+              </>
+              : null
+            }</span>
           </div>
         )}
         {costs.drumReplacementCost > 0 && (
-          <div className="flex justify-between text-sm">
+          <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
             <span className="text-muted-foreground lg:block flex flex-col">
               Drum Replacement ({summary.drumReplacementCount} song
               {summary.drumReplacementCount !== 1 ? "s" : ""})
-              {productionDealName && <span className="text-primary text-xs lg:ml-1">({productionDealName})</span>}
+              <span className="flex lg:flex-row flex-col gap-2">
+              {
+                costs.dealBreakdown.drums.premium > 0 &&
+                <span className="text-purple-600 text-xs lg:ml-1">
+                  ({costs.dealBreakdown.drums.premium} with {summary.premiumProductionDealName})
+                </span>
+              }
+              </span>
+              <span className="flex lg:flex-row flex-col gap-2">
+              {
+                costs.dealBreakdown.drums.standard > 0 &&
+                <span className="text-purple-600 text-xs lg:ml-1">
+                  ({costs.dealBreakdown.drums.standard} with {summary.productionDealName})
+                </span>
+              }
+              </span>
             </span>
-            <span>${costs.drumReplacementCost.toFixed(2)}</span>
+            <span>
+              ${costs.drumReplacementCost.toFixed(2)} {
+              costs.drumReplacementDiscount > 0
+              ?
+              <>
+                {" "}
+                <span className="text-sm text-green-600">(-${costs.drumReplacementDiscount.toFixed(2)} off)</span>
+              </>
+              : null
+            }</span>
           </div>
         )}
         {costs.guitarReampCost > 0 && (
-          <div className="flex justify-between text-sm">
+          <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
             <span className="text-muted-foreground lg:block flex flex-col">
               Guitar Re-Amp ({summary.guitarReampCount} song{summary.guitarReampCount !== 1 ? "s" : ""})
-              {productionDealName && <span className="text-primary text-xs lg:ml-1">({productionDealName})</span>}
+              <span className="flex lg:flex-row flex-col gap-2">
+              {
+                costs.dealBreakdown.guitar.premium > 0 &&
+                <span className="text-purple-600 text-xs lg:ml-1">
+                  ({costs.dealBreakdown.guitar.premium} with {summary.premiumProductionDealName})
+                </span>
+              }
+              </span>
+              <span className="flex lg:flex-row flex-col gap-2">
+              {
+                costs.dealBreakdown.guitar.standard > 0 &&
+                <span className="text-purple-600 text-xs lg:ml-1">
+                  ({costs.dealBreakdown.guitar.standard} with {summary.productionDealName})
+                </span>
+              }
+              </span>
             </span>
-            <span>${costs.guitarReampCost.toFixed(2)}</span>
+            <span>${costs.guitarReampCost.toFixed(2)} {
+              costs.guitarReampDiscount > 0
+              ?
+              <>
+                {" "}
+                <span className="text-sm text-green-600">(-${costs.guitarReampDiscount.toFixed(2)} off)</span>
+              </>
+              : null
+            }</span>
           </div>
         )}
 
-        {productionDealSavings > 0 && (
+        {costs.productionDealDiscount > 0 && summary.productionDealName && (
           <div className="flex justify-between text-sm text-green-600">
-            <span>{productionDealName} Savings</span>
-            <span>-${productionDealSavings.toFixed(2)}</span>
+            <span>{summary.productionDealName} {summary.premiumProductionDealName ? ` and ${summary.premiumProductionDealName}` : ''} Savings</span>
+            <span>-${costs.productionDealDiscount.toFixed(2)}</span>
           </div>
         )}
 
@@ -318,7 +390,7 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
           </div>
         )}
         {costs.highResMixdownCost > 0 && (
-          <div className="flex justify-between text-sm">
+          <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
             <span className="text-muted-foreground lg:block flex flex-col">
               High Resolution Mixdown ({summary.highResMixdownCount} song
               {summary.highResMixdownCount !== 1 ? "s" : ""})
@@ -326,43 +398,88 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
                 <span className="text-purple-600 text-xs lg:ml-1">({costs.hifiDealSongCount} with Hi-Fi Deal)</span>
               )}
             </span>
-            <span>${costs.highResMixdownCost.toFixed(2)}</span>
+            <span>${costs.highResMixdownCost.toFixed(2)} 
+            {
+              costs.highResDiscount > 0
+              ?
+              <>
+                {" "}
+                <span className="text-sm text-green-600">(-${costs.highResDiscount.toFixed(2)} off)</span>
+              </>
+              : null
+            }</span>
           </div>
         )}
         {costs.filmMixdownCost > 0 && (
-          <div className="flex justify-between text-sm">
+          <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
             <span className="text-muted-foreground lg:block flex flex-col">
               Film Mixdown ({summary.filmMixdownCount} song{summary.filmMixdownCount !== 1 ? "s" : ""})
               {costs.hifiDealSongCount > 0 && (
                 <span className="text-purple-600 text-xs lg:ml-1">({costs.hifiDealSongCount} with Hi-Fi Deal)</span>
               )}
             </span>
-            <span>${costs.filmMixdownCost.toFixed(2)}</span>
+            <span>${costs.filmMixdownCost.toFixed(2)}
+            {
+              costs.filmMixdownDiscount > 0
+              ?
+              <>
+                {" "}
+                <span className="text-sm text-green-600">(-${costs.filmMixdownDiscount.toFixed(2)} off)</span>
+              </>
+              : null
+            }</span>
           </div>
         )}
         {costs.mixedStemsCost > 0 && (
-          <div className="flex justify-between text-sm">
+          <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
             <span className="text-muted-foreground">
               Mixed Stems ({summary.mixedStemsCount} song{summary.mixedStemsCount !== 1 ? "s" : ""}, track-based)
             </span>
-            <span>${costs.mixedStemsCost.toFixed(2)}</span>
+            <span>${costs.mixedStemsCost.toFixed(2)}
+            {
+              costs.mixedStemsdDiscount > 0
+              ?
+              <>
+                {" "}
+                <span className="text-sm text-green-600">(-${costs.mixedStemsdDiscount.toFixed(2)} off)</span>
+              </>
+              : null
+            }</span>
           </div>
         )}
         {costs.extendedArchivalCost > 0 && (
-          <div className="flex justify-between text-sm">
+          <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
             <span className="text-muted-foreground">
               Extended Archival ({summary.extendedArchivalCount} song
               {summary.extendedArchivalCount !== 1 ? "s" : ""})
             </span>
-            <span>${costs.extendedArchivalCost.toFixed(2)}</span>
+            <span>${costs.extendedArchivalCost.toFixed(2)}
+            {
+              costs.extendedArchivalDiscount > 0
+              ?
+              <>
+                {" "}
+                <span className="text-sm text-green-600">(-${costs.extendedArchivalDiscount.toFixed(2)} off)</span>
+              </>
+              : null
+            }</span>
           </div>
         )}
         {costs.rushDeliveryCost > 0 && (
-          <div className="flex justify-between text-sm">
+          <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
             <span className="text-muted-foreground">
               Rush Delivery ({summary.rushDeliveryCount} song{summary.rushDeliveryCount !== 1 ? "s" : ""}, 2x song cost)
             </span>
-            <span>${costs.rushDeliveryCost.toFixed(2)}</span>
+            <span>${costs.rushDeliveryCost.toFixed(2)}
+            {
+              costs.rushDeliveryDiscount > 0
+              ?
+              <>
+                {" "}
+                <span className="text-sm text-green-600">(-${costs.rushDeliveryDiscount.toFixed(2)} off)</span>
+              </>
+              : null
+            }</span>
           </div>
         )}
         {costs.hifiDealDiscount > 0 && (
@@ -371,9 +488,28 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
             <span>-${costs.hifiDealDiscount.toFixed(2)}</span>
           </div>
         )}
-        <div className="flex justify-between text-lg font-bold pt-2 border-t border-border">
-          <span>Total</span>
-          <span>${costs.total.toFixed(2)}</span>
+        {
+          costs.optionsDiscounts > 0 && 
+          <div className="flex justify-between text-sm text-green-600 font-bold">
+            <span>Total Add-On/Delivery Discounts</span>
+            <span>-${costs.optionsDiscounts.toFixed(2)}</span>
+          </div>
+        }
+        <div className="flex flex-col border-t border-border gap-2">
+          <span className="flex flex-col">
+            <span className="flex justify-between text-sm font-bold pt-2 text-muted-foreground">
+              <span>Subtotal</span>
+              <span>${costs.preDiscountsTotal.toFixed(2)}</span>
+            </span>
+            <span className="flex justify-between text-sm font-bold pt-2 text-green-600">
+              <span>Discounts</span>
+              <span>${costs.discountsTotal.toFixed(2)}</span>
+            </span>
+          </span>
+          <span className="flex justify-between text-lg font-bold pt-2">
+            <span>Total</span>
+            <span>${costs.total.toFixed(2)}</span>
+          </span>
         </div>
       </div>
 

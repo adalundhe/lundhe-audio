@@ -68,30 +68,49 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
         </div>
       )}
 
-      {costs.multimediaDealName && (
-        <div className="flex items-start gap-2 p-3 bg-primary/10 border border-primary/20 rounded-md text-sm">
-          <Sparkles className="!w-[16px] !h-[16px] text-primary shrink-0 mt-0.5" />
-          <span className="text-foreground">
-            <span className="font-medium">{costs.multimediaDealName} Applied!</span>
-            {costs.multimediaDealDiscount > 0 && (
-              <span className="text-green-600 ml-1">(saving ${costs.multimediaDealDiscount.toFixed(2)})</span>
-            )}
-          </span>
-        </div>
-      )}
+      <>
+        {
+          Object.keys(costs.multiMediaDeals).map((deal, idx) =>     
+            <div key={`distro-deal-${idx}`} className="flex items-start gap-2 p-3 bg-primary/10 border border-primary/20 rounded-md text-sm">
+              <Sparkles className="!w-[16px] !h-[16px] text-primary shrink-0 mt-0.5" />
+              <span className="text-foreground">
+                <span className="font-bold">{deal} Applied!</span> discount on High Resolution, DDP,
+                and ISRC for {costs.multiMediaDeals[deal]} song{costs.multiMediaDeals[deal] !== 1 ? "s" : ""}
+                {deal.toLocaleLowerCase().includes("premium") ? costs.premiumMultiMediaDealDiscount > 0 && (
+                  <span className="text-green-600 ml-1">(saving ${costs.premiumMultiMediaDealDiscount.toFixed(2)})</span>
+                ) : 
+                costs.standardMultiMediaDealDiscount > 0 ?
+                <span className="text-green-600 ml-1">(saving ${costs.standardMultiMediaDealDiscount.toFixed(2)})</span>
+                :
+                null
+              }
+              </span>
+            </div>
+          )
+        }
+        </> 
 
-      {costs.distributionDealName && (
-        <div className="flex items-start gap-2 p-3 bg-purple-500/10 border border-purple-500/20 rounded-md text-sm">
-          <Sparkles className="!w-[16px] !h-[16px] text-purple-600 shrink-0 mt-0.5" />
-          <span className="text-foreground">
-            <span className="font-medium">{costs.distributionDealName} Applied!</span> discount on High Resolution, DDP,
-            and ISRC for {costs.distributionDealSongCount} song{costs.distributionDealSongCount !== 1 ? "s" : ""}
-            {costs.distributionDealDiscount > 0 && (
-              <span className="text-green-600 ml-1">(saving ${costs.distributionDealDiscount.toFixed(2)})</span>
-            )}
-          </span>
-        </div>
-      )}
+      <>
+        {
+          Object.keys(costs.distributionDeals).map((deal, idx) =>     
+            <div key={`distro-deal-${idx}`} className="flex items-start gap-2 p-3 bg-purple-500/10 border border-purple-500/20 rounded-md text-sm">
+              <Sparkles className="!w-[16px] !h-[16px] text-purple-600 shrink-0 mt-0.5" />
+              <span className="text-foreground">
+                <span className="font-bold">{deal} Applied!</span> discount on High Resolution, DDP,
+                and ISRC for {costs.distributionDeals[deal]} song{costs.distributionDeals[deal] !== 1 ? "s" : ""}
+                {deal.toLocaleLowerCase().includes("premium") ? costs.premiumDistributionDealDiscount > 0 && (
+                  <span className="text-green-600 ml-1">(saving ${costs.premiumDistributionDealDiscount.toFixed(2)})</span>
+                ) : 
+                costs.standardDistributionDealDiscount > 0 ?
+                <span className="text-green-600 ml-1">(saving ${costs.standardDistributionDealDiscount.toFixed(2)})</span>
+                :
+                null
+              }
+              </span>
+            </div>
+          )
+        }
+        </> 
 
       {(hasAnyPerSongAddOns || costs.virtualSessionHours > 0 || hasAnyDeliveryOptions) && (
         <div className="space-y-4">
@@ -241,7 +260,7 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
         </div>
       )}
 
-      <div className="border-t border-border pt-4 space-y-2">
+      <div className="border-t border-border pt-4 space-y-2 flex flex-col lg:gap-0 gap-2">
         <h3 className="font-medium mb-3">Cost Breakdown</h3>
 
         <div className="space-y-1 mb-3">
@@ -271,64 +290,143 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
         </div>
 
         {costs.vinylMasteringCost > 0 && (
-          <div className="flex justify-between text-sm">
+          <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
             <span className="text-muted-foreground lg:block flex flex-col">
               Vinyl Mastering ({summary.vinylMasteringCount} song{summary.vinylMasteringCount !== 1 ? "s" : ""})
-              {costs.multimediaDealName && (
-                <span className="text-primary text-xs lg:ml-1">({costs.multimediaDealName})</span>
-              )}
+              <span className="flex lg:flex-row flex-col gap-2">
+              {
+                costs.dealBreakdown.vinyl.premium > 0 &&
+                <span className="text-purple-600 text-xs lg:ml-1">
+                  ({costs.dealBreakdown.vinyl.premium} with {summary.premiumMultimediaDealName})
+                </span>
+              }
+              </span>
+              <span className="flex lg:flex-row flex-col gap-2">
+              {
+                costs.dealBreakdown.vinyl.standard > 0 &&
+                <span className="text-purple-600 text-xs lg:ml-1">
+                  ({costs.dealBreakdown.vinyl.standard} with {summary.multimediaDealName})
+                </span>
+              }
+              </span>
             </span>
-            <span>${costs.vinylMasteringCost.toFixed(2)}</span>
+            <span>${costs.vinylMasteringCost.toFixed(2)} {
+              costs.vinylMasteringDiscount > 0
+              ?
+              <>
+                {" "}
+                <span className="text-sm text-green-600">(-${costs.vinylMasteringDiscount.toFixed(2)} off)</span>
+              </>
+              : null
+            }</span>
           </div>
         )}
         {costs.streamingMasteringCost > 0 && (
-          <div className="flex justify-between text-sm">
+          <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
             <span className="text-muted-foreground lg:block flex flex-col">
               Streaming Mastering ({summary.streamingMasteringCount} song
               {summary.streamingMasteringCount !== 1 ? "s" : ""})
-              {costs.multimediaDealName && (
-                <span className="text-primary text-xs lg:ml-1">({costs.multimediaDealName})</span>
-              )}
+              <span className="flex lg:flex-row flex-col gap-2">
+              {
+                costs.dealBreakdown.streaming.premium > 0 &&
+                <span className="text-purple-600 text-xs lg:ml-1">
+                  ({costs.dealBreakdown.streaming.premium} with {summary.premiumMultimediaDealName})
+                </span>
+              }
+              </span>
+              <span className="flex lg:flex-row flex-col gap-2">
+              {
+                costs.dealBreakdown.streaming.standard > 0 &&
+                <span className="text-purple-600 text-xs lg:ml-1">
+                  ({costs.dealBreakdown.streaming.standard} with {summary.multimediaDealName})
+                </span>
+              }
+              </span>
             </span>
-            <span>${costs.streamingMasteringCost.toFixed(2)}</span>
+            <span>${costs.streamingMasteringCost.toFixed(2)} {
+              costs.streamingMasteringDiscount > 0
+              ?
+              <>
+                {" "}
+                <span className="text-sm text-green-600">(-${costs.streamingMasteringDiscount.toFixed(2)} off)</span>
+              </>
+              : null
+            }</span>
           </div>
         )}
         {costs.redbookMasteringCost > 0 && (
-          <div className="flex justify-between text-sm">
+          <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
             <span className="text-muted-foreground lg:block flex flex-col">
-              Redbook CD Mastering ({summary.redbookMasteringCount} song{summary.redbookMasteringCount !== 1 ? "s" : ""}
-              )
-              {costs.multimediaDealName && (
-                <span className="text-primary text-xs lg:ml-1">({costs.multimediaDealName})</span>
-              )}
+              Redbook CD Mastering ({summary.redbookMasteringCount} song{summary.redbookMasteringCount !== 1 ? "s" : ""})
+              <span className="flex lg:flex-row flex-col gap-2">
+              {
+                costs.dealBreakdown.redbook.premium > 0 &&
+                <span className="text-purple-600 text-xs lg:ml-1">
+                  ({costs.dealBreakdown.redbook.premium} with {summary.premiumMultimediaDealName})
+                </span>
+              }
+              </span>
+              <span className="flex lg:flex-row flex-col gap-2">
+              {
+                costs.dealBreakdown.redbook.standard > 0 &&
+                <span className="text-purple-600 text-xs lg:ml-1">
+                  ({costs.dealBreakdown.redbook.standard} with {summary.multimediaDealName})
+                </span>
+              }
+              </span>
             </span>
-            <span>${costs.redbookMasteringCost.toFixed(2)}</span>
+            <span>${costs.redbookMasteringCost.toFixed(2)} {
+              costs.redbookMasteringDiscount > 0
+              ?
+              <>
+                {" "}
+                <span className="text-sm text-green-600">(-${costs.redbookMasteringDiscount.toFixed(2)} off)</span>
+              </>
+              : null
+            }</span>
           </div>
         )}
         {costs.stemMasteringCost > 0 && (
-          <div className="flex justify-between text-sm">
+          <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
             <span className="text-muted-foreground">
               Stem Mastering ({summary.stemMasteringCount} song{summary.stemMasteringCount !== 1 ? "s" : ""})
             </span>
-            <span>${costs.stemMasteringCost.toFixed(2)}</span>
+            <span>${costs.stemMasteringCost.toFixed(2)} {
+              costs.stemMasteringDiscount > 0
+              ?
+              <>
+                {" "}
+                <span className="text-sm text-green-600">(-${costs.stemMasteringDiscount.toFixed(2)} off)</span>
+              </>
+              : null
+            }</span>
           </div>
         )}
         {costs.restorationRemasteringCost > 0 && (
-          <div className="flex justify-between text-sm">
+          <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
             <span className="text-muted-foreground">
               Restoration Remastering ({summary.restorationRemasteringCount} song
               {summary.restorationRemasteringCount !== 1 ? "s" : ""})
             </span>
-            <span>${costs.restorationRemasteringCost.toFixed(2)}</span>
+            <span>${costs.restorationRemasteringCost.toFixed(2)} {
+              costs.restorationRemasteringDiscount > 0
+              ?
+              <>
+                {" "}
+                <span className="text-sm text-green-600">(-${costs.restorationRemasteringDiscount.toFixed(2)} off)</span>
+              </>
+              : null
+            }</span>
           </div>
         )}
 
-        {costs.multimediaDealDiscount > 0 && (
+        {costs.multimediaDealDiscount > 0 && summary.multimediaDealName && (
           <div className="flex justify-between text-sm text-green-600">
-            <span>{costs.multimediaDealName} Savings</span>
+            <span>{summary.multimediaDealName} {summary.premiumMultimediaDealName ? ` and ${summary.premiumMultimediaDealName}` : ''} Savings</span>
             <span>-${costs.multimediaDealDiscount.toFixed(2)}</span>
           </div>
         )}
+        
 
         {costs.virtualSessionCost > 0 && (
           <div className="flex justify-between text-sm">
@@ -339,50 +437,115 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
           </div>
         )}
         {costs.highResMasterCost > 0 && (
-          <div className="flex justify-between text-sm">
+          <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
             <span className="text-muted-foreground lg:block flex flex-col">
               High Resolution Master ({summary.highResMasterCount} song{summary.highResMasterCount !== 1 ? "s" : ""})
-              {costs.distributionDealSongCount > 0 && (
+              <span className="flex lg:flex-row flex-col gap-2">
+              {
+                costs.dealBreakdown.highres.premium > 0 &&
                 <span className="text-purple-600 text-xs lg:ml-1">
-                  ({costs.distributionDealSongCount} with {costs.distributionDealName})
+                  ({costs.dealBreakdown.highres.premium} with {summary.premiumDistributionDealName})
                 </span>
-              )}
+              }
+              </span>
+              <span className="flex lg:flex-row flex-col gap-2">
+              {
+                costs.dealBreakdown.highres.standard > 0 &&
+                <span className="text-purple-600 text-xs lg:ml-1">
+                  ({costs.dealBreakdown.highres.standard} with {summary.distributionDealName})
+                </span>
+              }
+              </span>
             </span>
-            <span>${costs.highResMasterCost.toFixed(2)}</span>
+            <span>${costs.highResMasterCost.toFixed(2)} {
+              costs.highResMasterDiscount > 0
+              ?
+              <>
+                {" "}
+                <span className="text-sm text-green-600">(-${costs.highResMasterDiscount.toFixed(2)} off)</span>
+              </>
+              : null
+            }</span>
           </div>
         )}
         {costs.ddpImageCost > 0 && (
-          <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground lg:block flex flex-col">
+          <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
+            <span className="text-muted-foreground flex flex-col">
               DDP Image ({summary.ddpImageCount} song{summary.ddpImageCount !== 1 ? "s" : ""})
-              {costs.distributionDealSongCount > 0 && (
+              <span className="flex lg:flex-row flex-col gap-2">
+              {
+                costs.dealBreakdown.ddpimage.premium > 0 &&
                 <span className="text-purple-600 text-xs lg:ml-1">
-                  ({costs.distributionDealSongCount} with {costs.distributionDealName})
+                  ({costs.dealBreakdown.ddpimage.premium} with {summary.premiumDistributionDealName})
                 </span>
-              )}
+              }
+              </span>
+              <span className="flex lg:flex-row flex-col gap-2">
+              {
+                costs.dealBreakdown.ddpimage.standard > 0 &&
+                <span className="text-purple-600 text-xs lg:ml-1">
+                  ({costs.dealBreakdown.ddpimage.standard} with {summary.distributionDealName})
+                </span>
+              }
+              </span>
             </span>
-            <span>${costs.ddpImageCost.toFixed(2)}</span>
+            <span>${costs.ddpImageCost.toFixed(2)} {
+              costs.ddpImageDiscount > 0
+              ?
+              <>
+                {" "}
+                <span className="text-sm text-green-600">(-${costs.ddpImageDiscount.toFixed(2)} off)</span>
+              </>
+              : null
+            }</span>
           </div>
         )}
         {costs.isrcEncodingCost > 0 && (
-          <div className="flex justify-between text-sm">
+          <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
             <span className="text-muted-foreground lg:block flex flex-col">
               ISRC Encoding ({summary.isrcEncodingCount} song{summary.isrcEncodingCount !== 1 ? "s" : ""})
-              {costs.distributionDealSongCount > 0 && (
+             <span className="flex lg:flex-row flex-col gap-2">
+              {
+                costs.dealBreakdown.isrcencode.premium > 0 &&
                 <span className="text-purple-600 text-xs lg:ml-1">
-                  ({costs.distributionDealSongCount} with {costs.distributionDealName})
+                  ({costs.dealBreakdown.isrcencode.premium} with {summary.premiumDistributionDealName})
                 </span>
-              )}
+              }
+              </span>
+              <span className="flex lg:flex-row flex-col gap-2">
+              {
+                costs.dealBreakdown.isrcencode.standard > 0 &&
+                <span className="text-purple-600 text-xs lg:ml-1">
+                  ({costs.dealBreakdown.isrcencode.standard} with {summary.distributionDealName})
+                </span>
+              }
+              </span>
             </span>
-            <span>${costs.isrcEncodingCost.toFixed(2)}</span>
+            <span>${costs.isrcEncodingCost.toFixed(2)} {
+              costs.isrcEncodingDiscount > 0
+              ?
+              <>
+                {" "}
+                <span className="text-sm text-green-600">(-${costs.isrcEncodingDiscount.toFixed(2)} off)</span>
+              </>
+              : null
+            }</span>
           </div>
         )}
         {costs.rushDeliveryCost > 0 && (
-          <div className="flex justify-between text-sm">
+          <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
             <span className="text-muted-foreground">
               Rush Delivery ({summary.rushDeliveryCount} song{summary.rushDeliveryCount !== 1 ? "s" : ""}, 2x song cost)
             </span>
-            <span>${costs.rushDeliveryCost.toFixed(2)}</span>
+            <span>${costs.rushDeliveryCost.toFixed(2)} {
+              costs.rushDeliveryDiscount > 0
+              ?
+              <>
+                {" "}
+                <span className="text-sm text-green-600">(-${costs.rushDeliveryDiscount.toFixed(2)} off)</span>
+              </>
+              : null
+            }</span>
           </div>
         )}
         {costs.distributionDealDiscount > 0 && (
@@ -391,9 +554,28 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
             <span>-${costs.distributionDealDiscount.toFixed(2)}</span>
           </div>
         )}
-        <div className="flex justify-between text-lg font-bold pt-2 border-t border-border">
-          <span>Total</span>
-          <span>${costs.total.toFixed(2)}</span>
+        {
+          costs.optionsDiscounts > 0 && 
+          <div className="flex justify-between text-sm text-green-600 font-bold">
+            <span>Total Add-On/Delivery Discounts</span>
+            <span>-${costs.optionsDiscounts.toFixed(2)}</span>
+          </div>
+        }
+        <div className="flex flex-col border-t border-border gap-2">
+          <span className="flex flex-col">
+            <span className="flex justify-between text-sm font-bold pt-2 text-muted-foreground">
+              <span>Subtotal</span>
+              <span>${costs.preDiscountsTotal.toFixed(2)}</span>
+            </span>
+            <span className="flex justify-between text-sm font-bold pt-2 text-green-600">
+              <span>Discounts</span>
+              <span>${costs.discountsTotal.toFixed(2)}</span>
+            </span>
+          </span>
+          <span className="flex justify-between text-lg font-bold pt-2">
+            <span>Total</span>
+            <span>${costs.total.toFixed(2)}</span>
+          </span>
         </div>
       </div>
 

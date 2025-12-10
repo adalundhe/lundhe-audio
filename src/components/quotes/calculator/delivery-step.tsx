@@ -5,7 +5,8 @@ import { Checkbox } from "~/components/ui/checkbox"
 import { Button } from "~/components/ui/button"
 import type { DeliveryOptions, Song, PricingData } from "~/lib/mixing/pricing-types"
 import { meetsThreshold } from "~/lib/meets-threshold"
-import { ChevronDown, ChevronUp, Info, Sparkles } from "lucide-react"
+import { ChevronDown, ChevronUp, Info, Sparkles, Check } from "lucide-react"
+import { getDiscountLable } from "~/lib/discounts"
 
 type DeliveryStepProps = {
   deliveryOptions: DeliveryOptions
@@ -15,6 +16,7 @@ type DeliveryStepProps = {
 }
 
 type DeliveryOptionKey = keyof DeliveryOptions
+
 
 export function DeliveryStep({ deliveryOptions, setDeliveryOptions, songs, pricingData }: DeliveryStepProps) {
   const [expandedOptions, setExpandedOptions] = useState<Record<DeliveryOptionKey, boolean>>({
@@ -40,13 +42,26 @@ export function DeliveryStep({ deliveryOptions, setDeliveryOptions, songs, prici
   const extendedArchivalPrice = extendedArchivalOption?.price ?? 25
 
   // Get discounts from database
-  const optionVolumeDiscounts = discounts.filter((d) => d.category === "bundle")
+  const optionVolumeDiscounts = discounts.filter((d) => d.category === "bundle" || d.category == "option_volume")
   const hifiDealDiscount = discounts.find((d) => d.id === "hifi_deal")
+  const hiFiDiscountPrecentage = hifiDealDiscount?.discountPercentage ?? 0 
 
+  const getSongMixdownDeal = (songId: string) => {
+    const hasHighRes = deliveryOptions.highResMixdownSongs.includes(songId)
+    const hasFilm = deliveryOptions.filmMixdownSongs.includes(songId)
+    const count = [hasHighRes, hasFilm].filter(Boolean).length
 
+    if (count >= 3) return { hasDeal: true, isPremium: true }
+    if (count >= 2) return { hasDeal: true, isPremium: false }
+    return { hasDeal: false, isPremium: false }
+  }
+
+  
+  
   const getOptionVolumeDiscount = (count: number) => {
     let bestDiscount = 0
     for (const discount of optionVolumeDiscounts) {
+
       if (meetsThreshold(count, discount.minThreshold, discount.maxThreshold)) {
         if (discount.discountPercentage > bestDiscount) {
           bestDiscount = discount.discountPercentage
@@ -77,6 +92,10 @@ export function DeliveryStep({ deliveryOptions, setDeliveryOptions, songs, prici
       const additionalTiers = Math.ceil((song.tracks - 10) / 10)
       return basePrice + additionalTiers * 75
     }
+  }
+  
+  const isHiFiOption = (addOnKey: string) => {
+    return ["highResMixdownSongs", "filmMixdownSongs"].includes(addOnKey)
   }
 
   const hasMixdownBundle = (songId: string) => {
@@ -127,7 +146,7 @@ export function DeliveryStep({ deliveryOptions, setDeliveryOptions, songs, prici
       label: rushDeliveryOption?.name ?? "Rush Delivery",
       description:
         rushDeliveryOption?.description ?? "Priority processing with 48-hour turnaround - doubles the song cost",
-      priceLabel: "2x song cost",
+      priceLabel: "2x/song",
       getPrice: (song: Song) => calculateSongBasePrice(song),
     },
   ]
@@ -202,15 +221,32 @@ export function DeliveryStep({ deliveryOptions, setDeliveryOptions, songs, prici
           const hasSelections = selectedSongs.length > 0
           const selectedCount = selectedSongs.length
           const discountPercentage = getOptionVolumeDiscount(selectedCount)
+          const isHiFi = isHiFiOption(option.key)
+
+          const totalDiscount = discountPercentage + (
+            isHiFi ? hiFiDiscountPrecentage : 0
+          )
+
+
+          const optionPrice = option.fixedPrice ?? songs.map(
+            song => option.getPrice ? option.getPrice(song) : 0
+          ).reduce((prev, cur) => prev + cur, 0)
+          
+          const finalPrice = optionPrice * (1 - totalDiscount/100)      
+
+          const addonCost =  optionPrice * selectedCount * (1 - totalDiscount/100)   
+          const hasAnyDiscount =
+            selectedCount > 0 && (discountPercentage > 0 || (isHiFi && hiFiDiscountPrecentage > 0))
 
           return (
             <div key={option.key} className="border border-border rounded-lg overflow-hidden">
-              <div
-                className="flex lg:flex-row flex-col lg:items-center lg:gap-0 gap-4 justify-between p-4 cursor-pointer hover:bg-muted/50 transition-colors"
+              <button
+                type="button"
+                className="w-full flex lg:flex-row flex-col lg:gap-0 gap-4 justify-between p-4 hover:bg-muted/50 transition-colors text-left"
                 onClick={() => toggleExpanded(option.key)}
               >
-                <div className="flex-1">
-                  <div className="flex lg:flex-row flex-col lg:items-center gap-2">
+                <div className="flex-1 flex flex-col gap-2">
+                  <div className="flex flex-col gap-2">
                     <span className="text-base font-medium">{option.label}</span>
                     {option.isMixdownOption && songsWithMixdownBundle > 0 && (
                       <span className="text-xs bg-purple-500/10 text-purple-600 px-2 py-0.5 rounded-full flex items-center gap-1 w-fit">
@@ -219,51 +255,73 @@ export function DeliveryStep({ deliveryOptions, setDeliveryOptions, songs, prici
                       </span>
                     )}
                     {hasSelections && (
-                      <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 lg:rounded-full rounded-md w-fit">
-                        {selectedSongs.length} song{selectedSongs.length !== 1 ? "s" : ""}
-                        {discountPercentage > 0 && (
-                          <span className="ml-1 text-green-600">({discountPercentage}% off)</span>
-                        )}
-                      </span>
-                    )}
+                        <span className="px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full w-fit">
+                          {selectedCount} song{selectedCount !== 1 ? "s" : ""} selected
+                          {hasAnyDiscount && (
+                            <>
+                              {" "}
+                              <span className="text-green-600">
+                                ({discountPercentage > 0 && `${discountPercentage}%`}
+                                {discountPercentage > 0 && isHiFi && hiFiDiscountPrecentage > 0 && " + "}
+                                {isHiFi && hiFiDiscountPrecentage > 0 && `${hiFiDiscountPrecentage}%`} off)
+                              </span>
+                            </>
+                          )}
+                        </span>
+                      )}
                   </div>
                   <p className="text-sm text-muted-foreground mt-1">{option.description}</p>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-sm font-medium text-primary">{option.priceLabel}</span>
+                  <span className="text-sm font-medium">
+                    {hasAnyDiscount ? (
+                      <>
+                        <span className="line-through text-muted-foreground">{option.priceLabel}</span>
+                        <span className="text-green-600 ml-1">${finalPrice.toFixed(0)}/song</span>
+                      </>
+                    ) : (
+                      <span>+{option.priceLabel}/song</span>
+                    )}
+                    {addonCost > 0 && <span className="text-primary ml-1">(${addonCost.toFixed(0)})</span>}
+                  </span>
                   {isExpanded ? (
                     <ChevronUp className="!w-[16px] !h-[16px] text-muted-foreground" />
                   ) : (
                     <ChevronDown className="!w-[16px] !h-[16px] text-muted-foreground" />
                   )}
                 </div>
-              </div>
+              </button>
 
               {isExpanded && (
                 <div className="border-t border-border p-4 bg-muted/30">
-                  <div className="flex lg:flex-row lg:my-0 my-2 flex-col gap-2 mb-3">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        selectAllForOption(option.key)
-                      }}
-                      className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
-                    >
-                      Select All
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        deselectAllForOption(option.key)
-                      }}
-                      className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
-                    >
-                      Deselect All
-                    </Button>
+                  <div className="flex lg:flex-row flex-col items-center lg:gap-0 gap-4 justify-between mb-3">
+                    <span className="text-sm lg:text-left text-center text-muted-foreground">
+                      Select songs to apply {option.label.toLowerCase()}:
+                    </span>
+                    <div className="flex gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          selectAllForOption(option.key)
+                        }}
+                        className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
+                      >
+                        Select All
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          deselectAllForOption(option.key)
+                        }}
+                        className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
+                      >
+                        Deselect All
+                      </Button>
+                    </div>
                   </div>
                   {selectedCount > 0 && selectedCount < 5 && (
                     <div className="text-xs text-muted-foreground mb-3 p-2 bg-muted rounded">
@@ -295,41 +353,52 @@ export function DeliveryStep({ deliveryOptions, setDeliveryOptions, songs, prici
 
                       const hasAnyDiscount = discountPercentage > 0 || showMixdownBundle
 
+                      const songDeal = option.isMixdownOption
+                        ? getSongMixdownDeal(song.id)
+                        : { hasDeal: false }
+
                       return (
-                        <div key={song.id} className="flex items-center justify-between p-2 rounded hover:bg-muted/50">
-                          <div className="flex items-center gap-3">
-                            <Checkbox
-                              id={`${option.key}-${song.id}`}
-                              checked={isSelected}
-                              onCheckedChange={() => toggleSongForOption(option.key, song.id)}
-                            />
-                            <label
-                              htmlFor={`${option.key}-${song.id}`}
-                              className="text-sm cursor-pointer flex items-center gap-2"
-                            >
-                              {song.title || `Song ${index + 1}`}
-                              <span className="text-muted-foreground">
-                                ({song.tracks} tracks, {song.minutes}:{song.seconds.toString().padStart(2, "0")})
+                        <button
+                          key={song.id}
+                          type="button"
+                          onClick={() => toggleSongForOption(option.key, song.id)}
+                          className={`w-full flex lg:flex-row flex-col lg:items-center lg:gap-0 gap-4 justify-between p-3 rounded-md border transition-colors ${
+                            isSelected ? "border-primary bg-primary/5" : "border-border hover:bg-muted/50"
+                          }`}
+                        >
+                          <div className="flex lg:flex-row flex-col lg:items-center lg:gap-3 gap-4">
+                            <div className="flex gap-3 lg:items-start items-center">
+                                <div
+                                className={`!w-[16px] !h-[16px] rounded border flex items-center justify-center ${
+                                  isSelected ? "bg-primary border-primary" : "border-muted-foreground"
+                                }`}
+                              >
+                                {isSelected && <Check className="!w-[16px] !h-[16px] text-primary-foreground" />}
+                              </div>
+                              <span className="text-sm font-medium">{song.title || `Song ${index + 1}`}</span>
+
+                              <span className="text-xs text-muted-foreground">
+                                ({song.minutes}:{song.seconds.toString().padStart(2, "0")})
                               </span>
-                              {showMixdownBundle && (
-                                <span className="text-xs bg-purple-500/10 text-purple-600 px-1.5 py-0.5 rounded flex items-center gap-1">
-                                  <Sparkles className="!w-[16px] !h-[16px]" />
-                                  Hi-Fi -{hifiDealDiscount?.discountPercentage ?? 10}%
-                                </span>
-                              )}
-                            </label>
+                            </div>
+                            {option.isMixdownOption && songDeal.hasDeal && (
+                              <span className="text-xs bg-purple-500/10 text-purple-600 px-1.5 py-0.5 rounded flex items-center gap-1 w-fit">
+                                <Sparkles className="!w-[16px] !h-[16px]" />
+                                Hi-Fi Deal -{hiFiDiscountPrecentage}%
+                              </span>
+                            )}
                           </div>
-                          <span className="text-sm font-medium">
+                          <span className="text-sm text-muted-foreground">
                             {hasAnyDiscount ? (
                               <>
-                                <span className="line-through text-muted-foreground">${basePrice.toFixed(0)}</span>
+                                <span className="line-through">${basePrice.toFixed(0)}</span>
                                 <span className="text-green-600 ml-1">${discountedPrice.toFixed(0)}</span>
                               </>
                             ) : (
                               `$${basePrice.toFixed(0)}`
                             )}
                           </span>
-                        </div>
+                        </button>
                       )
                     })}
                   </div>

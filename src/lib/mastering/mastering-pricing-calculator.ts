@@ -1,5 +1,5 @@
 import type { Product, ProductOption, Discount } from "~/server/db/types"
-import type { MasteringPricingData, MasteringQuoteData } from "./pricing-types"
+import type { MasteringPricingData, MasteringQuoteData, MasteringDiscountDealSet, MasteringDealBreakdown } from "./pricing-types"
 import { meetsThreshold } from "../meets-threshold"
 
 
@@ -99,10 +99,11 @@ function getOptionVolumeDiscount(discounts: Discount[], selectedCount: number): 
 function getMultimediaDealDiscount(
   discounts: Discount[],
   addOns: MasteringAddOns,
+  songId: string
 ): { discount: Discount | null; type: "none" | "multimedia" | "premium_multimedia" } {
-  const hasVinyl = addOns.vinylMasteringSongs.length > 0
-  const hasStreaming = addOns.streamingMasteringSongs.length > 0
-  const hasRedbook = addOns.redbookMasteringSongs.length > 0
+  const hasVinyl = addOns.vinylMasteringSongs.includes(songId)
+  const hasStreaming = addOns.streamingMasteringSongs.includes(songId)
+  const hasRedbook = addOns.redbookMasteringSongs.includes(songId)
   const count = [hasVinyl, hasStreaming, hasRedbook].filter(Boolean).length
 
   if (count < 2) return { discount: null, type: "none" }
@@ -117,6 +118,35 @@ function getMultimediaDealDiscount(
   if (count >= 2) {
     const deal = bundleDiscounts.find((d) => d.id === "multimedia_deal")
     if (deal) return { discount: deal, type: "multimedia" }
+  }
+
+  return { discount: null, type: "none" }
+}
+
+function getDistributionDealDiscount(
+  discounts: Discount[],
+  deliveryOptions: MasteringDeliveryOptions,
+  songId: string,
+): { discount: Discount | null; type: "none" | "distribution" | "premium_distribution" } {
+
+
+  const hasHighRes = deliveryOptions.highResMasterSongs.includes(songId)
+  const hasDdp = deliveryOptions.ddpImageSongs.includes(songId)
+  const hasIsrc = deliveryOptions.isrcEncodingSongs.includes(songId)
+  const count = [hasHighRes, hasDdp, hasIsrc].filter(Boolean).length
+
+  if (count < 2) return { discount: null, type: "none" }
+
+  const bundleDiscounts = findDiscountsByCategory(discounts, "delivery_bundle")
+
+  if (count >= 3) {
+    const premiumDeal = bundleDiscounts.find((d) => d.id === "premium_distribution_deal")
+    if (premiumDeal) return { discount: premiumDeal, type: "premium_distribution" }
+  }
+
+  if (count >= 2) {
+    const deal = bundleDiscounts.find((d) => d.id === "distribution_deal")
+    if (deal) return { discount: deal, type: "distribution" }
   }
 
   return { discount: null, type: "none" }
@@ -174,33 +204,6 @@ function calculateMasteringBasePrice(
   }
 }
 
-function getDistributionDealDiscount(
-  discounts: Discount[],
-  deliveryOptions: MasteringDeliveryOptions,
-  songId: string,
-): { discount: Discount | null; type: "none" | "distribution" | "premium_distribution" } {
-  const hasHighRes = deliveryOptions.highResMasterSongs.includes(songId)
-  const hasDdp = deliveryOptions.ddpImageSongs.includes(songId)
-  const hasIsrc = deliveryOptions.isrcEncodingSongs.includes(songId)
-  const count = [hasHighRes, hasDdp, hasIsrc].filter(Boolean).length
-
-  if (count < 2) return { discount: null, type: "none" }
-
-  const bundleDiscounts = findDiscountsByCategory(discounts, "delivery_bundle")
-
-  if (count >= 3) {
-    const premiumDeal = bundleDiscounts.find((d) => d.id === "premium_distribution_deal")
-    if (premiumDeal) return { discount: premiumDeal, type: "premium_distribution" }
-  }
-
-  if (count >= 2) {
-    const deal = bundleDiscounts.find((d) => d.id === "distribution_deal")
-    if (deal) return { discount: deal, type: "distribution" }
-  }
-
-  return { discount: null, type: "none" }
-}
-
 // Main function to build mastering quote data
 export function buildMasteringQuoteData(
   pricingData: MasteringPricingData,
@@ -221,10 +224,6 @@ export function buildMasteringQuoteData(
   const volumeDiscountPercentage = volumeDiscount?.discountPercentage ?? 0
   const volumeDiscountName = volumeDiscount?.name ?? null
 
-  // Get multimedia deal discount
-  const { discount: multimediaDealObj } = getMultimediaDealDiscount(discounts, addOns)
-  const multimediaDealPercentage = multimediaDealObj?.discountPercentage ?? 0
-  const multimediaDealName = multimediaDealObj?.name ?? null
 
   // Get option counts
   const vinylCount = addOns.vinylMasteringSongs.length
@@ -289,6 +288,9 @@ export function buildMasteringQuoteData(
     const hasIsrcEncoding = deliveryOptions.isrcEncodingSongs.includes(song.id)
     const hasRushDelivery = deliveryOptions.rushDeliverySongs.includes(song.id)
 
+    const multimedialDealCount = [hasVinyl, hasStreaming, hasRedbook].filter(Boolean).length
+    const distroDealCount = [hasHighRes, hasDdpImage, hasRedbook].filter(Boolean).length
+
     return {
       songId: song.id,
       title: song.title || `Song ${index + 1}`,
@@ -305,75 +307,256 @@ export function buildMasteringQuoteData(
         stemMastering: hasStem,
         stemCount: songStemCount,
         restorationRemastering: hasRestoration,
+        multimedialDeal: multimedialDealCount >= 3 ? 'premium' : multimedialDealCount == 2 ? 'standard' : 'none'
       },
       delivery: {
         highResMaster: hasHighRes,
         ddpImage: hasDdpImage,
         isrcEncoding: hasIsrcEncoding,
         rushDelivery: hasRushDelivery,
+        distributionDeal: distroDealCount >= 3 ? 'premium' : distroDealCount == 2 ? 'standard' : 'none'
       },
-      songSubtotal: basePrice,
+      songSubtotal: basePrice + extendedLengthFeeAmount,
     }
   })
 
   // Calculate costs
   const baseSongsCost = songDetails.reduce((sum, s) => sum + s.songSubtotal, 0)
+  const lengthFeesCost = songDetails.reduce((sum, s) => sum + s.extendedLengthFeeAmount, 0)
   const volumeDiscountAmount = baseSongsCost * (volumeDiscountPercentage / 100)
 
   // Calculate add-on costs
   let vinylMasteringCost = 0
+  let vinylMasteringPreDiscountCost = 0
+  let vinylMasteringDiscountAmount = 0
   let streamingMasteringCost = 0
+  let streamingMasteringPreDiscountCost = 0
+  let streamingMasteringDiscountAmount = 0
   let redbookMasteringCost = 0
+  let redbookMasteringPreDiscountCost = 0
+  let redbookMasteringDiscountAmount = 0
   let stemMasteringCost = 0
+  let stemMasteringPreDiscountCost = 0
+  let stemMasteringDiscountAmount = 0
   let restorationRemasteringCost = 0
+  let restorationRemastringPreDiscountCost = 0
+  let restorationRemasteringDiscountAmount = 0
+
+  let multimediaDealName = undefined
+  let premiumMultimediaDealName = undefined
+  let multimediaDealSongCount = 0
+  let multiMediaDeals: MasteringDiscountDealSet = {}
+  let premiumMultiMdediaDealDiscountAmount = 0
+  let standardMultiMediaDealDiscountAmount = 0
+  let premiumDistributionDealDiscountAmount = 0
+  let standardDistributionDealDiscountAmount = 0
+
+  const masteringDealBreakdown: MasteringDealBreakdown = {
+    vinyl: {
+      premium: 0,
+      standard: 0
+    },
+    streaming: {
+      premium: 0,
+      standard: 0
+    },
+    redbook: {
+      premium: 0,
+      standard: 0
+    },
+    restoration: {
+      premium: 0,
+      standard: 0
+    },
+    stems: {
+      premium: 0,
+      standard: 0
+    },
+    highres: {
+      premium: 0,
+      standard: 0
+    },
+    ddpimage: {
+      premium: 0,
+      standard: 0
+    },
+    isrcencode: {
+      premium: 0,
+      standard: 0
+    },
+    rush: {
+      premium: 0,
+      standard: 0
+    }
+  }
 
   for (const song of songDetails) {
+
+    // Get multimedia deal discount
+    const { discount: multimediaDealObj } = getMultimediaDealDiscount(discounts, addOns, song.songId)
+    const multimediaDealPercentage = multimediaDealObj?.discountPercentage ?? 0
+
+    if (multimediaDealObj?.id.includes("premium")) {
+      premiumMultimediaDealName = multimediaDealObj.name
+
+    } else if (multimediaDealObj) {
+      multimediaDealName = multimediaDealObj.name
+    }
+
     // Vinyl mastering (multimedia deal eligible)
     if (song.addOns.vinylMastering) {
       let price = vinylPrice
-      if (vinylVolumeDiscount) price = applyDiscount(price, vinylVolumeDiscount.discountPercentage)
-      if (multimediaDealPercentage > 0) price = applyDiscount(price, multimediaDealPercentage)
+      let vinylMasteringDiscounts = 0
+      vinylMasteringPreDiscountCost += vinylPrice
+
+      if (vinylVolumeDiscount) {
+        vinylMasteringDiscounts += vinylVolumeDiscount.discountPercentage
+      }
+
+      if (multimediaDealPercentage > 0 && multimediaDealObj) {
+        vinylMasteringDiscounts += multimediaDealPercentage
+        multimediaDealSongCount += 1
+
+        multiMediaDeals[multimediaDealObj.name] = (
+            multiMediaDeals[multimediaDealObj.name] ?? 0
+        ) + 1
+      }
+
+      if (multimediaDealObj?.id.includes("premium") && multimediaDealPercentage > 0) {
+        masteringDealBreakdown.vinyl.premium += 1
+      } else if (multimediaDealObj && multimediaDealPercentage > 0) {
+        masteringDealBreakdown.vinyl.standard += 1
+      }
+
+      if (vinylMasteringDiscounts > 0) {
+        price = applyDiscount(vinylPrice, vinylMasteringDiscounts)
+        vinylMasteringDiscountAmount += vinylPrice - price
+      }
+
+      if (vinylMasteringDiscounts > 0 && multimediaDealObj?.id.includes("premium")) {
+        premiumMultiMdediaDealDiscountAmount += vinylPrice - price
+      } else if (vinylMasteringDiscounts > 0 && multimediaDealObj) {
+        standardMultiMediaDealDiscountAmount += vinylPrice - price
+      }
+
       vinylMasteringCost += price
     }
     // Streaming mastering (multimedia deal eligible)
     if (song.addOns.streamingMastering) {
       let price = streamingPrice
-      if (streamingVolumeDiscount) price = applyDiscount(price, streamingVolumeDiscount.discountPercentage)
-      if (multimediaDealPercentage > 0) price = applyDiscount(price, multimediaDealPercentage)
+      let streamingMasteringDiscounts = 0
+      streamingMasteringPreDiscountCost += streamingPrice
+
+      if (streamingVolumeDiscount) {
+        streamingMasteringDiscounts += streamingVolumeDiscount.discountPercentage
+      }
+
+      if (multimediaDealPercentage > 0){
+        streamingMasteringDiscounts += multimediaDealPercentage
+      }
+
+      if (streamingMasteringDiscounts > 0) {
+        price = applyDiscount(streamingPrice, streamingMasteringDiscounts)
+        streamingMasteringDiscountAmount += vinylPrice - price
+      }
+
+      if (streamingMasteringDiscounts > 0 && multimediaDealObj?.id.includes("premium")) {
+        premiumMultiMdediaDealDiscountAmount += streamingPrice - price
+      } else if (streamingMasteringDiscounts > 0 && multimediaDealObj) {
+        standardMultiMediaDealDiscountAmount += streamingPrice - price
+      }
+
+      if (multimediaDealObj?.id.includes("premium") && multimediaDealPercentage > 0) {
+        masteringDealBreakdown.streaming.premium += 1
+      } else if (multimediaDealObj && multimediaDealPercentage > 0) {
+        masteringDealBreakdown.streaming.standard += 1
+      }
+
       streamingMasteringCost += price
     }
     // Redbook mastering (multimedia deal eligible)
     if (song.addOns.redbookMastering) {
       let price = redbookPrice
-      if (redbookVolumeDiscount) price = applyDiscount(price, redbookVolumeDiscount.discountPercentage)
-      if (multimediaDealPercentage > 0) price = applyDiscount(price, multimediaDealPercentage)
+      let redbookMasteringDiscounts = 0
+      redbookMasteringPreDiscountCost += redbookPrice
+
+      if (redbookVolumeDiscount) {
+        redbookMasteringDiscounts += redbookVolumeDiscount.discountPercentage
+      }
+
+      if (multimediaDealPercentage > 0) {
+        redbookMasteringDiscounts += multimediaDealPercentage
+      }
+
+      if (redbookMasteringDiscounts > 0) {
+        price = applyDiscount(redbookPrice, redbookMasteringDiscounts)
+        redbookMasteringDiscountAmount += redbookPrice - price
+      }
+
+      if (redbookMasteringDiscounts > 0 && multimediaDealObj?.id.includes("premium")) {
+        premiumMultiMdediaDealDiscountAmount += redbookPrice - price
+      } else if (redbookMasteringDiscounts > 0 && multimediaDealObj) {
+        standardMultiMediaDealDiscountAmount += redbookPrice - price
+      }
+
+      if (multimediaDealObj?.id.includes("premium") && multimediaDealPercentage > 0) {
+        masteringDealBreakdown.redbook.premium += 1
+      } else if (multimediaDealObj && multimediaDealPercentage > 0) {
+        masteringDealBreakdown.redbook.standard += 1
+      }
+
+
       redbookMasteringCost += price
     }
+
     // Stem mastering
     if (song.addOns.stemMastering && song.addOns.stemCount > 0) {
-      let price = getStemMasteringPrice(options, song.addOns.stemCount)
-      if (stemVolumeDiscount) price = applyDiscount(price, stemVolumeDiscount.discountPercentage)
+      let stemsPrice = getStemMasteringPrice(options, song.addOns.stemCount)
+      let price = stemsPrice
+
+      stemMasteringPreDiscountCost += stemsPrice
+
+
+      if (stemVolumeDiscount) {
+        let discountedPrice = applyDiscount(price, stemVolumeDiscount.discountPercentage)
+        stemMasteringDiscountAmount += stemsPrice - discountedPrice
+        price = discountedPrice
+      }
+
+      if (multimediaDealObj?.id.includes("premium") && multimediaDealPercentage > 0) {
+        masteringDealBreakdown.stems.premium += 1
+      } else if (multimediaDealObj && multimediaDealPercentage > 0) {
+        masteringDealBreakdown.stems.standard += 1
+      }
+
       stemMasteringCost += price
     }
+
     // Restoration remastering
     if (song.addOns.restorationRemastering) {
       let price = restorationPrice
-      if (restorationVolumeDiscount) price = applyDiscount(price, restorationVolumeDiscount.discountPercentage)
+      restorationRemastringPreDiscountCost += restorationPrice
+
+      if (restorationVolumeDiscount) {
+        price = applyDiscount(restorationPrice, restorationVolumeDiscount.discountPercentage)
+        restorationRemasteringDiscountAmount += restorationPrice - price
+      }
+
+
+      if (multimediaDealObj?.id.includes("premium") && multimediaDealPercentage > 0) {
+        masteringDealBreakdown.restoration.premium += 1
+      } else if (multimediaDealObj && multimediaDealPercentage > 0) {
+        masteringDealBreakdown.restoration.standard += 1
+      }
+
       restorationRemasteringCost += price
     }
   }
 
   // Calculate multimedia deal savings
-  const vinylWithoutDeal =
-    vinylCount * (vinylVolumeDiscount ? applyDiscount(vinylPrice, vinylVolumeDiscount.discountPercentage) : vinylPrice)
-  const streamingWithoutDeal =
-    streamingCount *
-    (streamingVolumeDiscount
-      ? applyDiscount(streamingPrice, streamingVolumeDiscount.discountPercentage)
-      : streamingPrice)
-  const redbookWithoutDeal =
-    redbookCount *
-    (redbookVolumeDiscount ? applyDiscount(redbookPrice, redbookVolumeDiscount.discountPercentage) : redbookPrice)
+  const vinylWithoutDeal = vinylCount * vinylPrice
+  const streamingWithoutDeal = streamingCount * streamingPrice
+  const redbookWithoutDeal = redbookCount * redbookPrice
   const totalWithoutDeal = vinylWithoutDeal + streamingWithoutDeal + redbookWithoutDeal
   const totalWithDeal = vinylMasteringCost + streamingMasteringCost + redbookMasteringCost
   const multimediaDealDiscount = totalWithoutDeal - totalWithDeal
@@ -384,44 +567,173 @@ export function buildMasteringQuoteData(
 
   // Calculate delivery costs
   let highResMasterCost = 0
+  let highResMasterPreDiscountCost = 0
+  let highResMasterDiscountAmount = 0
   let ddpImageCost = 0
+  let ddpImagePreDiscountCost = 0
+  let ddpImageDiscountAmount = 0
   let isrcEncodingCost = 0
+  let isrcEncodingPreDiscountCost = 0
+  let isrcEncodingDiscountAmount = 0
+
   let rushDeliveryCost = 0
-  let distributionDealDiscount = 0
-  let distributionDealName: string | null = null
+  let rushDeliveryPreDiscountCost = 0
+  let rushDeliveryDiscountAmount = 0
+  let distributionDeals: MasteringDiscountDealSet = {}
+
+  let distributionDealSongCount = 0
+  let distributionDealName = undefined;
+  let premiumDistributionDealName = undefined
+
+
 
   for (const song of songDetails) {
-    if (song.delivery.highResMaster) {
-      let price = highResPrice
-      if (highResVolumeDiscount) price = applyDiscount(price, highResVolumeDiscount.discountPercentage)
-      highResMasterCost += price
-    }
-    if (song.delivery.ddpImage) {
-      let price = ddpImagePrice
-      if (ddpImageVolumeDiscount) price = applyDiscount(price, ddpImageVolumeDiscount.discountPercentage)
-      ddpImageCost += price
-    }
-    if (song.delivery.isrcEncoding) {
-      let price = isrcEncodingPrice
-      if (isrcEncodingVolumeDiscount) price = applyDiscount(price, isrcEncodingVolumeDiscount.discountPercentage)
-      isrcEncodingCost += price
-    }
-    if (song.delivery.rushDelivery) {
-      let price = song.songSubtotal * 2 // 100% surcharge (doubles the price)
-      if (rushDeliveryVolumeDiscount) price = applyDiscount(price, rushDeliveryVolumeDiscount.discountPercentage)
-      rushDeliveryCost += price
-    }
 
     // Distribution deal discount
     const { discount: distributionDealObj } = getDistributionDealDiscount(discounts, deliveryOptions, song.songId)
     const distributionDealPercentage = distributionDealObj?.discountPercentage ?? 0
-    const currentDistributionDealName = distributionDealObj?.name ?? null
 
-    if (distributionDealPercentage > 0) {
-      distributionDealDiscount += song.songSubtotal * (distributionDealPercentage / 100)
-      distributionDealName = currentDistributionDealName
+    if (distributionDealObj?.id.includes("premium")) {
+      premiumDistributionDealName = distributionDealObj.name
+    } else if (distributionDealObj) {
+      distributionDealName = distributionDealObj.name
     }
+
+
+    if (song.delivery.highResMaster) {
+      let price = highResPrice
+      let highResMasterDiscounts = 0
+      highResMasterPreDiscountCost += highResPrice
+
+      if (highResVolumeDiscount) {
+        highResMasterDiscounts += highResVolumeDiscount.discountPercentage
+      }
+
+      if (distributionDealPercentage > 0 && distributionDealObj) {
+        highResMasterDiscounts += distributionDealPercentage
+        distributionDealSongCount += 1
+        
+        distributionDeals[distributionDealObj?.name] = (
+            distributionDeals[distributionDealObj?.name] ?? 0
+        ) + 1
+      }
+
+      if (highResMasterDiscounts > 0) {
+        price = applyDiscount(highResPrice, highResMasterDiscounts)
+        highResMasterDiscountAmount += highResPrice - price
+      }
+
+      if (highResMasterDiscounts > 0 && distributionDealObj?.id.includes("premium")) {
+        premiumDistributionDealDiscountAmount += highResPrice - price
+      } else if (highResMasterDiscounts > 0 && distributionDealObj) {
+        standardDistributionDealDiscountAmount += highResPrice - price
+      }  
+
+      if (distributionDealObj?.id.includes("premium") && distributionDealPercentage > 0) {
+        masteringDealBreakdown.highres.premium += 1
+      } else if (distributionDealObj && distributionDealPercentage > 0) {
+        masteringDealBreakdown.highres.standard += 1
+      }
+
+      highResMasterCost += price
+    }
+
+    if (song.delivery.ddpImage) {
+      let price = ddpImagePrice
+      let ddpImageMasterDiscounts = 0
+      ddpImagePreDiscountCost += ddpImagePrice
+
+      if (ddpImageVolumeDiscount) {
+        ddpImageMasterDiscounts += ddpImageVolumeDiscount.discountPercentage
+      }
+
+      if (distributionDealPercentage > 0) {
+        ddpImageMasterDiscounts += distributionDealPercentage
+      } 
+
+      if (ddpImageMasterDiscounts > 0) {
+        price = applyDiscount(ddpImagePrice, ddpImageMasterDiscounts)
+        ddpImageDiscountAmount += ddpImagePrice - price
+      }
+
+      if (ddpImageMasterDiscounts > 0 && distributionDealObj?.id.includes("premium")) {
+        premiumDistributionDealDiscountAmount += ddpImagePrice - price
+      } else if (ddpImageMasterDiscounts > 0 && distributionDealObj) {
+        standardDistributionDealDiscountAmount += ddpImagePrice - price
+      }
+
+      if (distributionDealObj?.id.includes("premium") && distributionDealPercentage > 0) {
+        masteringDealBreakdown.ddpimage.premium += 1
+      } else if (distributionDealObj && distributionDealPercentage > 0) {
+        masteringDealBreakdown.ddpimage.standard += 1
+      }
+
+
+      ddpImageCost += price
+    }
+
+    if (song.delivery.isrcEncoding) {
+      let price = isrcEncodingPrice
+      let isrcEncodingDiscounts = 0
+      isrcEncodingPreDiscountCost += isrcEncodingPrice
+
+      if (isrcEncodingVolumeDiscount) {
+        isrcEncodingDiscounts += isrcEncodingVolumeDiscount.discountPercentage
+      }
+
+      if (distributionDealPercentage > 0) {
+        isrcEncodingDiscounts += distributionDealPercentage
+      }
+
+      if (isrcEncodingDiscounts > 0) {
+        price = applyDiscount(isrcEncodingPrice, isrcEncodingDiscounts)
+        isrcEncodingDiscountAmount += isrcEncodingPrice - price
+      }
+
+      if (isrcEncodingDiscounts > 0 && distributionDealObj?.id.includes("premium")) {
+        premiumDistributionDealDiscountAmount += isrcEncodingPrice - price
+      } else if (isrcEncodingDiscounts > 0 && distributionDealObj) {
+        standardDistributionDealDiscountAmount += isrcEncodingPrice - price
+      }
+
+      if (distributionDealObj?.id.includes("premium") && distributionDealPercentage > 0) {
+        masteringDealBreakdown.isrcencode.premium += 1
+      } else if (distributionDealObj && distributionDealPercentage > 0) {
+        masteringDealBreakdown.isrcencode.standard += 1
+      }
+
+      isrcEncodingCost += price
+    }
+
+    if (song.delivery.rushDelivery) {
+      let price = song.songSubtotal * 2 // 100% surcharge (doubles the price)
+      rushDeliveryPreDiscountCost += song.songSubtotal
+
+      if (rushDeliveryVolumeDiscount) {
+        price = applyDiscount(song.songSubtotal, rushDeliveryVolumeDiscount.discountPercentage)
+        rushDeliveryDiscountAmount += song.songSubtotal - price
+      }
+
+      if (distributionDealObj?.id.includes("premium") && distributionDealPercentage > 0) {
+        masteringDealBreakdown.rush.premium += 1
+      } else if (distributionDealObj && distributionDealPercentage > 0) {
+        masteringDealBreakdown.rush.standard += 1
+      }
+
+      rushDeliveryCost += price
+    }
+
+
   }
+
+
+  const highResWithoutDeal = highResCount * highResPrice
+  const ddpWithoutDeal = ddpImageCount * ddpImagePrice
+  const isrcWithoutDeal = isrcEncodingCount * isrcEncodingPrice
+  const optionsTotalWithoutDeal = highResWithoutDeal + ddpWithoutDeal + isrcWithoutDeal
+  const optionsTotalWithDeal = highResMasterCost + ddpImageCost + isrcEncodingCost
+
+  const distributionDealDiscount = optionsTotalWithoutDeal - optionsTotalWithDeal
 
   const subtotal =
     baseSongsCost -
@@ -435,8 +747,33 @@ export function buildMasteringQuoteData(
     highResMasterCost +
     ddpImageCost +
     isrcEncodingCost +
-    rushDeliveryCost -
-    distributionDealDiscount
+    rushDeliveryCost
+
+  const preDiscountsTotal = [
+    baseSongsCost,
+    vinylMasteringPreDiscountCost,
+    streamingMasteringPreDiscountCost,
+    redbookMasteringPreDiscountCost,
+    stemMasteringPreDiscountCost,
+    restorationRemastringPreDiscountCost,
+    virtualSessionCost,
+    highResMasterPreDiscountCost,
+    ddpImagePreDiscountCost,
+    isrcEncodingPreDiscountCost,
+    rushDeliveryPreDiscountCost,
+  ].reduce((prev, cur) => prev + cur, 0)
+
+  const optionsDiscountAmount = [
+    vinylMasteringDiscountAmount,
+    streamingMasteringDiscountAmount,
+    redbookMasteringDiscountAmount,
+    stemMasteringDiscountAmount,
+    restorationRemasteringDiscountAmount,
+    highResMasterDiscountAmount,
+    ddpImageDiscountAmount,
+    isrcEncodingDiscountAmount,
+    rushDeliveryDiscountAmount,
+  ].reduce((prev, cur) => prev + cur, 0)
 
   return {
     songs: songDetails,
@@ -447,27 +784,45 @@ export function buildMasteringQuoteData(
     },
     costs: {
       baseSongsCost,
+      lengthFeesCost,
       volumeDiscount: volumeDiscountAmount,
       volumeDiscountName,
       vinylMasteringCost,
+      vinylMasteringDiscount: vinylMasteringDiscountAmount,
       streamingMasteringCost,
+      streamingMasteringDiscount: streamingMasteringDiscountAmount,
       redbookMasteringCost,
+      redbookMasteringDiscount: redbookMasteringDiscountAmount,
       stemMasteringCost,
+      stemMasteringDiscount: stemMasteringDiscountAmount,
       restorationRemasteringCost,
+      restorationRemasteringDiscount: restorationRemasteringDiscountAmount,
       multimediaDealDiscount,
-      multimediaDealSongCount: streamingCount + redbookCount + vinylCount,
-      multimediaDealName,
+      multimediaDealSongCount: multimediaDealSongCount,
       virtualSessionCost,
       virtualSessionHours,
       highResMasterCost,
+      highResMasterDiscount: highResMasterDiscountAmount,
       ddpImageCost,
+      ddpImageDiscount: ddpImageDiscountAmount,
       isrcEncodingCost,
+      isrcEncodingDiscount: isrcEncodingDiscountAmount,
       rushDeliveryCost,
+      rushDeliveryDiscount: rushDeliveryDiscountAmount,
       distributionDealDiscount,
-      distributionDealName,
-      distributionDealSongCount: highResCount + ddpImageCount + isrcEncodingCount,
+      multiMediaDeals: multiMediaDeals,
+      distributionDeals: distributionDeals,
+      distributionDealSongCount: distributionDealSongCount,
       subtotal,
       total: subtotal,
+      preDiscountsTotal,
+      discountsTotal: preDiscountsTotal - subtotal,
+      optionsDiscounts: optionsDiscountAmount,
+      dealBreakdown: masteringDealBreakdown,
+      premiumDistributionDealDiscount: premiumDistributionDealDiscountAmount,
+      standardDistributionDealDiscount: standardDistributionDealDiscountAmount,
+      premiumMultiMediaDealDiscount: premiumMultiMdediaDealDiscountAmount,
+      standardMultiMediaDealDiscount: standardMultiMediaDealDiscountAmount,
     },
     summary: {
       hasExtendedLengthSongs: songDetails.filter((s) => s.isExtendedLength).length,
@@ -480,7 +835,12 @@ export function buildMasteringQuoteData(
       ddpImageCount: ddpImageCount,
       isrcEncodingCount: isrcEncodingCount,
       rushDeliveryCount: rushDeliveryCount,
-      distributionDealSongCount: highResCount + ddpImageCount + isrcEncodingCount,
+      multimediaDealSongCount: multimediaDealSongCount,
+      distributionDealSongCount: distributionDealSongCount,
+      distributionDealName: distributionDealName,
+      premiumDistributionDealName: premiumDistributionDealName,
+      multimediaDealName: multimediaDealName,
+      premiumMultimediaDealName: premiumMultimediaDealName
     },
   }
 }

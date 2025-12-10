@@ -66,27 +66,45 @@ export interface MasteringQuoteData {
   }
   costs: {
     baseSongsCost: number
+    lengthFeesCost: number,
     volumeDiscount: number
     volumeDiscountName: string | null
     vinylMasteringCost: number
+    vinylMasteringDiscount: number
     streamingMasteringCost: number
+    streamingMasteringDiscount: number
     redbookMasteringCost: number
+    redbookMasteringDiscount: number
     stemMasteringCost: number
+    stemMasteringDiscount: number
     restorationRemasteringCost: number
+    restorationRemasteringDiscount: number
     multimediaDealDiscount: number
     multimediaDealSongCount: number
-    multimediaDealName: string | null
     virtualSessionCost: number
     virtualSessionHours: number
     highResMasterCost: number
+    highResMasterDiscount: number
     ddpImageCost: number
+    ddpImageDiscount: number
     isrcEncodingCost: number
+    isrcEncodingDiscount: number
     rushDeliveryCost: number
+    rushDeliveryDiscount: number
     distributionDealDiscount: number
-    distributionDealName: string | null
+    distributionDeals: MasteringDiscountDealSet
     distributionDealSongCount: number
     subtotal: number
-    total: number
+    total: number,
+    preDiscountsTotal: number
+    discountsTotal: number
+    optionsDiscounts: number
+    dealBreakdown: MasteringDealBreakdown
+    multiMediaDeals: MasteringDiscountDealSet
+    premiumDistributionDealDiscount: number
+    standardDistributionDealDiscount: number
+    premiumMultiMediaDealDiscount: number
+    standardMultiMediaDealDiscount: number
   }
   summary: {
     hasExtendedLengthSongs: number
@@ -99,6 +117,30 @@ export interface MasteringQuoteData {
     ddpImageCount: number
     isrcEncodingCount: number
     rushDeliveryCount: number
+    multimediaDealSongCount: number
     distributionDealSongCount: number
+    distributionDealName?: string
+    premiumDistributionDealName?: string
+    multimediaDealName?: string
+    premiumMultimediaDealName?: string
   }
 }
+
+
+export interface MasteringDiscountDealSet {
+  [key: string]: number
+}
+
+export type MasteringDealBreakdown = Record<
+  'vinyl'
+  | 'streaming'
+  | 'redbook'
+  | 'restoration'
+  | 'stems'
+  | 'highres'
+  | 'ddpimage'
+  | 'isrcencode'
+  | 'rush'
+  ,
+  Record<'premium' | 'standard', number>
+>

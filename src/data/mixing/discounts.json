@@ -64,7 +64,7 @@
     "name": "Hi-Fi Deal",
     "description": "10% discount when selecting both High Resolution and Film Mixdown for same song",
     "discountPercentage": 10,
-    "category": "bundle",
+    "category": "delivery_bundle",
     "productType": "mixing",
     "minThreshold": null,
     "maxThreshold": null

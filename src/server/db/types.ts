@@ -38,7 +38,7 @@ export type Discount = {
     name: string
     description: string | null
     discountPercentage: number
-    category: "volume" | "option_volume" | "production" | "bundle"
+    category: "volume" | "option_volume" | "production" | "bundle" | "delivery_bundle"
     productType: 'mixing' | 'mastering' | "mixing-and-mastering"
     minThreshold: number | null
     maxThreshold: number | null
