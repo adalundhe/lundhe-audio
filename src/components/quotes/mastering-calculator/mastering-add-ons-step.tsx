@@ -12,12 +12,6 @@ import { getOptionVolumeDiscountInfo } from "~/lib/mastering/mastering-pricing-c
 import { meetsThreshold } from "~/lib/meets-threshold"
 import { ChevronDown, ChevronUp, Check, Info, Sparkles } from "lucide-react"
 
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "~/components/ui/popover"
-
 type MasteringAddOnsStepProps = {
   addOns: MasteringAddOns
   setAddOns: React.Dispatch<React.SetStateAction<MasteringAddOns>>
