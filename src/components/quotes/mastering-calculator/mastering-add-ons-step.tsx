@@ -502,8 +502,6 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
                   const stemCount = addOns.stemMasteringSongs[song.id] ?? 2
                   const stemPrice = getStemPrice(stemCount)
 
-                  console.log(isSelected)
-
                   return (
                     <div
                       key={song.id}

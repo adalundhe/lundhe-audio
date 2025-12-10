@@ -278,10 +278,6 @@ export function MasteringDeliveryStep({
           const hasAnyDiscount =
             selectedCount > 0 && (discountPercentage > 0 || (isDistribution && distributionDealDiscount > 0))
           
-          
-          console.log(addonCost, option.key)
-
-
           const songsWithDealForThisOption = option.isDistributionOption
             ? songs.filter((s) => {
                 const deal = getSongDistributionDeal(s.id)
