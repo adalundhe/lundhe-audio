@@ -270,7 +270,7 @@ export function MasteringDeliveryStep({
 
           const optionPrice = option.fixedPrice ?? songs.map(
             song => option.getPrice ? option.getPrice(song) : 0
-          ).reduce((prev, cur) => prev + cur, 0)
+          ).reduce((prev, cur) => prev + cur, 0)/Math.max(songs.length, 1)
 
           const finalPrice = optionPrice * (1 - totalDiscount/100)      
           const addonCost =  optionPrice * selectedCount * (1 - totalDiscount/100)
