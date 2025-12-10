@@ -420,13 +420,14 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
           </div>
         )}
 
-        {costs.multimediaDealDiscount > 0 && summary.multimediaDealName && (
+        {costs.multimediaDealDiscount > 0 && (summary.multimediaDealName || summary.premiumMultimediaDealName) && (
           <div className="flex justify-between text-sm text-green-600">
-            <span>{summary.multimediaDealName} {summary.premiumMultimediaDealName ? ` and ${summary.premiumMultimediaDealName}` : ''} Savings</span>
+            <span>{
+            [summary.multimediaDealName, summary.premiumMultimediaDealName].filter(name => name !== undefined).join(" and ")
+            } Savings</span>
             <span>-${costs.multimediaDealDiscount.toFixed(2)}</span>
           </div>
         )}
-        
 
         {costs.virtualSessionCost > 0 && (
           <div className="flex justify-between text-sm">
@@ -550,7 +551,9 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
         )}
         {costs.distributionDealDiscount > 0 && (
           <div className="flex justify-between text-sm text-green-600">
-            <span>Distribution Deal Savings</span>
+            <span>{
+              [summary.distributionDealName, summary.premiumDistributionDealName].filter(name => name !== undefined).join(" and ")
+            }  Savings</span>
             <span>-${costs.distributionDealDiscount.toFixed(2)}</span>
           </div>
         )}
