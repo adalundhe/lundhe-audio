@@ -457,7 +457,7 @@ export function buildMasteringQuoteData(
 
       if (streamingMasteringDiscounts > 0) {
         price = applyDiscount(streamingPrice, streamingMasteringDiscounts)
-        streamingMasteringDiscountAmount += vinylPrice - price
+        streamingMasteringDiscountAmount += streamingPrice - price
       }
 
       if (streamingMasteringDiscounts > 0 && multimediaDealObj?.id.includes("premium")) {
