@@ -9,6 +9,7 @@ import type { MasteringSong, MasteringDeliveryOptions } from "~/lib/mastering/ma
 import { getOptionVolumeDiscountInfo } from "~/lib/mastering/mastering-pricing-calculator"
 import { meetsThreshold } from "~/lib/meets-threshold"
 import { ChevronDown, ChevronUp, Check, Info, Sparkles } from "lucide-react"
+import { getDiscountLable } from "~/lib/discounts"
 
 type MasteringDeliveryStepProps = {
   deliveryOptions: MasteringDeliveryOptions
@@ -18,6 +19,11 @@ type MasteringDeliveryStepProps = {
 }
 
 type DeliveryOptionKey = keyof MasteringDeliveryOptions
+
+
+const checkIsDistributionOption = (optionKey: string) => {
+  return ["highResMasterSongs", "ddpImageSongs", "isrcEncodingSongs", "rushDeliverySongs"].includes(optionKey)
+}
 
 export function MasteringDeliveryStep({
   deliveryOptions,
@@ -70,9 +76,31 @@ export function MasteringDeliveryStep({
   }
 
   // Distribution deal logic
-  const bundleDiscounts = discounts.filter((d) => d.category === "bundle")
+  const bundleDiscounts = discounts.filter((d) => d.category === "delivery_bundle")
   const distributionDeal = bundleDiscounts.find((d) => d.id === "distribution_deal")
   const premiumDistributionDeal = bundleDiscounts.find((d) => d.id === "premium_distribution_deal")
+
+  const hasHighRes = deliveryOptions.highResMasterSongs.length > 0
+  const hasDDPImage = deliveryOptions.ddpImageSongs.length > 0
+  const hasISRC = deliveryOptions.isrcEncodingSongs.length > 0
+
+  const activeDistributionOptions = [hasHighRes, hasDDPImage, hasISRC].filter(Boolean).length
+  const hasPremiumDistributionDeal = activeDistributionOptions >= 3 && premiumDistributionDeal
+  const hasDistributionDeal = activeDistributionOptions >= 2 && distributionDeal
+
+  let distributionDealType: "none" | "standard" | "premium" = "none"
+  let distributionDealDiscount = 0
+  let distributionDealName = ""
+
+  if (hasPremiumDistributionDeal) {
+    distributionDealType = "premium"
+    distributionDealDiscount = premiumDistributionDeal.discountPercentage 
+    distributionDealName = premiumDistributionDeal.name
+  } else if (hasDistributionDeal) {
+    distributionDealType = "standard"
+    distributionDealDiscount = distributionDeal.discountPercentage
+    distributionDealName = distributionDeal.name
+  }
 
   const getSongDistributionDeal = (songId: string) => {
     const hasHighRes = deliveryOptions.highResMasterSongs.includes(songId)
@@ -84,6 +112,7 @@ export function MasteringDeliveryStep({
     if (count >= 2) return { hasDeal: true, isPremium: false }
     return { hasDeal: false, isPremium: false }
   }
+
 
   const songsWithDistributionDeal = songs.filter((s) => getSongDistributionDeal(s.id).hasDeal).length
 
@@ -125,7 +154,7 @@ export function MasteringDeliveryStep({
       label: rushDeliveryOption?.name ?? "Rush Delivery",
       description:
         rushDeliveryOption?.description ?? "Priority processing with 48-hour turnaround - doubles the song cost",
-      priceLabel: "2x song cost",
+      priceLabel: "2x/song",
       getPrice: (song: MasteringSong) => calculateSongBasePrice(song),
     },
   ]
@@ -179,7 +208,38 @@ export function MasteringDeliveryStep({
         </span>
       </div>
 
-      <div className="flex items-start gap-2 p-3 bg-purple-500/10 border border-purple-500/20 rounded-md text-sm">
+      {distributionDealType !== "none" && (
+          <div className="flex items-start gap-2 p-3 bg-purple-500/10 border border-purple-500/20 rounded-md text-sm">
+            <Sparkles className="!w-[16px] !h-[16px] text-purple-600 shrink-0 mt-0.5" />
+            <span className="text-foreground">
+              <span className="font-medium">{distributionDealName} Applied!</span> {distributionDealDiscount}% additional
+              discount on all distribution add-ons.
+            </span>
+          </div>
+        )}
+  
+        {activeDistributionOptions === 1 && (
+          <div className="flex items-start gap-2 p-3 bg-purple-500/10 border border-purple-500/20 rounded-md text-sm">
+            <Sparkles className="!w-[16px] !h-[16px] text-purple-600  shrink-0 mt-0.5" />
+            <span className="text-foreground">
+              Add 1 more format (High Resolution, DDP Image, or ISRC) to unlock the{" "}
+              <span className="font-medium">Distribution Deal</span> (15% off), or all 3 for the{" "}
+              <span className="font-medium">Premium Distribution Deal</span> (25% off)!
+            </span>
+          </div>
+        )}
+  
+        {activeDistributionOptions === 2 && (
+          <div className="flex items-start gap-2 p-3 bg-purple-500/10 border border-purple-500/20 rounded-md text-sm">
+            <Sparkles className="!w-[16px] !h-[16px] text-purple-600 shrink-0 mt-0.5" />
+            <span className="text-foreground">
+              Add the last format to upgrade to the <span className="font-medium">Premium Distribution Deal</span> (25%
+              off)!
+            </span>
+          </div>
+        )}
+
+        {/* <div className="flex items-start gap-2 p-3 bg-purple-500/10 border border-purple-500/20 rounded-md text-sm">
         <Sparkles className="!w-[16px] !h-[16px] text-purple-600 shrink-0 mt-0.5" />
         <span className="text-foreground">
           <span className="font-medium">Distribution Deal:</span> Select 2 of High Resolution, DDP Image, or ISRC for a
@@ -191,7 +251,7 @@ export function MasteringDeliveryStep({
             </span>
           )}
         </span>
-      </div>
+      </div> */}
 
       <div className="space-y-4">
         {DELIVERY_OPTIONS_CONFIG.map((option) => {
@@ -200,8 +260,24 @@ export function MasteringDeliveryStep({
           const hasSelections = selectedSongs.length > 0
           const selectedCount = selectedSongs.length
           const discountPercentage = getOptionVolumeDiscount(selectedCount)
+          const isDistribution= checkIsDistributionOption(option.key)
           const isRushDelivery = option.key === "rushDeliverySongs"
 
+          const totalDiscount = discountPercentage + (
+            isDistribution ? distributionDealDiscount : 0
+          )
+
+
+          const optionPrice = option.fixedPrice ?? songs.map(
+            song => option.getPrice ? option.getPrice(song) : 0
+          ).reduce((prev, cur) => prev + cur, 0)
+
+          const finalPrice = optionPrice * (1 - totalDiscount/100)      
+          const addonCost =  optionPrice * selectedCount * (1 - totalDiscount/100)
+
+          const hasAnyDiscount =
+            selectedCount > 0 && (discountPercentage > 0 || (isDistribution && distributionDealDiscount > 0))
+          
           const songsWithDealForThisOption = option.isDistributionOption
             ? songs.filter((s) => {
                 const deal = getSongDistributionDeal(s.id)
@@ -209,35 +285,66 @@ export function MasteringDeliveryStep({
               }).length
             : 0
 
+          const activePremiumDistributionDeal = option.isDistributionOption
+          ? songs.filter((s) => {
+            const deal = getSongDistributionDeal(s.id)
+            return deal.isPremium
+          }).length > 0: false
+
+
           return (
             <div key={option.key} className="border border-border rounded-lg overflow-hidden">
               <button
                 type="button"
                 onClick={() => toggleExpanded(option.key)}
-                className="w-full flex lg:flex-row flex-col lg:items-center lg:gap-0 gap-4 justify-between p-4 hover:bg-muted/50 transition-colors text-left"
+                className="w-full flex lg:flex-row flex-col lg:gap-0 gap-4 justify-between p-4 hover:bg-muted/50 transition-colors text-left"
               >
-                <div className="flex-1">
-                  <div className="flex lg:flex-row flex-col lg:items-center lg:gap-2 gap-4">
+                <div className="flex-1 flex flex-col gap-2">
+                  <div className="flex flex-col gap-2">
                     <span className="text-base font-medium">{option.label}</span>
-                    {option.isDistributionOption && songsWithDealForThisOption > 0 && (
-                      <span className="text-xs bg-purple-500/10 text-purple-600 px-2 py-0.5 rounded-full w-fit flex items-center gap-1">
-                        <Sparkles className="!w-[16px] !h-[16px]" />
-                        Distribution Deal
-                      </span>
-                    )}
-                    {hasSelections && (
-                      <span className="px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full w-fit">
-                        {selectedSongs.length} song{selectedSongs.length !== 1 ? "s" : ""}
-                        {discountPercentage > 0 && !isRushDelivery && (
-                          <span className="ml-1 text-green-600">({discountPercentage}% off)</span>
-                        )}
-                      </span>
-                    )}
+                    <div className="flex lg:flex-row flex-col gap-2">
+                      {option.isDistributionOption && songsWithDealForThisOption > 0 && (
+                        <span className="text-xs bg-purple-500/10 text-purple-600 px-2 py-0.5 rounded-full w-fit flex items-center gap-1">
+                          <Sparkles className="!w-[16px] !h-[16px]" />
+                          {
+                            activePremiumDistributionDeal
+                            ?
+                            "Premium Distro."
+                            : "Distro. Deal"
+                          }
+                        </span>
+                      )}
+                      {hasSelections && (
+                        <span className="px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full w-fit">
+                          {selectedCount} song{selectedCount !== 1 ? "s" : ""} selected
+                          {hasAnyDiscount && (
+                            <>
+                              {" "}
+                              <span className="text-green-600">
+                                ({discountPercentage > 0 && `${discountPercentage}%`}
+                                {discountPercentage > 0 && isDistribution && distributionDealDiscount > 0 && " + "}
+                                {isDistribution && distributionDealDiscount > 0 && `${distributionDealDiscount}%`} off)
+                              </span>
+                            </>
+                          )}
+                        </span>
+                      )}
+                    </div>
                   </div>
                   <p className="text-sm text-muted-foreground mt-1">{option.description}</p>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-sm font-medium text-primary">{option.priceLabel}</span>
+                  <span className="text-sm font-medium">
+                    {hasAnyDiscount ? (
+                      <>
+                        <span className="line-through text-muted-foreground">{option.priceLabel}</span>
+                        <span className="text-green-600 ml-1">${finalPrice.toFixed(0)}/song</span>
+                      </>
+                    ) : (
+                      <span>+{option.priceLabel}/song</span>
+                    )}
+                    {addonCost > 0 && <span className="text-primary ml-1">(${addonCost.toFixed(0)})</span>}
+                  </span>
                   {isExpanded ? (
                     <ChevronUp className="!w-[16px] !h-[16px] text-muted-foreground" />
                   ) : (
@@ -308,7 +415,7 @@ export function MasteringDeliveryStep({
                           : 0
 
                       let discountedPrice = basePrice
-                      if (!isRushDelivery && discountPercentage > 0) {
+                      if (isRushDelivery && discountPercentage > 0) {
                         discountedPrice = discountedPrice * (1 - discountPercentage / 100)
                       }
                       if (option.isDistributionOption && distributionDealPercent > 0) {
@@ -316,7 +423,7 @@ export function MasteringDeliveryStep({
                       }
 
                       const hasAnyDiscount =
-                        (!isRushDelivery && discountPercentage > 0) ||
+                        (isRushDelivery && discountPercentage > 0) ||
                         (option.isDistributionOption && distributionDealPercent > 0)
 
                       return (

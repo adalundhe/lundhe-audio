@@ -22,6 +22,7 @@ type MasteringAddOnsStepProps = {
 export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: MasteringAddOnsStepProps) {
   const [openAddOns, setOpenAddOns] = useState<Record<string, boolean>>({})
   const [virtualSessionOpen, setVirtualSessionOpen] = useState(false)
+  const [stemInputValues, setStemInputValues] = useState<Record<string, string>>({})
 
   const { fivePlus, tenPlus } = getOptionVolumeDiscountInfo(pricingData.discounts)
   const fivePlusDiscount = fivePlus?.discountPercentage ?? 15
@@ -68,12 +69,12 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
 
   if (hasPremiumMultimediaDeal) {
     multimediaDealType = "premium"
-    multimediaDealDiscount = premiumMultimediaDeal?.discountPercentage ?? 25
-    multimediaDealName = premiumMultimediaDeal?.name ?? "Premium Multimedia Deal"
+    multimediaDealDiscount = premiumMultimediaDeal.discountPercentage
+    multimediaDealName = premiumMultimediaDeal.name
   } else if (hasMultimediaDeal) {
     multimediaDealType = "standard"
-    multimediaDealDiscount = multimediaDeal?.discountPercentage ?? 15
-    multimediaDealName = multimediaDeal?.name ?? "Multimedia Deal"
+    multimediaDealDiscount = multimediaDeal.discountPercentage
+    multimediaDealName = multimediaDeal.name
   }
 
   const getOptionVolumeDiscount = (count: number) => {
@@ -158,11 +159,12 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
     }
   }
 
-  const selectAllForAddOn = (
+  const  selectAllForAddOn = (
     addOnKey:
       | "vinylMasteringSongs"
       | "streamingMasteringSongs"
       | "redbookMasteringSongs"
+      | "stemMasteringSongs"
       | "restorationRemasteringSongs",
   ) => {
     setAddOns({ ...addOns, [addOnKey]: songs.map((s) => s.id) })
@@ -173,6 +175,7 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
       | "vinylMasteringSongs"
       | "streamingMasteringSongs"
       | "redbookMasteringSongs"
+      | "stemMasteringSongs"
       | "restorationRemasteringSongs",
   ) => {
     setAddOns({ ...addOns, [addOnKey]: [] })
@@ -206,6 +209,41 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
   }
 
   const virtualSessionCost = addOns.virtualSessionHours * virtualSessionHourlyRate
+
+  const handleStemInputChange = (songId: string, value: string) => {
+    setStemInputValues((prev) => ({ ...prev, [songId]: value }))
+    if (value === "") return
+    const parsed = Number.parseInt(value, 10)
+    if (!isNaN(parsed)) {
+      updateStemCount(songId, parsed)
+    }
+  }
+
+  const handleStemInputBlur = (songId: string) => {
+    const currentValue = stemInputValues[songId]
+    if (currentValue === "" || currentValue === undefined) {
+      updateStemCount(songId, 2)
+    }
+    setStemInputValues((prev) => ({ ...prev, [songId]: undefined as unknown as string }))
+  }
+
+  const getStemInputValue = (songId: string, actualValue: number): string => {
+    const intermediate = stemInputValues[songId]
+    return intermediate !== undefined ? intermediate : actualValue.toString()
+  }
+
+
+  const selectAllForStemMastering = () => {
+    const newStems: Record<string, number> = {}
+    songs.forEach((song) => {
+      newStems[song.id] = addOns.stemMasteringSongs[song.id] ?? 2
+    })
+    setAddOns({ ...addOns, stemMasteringSongs: newStems })
+  }
+
+  const deselectAllForStemMastering = () => {
+    setAddOns({ ...addOns, stemMasteringSongs: {} })
+  }
 
   return (
     <div className="space-y-6">
@@ -259,11 +297,14 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
           const selectedCount = addOns[addon.key].length
           const volumeDiscountPercentage = getOptionVolumeDiscount(selectedCount)
           const isMultimedia = isMultimediaAddon(addon.key)
-          const afterVolumeDiscount = addon.price * (1 - volumeDiscountPercentage / 100)
-          const finalPrice = isMultimedia
-            ? afterVolumeDiscount * (1 - multimediaDealDiscount / 100)
-            : afterVolumeDiscount
-          const addonCost = selectedCount * finalPrice
+          const totalDiscount = volumeDiscountPercentage + (
+            isMultimedia ? multimediaDealDiscount : 0
+          )
+
+
+          const finalPrice = addon.price * (1 - totalDiscount/100)      
+
+          const addonCost =  addon.price * selectedCount * (1 - totalDiscount/100)   
           const hasAnyDiscount =
             selectedCount > 0 && (volumeDiscountPercentage > 0 || (isMultimedia && multimediaDealDiscount > 0))
 
@@ -272,7 +313,7 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
               <button
                 type="button"
                 onClick={() => toggleAddOnOpen(addon.key)}
-                className="w-full flex flex lg:flex-row flex-col lg:items-center lg:gap-0 gap-4 justify-between p-4 hover:bg-muted/50 transition-colors text-left"
+                className="w-full flex lg:flex-row flex-col lg:items-center lg:gap-0 gap-4 justify-between p-4 hover:bg-muted/50 transition-colors text-left"
               >
                 <div className="flex-1">
                   <div className="flex lg:flex-row flex-col lg:items-center lg:gap-2 gap-4">
@@ -313,7 +354,7 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
               </button>
 
               {isOpen && (
-                <div className="border-t border-border p-4 bg-muted/30">
+                <div className="border-t border-border p-4 bg-muted/30 flex flex-col gap-4">
                   <div className="flex lg:flex-row lg:my-0 my-2 lg:gap-0 gap-4 flex-col items-center justify-between mb-3">
                     <span className="text-sm lg:text-left text-center text-muted-foreground">
                       Select songs to apply {addon.label.toLowerCase()}:
@@ -394,17 +435,28 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
           <button
             type="button"
             onClick={() => toggleAddOnOpen("stemMastering")}
-            className="w-full flex items-center justify-between p-4 hover:bg-muted/50 transition-colors text-left"
+            className="w-full flex lg:flex-row flex-col lg:items-center lg:gap-0 gap-4 justify-between p-4 hover:bg-muted/50 transition-colors text-left"
           >
             <div className="flex-1">
-              <div className="flex items-center gap-2">
-                <span className="text-base font-medium">Stem Mastering</span>
-                {Object.keys(addOns.stemMasteringSongs).length > 0 && (
-                  <span className="px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full">
-                    {Object.keys(addOns.stemMasteringSongs).length} song
-                    {Object.keys(addOns.stemMasteringSongs).length !== 1 ? "s" : ""} selected
-                  </span>
-                )}
+              <div className="flex lg:flex-row flex-col lg:items-center gap-2">
+                <span className="text-base font-medium flex lg:flex-row flex-col">Stem Mastering</span>
+                {(() => {
+                  const selectedCount = Object.keys(addOns.stemMasteringSongs).length
+                  const volumeDiscountPercentage = getOptionVolumeDiscount(selectedCount)
+                  const hasDiscount = selectedCount > 0 && volumeDiscountPercentage > 0
+
+                  return selectedCount > 0 ? (
+                    <span className="px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full w-fit">
+                      {selectedCount} song{selectedCount !== 1 ? "s" : ""} selected
+                      {hasDiscount && 
+                        <>
+                          {" "}
+                          <span className="text-green-600">({volumeDiscountPercentage}% off)</span>
+                        </>
+                      }
+                    </span>
+                  ) : null
+                })()}
               </div>
               <p className="text-sm text-muted-foreground mt-1">Mastering from individual stems for enhanced control</p>
             </div>
@@ -420,9 +472,24 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
 
           {openAddOns["stemMastering"] && (
             <div className="border-t border-border p-4 bg-muted/30">
+                <div className="border-t border-border p-4 bg-muted/30 flex flex-col gap-4">
+                  <div className="flex lg:flex-row lg:my-0 my-2 lg:gap-0 gap-4 flex-col items-center justify-between mb-3">
+                    <span className="text-sm lg:text-left text-center text-muted-foreground">
+                      Select songs to apply stem mastering:
+                    </span>
+                    <div className="flex gap-2">
+                      <Button variant="outline" size="sm" onClick={() => selectAllForStemMastering()} className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">
+                        Select All
+                      </Button>
+                      <Button variant="outline" size="sm" onClick={() => deselectAllForStemMastering()} className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">
+                        Deselect All
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               <div className="bg-muted/50 p-3 rounded-md mb-4">
                 <p className="text-sm font-medium mb-2">Stem Pricing Tiers:</p>
-                <div className="grid grid-cols-2 gap-2 text-sm text-muted-foreground">
+                <div className="lg:grid grid-cols-2 lg:gap-2 text-sm text-muted-foreground flex flex-col">
                   <span>2-8 stems: $50/song</span>
                   <span>9-16 stems: $100/song</span>
                   <span>17-24 stems: $150/song</span>
@@ -438,39 +505,46 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
                   return (
                     <div
                       key={song.id}
-                      className={`flex items-center justify-between p-3 rounded-md border transition-colors ${
+                      className={`flex lg:flex-row flex-col lg:items-center lg:gap-0 gap-4 justify-between p-3 rounded-md border transition-colors ${
                         isSelected ? "border-primary bg-primary/5" : "border-border hover:bg-muted/50"
                       }`}
                     >
-                      <div className="flex items-center gap-3">
-                        <button
-                          type="button"
-                          onClick={() => toggleStemMastering(song.id)}
-                          className={`!w-[16px] !h-[16px] rounded border flex items-center justify-center ${
-                            isSelected ? "bg-primary border-primary" : "border-muted-foreground"
-                          }`}
-                        >
-                          {isSelected && <Check className="!w-[16px] !h-[16px] text-primary-foreground" />}
-                        </button>
-                        <span className="text-sm font-medium">{song.title || `Song ${index + 1}`}</span>
+                      <div className="flex items-center lg:gap-3 gap-2">
+                        <span className="flex items-center gap-3">
+                          <button
+                            type="button"
+                            onClick={() => toggleStemMastering(song.id)}
+                            className={`!w-[16px] !h-[16px] rounded border flex items-center justify-center ${
+                              isSelected ? "bg-primary border-primary" : "border-muted-foreground"
+                            }`}
+                          >
+                            {isSelected && <Check className=" !w-[16px] !h-[16px] text-primary-foreground" />}
+                          </button>
+                          <span className="text-sm font-medium">{song.title || `Song ${index + 1}`}</span>
+                        </span>
                         <span className="text-xs text-muted-foreground">
                           ({song.minutes}:{song.seconds.toString().padStart(2, "0")})
                         </span>
                       </div>
                       {isSelected ? (
-                        <div className="flex items-center gap-2">
-                          <Input
-                            type="number"
-                            min={2}
-                            max={32}
-                            value={stemCount}
-                            onChange={(e) => updateStemCount(song.id, Number.parseInt(e.target.value, 10) || 2)}
-                            onClick={(e) => e.stopPropagation()}
-                            className="w-20 h-8"
-                          />
-                          <span className="text-xs text-muted-foreground">stems</span>
-                          <span className="text-sm font-medium">${stemPrice}</span>
-                          <span className="text-xs text-muted-foreground">({getStemTierName(stemCount)})</span>
+                        <div className="flex lg:flex-row flex-col lg:items-center lg:gap-2 gap-4">
+                          <span className="flex items-center gap-2">
+                            <Input
+                              type="number"
+                              min={2}
+                              max={32}
+                              value={getStemInputValue(song.id, stemCount)}
+                              onChange={(e) => handleStemInputChange(song.id, e.target.value)}
+                              onBlur={() => handleStemInputBlur(song.id)}
+                              onClick={(e) => e.stopPropagation()}
+                              className="w-20 h-8 border dark:border-white dark:bg-black/70"
+                            />
+                            <span className="text-xs text-muted-foreground">stems</span>
+                          </span>
+                          <span className="flex items-center gap-2">
+                            <span className="text-sm font-medium">${stemPrice}</span>
+                            <span className="text-xs text-muted-foreground">({getStemTierName(stemCount)})</span>
+                          </span>
                         </div>
                       ) : (
                         <span className="text-sm text-muted-foreground">+$50-$200</span>

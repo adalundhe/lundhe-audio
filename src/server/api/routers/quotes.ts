@@ -29,8 +29,6 @@ export const mixQuotesRouter = createTRPCRouter({
       ),
     ])
 
-    console.log(discountsData)
-
     return {
       products: productsData,
       options: optionsData,

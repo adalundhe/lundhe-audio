@@ -55,6 +55,7 @@ export interface SongPriceDetail {
     mixedStems: boolean
     extendedArchival: boolean
     rushDelivery: boolean
+    hifiBundle: boolean
   }
   songSubtotal: number
 }
@@ -74,21 +75,36 @@ export interface QuoteData {
     volumeDiscount: number
     volumeDiscountName: string | null
     vocalProductionCost: number
+    vocalProductionDiscount: number
     drumReplacementCost: number
+    drumReplacementDiscount: number
     guitarReampCost: number
+    guitarReampDiscount: number
     productionDealDiscount: number
-    productionDealName: string | null
+    productionDealSongCount: number
     virtualSessionCost: number
     virtualSessionHours: number
     highResMixdownCost: number
+    highResDiscount: number
     filmMixdownCost: number
+    filmMixdownDiscount: number
     hifiDealDiscount: number
     hifiDealSongCount: number
     mixedStemsCost: number
+    mixedStemsdDiscount: number
     extendedArchivalCost: number
+    extendedArchivalDiscount: number
     rushDeliveryCost: number
+    rushDeliveryDiscount: number
     subtotal: number
     total: number
+    preDiscountsTotal: number
+    discountsTotal: number
+    optionsDiscounts: number
+    dealBreakdown: MixingDealBreakdown
+    productionDeals: MixingDiscountDealSet
+    premiumProductionDealDiscount: number
+    standardProductionDealDiscount: number
   }
   summary: {
     hasHighTrackCountSongs: number
@@ -101,5 +117,26 @@ export interface QuoteData {
     mixedStemsCount: number
     extendedArchivalCount: number
     rushDeliveryCount: number
+    productionDealSongCount: number
+    productionDealName?: string
+    premiumProductionDealName?: string
   }
 }
+
+
+export interface MixingDiscountDealSet {
+  [key: string]: number
+}
+
+export type MixingDealBreakdown = Record<
+  'vocals'
+  | 'drums'
+  | 'guitar'
+  | 'hires'
+  | 'film'
+  | 'stems'
+  | 'archival'
+  | 'rush'
+  ,
+  Record<'premium' | 'standard', number>
+>

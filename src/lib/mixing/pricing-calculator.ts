@@ -1,5 +1,5 @@
 import type { Product, ProductOption, Discount } from "~/server/db/types"
-import type { PricingData, Song, AddOns, DeliveryOptions, QuoteData, SongPriceDetail } from "./pricing-types"
+import type { PricingData, Song, AddOns, DeliveryOptions, QuoteData, SongPriceDetail, MixingDealBreakdown, MixingDiscountDealSet } from "./pricing-types"
 import { meetsThreshold } from "../meets-threshold"
 
 // Helper to find a product by ID
@@ -63,10 +63,11 @@ function getOptionVolumeDiscount(discounts: Discount[], selectedCount: number): 
 function getProductionDealDiscount(
   discounts: Discount[],
   addOns: AddOns,
+  songId: string,
 ): { discount: Discount | null; type: "none" | "production" | "premium" } {
-  const hasVocal = addOns.vocalProductionSongs.length > 0
-  const hasDrum = addOns.drumReplacementSongs.length > 0
-  const hasGuitar = addOns.guitarReampSongs.length > 0
+  const hasVocal = addOns.vocalProductionSongs.includes(songId)
+  const hasDrum = addOns.drumReplacementSongs.includes(songId)
+  const hasGuitar = addOns.guitarReampSongs.includes(songId)
   const count = [hasVocal, hasDrum, hasGuitar].filter(Boolean).length
 
   if (count < 2) return { discount: null, type: "none" }
@@ -223,14 +224,6 @@ export function buildQuoteDataFromDb(
   const volumeDiscountPercentage = volumeDiscount?.discountPercentage ?? 0
   const volumeDiscountName = volumeDiscount?.name ?? null
 
-  // Get production deal discount
-  const { discount: productionDealDiscountObj, type: productionDealType } = getProductionDealDiscount(discounts, addOns)
-  const productionDealPercentage = productionDealDiscountObj?.discountPercentage ?? 0
-  const productionDealName = productionDealDiscountObj?.name ?? null
-
-  // Get hi-fi deal discount
-  const hifiDealDiscountObj = findDiscount(discounts, "hifi_deal")
-  const hifiDealPercentage = hifiDealDiscountObj?.discountPercentage ?? 0
 
   // Get option counts for volume discounts
   const vocalCount = addOns.vocalProductionSongs.length
@@ -260,7 +253,6 @@ export function buildQuoteDataFromDb(
   const highResOption = findOption(options, "high_res_mixdown")
   const filmMixdownOption = findOption(options, "film_mixdown")
   const extendedArchivalOption = findOption(options, "extended_archival")
-  const rushDeliveryOption = findOption(options, "rush_delivery")
 
   const vocalPrice = vocalOption?.price ?? 100
   const drumPrice = drumOption?.price ?? 150
@@ -300,6 +292,8 @@ export function buildQuoteDataFromDb(
 
     const songSubtotal = basePrice + trackFee + lengthFee
 
+    const productionDealCount = [hasVocal, hasDrum, hasGuitar].filter(Boolean).length
+
     return {
       songId: song.id,
       title: song.title || `Song ${index + 1}`,
@@ -317,6 +311,7 @@ export function buildQuoteDataFromDb(
         vocalProduction: hasVocal,
         drumReplacement: hasDrum,
         guitarReamp: hasGuitar,
+        productionDeal: productionDealCount >= 3 ? 'premium' : productionDealCount == 2 ? 'standard' : 'none'
       },
       delivery: {
         highResMixdown: hasHighRes,
@@ -324,6 +319,7 @@ export function buildQuoteDataFromDb(
         mixedStems: hasMixedStems,
         extendedArchival: hasExtendedArchival,
         rushDelivery: hasRushDelivery,
+        hifiBundle: hasHifiBundleOnSong,
       },
       songSubtotal,
     }
@@ -337,38 +333,180 @@ export function buildQuoteDataFromDb(
 
   // Calculate add-on costs with discounts
   let vocalProductionCost = 0
+  let vocalProductionPreDiscountCost = 0
+  let vocalProductionDiscountAmount = 0
   let drumReplacementCost = 0
+  let drumReplacementPreDiscountCost = 0
+  let drumReplacementDiscountAmount = 0
   let guitarReampCost = 0
+  let guitarReampPreDiscountCost = 0
+  let guitarReampDiscountAmount = 0
+  
+  let productionDealName = undefined
+  let premiumProductionDealName = undefined
+  let productionDealSongCount = 0
+  let productionDeals: MixingDiscountDealSet = {}
+  let premiumProductionDiscountAmount = 0
+  let standardProductionDiscountAmount = 0
+
+
+  const mixingDealBreakdown: MixingDealBreakdown = {
+    vocals: {
+      premium: 0,
+      standard: 0
+    },
+    drums: {
+      premium: 0,
+      standard: 0
+    },
+    guitar: {
+      premium: 0,
+      standard: 0
+    },
+    hires: {
+      premium: 0,
+      standard: 0
+    },
+    film: {
+      premium: 0,
+      standard: 0
+    },
+    stems: {
+      premium: 0,
+      standard: 0
+    },
+    archival: {
+      premium: 0,
+      standard: 0
+    },
+    rush: {
+      premium: 0,
+      standard: 0
+    }
+  }
+
 
   for (const song of songDetails) {
+
+
+    // Get production deal discount
+    const { discount: productionDealDiscountObj, type: productionDealType } = getProductionDealDiscount(discounts, addOns, song.songId)
+    const productionDealPercentage = productionDealDiscountObj?.discountPercentage ?? 0
+
+    if (productionDealDiscountObj?.id.includes("premium")) {
+      premiumProductionDealName = productionDealDiscountObj.name
+    } else if (productionDealDiscountObj) {
+      productionDealName = productionDealDiscountObj.name
+    }
+
+
     if (song.addOns.vocalProduction) {
       let price = vocalPrice
-      if (vocalVolumeDiscount) price = applyDiscount(price, vocalVolumeDiscount.discountPercentage)
-      if (productionDealPercentage > 0) price = applyDiscount(price, productionDealPercentage)
+      let vocalProductionDiscounts = 0
+      vocalProductionPreDiscountCost += vocalPrice
+      
+      if (vocalVolumeDiscount) {
+        vocalProductionDiscounts += vocalVolumeDiscount.discountPercentage
+      }
+      if (productionDealPercentage > 0 && productionDealDiscountObj) {
+        vocalProductionDiscounts += productionDealPercentage
+        productionDealSongCount += 1
+
+        productionDeals[productionDealDiscountObj.name] = (
+          productionDeals[productionDealDiscountObj.name] ?? 0
+        ) + 1
+      }
+
+      if (productionDealDiscountObj?.id.includes("premium") && productionDealPercentage > 0) {
+        mixingDealBreakdown.vocals.premium += 1
+      } else if(productionDealDiscountObj && productionDealPercentage > 0) {
+        mixingDealBreakdown.vocals.standard += 1
+      }
+
+      if (vocalProductionDiscounts > 0) {
+        price = applyDiscount(vocalPrice, vocalProductionDiscounts)
+        vocalProductionDiscountAmount += vocalPrice - price
+      }
+
+      if (vocalProductionDiscounts > 0 && productionDealDiscountObj?.id.includes("premium")) {
+        premiumProductionDiscountAmount += vocalPrice - price
+      } else if (vocalProductionDiscounts > 0 && productionDealDiscountObj) {
+        standardProductionDiscountAmount += vocalPrice - price
+      }
+
       vocalProductionCost += price
     }
+
     if (song.addOns.drumReplacement) {
       let price = drumPrice
-      if (drumVolumeDiscount) price = applyDiscount(price, drumVolumeDiscount.discountPercentage)
-      if (productionDealPercentage > 0) price = applyDiscount(price, productionDealPercentage)
+      let drumProductionDiscounts = 0
+      drumReplacementPreDiscountCost += drumPrice
+
+      if (drumVolumeDiscount) {
+        drumProductionDiscounts += drumVolumeDiscount.discountPercentage
+      }
+      if (productionDealPercentage > 0) {
+        drumProductionDiscounts += productionDealPercentage
+      }
+
+      if (drumProductionDiscounts > 0) {
+        price = applyDiscount(drumPrice, drumProductionDiscounts)
+        drumReplacementDiscountAmount += drumPrice - price
+      }
+
+      if (drumProductionDiscounts > 0 && productionDealDiscountObj?.id.includes("premium")) {
+        premiumProductionDiscountAmount += drumPrice - price
+      } else if (drumProductionDiscounts > 0 && productionDealDiscountObj) {
+        standardProductionDiscountAmount += drumPrice - price
+      }
+
+      if (productionDealDiscountObj?.id.includes("premium") && productionDealPercentage > 0) {
+        mixingDealBreakdown.drums.premium += 1
+      } else if (productionDealDiscountObj && productionDealPercentage > 0) {
+        mixingDealBreakdown.drums.standard += 1
+      }
+
       drumReplacementCost += price
     }
     if (song.addOns.guitarReamp) {
       let price = guitarPrice
-      if (guitarVolumeDiscount) price = applyDiscount(price, guitarVolumeDiscount.discountPercentage)
-      if (productionDealPercentage > 0) price = applyDiscount(price, productionDealPercentage)
+      let guitarReampDiscounts = 0
+      guitarReampPreDiscountCost += price
+
+      if (guitarVolumeDiscount) {
+        guitarReampDiscounts += guitarVolumeDiscount.discountPercentage
+      }
+      if (productionDealPercentage > 0) {
+        guitarReampDiscounts += productionDealPercentage
+      }
+
+      if (guitarReampDiscounts > 0) {
+        price = applyDiscount(guitarPrice, guitarReampDiscounts)
+        guitarReampDiscountAmount += guitarPrice - price
+      }
+
+      if (guitarReampDiscounts > 0 && productionDealDiscountObj?.id.includes("premium")) {
+        premiumProductionDiscountAmount += guitarPrice - price
+      } else if (guitarReampDiscounts > 0 && productionDealDiscountObj) {
+        standardProductionDiscountAmount += guitarPrice - price
+      }
+
+      if (productionDealDiscountObj?.id.includes("premium") && productionDealPercentage > 0) {
+        mixingDealBreakdown.guitar.premium += 1
+      } else if (productionDealDiscountObj && productionDealPercentage > 0) {
+        mixingDealBreakdown.guitar.standard += 1
+      }
+
       guitarReampCost += price
     }
   }
 
   // Calculate production deal savings
-  const vocalWithoutDeal =
-    vocalCount * (vocalVolumeDiscount ? applyDiscount(vocalPrice, vocalVolumeDiscount.discountPercentage) : vocalPrice)
-  const drumWithoutDeal =
-    drumCount * (drumVolumeDiscount ? applyDiscount(drumPrice, drumVolumeDiscount.discountPercentage) : drumPrice)
-  const guitarWithoutDeal =
-    guitarCount *
-    (guitarVolumeDiscount ? applyDiscount(guitarPrice, guitarVolumeDiscount.discountPercentage) : guitarPrice)
+  const vocalWithoutDeal = vocalCount * vocalPrice
+  const drumWithoutDeal = drumCount * drumPrice
+  const guitarWithoutDeal = guitarCount * guitarPrice
+
+  
   const totalWithoutProductionDeal = vocalWithoutDeal + drumWithoutDeal + guitarWithoutDeal
   const totalWithProductionDeal = vocalProductionCost + drumReplacementCost + guitarReampCost
   const productionDealDiscount = totalWithoutProductionDeal - totalWithProductionDeal
@@ -383,55 +521,116 @@ export function buildQuoteDataFromDb(
   let mixedStemsCost = 0
   let extendedArchivalCost = 0
   let rushDeliveryCost = 0
+
+  let highResDiscountAmount = 0
+  let filmMixdownDiscountAmount = 0
+  let mixedStemsDiscountAmount = 0
+  let extendedArchivalDiscountAmount = 0
+  let rushDeliveryDiscountAmount = 0
   let hifiDealDiscountAmount = 0
   let hifiDealSongCount = 0
 
+  let highResPreDiscountCost = 0
+  let filmMixDownPreDiscountCost = 0
+  let mixedStemsPreDiscountCost = 0
+  let extendedArchivalPreDiscountCost = 0
+  let rushDeliveryPrediscountCost = 0
+
+  // Get hi-fi deal discount
+  const hifiDealDiscountObj = findDiscount(discounts, "hifi_deal")
+  const hifiDealPercentage = hifiDealDiscountObj?.discountPercentage ?? 0
+
   for (const song of songDetails) {
-    const hasHifiBundleOnSong = song.delivery.highResMixdown && song.delivery.filmMixdown
+    
+    const hasHifiBundleOnSong = song.delivery.hifiBundle
+    let highResDiscounts = 0
+    let filmMixdownDiscounts = 0
 
     if (song.delivery.highResMixdown) {
       let price = highResPrice
-      if (highResVolumeDiscount) price = applyDiscount(price, highResVolumeDiscount.discountPercentage)
+      highResPreDiscountCost += price
+
+      if (highResVolumeDiscount) {
+        highResDiscounts += highResVolumeDiscount.discountPercentage
+      
+      }
       if (hasHifiBundleOnSong) {
-        const beforeBundle = price
-        price = applyDiscount(price, hifiDealPercentage)
-        hifiDealDiscountAmount += beforeBundle - price
+        highResDiscounts += hifiDealPercentage
         hifiDealSongCount++
       }
+
+
+      if (highResDiscounts > 0) {
+        price = applyDiscount(highResPrice, highResDiscounts)
+        const highResDiscount = highResPrice - price
+        
+        highResDiscountAmount += highResDiscount
+        hifiDealDiscountAmount += highResDiscount
+      }
+
       highResMixdownCost += price
     }
 
     if (song.delivery.filmMixdown) {
       let price = filmMixdownPrice
-      if (filmMixdownVolumeDiscount) price = applyDiscount(price, filmMixdownVolumeDiscount.discountPercentage)
-      if (hasHifiBundleOnSong) {
-        const beforeBundle = price
-        price = applyDiscount(price, hifiDealPercentage)
-        hifiDealDiscountAmount += beforeBundle - price
+      filmMixDownPreDiscountCost += price
+
+      if (filmMixdownVolumeDiscount) {
+        filmMixdownDiscounts += filmMixdownVolumeDiscount.discountPercentage
       }
+
+      if (hasHifiBundleOnSong) {
+        filmMixdownDiscounts += hifiDealPercentage
+      }
+
+      if (filmMixdownDiscounts > 0){
+        price = applyDiscount(price, filmMixdownDiscounts)
+        const filmMixdownDiscount = filmMixdownPrice - price
+
+        filmMixdownDiscountAmount += filmMixdownDiscount
+        hifiDealDiscountAmount += filmMixdownDiscount
+      }
+
       filmMixdownCost += price
     }
 
     if (song.delivery.mixedStems) {
       const songData = songs.find((s) => s.id === song.songId)
-      let price = calculateMixedStemsPrice(options, songData?.tracks ?? 0)
-      if (mixedStemsVolumeDiscount) price = applyDiscount(price, mixedStemsVolumeDiscount.discountPercentage)
+      let stemsPrice = calculateMixedStemsPrice(options, songData?.tracks ?? 0)
+      let price = stemsPrice
+
+      mixedStemsPreDiscountCost += stemsPrice
+
+      if (mixedStemsVolumeDiscount) {
+        let discountedPice = applyDiscount(stemsPrice, mixedStemsVolumeDiscount.discountPercentage)
+        mixedStemsDiscountAmount += stemsPrice - discountedPice 
+        price = discountedPice
+      }
       mixedStemsCost += price
     }
 
     if (song.delivery.extendedArchival) {
       let price = extendedArchivalPrice
+      extendedArchivalPreDiscountCost += price
+
       if (extendedArchivalVolumeDiscount)
         price = applyDiscount(price, extendedArchivalVolumeDiscount.discountPercentage)
-      extendedArchivalCost += price
+        extendedArchivalDiscountAmount += extendedArchivalPrice - price
+        extendedArchivalCost += price
     }
 
     if (song.delivery.rushDelivery) {
       let price = song.songSubtotal // Rush doubles the base cost
-      if (rushDeliveryVolumeDiscount) price = applyDiscount(price, rushDeliveryVolumeDiscount.discountPercentage)
-      rushDeliveryCost += price
+      rushDeliveryPrediscountCost += price
+
+      if (rushDeliveryVolumeDiscount) {
+        price = applyDiscount(price, rushDeliveryVolumeDiscount.discountPercentage)
+        rushDeliveryDiscountAmount += (song.songSubtotal - price)
+      }
+        rushDeliveryCost += price
     }
   }
+  
 
   const subtotal =
     baseSongsCost -
@@ -447,6 +646,32 @@ export function buildQuoteDataFromDb(
     rushDeliveryCost
 
   const total = subtotal
+
+
+  const preDiscountsTotal = [
+    baseSongsCost,
+    vocalProductionPreDiscountCost,
+    drumReplacementPreDiscountCost,
+    guitarReampPreDiscountCost,
+    virtualSessionCost,
+    highResPreDiscountCost,
+    filmMixDownPreDiscountCost,
+    mixedStemsPreDiscountCost,
+    extendedArchivalPreDiscountCost,
+    rushDeliveryPrediscountCost,
+  ].reduce((prev, cur) => prev + cur, 0)
+
+  const optionsDiscountAmount = [
+    vocalProductionDiscountAmount,
+    drumReplacementDiscountAmount,
+    guitarReampDiscountAmount,
+    highResDiscountAmount,
+    filmMixdownDiscountAmount,
+    mixedStemsDiscountAmount,
+    extendedArchivalDiscountAmount,
+    rushDeliveryDiscountAmount,
+  ].reduce((prev, cur) => prev + cur, 0)
+  
 
   return {
     songs: songDetails,
@@ -466,7 +691,6 @@ export function buildQuoteDataFromDb(
       drumReplacementCost,
       guitarReampCost,
       productionDealDiscount,
-      productionDealName,
       virtualSessionCost,
       virtualSessionHours,
       highResMixdownCost,
@@ -478,6 +702,23 @@ export function buildQuoteDataFromDb(
       rushDeliveryCost,
       subtotal,
       total,
+      vocalProductionDiscount: vocalProductionDiscountAmount,
+      drumReplacementDiscount: drumReplacementDiscountAmount,
+      guitarReampDiscount: guitarReampDiscountAmount,
+      highResDiscount: highResDiscountAmount,
+      filmMixdownDiscount: filmMixdownDiscountAmount,
+      mixedStemsdDiscount: mixedStemsDiscountAmount,
+      extendedArchivalDiscount: extendedArchivalDiscountAmount,
+      rushDeliveryDiscount: rushDeliveryDiscountAmount,
+      preDiscountsTotal,
+      discountsTotal: preDiscountsTotal - subtotal,
+      optionsDiscounts: optionsDiscountAmount,
+      productionDealSongCount,
+      productionDeals,
+      dealBreakdown: mixingDealBreakdown,
+      premiumProductionDealDiscount: premiumProductionDiscountAmount,
+      standardProductionDealDiscount: standardProductionDiscountAmount,
+
     },
     summary: {
       hasHighTrackCountSongs: songDetails.filter((s) => s.hasHighTrackCount).length,
@@ -490,6 +731,10 @@ export function buildQuoteDataFromDb(
       mixedStemsCount,
       extendedArchivalCount,
       rushDeliveryCount,
+      productionDealName,
+      premiumProductionDealName,
+      productionDealSongCount,
+      
     },
   }
 }

@@ -135,6 +135,11 @@ export function AddOnsStep({ addOns, setAddOns, songs, pricingData }: AddOnsStep
     }
   }
 
+    // Check if add-on is part of multimedia bundle
+  const isProductionAddOn = (addOnKey: string) => {
+    return ["vocalProductionSongs", "drumReplacementSongs", "guitarReampSongs"].includes(addOnKey)
+  }
+
   const virtualSessionCost = addOns.virtualSessionHours * virtualSessionHourlyRate
 
   return (
@@ -187,10 +192,18 @@ export function AddOnsStep({ addOns, setAddOns, songs, pricingData }: AddOnsStep
           const isOpen = openAddOns[addon.key] ?? false
           const selectedCount = addOns[addon.key].length
           const volumeDiscountPercentage = getOptionVolumeDiscount(selectedCount)
-          const afterVolumeDiscount = addon.price * (1 - volumeDiscountPercentage / 100)
-          const finalPrice = afterVolumeDiscount * (1 - productionDealDiscount / 100)
-          const addonCost = selectedCount * finalPrice
-          const hasAnyDiscount = selectedCount > 0 && (volumeDiscountPercentage > 0 || productionDealDiscount > 0)
+          const isProductionDeal = isProductionAddOn(addon.key)
+
+          const totalDiscount = volumeDiscountPercentage + (
+            isProductionDeal ? productionDealDiscount : 0
+          )
+
+
+          const finalPrice = addon.price * (1 - totalDiscount/100)      
+
+          const addonCost =  addon.price * selectedCount * (1 - totalDiscount/100)   
+          const hasAnyDiscount =
+            selectedCount > 0 && (volumeDiscountPercentage > 0 || (isProductionDeal && productionDealDiscount > 0))
 
           return (
             <div key={addon.key} className="border border-border rounded-lg overflow-hidden">
