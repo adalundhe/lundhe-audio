@@ -509,45 +509,55 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
                         isSelected ? "border-primary bg-primary/5" : "border-border hover:bg-muted/50"
                       }`}
                     >
-                      <div className="flex items-center lg:gap-3 gap-2">
-                        <span className="flex items-center gap-3">
-                          <button
-                            type="button"
-                            onClick={() => toggleStemMastering(song.id)}
-                            className={`!w-[16px] !h-[16px] rounded border flex items-center justify-center ${
-                              isSelected ? "bg-primary border-primary" : "border-muted-foreground"
-                            }`}
-                          >
-                            {isSelected && <Check className=" !w-[16px] !h-[16px] text-primary-foreground" />}
-                          </button>
-                          <span className="text-sm font-medium">{song.title || `Song ${index + 1}`}</span>
-                        </span>
-                        <span className="text-xs text-muted-foreground">
-                          ({song.minutes}:{song.seconds.toString().padStart(2, "0")})
-                        </span>
-                      </div>
-                      {isSelected ? (
-                        <div className="flex lg:flex-row flex-col lg:items-center lg:gap-2 gap-4">
-                          <span className="flex items-center gap-2">
-                            <Input
-                              type="number"
-                              min={2}
-                              max={32}
-                              value={getStemInputValue(song.id, stemCount)}
-                              onChange={(e) => handleStemInputChange(song.id, e.target.value)}
-                              onBlur={() => handleStemInputBlur(song.id)}
-                              onClick={(e) => e.stopPropagation()}
-                              className="w-20 h-8 border dark:border-white dark:bg-black/70"
-                            />
-                            <span className="text-xs text-muted-foreground">stems</span>
+                      <div className="flex lg:flex-row flex-col lg:justify-start justify-center lg:gap-3 gap-2 w-full">
+                        <span className="flex flex-row justify-between items-center gap-4">
+                          <span className="flex items-center gap-3">
+                            <button
+                              type="button"
+                              onClick={() => toggleStemMastering(song.id)}
+                              className={`!w-[16px] !h-[16px] rounded border flex items-center justify-center ${
+                                isSelected ? "bg-primary border-primary" : "border-muted-foreground"
+                              }`}
+                            >
+                              {isSelected && <Check className=" !w-[16px] !h-[16px] text-primary-foreground" />}
+                            </button>
+                            <span className="text-sm font-medium">{song.title || `Song ${index + 1}`}</span>
                           </span>
+                          <span className="text-xs text-muted-foreground">
+                            ({song.minutes}:{song.seconds.toString().padStart(2, "0")})
+                          </span>
+                        </span>
+                        {
+                          isSelected
+                          ?
                           <span className="flex items-center gap-2">
                             <span className="text-sm font-medium">${stemPrice}</span>
                             <span className="text-xs text-muted-foreground">({getStemTierName(stemCount)})</span>
                           </span>
-                        </div>
+                          :
+                          <span className="text-sm text-muted-foreground ml-auto">+$50-$200</span>
+                        }
+                      </div>
+                      {isSelected ? (
+                        <>
+                          <div className="flex lg:flex-row flex-col lg:items-center lg:gap-2 gap-4">
+                            <span className="flex items-center gap-2">
+                              <Input
+                                type="number"
+                                min={2}
+                                max={32}
+                                value={getStemInputValue(song.id, stemCount)}
+                                onChange={(e) => handleStemInputChange(song.id, e.target.value)}
+                                onBlur={() => handleStemInputBlur(song.id)}
+                                onClick={(e) => e.stopPropagation()}
+                                className="w-20 h-8 border dark:border-white dark:bg-black/70"
+                              />
+                              <span className="text-xs text-muted-foreground">stems</span>
+                            </span>
+                          </div>
+                        </>
                       ) : (
-                        <span className="text-sm text-muted-foreground">+$50-$200</span>
+                        null
                       )}
                     </div>
                   )
@@ -562,7 +572,7 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
           <button
             type="button"
             onClick={() => setVirtualSessionOpen(!virtualSessionOpen)}
-            className="w-full flex items-center justify-between p-4 hover:bg-muted/50 transition-colors text-left"
+            className="w-full flex lg:flex-row flex-col lg:items-center lg:gap-0 gap-4 justify-between p-4 hover:bg-muted/50 transition-colors text-left"
           >
             <div className="flex-1">
               <div className="flex items-center gap-2">
