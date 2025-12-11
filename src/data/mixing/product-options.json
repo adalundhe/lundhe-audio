@@ -372,5 +372,27 @@
     "productType": "mastering",
     "minThreshold": null,
     "maxThreshold": null
+  },
+  {
+    "id": "mix_revision",
+    "name": "Project Mix Revision",
+    "description": "Request mix changes to any/all songs in a project",
+    "price": 250,
+    "priceType": "flat",
+    "category": "addon",
+    "productType": "mixing",
+    "minThreshold": null,
+    "maxThreshold": 10
+  },
+  {
+    "id": "mastering_revision",
+    "name": "Project Mastering Revision",
+    "description": "Request mastering changes to any/all songs in a project",
+    "price": 125,
+    "priceType": "flat",
+    "category": "addon",
+    "productType": "mastering",
+    "minThreshold": null,
+    "maxThreshold": null
   }
 ]

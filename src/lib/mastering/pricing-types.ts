@@ -104,7 +104,13 @@ export interface MasteringQuoteData {
     premiumDistributionDealDiscount: number
     standardDistributionDealDiscount: number
     premiumMultiMediaDealDiscount: number
-    standardMultiMediaDealDiscount: number
+    standardMultiMediaDealDiscount: number,
+    additionalRevisionsCost: number
+    preDiscountRevisionPrice: number
+    revisionDiscount: number
+    includedRevisionsCost: number
+    additionalRevisionsDiscountPercentage: number
+    perRevisionPrice: number
   }
   summary: {
     hasExtendedLengthSongs: number
@@ -122,7 +128,10 @@ export interface MasteringQuoteData {
     distributionDealName?: string
     premiumDistributionDealName?: string
     multimediaDealName?: string
-    premiumMultimediaDealName?: string
+    premiumMultimediaDealName?: string,
+    additionalRevisionsDiscountName?: string
+    includedRevisions: number
+    additionalRevisions: number
   }
 }
 

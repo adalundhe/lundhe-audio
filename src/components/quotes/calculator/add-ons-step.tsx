@@ -6,7 +6,8 @@ import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
 import type { AddOns, Song, PricingData } from "~/lib/mixing/pricing-types"
 import { meetsThreshold } from "~/lib/meets-threshold"
-import { ChevronDown, ChevronUp, Check, Info, Sparkles } from "lucide-react"
+import { ChevronDown, ChevronUp, Check, Info, Sparkles, RotateCcw } from "lucide-react"
+import { Discount } from "~/server/db/types"
 
 type AddOnsStepProps = {
   addOns: AddOns
@@ -15,9 +16,33 @@ type AddOnsStepProps = {
   pricingData: PricingData
 }
 
+const getRevisionVolumeDiscount = (count: number, discounts: Discount[]) => {
+
+  const standardRevisionDiscount = discounts.find((p) => p.id === "standard_revision_bundle")
+  const deluxeRevisionDiscount = discounts.find((p) => p.id === "deluxe_revision_bundle")
+  const premiumRevisionDiscount = discounts.find((p) => p.id === "premium_revision_bundle")
+
+  const revisionVolumeDiscounts = [
+    standardRevisionDiscount,
+    deluxeRevisionDiscount,
+    premiumRevisionDiscount,
+  ]
+
+  let bestDiscount = 0
+  for (const discount of revisionVolumeDiscounts) {
+    if (discount && meetsThreshold(count, discount.minThreshold, discount.maxThreshold)) {
+      if (discount.discountPercentage > bestDiscount) {
+        bestDiscount = discount.discountPercentage
+      }
+    }
+  }
+  return bestDiscount
+}
+
 export function AddOnsStep({ addOns, setAddOns, songs, pricingData }: AddOnsStepProps) {
   const [openAddOns, setOpenAddOns] = useState<Record<string, boolean>>({})
   const [virtualSessionOpen, setVirtualSessionOpen] = useState(false)
+  const [revisionsOpen, setRevisionsOpen] = useState(false)
 
   const { options, discounts } = pricingData
 
@@ -26,10 +51,20 @@ export function AddOnsStep({ addOns, setAddOns, songs, pricingData }: AddOnsStep
   const drumOption = options.find((o) => o.id === "drum_replacement")
   const guitarOption = options.find((o) => o.id === "guitar_reamp")
   const virtualSessionOption = options.find((o) => o.id === "virtual_session")
+  const revisionOption = options.find((o) => o.id === 'mix_revision')
 
   const vocalPrice = vocalOption?.price ?? 100
   const drumPrice = drumOption?.price ?? 150
   const guitarPrice = guitarOption?.price ?? 50
+
+  const revisionPrice = revisionOption?.price ?? 250
+  const revisionCount = addOns.revisions
+  const revisionsMax = revisionOption?.maxThreshold ?? 10
+  const revisionDiscountPercent = getRevisionVolumeDiscount(revisionCount, discounts)
+  const revisionSubtotal = revisionCount * revisionPrice
+  const revisionDiscount = revisionSubtotal * (revisionDiscountPercent / 100)
+  const revisionTotal = revisionSubtotal - revisionDiscount
+  
   const virtualSessionHourlyRate = virtualSessionOption?.price ?? 100
   const virtualSessionMinHours = virtualSessionOption?.minThreshold ?? 4
 
@@ -133,6 +168,12 @@ export function AddOnsStep({ addOns, setAddOns, songs, pricingData }: AddOnsStep
     } else {
       setAddOns({ ...addOns, virtualSessionHours: Math.max(hours, virtualSessionMinHours) })
     }
+  }
+
+
+  const handleAdditionalRevisionsChange = (value: string) => {
+    const count = Number.parseInt(value) || 0
+    setAddOns({ ...addOns, revisions: Math.min(Math.max(0, count), revisionsMax) })
   }
 
     // Check if add-on is part of multimedia bundle
@@ -251,12 +292,12 @@ export function AddOnsStep({ addOns, setAddOns, songs, pricingData }: AddOnsStep
               </button>
 
               {isOpen && (
-                <div className="border-t border-border p-4 bg-muted/30">
+                <div className="border-t border-border p-4 bg-muted/30 flex flex-col gap-2">
                   <div className="flex lg:flex-row lg:my-0 my-2 lg:gap-0 gap-4 flex-col items-center justify-between mb-3">
                     <span className="text-sm lg:text-left text-center text-muted-foreground">
                       Select songs to apply {addon.label.toLowerCase()}:
                     </span>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 lg:ml-auto lg:w-fit w-full lg:items-start items-center justify-center">
                       <Button variant="outline" size="sm" className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black" onClick={() => selectAllForAddOn(addon.key)}>
                         Select All
                       </Button>
@@ -327,6 +368,139 @@ export function AddOnsStep({ addOns, setAddOns, songs, pricingData }: AddOnsStep
             </div>
           )
         })}
+        <div className="border border-border rounded-lg overflow-hidden">
+          <button
+            type="button"
+            onClick={() => setRevisionsOpen(!revisionsOpen)}
+            className="w-full flex lg:flex-row flex-col lg:items-center lg:gap-0 gap-4 justify-between p-4 hover:bg-muted/50 transition-colors text-left"
+          >
+            <div className="flex-1">
+              <div className="flex items-center gap-2">
+                <span className="text-base font-medium">Additional Project Revisions</span>
+                {revisionCount > 0 && (
+                  <span className="px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full flex items-center gap-1">
+                    {revisionCount} revision{revisionCount !== 1 ? "s" : ""}
+                    {revisionDiscountPercent > 0 && (
+                      <span className="text-green-600">({revisionDiscountPercent}% off)</span>
+                    )}
+                  </span>
+                )}
+              </div>
+              <p className="text-sm text-muted-foreground mt-1">
+                Additional project revisions beyond your included revisions
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="text-sm font-medium">
+                {revisionDiscountPercent > 0 ? (
+                  <>
+                    <span className="line-through text-muted-foreground">${revisionPrice}</span>
+                    <span className="text-green-600 ml-1">
+                      ${(revisionPrice * (1 - revisionDiscountPercent / 100)).toFixed(0)}/revision
+                    </span>
+                  </>
+                ) : (
+                  <span>+${revisionPrice}/revision</span>
+                )}
+                {revisionTotal > 0 && <span className="text-primary ml-1">(${revisionTotal.toFixed(0)})</span>}
+              </span>
+              {revisionsOpen ? (
+                <ChevronUp className="!w-[16px] !h-[16px] text-muted-foreground" />
+              ) : (
+                <ChevronDown className="!w-[16px] !h-[16px] text-muted-foreground" />
+              )}
+            </div>
+          </button>
+
+          {revisionsOpen && (
+            <div className="border-t border-border p-4 bg-muted/30">
+              <div className="flex items-start gap-2 p-3 bg-blue-500/10 border border-blue-500/20 rounded-md text-sm mb-4">
+                <Info className="!w-[16px] !h-[16px] text-blue-600 shrink-0 mt-0.5" />
+                <div className="text-foreground">
+                  <p>
+                    A single revision allows you to request mix changes to <strong>any and/or all songs</strong> in the
+                    project.We do not charge revisions per-song.
+                  </p>
+                  <br/>
+                  <p>
+                    The maximum number of revisions you may purchase is {revisionsMax}.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-2 p-3 bg-green-500/10 border border-green-500/20 rounded-md text-sm mb-4">
+                <RotateCcw className="!w-[16px] !h-[16px] text-green-600 shrink-0 mt-0.5" />
+                <span className="text-foreground">
+                  <span className="font-medium">Volume Discounts:</span> Purchase 3+ revisions for 15% off, 5+ for 25%
+                  off, or 8+ for 40% off.
+                </span>
+              </div>
+
+              <div className="flex lg:flex-row flex-col items-center justify-center gap-2">
+                <div className="flex items-center gap-2">
+                  <Label htmlFor="additionalRevisions" className="text-sm text-muted-foreground lg:text-left text-center">
+                    Number of revisions:
+                  </Label>
+                </div>
+                <Input
+                  id="additionalRevisions"
+                  type="number"
+                  min={0}
+                  max={revisionsMax}
+                  value={addOns.revisions || ""}
+                  onChange={(e) => handleAdditionalRevisionsChange(e.target.value)}
+                  placeholder="0"
+                  className="w-24 bg-black/80"
+                />
+                {revisionCount > 0 && (
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium">
+                      {revisionDiscountPercent > 0 ? (
+                        <>
+                          <span className="line-through text-muted-foreground">${revisionSubtotal}</span>
+                          <span className="text-green-600 ml-1">${revisionTotal.toFixed(0)}</span>
+                        </>
+                      ) : (
+                        <span className="text-primary">${revisionTotal.toFixed(0)}</span>
+                      )}
+                    </span>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setAddOns({ ...addOns, revisions: 0 })}
+                      className="text-muted-foreground hover:text-destructive"
+                    >
+                      Remove
+                    </Button>
+                  </div>
+                )}
+              </div>
+
+              {revisionCount > 0 && revisionCount < 3 && (
+                <div className="text-xs text-muted-foreground mt-3 p-2 bg-muted rounded">
+                  Add {3 - revisionCount} more revision{3 - revisionCount !== 1 ? "s" : ""} for 15% discount
+                </div>
+              )}
+              {revisionCount >= 3 && revisionCount < 5 && (
+                <div className="text-xs text-green-600 mt-3 p-2 bg-green-500/10 rounded">
+                  15% discount applied! Add {5 - revisionCount} more revision{5 - revisionCount !== 1 ? "s" : ""} for
+                  25% discount
+                </div>
+              )}
+              {revisionCount >= 5 && revisionCount < 8 && (
+                <div className="text-xs text-green-600 mt-3 p-2 bg-green-500/10 rounded">
+                  25% discount applied! Add {8 - revisionCount} more revision{8 - revisionCount !== 1 ? "s" : ""} for
+                  40% discount
+                </div>
+              )}
+              {revisionCount >= 8 && (
+                <div className="text-xs text-green-600 mt-3 p-2 bg-green-500/10 rounded">
+                  40% maximum discount applied!
+                </div>
+              )}
+            </div>
+          )}
+        </div>
 
         <div className="border border-border rounded-lg overflow-hidden">
           <button
@@ -372,8 +546,8 @@ export function AddOnsStep({ addOns, setAddOns, songs, pricingData }: AddOnsStep
                 </span>
               </div>
 
-              <div className="flex items-center gap-4">
-                <Label htmlFor="virtualSessionHours" className="text-sm text-muted-foreground whitespace-nowrap">
+              <div className="flex lg:flex-row flex-col items-center justify-center gap-2">
+                <Label htmlFor="virtualSessionHours" className="text-sm text-muted-foreground lg:text-left text-center">
                   Number of hours:
                 </Label>
                 <Input
@@ -383,7 +557,7 @@ export function AddOnsStep({ addOns, setAddOns, songs, pricingData }: AddOnsStep
                   value={addOns.virtualSessionHours || ""}
                   onChange={(e) => handleVirtualSessionHoursChange(e.target.value)}
                   placeholder={`Min ${virtualSessionMinHours} hours`}
-                  className="w-32"
+                  className="w-36 bg-black/80"
                 />
                 {addOns.virtualSessionHours > 0 && (
                   <div className="flex items-center gap-2">

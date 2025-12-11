@@ -26,5 +26,19 @@
     "description": "Professional mastering for songs over 10 minutes",
     "productType": "mastering",
     "price": 150
+  },
+  {
+    "id": "mix_revision",
+    "name": "Project Mix Revision",
+    "description": "Request mix changes to any/all songs in a project",
+    "productType": "mixing",
+    "price": 250
+  },
+  {
+    "id": "mastering_revision",
+    "name": "Project Mastering Revision",
+    "description": "Request mastering changes to any/all songs in a project",
+    "productType": "mastering",
+    "price": 125
   }
 ]

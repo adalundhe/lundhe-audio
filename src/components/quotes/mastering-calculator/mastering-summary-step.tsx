@@ -2,7 +2,7 @@
 
 import type { MasteringPricingData } from "~/lib/mastering/pricing-types"
 import type { MasteringQuoteData } from "~/lib/mastering/pricing-types"
-import { Music, Clock, CheckCircle2, AlertCircle, Sparkles } from "lucide-react"
+import { Music, Clock, CheckCircle2, AlertCircle, Sparkles, Gift, RotateCcw } from "lucide-react"
 
 type MasteringSummaryStepProps = {
   quoteData: MasteringQuoteData
@@ -53,6 +53,40 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
             <p className="text-sm text-muted-foreground">Total Length</p>
             <p className="text-xl font-semibold">{formattedTotalLength}</p>
           </div>
+        </div>
+      </div>
+
+      <div className="flex lg:flex-row flex-col lg:items-start items-center gap-2 p-3 bg-green-500/10 border border-green-500/20 rounded-md text-sm">
+        <Gift className="!w-[16px] !h-[16px] text-green-600 shrink-0 mt-0.5" />
+        <div className="flex flex-col lg:gap-1 gap-2">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+            <span className="text-foreground">
+              <span className="font-medium">{summary.includedRevisions} Project Revisions Included</span>
+            </span>
+            <span className="flex gap-2">
+              <span className="text-muted-foreground line-through">${costs.includedRevisionsCost}</span>
+              <span className="text-green-600 font-medium">Free</span>
+            </span>
+          </div>
+          {costs.additionalRevisionsCost > 0 && (
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-foreground text-sm w-full">
+              <span className="font-medium">+{summary.additionalRevisions} Revisions Purchased</span>
+              {costs.additionalRevisionsDiscountPercentage > 0 && (
+                <span className="flex gap-2">
+                  <span className="text-muted-foreground line-through">${costs.preDiscountRevisionPrice}</span>
+                  <span className="text-green-600 font-medium">
+                    ${costs.additionalRevisionsCost.toFixed(0)} ({costs.additionalRevisionsDiscountPercentage}% off)
+                  </span>
+                </span>
+              )}
+              {costs.additionalRevisionsDiscountPercentage === 0 && (
+                <span className="text-primary">${costs.additionalRevisionsCost.toFixed(0)}</span>
+              )}
+            </div>
+          )}
+          <span className="text-muted-foreground text-xs mt-1">
+            Total: {summary.includedRevisions + summary.additionalRevisions} revisions available for your project
+          </span>
         </div>
       </div>
 
@@ -112,7 +146,7 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
         }
         </> 
 
-      {(hasAnyPerSongAddOns || costs.virtualSessionHours > 0 || hasAnyDeliveryOptions) && (
+      {(hasAnyPerSongAddOns || costs.virtualSessionHours > 0 || summary.additionalRevisions > 0 || hasAnyDeliveryOptions) && (
         <div className="space-y-4">
           {summary.vinylMasteringCount > 0 && (
             <div className="flex items-start gap-2 text-sm">
@@ -185,6 +219,17 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
                     .filter((s) => s.addOns.restorationRemastering)
                     .map((s) => s.title)
                     .join(", ")}
+                </div>
+              </div>
+            </div>
+          )}
+          {summary.additionalRevisions > 0 && (
+            <div className="flex items-start gap-2 text-sm">
+              <RotateCcw className="!w-[16px] !h-[16px] text-amber-600 shrink-0" />
+              <div>
+                <span> Additional Project Revisions </span>
+                <div className="text-muted-foreground text-xs mt-1">
+                  {summary.additionalRevisions} revision{summary.additionalRevisions !== 1 ? "s" : ""}
                 </div>
               </div>
             </div>
@@ -288,6 +333,36 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
           <span className="text-muted-foreground font-medium">Songs Subtotal</span>
           <span>${(costs.baseSongsCost - costs.volumeDiscount).toFixed(2)}</span>
         </div>
+
+        {summary.additionalRevisions > 0 && (
+          <div className="flex justify-between text-sm">
+            <span className="text-muted-foreground">
+              Additional Revisions ({summary.additionalRevisions} × ${costs.perRevisionPrice}/each)
+              <span className="flex lg:flex-row flex-col gap-2">
+              {
+                costs.additionalRevisionsDiscountPercentage > 0 &&
+                <span className="text-purple-600 text-xs lg:ml-1">
+                  (${costs.revisionDiscount} with {summary.additionalRevisionsDiscountName})
+                </span>
+              }
+              </span>
+            </span>
+            <span className="flex items-center gap-2">
+              {costs.additionalRevisionsDiscountPercentage > 0 && (
+                <span className="line-through text-muted-foreground">${costs.preDiscountRevisionPrice}</span>
+              )}
+              <span>${costs.additionalRevisionsCost.toFixed(2)} {
+              costs.revisionDiscount > 0
+              ?
+              <>
+                {" "}
+                <span className="text-sm text-green-600">(-${costs.revisionDiscount.toFixed(2)} off)</span>
+              </>
+              : null
+            }</span>
+            </span>
+          </div>
+        )}
 
         {costs.vinylMasteringCost > 0 && (
           <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
@@ -565,6 +640,16 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
           </div>
         }
         <div className="flex flex-col border-t border-border gap-2">
+          <span className="text-sm flex pt-2 lg:items-center items-start">
+            <span className="text-muted-foreground flex lg:flex-row flex-col">
+              Included Revisions <span>({summary.includedRevisions} × ${costs.perRevisionPrice}/each)</span>
+            </span>
+            <span className="flex items-center gap-2 ml-auto">
+              <span className="line-through text-muted-foreground">${costs.includedRevisionsCost}</span>
+              <span className="text-green-600 font-medium">Free</span>
+            </span>
+          </span>
+          
           <span className="flex flex-col">
             <span className="flex justify-between text-sm font-bold pt-2 text-muted-foreground">
               <span>Subtotal</span>

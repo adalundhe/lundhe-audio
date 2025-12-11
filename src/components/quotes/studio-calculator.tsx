@@ -29,6 +29,7 @@ export function StudioCalculator({ pricingData }: StudioCalculatorProps) {
     drumReplacementSongs: [],
     guitarReampSongs: [],
     virtualSessionHours: 0,
+    revisions: 0
   })
   const [deliveryOptions, setDeliveryOptions] = useState<DeliveryOptions>({
     highResMixdownSongs: [],
