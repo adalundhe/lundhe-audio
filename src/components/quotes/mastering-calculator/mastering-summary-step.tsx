@@ -312,7 +312,9 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
           {songs.map((song) => (
             <div key={song.songId} className="flex justify-between text-sm">
               <span className="text-muted-foreground">
-                {song.title}
+                <div className="lg:max-w-[440px] max-w-[220px] text-nowrap overflow-hidden text-ellipsis">
+                  <span>{song.title}</span>
+                </div>
                 {song.isExtendedLength && (
                   <span className="ml-1 text-amber-600 text-xs">(+${song.extendedLengthFeeAmount} Extended)</span>
                 )}

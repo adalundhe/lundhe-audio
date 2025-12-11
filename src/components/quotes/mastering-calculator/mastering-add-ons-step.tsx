@@ -452,7 +452,9 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
                             >
                               {isSelected && <Check className="!w-[16px] !h-[16px] text-primary-foreground" />}
                             </div>
-                            <span className="text-sm font-medium">{song.title || `Song ${index + 1}`}</span>
+                            <div className="lg:max-w-[320px] max-w-[72px] text-nowrap overflow-hidden text-ellipsis">
+                              <span className="text-sm font-medium">{song.title || `Song ${index + 1}`}</span>
+                            </div>
                             <span className="text-xs text-muted-foreground">
                               ({song.minutes}:{song.seconds.toString().padStart(2, "0")})
                             </span>
@@ -612,7 +614,9 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
                             >
                               {isSelected && <Check className=" !w-[16px] !h-[16px] text-primary-foreground" />}
                             </button>
-                            <span className="text-sm font-medium">{song.title || `Song ${index + 1}`}</span>
+                            <div className="lg:max-w-[320px] max-w-[146px] text-nowrap overflow-hidden text-ellipsis">
+                              <span className="text-sm font-medium">{song.title || `Song ${index + 1}`}</span>
+                            </div>
                           </span>
                           <span className="text-xs text-muted-foreground">
                             ({song.minutes}:{song.seconds.toString().padStart(2, "0")})

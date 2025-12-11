@@ -261,7 +261,7 @@ export function MasteringProjectSizeStep({ songs, setSongs, pricingData }: Maste
                   ) : (
                     <ChevronDown className="!w-[16px] !h-[16px] text-muted-foreground" />
                   )}
-                  <h3 className="font-medium">{song.title || `Song ${index + 1}`}</h3>
+                  <h3 className="lg:max-w-[500px] max-w-[180px] text-nowrap overflow-hidden text-ellipsis font-medium">{song.title || `Song ${index + 1}`}</h3>
                   {isCollapsed && (
                     <span className="text-sm text-muted-foreground ml-2">
                       ({song.minutes}:{song.seconds.toString().padStart(2, "0")})
