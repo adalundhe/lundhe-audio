@@ -176,7 +176,7 @@ export function MasteringProjectSizeStep({ songs, setSongs, pricingData }: Maste
               covers feedback for any or all songs in your project — we never charge per-song for revisions.
             </p>
             <div className="flex flex-wrap items-center gap-3">
-              <span className="text-sm lg:items-center lg:w-fit w-full gap-1.5 px-3 py-1.5 rounded-full bg-green-500/10 text-green-600 border border-green-500/20">
+              <span className="text-sm lg:text-left text-center lg:items-center lg:w-fit w-full gap-1.5 px-3 py-1.5 rounded-full bg-green-500/10 text-green-600 border border-green-500/20">
                 <span>
                   {includedRevisions} Revisions{" "}
                   (<span className="text-green-600/80 w-fit line-through">${includedRevisions * revisions.price}</span>){" "}
