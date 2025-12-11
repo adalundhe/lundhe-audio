@@ -56,14 +56,14 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
         </div>
       </div>
 
-      <div className="flex lg:flex-row flex-col lg:items-start items-center gap-2 p-3 bg-green-500/10 border border-green-500/20 rounded-md text-sm">
-        <Gift className="!w-[16px] !h-[16px] text-green-600 shrink-0 mt-0.5" />
+      <div className="flex lg:flex-row flex-col items-center lg:items-start lg:justify-center justify-start gap-2 p-3 bg-green-500/10 border border-green-500/20 rounded-md text-sm">
+        <Gift className="!w-[16px] !h-[16px] text-green-600 shrink-0" />
         <div className="flex flex-col lg:gap-1 gap-2">
           <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-            <span className="text-foreground">
+            <span className="text-foreground lg:w-fit w-full lg:text-left text-center">
               <span className="font-medium">{summary.includedRevisions} Project Revisions Included</span>
             </span>
-            <span className="flex gap-2">
+            <span className="flex gap-2 lg:w-fit w-full flex justify-center">
               <span className="text-muted-foreground line-through">${costs.includedRevisionsCost}</span>
               <span className="text-green-600 font-medium">Free</span>
             </span>
@@ -72,7 +72,7 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
             <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-foreground text-sm w-full">
               <span className="font-medium">+{summary.additionalRevisions} Revisions Purchased</span>
               {costs.additionalRevisionsDiscountPercentage > 0 && (
-                <span className="flex gap-2">
+                <span className="flex gap-2 lg:text-left">
                   <span className="text-muted-foreground line-through">${costs.preDiscountRevisionPrice}</span>
                   <span className="text-green-600 font-medium">
                     ${costs.additionalRevisionsCost.toFixed(0)} ({costs.additionalRevisionsDiscountPercentage}% off)
@@ -84,7 +84,7 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
               )}
             </div>
           )}
-          <span className="text-muted-foreground text-xs mt-1">
+          <span className="text-muted-foreground text-xs mt-1 lg:text-left text-center">
             Total: {summary.includedRevisions + summary.additionalRevisions} revisions available for your project
           </span>
         </div>
