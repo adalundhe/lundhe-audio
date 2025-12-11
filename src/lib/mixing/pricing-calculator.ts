@@ -29,7 +29,13 @@ function findDiscountsByCategory(discounts: Discount[], category: string): Disco
 
 // Get the applicable volume discount for songs
 function getVolumeDiscount(discounts: Discount[], songCount: number): Discount | null {
-  const volumeDiscounts = findDiscountsByCategory(discounts, "volume")
+  const volumeDiscounts = findDiscountsByCategory(discounts, "volume").filter(discount => ![
+    discounts.find(d => d.id === "standard_revision_bundle")?.id ?? "",
+    discounts.find(d => d.id === "deluxe_revision_bundle")?.id ?? "",
+    discounts.find(d => d.id === "premium_revision_bundle")?.id ?? "",
+
+  ].includes(discount.id))
+
   let bestDiscount: Discount | null = null
 
   for (const discount of volumeDiscounts) {
@@ -87,6 +93,18 @@ function getProductionDealDiscount(
   }
 
   return { discount: null, type: "none" }
+}
+
+export function getIncludedRevisions(songCount: number, discounts: Discount[]): number {
+
+  const standardRevisionDiscount = discounts.find((p) => p.id === "standard_revision_bundle")
+  const deluxeRevisionDiscount = discounts.find((p) => p.id === "deluxe_revision_bundle")
+  const premiumRevisionDiscount = discounts.find((p) => p.id === "premium_revision_bundle")
+  
+
+  if (songCount >= 10) return premiumRevisionDiscount?.minThreshold ?? 8
+  if (songCount >= 5) return deluxeRevisionDiscount?.minThreshold ?? 5
+  return standardRevisionDiscount?.minThreshold ?? 3
 }
 
 // Calculate base price for a song based on track count
@@ -385,6 +403,34 @@ export function buildQuoteDataFromDb(
     }
   }
 
+  const revisionProduct = findProduct(products, "revision")
+  const revisionPrice = revisionProduct?.price ?? 250
+
+  const includedRevisions = getIncludedRevisions(songCount, discounts)
+  const includedRevisionsCost = includedRevisions * revisionPrice
+
+  const additionalRevisions = addOns.revisions ?? 0
+  const revisionVolumeDiscounts = findDiscountsByCategory(discounts, "volume").filter(
+    discount => [
+      "standard_revision_bundle",
+      "deluxe_revision_bundle",
+      "premium_revision_bundle"
+    ].includes(discount.id)
+  )
+  let revisionDiscountPercentage = 0
+  let revisionDealName: string | undefined = undefined
+  for (const discount of revisionVolumeDiscounts) {
+    if (meetsThreshold(additionalRevisions, discount.minThreshold, discount.maxThreshold)) {
+      if (discount.discountPercentage > revisionDiscountPercentage) {
+        revisionDiscountPercentage = discount.discountPercentage
+        revisionDealName = discount.name
+      }
+    }
+  }
+
+  const preDiscountRevisionPrice = additionalRevisions * revisionPrice
+  const additionalRevisionsCost = additionalRevisions * revisionPrice * (1 - revisionDiscountPercentage / 100)
+  const revisionsDiscountAmount = preDiscountRevisionPrice - additionalRevisionsCost
 
   for (const song of songDetails) {
 
@@ -638,6 +684,7 @@ export function buildQuoteDataFromDb(
     vocalProductionCost +
     drumReplacementCost +
     guitarReampCost +
+    additionalRevisionsCost +
     virtualSessionCost +
     highResMixdownCost +
     filmMixdownCost +
@@ -659,6 +706,7 @@ export function buildQuoteDataFromDb(
     mixedStemsPreDiscountCost,
     extendedArchivalPreDiscountCost,
     rushDeliveryPrediscountCost,
+    preDiscountRevisionPrice,
   ].reduce((prev, cur) => prev + cur, 0)
 
   const optionsDiscountAmount = [
@@ -670,6 +718,7 @@ export function buildQuoteDataFromDb(
     mixedStemsDiscountAmount,
     extendedArchivalDiscountAmount,
     rushDeliveryDiscountAmount,
+    revisionsDiscountAmount,
   ].reduce((prev, cur) => prev + cur, 0)
   
 
@@ -718,6 +767,12 @@ export function buildQuoteDataFromDb(
       dealBreakdown: mixingDealBreakdown,
       premiumProductionDealDiscount: premiumProductionDiscountAmount,
       standardProductionDealDiscount: standardProductionDiscountAmount,
+      preDiscountRevisionPrice,
+      revisionDiscount: revisionsDiscountAmount,
+      additionalRevisionsCost,
+      includedRevisionsCost,
+      additionalRevisionsDiscountPercentage: revisionDiscountPercentage,
+      perRevisionPrice: revisionPrice,
 
     },
     summary: {
@@ -734,7 +789,9 @@ export function buildQuoteDataFromDb(
       productionDealName,
       premiumProductionDealName,
       productionDealSongCount,
-      
+      includedRevisions,
+      additionalRevisions,
+      additionalRevisionsDiscountName: revisionDealName
     },
   }
 }

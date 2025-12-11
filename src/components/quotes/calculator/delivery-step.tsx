@@ -109,6 +109,7 @@ export function DeliveryStep({ deliveryOptions, setDeliveryOptions, songs, prici
     priceLabel: string
     getPrice?: (song: Song) => number
     fixedPrice?: number
+    unit?: string
     isMixdownOption?: boolean
   }[] = [
     {
@@ -146,7 +147,9 @@ export function DeliveryStep({ deliveryOptions, setDeliveryOptions, songs, prici
       label: rushDeliveryOption?.name ?? "Rush Delivery",
       description:
         rushDeliveryOption?.description ?? "Priority processing with 48-hour turnaround - doubles the song cost",
-      priceLabel: "2x/song",
+      priceLabel: "2x",
+      unit: "/song",
+
       getPrice: (song: Song) => calculateSongBasePrice(song),
     },
   ]
@@ -230,7 +233,7 @@ export function DeliveryStep({ deliveryOptions, setDeliveryOptions, songs, prici
 
           const optionPrice = option.fixedPrice ?? songs.map(
             song => option.getPrice ? option.getPrice(song) : 0
-          ).reduce((prev, cur) => prev + cur, 0)
+          ).reduce((prev, cur) => prev + cur, 0)/Math.max(songs.length, 1)
           
           const finalPrice = optionPrice * (1 - totalDiscount/100)      
 
@@ -283,7 +286,7 @@ export function DeliveryStep({ deliveryOptions, setDeliveryOptions, songs, prici
                   <span className="text-sm font-medium">
                     {hasAnyDiscount ? (
                       <>
-                        <span className="line-through text-muted-foreground">{option.priceLabel}</span>
+                        <span className="line-through text-muted-foreground">{option.priceLabel}{option.unit ?? ''}</span>
                         <span className="text-green-600 ml-1">${finalPrice.toFixed(0)}/song</span>
                       </>
                     ) : (
@@ -301,11 +304,11 @@ export function DeliveryStep({ deliveryOptions, setDeliveryOptions, songs, prici
 
               {isExpanded && (
                 <div className="border-t border-border p-4 bg-muted/30 flex flex-col gap-2 lg:items-start items-center">
-                  <div className="flex lg:flex-row flex-col items-center lg:gap-0 gap-4 justify-between mb-3">
+                  <div className="w-full flex lg:flex-row flex-col items-center lg:gap-0 gap-4 justify-between mb-3">
                     <span className="text-sm lg:text-left text-center text-muted-foreground">
                       Select songs to apply {option.label.toLowerCase()}:
                     </span>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 lg:ml-auto lg:w-fit w-full lg:items-start items-center justify-center">
                       <Button
                         variant="outline"
                         size="sm"
@@ -331,18 +334,18 @@ export function DeliveryStep({ deliveryOptions, setDeliveryOptions, songs, prici
                     </div>
                   </div>
                   {selectedCount > 0 && selectedCount < 5 && (
-                    <div className="text-xs text-muted-foreground mb-3 p-2 bg-muted rounded lg:w-fit w-full lg:text-left text-center">
+                    <div className="text-xs text-muted-foreground mb-3 p-2 bg-muted rounded w-full text-center">
                       Select {5 - selectedCount} more song{5 - selectedCount !== 1 ? "s" : ""} for 15% discount
                     </div>
                   )}
                   {selectedCount >= 5 && selectedCount < 10 && (
-                    <div className="text-xs text-green-600 mb-3 p-2 bg-green-500/10 rounded lg:w-fit w-full lg:text-left text-center">
+                    <div className="text-xs text-green-600 mb-3 p-2 bg-green-500/10 rounded w-full text-center">
                       15% discount applied! Select {10 - selectedCount} more song{10 - selectedCount !== 1 ? "s" : ""}{" "}
                       for 25% discount
                     </div>
                   )}
                   {selectedCount >= 10 && (
-                    <div className="text-xs text-green-600 mb-3 p-2 bg-green-500/10 rounded lg:w-fit w-full lg:text-left text-center">
+                    <div className="text-xs text-green-600 mb-3 p-2 bg-green-500/10 rounded w-full text-center">
                       25% maximum discount applied!
                     </div>
                   )}
@@ -366,10 +369,6 @@ export function DeliveryStep({ deliveryOptions, setDeliveryOptions, songs, prici
                       }
 
                       const hasAnyDiscount = discountPercentage > 0 || showMixdownBundle
-
-                      const songDeal = option.isMixdownOption
-                        ? getSongMixdownDeal(song.id)
-                        : { hasDeal: false }
 
                       return (
                         <button

@@ -108,5 +108,35 @@
     "productType": "mastering",
     "minThreshold": 3,
     "maxThreshold": 3
+  },
+  {
+    "id": "standard_revision_bundle",
+    "name": "Standard Revision Bundle",
+    "description": "15% discount when purchasing three to four additional mixing or mastering revisions",
+    "discountPercentage": 15,
+    "category": "volume",
+    "productType": "mixing-and-mastering",
+    "minThreshold": 3,
+    "maxThreshold": 4
+  },
+  {
+    "id": "deluxe_revision_bundle",
+    "name": "Deluxe Revision Bundle",
+    "description": "25% discount when purchasing five to eight additional mixing or mastering revisions",
+    "discountPercentage": 25,
+    "category": "volume",
+    "productType": "mixing-and-mastering",
+    "minThreshold": 5,
+    "maxThreshold": 7
+  },
+  {
+    "id": "premium_revision_bundle",
+    "name": "Premium Revision Bundle",
+    "description": "40% discount when purchasing eight or more additional mixing or mastering revisions",
+    "discountPercentage": 40,
+    "category": "volume",
+    "productType": "mixing-and-mastering",
+    "minThreshold": 8,
+    "maxThreshold": null
   }
 ]

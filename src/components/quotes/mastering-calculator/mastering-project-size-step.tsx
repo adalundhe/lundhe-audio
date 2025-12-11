@@ -7,11 +7,12 @@ import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
 import { Label } from "~/components/ui/label"
 import { Card, CardContent } from "~/components/ui/card"
-import { Plus, Trash2, ChevronDown, ChevronRight, Info } from "lucide-react"
+import { Plus, Trash2, ChevronDown, ChevronRight, Info,HelpCircle } from "lucide-react"
 import type { MasteringPricingData } from "~/lib/mastering/pricing-types"
 import type { MasteringSong } from "~/lib/mastering/mastering-pricing-calculator"
-import { getVolumeDiscountInfo } from "~/lib/mastering/mastering-pricing-calculator"
+import { getVolumeDiscountInfo, getIncludedRevisions } from "~/lib/mastering/mastering-pricing-calculator"
 import { meetsThreshold } from "~/lib/meets-threshold"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/ui/tooltip"
 
 type MasteringProjectSizeStepProps = {
   songs: MasteringSong[]
@@ -25,15 +26,23 @@ export function MasteringProjectSizeStep({ songs, setSongs, pricingData }: Maste
 
   const { epDeal, albumDeal } = getVolumeDiscountInfo(pricingData.discounts)
 
+  const { discounts } = pricingData
+
   const standardProduct = pricingData.products.find((p) => p.id === "standard_master")
   const extendedProduct = pricingData.products.find((p) => p.id === "extended_length_master")
   const standardPrice = standardProduct?.price ?? 75
   const extendedPrice = extendedProduct?.price ?? 150
 
+  
+  const revisions = pricingData.products.find((p) => p.id === "mastering_revision")
+
   const songCount = songs.length
   const epDealActive = epDeal && meetsThreshold(songCount, epDeal.minThreshold, epDeal.maxThreshold)
   const albumDealActive = albumDeal && meetsThreshold(songCount, albumDeal.minThreshold, albumDeal.maxThreshold)
   const activeDeal = albumDealActive ? albumDeal : epDealActive ? epDeal : null
+
+
+  const includedRevisions = getIncludedRevisions(songCount, discounts)
 
   const addSong = () => {
     setSongs([...songs, { id: crypto.randomUUID(), title: "", minutes: 3, seconds: 30 }])
@@ -143,6 +152,53 @@ export function MasteringProjectSizeStep({ songs, setSongs, pricingData }: Maste
               </ul>
             </div>
           </div>
+
+          {
+            revisions && <div className="pt-2 border-t border-border">
+            <div className="flex items-center gap-2 mb-2">
+              <h4 className="font-medium text-foreground">Project Revisions Included</h4>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <HelpCircle className="!w-[16px] !h-[16px] text-muted-foreground cursor-help" />
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs">
+                    <p>
+                      A single revision allows you to request mastering changes to any and/or all songs in the project. We do
+                      not charge per-song for revisions.
+                    </p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
+            <p className="text-xs text-muted-foreground mb-2">
+              Each revision is valued at <span className="font-medium">${revisions.price}</span>. A single revision
+              covers feedback for any or all songs in your project — we never charge per-song for revisions.
+            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="text-sm lg:items-center lg:w-fit w-full gap-1.5 px-3 py-1.5 rounded-full bg-green-500/10 text-green-600 border border-green-500/20">
+                <span>
+                  {includedRevisions} Revisions{" "}
+                  (<span className="text-green-600/80 w-fit line-through">${includedRevisions * revisions.price}</span>){" "}
+                  Free
+                </span>
+              </span>
+            </div>
+            <p className="text-xs text-muted-foreground mt-2">
+              Revisions are project-wide and apply to the entire project.
+              {songCount < 5 && " Add more songs to unlock additional revisions."}
+            </p>
+            <ul className="mt-2 space-y-1 text-xs text-muted-foreground">
+              <li className={songCount >= 1 && songCount <= 4 ? "text-green-600 font-medium" : ""}>
+                • 1-4 songs: 3 project revisions
+              </li>
+              <li className={songCount >= 5 && songCount <= 9 ? "text-green-600 font-medium" : ""}>
+                • 5-9 songs: 5 project revisions
+              </li>
+              <li className={songCount >= 10 ? "text-green-600 font-medium" : ""}>• 10+ songs: 8 project revisions</li>
+            </ul>
+          </div>
+          }
 
           <div className="pt-2 border-t border-border">
             <h4 className="font-medium text-foreground mb-2">Volume Discounts</h4>

@@ -21,6 +21,7 @@ export interface AddOns {
   drumReplacementSongs: string[]
   guitarReampSongs: string[]
   virtualSessionHours: number
+  revisions: number
 }
 
 export interface DeliveryOptions {
@@ -105,6 +106,12 @@ export interface QuoteData {
     productionDeals: MixingDiscountDealSet
     premiumProductionDealDiscount: number
     standardProductionDealDiscount: number
+    additionalRevisionsCost: number
+    preDiscountRevisionPrice: number
+    revisionDiscount: number
+    includedRevisionsCost: number
+    additionalRevisionsDiscountPercentage: number
+    perRevisionPrice: number
   }
   summary: {
     hasHighTrackCountSongs: number
@@ -120,6 +127,9 @@ export interface QuoteData {
     productionDealSongCount: number
     productionDealName?: string
     premiumProductionDealName?: string
+    additionalRevisionsDiscountName?: string
+    includedRevisions: number
+    additionalRevisions: number
   }
 }
 

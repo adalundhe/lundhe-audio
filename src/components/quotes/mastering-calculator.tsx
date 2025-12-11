@@ -32,6 +32,7 @@ export function MasteringCalculator({ pricingData }: MasteringCalculatorProps) {
     stemMasteringSongs: {},
     restorationRemasteringSongs: [],
     virtualSessionHours: 0,
+    revisions: 0,
   })
   const [deliveryOptions, setDeliveryOptions] = useState<MasteringDeliveryOptions>({
     highResMasterSongs: [],

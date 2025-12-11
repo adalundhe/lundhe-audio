@@ -239,20 +239,6 @@ export function MasteringDeliveryStep({
           </div>
         )}
 
-        {/* <div className="flex items-start gap-2 p-3 bg-purple-500/10 border border-purple-500/20 rounded-md text-sm">
-        <Sparkles className="!w-[16px] !h-[16px] text-purple-600 shrink-0 mt-0.5" />
-        <span className="text-foreground">
-          <span className="font-medium">Distribution Deal:</span> Select 2 of High Resolution, DDP Image, or ISRC for a
-          song to get {distributionDeal?.discountPercentage ?? 10}% off each. Select all 3 for the Premium Distribution
-          Deal at {premiumDistributionDeal?.discountPercentage ?? 25}% off!
-          {songsWithDistributionDeal > 0 && (
-            <span className="ml-1 text-purple-600 font-medium">
-              ({songsWithDistributionDeal} song{songsWithDistributionDeal !== 1 ? "s" : ""} with deal applied!)
-            </span>
-          )}
-        </span>
-      </div> */}
-
       <div className="space-y-4">
         {DELIVERY_OPTIONS_CONFIG.map((option) => {
           const selectedSongs = deliveryOptions[option.key]
@@ -270,7 +256,7 @@ export function MasteringDeliveryStep({
 
           const optionPrice = option.fixedPrice ?? songs.map(
             song => option.getPrice ? option.getPrice(song) : 0
-          ).reduce((prev, cur) => prev + cur, 0)
+          ).reduce((prev, cur) => prev + cur, 0)/Math.max(songs.length, 1)
 
           const finalPrice = optionPrice * (1 - totalDiscount/100)      
           const addonCost =  optionPrice * selectedCount * (1 - totalDiscount/100)
@@ -366,11 +352,11 @@ export function MasteringDeliveryStep({
 
               {isExpanded && (
                 <div className="border-t border-border p-4 bg-muted/30 flex flex-col gap-2 lg:items-start items-center">
-                  <div className="flex lg:flex-row lg:my-0 my-2 lg:gap-0 gap-4 flex-col items-center justify-between mb-3">
+                  <div className="w-full flex lg:flex-row lg:my-0 my-2 lg:gap-0 gap-4 flex-col items-center justify-between mb-3">
                     <span className="text-sm lg:text-left text-center text-muted-foreground">
                       Select songs to apply {option.label.toLowerCase()}:
                     </span>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 lg:ml-auto lg:w-fit w-full lg:items-start items-center justify-center">
                       <Button
                         variant="outline"
                         size="sm"
@@ -396,30 +382,30 @@ export function MasteringDeliveryStep({
                     </div>
                   </div>
                   {!isRushDelivery && selectedCount > 0 && selectedCount < 5 && (
-                    <div className="text-xs text-muted-foreground mb-3 p-2 bg-muted rounded lg:w-fit w-full lg:text-left text-center">
+                    <div className="text-xs text-muted-foreground mb-3 p-2 bg-muted rounded w-full text-center">
                       Select {5 - selectedCount} more song{5 - selectedCount !== 1 ? "s" : ""} for{" "}
                       {fivePlus?.discountPercentage ?? 15}% volume discount
                     </div>
                   )}
                   {!isRushDelivery && selectedCount >= 5 && selectedCount < 10 && (
-                    <div className="text-xs text-green-600 mb-3 p-2 bg-green-500/10 rounded lg:w-fit w-full lg:text-left text-center">
+                    <div className="text-xs text-green-600 mb-3 p-2 bg-green-500/10 rounded w-full text-center">
                       {fivePlus?.discountPercentage ?? 15}% volume discount applied! Select {10 - selectedCount} more
                       song{10 - selectedCount !== 1 ? "s" : ""} for {tenPlus?.discountPercentage ?? 25}% discount
                     </div>
                   )}
                   {!isRushDelivery && selectedCount >= 10 && (
-                    <div className="text-xs text-green-600 mb-3 p-2 bg-green-500/10 rounded lg:w-fit w-full lg:text-left text-center">
+                    <div className="text-xs text-green-600 mb-3 p-2 bg-green-500/10 rounded w-full text-center">
                       {tenPlus?.discountPercentage ?? 25}% maximum volume discount applied!
                     </div>
                   )}
                   {option.isDistributionOption && standardDistroSongs.length > 0 && distributionDeal && (
-                    <span className="flex lg:flex-row flex-col lg:gap-0 gap-2 text-xs bg-purple-500/10 text-purple-600 mb-3 p-2 rounded flex items-center gap-1 lg:w-fit w-full lg:text-left text-center">
+                    <span className="flex lg:flex-row lg:justify-center flex-col gap-2 text-xs bg-purple-500/10 text-purple-600 mb-3 p-2 rounded flex items-center gap-1 w-full text-center">
                       <Sparkles className="!w-[16px] !h-[16px]" />
                       {standardDistroSongs.length} songs with {distributionDeal.name} applied for -{distributionDeal?.discountPercentage}% off!
                     </span>
                   )}
                   {option.isDistributionOption && premiumDistroSongs.length > 0 && premiumDistributionDeal && (
-                    <span className="flex lg:flex-row flex-col lg:gap-0 gap-2 text-xs bg-purple-500/10 text-purple-600 mb-3 p-2 rounded flex items-center gap-1 lg:w-fit w-full lg:text-left text-center">
+                    <span className="flex lg:flex-row lg:justify-center flex-col gap-2 text-xs bg-purple-500/10 text-purple-600 mb-3 p-2 rounded flex items-center gap-1 w-full text-center">
                       <Sparkles className="!w-[16px] !h-[16px]" />
                       {premiumDistroSongs.length} songs with {premiumDistributionDeal.name} applied for -{premiumDistributionDeal?.discountPercentage}% off!
                     </span>
