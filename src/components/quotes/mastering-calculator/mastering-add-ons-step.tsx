@@ -369,7 +369,7 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
                       <span className="px-2 py-0.5 bg-primary/10 text-primary text-xs lg:rounded-full rounded-md w-fit flex items-center gap-1">
                         {selectedCount} song{selectedCount !== 1 ? "s" : ""} selected
                         {hasAnyDiscount && (
-                          <span className="text-green-600">
+                          <span className="text-green-600 ml-1">
                             ({volumeDiscountPercentage > 0 && `${volumeDiscountPercentage}%`}
                             {volumeDiscountPercentage > 0 && isMultimedia && multimediaDealDiscount > 0 && " + "}
                             {isMultimedia && multimediaDealDiscount > 0 && `${multimediaDealDiscount}%`} off)
@@ -498,7 +498,7 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
                       {hasDiscount && 
                         <>
                           {" "}
-                          <span className="text-green-600">({volumeDiscountPercentage}% off)</span>
+                          <span className="text-green-600 ml-1">({volumeDiscountPercentage}% off)</span>
                         </>
                       }
                     </span>
@@ -665,13 +665,13 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
             className="w-full flex lg:flex-row flex-col lg:items-center lg:gap-0 gap-4 justify-between p-4 hover:bg-muted/50 transition-colors text-left"
           >
             <div className="flex-1">
-              <div className="flex items-center gap-2">
+              <div className="flex lg:flex-row flex-col lg:items-center gap-2">
                 <span className="text-base font-medium">Additional Project Revisions</span>
                 {revisionCount > 0 && (
-                  <span className="px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full flex items-center gap-1">
+                  <span className="px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full w-fit">
                     {revisionCount} revision{revisionCount !== 1 ? "s" : ""}
                     {revisionDiscountPercent > 0 && (
-                      <span className="text-green-600">({revisionDiscountPercent}% off)</span>
+                      <span className="text-green-600 ml-1">({revisionDiscountPercent}% off)</span>
                     )}
                   </span>
                 )}
@@ -800,12 +800,12 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
             className="w-full flex lg:flex-row flex-col lg:items-center lg:gap-0 gap-4 justify-between p-4 hover:bg-muted/50 transition-colors text-left"
           >
             <div className="flex-1">
-              <div className="flex items-center gap-2">
+              <div className="flex lg:flex-row flex-col lg:items-center lg:gap-2 gap-4">
                 <span className="text-base font-medium">
                   {virtualSessionOption?.name ?? "Virtual In-Person Session"}
                 </span>
                 {addOns.virtualSessionHours > 0 && (
-                  <span className="px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full">
+                  <span className="px-2 py-0.5 bg-primary/10 text-primary text-xs lg:rounded-full rounded-md w-fit flex items-center gap-1">
                     {addOns.virtualSessionHours} hour{addOns.virtualSessionHours !== 1 ? "s" : ""} booked
                   </span>
                 )}
@@ -851,7 +851,7 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
                   className="w-36 bg-black/80"
                 />
                 {addOns.virtualSessionHours > 0 && (
-                  <div className="flex items-center gap-2">
+                  <div className="flex lg:flex-row flex-col items-center gap-2">
                     <span className="text-sm font-medium">
                       Total: <span className="text-primary">${virtualSessionCost}</span>
                     </span>
