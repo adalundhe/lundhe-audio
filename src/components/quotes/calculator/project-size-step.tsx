@@ -381,7 +381,7 @@ export function ProjectSizeStep({ songs, setSongs, pricingData }: ProjectSizeSte
                         id={`tracks-${song.id}`}
                         type="number"
                         min={1}
-                        max={200}
+                        max={500}
                         value={getInputValue(song.id, "tracks", song.tracks)}
                         onChange={(e) => handleNumberInputChange(song.id, "tracks", e.target.value, 1, 200, 1)}
                         onBlur={() => handleNumberInputBlur(song.id, "tracks", 1, 1)}
