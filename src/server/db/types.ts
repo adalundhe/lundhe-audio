@@ -28,6 +28,7 @@ export type ProductOption = {
     category: "addon" | "delivery" | "track_fee" | "length_fee"
     priceType: "flat" | "per_ten_tracks" | "multiplier" | "per_hour"
     productType: 'mixing' | 'mastering' | "mixing-and-mastering"
+    perCount: number
     minThreshold: number | null
     maxThreshold: number | null
 }

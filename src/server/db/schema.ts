@@ -78,6 +78,7 @@ export const productOptions = createTable("product_options", {
   category: text("category", { enum: ["addon", "delivery", "track_fee", "length_fee"] }).notNull(),
   priceType: text("price_type", { enum: ["flat", "per_ten_tracks", "multiplier", "per_hour"] }).notNull(),
   productType: text("productType", { enum: ["mixing", "mastering", "mixing-and-mastering"]}).notNull(),
+  perCount: integer("per_count").notNull(),
   minThreshold: integer("min_threshold"),
   maxThreshold: integer("max_threshold"),
   created_timestamp: text('created_timestamp').notNull().$defaultFn(() => new Date().toString()),

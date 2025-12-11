@@ -10,6 +10,7 @@ import { getVolumeDiscountInfo, getIncludedRevisions } from "~/lib/mixing/pricin
 import { Card, CardContent } from "~/components/ui/card"
 import { meetsThreshold } from "~/lib/meets-threshold"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/ui/tooltip"
+import { ProductOption } from "~/server/db/types"
 
 type ProjectSizeStepProps = {
   songs: Song[]
@@ -35,7 +36,12 @@ export function ProjectSizeStep({ songs, setSongs, pricingData }: ProjectSizeSte
     .filter((o) => o.category === "length_fee")
     .sort((a, b) => (a.minThreshold ?? 0) - (b.minThreshold ?? 0))
 
-  const HIGH_TRACK_THRESHOLD = 50
+  const trackFeeOption = options.find(o => o.id === "track_fee")
+  const highTrackFeeOption = options.find(o => o.id === "high_track_fee")
+  const highTrackFeeCost = highTrackFeeOption?.price ?? 150
+  const highTrackFeeThreshold = trackFeeOption?.maxThreshold ?? 100
+  const highTrackPerCount = highTrackFeeOption?.perCount ?? 25
+  const highTrackCountLimit = highTrackFeeOption?.maxThreshold ?? 500
 
   // Determine which deal is active
   const songCount = songs.length
@@ -137,7 +143,13 @@ export function ProjectSizeStep({ songs, setSongs, pricingData }: ProjectSizeSte
     }
     return actualValue.toString()
   }
-  const hasHighTrackCount = (trackCount: number) => trackCount > HIGH_TRACK_THRESHOLD
+  const hasHighTrackCount = (trackCount: number, options: ProductOption[]) => {
+    const highTrackFeeOption = options.find(o => o.id === "high_track_fee")
+    if (!highTrackFeeOption) return false;
+
+    return meetsThreshold(trackCount, highTrackFeeOption.minThreshold, highTrackFeeOption.maxThreshold)
+
+  }
 
   const hasExtendedLengthFee = (minutes: number, seconds: number) => {
     const totalMinutes = minutes + seconds / 60
@@ -184,7 +196,7 @@ export function ProjectSizeStep({ songs, setSongs, pricingData }: ProjectSizeSte
                 <li>
                   • 50+ tracks:{" "}
                   <span className="text-foreground font-medium">${highTrackProduct?.price ?? 500} + $100</span> per
-                  additional 10 tracks
+                  additional {highTrackPerCount} tracks
                 </li>
               </ul>
             </div>
@@ -294,7 +306,7 @@ export function ProjectSizeStep({ songs, setSongs, pricingData }: ProjectSizeSte
       <div className="space-y-4">
         {songs.map((song, index) => {
           const isCollapsed = collapsedSongs.has(song.id)
-          const isHighTrackCount = hasHighTrackCount(song.tracks)
+          const isHighTrackCount = hasHighTrackCount(song.tracks, options)
           const isExtendedLength = hasExtendedLengthFee(song.minutes, song.seconds)
           const lengthFee = getExtendedLengthFee(song.minutes, song.seconds)
 
@@ -348,9 +360,9 @@ export function ProjectSizeStep({ songs, setSongs, pricingData }: ProjectSizeSte
                     <div className="flex items-center gap-2 p-3 bg-primary/10 border border-primary/20 rounded-md text-sm">
                       <Info className="!w-[16px] !h-[16px] text-primary shrink-0" />
                       <span className="text-foreground">
-                        <strong>High track count fee applies.</strong> Songs with more than {HIGH_TRACK_THRESHOLD}{" "}
-                        tracks incur a higher base rate of ${highTrackProduct?.price ?? 500} plus $100 for every
-                        additional 10 tracks.
+                        <strong>High track count fee applies.</strong> Songs with more than {highTrackFeeThreshold}{" "}
+                        tracks incur a higher base rate of ${highTrackProduct?.price ?? 500} plus ${highTrackFeeCost} for every
+                        additional {highTrackPerCount} tracks.
                       </span>
                     </div>
                   )}
@@ -383,7 +395,7 @@ export function ProjectSizeStep({ songs, setSongs, pricingData }: ProjectSizeSte
                         min={1}
                         max={500}
                         value={getInputValue(song.id, "tracks", song.tracks)}
-                        onChange={(e) => handleNumberInputChange(song.id, "tracks", e.target.value, 1, 200, 1)}
+                        onChange={(e) => handleNumberInputChange(song.id, "tracks", e.target.value, 1, highTrackCountLimit, 1)}
                         onBlur={() => handleNumberInputBlur(song.id, "tracks", 1, 1)}
                       />
                     </div>

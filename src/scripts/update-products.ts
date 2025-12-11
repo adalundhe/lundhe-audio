@@ -61,6 +61,7 @@ export const productOptions = createTable("product_options", {
   price: real("price").notNull(),
   category: text("category", { enum: ["addon", "delivery", "track_fee", "length_fee"] }).notNull(),
   priceType: text("price_type", { enum: ["flat", "per_ten_tracks", "multiplier", "per_hour"] }).notNull(),
+  perCount: integer("per_count").notNull(),
   minThreshold: integer("min_threshold"),
   maxThreshold: integer("max_threshold"),
   productType: text("productType", { enum: ["mixing", "mastering"]}).notNull(),

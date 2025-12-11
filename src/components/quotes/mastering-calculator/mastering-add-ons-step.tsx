@@ -8,7 +8,7 @@ import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
 import type { MasteringPricingData } from "~/lib/mastering/pricing-types"
 import type { MasteringSong, MasteringAddOns } from "~/lib//mastering/mastering-pricing-calculator"
-import { getOptionVolumeDiscountInfo } from "~/lib/mastering/mastering-pricing-calculator"
+import { getOptionVolumeDiscountInfo, getStemMasteringPrice } from "~/lib/mastering/mastering-pricing-calculator"
 import { meetsThreshold } from "~/lib/meets-threshold"
 import { ChevronDown, ChevronUp, Check, Info, Sparkles, RotateCcw } from "lucide-react"
 import { Discount } from "~/server/db/types"
@@ -66,14 +66,6 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
   const revisionOption = pricingData.options.find((o) => o.id === 'mastering_revision')
   const virtualSessionOption = pricingData.options.find((o) => o.id === "virtual_session")
 
-  // Stem mastering tiers
-  const stemTiers = [
-    pricingData.options.find((o) => o.id === "stem_master_2_8"),
-    pricingData.options.find((o) => o.id === "stem_master_9_16"),
-    pricingData.options.find((o) => o.id === "stem_master_17_24"),
-    pricingData.options.find((o) => o.id === "stem_master_25_32"),
-  ].filter(Boolean)
-
   const vinylPrice = vinylOption?.price ?? 50
   const streamingPrice = streamingOption?.price ?? 25
   const redbookPrice = redbookOption?.price ?? 25
@@ -128,14 +120,6 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
   // Check if add-on is part of multimedia bundle
   const isMultimediaAddon = (addOnKey: string) => {
     return ["vinylMasteringSongs", "streamingMasteringSongs", "redbookMasteringSongs"].includes(addOnKey)
-  }
-
-  const getStemPrice = (stemCount: number): number => {
-    if (stemCount >= 25) return stemTiers.find((t) => t?.id === "stem_master_25_32")?.price ?? 200
-    if (stemCount >= 17) return stemTiers.find((t) => t?.id === "stem_master_17_24")?.price ?? 150
-    if (stemCount >= 9) return stemTiers.find((t) => t?.id === "stem_master_9_16")?.price ?? 100
-    if (stemCount >= 2) return stemTiers.find((t) => t?.id === "stem_master_2_8")?.price ?? 50
-    return 0
   }
 
   const getStemTierName = (stemCount: number): string => {
@@ -518,7 +502,7 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
 
                   const stemsPrice = songs.map(song => {
                     const stemCount = addOns.stemMasteringSongs[song.id] ?? 2
-                    return getStemPrice(stemCount)
+                    return getStemMasteringPrice(pricingData.options, stemCount)
                   }).reduce((prev, cur) => prev + cur, 0)
                   
 
@@ -582,18 +566,15 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
                   )}
               <div className="bg-muted/50 p-3 rounded-md mb-4">
                 <p className="text-sm font-medium mb-2">Stem Pricing Tiers:</p>
-                <div className="lg:grid grid-cols-2 lg:gap-2 text-sm text-muted-foreground flex flex-col">
-                  <span>2-8 stems: $50/song</span>
-                  <span>9-16 stems: $100/song</span>
-                  <span>17-24 stems: $150/song</span>
-                  <span>25-32 stems: $200/song</span>
+                <div className="text-sm text-muted-foreground flex flex-col">
+                  <span>$50 per six song tracks</span>
                 </div>
               </div>
               <div className="space-y-2">
                 {songs.map((song, index) => {
                   const isSelected = song.id in addOns.stemMasteringSongs
                   const stemCount = addOns.stemMasteringSongs[song.id] ?? 2
-                  const stemPrice = getStemPrice(stemCount)
+                  const stemPrice =  getStemMasteringPrice(pricingData.options, stemCount)
 
                   return (
                     <div

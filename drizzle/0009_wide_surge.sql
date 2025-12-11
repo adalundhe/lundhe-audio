@@ -1,0 +1,1 @@
+ALTER TABLE `product_options` ADD `per_count` integer NOT NULL;

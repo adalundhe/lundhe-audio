@@ -108,78 +108,58 @@ export function getIncludedRevisions(songCount: number, discounts: Discount[]): 
 }
 
 // Calculate base price for a song based on track count
-function calculateSongBasePrice(
+export function calculateSongBasePrice(
   products: Product[],
   options: ProductOption[],
   trackCount: number,
 ): { price: number; productId: string; productName: string; trackFee: number; isHighTrackCount: boolean } {
-  const HIGH_TRACK_THRESHOLD = 50
 
-  if (trackCount > HIGH_TRACK_THRESHOLD) {
-    // High track count pricing
-    const highTrackProduct = findProduct(products, "high_track_count_mix")
-    const basePrice = highTrackProduct?.price ?? 500
+  const highTrackFeeOption = findOption(options, "high_track_fee")
+  const trackFeeOption = findOption(options, "track_fee")
+  const highTrackCountMix = findProduct(products, "high_track_count_mix")
+  const songMix = findProduct(products, "song_mix")
 
-    // Calculate additional track fees for high track count
-    const trackFeeOptions = findOptionsByCategory(options, "track_fee").filter((o) =>
-      o.id.startsWith("track_fee_high_"),
-    )
-
-    let trackFee = 0
-    for (const opt of trackFeeOptions) {
-      if (meetsThreshold(trackCount, opt.minThreshold, opt.maxThreshold)) {
-        trackFee = opt.price
-        break
-      }
-    }
-
-    // If beyond defined tiers, extrapolate
-    if (trackCount > 100) {
-      const additionalTiers = Math.ceil((trackCount - 100) / 10)
-      trackFee = 500 + additionalTiers * 100
-    }
-
+  if (!trackFeeOption || !highTrackFeeOption){
     return {
-      price: basePrice,
-      productId: "high_track_count_mix",
-      productName: highTrackProduct?.name ?? "High Track Count Mix",
-      trackFee,
-      isHighTrackCount: true,
+      price: songMix?.price ?? 100,
+      productId: songMix?.id ?? "song_mix",
+      productName: songMix?.name ?? "Song Mix",
+      trackFee: 0,
+      isHighTrackCount: false
     }
-  } else {
-    // Standard pricing
-    const songMixProduct = findProduct(products, "song_mix")
-    const basePrice = songMixProduct?.price ?? 100
+  }
 
-    // Calculate additional track fees
-    const trackFeeOptions = findOptionsByCategory(options, "track_fee").filter(
-      (o) => !o.id.startsWith("track_fee_high_"),
-    )
+  const isHighTrackCount = meetsThreshold(trackCount, highTrackFeeOption.minThreshold , highTrackFeeOption.maxThreshold)
 
-    let trackFee = 0
-    if (trackCount > 10) {
-      // Find the right tier
-      for (const opt of trackFeeOptions) {
-        if (meetsThreshold(trackCount, opt.minThreshold, opt.maxThreshold)) {
-          trackFee = opt.price
-          break
-        }
-      }
+  // let trackFeeCost = isHighTrackCount ? highTrackFeeOption.price : isTrackFee ? trackFeeOption.price : 0
 
-      // If beyond defined tiers, extrapolate
-      if (trackCount > 50 && trackFee === 0) {
-        const additionalTiers = Math.ceil((trackCount - 10) / 10)
-        trackFee = additionalTiers * 75
-      }
-    }
+  let basePrice = isHighTrackCount ? (
+    highTrackCountMix?.price ?? 500
+  ) : songMix?.price ?? 100
 
-    return {
-      price: basePrice,
-      productId: "song_mix",
-      productName: songMixProduct?.name ?? "Song Mix",
-      trackFee,
-      isHighTrackCount: false,
-    }
+  const tracksOverHighTrackFeeLimit = isHighTrackCount ? trackCount - (highTrackFeeOption.minThreshold ?? 101) : 0
+  const tracksFeeTracksCount = isHighTrackCount ? 0 : (trackCount - tracksOverHighTrackFeeLimit)
+
+  let trackFeeCost = (trackFeeOption.price * Math.floor(tracksFeeTracksCount/trackFeeOption.perCount)) + (highTrackFeeOption.price * Math.floor(tracksOverHighTrackFeeLimit/highTrackFeeOption.perCount))
+
+  return {
+    price: basePrice,
+    productId: isHighTrackCount ? (
+      highTrackCountMix?.id
+      ?? "high_track_count_mix"
+    ) : (
+      songMix?.id
+      ?? "song_mix"
+    ),
+    productName: isHighTrackCount ? (
+      highTrackCountMix?.name
+      ?? "High Track Count Mix"
+    ) : (
+      songMix?.name
+      ?? "Song Mix"
+    ),
+    trackFee: trackFeeCost,
+    isHighTrackCount: isHighTrackCount,
   }
 }
 
