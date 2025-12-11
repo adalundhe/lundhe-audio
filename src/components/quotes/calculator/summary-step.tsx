@@ -2,6 +2,7 @@
 
 import type { QuoteData, PricingData } from "~/lib/mixing/pricing-types"
 import { Music, Clock, Layers, CheckCircle2, AlertCircle, Sparkles, Gift, RotateCcw } from "lucide-react"
+import { ReactNode } from "react"
 
 type SummaryStepProps = {
   quoteData: QuoteData
@@ -155,8 +156,10 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
                   Applied to:{" "}
                   {songs
                     .filter((s) => s.addOns.vocalProduction)
-                    .map((s) => s.title)
-                    .join(", ")}
+                    .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
+                      {s.title}
+                    </div>
+                  ).reduce((prev, curr) => [prev, ', ', curr])}
                 </div>
               </div>
             </div>
@@ -170,8 +173,10 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
                   Applied to:{" "}
                   {songs
                     .filter((s) => s.addOns.drumReplacement)
-                    .map((s) => s.title)
-                    .join(", ")}
+                    .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
+                      {s.title}
+                    </div>
+                  ).reduce((prev, curr) => [prev, ', ', curr])}
                 </div>
               </div>
             </div>
@@ -185,8 +190,10 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
                   Applied to:{" "}
                   {songs
                     .filter((s) => s.addOns.guitarReamp)
-                    .map((s) => s.title)
-                    .join(", ")}
+                    .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
+                      {s.title}
+                    </div>
+                  ).reduce((prev, curr) => [prev, ', ', curr])}
                 </div>
               </div>
             </div>
@@ -220,8 +227,10 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
                   Applied to:{" "}
                   {songs
                     .filter((s) => s.delivery.highResMixdown)
-                    .map((s) => s.title)
-                    .join(", ")}
+                    .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
+                      {s.title}
+                    </div>
+                  ).reduce((prev, curr) => [prev, ', ', curr])}
                 </div>
               </div>
             </div>
@@ -235,8 +244,10 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
                   Applied to:{" "}
                   {songs
                     .filter((s) => s.delivery.filmMixdown)
-                    .map((s) => s.title)
-                    .join(", ")}
+                    .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
+                      {s.title}
+                    </div>
+                  ).reduce((prev, curr) => [prev, ', ', curr])}
                 </div>
               </div>
             </div>
@@ -250,8 +261,10 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
                   Applied to:{" "}
                   {songs
                     .filter((s) => s.delivery.mixedStems)
-                    .map((s) => s.title)
-                    .join(", ")}
+                    .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
+                      {s.title}
+                    </div>
+                  ).reduce((prev, curr) => [prev, ', ', curr])}
                 </div>
               </div>
             </div>
@@ -264,9 +277,11 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
                 <div className="text-muted-foreground text-xs mt-1">
                   Applied to:{" "}
                   {songs
-                    .filter((s) => s.delivery.extendedArchival)
-                    .map((s) => s.title)
-                    .join(", ")}
+                    .filter((s) => s.delivery.highResMixdown)
+                    .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
+                      {s.title}
+                    </div>
+                  ).reduce((prev, curr) => [prev, ', ', curr])}
                 </div>
               </div>
             </div>
@@ -280,8 +295,10 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
                   Applied to:{" "}
                   {songs
                     .filter((s) => s.delivery.rushDelivery)
-                    .map((s) => s.title)
-                    .join(", ")}
+                    .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
+                      {s.title}
+                    </div>
+                  ).reduce((prev, curr) => [prev, ', ', curr])}
                 </div>
               </div>
             </div>
@@ -296,7 +313,7 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
           {songs.map((song) => (
             <div key={song.songId} className="flex justify-between text-sm">
               <span className="text-muted-foreground">
-                <div className="lg:max-w-[440px] max-w-[220px] text-nowrap overflow-hidden text-ellipsis">
+                <div className="lg:max-w-[440px] max-w-[200px] text-nowrap overflow-hidden text-ellipsis">
                   <span>{song.title}</span>
                 </div>
                 ({song.tracks} tracks)

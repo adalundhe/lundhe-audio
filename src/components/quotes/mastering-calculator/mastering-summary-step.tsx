@@ -3,6 +3,7 @@
 import type { MasteringPricingData } from "~/lib/mastering/pricing-types"
 import type { MasteringQuoteData } from "~/lib/mastering/pricing-types"
 import { Music, Clock, CheckCircle2, AlertCircle, Sparkles, Gift, RotateCcw } from "lucide-react"
+import { ReactNode } from "react"
 
 type MasteringSummaryStepProps = {
   quoteData: MasteringQuoteData
@@ -157,8 +158,10 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
                   Applied to:{" "}
                   {songs
                     .filter((s) => s.addOns.vinylMastering)
-                    .map((s) => s.title)
-                    .join(", ")}
+                    .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
+                      {s.title}
+                    </div>
+                  ).reduce((prev, curr) => [prev, ', ', curr])}
                 </div>
               </div>
             </div>
@@ -172,8 +175,10 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
                   Applied to:{" "}
                   {songs
                     .filter((s) => s.addOns.streamingMastering)
-                    .map((s) => s.title)
-                    .join(", ")}
+                    .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
+                      {s.title}
+                    </div>
+                  ).reduce((prev, curr) => [prev, ', ', curr])}
                 </div>
               </div>
             </div>
@@ -187,8 +192,10 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
                   Applied to:{" "}
                   {songs
                     .filter((s) => s.addOns.redbookMastering)
-                    .map((s) => s.title)
-                    .join(", ")}
+                    .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
+                      {s.title}
+                    </div>
+                  ).reduce((prev, curr) => [prev, ', ', curr])}
                 </div>
               </div>
             </div>
@@ -202,8 +209,10 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
                   Applied to:{" "}
                   {songs
                     .filter((s) => s.addOns.stemMastering)
-                    .map((s) => `${s.title} (${s.addOns.stemCount} stems)`)
-                    .join(", ")}
+                    .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
+                      {s.title}
+                    </div>
+                  ).reduce((prev, curr) => [prev, ', ', curr])}
                 </div>
               </div>
             </div>
@@ -217,8 +226,10 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
                   Applied to:{" "}
                   {songs
                     .filter((s) => s.addOns.restorationRemastering)
-                    .map((s) => s.title)
-                    .join(", ")}
+                    .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
+                      {s.title}
+                    </div>
+                  ).reduce((prev, curr) => [prev, ', ', curr])}
                 </div>
               </div>
             </div>
@@ -251,8 +262,10 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
                   Applied to:{" "}
                   {songs
                     .filter((s) => s.delivery.highResMaster)
-                    .map((s) => s.title)
-                    .join(", ")}
+                    .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
+                      {s.title}
+                    </div>
+                  ).reduce((prev, curr) => [prev, ', ', curr])}
                 </div>
               </div>
             </div>
@@ -266,8 +279,10 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
                   Applied to:{" "}
                   {songs
                     .filter((s) => s.delivery.ddpImage)
-                    .map((s) => s.title)
-                    .join(", ")}
+                    .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
+                      {s.title}
+                    </div>
+                  ).reduce((prev, curr) => [prev, ', ', curr])}
                 </div>
               </div>
             </div>
@@ -281,8 +296,10 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
                   Applied to:{" "}
                   {songs
                     .filter((s) => s.delivery.isrcEncoding)
-                    .map((s) => s.title)
-                    .join(", ")}
+                    .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
+                      {s.title}
+                    </div>
+                  ).reduce((prev, curr) => [prev, ', ', curr])}
                 </div>
               </div>
             </div>
@@ -296,8 +313,10 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
                   Applied to:{" "}
                   {songs
                     .filter((s) => s.delivery.rushDelivery)
-                    .map((s) => s.title)
-                    .join(", ")}
+                    .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
+                      {s.title}
+                    </div>
+                  ).reduce((prev, curr) => [prev, ', ', curr])}
                 </div>
               </div>
             </div>
@@ -312,7 +331,7 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
           {songs.map((song) => (
             <div key={song.songId} className="flex justify-between text-sm">
               <span className="text-muted-foreground">
-                <div className="lg:max-w-[440px] max-w-[220px] text-nowrap overflow-hidden text-ellipsis">
+                <div className="lg:max-w-[440px] max-w-[200px] text-nowrap overflow-hidden text-ellipsis">
                   <span>{song.title}</span>
                 </div>
                 {song.isExtendedLength && (
