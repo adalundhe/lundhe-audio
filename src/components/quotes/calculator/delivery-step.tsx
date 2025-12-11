@@ -387,7 +387,9 @@ export function DeliveryStep({ deliveryOptions, setDeliveryOptions, songs, prici
                             >
                               {isSelected && <Check className="!w-[16px] !h-[16px] text-primary-foreground" />}
                             </div>
-                            <span className="text-sm font-medium">{song.title || `Song ${index + 1}`}</span>
+                            <div className="lg:max-w-[320px] max-w-[72px] text-nowrap overflow-hidden text-ellipsis">
+                              <span className="text-sm font-medium">{song.title || `Song ${index + 1}`}</span>
+                            </div>
 
                             <span className="text-xs text-muted-foreground">
                               ({song.minutes}:{song.seconds.toString().padStart(2, "0")})
