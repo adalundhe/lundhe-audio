@@ -177,12 +177,16 @@ function applyDiscount(price: number, discountPercentage: number): number {
   return price * (1 - discountPercentage / 100)
 }
 
-function getStemMasteringPrice(options: ProductOption[], stemCount: number): number {
-  if (stemCount >= 25) return findOption(options, "stem_master_25_32")?.price ?? 200
-  if (stemCount >= 17) return findOption(options, "stem_master_17_24")?.price ?? 150
-  if (stemCount >= 9) return findOption(options, "stem_master_9_16")?.price ?? 100
-  if (stemCount >= 2) return findOption(options, "stem_master_2_8")?.price ?? 50
-  return 0
+export function getStemMasteringPrice(options: ProductOption[], stemCount: number): number {
+
+  const stemMasterOption = findOption(options, "stem_master")
+
+  if (!stemMasterOption){
+    return 0
+  }
+
+
+  return stemMasterOption.price * Math.max(Math.ceil(stemCount/stemMasterOption.perCount), 1)
 }
 
 // Calculate base price for mastering based on song length

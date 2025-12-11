@@ -1,102 +1,27 @@
 [
   {
-    "id": "track_fee_11_20",
-    "name": "Track Fee (11-20)",
-    "description": "Additional fee for songs with 11-20 tracks",
+    "id": "track_fee",
+    "name": "Track Fee",
+    "description": "Additional fee for songs with 50-100 tracks",
     "price": 75,
     "priceType": "flat",
     "category": "track_fee",
     "productType": "mixing",
+    "perCount": 10,
     "minThreshold": 11,
-    "maxThreshold": 20
-  },
-  {
-    "id": "track_fee_21_30",
-    "name": "Track Fee (21-30)",
-    "description": "Additional fee for songs with 21-30 tracks",
-    "price": 150,
-    "priceType": "flat",
-    "category": "track_fee",
-    "productType": "mixing",
-    "minThreshold": 21,
-    "maxThreshold": 30
-  },
-  {
-    "id": "track_fee_31_40",
-    "name": "Track Fee (31-40)",
-    "description": "Additional fee for songs with 31-40 tracks",
-    "price": 225,
-    "priceType": "flat",
-    "category": "track_fee",
-    "productType": "mixing",
-    "minThreshold": 31,
-    "maxThreshold": 40
-  },
-  {
-    "id": "track_fee_41_50",
-    "name": "Track Fee (41-50)",
-    "description": "Additional fee for songs with 41-50 tracks",
-    "price": 300,
-    "priceType": "flat",
-    "category": "track_fee",
-    "productType": "mixing",
-    "minThreshold": 41,
     "maxThreshold": 50
   },
   {
-    "id": "track_fee_high_51_60",
-    "name": "High Track Fee (51-60)",
-    "description": "Additional fee for high track count songs with 51-60 tracks",
+    "id": "high_track_fee",
+    "name": "High Track Fee",
+    "description": "Additional fee for high track count songs with 100+ tracks",
     "price": 100,
     "priceType": "flat",
     "category": "track_fee_high",
     "productType": "mixing",
+    "perCount": 25,
     "minThreshold": 51,
-    "maxThreshold": 60
-  },
-  {
-    "id": "track_fee_high_61_70",
-    "name": "High Track Fee (61-70)",
-    "description": "Additional fee for high track count songs with 61-70 tracks",
-    "price": 200,
-    "priceType": "flat",
-    "category": "track_fee_high",
-    "productType": "mixing",
-    "minThreshold": 61,
-    "maxThreshold": 70
-  },
-  {
-    "id": "track_fee_high_71_80",
-    "name": "High Track Fee (71-80)",
-    "description": "Additional fee for high track count songs with 71-80 tracks",
-    "price": 300,
-    "priceType": "flat",
-    "category": "track_fee_high",
-    "productType": "mixing",
-    "minThreshold": 71,
-    "maxThreshold": 80
-  },
-  {
-    "id": "track_fee_high_81_90",
-    "name": "High Track Fee (81-90)",
-    "description": "Additional fee for high track count songs with 81-90 tracks",
-    "price": 400,
-    "priceType": "flat",
-    "category": "track_fee_high",
-    "productType": "mixing",
-    "minThreshold": 81,
-    "maxThreshold": 90
-  },
-  {
-    "id": "track_fee_high_91_100",
-    "name": "High Track Fee (91-100)",
-    "description": "Additional fee for high track count songs with 91-100 tracks",
-    "price": 500,
-    "priceType": "flat",
-    "category": "track_fee_high",
-    "productType": "mixing",
-    "minThreshold": 91,
-    "maxThreshold": 100
+    "maxThreshold": 500
   },
   {
     "id": "length_fee_5min",
@@ -106,6 +31,7 @@
     "priceType": "flat",
     "category": "length_fee",
     "productType": "mixing",
+    "perCount": 0,
     "minThreshold": 5,
     "maxThreshold": 10
   },
@@ -117,6 +43,7 @@
     "priceType": "flat",
     "category": "length_fee",
     "productType": "mixing",
+    "perCount": 0,
     "minThreshold": 10,
     "maxThreshold": 15
   },
@@ -128,6 +55,7 @@
     "priceType": "flat",
     "category": "length_fee",
     "productType": "mixing",
+    "perCount": 0,
     "minThreshold": 15,
     "maxThreshold": null
   },
@@ -139,6 +67,7 @@
     "priceType": "flat",
     "category": "addon",
     "productType": "mixing",
+    "perCount": 0,
     "minThreshold": null,
     "maxThreshold": null
   },
@@ -150,6 +79,7 @@
     "priceType": "flat",
     "category": "addon",
     "productType": "mixing",
+    "perCount": 0,
     "minThreshold": null,
     "maxThreshold": null
   },
@@ -161,6 +91,7 @@
     "priceType": "flat",
     "category": "addon",
     "productType": "mixing",
+    "perCount": 0,
     "minThreshold": null,
     "maxThreshold": null
   },
@@ -172,6 +103,7 @@
     "priceType": "per_hour",
     "category": "addon",
     "productType": "mixing",
+    "perCount": 0,
     "minThreshold": 4,
     "maxThreshold": null
   },
@@ -183,6 +115,7 @@
     "priceType": "flat",
     "category": "delivery",
     "productType": "mixing",
+    "perCount": 0,
     "minThreshold": null,
     "maxThreshold": null
   },
@@ -194,6 +127,7 @@
     "priceType": "flat",
     "category": "delivery",
     "productType": "mixing",
+    "perCount": 0,
     "minThreshold": null,
     "maxThreshold": null
   },
@@ -205,6 +139,7 @@
     "priceType": "per_ten_tracks",
     "category": "delivery",
     "productType": "mixing",
+    "perCount": 0,
     "minThreshold": null,
     "maxThreshold": null
   },
@@ -216,6 +151,7 @@
     "priceType": "flat",
     "category": "delivery",
     "productType": "mixing",
+    "perCount": 0,
     "minThreshold": null,
     "maxThreshold": null
   },
@@ -227,6 +163,7 @@
     "priceType": "multiplier",
     "category": "delivery",
     "productType": "mixing",
+    "perCount": 0,
     "minThreshold": null,
     "maxThreshold": null
   },
@@ -238,6 +175,7 @@
     "priceType": "flat",
     "category": "addon",
     "productType": "mastering",
+    "perCount": 0,
     "minThreshold": null,
     "maxThreshold": null
   },
@@ -249,6 +187,7 @@
     "priceType": "flat",
     "category": "addon",
     "productType": "mastering",
+    "perCount": 0,
     "minThreshold": null,
     "maxThreshold": null
   },
@@ -260,52 +199,21 @@
     "priceType": "flat",
     "category": "addon",
     "productType": "mastering",
+    "perCount": 0,
     "minThreshold": null,
     "maxThreshold": null
   },
   {
-    "id": "stem_master_2_8",
-    "name": "Stem Mastering (2-8 Stems)",
-    "description": "Stereo mastering from 2-8 stems",
+    "id": "stem_master",
+    "name": "Stem Mastering",
+    "description": "Stereo mastering fee",
     "price": 50,
     "priceType": "flat",
     "category": "addon",
     "productType": "mastering",
-    "minThreshold": 2,
-    "maxThreshold": 8
-  },
-  {
-    "id": "stem_master_9_16",
-    "name": "Stem Mastering (9-16 Stems)",
-    "description": "Stereo mastering from 9-16 stems",
-    "price": 100,
-    "priceType": "flat",
-    "category": "addon",
-    "productType": "mastering",
+    "perCount": 6,
     "minThreshold": 9,
     "maxThreshold": 16
-  },
-  {
-    "id": "stem_master_17_24",
-    "name": "Stem Mastering (17-24 Stems)",
-    "description": "Stereo mastering from 17-24 stems",
-    "price": 150,
-    "priceType": "flat",
-    "category": "addon",
-    "productType": "mastering",
-    "minThreshold": 17,
-    "maxThreshold": 24
-  },
-  {
-    "id": "stem_master_25_32",
-    "name": "Stem Mastering (25-32 Stems)",
-    "description": "Stereo mastering from 25-32 stems",
-    "price": 200,
-    "priceType": "flat",
-    "category": "addon",
-    "productType": "mastering",
-    "minThreshold": 25,
-    "maxThreshold": 32
   },
   {
     "id": "restoration_remaster",
@@ -315,6 +223,7 @@
     "priceType": "flat",
     "category": "addon",
     "productType": "mastering",
+    "perCount": 0,
     "minThreshold": null,
     "maxThreshold": null
   },
@@ -326,6 +235,7 @@
     "priceType": "per_hour",
     "category": "addon",
     "productType": "mastering",
+    "perCount": 0,
     "minThreshold": 4,
     "maxThreshold": null
   },
@@ -337,6 +247,7 @@
     "priceType": "flat",
     "category": "delivery",
     "productType": "mastering",
+    "perCount": 0,
     "minThreshold": null,
     "maxThreshold": null
   },
@@ -348,6 +259,7 @@
     "priceType": "flat",
     "category": "delivery",
     "productType": "mastering",
+    "perCount": 0,
     "minThreshold": null,
     "maxThreshold": null
   },
@@ -359,6 +271,7 @@
     "priceType": "flat",
     "category": "delivery",
     "productType": "mastering",
+    "perCount": 0,
     "minThreshold": null,
     "maxThreshold": null
   },
@@ -370,6 +283,7 @@
     "priceType": "multiplier",
     "category": "delivery",
     "productType": "mastering",
+    "perCount": 0,
     "minThreshold": null,
     "maxThreshold": null
   },
@@ -381,6 +295,7 @@
     "priceType": "flat",
     "category": "addon",
     "productType": "mixing",
+    "perCount": 0,
     "minThreshold": null,
     "maxThreshold": 10
   },
@@ -392,6 +307,7 @@
     "priceType": "flat",
     "category": "addon",
     "productType": "mastering",
+    "perCount": 0,
     "minThreshold": null,
     "maxThreshold": null
   }
