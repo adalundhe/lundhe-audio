@@ -40,5 +40,40 @@
     "description": "Request mastering changes to any/all songs in a project",
     "productType": "mastering",
     "price": 125
+  },
+  {
+    "id": "consultation",
+    "name": "Virtual Consult",
+    "description": "Mixing and/or audio consultation billed hourly",
+    "productType": "consultation",
+    "price": 150
+  },
+  {
+    "id": "podcast_mixing",
+    "name": "Podcast Mixing",
+    "description": "Mixing for podcast audio or recordings",
+    "productType": "mixing",
+    "price": 100
+  },
+  {
+    "id": "podcast_mastering",
+    "name": "Podcast Mastering",
+    "description": "Mastering for podcast audio or recordings",
+    "productType": "mastering",
+    "price": 75
+  },
+  {
+    "id": "film_mixing",
+    "name": "TV/Film Mixing",
+    "description": "Mixing for TV/Film audio and music",
+    "productType": "mixing",
+    "price": 600
+  },
+  {
+    "id": "film_mastering",
+    "name": "TV/Film Mastering",
+    "description": "Mastering for TV/Film audio and music",
+    "productType": "Mastering",
+    "price": 450
   }
 ]
