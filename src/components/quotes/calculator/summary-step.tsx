@@ -152,8 +152,8 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
               <CheckCircle2 className="!w-[16px] !h-[16px] text-green-600 shrink-0 mt-0.5" />
               <div>
                 <span>Vocal Production Mixing/Editing</span>
-                <div className="text-muted-foreground text-xs mt-1">
-                  Applied to:{" "}
+                <div className="text-muted-foreground text-xs mt-1 flex flex-wrap">
+                  <span className="mr-1">Applied to:</span>
                   {songs
                     .filter((s) => s.addOns.vocalProduction)
                     .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
@@ -169,8 +169,8 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
               <CheckCircle2 className="!w-[16px] !h-[16px] text-blue-600 shrink-0 mt-0.5" />
               <div>
                 <span>Drum Replacement/Production</span>
-                <div className="text-muted-foreground text-xs mt-1">
-                  Applied to:{" "}
+                <div className="text-muted-foreground text-xs mt-1 flex flex-wrap">
+                  <span className="mr-1">Applied to:</span>
                   {songs
                     .filter((s) => s.addOns.drumReplacement)
                     .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
@@ -186,8 +186,8 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
               <CheckCircle2 className="!w-[16px] !h-[16px] text-purple-600 shrink-0 mt-0.5" />
               <div>
                 <span>Guitar Re-Amplification/Production</span>
-                <div className="text-muted-foreground text-xs mt-1">
-                  Applied to:{" "}
+                <div className="text-muted-foreground text-xs mt-1 flex flex-wrap">
+                  <span className="mr-1">Applied to:</span>
                   {songs
                     .filter((s) => s.addOns.guitarReamp)
                     .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
@@ -223,8 +223,8 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
               <CheckCircle2 className="!w-[16px] !h-[16px] text-cyan-600 shrink-0 mt-0.5" />
               <div>
                 <span>High Resolution Mixdown</span>
-                <div className="text-muted-foreground text-xs mt-1">
-                  Applied to:{" "}
+                <div className="text-muted-foreground text-xs mt-1 flex flex-wrap">
+                  <span className="mr-1">Applied to:</span>
                   {songs
                     .filter((s) => s.delivery.highResMixdown)
                     .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
@@ -240,8 +240,8 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
               <CheckCircle2 className="!w-[16px] !h-[16px] text-orange-600 shrink-0 mt-0.5" />
               <div>
                 <span>Film Mixdown</span>
-                <div className="text-muted-foreground text-xs mt-1">
-                  Applied to:{" "}
+                <div className="text-muted-foreground text-xs mt-1 flex flex-wrap">
+                  <span className="mr-1">Applied to:</span>
                   {songs
                     .filter((s) => s.delivery.filmMixdown)
                     .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
@@ -257,8 +257,8 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
               <CheckCircle2 className="!w-[16px] !h-[16px] text-pink-600 shrink-0 mt-0.5" />
               <div>
                 <span>Mixed Stems</span>
-                <div className="text-muted-foreground text-xs mt-1">
-                  Applied to:{" "}
+                <div className="text-muted-foreground text-xs mt-1 flex flex-wrap">
+                  <span className="mr-1">Applied to:</span>
                   {songs
                     .filter((s) => s.delivery.mixedStems)
                     .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
@@ -274,8 +274,8 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
               <CheckCircle2 className="!w-[16px] !h-[16px] text-teal-600 shrink-0 mt-0.5" />
               <div>
                 <span>Extended Archival</span>
-                <div className="text-muted-foreground text-xs mt-1">
-                  Applied to:{" "}
+                <div className="text-muted-foreground text-xs mt-1 flex flex-wrap">
+                  <span className="mr-1">Applied to:</span>
                   {songs
                     .filter((s) => s.delivery.highResMixdown)
                     .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
@@ -291,8 +291,8 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
               <CheckCircle2 className="!w-[16px] !h-[16px] text-red-600 shrink-0 mt-0.5" />
               <div>
                 <span>Rush Delivery</span>
-                <div className="text-muted-foreground text-xs mt-1">
-                  Applied to:{" "}
+                <div className="text-muted-foreground text-xs mt-1 flex flex-wrap">
+                  <span className="mr-1">Applied to:</span>
                   {songs
                     .filter((s) => s.delivery.rushDelivery)
                     .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
@@ -379,7 +379,7 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
               {
                 costs.dealBreakdown.vocals.premium > 0 &&
                 <span className="text-purple-600 text-xs lg:ml-1">
-                  (${costs.dealBreakdown.vocals.premium} with {summary.premiumProductionDealName})
+                  ({costs.dealBreakdown.vocals.premium} songs with {summary.premiumProductionDealName})
                 </span>
               }
               </span>
@@ -387,7 +387,7 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
               {
                 costs.dealBreakdown.vocals.standard > 0 &&
                 <span className="text-purple-600 text-xs lg:ml-1">
-                  (${costs.dealBreakdown.vocals.standard} with {summary.productionDealName})
+                  ({costs.dealBreakdown.vocals.standard} songs with {summary.productionDealName})
                 </span>
               }
               </span>
@@ -412,7 +412,7 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
               {
                 costs.dealBreakdown.drums.premium > 0 &&
                 <span className="text-purple-600 text-xs lg:ml-1">
-                  (${costs.dealBreakdown.drums.premium} with {summary.premiumProductionDealName})
+                  ({costs.dealBreakdown.drums.premium} songs with {summary.premiumProductionDealName})
                 </span>
               }
               </span>
@@ -420,7 +420,7 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
               {
                 costs.dealBreakdown.drums.standard > 0 &&
                 <span className="text-purple-600 text-xs lg:ml-1">
-                  (${costs.dealBreakdown.drums.standard} with {summary.productionDealName})
+                  ({costs.dealBreakdown.drums.standard} songs with {summary.productionDealName})
                 </span>
               }
               </span>
@@ -445,7 +445,7 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
               {
                 costs.dealBreakdown.guitar.premium > 0 &&
                 <span className="text-purple-600 text-xs lg:ml-1">
-                  (${costs.dealBreakdown.guitar.premium} with {summary.premiumProductionDealName})
+                  ({costs.dealBreakdown.guitar.premium} songs with {summary.premiumProductionDealName})
                 </span>
               }
               </span>
@@ -453,7 +453,7 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
               {
                 costs.dealBreakdown.guitar.standard > 0 &&
                 <span className="text-purple-600 text-xs lg:ml-1">
-                  (${costs.dealBreakdown.guitar.standard} with {summary.productionDealName})
+                  ({costs.dealBreakdown.guitar.standard} songs with {summary.productionDealName})
                 </span>
               }
               </span>
@@ -492,9 +492,11 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
             <span className="text-muted-foreground lg:block flex flex-col">
               High Resolution Mixdown ({summary.highResMixdownCount} song
               {summary.highResMixdownCount !== 1 ? "s" : ""})
+              <span className="flex lg:flex-row flex-col gap-2">
               {costs.hifiDealSongCount > 0 && (
-                <span className="text-purple-600 text-xs lg:ml-1">({costs.hifiDealSongCount} with Hi-Fi Deal)</span>
+                <span className="text-purple-600 text-xs lg:ml-1 ">({costs.hifiDealSongCount} songs with Hi-Fi Deal)</span>
               )}
+              </span>
             </span>
             <span>${costs.highResMixdownCost.toFixed(2)} 
             {
@@ -512,9 +514,11 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
           <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
             <span className="text-muted-foreground lg:block flex flex-col">
               Film Mixdown ({summary.filmMixdownCount} song{summary.filmMixdownCount !== 1 ? "s" : ""})
+              <span className="flex lg:flex-row flex-col gap-2">
               {costs.hifiDealSongCount > 0 && (
-                <span className="text-purple-600 text-xs lg:ml-1">({costs.hifiDealSongCount} with Hi-Fi Deal)</span>
+                <span className="text-purple-600 text-xs lg:ml-1">({costs.hifiDealSongCount} songs with Hi-Fi Deal)</span>
               )}
+              </span>
             </span>
             <span>${costs.filmMixdownCost.toFixed(2)}
             {
@@ -586,6 +590,11 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
             <span>-${costs.hifiDealDiscount.toFixed(2)}</span>
           </div>
         )}
+
+        <span className="flex justify-between text-sm font-bold pt-2 text-muted-foreground">
+          <span>Add-On/Delivery Subtotal</span>
+          <span>${costs.optionsAndAddonsPreDiscountsTotal.toFixed(2)}</span>
+        </span>
         {
           costs.optionsDiscounts > 0 && 
           <div className="flex justify-between text-sm text-green-600 font-bold">
@@ -593,6 +602,10 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
             <span>-${costs.optionsDiscounts.toFixed(2)}</span>
           </div>
         }
+        <div className="flex justify-between text-sm font-bold">
+          <span>Total Add-On/Delivery Cost</span>
+          <span>${costs.optionsAndAddonsTotal.toFixed(2)}</span>
+        </div>
         <div className="flex flex-col border-t border-border gap-2">
 
           <span className="text-sm flex pt-2 lg:items-center items-start">

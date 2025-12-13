@@ -112,6 +112,8 @@ export interface QuoteData {
     includedRevisionsCost: number
     additionalRevisionsDiscountPercentage: number
     perRevisionPrice: number
+    optionsAndAddonsTotal: number
+    optionsAndAddonsPreDiscountsTotal: number
   }
   summary: {
     hasHighTrackCountSongs: number

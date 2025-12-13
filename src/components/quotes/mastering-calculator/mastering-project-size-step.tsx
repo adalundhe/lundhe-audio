@@ -24,7 +24,7 @@ export function MasteringProjectSizeStep({ songs, setSongs, pricingData }: Maste
   const [collapsedSongs, setCollapsedSongs] = useState<Set<string>>(new Set())
   const [inputValues, setInputValues] = useState<Record<string, { minutes?: string; seconds?: string }>>({})
 
-  const { epDeal, albumDeal } = getVolumeDiscountInfo(pricingData.discounts)
+  const { epDeal, lpDeal, xlpDeal } = getVolumeDiscountInfo(pricingData.discounts)
 
   const { discounts } = pricingData
 
@@ -38,9 +38,9 @@ export function MasteringProjectSizeStep({ songs, setSongs, pricingData }: Maste
 
   const songCount = songs.length
   const epDealActive = epDeal && meetsThreshold(songCount, epDeal.minThreshold, epDeal.maxThreshold)
-  const albumDealActive = albumDeal && meetsThreshold(songCount, albumDeal.minThreshold, albumDeal.maxThreshold)
-  const activeDeal = albumDealActive ? albumDeal : epDealActive ? epDeal : null
-
+  const lpDealActive = lpDeal && meetsThreshold(songCount, lpDeal.minThreshold, lpDeal.maxThreshold)
+  const xlpDealActive = xlpDeal && meetsThreshold(songCount, xlpDeal.minThreshold, xlpDeal.maxThreshold)
+  const activeDeal = xlpDealActive ? xlpDeal : lpDealActive ? lpDeal : epDealActive ?  epDeal : null
 
   const includedRevisions = getIncludedRevisions(songCount, discounts)
 
@@ -206,7 +206,7 @@ export function MasteringProjectSizeStep({ songs, setSongs, pricingData }: Maste
               {epDeal && (
                 <span
                   className={`inline-flex lg:text-sm text-xs items-center gap-1.5 px-2.5 py-1 rounded-full border ${
-                    epDealActive && !albumDealActive
+                    epDealActive && !lpDeal && !xlpDealActive
                       ? "bg-green-500/20 text-green-600 border-green-500/40 ring-2 ring-green-500/20"
                       : "bg-green-500/10 text-green-600/30 border-green-500/20"
                   }`}
@@ -216,17 +216,30 @@ export function MasteringProjectSizeStep({ songs, setSongs, pricingData }: Maste
                   <span className="font-medium">({epDeal.name})</span>
                 </span>
               )}
-              {albumDeal && (
+              {lpDeal && (
                 <span
                   className={`inline-flex lg:text-sm text-xs items-center gap-1.5 px-2.5 py-1 rounded-full border ${
-                    albumDealActive
+                    lpDealActive && !xlpDealActive
                       ? "bg-green-500/20 text-green-600 border-green-500/40 ring-2 ring-green-500/20"
                       : "bg-green-500/10 text-green-600/30 border-green-500/20"
                   }`}
                 >
-                  {albumDeal.minThreshold}+ songs:{" "}
-                  <span className="font-semibold">{albumDeal.discountPercentage}% off</span>
-                  <span className="font-medium">({albumDeal.name})</span>
+                  {lpDeal.minThreshold}+ songs:{" "}
+                  <span className="font-semibold">{lpDeal.discountPercentage}% off</span>
+                  <span className="font-medium">({lpDeal.name})</span>
+                </span>
+              )}
+              {xlpDeal && (
+                <span
+                  className={`inline-flex lg:text-sm text-xs items-center gap-1.5 px-2.5 py-1 rounded-full border ${
+                    xlpDealActive
+                      ? "bg-green-500/20 text-green-600 border-green-500/40 ring-2 ring-green-500/20"
+                      : "bg-green-500/10 text-green-600/30 border-green-500/20"
+                  }`}
+                >
+                  {xlpDeal.minThreshold}+ songs:{" "}
+                  <span className="font-semibold">{xlpDeal.discountPercentage}% off</span>
+                  <span className="font-medium">({xlpDeal.name})</span>
                 </span>
               )}
             </div>

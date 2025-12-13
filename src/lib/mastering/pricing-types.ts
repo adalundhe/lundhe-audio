@@ -111,6 +111,8 @@ export interface MasteringQuoteData {
     includedRevisionsCost: number
     additionalRevisionsDiscountPercentage: number
     perRevisionPrice: number
+    optionsAndAddonsTotal: number
+    optionsAndAddonsPreDiscountsTotal: number
   }
   summary: {
     hasExtendedLengthSongs: number

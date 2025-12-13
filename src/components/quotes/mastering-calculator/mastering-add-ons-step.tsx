@@ -51,9 +51,10 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
 
   const [stemInputValues, setStemInputValues] = useState<Record<string, string>>({})
 
-  const { fivePlus, tenPlus } = getOptionVolumeDiscountInfo(pricingData.discounts)
-  const fivePlusDiscount = fivePlus?.discountPercentage ?? 15
-  const tenPlusDiscount = tenPlus?.discountPercentage ?? 25
+  const { threePlus, fivePlus, tenPlus } = getOptionVolumeDiscountInfo(pricingData.discounts)
+  const threePlusDiscount = threePlus?.discountPercentage ?? 10
+  const fivePlusDiscount = fivePlus?.discountPercentage ?? 20
+  const tenPlusDiscount = tenPlus?.discountPercentage ?? 30
 
 
   const { discounts } = pricingData
@@ -113,6 +114,8 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
       return tenPlusDiscount
     } else if (meetsThreshold(count, fivePlus?.minThreshold ?? 5, fivePlus?.maxThreshold ?? 9)) {
       return fivePlusDiscount
+    } else if (meetsThreshold(count, threePlus?.minThreshold ?? 3, threePlus?.maxThreshold ?? 4)) {
+      return threePlusDiscount
     }
     return 0
   }
@@ -286,7 +289,7 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
       <div className="flex items-start gap-2 p-3 bg-green-500/10 border border-green-500/20 rounded-md text-sm">
         <Info className="!w-[16px] !h-[16px] text-green-600 shrink-0 mt-0.5" />
         <span className="text-foreground">
-          <span className="font-medium">Volume Discounts:</span> Select 5+ songs for {fivePlusDiscount}% off, or 10+
+          <span className="font-medium">Volume Discounts:</span> Select 3+ songs for {threePlusDiscount}% off, 5+ songs for {fivePlusDiscount}% off, or 10+
           songs for {tenPlusDiscount}% off on per-song add-ons.
         </span>
       </div>
@@ -399,10 +402,16 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
                       </Button>
                     </div>
                   </div>
-                  {selectedCount > 0 && selectedCount < 5 && (
+                  {selectedCount > 0 && selectedCount < 3 && (
                     <div className="text-xs text-muted-foreground mb-3 p-2 bg-muted rounded">
-                      Select {5 - selectedCount} more song{5 - selectedCount !== 1 ? "s" : ""} for {fivePlusDiscount}%
+                      Select {3 - selectedCount} more song{3 - selectedCount !== 1 ? "s" : ""} for {threePlusDiscount}%
                       volume discount
+                    </div>
+                  )}
+                  {selectedCount >= 3 && selectedCount < 5 && (
+                    <div className="text-xs lg:text-center text-green-600 mb-3 p-2 bg-green-500/10 rounded">
+                      {threePlusDiscount}% volume discount applied! Select {5 - selectedCount} more song
+                      {5 - selectedCount !== 1 ? "s" : ""} for {fivePlusDiscount}% discount
                     </div>
                   )}
                   {selectedCount >= 5 && selectedCount < 10 && (
@@ -547,23 +556,29 @@ export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: M
                     </Button>
                   </div>
                 </div>
+                {selectedStemMasteringCount > 0 && selectedStemMasteringCount < 3 && (
+                  <div className="text-xs text-muted-foreground mb-3 p-2 bg-muted rounded">
+                    Select {3 - selectedStemMasteringCount} more song{3 - selectedStemMasteringCount !== 1 ? "s" : ""} for {threePlusDiscount}%
+                    volume discount
+                  </div>
+                )}
                 {selectedStemMasteringCount > 0 && selectedStemMasteringCount < 5 && (
-                    <div className="text-xs text-muted-foreground mb-3 p-2 bg-muted rounded">
-                      Select {5 - selectedStemMasteringCount} more song{5 - selectedStemMasteringCount !== 1 ? "s" : ""} for {fivePlusDiscount}%
-                      volume discount
-                    </div>
-                  )}
-                  {selectedStemMasteringCount >= 5 && selectedStemMasteringCount < 10 && (
-                    <div className="text-xs lg:text-center text-green-600 mb-3 p-2 bg-green-500/10 rounded">
-                      {fivePlusDiscount}% volume discount applied! Select {10 - selectedStemMasteringCount} more song
-                      {10 - selectedStemMasteringCount !== 1 ? "s" : ""} for {tenPlusDiscount}% discount
-                    </div>
-                  )}
-                  {selectedStemMasteringCount >= 10 && (
-                    <div className="text-xs lg:text-center text-green-600 mb-3 p-2 bg-green-500/10 rounded">
-                      {tenPlusDiscount}% maximum volume discount applied!
-                    </div>
-                  )}
+                  <div className="text-xs lg:text-center text-green-600 mb-3 p-2 bg-green-500/10 rounded">
+                    {threePlusDiscount}% volume discount applied! Select {5 - selectedStemMasteringCount} more song
+                    {5 - selectedStemMasteringCount !== 1 ? "s" : ""} for {fivePlusDiscount}% discount
+                  </div>
+                )}
+                {selectedStemMasteringCount >= 5 && selectedStemMasteringCount < 10 && (
+                  <div className="text-xs lg:text-center text-green-600 mb-3 p-2 bg-green-500/10 rounded">
+                    {fivePlusDiscount}% volume discount applied! Select {10 - selectedStemMasteringCount} more song
+                    {10 - selectedStemMasteringCount !== 1 ? "s" : ""} for {tenPlusDiscount}% discount
+                  </div>
+                )}
+                {selectedStemMasteringCount >= 10 && (
+                  <div className="text-xs lg:text-center text-green-600 mb-3 p-2 bg-green-500/10 rounded">
+                    {tenPlusDiscount}% maximum volume discount applied!
+                  </div>
+                )}
               <div className="bg-muted/50 p-3 rounded-md mb-4">
                 <p className="text-sm font-medium mb-2">Stem Pricing Tiers:</p>
                 <div className="text-sm text-muted-foreground flex flex-col">

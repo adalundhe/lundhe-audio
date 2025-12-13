@@ -30,7 +30,9 @@ export function ProjectSizeStep({ songs, setSongs, pricingData }: ProjectSizeSte
   const highTrackProduct = products.find((p) => p.id === "high_track_count_mix")
   const revisions = products.find((p) => p.id === "mix_revision")
 
-  const { epDeal, albumDeal } = getVolumeDiscountInfo(discounts)
+  const { epDeal, lpDeal, xlpDeal } = getVolumeDiscountInfo(discounts)
+
+  console.log(epDeal)
 
   const lengthFeeOptions = options
     .filter((o) => o.category === "length_fee")
@@ -46,8 +48,9 @@ export function ProjectSizeStep({ songs, setSongs, pricingData }: ProjectSizeSte
   // Determine which deal is active
   const songCount = songs.length
   const epDealActive = epDeal && meetsThreshold(songCount, epDeal.minThreshold, epDeal.maxThreshold)
-  const albumDealActive = albumDeal && meetsThreshold(songCount, albumDeal.minThreshold, albumDeal.maxThreshold)
-  const activeDeal = albumDealActive ? albumDeal : epDealActive ? epDeal : null
+  const lpDealActive = lpDeal && meetsThreshold(songCount, lpDeal.minThreshold, lpDeal.maxThreshold)
+  const xlpDealActive = xlpDeal && meetsThreshold(songCount, xlpDeal.minThreshold, xlpDeal.maxThreshold)
+  const activeDeal = xlpDealActive ? xlpDeal : lpDealActive ? lpDeal : epDealActive ?  epDeal : null
 
 
   const includedRevisions = getIncludedRevisions(songCount, discounts)
@@ -186,16 +189,16 @@ export function ProjectSizeStep({ songs, setSongs, pricingData }: ProjectSizeSte
               <h4 className="font-medium text-foreground">Base Cost Per Song</h4>
               <ul className="space-y-1 text-muted-foreground">
                 <li>
-                  • 1-10 tracks: <span className="text-foreground font-medium">${songMixProduct?.price ?? 100}</span>
+                  • 1-10 tracks: <span className="text-foreground font-medium">${songMixProduct?.price ?? 200}</span>
                 </li>
                 <li>
                   • 11-50 tracks:{" "}
-                  <span className="text-foreground font-medium">${songMixProduct?.price ?? 100} + $75</span> per
+                  <span className="text-foreground font-medium">${songMixProduct?.price ?? 200} + ${trackFeeOption?.price ?? 50}</span> per
                   additional 10 tracks
                 </li>
                 <li>
                   • 50+ tracks:{" "}
-                  <span className="text-foreground font-medium">${highTrackProduct?.price ?? 500} + $100</span> per
+                  <span className="text-foreground font-medium">${highTrackProduct?.price ?? 600} + ${highTrackFeeCost}</span> per
                   additional {highTrackPerCount} tracks
                 </li>
               </ul>
@@ -267,7 +270,7 @@ export function ProjectSizeStep({ songs, setSongs, pricingData }: ProjectSizeSte
               {epDeal && (
                 <span
                   className={`inline-flex lg:text-sm text-xs items-center gap-1.5 px-2.5 py-1 rounded-full border ${
-                    epDealActive && !albumDealActive
+                    epDealActive && !lpDeal && !xlpDealActive
                       ? "bg-green-500/20 text-green-600 border-green-500/40 ring-2 ring-green-500/20"
                       : "bg-green-500/10 text-green-600/30 border-green-500/20"
                   }`}
@@ -277,17 +280,30 @@ export function ProjectSizeStep({ songs, setSongs, pricingData }: ProjectSizeSte
                   <span className="font-medium">({epDeal.name})</span>
                 </span>
               )}
-              {albumDeal && (
+              {lpDeal && (
                 <span
                   className={`inline-flex lg:text-sm text-xs items-center gap-1.5 px-2.5 py-1 rounded-full border ${
-                    albumDealActive
+                    lpDealActive && !xlpDealActive
                       ? "bg-green-500/20 text-green-600 border-green-500/40 ring-2 ring-green-500/20"
                       : "bg-green-500/10 text-green-600/30 border-green-500/20"
                   }`}
                 >
-                  {albumDeal.minThreshold}+ songs:{" "}
-                  <span className="font-semibold">{albumDeal.discountPercentage}% off</span>
-                  <span className="font-medium">({albumDeal.name})</span>
+                  {lpDeal.minThreshold}+ songs:{" "}
+                  <span className="font-semibold">{lpDeal.discountPercentage}% off</span>
+                  <span className="font-medium">({lpDeal.name})</span>
+                </span>
+              )}
+              {xlpDeal && (
+                <span
+                  className={`inline-flex lg:text-sm text-xs items-center gap-1.5 px-2.5 py-1 rounded-full border ${
+                    xlpDealActive
+                      ? "bg-green-500/20 text-green-600 border-green-500/40 ring-2 ring-green-500/20"
+                      : "bg-green-500/10 text-green-600/30 border-green-500/20"
+                  }`}
+                >
+                  {xlpDeal.minThreshold}+ songs:{" "}
+                  <span className="font-semibold">{xlpDeal.discountPercentage}% off</span>
+                  <span className="font-medium">({xlpDeal.name})</span>
                 </span>
               )}
             </div>
