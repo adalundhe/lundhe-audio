@@ -88,7 +88,6 @@ function getVolumeDiscount(discounts: Discount[], songCount: number): Discount |
 
   ].includes(discount.id))
 
-  console.log(volumeDiscounts)
   let bestDiscount: Discount | null = null
 
   for (const discount of volumeDiscounts) {
@@ -831,6 +830,35 @@ export function buildMasteringQuoteData(
     revisionsDiscountAmount,
   ].reduce((prev, cur) => prev + cur, 0)
 
+    const optionsAndAddonsPreDiscountsTotal = [
+    vinylMasteringPreDiscountCost,
+    streamingMasteringPreDiscountCost,
+    redbookMasteringPreDiscountCost,
+    stemMasteringPreDiscountCost,
+    restorationRemastringPreDiscountCost,
+    virtualSessionCost,
+    highResMasterPreDiscountCost,
+    ddpImagePreDiscountCost,
+    isrcEncodingPreDiscountCost,
+    rushDeliveryPreDiscountCost,
+    preDiscountRevisionPrice,
+  ].reduce((prev, cur) => prev + cur, 0)
+
+  const optionsAndAddonsTotal = [
+    vinylMasteringCost +
+    streamingMasteringCost +
+    redbookMasteringCost +
+    stemMasteringCost +
+    additionalRevisionsCost +
+    virtualSessionCost +
+    restorationRemasteringCost +
+    highResMasterCost +
+    ddpImageCost +
+    isrcEncodingCost +
+    rushDeliveryCost
+  ].reduce((prev, cur) => prev + cur, 0)
+
+
   return {
     songs: songDetails,
     totals: {
@@ -885,6 +913,8 @@ export function buildMasteringQuoteData(
       includedRevisionsCost,
       additionalRevisionsDiscountPercentage: revisionDiscountPercentage,
       perRevisionPrice: revisionPrice,
+      optionsAndAddonsTotal,
+      optionsAndAddonsPreDiscountsTotal,
     },
     summary: {
       hasExtendedLengthSongs: songDetails.filter((s) => s.isExtendedLength).length,
@@ -910,20 +940,23 @@ export function buildMasteringQuoteData(
   }
 }
 
-export function getVolumeDiscountInfo(discounts: Discount[]): { epDeal: Discount | null; albumDeal: Discount | null } {
+export function getVolumeDiscountInfo(discounts: Discount[]): { epDeal: Discount | null; lpDeal: Discount | null, xlpDeal: Discount | null } {
   const volumeDiscounts = findDiscountsByCategory(discounts, "volume")
   return {
     epDeal: volumeDiscounts.find((d) => d.id === "ep_deal") ?? null,
-    albumDeal: volumeDiscounts.find((d) => d.id === "album_deal") ?? null,
+    lpDeal: volumeDiscounts.find((d) => d.id == "lp_deal") ?? null,
+    xlpDeal: volumeDiscounts.find((d) => d.id === "xlp_deal") ?? null,
   }
 }
 
 export function getOptionVolumeDiscountInfo(discounts: Discount[]): {
+  threePlus: Discount | null
   fivePlus: Discount | null
   tenPlus: Discount | null
 } {
   const optionDiscounts = findDiscountsByCategory(discounts, "option_volume")
   return {
+    threePlus: optionDiscounts.find((d) => d.id === "option_volume_3") ?? null,
     fivePlus: optionDiscounts.find((d) => d.id === "option_volume_5") ?? null,
     tenPlus: optionDiscounts.find((d) => d.id === "option_volume_10") ?? null,
   }

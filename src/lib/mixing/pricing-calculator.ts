@@ -689,6 +689,34 @@ export function buildQuoteDataFromDb(
     preDiscountRevisionPrice,
   ].reduce((prev, cur) => prev + cur, 0)
 
+
+  const optionsAndAddonsPreDiscountsTotal = [
+    vocalProductionPreDiscountCost,
+    drumReplacementPreDiscountCost,
+    guitarReampPreDiscountCost,
+    virtualSessionCost,
+    highResPreDiscountCost,
+    filmMixDownPreDiscountCost,
+    mixedStemsPreDiscountCost,
+    extendedArchivalPreDiscountCost,
+    rushDeliveryPrediscountCost,
+    preDiscountRevisionPrice,
+  ].reduce((prev, cur) => prev + cur, 0)
+
+  const optionsAndAddonsTotal = [
+    vocalProductionCost +
+    drumReplacementCost +
+    guitarReampCost +
+    additionalRevisionsCost +
+    virtualSessionCost +
+    highResMixdownCost +
+    filmMixdownCost +
+    mixedStemsCost +
+    extendedArchivalCost +
+    rushDeliveryCost
+  ].reduce((prev, cur) => prev + cur, 0)
+
+
   const optionsDiscountAmount = [
     vocalProductionDiscountAmount,
     drumReplacementDiscountAmount,
@@ -753,6 +781,8 @@ export function buildQuoteDataFromDb(
       includedRevisionsCost,
       additionalRevisionsDiscountPercentage: revisionDiscountPercentage,
       perRevisionPrice: revisionPrice,
+      optionsAndAddonsTotal,
+      optionsAndAddonsPreDiscountsTotal,
 
     },
     summary: {
@@ -776,22 +806,24 @@ export function buildQuoteDataFromDb(
   }
 }
 
-// Helper function to get volume discount info for display
-export function getVolumeDiscountInfo(discounts: Discount[]): { epDeal: Discount | null; albumDeal: Discount | null } {
+
+export function getVolumeDiscountInfo(discounts: Discount[]): { epDeal: Discount | null; lpDeal: Discount | null, xlpDeal: Discount | null } {
   const volumeDiscounts = findDiscountsByCategory(discounts, "volume")
   return {
     epDeal: volumeDiscounts.find((d) => d.id === "ep_deal") ?? null,
-    albumDeal: volumeDiscounts.find((d) => d.id === "album_deal") ?? null,
+    lpDeal: volumeDiscounts.find((d) => d.id == "lp_deal") ?? null,
+    xlpDeal: volumeDiscounts.find((d) => d.id === "xlp_deal") ?? null,
   }
 }
 
-// Helper function to get option volume discount info for display
 export function getOptionVolumeDiscountInfo(discounts: Discount[]): {
+  threePlus: Discount | null
   fivePlus: Discount | null
   tenPlus: Discount | null
 } {
   const optionDiscounts = findDiscountsByCategory(discounts, "option_volume")
   return {
+    threePlus: optionDiscounts.find((d) => d.id === "option_volume_3") ?? null,
     fivePlus: optionDiscounts.find((d) => d.id === "option_volume_5") ?? null,
     tenPlus: optionDiscounts.find((d) => d.id === "option_volume_10") ?? null,
   }

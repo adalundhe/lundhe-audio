@@ -154,8 +154,8 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
               <CheckCircle2 className="!w-[16px] !h-[16px] text-blue-600 shrink-0 mt-0.5" />
               <div>
                 <span>Vinyl Mastering</span>
-                <div className="text-muted-foreground text-xs mt-1">
-                  Applied to:{" "}
+                <div className="text-muted-foreground text-xs mt-1 flex flex-wrap">
+                  <span className="mr-1">Applied to:</span>
                   {songs
                     .filter((s) => s.addOns.vinylMastering)
                     .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
@@ -171,8 +171,8 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
               <CheckCircle2 className="!w-[16px] !h-[16px] text-cyan-600 shrink-0 mt-0.5" />
               <div>
                 <span>Streaming Mastering</span>
-                <div className="text-muted-foreground text-xs mt-1">
-                  Applied to:{" "}
+                <div className="text-muted-foreground text-xs mt-1 flex flex-wrap">
+                  <span className="mr-1">Applied to:</span>
                   {songs
                     .filter((s) => s.addOns.streamingMastering)
                     .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
@@ -188,8 +188,8 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
               <CheckCircle2 className="!w-[16px] !h-[16px] text-orange-600 shrink-0 mt-0.5" />
               <div>
                 <span>Redbook CD Mastering</span>
-                <div className="text-muted-foreground text-xs mt-1">
-                  Applied to:{" "}
+                <div className="text-muted-foreground text-xs mt-1 flex flex-wrap">
+                  <span className="mr-1">Applied to:</span>
                   {songs
                     .filter((s) => s.addOns.redbookMastering)
                     .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
@@ -205,8 +205,8 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
               <CheckCircle2 className="!w-[16px] !h-[16px] text-purple-600 shrink-0 mt-0.5" />
               <div>
                 <span>Stem Mastering</span>
-                <div className="text-muted-foreground text-xs mt-1">
-                  Applied to:{" "}
+                <div className="text-muted-foreground text-xs mt-1 flex flex-wrap">
+                  <span className="mr-1">Applied to:</span>
                   {songs
                     .filter((s) => s.addOns.stemMastering)
                     .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
@@ -222,8 +222,8 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
               <CheckCircle2 className="!w-[16px] !h-[16px] text-rose-600 shrink-0 mt-0.5" />
               <div>
                 <span>Restoration Remastering</span>
-                <div className="text-muted-foreground text-xs mt-1">
-                  Applied to:{" "}
+                <div className="text-muted-foreground text-xs mt-1 flex flex-wrap">
+                  <span className="mr-1">Applied to:</span>
                   {songs
                     .filter((s) => s.addOns.restorationRemastering)
                     .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
@@ -258,8 +258,8 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
               <CheckCircle2 className="!w-[16px] !h-[16px] text-green-600 shrink-0 mt-0.5" />
               <div>
                 <span>High Resolution Master</span>
-                <div className="text-muted-foreground text-xs mt-1">
-                  Applied to:{" "}
+                <div className="text-muted-foreground text-xs mt-1 flex flex-wrap">
+                  <span className="mr-1">Applied to:</span>
                   {songs
                     .filter((s) => s.delivery.highResMaster)
                     .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
@@ -275,8 +275,8 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
               <CheckCircle2 className="!w-[16px] !h-[16px] text-pink-600 shrink-0 mt-0.5" />
               <div>
                 <span>DDP Image</span>
-                <div className="text-muted-foreground text-xs mt-1">
-                  Applied to:{" "}
+                <div className="text-muted-foreground text-xs mt-1 flex flex-wrap">
+                  <span className="mr-1">Applied to:</span>
                   {songs
                     .filter((s) => s.delivery.ddpImage)
                     .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
@@ -292,8 +292,8 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
               <CheckCircle2 className="!w-[16px] !h-[16px] text-teal-600 shrink-0 mt-0.5" />
               <div>
                 <span>ISRC Encoding</span>
-                <div className="text-muted-foreground text-xs mt-1">
-                  Applied to:{" "}
+                <div className="text-muted-foreground text-xs mt-1 flex flex-wrap">
+                  <span className="mr-1">Applied to:</span>
                   {songs
                     .filter((s) => s.delivery.isrcEncoding)
                     .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
@@ -309,8 +309,8 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
               <CheckCircle2 className="!w-[16px] !h-[16px] text-red-600 shrink-0 mt-0.5" />
               <div>
                 <span>Rush Delivery</span>
-                <div className="text-muted-foreground text-xs mt-1">
-                  Applied to:{" "}
+                <div className="text-muted-foreground text-xs mt-1 flex flex-wrap">
+                  <span className="mr-1">Applied to:</span>
                   {songs
                     .filter((s) => s.delivery.rushDelivery)
                     .map<ReactNode>((s) => <div className="max-w-[60px] text-nowrap overflow-hidden text-ellipsis">
@@ -393,7 +393,7 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
               {
                 costs.dealBreakdown.vinyl.premium > 0 &&
                 <span className="text-purple-600 text-xs lg:ml-1">
-                  ({costs.dealBreakdown.vinyl.premium} with {summary.premiumMultimediaDealName})
+                  ({costs.dealBreakdown.vinyl.premium} songs with {summary.premiumMultimediaDealName})
                 </span>
               }
               </span>
@@ -401,7 +401,7 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
               {
                 costs.dealBreakdown.vinyl.standard > 0 &&
                 <span className="text-purple-600 text-xs lg:ml-1">
-                  ({costs.dealBreakdown.vinyl.standard} with {summary.multimediaDealName})
+                  ({costs.dealBreakdown.vinyl.standard} songs with {summary.multimediaDealName})
                 </span>
               }
               </span>
@@ -426,7 +426,7 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
               {
                 costs.dealBreakdown.streaming.premium > 0 &&
                 <span className="text-purple-600 text-xs lg:ml-1">
-                  ({costs.dealBreakdown.streaming.premium} with {summary.premiumMultimediaDealName})
+                  ({costs.dealBreakdown.streaming.premium} songs with {summary.premiumMultimediaDealName})
                 </span>
               }
               </span>
@@ -434,7 +434,7 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
               {
                 costs.dealBreakdown.streaming.standard > 0 &&
                 <span className="text-purple-600 text-xs lg:ml-1">
-                  ({costs.dealBreakdown.streaming.standard} with {summary.multimediaDealName})
+                  ({costs.dealBreakdown.streaming.standard} songs with {summary.multimediaDealName})
                 </span>
               }
               </span>
@@ -458,7 +458,7 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
               {
                 costs.dealBreakdown.redbook.premium > 0 &&
                 <span className="text-purple-600 text-xs lg:ml-1">
-                  ({costs.dealBreakdown.redbook.premium} with {summary.premiumMultimediaDealName})
+                  ({costs.dealBreakdown.redbook.premium} songs with {summary.premiumMultimediaDealName})
                 </span>
               }
               </span>
@@ -466,7 +466,7 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
               {
                 costs.dealBreakdown.redbook.standard > 0 &&
                 <span className="text-purple-600 text-xs lg:ml-1">
-                  ({costs.dealBreakdown.redbook.standard} with {summary.multimediaDealName})
+                  ({costs.dealBreakdown.redbook.standard} songs with {summary.multimediaDealName})
                 </span>
               }
               </span>
@@ -541,7 +541,7 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
               {
                 costs.dealBreakdown.highres.premium > 0 &&
                 <span className="text-purple-600 text-xs lg:ml-1">
-                  ({costs.dealBreakdown.highres.premium} with {summary.premiumDistributionDealName})
+                  ({costs.dealBreakdown.highres.premium} songs with {summary.premiumDistributionDealName})
                 </span>
               }
               </span>
@@ -549,7 +549,7 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
               {
                 costs.dealBreakdown.highres.standard > 0 &&
                 <span className="text-purple-600 text-xs lg:ml-1">
-                  ({costs.dealBreakdown.highres.standard} with {summary.distributionDealName})
+                  ({costs.dealBreakdown.highres.standard} songs with {summary.distributionDealName})
                 </span>
               }
               </span>
@@ -573,7 +573,7 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
               {
                 costs.dealBreakdown.ddpimage.premium > 0 &&
                 <span className="text-purple-600 text-xs lg:ml-1">
-                  ({costs.dealBreakdown.ddpimage.premium} with {summary.premiumDistributionDealName})
+                  ({costs.dealBreakdown.ddpimage.premium} songs with {summary.premiumDistributionDealName})
                 </span>
               }
               </span>
@@ -581,7 +581,7 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
               {
                 costs.dealBreakdown.ddpimage.standard > 0 &&
                 <span className="text-purple-600 text-xs lg:ml-1">
-                  ({costs.dealBreakdown.ddpimage.standard} with {summary.distributionDealName})
+                  ({costs.dealBreakdown.ddpimage.standard} songs with {summary.distributionDealName})
                 </span>
               }
               </span>
@@ -605,7 +605,7 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
               {
                 costs.dealBreakdown.isrcencode.premium > 0 &&
                 <span className="text-purple-600 text-xs lg:ml-1">
-                  ({costs.dealBreakdown.isrcencode.premium} with {summary.premiumDistributionDealName})
+                  ({costs.dealBreakdown.isrcencode.premium} songs with {summary.premiumDistributionDealName})
                 </span>
               }
               </span>
@@ -613,7 +613,7 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
               {
                 costs.dealBreakdown.isrcencode.standard > 0 &&
                 <span className="text-purple-600 text-xs lg:ml-1">
-                  ({costs.dealBreakdown.isrcencode.standard} with {summary.distributionDealName})
+                  ({costs.dealBreakdown.isrcencode.standard} songs with {summary.distributionDealName})
                 </span>
               }
               </span>
@@ -653,6 +653,10 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
             <span>-${costs.distributionDealDiscount.toFixed(2)}</span>
           </div>
         )}
+        <span className="flex justify-between text-sm font-bold pt-2 text-muted-foreground">
+          <span>Add-On/Delivery Subtotal</span>
+          <span>${costs.optionsAndAddonsPreDiscountsTotal.toFixed(2)}</span>
+        </span>
         {
           costs.optionsDiscounts > 0 && 
           <div className="flex justify-between text-sm text-green-600 font-bold">
@@ -660,6 +664,10 @@ export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummar
             <span>-${costs.optionsDiscounts.toFixed(2)}</span>
           </div>
         }
+        <div className="flex justify-between text-sm font-bold">
+          <span>Total Add-On/Delivery Cost</span>
+          <span>${costs.optionsAndAddonsTotal.toFixed(2)}</span>
+        </div>
         <div className="flex flex-col border-t border-border gap-2">
           <span className="text-sm flex pt-2 lg:items-center items-start">
             <span className="text-muted-foreground flex lg:flex-row flex-col">
