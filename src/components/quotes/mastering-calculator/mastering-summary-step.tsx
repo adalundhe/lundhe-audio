@@ -4,13 +4,12 @@ import type { MasteringPricingData } from "~/lib/mastering/pricing-types"
 import type { MasteringQuoteData } from "~/lib/mastering/pricing-types"
 import { Music, Clock, CheckCircle2, AlertCircle, Sparkles, Gift, RotateCcw } from "lucide-react"
 import { ReactNode } from "react"
+import { useMasteringQuoteData } from "~/hooks/use-mastering-quote"
 
-type MasteringSummaryStepProps = {
-  quoteData: MasteringQuoteData
-  pricingData: MasteringPricingData
-}
+export function MasteringSummaryStep() {
 
-export function MasteringSummaryStep({ quoteData, pricingData }: MasteringSummaryStepProps) {
+  const { quoteData } = useMasteringQuoteData()
+
   const { songs, totals, costs, summary } = quoteData
 
   const hasAnyPerSongAddOns =

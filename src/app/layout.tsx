@@ -5,6 +5,8 @@ import { Footer } from "~/components/Footer";
 import { NavBar } from "~/components/NavBar";
 import { env } from "~/env";
 import { TRPCReactProvider } from "~/trpc/react";
+import { CartStoreProvider } from "~/components/cart/cart-provider"
+import { api } from "~/lib/server-client"
 
 import {ScrollToTop} from '~/components/ui/scroll-to-top'
 import { ThemeProvider } from 'next-themes'
@@ -24,6 +26,10 @@ export default async function RootLayout ({
 	children,
 }: Readonly<{ children: React.ReactNode }>) {
 
+
+  const client = await api()
+  const { discounts } = await client.mixQuotes.getAllMixingPricingData()
+
   return (
     <html className={`${courierPrime.className}`} lang="en" suppressHydrationWarning>
 
@@ -40,13 +46,15 @@ export default async function RootLayout ({
         <Script src={`https://www.google.com/recaptcha/api.js?render=${env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY}`} async/>
         <body>
             <ThemeProvider attribute="class">
-                <TRPCReactProvider>          
+                <TRPCReactProvider>
+                  <CartStoreProvider discountData={discounts}>
                     <NavBar />
                     <div className={`flex flex-col h-full`}>
                             {children}
                     </div>
                     <Footer />
-                    <ScrollToTop minHeight={100} scrollTo={0}/>
+                    <ScrollToTop minHeight={100} scrollTo={0}/>               
+                  </CartStoreProvider>          
                 </TRPCReactProvider>
             </ThemeProvider>
         </body>

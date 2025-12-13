@@ -26,6 +26,7 @@ import { Courier_Prime } from 'next/font/google';
 import { ScrollArea } from "~/components/ui/scroll-area";
 import NavBarImage from "./NavBarImage";
 import { ModeToggle } from './ModeToggle';
+import { CartDropdown } from './cart/cart-dropdown';
 
 const courierPrime = Courier_Prime({
     weight: "400",
@@ -52,7 +53,10 @@ export const NavBar = () => (
                     </NavigationMenuTrigger>
                   </div>
                   <div className='col-span-10 flex flex-col items-center justify-center px-4 h-full'>
-                    <ModeToggle align='end' />     
+                    <div className='flex ml-auto'>
+                        <CartDropdown/>
+                        <ModeToggle align='end' />      
+                    </div>   
                   </div>
               </div>       
               <NavigationMenuContent>

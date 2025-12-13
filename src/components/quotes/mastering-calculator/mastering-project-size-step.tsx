@@ -8,19 +8,18 @@ import { Input } from "~/components/ui/input"
 import { Label } from "~/components/ui/label"
 import { Card, CardContent } from "~/components/ui/card"
 import { Plus, Trash2, ChevronDown, ChevronRight, Info,HelpCircle } from "lucide-react"
-import type { MasteringPricingData } from "~/lib/mastering/pricing-types"
-import type { MasteringSong } from "~/lib/mastering/mastering-pricing-calculator"
+import type { MasteringSong } from "~/lib/mastering/pricing-types"
 import { getVolumeDiscountInfo, getIncludedRevisions } from "~/lib/mastering/mastering-pricing-calculator"
 import { meetsThreshold } from "~/lib/meets-threshold"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/ui/tooltip"
+import { useMasteringPricingData, useMasteringSongs } from "~/hooks/use-mastering-quote"
 
-type MasteringProjectSizeStepProps = {
-  songs: MasteringSong[]
-  setSongs: React.Dispatch<React.SetStateAction<MasteringSong[]>>
-  pricingData: MasteringPricingData
-}
 
-export function MasteringProjectSizeStep({ songs, setSongs, pricingData }: MasteringProjectSizeStepProps) {
+export function MasteringProjectSizeStep() {
+
+  const { songs, setSongs } = useMasteringSongs()
+  const { pricingData } = useMasteringPricingData()
+  
   const [collapsedSongs, setCollapsedSongs] = useState<Set<string>>(new Set())
   const [inputValues, setInputValues] = useState<Record<string, { minutes?: string; seconds?: string }>>({})
 
@@ -206,7 +205,7 @@ export function MasteringProjectSizeStep({ songs, setSongs, pricingData }: Maste
               {epDeal && (
                 <span
                   className={`inline-flex lg:text-sm text-xs items-center gap-1.5 px-2.5 py-1 rounded-full border ${
-                    epDealActive && !lpDeal && !xlpDealActive
+                    epDealActive && !lpDealActive && !xlpDealActive
                       ? "bg-green-500/20 text-green-600 border-green-500/40 ring-2 ring-green-500/20"
                       : "bg-green-500/10 text-green-600/30 border-green-500/20"
                   }`}

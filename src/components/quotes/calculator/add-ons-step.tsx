@@ -9,13 +9,7 @@ import { meetsThreshold } from "~/lib/meets-threshold"
 import { ChevronDown, ChevronUp, Check, Info, Sparkles, RotateCcw } from "lucide-react"
 import { getOptionVolumeDiscountInfo } from "~/lib/mixing/pricing-calculator"
 import { Discount } from "~/server/db/types"
-
-type AddOnsStepProps = {
-  addOns: AddOns
-  setAddOns: (addOns: AddOns) => void
-  songs: Song[]
-  pricingData: PricingData
-}
+import { useMixingAddOns, useMixingPricingData, useMixingSongs } from "~/hooks/use-mixing-quote"
 
 const getRevisionVolumeDiscount = (count: number, discounts: Discount[]) => {
 
@@ -40,7 +34,12 @@ const getRevisionVolumeDiscount = (count: number, discounts: Discount[]) => {
   return bestDiscount
 }
 
-export function AddOnsStep({ addOns, setAddOns, songs, pricingData }: AddOnsStepProps) {
+export function AddOnsStep() {
+
+  const {addOns, setAddOns } = useMixingAddOns()
+  const {songs } = useMixingSongs()
+  const { pricingData } = useMixingPricingData()
+
   const [openAddOns, setOpenAddOns] = useState<Record<string, boolean>>({})
   const [virtualSessionOpen, setVirtualSessionOpen] = useState(false)
   const [revisionsOpen, setRevisionsOpen] = useState(false)

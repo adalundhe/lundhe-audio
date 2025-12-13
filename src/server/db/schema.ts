@@ -94,7 +94,7 @@ export const discounts = createTable("discounts", {
   name: text("name").notNull(),
   description: text("description"),
   discountPercentage: real("discount_percentage").notNull(),
-  category: text("category", { enum: ["volume", "option_volume", "production", "bundle", "delivery_bundle"] }).notNull(),
+  category: text("category", { enum: ["volume", "option_volume", "production", "bundle", "delivery_bundle", "cart_bundle"] }).notNull(),
   productType: text("productType", { enum: ["mixing", "mastering", "mixing-and-mastering"]}).notNull(),
   minThreshold: integer("min_threshold"),
   maxThreshold: integer("max_threshold"),

@@ -3,13 +3,13 @@
 import type { QuoteData, PricingData } from "~/lib/mixing/pricing-types"
 import { Music, Clock, Layers, CheckCircle2, AlertCircle, Sparkles, Gift, RotateCcw } from "lucide-react"
 import { ReactNode } from "react"
+import { useMixingQuoteData } from "~/hooks/use-mixing-quote"
 
-type SummaryStepProps = {
-  quoteData: QuoteData
-  pricingData: PricingData
-}
 
-export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
+
+export function SummaryStep() {
+
+  const {quoteData } = useMixingQuoteData()
   const { songs, costs, totals, summary } = quoteData
 
   const hasAnyPerSongAddOns =

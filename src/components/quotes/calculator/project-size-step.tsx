@@ -5,27 +5,26 @@ import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
 import { Label } from "~/components/ui/label"
 import { Plus, Trash2, ChevronDown, ChevronRight, Info, HelpCircle } from "lucide-react"
-import type { PricingData, Song } from "~/lib/mixing/pricing-types"
+import type { Song } from "~/lib/mixing/pricing-types"
 import { getVolumeDiscountInfo, getIncludedRevisions } from "~/lib/mixing/pricing-calculator"
 import { Card, CardContent } from "~/components/ui/card"
 import { meetsThreshold } from "~/lib/meets-threshold"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/ui/tooltip"
 import { ProductOption } from "~/server/db/types"
+import { useMixingPricingData, useMixingSongs } from "~/hooks/use-mixing-quote"
 
-type ProjectSizeStepProps = {
-  songs: Song[]
-  setSongs: (songs: Song[]) => void
-  pricingData: PricingData
-}
 
-export function ProjectSizeStep({ songs, setSongs, pricingData }: ProjectSizeStepProps) {
+export function ProjectSizeStep() {
+
+  const { songs, setSongs } = useMixingSongs()
+  const { pricingData } = useMixingPricingData()
+
   const [collapsedSongs, setCollapsedSongs] = useState<Set<string>>(new Set())
   const [inputValues, setInputValues] = useState<
     Record<string, { tracks?: string; minutes?: string; seconds?: string }>
   >({})
 
   const { products, options, discounts } = pricingData
-
   const songMixProduct = products.find((p) => p.id === "song_mix")
   const highTrackProduct = products.find((p) => p.id === "high_track_count_mix")
   const revisions = products.find((p) => p.id === "mix_revision")
@@ -103,6 +102,7 @@ export function ProjectSizeStep({ songs, setSongs, pricingData }: ProjectSizeSte
       return
     }
     const parsed = Number.parseInt(value, 10)
+    console.log(parsed)
     if (!isNaN(parsed)) {
       const clamped = Math.max(min, Math.min(max, parsed))
       updateSong(songId, field, clamped)
@@ -267,7 +267,7 @@ export function ProjectSizeStep({ songs, setSongs, pricingData }: ProjectSizeSte
               {epDeal && (
                 <span
                   className={`inline-flex lg:text-sm text-xs items-center gap-1.5 px-2.5 py-1 rounded-full border ${
-                    epDealActive && !lpDeal && !xlpDealActive
+                    epDealActive && !lpDealActive && !xlpDealActive
                       ? "bg-green-500/20 text-green-600 border-green-500/40 ring-2 ring-green-500/20"
                       : "bg-green-500/10 text-green-600/30 border-green-500/20"
                   }`}

@@ -1,6 +1,6 @@
 import type { Product, ProductOption, Discount } from "~/server/db/types"
 import type { PricingData, Song, AddOns, DeliveryOptions, QuoteData, SongPriceDetail, MixingDealBreakdown, MixingDiscountDealSet } from "./pricing-types"
-import { meetsThreshold } from "../meets-threshold"
+import { meetsThreshold } from "~/lib/meets-threshold"
 
 // Helper to find a product by ID
 function findProduct(products: Product[], id: string): Product | undefined {
