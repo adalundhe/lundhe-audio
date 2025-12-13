@@ -592,18 +592,18 @@ export function SummaryStep({ quoteData, pricingData }: SummaryStepProps) {
         )}
 
         <span className="flex justify-between text-sm font-bold pt-2 text-muted-foreground">
-          <span>Add-On/Delivery Subtotal</span>
+          <span>Add-Ons/Delivery Subtotal</span>
           <span>${costs.optionsAndAddonsPreDiscountsTotal.toFixed(2)}</span>
         </span>
         {
           costs.optionsDiscounts > 0 && 
           <div className="flex justify-between text-sm text-green-600 font-bold">
-            <span>Total Add-On/Delivery Discounts</span>
+            <span>Add-Ons/Delivery Discounts</span>
             <span>-${costs.optionsDiscounts.toFixed(2)}</span>
           </div>
         }
         <div className="flex justify-between text-sm font-bold">
-          <span>Total Add-On/Delivery Cost</span>
+          <span>Add-Ons/Delivery Cost</span>
           <span>${costs.optionsAndAddonsTotal.toFixed(2)}</span>
         </div>
         <div className="flex flex-col border-t border-border gap-2">

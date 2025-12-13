@@ -31,9 +31,6 @@ export function ProjectSizeStep({ songs, setSongs, pricingData }: ProjectSizeSte
   const revisions = products.find((p) => p.id === "mix_revision")
 
   const { epDeal, lpDeal, xlpDeal } = getVolumeDiscountInfo(discounts)
-
-  console.log(epDeal)
-
   const lengthFeeOptions = options
     .filter((o) => o.category === "length_fee")
     .sort((a, b) => (a.minThreshold ?? 0) - (b.minThreshold ?? 0))

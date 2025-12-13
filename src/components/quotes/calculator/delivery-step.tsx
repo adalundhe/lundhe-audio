@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { Checkbox } from "~/components/ui/checkbox"
 import { Button } from "~/components/ui/button"
 import type { DeliveryOptions, Song, PricingData } from "~/lib/mixing/pricing-types"
@@ -224,12 +224,11 @@ export function DeliveryStep({ deliveryOptions, setDeliveryOptions, songs, prici
           const hasSelections = selectedSongs.length > 0
           const selectedCount = selectedSongs.length
           const discountPercentage = getOptionVolumeDiscount(selectedCount)
-          const isHiFi = isHiFiOption(option.key)
+          const isHiFi = isHiFiOption(option.key) && deliveryOptions["highResMixdownSongs"].length > 0 && deliveryOptions["filmMixdownSongs"].length > 0
 
           const totalDiscount = discountPercentage + (
             isHiFi ? hiFiDiscountPrecentage : 0
           )
-
 
           const optionPrice = option.fixedPrice ?? songs.map(
             song => option.getPrice ? option.getPrice(song) : 0
