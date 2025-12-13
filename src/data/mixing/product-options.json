@@ -3,11 +3,11 @@
     "id": "track_fee",
     "name": "Track Fee",
     "description": "Additional fee for songs with 11-100 tracks",
-    "price": 20,
+    "price": 50,
     "priceType": "flat",
     "category": "track_fee",
     "productType": "mixing",
-    "perCount": 10,
+    "perCount": 25,
     "minThreshold": 11,
     "maxThreshold": 50
   },
