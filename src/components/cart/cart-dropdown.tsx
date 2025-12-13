@@ -183,6 +183,18 @@ export function CartDropdown() {
   const [isOpen, setIsOpen] = useState(false)
   const itemCount = useCartItemCount()
 
+    // Dropdown uses responsive Tailwind classes instead of isMobile state
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [isOpen])
+
   // Dropdown uses responsive Tailwind classes instead of isMobile state
   return (
     <div className="relative">
