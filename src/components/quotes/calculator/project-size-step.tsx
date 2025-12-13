@@ -275,7 +275,7 @@ export function ProjectSizeStep({ songs, setSongs, pricingData }: ProjectSizeSte
                       : "bg-green-500/10 text-green-600/30 border-green-500/20"
                   }`}
                 >
-                  {epDeal.minThreshold}-{epDeal.maxThreshold} songs:{" "}
+                  {epDeal.minThreshold}+ songs:{" "}
                   <span className="font-semibold">{epDeal.discountPercentage}% off</span>
                   <span className="font-medium">({epDeal.name})</span>
                 </span>
