@@ -22,6 +22,7 @@ export interface MasteringAddOns {
   stemMasteringSongs: Record<string, number> // songId -> stem count
   restorationRemasteringSongs: string[]
   virtualSessionHours: number
+  revisions: number
 }
 
 export interface MasteringDeliveryOptions {

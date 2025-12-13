@@ -1,32 +1,16 @@
 import type { Product, ProductOption, Discount } from "~/server/db/types"
-import type { MasteringPricingData, MasteringQuoteData, MasteringDiscountDealSet, MasteringDealBreakdown } from "./pricing-types"
+import type { 
+  MasteringPricingData,
+  MasteringQuoteData,
+  MasteringDiscountDealSet,
+  MasteringDealBreakdown,
+  MasteringAddOns,
+  MasteringDeliveryOptions,
+  MasteringSong,
+} from "./pricing-types"
 import { meetsThreshold } from "../meets-threshold"
 
 
-// Mastering-specific types
-export interface MasteringSong {
-  id: string
-  title: string
-  minutes: number
-  seconds: number
-}
-
-export interface MasteringAddOns {
-  vinylMasteringSongs: string[]
-  streamingMasteringSongs: string[]
-  redbookMasteringSongs: string[]
-  stemMasteringSongs: Record<string, number> // songId -> stem count
-  restorationRemasteringSongs: string[]
-  virtualSessionHours: number
-  revisions: number
-}
-
-export interface MasteringDeliveryOptions {
-  highResMasterSongs: string[]
-  ddpImageSongs: string[]
-  isrcEncodingSongs: string[]
-  rushDeliverySongs: string[]
-}
 
 export interface MasteringSongPriceDetail {
   songId: string

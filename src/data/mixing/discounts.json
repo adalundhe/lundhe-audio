@@ -158,5 +158,15 @@
     "productType": "mixing-and-mastering",
     "minThreshold": 8,
     "maxThreshold": null
+  },
+  {
+    "id": "mix_and_master_bundle",
+    "name": "Mix and Master Bundle",
+    "description": "15% discount when purchasing both a mixing and mastering session",
+    "discountPercentage": 15,
+    "category": "cart_bundle",
+    "productType": "mixing-and-mastering",
+    "minThreshold": null,
+    "maxThreshold": null
   }
 ]

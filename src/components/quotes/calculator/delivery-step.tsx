@@ -1,24 +1,22 @@
 "use client"
 
-import { useMemo, useState } from "react"
-import { Checkbox } from "~/components/ui/checkbox"
+import { useState } from "react"
 import { Button } from "~/components/ui/button"
-import type { DeliveryOptions, Song, PricingData } from "~/lib/mixing/pricing-types"
+import type { DeliveryOptions, Song } from "~/lib/mixing/pricing-types"
 import { meetsThreshold } from "~/lib/meets-threshold"
 import { ChevronDown, ChevronUp, Info, Sparkles, Check } from "lucide-react"
-import { getDiscountLable } from "~/lib/discounts"
+import { useMixingDeliveryOptions, useMixingPricingData, useMixingSongs } from "~/hooks/use-mixing-quote"
 
-type DeliveryStepProps = {
-  deliveryOptions: DeliveryOptions
-  setDeliveryOptions: (options: DeliveryOptions) => void
-  songs: Song[]
-  pricingData: PricingData
-}
 
 type DeliveryOptionKey = keyof DeliveryOptions
 
 
-export function DeliveryStep({ deliveryOptions, setDeliveryOptions, songs, pricingData }: DeliveryStepProps) {
+export function DeliveryStep() {
+
+  const { pricingData } = useMixingPricingData()
+  const { songs } = useMixingSongs()
+  const {deliveryOptions, setDeliveryOptions } = useMixingDeliveryOptions()
+
   const [expandedOptions, setExpandedOptions] = useState<Record<DeliveryOptionKey, boolean>>({
     highResMixdownSongs: false,
     filmMixdownSongs: false,

@@ -6,19 +6,13 @@ import { useState } from "react"
 import { Label } from "~/components/ui/label"
 import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
-import type { MasteringPricingData } from "~/lib/mastering/pricing-types"
-import type { MasteringSong, MasteringAddOns } from "~/lib//mastering/mastering-pricing-calculator"
+import type { MasteringSong, MasteringAddOns  } from "~/lib/mastering/pricing-types"
 import { getOptionVolumeDiscountInfo, getStemMasteringPrice } from "~/lib/mastering/mastering-pricing-calculator"
 import { meetsThreshold } from "~/lib/meets-threshold"
 import { ChevronDown, ChevronUp, Check, Info, Sparkles, RotateCcw } from "lucide-react"
 import { Discount } from "~/server/db/types"
+import { useMasteringAddOns, useMasteringPricingData, useMasteringSongs } from "~/hooks/use-mastering-quote"
 
-type MasteringAddOnsStepProps = {
-  addOns: MasteringAddOns
-  setAddOns: React.Dispatch<React.SetStateAction<MasteringAddOns>>
-  songs: MasteringSong[]
-  pricingData: MasteringPricingData
-}
 
 
 const getRevisionVolumeDiscount = (count: number, discounts: Discount[]) => {
@@ -44,7 +38,13 @@ const getRevisionVolumeDiscount = (count: number, discounts: Discount[]) => {
   return bestDiscount
 }
 
-export function MasteringAddOnsStep({ addOns, setAddOns, songs, pricingData }: MasteringAddOnsStepProps) {
+export function MasteringAddOnsStep() {
+
+
+  const { pricingData } = useMasteringPricingData()
+  const { songs } = useMasteringSongs()
+  const { addOns, setAddOns } = useMasteringAddOns()
+
   const [openAddOns, setOpenAddOns] = useState<Record<string, boolean>>({})
   const [virtualSessionOpen, setVirtualSessionOpen] = useState(false)
   const [revisionsOpen, setRevisionsOpen] = useState(false)

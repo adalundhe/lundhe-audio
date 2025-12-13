@@ -1,22 +1,13 @@
 "use client"
 
-import type React from "react"
-
 import { useState } from "react"
 import { Button } from "~/components/ui/button"
-import type { MasteringPricingData } from "~/lib/mastering/pricing-types"
-import type { MasteringSong, MasteringDeliveryOptions } from "~/lib/mastering/mastering-pricing-calculator"
+import type { MasteringSong, MasteringDeliveryOptions  } from "~/lib/mastering/pricing-types"
 import { getOptionVolumeDiscountInfo } from "~/lib/mastering/mastering-pricing-calculator"
 import { meetsThreshold } from "~/lib/meets-threshold"
 import { ChevronDown, ChevronUp, Check, Info, Sparkles } from "lucide-react"
-import { getDiscountLable } from "~/lib/discounts"
+import { useMasteringDeliveryOptions, useMasteringPricingData, useMasteringSongs } from "~/hooks/use-mastering-quote"
 
-type MasteringDeliveryStepProps = {
-  deliveryOptions: MasteringDeliveryOptions
-  setDeliveryOptions: React.Dispatch<React.SetStateAction<MasteringDeliveryOptions>>
-  songs: MasteringSong[]
-  pricingData: MasteringPricingData
-}
 
 type DeliveryOptionKey = keyof MasteringDeliveryOptions
 
@@ -25,12 +16,12 @@ const checkIsDistributionOption = (optionKey: string) => {
   return ["highResMasterSongs", "ddpImageSongs", "isrcEncodingSongs", "rushDeliverySongs"].includes(optionKey)
 }
 
-export function MasteringDeliveryStep({
-  deliveryOptions,
-  setDeliveryOptions,
-  songs,
-  pricingData,
-}: MasteringDeliveryStepProps) {
+export function MasteringDeliveryStep() {
+
+  const { pricingData } = useMasteringPricingData()
+  const { songs } = useMasteringSongs()
+  const {deliveryOptions, setDeliveryOptions } = useMasteringDeliveryOptions()
+
   const [expandedOptions, setExpandedOptions] = useState<Record<DeliveryOptionKey, boolean>>({
     highResMasterSongs: false,
     ddpImageSongs: false,
