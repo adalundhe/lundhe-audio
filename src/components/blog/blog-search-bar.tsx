@@ -23,7 +23,7 @@ export const BlogSearchBar = () => {
     })))
 
     return (
-        <div className="md:w-full w-[90%] flex items-center md:gap-4 gap-2 my-2">
+        <div className="2xl:w-3/4 w-full flex items-center md:gap-4 gap-2 my-2">
             <Button
                 className='p-0 justify-self-start border rounded-sm px-2 py-2 text-sm hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black'
                 onClick={() => update({
