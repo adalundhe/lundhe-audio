@@ -139,6 +139,8 @@ const updateMixProducts = async () => {
   await Promise.allSettled(updates)
   let inserted = 1;
   for (const item of updated) {
+
+    console.log(`Updated: ${item.name} - ${inserted}/${items}`)
     inserted += 1
   }
     
