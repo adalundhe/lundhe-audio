@@ -16,7 +16,7 @@ export const checkout = async ({
     user: Pick<UserResource, "id" >,
     items: CartItem[]
 }) => {
-    const stripe = new Stripe(env.NODE_ENV === 'development' ? env.STRIPE_SANDBOX_SECRET_KEY ?? '' : '' as string, { apiVersion: '2025-11-17.clover'})
+    const stripe = new Stripe(env.NODE_ENV === 'development' ? env.STRIPE_SANDBOX_SECRET_KEY ?? env.STRIPE_SECRET_KEY : env.STRIPE_SECRET_KEY as string, { apiVersion: '2025-11-17.clover'})
 
     try {
       const origin = env.LUNDHE_AUDIO_DOMAIN
