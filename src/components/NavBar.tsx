@@ -28,8 +28,16 @@ import { ScrollArea } from "~/components/ui/scroll-area";
 import NavBarImage from "./NavBarImage";
 import { ModeToggle } from './ModeToggle';
 import { CartDropdown } from './cart/cart-dropdown';
-import { ClerkProvider, SignedIn, SignedOut, SignInButton, useClerk, UserButton } from '@clerk/nextjs'
+import { SignedIn, SignedOut, useClerk } from '@clerk/nextjs'
 import { Button } from './ui/button';
+import { User } from 'lucide-react';
+import Link from 'next/link';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "~/components/ui/tooltip"
+import { ThemeProvider } from 'next-themes';
 
 const courierPrime = Courier_Prime({
     weight: "400",
@@ -61,7 +69,25 @@ export const NavBar = () => {
                             </NavigationMenuTrigger>
                         </div>
                         <div className='col-span-10 flex flex-col items-center justify-center px-4 h-full'>
-                            <div className='flex ml-auto'>
+                            <div className='flex ml-auto gap-4'>
+                                <SignedIn>
+                                    <Tooltip>
+                                        <TooltipTrigger>
+                                            <Button className='rounded-sm py-2 px-2 hover:text-white hover:bg-black dark:hover:bg-white dark:hover:text-black'>
+                                                <Link href={"/account"}>
+                                                    <User/>
+                                                </Link>
+                                            </Button>
+                                        </TooltipTrigger>
+                                        <TooltipContent className={`${courierPrime.className} p-0 border dark:border-white tooltip-content`}>
+                                           <ThemeProvider>
+                                                <div className='dark:bg-black dark:text-white p-2 text-md'>
+                                                    Go to my account
+                                                </div>
+                                           </ThemeProvider>
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </SignedIn>
                                 <SignedIn>
                                     <CartDropdown/>
                                 </SignedIn>
@@ -83,14 +109,13 @@ export const NavBar = () => {
                                         </AccordionItem>
                                     </SignedOut>
                                     <SignedIn>
-                                        <AccordionItem value='sign-out'>
+                                        <AccordionItem value='sign-out' className='px-2'>
                                             <Button className='border border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black my-4' onClick={() => signOut()}>
                                                 sign out
                                             </Button>
                                         </AccordionItem>
                                     </SignedIn>
                                     <AccordionItem value="home" className={"py-2 px-2 h-[40px] w-full flex grow-1 items-center space-x-2"}>
-                                        {/* <MdHome/> */}
                                         <NavigationMenuLink href="/" className={navigationMenuLinkStyle()}>
                                             home
                                         </NavigationMenuLink>

@@ -243,3 +243,14 @@ svg {
   @apply text-red-500; /* Uses Tailwind's red-500 color */
 }
 
+.tooltip-content::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  /* border-color: transparent transparent white transparent; */
+  @apply border-t-transparent border-l-transparent border-b-white border-r-transparent
+}

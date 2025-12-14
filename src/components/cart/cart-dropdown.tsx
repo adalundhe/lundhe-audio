@@ -11,7 +11,6 @@ import {
 } from "~/lib/stores/shopping-cart"
 import {
   useCartItemCount,
-  useCartActions,
   useCart,
   useCartState,
 } from '~/hooks/use-shopping-cart'

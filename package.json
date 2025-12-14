@@ -102,6 +102,7 @@
     "remark-parse": "^11.0.0",
     "shiki": "^3.19.0",
     "sonner": "^1.7.4",
+    "stripe": "^20.0.0",
     "superjson": "^2.2.6",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
