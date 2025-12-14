@@ -2,7 +2,7 @@
 
 import { Card, CardContent } from "~/components/ui/card"
 import { Button } from "~/components/ui/button"
-import { Breadcrumbs } from "~/components/quotes/calculator/breadcrumbs"
+import { Breadcrumbs } from "~/components/quotes/mixing-calculator/breadcrumbs"
 import { MasteringProjectSizeStep } from "~/components/quotes/mastering-calculator/mastering-project-size-step"
 import { MasteringAddOnsStep } from "~/components/quotes/mastering-calculator/mastering-add-ons-step"
 import { MasteringDeliveryStep } from "~/components/quotes/mastering-calculator/mastering-delivery-step"
@@ -34,7 +34,7 @@ export function MasteringCalculator() {
 
   const handleSubmit = () => {
     if (quoteData) {
-      const quoteName = `Mastring Session (${quoteData.totals.songCount} song${quoteData.totals.songCount !== 1 ? "s" : ""})`
+      const quoteName = `Mastering Session (${quoteData.totals.songCount} song${quoteData.totals.songCount !== 1 ? "s" : ""})`
       addQuote("mastering", quoteName, quoteData)
       reset()
     }

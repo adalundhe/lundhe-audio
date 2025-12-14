@@ -346,7 +346,7 @@ export function buildMasteringQuoteData(
   let stemMasteringPreDiscountCost = 0
   let stemMasteringDiscountAmount = 0
   let restorationRemasteringCost = 0
-  let restorationRemastringPreDiscountCost = 0
+  let restorationRemasteringPreDiscountCost = 0
   let restorationRemasteringDiscountAmount = 0
 
   let multimediaDealName = undefined
@@ -571,7 +571,7 @@ export function buildMasteringQuoteData(
     // Restoration remastering
     if (song.addOns.restorationRemastering) {
       let price = restorationPrice
-      restorationRemastringPreDiscountCost += restorationPrice
+      restorationRemasteringPreDiscountCost += restorationPrice
 
       if (restorationVolumeDiscount) {
         price = applyDiscount(restorationPrice, restorationVolumeDiscount.discountPercentage)
@@ -792,7 +792,7 @@ export function buildMasteringQuoteData(
     streamingMasteringPreDiscountCost,
     redbookMasteringPreDiscountCost,
     stemMasteringPreDiscountCost,
-    restorationRemastringPreDiscountCost,
+    restorationRemasteringPreDiscountCost,
     virtualSessionCost,
     highResMasterPreDiscountCost,
     ddpImagePreDiscountCost,
@@ -819,7 +819,7 @@ export function buildMasteringQuoteData(
     streamingMasteringPreDiscountCost,
     redbookMasteringPreDiscountCost,
     stemMasteringPreDiscountCost,
-    restorationRemastringPreDiscountCost,
+    restorationRemasteringPreDiscountCost,
     virtualSessionCost,
     highResMasterPreDiscountCost,
     ddpImagePreDiscountCost,

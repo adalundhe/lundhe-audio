@@ -45,3 +45,9 @@ export type Discount = {
     maxThreshold: number | null
 
 }
+
+export type PricingData = {
+    products: Product[]
+    discounts: Discount[]
+    options: ProductOption[]
+}

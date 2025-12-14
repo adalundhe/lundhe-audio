@@ -1,15 +1,17 @@
 "use client"
 
-import type { QuoteData, PricingData } from "~/lib/mixing/pricing-types"
 import { Music, Clock, Layers, CheckCircle2, AlertCircle, Sparkles, Gift, RotateCcw } from "lucide-react"
 import { ReactNode } from "react"
 import { useMixingQuoteData } from "~/hooks/use-mixing-quote"
+import { QuoteData } from "~/lib/mixing/pricing-types"
 
 
+export const MixingSummaryView = ({
+  quoteData
+}: {
+  quoteData: QuoteData
+}) => {
 
-export function SummaryStep() {
-
-  const {quoteData } = useMixingQuoteData()
   const { songs, costs, totals, summary } = quoteData
 
   const hasAnyPerSongAddOns =
@@ -25,7 +27,6 @@ export function SummaryStep() {
   const formattedTotalLength = `${totals.totalLengthMinutes}m ${totals.totalLengthSeconds}s`
 
   
-
   return (
     <div className="space-y-6">
       <div>
@@ -341,7 +342,7 @@ export function SummaryStep() {
 
 
         {summary.additionalRevisions > 0 && (
-          <div className="flex justify-between text-sm">
+          <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
             <span className="text-muted-foreground">
               Additional Revisions ({summary.additionalRevisions} × ${costs.perRevisionPrice}/each)
               <span className="flex lg:flex-row flex-col gap-2">
@@ -480,7 +481,7 @@ export function SummaryStep() {
         )}
 
         {costs.virtualSessionCost > 0 && (
-          <div className="flex justify-between text-sm">
+          <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
             <span className="text-muted-foreground">
               Virtual Session ({costs.virtualSessionHours} hour{costs.virtualSessionHours !== 1 ? "s" : ""})
             </span>
@@ -654,5 +655,14 @@ export function SummaryStep() {
         </div>
       )}
     </div>
+  )
+}
+
+export function SummaryStep() {
+
+  const {quoteData } = useMixingQuoteData()
+
+  return (
+    <MixingSummaryView quoteData={quoteData}/>
   )
 }

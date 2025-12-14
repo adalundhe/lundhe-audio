@@ -1,14 +1,17 @@
 "use client"
 
-import type { MasteringPricingData } from "~/lib/mastering/pricing-types"
 import type { MasteringQuoteData } from "~/lib/mastering/pricing-types"
 import { Music, Clock, CheckCircle2, AlertCircle, Sparkles, Gift, RotateCcw } from "lucide-react"
 import { ReactNode } from "react"
 import { useMasteringQuoteData } from "~/hooks/use-mastering-quote"
 
-export function MasteringSummaryStep() {
 
-  const { quoteData } = useMasteringQuoteData()
+export const MasteringSummaryView = ({
+  quoteData
+}: {
+  quoteData: MasteringQuoteData
+}) =>{
+
 
   const { songs, totals, costs, summary } = quoteData
 
@@ -355,8 +358,8 @@ export function MasteringSummaryStep() {
         </div>
 
         {summary.additionalRevisions > 0 && (
-          <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">
+          <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
+            <span className="text-muted-foreground lg:block flex flex-col">
               Additional Revisions ({summary.additionalRevisions} × ${costs.perRevisionPrice}/each)
               <span className="flex lg:flex-row flex-col gap-2">
               {
@@ -525,7 +528,7 @@ export function MasteringSummaryStep() {
         )}
 
         {costs.virtualSessionCost > 0 && (
-          <div className="flex justify-between text-sm">
+          <div className="flex lg:flex-row flex-col lg:gap-0 gap-2 justify-between text-sm">
             <span className="text-muted-foreground">
               Virtual Session ({costs.virtualSessionHours} hour{costs.virtualSessionHours !== 1 ? "s" : ""})
             </span>
@@ -705,5 +708,14 @@ export function MasteringSummaryStep() {
         </div>
       )}
     </div>
+  )
+}
+
+export function MasteringSummaryStep() {
+
+  const { quoteData } = useMasteringQuoteData()
+
+  return (
+    <MasteringSummaryView quoteData={quoteData}/>
   )
 }

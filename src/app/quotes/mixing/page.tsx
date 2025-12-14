@@ -1,4 +1,4 @@
-import { MixingQuoteProvider } from "~/components/quotes/calculator/mixing-quote-provider"
+import { MixingQuoteProvider } from "~/components/quotes/mixing-calculator/mixing-quote-provider"
 import { StudioCalculator } from "~/components/quotes/studio-calculator"
 import { api } from "~/lib/server-client"
 
