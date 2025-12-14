@@ -15,6 +15,7 @@ import { db } from '~/server/db/client';
 import { products, productOptions, discounts, cart, cartItems, cartDiscounts } from "~/server/db/schema"
 import { eq, or } from "drizzle-orm"
 import { AppliedDiscount, CartInitData, CartItem } from '~/lib/stores/shopping-cart';
+import { TooltipProvider } from '~/components/ui/tooltip';
 // import {ShopifyProvider} from '@shopify/hydrogen-react';
 // import {CartProvider, useCart} from '@shopify/hydrogen-react';
 // import { type CountryCode, type LanguageCode } from "@shopify/hydrogen-react/storefront-api-types";
@@ -160,20 +161,22 @@ export default async function RootLayout ({
           <Script src={`https://www.google.com/recaptcha/api.js?render=${env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY}`} async/>
           <body>
                 <ThemeProvider attribute="class">
-                    <TRPCReactProvider>
-                      <CartStoreProvider pricingData={{
-                        products: productsData,
-                        options: optionsData,
-                        discounts: discountsData,
-                      }} initData={cartData}>
-                        <NavBar />
-                        <div className={`flex flex-col h-full`}>
-                                {children}
-                        </div>
-                        <Footer />
-                        <ScrollToTop minHeight={100} scrollTo={0}/>               
-                      </CartStoreProvider>          
-                    </TRPCReactProvider>
+                    <TooltipProvider>
+                      <TRPCReactProvider>
+                        <CartStoreProvider pricingData={{
+                          products: productsData,
+                          options: optionsData,
+                          discounts: discountsData,
+                        }} initData={cartData}>
+                          <NavBar />
+                          <div className={`flex flex-col h-full`}>
+                                  {children}
+                          </div>
+                          <Footer />
+                          <ScrollToTop minHeight={100} scrollTo={0}/>               
+                        </CartStoreProvider>          
+                      </TRPCReactProvider>
+                    </TooltipProvider>
                 </ThemeProvider>
           </body>
           {/* </CartProvider>
