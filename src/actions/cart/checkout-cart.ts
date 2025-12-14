@@ -21,7 +21,6 @@ export const checkout = async ({
     try {
       const origin = env.LUNDHE_AUDIO_DOMAIN
 
-
       const session = await stripe.checkout.sessions.create({
         mode: 'payment',
         payment_method_types: ['card', 'link'],
