@@ -33,11 +33,11 @@ export const BlogNavCard = ({
     
 
     return (
-            <Card className="bg-(--background) w-full h-full rounded-none border shadow-none transition-all motion-reduce:transition-none duration-700 hover:scale-110 motion-reduce:hover:scale-100"
+            <Card className="bg-(--background) w-full h-full rounded-none border shadow-none md:transition-all motion-reduce:transition-none md:duration-700 md:hover:scale-110 motion-reduce:hover:scale-100"
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
             >
-                <div className='py-8 px-4 w-full flex flex-col gap-4'>
+                <div className='py-4 px-4 w-full flex flex-col gap-4'>
                     <div className='lg:grid lg:grid-cols-8 flex flex-col gap-2'>
 
                         <h1 className='col-span-6 text-2xl w-full'>{title}</h1>
@@ -61,10 +61,10 @@ export const BlogNavCard = ({
                         <p className='col-span-6 flex items-start justify-start text-sm'>{description}</p>
                         <p className='col-span-2 w-full lg:text-right text-xs text-slate-900/50 dark:text-neutral-100/50'>{date}</p>
                     </div>
-                    <div className='flex my-4 gap-4 md:justify-start items-center justify-center'>
+                    <div className='flex gap-4 md:justify-start items-center justify-center'>
                         {
                             tags.map((tag, idx) => (
-                                <div key={`${titleSlug}-${tag}-${idx}`} className='items-center justify-center'>
+                                <div key={`${titleSlug}-${tag}-${idx}`}>
                                     <BlogTag tag={tag} />
                                 </div>
                             ))

@@ -25,7 +25,7 @@ export const BlogTag = ({
                 type: 'filter',
                 value: tag,
             })}
-            className={`lg:text-[1vmax] md:text-[1.25vmax] text-[2vmax] rounded-xs md:w-[8vmax] md:w-[10vmax] w-[16vmax] lg:h-[2.5vmax] md:h-[2.5vmax] h-[5vmax] flex items-center justify-center border ${filters.includes(tag) ? 'text-cyan-500' : 'text-slate-500/90'} hover:text-cyan-500 hover:border-cyan-500 cursor-pointer`}
+            className={`text-xs align-middle rounded-xs px-2 py-1 border ${filters.includes(tag) ? 'text-cyan-500' : 'text-muted-foreground'} hover:text-cyan-500 hover:border-cyan-500 cursor-pointer`}
         >
             {tag}
         </Button>
