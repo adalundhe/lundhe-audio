@@ -74,7 +74,7 @@ export const NavBar = () => {
                             <ScrollArea className={`h-[60vh]`}>
                                 <Accordion defaultValue="home" type="single" collapsible className="flex flex-col w-full">
                                     <SignedOut>
-                                        <AccordionItem value='sign-in-or-up px-2'>
+                                        <AccordionItem value='sign-in-or-up' className='px-2'>
                                                 <Button className='border border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black my-4'>
                                                     <NavigationMenuLink href='/sign-in' className='underline-none'>
                                                         sign in
