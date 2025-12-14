@@ -37,31 +37,31 @@ export const BlogNavCard = ({
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
             >
-                <div className='py-8 px-2 w-full flex flex-col'>
-                    <div className='grid grid-cols-8'>
+                <div className='py-8 px-4 w-full flex flex-col gap-4'>
+                    <div className='lg:grid lg:grid-cols-8 flex flex-col gap-2'>
 
-                        <h1 className='col-span-6 flex items-start text-2xl w-full'>{title}</h1>
-                        <div className='col-span-2 flex items-start justify-end w-full'>
+                        <h1 className='col-span-6 text-2xl w-full'>{title}</h1>
+                        <div className='col-span-2 flex items-start lg:justify-end w-full'>
                             <div className={`w-fit flex justify-end items-center space-x-2 ${isHovered ? 'hover:text-cyan-500' : 'text-slate-900/80 dark:text-neutral-100/80'}`}>
 
                                 <Link href={`/blog/${link}`} className="cursor-pointer">
-                                    <p className='lg:text-[1.5vmax] md:text-[2vmax] text-[2.5vmax]'>
+                                    <p className='text-sm'>
                                         read
                                     </p>
                                 </Link>
                                 <div className='w-full'>
                                 {
-                                    isHovered ? <BookOpen className='md:h-[1.5vmax] md:w-[1.5vmax] h-[2vmax] w-[2vmax]'/> : <Book className='md:h-[2vmax] md:w-[2vmax] h-[2vmax] w-[2vmax]'/>
+                                    isHovered ? <BookOpen className='!w-[16px] !h-[16px]'/> : <Book className='!w-[16px] !h-[16px]'/>
                                 }
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className='grid grid-cols-8'>
-                        <p className='col-span-6 flex items-start justify-start text-[1.5vmax]'>{description}</p>
-                        <p className='col-span-2 flex justify-end items-start text-md text-slate-900/50 dark:text-neutral-100/50'>{date}</p>
+                    <div className='lg:grid lg:grid-cols-8 flex flex-col gap-2'>
+                        <p className='col-span-6 flex items-start justify-start text-sm'>{description}</p>
+                        <p className='col-span-2 w-full lg:text-right text-xs text-slate-900/50 dark:text-neutral-100/50'>{date}</p>
                     </div>
-                    <div className='flex my-4 gap-4 w-full md:justify-start items-center justify-center'>
+                    <div className='flex my-4 gap-4 md:justify-start items-center justify-center'>
                         {
                             tags.map((tag, idx) => (
                                 <div key={`${titleSlug}-${tag}-${idx}`} className='items-center justify-center'>

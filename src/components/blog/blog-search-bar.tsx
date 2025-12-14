@@ -23,9 +23,9 @@ export const BlogSearchBar = () => {
     })))
 
     return (
-        <div className="md:w-full w-[90%] flex items-center md:gap-4 gap-2 h-[4vmax] mb-4">
+        <div className="md:w-full w-[90%] flex items-center md:gap-4 gap-2 my-2">
             <Button
-                className='p-0 justify-self-start'
+                className='p-0 justify-self-start border rounded-sm px-2 py-2 text-sm hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black'
                 onClick={() => update({
                         type: 'sort',
                         value: direction === 'ASC' ? 'DESC' : 'ASC',
@@ -33,16 +33,14 @@ export const BlogSearchBar = () => {
                     })
                 }
             >
-                <div className='border rounded-sm px-2 py-2 md:h-[3vmax] h-[4vmax] md:w-[3vmax] w-[4vamx] md:min-w-[3vmax] min-w-[4vmax] md:min-h-[3vmax] min-h-[4vmax] flex items-center justify-center'>
-                    <BlogSortIcon 
-                        styles='md:w-[1.5vmax] w-[2vmax] md:h-[1.5vmax] h-[2vmax]'
-                        direction={direction}
-                        field={field}
-                    />
-                </div>
+                <BlogSortIcon 
+                    styles='!w-[16px] !h-[16px]'
+                    direction={direction}
+                    field={field}
+                />
             </Button>
             <Button
-                className='p-0 justify-self-start'
+                className='p-0 justify-self-start px-2 py-2 border rounded-sm text-sm hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black'
                 onClick={() => update({
                         type: 'sort',
                         value: direction,
@@ -50,21 +48,16 @@ export const BlogSearchBar = () => {
                     })
                 }
             >
-                <div className='border rounded-sm px-2 py-2 md:h-[3vmax] h-[4vmax] md:w-[6vmax] w-[8vmax] md:min-w-[6vmax] min-w-[8vmax] md:min-h-[3vmax] min-h-[4vmax] flex items-center justify-center md:text-[1.5vmax] text-[2vmax] '>
-                    {
-                        field === 'title' ? 'Title' : 'Date'
-                    }
-                </div>
+                {field === 'title' ? 'Title' : 'Date'}
             </Button>
-            <div className='w-full flex flex-col md:h-[3vmax] h-[4vmax] md:max-h-[3vmax] max-h-[4vmax] justify-center'>
-                <div className='flex md:h-[2vmax] h-full w-full justify-end gap-2 items-center'>
-
+            <div className='w-full flex flex-col justify-center'>
+                <div className='flex h-full w-full justify-end gap-2 items-center'>
                     <div>
                         <Search
-                            className='md:w-[1.5vmax] w-[2vmax] md:h-[1.5vmax] h-[2vmax]'
+                            className='!w-[16px] !h-[16px]'
                         />
                     </div>
-                    <Input value={query} className='md:text-[1.5vmax] text-[1vmax] h-full md:w-1/4 w-1/2 py-2' onChange={(e) => update({
+                    <Input value={query} className='text-sm h-full md:w-1/4 w-1/2 py-2' onChange={(e) => update({
                         type: 'search',
                         value: e.target.value,
                     })} />
