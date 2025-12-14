@@ -23,9 +23,9 @@ export function QuoteViewModal({ isOpen, onClose, item, pricingData }: QuoteView
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
+      <DialogContent className="mx-1 max-h-[90vh] overflow-y-auto">
+        <DialogHeader className="my-2">
+          <DialogTitle className="flex lg:flex-row flex-col items-center gap-2">
             <span className="text-xs px-2 py-0.5 rounded bg-muted text-muted-foreground capitalize">{item.type}</span>
             {item.name}
           </DialogTitle>
