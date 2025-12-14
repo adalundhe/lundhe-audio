@@ -31,7 +31,6 @@ export const checkout = async ({
                     metadata: {
                         cartItemId: item.id,
                         cartId: cartId,
-                        userId: user.id,
                     },
                 },
                 unit_amount: item.price,
