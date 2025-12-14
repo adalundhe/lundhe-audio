@@ -1,44 +1,27 @@
 import { env } from '~/env'
 
 
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { NextRequest, NextResponse } from 'next/server'
  
-type ResponseData = {
-  message: string
-}
+export async function DELETE(_: NextRequest,  { params }: { params: Promise<{ userId: string }> }) {
+    const { userId } = await params
 
-function userIdIsString(userId: string | string[] | undefined): userId is string {
-    return userId?.toString !== undefined
-}
- 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<ResponseData>
-) {
+    const headers = new Headers()
+    headers.append("Authorization", `Bearer ${env.CLERK_SECRET_KEY}`)
+    headers.append('Content-Type', 'application/json')
 
-    if (req.method === "DELETE") {
+   
+    
 
-        const { userId } = req.query
-
-        if (!userIdIsString(userId)){
-            return res.status(400).json({message:"Invalid userId"})
-        }
-
-        const headers = new Headers()
-        headers.append("Authorization", `Bearer ${env.CLERK_SECRET_KEY}`)
-        headers.append('Content-Type', 'application/json')
-        
-
-        return await fetch(`https://api.clerk.com/v1/users/${userId}`, {
-            method: "DELETE",
-            headers: headers,
-        })
-            .then(_ => res.status(200).json({ message: 'OK' }))
-            .catch(_ => res.status(500))
-        
-
-    }
-
-    return res.status(405)
-  
+    return await fetch(`https://api.clerk.com/v1/users/${userId}`, {
+        method: "DELETE",
+        headers: headers,
+    })
+        .then(_ => NextResponse.next({
+            status: 204,
+            
+        }))
+        .catch(_ => NextResponse.next({
+            status: 500
+        }))
 }
