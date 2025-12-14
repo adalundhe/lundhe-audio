@@ -32,7 +32,7 @@ export default function Blog() {
                 <BlogSearchBar/>
             </div>
             <div className='flex w-full justify-center'>
-                <div className="md:w-full w-[90%] mt-4 h-full flex flex-col items-center justify-center gap-4">
+                <div className="2xl:w-3/4 w-full mt-4 h-full flex flex-col items-center justify-center gap-4">
                     {
                         posts.map((post, idx) => (
                             <div key={`blog-${idx}-${post.date}`} className='mb-4 w-full'>
