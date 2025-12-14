@@ -1,6 +1,6 @@
 "use client"
 import { ArrowDownAZ, ArrowUpAZ, ArrowUpNarrowWide, ArrowDownNarrowWide } from "lucide-react";
-import { type SortField, type SortDirection } from "~/stores/posts-store";
+import { type SortField, type SortDirection } from "~/lib/stores/posts-store";
 
 
 export const BlogSortIcon = ({

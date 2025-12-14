@@ -3,7 +3,6 @@ import { persist } from "zustand/middleware"
 import type { QuoteData } from "~/lib/mixing/pricing-types"
 import type { MasteringQuoteData } from "~/lib/mastering/pricing-types"
 import { Discount, PricingData } from "~/server/db/types"
-import { useShallow } from "zustand/react/shallow"
 
 export type CartItemType = "mixing" | "mastering" | "product"
 
@@ -16,6 +15,7 @@ interface BaseCartItem {
 export interface QuoteCartItem extends BaseCartItem {
   type: "mixing" | "mastering"
   quote: QuoteData | MasteringQuoteData
+  price: number
 }
 
 export interface ProductCartItem extends BaseCartItem {
@@ -36,6 +36,9 @@ export function isProductItem(item: CartItem): item is ProductCartItem {
 }
 
 
+export type CartInitData = Omit<CartState, "discountData" | "pricingData">
+
+type SubmitAction =(item: CartItem[], totals: Pick<CartState, "subtotal" | "discount" | "appliedDiscounts" | "total">) => Promise<void>
 
 export interface AppliedDiscount {
   id: string
@@ -44,27 +47,30 @@ export interface AppliedDiscount {
   amount: number
   count: number
   description: string
+  addedAt: number
 }
 
 export interface CartState {
+  cartId?: string
+  userId?: string,
   items: CartItem[]
   subtotal: number
   discount: number
   appliedDiscounts: AppliedDiscount[]
-  discountPercentage: number
-  discountName: string | null
   total: number
   discountData: Discount[]
   pricingData: PricingData
 }
 
 export interface CartActions {
-  addQuote: (type: "mixing" | "mastering", name: string, quote: QuoteData | MasteringQuoteData) => void
-  addProduct: (name: string, price: number, quantity?: number) => void
-  removeItem: (id: string) => void
-  updateQuantity: (id: string, quantity: number) => void
-  clearCart: () => void
+  addQuote: (item: {type: "mixing" | "mastering", name: string, quote: QuoteData | MasteringQuoteData, submit: SubmitAction}) => void
+  addProduct: (item: {name: string, price: number, quantity?: number,  submit: SubmitAction}) => void
+  removeItem: (id: string, submit: SubmitAction) => void
+  updateQuantity: (id: string, quantity: number, submit: SubmitAction) => void
+  clearCart: ( submit: SubmitAction ) => void
   recalculateTotals: () => void
+  clearCartIdentifiers: () => void
+  setUserId: (id: string) => void
 }
 
 export type CartStore = CartState & CartActions
@@ -84,7 +90,7 @@ function getItemTotal(item: CartItem): number {
 function calculateTotals(
   items: CartItem[],
   discountData: Discount[],
-): Pick<CartState, "subtotal" | "discount" | "discountPercentage" | "discountName" | "appliedDiscounts" | "total"> {
+): Pick<CartState, "subtotal" | "discount"  | "appliedDiscounts" | "total"> {
   const subtotal = items.reduce((sum, item) => sum + getItemTotal(item), 0)
 
   const appliedDiscounts: AppliedDiscount[] = []
@@ -127,55 +133,55 @@ function calculateTotals(
       amount,
       count: bundleCount,
       description: mixAndMasterBundle.description as string,
+      addedAt: Date.now()
     })
   }
 
   // Calculate totals from all applied discounts
   const discount = appliedDiscounts.reduce((sum, d) => sum + d.amount, 0)
-  const discountPercentage = hasBundleDiscount ? mixAndMasterBundle!.discountPercentage : 0
-  const discountName = hasBundleDiscount ? mixAndMasterBundle!.name : null
   const total = subtotal - discount
 
-  return { subtotal, discount, discountPercentage, discountName, appliedDiscounts, total }
+  return { subtotal, discount, appliedDiscounts, total }
 }
 
-export function createCartStore(pricingData: PricingData) {
-  const initialState: CartState = {
-    items: [],
-    subtotal: 0,
-    discount: 0,
-    discountPercentage: 0,
-    appliedDiscounts: [],
-    discountName: null,
-    total: 0,
-    discountData: pricingData.discounts.filter(d => d.category === "cart_bundle"),
-    pricingData,
-  }
+export function createCartStore(pricingData: PricingData, initCart?: CartInitData) {
 
   return createStore<CartStore>()(
     persist(
       (set, get) => ({
-        ...initialState,
+        ...Object.assign({
+            items: [],
+            subtotal: 0,
+            discount: 0,
+            appliedDiscounts: [],
+            total: 0,
+            discountData: pricingData.discounts.filter(d => d.category === "cart_bundle"),
+            pricingData,
+            cartId: crypto.randomUUID()
+          }, initCart ?? {}),
 
-        addQuote: (type, name, quote) => {
+        addQuote: ({type, name, quote, submit}) => {
           const newItem: QuoteCartItem = {
             id: generateId(),
             type,
             name,
             quote,
             addedAt: Date.now(),
+            price: quote.costs.total,
           }
 
           const newItems = [...get().items, newItem]
           const totals = calculateTotals(newItems, get().discountData)
+          submit([newItem], totals)
 
           set({
             items: newItems,
             ...totals,
           })
+
         },
 
-        addProduct: (name, price, quantity = 1) => {
+        addProduct: ({name, price, quantity = 1, submit}) => {
           const newItem: ProductCartItem = {
             id: generateId(),
             type: "product",
@@ -192,11 +198,17 @@ export function createCartStore(pricingData: PricingData) {
             items: newItems,
             ...totals,
           })
+
+          submit(newItems, totals)
         },
 
-        removeItem: (id) => {
-          const newItems = get().items.filter((item) => item.id !== id)
+        removeItem: (id, submit) => {
+
+          const { items } = get()
+          const newItems = items.filter((item) => item.id !== id)
           const totals = calculateTotals(newItems, get().discountData)
+
+          submit(items.filter(item => item.id === id), totals)
 
           set({
             items: newItems,
@@ -204,7 +216,7 @@ export function createCartStore(pricingData: PricingData) {
           })
         },
 
-        updateQuantity: (id, quantity) => {
+        updateQuantity: (id, quantity, submit) => {
           const items = get().items
           const itemIndex = items.findIndex((item) => item.id === id)
 
@@ -216,15 +228,10 @@ export function createCartStore(pricingData: PricingData) {
           // Only product items have quantity
           if (!isProductItem(item)) return
 
-          // Remove item if quantity is 0 or less
-          if (quantity <= 0) {
-            get().removeItem(id)
-            return
-          }
-
           const newItems = [...items]
           newItems[itemIndex] = { ...item, quantity }
           const totals = calculateTotals(newItems, get().discountData)
+          submit(newItems, totals)
 
           set({
             items: newItems,
@@ -232,14 +239,20 @@ export function createCartStore(pricingData: PricingData) {
           })
         },
 
-        clearCart: () => {
+        clearCart: (submit: SubmitAction) => {
+
+          submit([], {
+            subtotal: 0,
+            discount: 0,
+            appliedDiscounts: [],
+            total: 0,
+          })
+          
           set({
             items: [],
             subtotal: 0,
             discount: 0,
-            discountPercentage: 0,
             appliedDiscounts: [],
-            discountName: null,
             total: 0,
           })
         },
@@ -248,6 +261,11 @@ export function createCartStore(pricingData: PricingData) {
           const totals = calculateTotals(get().items, get().discountData)
           set(totals)
         },
+
+        clearCartIdentifiers: () => {
+          set({ cartId: undefined, userId: undefined })
+        },
+        setUserId: (id: string) => set({ userId: id })
       }),
       {
         name: "cart-storage",
@@ -259,8 +277,6 @@ export function createCartStore(pricingData: PricingData) {
             const totals = calculateTotals(state.items, state.discountData)
             state.subtotal = totals.subtotal
             state.discount = totals.discount
-            state.discountPercentage = totals.discountPercentage
-            state.discountName = totals.discountName,
             state.appliedDiscounts = totals.appliedDiscounts
             state.total = totals.total
           }

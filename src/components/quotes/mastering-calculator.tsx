@@ -10,7 +10,9 @@ import { MasteringSummaryStep } from "~/components/quotes/mastering-calculator/m
 import { useMasteringQuote } from "~/hooks/use-mastering-quote"
 import { useShallow } from "zustand/react/shallow"
 import { CalculatorToolbar } from "./toolbar"
-import { useCartActions } from "~/hooks/use-shopping-cart"
+import { useCartActions, useCartState } from "~/hooks/use-shopping-cart"
+import { useUser } from "@clerk/nextjs"
+import { createOrUpdateCart } from "~/actions/cart/create-or-update-cart"
 
 const STEPS = ["Project Size", "Add Ons", "Delivery", "Summary"]
 
@@ -32,10 +34,32 @@ export function MasteringCalculator() {
     }
   }
 
+
+  const {
+    userId,
+    items,
+    ...cart
+  } = useCartState()
+  const { isSignedIn } = useUser()
+
   const handleSubmit = () => {
     if (quoteData) {
-      const quoteName = `Mastering Session (${quoteData.totals.songCount} song${quoteData.totals.songCount !== 1 ? "s" : ""})`
-      addQuote("mastering", quoteName, quoteData)
+      addQuote({
+        type: "mastering", 
+        name: `Mastering Session (${quoteData.totals.songCount} song${quoteData.totals.songCount !== 1 ? "s" : ""})`, 
+        quote: quoteData,
+        submit: async (items, totals) => {
+          if (userId && isSignedIn) {
+            await createOrUpdateCart({
+              ...cart,
+              ...totals,
+              items,
+              userId: userId,
+            })
+          }
+        }
+      })
+
       reset()
     }
   }

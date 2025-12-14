@@ -102,7 +102,6 @@ export function ProjectSizeStep() {
       return
     }
     const parsed = Number.parseInt(value, 10)
-    console.log(parsed)
     if (!isNaN(parsed)) {
       const clamped = Math.max(min, Math.min(max, parsed))
       updateSong(songId, field, clamped)

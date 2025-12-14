@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX `cart_user_id_unique` ON `cart` (`user_id`);

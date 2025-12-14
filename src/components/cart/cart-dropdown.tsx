@@ -13,9 +13,13 @@ import {
   useCartItemCount,
   useCartActions,
   useCart,
+  useCartState,
 } from '~/hooks/use-shopping-cart'
 import { useShallow } from "zustand/react/shallow"
 import { QuoteViewModal } from "~/components/cart/quote-view-modal"
+import { useUser } from "@clerk/nextjs"
+import { createOrUpdateCart } from "~/actions/cart/create-or-update-cart"
+import { removeOrCreateCart } from "~/actions/cart/remove--or-create-cart"
 
 function formatCurrency(amount: number): string {
   return new Intl.NumberFormat("en-US", {
@@ -31,10 +35,18 @@ function CartItemRow({
   item: CartItem
   onViewQuote?: (item: QuoteCartItem) => void
 }) {
-  const { removeItem, updateQuantity } = useCartActions()
+  const {
+    removeItem,
+    updateQuantity,
+  } = useCart(useShallow(store => store))
+
+  const {
+    userId,
+    ...cart
+  } = useCartState()
+  const { isSignedIn } = useUser()
 
   const itemTotal = isQuoteItem(item) ? item.quote.costs.total : item.price * item.quantity
-  
 
   return (
 
@@ -52,7 +64,30 @@ function CartItemRow({
                 variant="outline"
                 size="icon"
                 className="h-6 w-6 bg-transparent"
-                onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                onClick={() => {
+                  const nextQuantity = item.quantity - 1
+    
+                  nextQuantity === 0 ? removeItem(item.id,  async (items, totals) => {
+                    if (userId && isSignedIn) {
+                      removeOrCreateCart({
+                        ...cart,
+                        items: items,
+                        userId: userId,
+                        ...totals
+                      })
+                    }
+                  }) : updateQuantity(item.id, nextQuantity, async (items, totals) => {
+                    if (userId && isSignedIn) {
+                      createOrUpdateCart({
+                        ...cart,
+                        items,
+                        userId: userId,
+                        ...totals,
+                      })
+                    }
+                  })
+             
+                }}
               >
                 <Minus className="!w-[16px] !h-[16px]" />
               </Button>
@@ -61,7 +96,20 @@ function CartItemRow({
                 variant="outline"
                 size="icon"
                 className="h-6 w-6 bg-transparent"
-                onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                onClick={() => {
+                  const nextQuantity = item.quantity + 1
+                
+                  updateQuantity(item.id, nextQuantity, async (items, totals) => {
+                    if (userId && isSignedIn) {
+                      createOrUpdateCart({
+                        ...cart,
+                        items,
+                        userId: userId,
+                        ...totals,
+                      })
+                    }
+                  })
+                }}
               >
                 <Plus className="!w-[16px] !h-[16px]" />
               </Button>
@@ -76,7 +124,22 @@ function CartItemRow({
             variant="ghost"
             size="icon"
             className="h-6 w-6 text-muted-foreground hover:text-destructive"
-            onClick={() => removeItem(item.id)}
+            onClick={() => {
+
+              if (userId && isSignedIn) {
+              }
+
+              removeItem(item.id, async (items, totals) => {
+                if (userId && isSignedIn) {
+                  removeOrCreateCart({
+                    ...cart,
+                    items: items,
+                    userId: userId,
+                    ...totals
+                  })
+                }
+              })
+            }}
           >
             <Trash2 className="!w-[16px] !h-[16px]" />
           </Button>
@@ -98,12 +161,18 @@ function CartContent({ onClose }: { onClose: () => void }) {
     items,
     subtotal,
     discount,
-    discountPercentage,
     pricingData,
     appliedDiscounts,
     total,
     clearCart,
   } = useCart(useShallow(state => state))
+
+
+  const {
+    userId,
+    ...cart
+  } = useCartState()
+  const { isSignedIn } = useUser()
 
 
   const [selectedQuote, setSelectedQuote] = useState<QuoteCartItem | null>(null)
@@ -126,7 +195,17 @@ function CartContent({ onClose }: { onClose: () => void }) {
           variant="ghost"
           size="icon"
           className="absolute top-2 right-2 h-8 w-8 text-muted-foreground hover:text-foreground"
-          onClick={onClose}
+          onClick={() => {
+            if (userId && isSignedIn) {
+                createOrUpdateCart({
+                  ...cart,
+                  userId: userId,
+                })
+            }
+      
+            onClose()
+
+          }}
         >
           <X className="!w-[16px] mixing!h-[16px]" />
         </Button>
@@ -137,6 +216,8 @@ function CartContent({ onClose }: { onClose: () => void }) {
     )
   }
 
+  const discounts = appliedDiscounts.reduce((prev, discount) => prev + discount.amount, 0)
+
   return (
     <>
       <div className="flex flex-col h-full">
@@ -146,7 +227,16 @@ function CartContent({ onClose }: { onClose: () => void }) {
             variant="ghost"
             size="icon"
             className="h-8 w-8 text-muted-foreground hover:text-foreground"
-            onClick={onClose}
+            onClick={() => {
+              if (userId && isSignedIn) {
+                  createOrUpdateCart({
+                    ...cart,
+                    userId: userId,
+                  })
+              }
+        
+              onClose()
+            }}
           >
             <X className="!w-[16px] !h-[16px]" />
           </Button>
@@ -195,9 +285,9 @@ function CartContent({ onClose }: { onClose: () => void }) {
             <span>{formatCurrency(subtotal)}</span>
           </div>
 
-          {discount > 0 && (
+          {discounts > 0 && (
             <div className="flex justify-between text-sm">
-              <span className="text-green-600">Bundle Discount ({discountPercentage}%)</span>
+              <span className="text-green-600">Discounts ({discounts}%)</span>
               <span className="text-green-600">-{formatCurrency(discount)}</span>
             </div>
           )}
@@ -208,7 +298,20 @@ function CartContent({ onClose }: { onClose: () => void }) {
           </div>
 
           <div className="flex gap-2 pt-2">
-            <Button size="sm" className="flex-1 text-red-600 hover:bg-red-600/30 border border-red-600" onClick={clearCart}>
+            <Button size="sm" className="flex-1 text-red-600 hover:bg-red-600/30 border border-red-600" onClick={() => {
+              clearCart(async (_, totals)  => {
+                if (userId && isSignedIn) {
+                  removeOrCreateCart({
+                    ...cart,
+                    userId: userId,
+                    items,
+                    ...totals,
+                  })
+                }
+
+
+              })
+            }}>
               Clear Cart
             </Button>
             <Button size="sm" className="flex-1 border border-black dark:border-white dark:hover:bg-white dark:hover:text-black">
@@ -238,6 +341,14 @@ export function CartDropdown() {
     }
   }, [isOpen])
 
+
+  const {
+    userId,
+    ...cart
+  } = useCartState()
+  const { isSignedIn } = useUser()
+
+
   // Dropdown uses responsive Tailwind classes instead of isMobile state
   return (
     <div className="relative">
@@ -247,7 +358,17 @@ export function CartDropdown() {
         size="icon"
         className="relative rounded-sm hover:text-white hover:bg-black dark:hover:text-black dark:hover:bg-white data-[state=open]:bg-black data-[state=open]:dark:bg-white data-[state=open]:text-white data-[state=open]:dark:text-black transition-colors"
         data-state={isOpen ? "open" : "closed"}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+
+          if (userId && isSignedIn) {
+              createOrUpdateCart({
+                ...cart,
+                userId: userId,
+              })
+          }
+  
+          setIsOpen(!isOpen)
+        }}
       >
         <ShoppingCart className="!w-[16px] !h-[16px]" />
         {itemCount > 0 && (
@@ -258,7 +379,17 @@ export function CartDropdown() {
       </Button>
 
       {/* Backdrop */}
-      {isOpen && <div className="fixed inset-0 z-40 bg-black/50 lg:bg-transparent" onClick={() => setIsOpen(false)} />}
+      {isOpen && <div className="fixed inset-0 z-40 bg-black/50 lg:bg-transparent" onClick={() => {
+
+        if (userId && isSignedIn) {
+            createOrUpdateCart({
+              ...cart,
+              userId: userId,
+            })
+        }
+  
+        setIsOpen(false)
+      }} />}
 
       {/* Dropdown */}
       {isOpen && (

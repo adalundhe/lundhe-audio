@@ -7,7 +7,7 @@ import {
     CardHeader,
     CardTitle
 } from "~/components/ui/card";
-import { usePostsStore, type Blog } from '~/stores/posts-store';
+import { usePostsStore, type Blog } from '~/lib/stores/posts-store';
 import { useShallow } from 'zustand/react/shallow'
 
 

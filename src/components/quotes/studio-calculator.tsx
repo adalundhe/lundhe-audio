@@ -11,7 +11,10 @@ import type { Song, AddOns, DeliveryOptions } from "~/lib/mixing/pricing-types"
 import { useMixingQuote} from "~/hooks/use-mixing-quote"
 import { useShallow } from "zustand/react/shallow"
 import { CalculatorToolbar } from "./toolbar"
-import { useCartActions } from "~/hooks/use-shopping-cart"
+import { useCartActions, useCartState } from "~/hooks/use-shopping-cart"
+import { SignedIn, SignedOut, useUser } from "@clerk/nextjs"
+import { redirect } from "next/navigation"
+import { createOrUpdateCart } from "~/actions/cart/create-or-update-cart"
 
 export type { Song, AddOns, DeliveryOptions }
 
@@ -35,13 +38,36 @@ export function StudioCalculator() {
     }
   }
 
+  const {
+    userId,
+    items,
+    ...cart
+  } = useCartState()
+  const { isSignedIn } = useUser()
+
+
   const handleSubmit = () => {
     if (quoteData) {
-      const quoteName = `Mixing Session (${quoteData.totals.songCount} song${quoteData.totals.songCount !== 1 ? "s" : ""})`
-      addQuote("mixing", quoteName, quoteData)
+      addQuote({
+        type: "mixing", 
+        name: `Mixing Session (${quoteData.totals.songCount} song${quoteData.totals.songCount !== 1 ? "s" : ""})`, 
+        quote: quoteData,
+        submit: async (items, totals) => {
+          if (userId && isSignedIn) {
+            await createOrUpdateCart({
+              ...cart,
+              ...totals,
+              items,
+              userId: userId,
+            })
+          }
+        }
+      })
+
       reset()
     }
   }
+
 
   const isSummaryStep = currentStep === STEPS.length - 1
 
@@ -69,9 +95,21 @@ export function StudioCalculator() {
               </Button>
 
               {isSummaryStep ? (
-                <Button onClick={handleSubmit} size="lg" className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">
-                  Add to Cart
-                </Button>
+                <>
+                <SignedIn>
+                  <Button onClick={handleSubmit} size="lg" className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">
+                    Add to Cart
+                  </Button>
+                </SignedIn>
+                <SignedOut>
+                  <Button onClick={() => {
+                    handleSubmit()
+                    redirect("/sign-in")
+                  }} size="lg" className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">
+                    Add to Cart
+                  </Button>
+                </SignedOut>
+                </>
               ) : (
                 <Button onClick={handleNext} size="lg" className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">Next</Button>
               )}
