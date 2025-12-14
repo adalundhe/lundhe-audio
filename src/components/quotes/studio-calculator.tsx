@@ -13,7 +13,7 @@ import { useShallow } from "zustand/react/shallow"
 import { CalculatorToolbar } from "./toolbar"
 import { useCartActions, useCartState } from "~/hooks/use-shopping-cart"
 import { SignedIn, SignedOut, useUser } from "@clerk/nextjs"
-import { redirect } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import { createOrUpdateCart } from "~/actions/cart/create-or-update-cart"
 
 export type { Song, AddOns, DeliveryOptions }
@@ -22,6 +22,8 @@ const STEPS = ["Project Size", "Add Ons", "Delivery", "Summary"]
 
 
 export function StudioCalculator() {
+
+  const router = useRouter()
   const { quoteData, currentStep, setCurrentStep, reset } = useMixingQuote(useShallow(state => state))
 
   const { addQuote } = useCartActions()
@@ -64,7 +66,9 @@ export function StudioCalculator() {
         }
       })
 
-      reset()
+      if (!userId || !isSignedIn) {
+        router.push("/sign-in")
+      }
     }
   }
 
