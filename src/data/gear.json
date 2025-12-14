@@ -24,7 +24,7 @@
     {
         "id": "8735c0cd-66b6-42c9-b28a-3ab8f271170d",
         "name": "SPL Mercury",
-        "description": "24-bit D/A mastring converter",
+        "description": "24-bit D/A mastering converter",
         "type": "converters",
         "group": "I/O",
         "quantity": 1,
@@ -134,7 +134,7 @@
     {
         "id": "a31eb00b-fe0c-4cdd-b9b8-1604a71e1eb8",
         "name": "Crane Song Interstellar",
-        "description": "24-bit A/D mastring converter",
+        "description": "24-bit A/D mastering converter",
         "type": "converters",
         "group": "I/O",
         "quantity": 1,

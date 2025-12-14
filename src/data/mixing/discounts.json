@@ -162,7 +162,7 @@
   {
     "id": "mix_and_master_bundle",
     "name": "Mix and Master Bundle",
-    "description": "15% discount when purchasing both a mixing and mastering session",
+    "description": "15% discount for each mixing and mastering session pair purchased",
     "discountPercentage": 15,
     "category": "cart_bundle",
     "productType": "mixing-and-mastering",

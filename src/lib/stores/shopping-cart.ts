@@ -2,7 +2,7 @@ import { createStore } from "zustand"
 import { persist } from "zustand/middleware"
 import type { QuoteData } from "~/lib/mixing/pricing-types"
 import type { MasteringQuoteData } from "~/lib/mastering/pricing-types"
-import { Discount } from "~/server/db/types"
+import { Discount, PricingData } from "~/server/db/types"
 import { useShallow } from "zustand/react/shallow"
 
 export type CartItemType = "mixing" | "mastering" | "product"
@@ -35,11 +35,15 @@ export function isProductItem(item: CartItem): item is ProductCartItem {
   return item.type === "product"
 }
 
+
+
 export interface AppliedDiscount {
   id: string
   name: string
   percentage: number
   amount: number
+  count: number
+  description: string
 }
 
 export interface CartState {
@@ -51,6 +55,7 @@ export interface CartState {
   discountName: string | null
   total: number
   discountData: Discount[]
+  pricingData: PricingData
 }
 
 export interface CartActions {
@@ -86,18 +91,42 @@ function calculateTotals(
 
   const mixAndMasterBundle = discountData.find(d => d.id === "mix_and_master_bundle")
 
-  // Check if cart has both mixing and mastering quotes
-  const hasMixing = items.some((item) => item.type === "mixing")
-  const hasMastering = items.some((item) => item.type === "mastering")
-  const hasBundleDiscount = mixAndMasterBundle && hasMixing && hasMastering && mixAndMasterBundle
+  const mixingQuotes = items.filter((item) => item.type === "mixing") as QuoteCartItem[]
+  const masteringQuotes = items.filter((item) => item.type === "mastering") as QuoteCartItem[]
+
+  // Number of complete bundles is the minimum of mixing and mastering quote counts
+  const bundleCount = Math.min(mixingQuotes.length, masteringQuotes.length)
+  const hasBundleDiscount = bundleCount > 0 && mixAndMasterBundle
 
   if (hasBundleDiscount && mixAndMasterBundle) {
-    const amount = subtotal * (mixAndMasterBundle.discountPercentage / 100)
+    // Sort quotes by price descending so we bundle the most expensive ones first
+    const sortedMixing = [...mixingQuotes].sort((a, b) => b.quote.costs.total - a.quote.costs.total)
+    const sortedMastering = [...masteringQuotes].sort((a, b) => b.quote.costs.total - a.quote.costs.total)
+
+    // Calculate discount only on the paired quotes
+    let bundledTotal = 0
+    sortedMixing.forEach((mix, idx) => {
+      if (idx < bundleCount) {
+        bundledTotal += mix.quote.costs.total
+      }
+
+    })
+
+
+    sortedMastering.forEach((mix, idx) => {
+      if (idx < bundleCount) {
+        bundledTotal += mix.quote.costs.total
+      }
+
+    })
+    const amount = bundledTotal * (mixAndMasterBundle.discountPercentage / 100)
     appliedDiscounts.push({
       id: mixAndMasterBundle.id,
       name: mixAndMasterBundle.name,
       percentage: mixAndMasterBundle.discountPercentage,
       amount,
+      count: bundleCount,
+      description: mixAndMasterBundle.description as string,
     })
   }
 
@@ -110,7 +139,7 @@ function calculateTotals(
   return { subtotal, discount, discountPercentage, discountName, appliedDiscounts, total }
 }
 
-export function createCartStore(discountData: Discount[]) {
+export function createCartStore(pricingData: PricingData) {
   const initialState: CartState = {
     items: [],
     subtotal: 0,
@@ -119,7 +148,8 @@ export function createCartStore(discountData: Discount[]) {
     appliedDiscounts: [],
     discountName: null,
     total: 0,
-    discountData: discountData.filter(d => d.category === "cart_bundle"),
+    discountData: pricingData.discounts.filter(d => d.category === "cart_bundle"),
+    pricingData,
   }
 
   return createStore<CartStore>()(

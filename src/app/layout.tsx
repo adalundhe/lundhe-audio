@@ -28,7 +28,7 @@ export default async function RootLayout ({
 
 
   const client = await api()
-  const { discounts } = await client.mixQuotes.getAllMixingPricingData()
+  const pricingData = await client.mixQuotes.getAllMixingPricingData()
 
   return (
     <html className={`${courierPrime.className}`} lang="en" suppressHydrationWarning>
@@ -47,7 +47,7 @@ export default async function RootLayout ({
         <body>
             <ThemeProvider attribute="class">
                 <TRPCReactProvider>
-                  <CartStoreProvider discountData={discounts}>
+                  <CartStoreProvider pricingData={pricingData}>
                     <NavBar />
                     <div className={`flex flex-col h-full`}>
                             {children}

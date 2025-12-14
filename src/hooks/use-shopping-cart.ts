@@ -6,7 +6,7 @@ import { type CartStore } from "~/lib/stores/shopping-cart"
 
 
 // Hook to use the store with a selector
-export function useCartStore<T>(selector: (state: CartStore) => T): T {
+export function useCart<T>(selector: (state: CartStore) => T): T {
   const store = useContext(CartStoreContext)
   if (!store) {
     throw new Error("useCartStore must be used within a CartStoreProvider")
@@ -15,15 +15,16 @@ export function useCartStore<T>(selector: (state: CartStore) => T): T {
 }
 
 // Selector hooks for optimized re-renders
-export const useCartItems = () => useCartStore(useShallow((state) => state.items))
-export const useCartSubtotal = () => useCartStore((state) => state.subtotal)
-export const useCartDiscount = () => useCartStore((state) => state.discount)
-export const useCartDiscountPercentage = () => useCartStore((state) => state.discountPercentage)
-export const useCartTotal = () => useCartStore((state) => state.total)
-export const useCartItemCount = () => useCartStore((state) => state.items.length)
-export const useCartAppliedDiscounts = () => useCartStore((state) => state.appliedDiscounts)
+export const useCartItems = () => useCart(useShallow((state) => state.items))
+export const useCartSubtotal = () => useCart((state) => state.subtotal)
+export const useCartDiscount = () => useCart((state) => state.discount)
+export const useCartDiscountPercentage = () => useCart((state) => state.discountPercentage)
+export const useCartTotal = () => useCart((state) => state.total)
+export const useCartItemCount = () => useCart((state) => state.items.length)
+export const useCartAppliedDiscounts = () => useCart((state) => state.appliedDiscounts)
+export const useCartPricingData = () => useCart(useShallow((state) => state.pricingData))
 export const useCartActions = () =>
-  useCartStore(useShallow((state) => ({
+  useCart(useShallow((state) => ({
   addQuote: state.addQuote,
   addProduct: state.addProduct,
   removeItem: state.removeItem,
