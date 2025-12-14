@@ -19,7 +19,7 @@ export const env = createEnv({
     TWILIO_PHONE_NUMBER: z.string(),
     TURSO_SQLITE_DB_DATABASE_URL: z.string(),
     TURSO_SQLITE_DB_TOKEN: z.string(),
-    CLERK_SECRET_KEY: z.string(),
+    CLERK_SECRET_KEY: z.string().optional(),
     // NEXTAUTH_SECRET:
     //   process.env.NODE_ENV === "production"
     //     ? z.string()
@@ -40,7 +40,7 @@ export const env = createEnv({
    */
   client: {
     NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY: z.string(),
-    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string(),
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().optional(),
     // NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN: z.string(),
     // NEXT_PUBLIC_SHOPIFY_STOREFRONT_API_ACCESS_TOKEN: z.string(),
     // NEXT_PUBLIC_SHOPIFY_APP_COUNTRY_ISO_CODE: z.string(),

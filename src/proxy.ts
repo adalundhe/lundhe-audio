@@ -13,6 +13,6 @@ export const config = {
     // Skip Next.js internals and all static files
     '/((?!api|_next/static|_next/image|.*\\.png$).*)',
     // Always run for API routes
-    // "/(api|trpc)(.*)",
+    "/(api|trpc)(.*)",
   ],
 }
