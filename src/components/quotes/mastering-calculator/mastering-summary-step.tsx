@@ -337,7 +337,7 @@ export const MasteringSummaryView = ({
                   <span>{song.title}</span>
                 </div>
                 {song.isExtendedLength && (
-                  <span className="ml-1 text-amber-600 text-xs">(+${song.extendedLengthFeeAmount} Extended)</span>
+                  <span className="text-amber-600 text-xs">(+${song.extendedLengthFeeAmount} Extended)</span>
                 )}
               </span>
               <span>${song.basePrice.toFixed(2)}</span>

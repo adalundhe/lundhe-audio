@@ -317,11 +317,13 @@ export const MixingSummaryView = ({
                 <div className="lg:max-w-[440px] max-w-[200px] text-nowrap overflow-hidden text-ellipsis">
                   <span>{song.title}</span>
                 </div>
-                ({song.tracks} tracks)
-                {song.hasHighTrackCount && <span className="ml-1 text-primary text-xs">(High Track)</span>}
-                {song.hasExtendedLength && (
-                  <span className="ml-1 text-amber-600 text-xs">(+${song.extendedLengthFeeAmount} Length)</span>
-                )}
+                <span className="flex lg:flex-row flex-col gap-1 text-xs">
+                  ({song.tracks} tracks)
+                  {song.hasHighTrackCount && <span className="text-primary text-xs">(High Track)</span>}
+                  {song.hasExtendedLength && (
+                    <span className="text-amber-600 text-xs">(+${song.extendedLengthFeeAmount} Length)</span>
+                  )}
+                </span>
               </span>
               <span>${song.songSubtotal.toFixed(2)}</span>
             </div>
