@@ -4,6 +4,7 @@ import Products from '~/data/mixing/products.json'
 import ProductOptions from '~/data/mixing/product-options.json'
 import Discounts from '~/data/mixing/discounts.json'
 import { randomUUID } from "node:crypto";
+import { sql } from "drizzle-orm";
 // import { relations, sql } from "drizzle-orm";
 import {
   // index,
@@ -45,9 +46,9 @@ export const products = createTable("products", {
   name: text("name").notNull(),
   description: text("description"),
   price: real("price").notNull(),
-  productType: text("productType", { enum: ["mixing", "mastering"]}).notNull(),
+  productType: text("product_type", { enum: ["mixing", "mastering", "mixing-and-mastering"]}).notNull(),
   created_timestamp: text('created_timestamp').notNull().$defaultFn(() => new Date().toString()),
-  updated_timestamp: text('updated_timestamp')
+  updated_timestamp: text('updated_timestamp').default(sql`(current_timestamp)`),
 })
 
 // Product options table - add-ons, delivery options, track fees, length fees
@@ -61,12 +62,12 @@ export const productOptions = createTable("product_options", {
   price: real("price").notNull(),
   category: text("category", { enum: ["addon", "delivery", "track_fee", "length_fee"] }).notNull(),
   priceType: text("price_type", { enum: ["flat", "per_ten_tracks", "multiplier", "per_hour"] }).notNull(),
+  productType: text("product_type", { enum: ["mixing", "mastering", "mixing-and-mastering"]}).notNull(),
   perCount: integer("per_count").notNull(),
   minThreshold: integer("min_threshold"),
   maxThreshold: integer("max_threshold"),
-  productType: text("productType", { enum: ["mixing", "mastering"]}).notNull(),
   created_timestamp: text('created_timestamp').notNull().$defaultFn(() => new Date().toString()),
-  updated_timestamp: text('updated_timestamp')
+  updated_timestamp: text('updated_timestamp').default(sql`(current_timestamp)`),
 })
 
 // Discounts table - volume discounts, production deals, bundles
@@ -78,12 +79,12 @@ export const discounts = createTable("discounts", {
   name: text("name").notNull(),
   description: text("description"),
   discountPercentage: real("discount_percentage").notNull(),
-  category: text("category", { enum: ["volume", "option_volume", "production", "bundle"] }).notNull(),
+  category: text("category", { enum: ["volume", "option_volume", "production", "bundle", "delivery_bundle", "cart_bundle"] }).notNull(),
+  productType: text("product_type", { enum: ["mixing", "mastering", "mixing-and-mastering"]}).notNull(),
   minThreshold: integer("min_threshold"),
   maxThreshold: integer("max_threshold"),
-  productType: text("productType", { enum: ["mixing", "mastering"]}).notNull(),
   created_timestamp: text('created_timestamp').notNull().$defaultFn(() => new Date().toString()),
-  updated_timestamp: text('updated_timestamp')
+  updated_timestamp: text('updated_timestamp').default(sql`(current_timestamp)`),
 })
 
 

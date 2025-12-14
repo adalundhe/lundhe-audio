@@ -27,7 +27,7 @@ const globalForDb = globalThis as unknown as {
 export const createTable = sqliteTableCreator((name) => name);
 
 const contactRequestor = createTable(
-  'ContactRequestor',
+  'contact_requestor',
   {
     id: text("id", { length: 255 })
       .notNull()
@@ -43,7 +43,7 @@ const contactRequestor = createTable(
 )
 
 const equipmentItem = createTable(
-  'EquipmentItem',
+  'equipment_item',
   {
     id: text("id", { length: 255 })
       .notNull()

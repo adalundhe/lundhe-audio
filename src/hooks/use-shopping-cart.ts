@@ -18,7 +18,6 @@ export function useCart<T>(selector: (state: CartStore) => T): T {
 export const useCartItems = () => useCart(useShallow((state) => state.items))
 export const useCartSubtotal = () => useCart((state) => state.subtotal)
 export const useCartDiscount = () => useCart((state) => state.discount)
-export const useCartDiscountPercentage = () => useCart((state) => state.discountPercentage)
 export const useCartTotal = () => useCart((state) => state.total)
 export const useCartItemCount = () => useCart((state) => state.items.length)
 export const useCartAppliedDiscounts = () => useCart((state) => state.appliedDiscounts)
@@ -31,4 +30,14 @@ export const useCartActions = () =>
   updateQuantity: state.updateQuantity,
   clearCart: state.clearCart,
   recalculateTotals: state.recalculateTotals,
+})))
+
+export const useCartState = () => useCart(useShallow(state => ({
+  cartId: state.cartId,
+  userId: state.userId,
+  items: state.items,
+  subtotal: state.subtotal,
+  discount: state.discount,
+  appliedDiscounts: state.appliedDiscounts,
+  total: state.total,
 })))

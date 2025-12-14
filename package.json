@@ -24,6 +24,8 @@
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.11.1",
+    "@clerk/nextjs": "^6.36.2",
+    "@clerk/types": "^4.101.6",
     "@hookform/resolvers": "^3.10.0",
     "@libsql/client": "^0.14.0",
     "@mdx-js/loader": "^3.1.1",

@@ -1,5 +1,5 @@
 "use client"
-import { usePostsStore } from '~/stores/posts-store';
+import { usePostsStore } from '~/lib/stores/posts-store';
 import { useShallow } from 'zustand/react/shallow'
 import { Button } from '~/components/ui/button'
 import {
