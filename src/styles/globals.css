@@ -237,3 +237,9 @@ svg {
   }
 }
 
+
+.required::after {
+  content: " *";
+  @apply text-red-500; /* Uses Tailwind's red-500 color */
+}
+
