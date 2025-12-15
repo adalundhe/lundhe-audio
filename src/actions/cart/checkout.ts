@@ -19,11 +19,11 @@ export async function createCheckoutSession({
     items: CartItem[],
     discounts: AppliedDiscount[]
 }) {
-   // const { userId } = await auth()
+   const { userId } = await auth()
 
-    //if (!userId) {
-    //    throw new Error("User must be authenticated to checkout")
-   // }
+    if (!userId) {
+       throw new Error("User must be authenticated to checkout")
+   }
 
     if (!cartId) {
       throw new Error("Missing or invalid cart id")
@@ -32,15 +32,12 @@ export async function createCheckoutSession({
     const origin = env.LUNDHE_AUDIO_DOMAIN
 
     const pricedItems = items.map(item => {
-      let price = item.price
-      discounts.forEach(discount => {
 
-        if(discount.items.find((discountItem) => discountItem === item.id) !== undefined) {
-          price = price * (1 - (discount.percentage / 100))
-        }
-      })
-
-      item.price = price
+      item.price = item.price * (1 - discounts.filter(
+        discount => discount.items.find(
+          (id) => id === item.id)
+        ).reduce((prev, cur) => prev + cur.percentage, 0)/100
+      )
 
       return item
 
@@ -59,7 +56,7 @@ export async function createCheckoutSession({
                         cartId: cartId,
                     },
                 },
-                unit_amount: item.price,
+                unit_amount: Math.trunc(item.price * 100),
                 currency: 'usd'
             },
             quantity: isQuoteItem(item) ? 1 : item.quantity,

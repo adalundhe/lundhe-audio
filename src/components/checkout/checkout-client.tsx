@@ -63,12 +63,6 @@ export function CheckoutClient({ userName, userEmail }: CheckoutClientProps) {
     setError(null)
 
     try {
-      const lineItems = items.map((item) => ({
-        name: item.name,
-        type: item.type,
-        priceInCents: Math.round(getItemPrice(item) * 100),
-        quantity: isProductItem(item) ? item.quantity : 1,
-      }))
 
       await createCheckoutSession({
         cartId: cartId,
