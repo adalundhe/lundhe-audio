@@ -106,7 +106,7 @@ export function StudioCalculator() {
                   <Button onClick={() => {
                     handleSubmit()
                     reset()
-                    redirect("/checkount")
+                    redirect("/checkout")
                   }} size="lg" className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">
                     Add to Cart
                   </Button>
