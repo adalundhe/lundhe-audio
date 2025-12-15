@@ -65,6 +65,8 @@ export function MasteringCalculator() {
       if (!userId || !isSignedIn) {
         router.push("/sign-in")
       }
+
+      router.push("/checkout")
     }
   }
 

@@ -69,6 +69,8 @@ export function StudioCalculator() {
       if (!userId || !isSignedIn) {
         router.push("/sign-in")
       }
+
+      reset()
     }
   }
 
@@ -101,13 +103,18 @@ export function StudioCalculator() {
               {isSummaryStep ? (
                 <>
                 <SignedIn>
-                  <Button onClick={handleSubmit} size="lg" className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">
+                  <Button onClick={() => {
+                    handleSubmit()
+                    reset()
+                    redirect("/checkount")
+                  }} size="lg" className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">
                     Add to Cart
                   </Button>
                 </SignedIn>
                 <SignedOut>
                   <Button onClick={() => {
                     handleSubmit()
+                    reset()
                     redirect("/sign-in")
                   }} size="lg" className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">
                     Add to Cart
