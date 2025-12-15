@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card"
 import { Button } from "~/components/ui/button"
 import { Separator } from "~/components/ui/separator"
 import { ShoppingCart, ArrowLeft, WalletCards, Tag } from "lucide-react"
+import { EmbeddedCheckout, EmbeddedCheckoutProvider } from "@stripe/react-stripe-js"
 
 import Link from "next/link"
 import {
@@ -75,7 +76,8 @@ export function CheckoutClient({ userName, userEmail }: CheckoutClientProps) {
         discounts: appliedDiscounts,
       })
     } catch (err) {
-      setError("Failed to initialize checkout. Please try again.")
+        const error = err as Error
+        setError(`Failed to initialize checkout. Please try again. ${error.toString()}`)
     } finally {
       setIsLoading(false)
     }
