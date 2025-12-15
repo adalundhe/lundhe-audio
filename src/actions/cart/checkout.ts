@@ -19,11 +19,11 @@ export async function createCheckoutSession({
     items: CartItem[],
     discounts: AppliedDiscount[]
 }) {
-    const { userId } = await auth()
+   // const { userId } = await auth()
 
-    if (!userId) {
-        throw new Error("User must be authenticated to checkout")
-    }
+    //if (!userId) {
+    //    throw new Error("User must be authenticated to checkout")
+   // }
 
     if (!cartId) {
       throw new Error("Missing or invalid cart id")
