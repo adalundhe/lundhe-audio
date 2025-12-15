@@ -7,6 +7,7 @@ import { Label } from '~/components/ui/label'
 import { Input } from '~/components/ui/input'
 import { ScaleLoader } from '~/components/ui/scale-loader'
 import { useClerk } from '@clerk/nextjs'
+import SignInContinueLoading from './loading'
 
 export default function SignInContinuePage() {
   const router = useRouter()
@@ -25,7 +26,7 @@ export default function SignInContinuePage() {
 //   // such as users who visited this route directly
   if (!signUp.id) router.push('/sign-in')
 
-  let status = signUp?.status
+  const status = signUp?.status
   const missingFields =  signUp?.missingFields ?? []
 
   const handleChange = (field: string, value: string) => {
@@ -57,7 +58,6 @@ export default function SignInContinuePage() {
 
         router.push("/account")
 
-        status = res.status
         return
       }
 
@@ -100,9 +100,7 @@ export default function SignInContinuePage() {
     ? <div>
       Sign up complete!
     </div>
-    : <div>
-      Invalid request.
-    </div> 
+    : <SignInContinueLoading/>
   )
 
 
