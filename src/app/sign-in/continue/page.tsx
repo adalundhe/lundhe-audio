@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { Label } from '~/components/ui/label'
 import { Input } from '~/components/ui/input'
 import { ScaleLoader } from '~/components/ui/scale-loader'
+import { useClerk } from '@clerk/nextjs'
 
 export default function SignInContinuePage() {
   const router = useRouter()
@@ -24,7 +25,7 @@ export default function SignInContinuePage() {
 //   // such as users who visited this route directly
   if (!signUp.id) router.push('/sign-in')
 
-  const status = signUp?.status
+  let status = signUp?.status
   const missingFields =  signUp?.missingFields ?? []
 
   const handleChange = (field: string, value: string) => {
@@ -50,13 +51,16 @@ export default function SignInContinuePage() {
             }
 
             router.push('/account')
+       
           },
         })
 
-        console.log(res.status)
-
         router.push("/account")
+
+        status = res.status
+        return
       }
+
     } catch (err) {
       // See https://clerk.com/docs/guides/development/custom-flows/error-handling
       // for more info on error handling
