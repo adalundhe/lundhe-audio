@@ -72,12 +72,10 @@ export const NavBar = () => {
                             <div className='flex ml-auto gap-4'>
                                 <SignedIn>
                                     <Tooltip>
-                                        <TooltipTrigger>
-                                            <Button className='rounded-sm py-2 px-2 hover:text-white hover:bg-black dark:hover:bg-white dark:hover:text-black'>
-                                                <Link href={"/account"}>
-                                                    <User/>
-                                                </Link>
-                                            </Button>
+                                        <TooltipTrigger className='rounded-sm py-2 px-2 hover:text-white hover:bg-black dark:hover:bg-white dark:hover:text-black'>   
+                                            <Link href={"/account"}>
+                                                <User/>
+                                            </Link>
                                         </TooltipTrigger>
                                         <TooltipContent className={`${courierPrime.className} p-0 border dark:border-white tooltip-content`}>
                                            <ThemeProvider>

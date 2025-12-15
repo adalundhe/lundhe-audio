@@ -178,6 +178,7 @@ export default async function RootLayout ({
                       </TRPCReactProvider>
                     </TooltipProvider>
                 </ThemeProvider>
+              <div id="clerk-captcha" />
           </body>
           {/* </CartProvider>
         </ShopifyProvider> */}
