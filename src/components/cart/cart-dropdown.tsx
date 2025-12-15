@@ -19,6 +19,7 @@ import { QuoteViewModal } from "~/components/cart/quote-view-modal"
 import { useUser } from "@clerk/nextjs"
 import { createOrUpdateCart } from "~/actions/cart/create-or-update-cart"
 import { removeOrCreateCart } from "~/actions/cart/remove--or-create-cart"
+import Link from "next/link"
 
 function formatCurrency(amount: number): string {
   return new Intl.NumberFormat("en-US", {
@@ -313,8 +314,20 @@ function CartContent({ onClose }: { onClose: () => void }) {
             }}>
               Clear Cart
             </Button>
-            <Button size="sm" className="flex-1 border border-black dark:border-white dark:hover:bg-white dark:hover:text-black">
-              Checkout
+            <Button size="sm" className="flex-1 border border-black dark:border-white dark:hover:bg-white dark:hover:text-black" asChild>  
+              <Link href="/checkout" onClick={() => {
+                  if (userId && isSignedIn) {
+                      createOrUpdateCart({
+                        ...cart,
+                        userId: userId,
+                      })
+                  }
+            
+                  onClose()
+
+                }}>
+                Checkout
+              </Link>
             </Button>
           </div>
         </div>
