@@ -30,14 +30,12 @@ export default function AccountDashboard() {
 
   const fullName = user?.fullName ?? 'Unknown'
 
-  const handleDeleteAccount = async () => {
-    setIsDeleting(true)
-    setError(null)
+  const handleDeleteAccount = () => {
 
     try {
-     await deleteAccount()
-      await signOut()
-      router.push("/")
+       signOut()
+       deleteAccount(user?.id)
+       setIsDeleting(true)
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred")
       setIsDeleting(false)
