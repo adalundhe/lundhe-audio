@@ -21,6 +21,7 @@ export default async function SignInContinueLayout() {
                         </Suspense>
                     </CardContent>
                 </div>
+                <div id="clerk-captcha" />
             </Card>
         </Layout>
     )

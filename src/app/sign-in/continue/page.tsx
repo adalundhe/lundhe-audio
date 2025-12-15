@@ -49,9 +49,13 @@ export default function SignInContinuePage() {
               return
             }
 
-            router.push('/')
+            router.push('/account')
           },
         })
+
+        console.log(res.status)
+
+        router.push("/account")
       }
     } catch (err) {
       // See https://clerk.com/docs/guides/development/custom-flows/error-handling
