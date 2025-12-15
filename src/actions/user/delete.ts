@@ -3,8 +3,7 @@ import { auth } from "@clerk/nextjs/server"
 import { env } from '~/env'
 import { redirect } from "next/navigation"
 
-export const deleteAccount = async () => {
-    const { userId } = await auth()
+export const deleteAccount = async (userId?: string) => {
     if (!userId) {
         redirect("/sign-in")
     }
@@ -21,4 +20,6 @@ export const deleteAccount = async () => {
     } catch (_) {
         console.error("User delete failed")
     }
+
+    redirect("/")
 }
