@@ -48,6 +48,7 @@ export interface AppliedDiscount {
   count: number
   description: string
   addedAt: number
+  items: string[]
 }
 
 export interface CartState {
@@ -111,17 +112,21 @@ function calculateTotals(
 
     // Calculate discount only on the paired quotes
     let bundledTotal = 0
+    const appliedMixingQuoteCartIds: string[] = []
     sortedMixing.forEach((mix, idx) => {
       if (idx < bundleCount) {
         bundledTotal += mix.quote.costs.total
+        appliedMixingQuoteCartIds.push(mix.id)
       }
 
     })
 
 
-    sortedMastering.forEach((mix, idx) => {
+    const appliedMasteringQuoteCartIds: string[] = []
+    sortedMastering.forEach((master, idx) => {
       if (idx < bundleCount) {
-        bundledTotal += mix.quote.costs.total
+        bundledTotal += master.quote.costs.total
+        appliedMasteringQuoteCartIds.push(master.id)
       }
 
     })
@@ -133,7 +138,11 @@ function calculateTotals(
       amount,
       count: bundleCount,
       description: mixAndMasterBundle.description as string,
-      addedAt: Date.now()
+      addedAt: Date.now(),
+      items: [
+        ...appliedMixingQuoteCartIds,
+        ...appliedMasteringQuoteCartIds,
+      ]
     })
   }
 

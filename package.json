@@ -63,6 +63,8 @@
     "@shopify/cli-kit": "^3.88.0",
     "@shopify/hydrogen": "^2024.10.1",
     "@shopify/hydrogen-react": "^2024.10.1",
+    "@stripe/react-stripe-js": "^5.4.1",
+    "@stripe/stripe-js": "^8.5.3",
     "@t3-oss/env-nextjs": "^0.10.1",
     "@tanstack/react-query": "^5.90.12",
     "@tanstack/react-table": "^8.21.3",
