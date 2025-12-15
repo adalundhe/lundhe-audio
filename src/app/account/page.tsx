@@ -19,14 +19,8 @@ import {
 } from "~/components/ui/alert-dialog"
 import { User, Mail, Trash2, Loader2 } from "lucide-react"
 import { Layout } from "~/components/Layout"
+import { deleteAccount } from "~/actions/user/delete"
 
-interface AccountDashboardProps {
-  userId: string
-  firstName: string | null
-  lastName: string | null
-  email: string | undefined
-  imageUrl: string
-}
 
 export default function AccountDashboard() {
   const [isDeleting, setIsDeleting] = useState(false)
@@ -41,15 +35,7 @@ export default function AccountDashboard() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/users/${user?.id}/delete`, {
-        method: "DELETE",
-      })
-
-      if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.error || "Failed to delete account")
-      }
-
+     await deleteAccount()
       await signOut()
       router.push("/")
     } catch (err) {
@@ -63,8 +49,8 @@ export default function AccountDashboard() {
 
   return (
     <Layout>
-        <Card className="w-full md:w-3/4 h-3/4 rounded-none border-none shadow-none flex flex-col items-center justify-center gap-8">
-            <Card className="w-1/2">
+        <Card className="max-w-[500px] h-3/4 rounded-none border-none shadow-none flex flex-col items-center justify-center gap-8">
+            <Card className="w-full">
                 <CardHeader>
                     <CardTitle>Profile</CardTitle>
                     <CardDescription>Your account information</CardDescription>
@@ -102,7 +88,7 @@ export default function AccountDashboard() {
             </Card>
 
             {/* Danger Zone Card */}
-            <Card className="border-red-500/50 w-1/2 flex flex-col items-center justify-center">
+            <Card className="border-red-500/50 w-full flex flex-col items-center justify-center">
                 <CardHeader>
                     <CardTitle className="text-red-500">Danger Zone</CardTitle>
                     <CardDescription>Irreversible actions for your account</CardDescription>
@@ -117,7 +103,7 @@ export default function AccountDashboard() {
                             Delete Account
                         </Button>
                     </AlertDialogTrigger>
-                    <AlertDialogContent>
+                    <AlertDialogContent className="mx-4">
                         <AlertDialogHeader>
                         <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                         <AlertDialogDescription>

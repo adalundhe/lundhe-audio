@@ -88,7 +88,11 @@ export default function SignInContinuePage() {
           <button type="submit" className='px-4 py-2 border dark:border-white rounded-sm hover:border-cyan-400 hover:text-cyan-500'>Submit</button>
         </div>
       </form>
-    ) : <div>
+    ) : status === 'complete'
+    ? <div>
+      Sign up complete!
+    </div>
+    : <div>
       Invalid request.
     </div> 
   )
