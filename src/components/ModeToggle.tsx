@@ -29,15 +29,15 @@ export const ModeToggle = ({
     <div className={`flex flex-col items-center justify-center h-full`}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button className="focus:outline-none border-transparent p-0">
+          <Button className="focus:outline-none border-transparent p-0 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">
             <div className="h-full flex items-center justify-end px-2 py-2">
-              <div className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 xl:w-[1.5vmax] xl:h-[1.5vmax] lg:w-[2vmax] lg:h-[2vmax] md:w-[2.5vmax] md:h-[2.5vmax] w-[3vmax] h-[3vmax]  flex items-center justify-center">
+              <div className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 x flex items-center justify-center">
 
-                <Sun className="focus:outline-none border-transparent !w-[16px] !h-[16px]" />
+                <Sun className="focus:outline-none border-transparent !w-[20px] !h-[20px]" />
               </div>
            
-              <div className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 xl:w-[1.5vmax] xl:h-[1.5vmax] lg:w-[2vmax] lg:h-[2vmax] md:w-[2.5vmax] md:h-[2.5vmax] w-[3vmax] h-[3vmax] flex items-center justify-center">
-                <Moon className="focus:outline-none border-transparent !w-[16px] !h-[16px]" />
+              <div className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 flex items-center justify-center">
+                <Moon className="focus:outline-none border-transparent !w-[20px] !h-[20px]" />
               </div>
              </div>
             <span className="sr-only">Toggle theme</span>
