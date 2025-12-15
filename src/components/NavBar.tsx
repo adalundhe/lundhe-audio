@@ -52,7 +52,7 @@ export const NavBar = () => {
 
     return (
         (
-            <NavigationMenu className={`h-[80px] max-h-[80px] my-4 ${courierPrime.className}`}>
+        <NavigationMenu className={`h-[80px] max-h-[80px] my-4 ${courierPrime.className} flex items-center w-full`}>
             <NavigationMenuList className="flex justify-start w-full h-full">
                 <NavBarImage />
                 <NavigationMenuItem className="h-[80px] max-h-[80px] flex flex-row items-center justify-center w-full h-full">
@@ -74,7 +74,7 @@ export const NavBar = () => {
                                     <Tooltip>
                                         <TooltipTrigger className='rounded-sm py-2 px-2 hover:text-white hover:bg-black dark:hover:bg-white dark:hover:text-black'>   
                                             <Link href={"/account"}>
-                                                <User/>
+                                                <User className='!w-[20px] !h-[20px]'/>
                                             </Link>
                                         </TooltipTrigger>
                                         <TooltipContent className={`${courierPrime.className} p-0 border dark:border-white tooltip-content`}>

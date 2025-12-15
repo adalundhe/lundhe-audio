@@ -382,7 +382,7 @@ export function CartDropdown() {
           setIsOpen(!isOpen)
         }}
       >
-        <ShoppingCart className="!w-[16px] !h-[16px]" />
+        <ShoppingCart className="!w-[20px] !h-[20px]" />
         {itemCount > 0 && (
           <span className="absolute -top-[4px] -right-[4px] !w-[16px] !h-[16px] rounded-full bg-primary border border-white dark:border-black text-[10px] font-medium text-primary-foreground flex items-center justify-center">
             {itemCount > 9 ? "9+" : itemCount}
