@@ -9106,5 +9106,37 @@
         "manufacturer": "Sebatron Audio",
         "created_timestamp": "Sun Dec 14 2025 01:46:19 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Sun Dec 14 2025 01:46:19 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Craneborne Audio HE2 Legacy Edition",
+        "description": "Digitally controllable harmonic equalizer",
+        "type": "equalizer",
+        "group": "equalization",
+        "quantity": 1,
+        "manufacturer": "Craneborne Audio"
+    },
+    {
+        "name": "WesAudio ngBusComp",
+        "description": "Digitally recallable quad VCA compressor",
+        "type": "compressor",
+        "group": "dynamics",
+        "quantity": 1,
+        "manufacturer": "WesAudio"
+    },
+    {
+        "name": "Dangerous Compressor",
+        "description": "Transparent transformerless VCA bus compressor",
+        "type": "compressor",
+        "group": "dynamics",
+        "quantity": 1,
+        "manufacturer": "Dangerous Music"
+    },
+    {
+        "name": "Erica Synths x Hexinverter HexDrums",
+        "description": "Ten-voice analog drum machine",
+        "type": "analog drum machine",
+        "group": "keyboards/samplers",
+        "quantity": 1,
+        "manufacturer": "Erica Synths"
     }
 ]
