@@ -148,7 +148,6 @@ export const cartDiscounts = createTable("cart_discounts", {
   updated_timestamp: text('updated_timestamp').default(sql`(current_timestamp)`),
 })
 
-
 // Infer types from schema
 export type Product = typeof products.$inferSelect
 export type ProductOption = typeof productOptions.$inferSelect

@@ -1,12 +1,23 @@
 "use client"
 
 import { useEffect } from "react"
-import { useCart, useCartActions } from "~/hooks/use-shopping-cart"
+import { useCart } from "~/hooks/use-shopping-cart"
 import { removeOrCreateCart } from "~/actions/cart/remove--or-create-cart"
 import { useShallow } from "zustand/react/shallow"
 import { useUser } from "@clerk/nextjs"
+import Stripe from 'stripe'
 
-export function ClearCartOnSuccess() {
+
+export function ClearCartOnSuccess({
+  status
+}: {
+  status: Stripe.Checkout.Session.Status
+}) {
+
+  if (status !== 'complete'){
+    return null
+  }
+
   const { clearCart, items, ...cart } = useCart(useShallow(state => state))
   const {user, isSignedIn} = useUser()
 

@@ -48,7 +48,7 @@ export default async function CompletePage({ searchParams }: CompletePageProps) 
     <main className="min-h-screen bg-background py-8">
       <div className="container max-w-2xl mx-auto px-4">
         {/* Clear cart on successful payment */}
-        <ClearCartOnSuccess />
+        <ClearCartOnSuccess status={session.status} />
 
         <Card>
           <CardHeader className="text-center pb-2">
