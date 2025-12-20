@@ -9150,5 +9150,13 @@
         "manufacturer": "Dangerous Music",
         "created_timestamp": "Fri Dec 19 2025 23:24:34 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Fri Dec 19 2025 23:35:18 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "WesAudio NG78",
+        "description": "Digitally controllable stereo FET compressor",
+        "type": "compressor",
+        "group": "dynamics",
+        "quantity": 1,
+        "manufacturer": "WesAudio"
     }
 ]
