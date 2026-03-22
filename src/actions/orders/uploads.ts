@@ -1,6 +1,6 @@
 "use server";
 
-import { auth } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
@@ -14,6 +14,11 @@ import { deleteOrderAssetFile } from "~/server/order-asset-storage";
 import { db } from "~/server/db/client";
 import { orderSongAssets } from "~/server/db/schema";
 import {
+  createOrderSubmission,
+  getOrderProjectName,
+  getOrderSubmissionForUser,
+} from "~/server/order-submissions";
+import {
   getOrderDetailForUser,
   syncOrderWorkflowFromUploads,
 } from "~/server/order-detail";
@@ -26,7 +31,6 @@ import {
   getMultipartPartCount,
   getMultipartPartSizeBytes,
   getOrderSongSourceObjectKey,
-  getOrderUploadBucket,
   getStoredObjectBytes,
   getStoredObjectUri,
   headStoredObject,
@@ -52,6 +56,7 @@ export interface PreparedOrderUploadInput {
 export interface PreparedSinglePartUpload {
   clientUploadId: string;
   kind: "single-part";
+  submissionId: string;
   songSpecId: string;
   objectKey: string;
   uploadUrl: string;
@@ -61,6 +66,7 @@ export interface PreparedSinglePartUpload {
 export interface PreparedMultipartUpload {
   clientUploadId: string;
   kind: "multipart";
+  submissionId: string;
   songSpecId: string;
   objectKey: string;
   uploadId: string;
@@ -78,6 +84,7 @@ export type PreparedOrderUpload =
 
 export interface CompletePreparedOrderUploadInput {
   clientUploadId: string;
+  submissionId: string;
   songSpecId: string;
   fileName: string;
   relativePath: string | null;
@@ -102,6 +109,20 @@ const getContentType = (mimeType: string | null) => {
   }
 
   return "audio/wav";
+};
+
+const getUserDisplayName = async (userId: string) => {
+  const user = await currentUser();
+  const fullName =
+    user?.fullName ??
+    [user?.firstName, user?.lastName].filter(Boolean).join(" ").trim();
+
+  return (
+    fullName ||
+    user?.username ||
+    user?.primaryEmailAddress?.emailAddress ||
+    userId
+  );
 };
 
 const getSongSpecMap = (songSpecs: OrderSongSpec[]) =>
@@ -270,13 +291,20 @@ export async function prepareOrderUploadSubmission({
     order,
   });
 
-  const bucket = getOrderUploadBucket();
+  const submission = await createOrderSubmission({
+    orderId,
+    projectName: getOrderProjectName(order.items.map((item) => item.name)),
+    userDisplayName: await getUserDisplayName(userId),
+    userId,
+  });
+  const bucket = submission.uploadBucketKey;
 
   return await Promise.all(
     files.map(async (file) => {
       const contentType = getContentType(file.mimeType);
       const objectKey = getOrderSongSourceObjectKey({
         orderId,
+        submissionId: submission.id,
         songSpecId: file.songSpecId,
         clientUploadId: file.clientUploadId,
         fileName: file.fileName,
@@ -287,6 +315,7 @@ export async function prepareOrderUploadSubmission({
         return {
           clientUploadId: file.clientUploadId,
           kind: "single-part",
+          submissionId: submission.id,
           songSpecId: file.songSpecId,
           objectKey,
           uploadUrl: await createPresignedPutUrl({
@@ -312,6 +341,7 @@ export async function prepareOrderUploadSubmission({
       return {
         clientUploadId: file.clientUploadId,
         kind: "multipart",
+        submissionId: submission.id,
         songSpecId: file.songSpecId,
         objectKey,
         uploadId,
@@ -329,15 +359,16 @@ export async function prepareOrderUploadSubmission({
 }
 
 const validateUploadedObjectAgainstSongSpec = async ({
+  bucket,
   fileName,
   key,
   songSpec,
 }: {
+  bucket: string;
   fileName: string;
   key: string;
   songSpec: OrderSongSpec;
 }) => {
-  const bucket = getOrderUploadBucket();
   const [headResponse, headerBytes] = await Promise.all([
     headStoredObject({
       bucket,
@@ -409,7 +440,17 @@ export async function completePreparedOrderUpload({
     throw new Error("The selected song could not be found.");
   }
 
-  const bucket = getOrderUploadBucket();
+  const submission = await getOrderSubmissionForUser({
+    orderId,
+    submissionId: file.submissionId,
+    userId,
+  });
+
+  if (!submission) {
+    throw new Error("The upload submission for this file could not be found.");
+  }
+
+  const bucket = submission.uploadBucketKey;
 
   try {
     if (file.uploadKind === "multipart") {
@@ -433,6 +474,7 @@ export async function completePreparedOrderUpload({
     }
 
     const verifiedUpload = await validateUploadedObjectAgainstSongSpec({
+      bucket,
       fileName: file.fileName,
       key: file.objectKey,
       songSpec,

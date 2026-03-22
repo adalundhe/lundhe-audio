@@ -1,6 +1,6 @@
 import { sql } from "drizzle-orm";
 import {
-  // index,
+  index,
   // int,
   // primaryKey,
   sqliteTableCreator,
@@ -331,6 +331,36 @@ export const orderSongAssets = createTable("order_song_assets", {
   ),
 });
 
+export const orderSubmissions = createTable(
+  "submissions",
+  {
+    id: text("id", { length: 255 })
+      .notNull()
+      .primaryKey()
+      .$defaultFn(() => crypto.randomUUID()),
+    orderId: text("order_id", { length: 255 })
+      .notNull()
+      .references(() => orders.id),
+    userId: text("user_id", { length: 255 }).notNull(),
+    uploadBucketKey: text("upload_bucket_key", { length: 255 })
+      .notNull()
+      .unique(),
+    downloadBucketKey: text("download_bucket_key", { length: 255 }).unique(),
+    submittedAt: text("submitted_at").notNull(),
+    created_timestamp: text("created_timestamp")
+      .notNull()
+      .$defaultFn(() => new Date().toISOString()),
+    updated_timestamp: text("updated_timestamp").default(
+      sql`(current_timestamp)`,
+    ),
+  },
+  (table) => ({
+    orderIdIdx: index("submissions_order_id_idx").on(table.orderId),
+    userIdIdx: index("submissions_user_id_idx").on(table.userId),
+    submittedAtIdx: index("submissions_submitted_at_idx").on(table.submittedAt),
+  }),
+);
+
 export const orderArchiveDownloadSessions = createTable(
   "order_archive_download_sessions",
   {
@@ -366,5 +396,6 @@ export type Order = typeof orders.$inferSelect;
 export type OrderItem = typeof orderItems.$inferSelect;
 export type OrderSongSpec = typeof orderSongSpecs.$inferSelect;
 export type OrderSongAsset = typeof orderSongAssets.$inferSelect;
+export type OrderSubmission = typeof orderSubmissions.$inferSelect;
 export type OrderArchiveDownloadSession =
   typeof orderArchiveDownloadSessions.$inferSelect;

@@ -1446,6 +1446,7 @@ export function OrderDetailClient({ order }: { order: OrderDetail }) {
         orderId: order.id,
         file: {
           clientUploadId: pendingFile.clientUploadId,
+          submissionId: instruction.submissionId,
           songSpecId: pendingFile.songSpecId,
           fileName: pendingFile.fileName,
           relativePath: pendingFile.relativePath,
@@ -1485,6 +1486,7 @@ export function OrderDetailClient({ order }: { order: OrderDetail }) {
       orderId: order.id,
       file: {
         clientUploadId: pendingFile.clientUploadId,
+        submissionId: instruction.submissionId,
         songSpecId: pendingFile.songSpecId,
         fileName: pendingFile.fileName,
         relativePath: pendingFile.relativePath,

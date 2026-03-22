@@ -1,6 +1,6 @@
 import "server-only";
 
-import { and, asc, eq } from "drizzle-orm";
+import { and, asc, desc, eq } from "drizzle-orm";
 
 import type { MasteringQuoteData } from "~/lib/mastering/pricing-types";
 import type { QuoteData } from "~/lib/mixing/pricing-types";
@@ -11,6 +11,7 @@ import {
   orders,
   orderSongAssets,
   orderSongSpecs,
+  orderSubmissions,
 } from "~/server/db/schema";
 import type {
   OrderDetail,
@@ -19,6 +20,7 @@ import type {
   OrderSongAsset,
   OrderSongSpec,
   OrderSongSourceType,
+  OrderSubmissionSummary,
   OrderWorkflowStatus,
 } from "~/types/orders";
 
@@ -81,7 +83,8 @@ const isMissingOrderDetailSchemaError = (error: unknown) => {
 
   return (
     error.message.includes("no such table: order_song_specs") ||
-    error.message.includes("no such table: order_song_assets")
+    error.message.includes("no such table: order_song_assets") ||
+    error.message.includes("no such table: submissions")
   );
 };
 
@@ -381,6 +384,17 @@ const toOrderSongAsset = (
   uploadedAt: asset.uploaded_timestamp,
 });
 
+const toOrderSubmissionSummary = (
+  submission: typeof orderSubmissions.$inferSelect,
+): OrderSubmissionSummary => ({
+  id: submission.id,
+  orderId: submission.orderId,
+  userId: submission.userId,
+  uploadBucketKey: submission.uploadBucketKey,
+  downloadBucketKey: submission.downloadBucketKey,
+  submittedAt: submission.submittedAt,
+});
+
 export const syncOrderSongSpecsFromCart = async ({
   orderId,
   cartId,
@@ -674,6 +688,16 @@ export const getOrderDetailForUser = async ({
       .from(orderSongAssets)
       .where(eq(orderSongAssets.orderId, orderRecord.id))
       .orderBy(asc(orderSongAssets.uploaded_timestamp));
+    const submissions = await db
+      .select()
+      .from(orderSubmissions)
+      .where(
+        and(
+          eq(orderSubmissions.orderId, orderRecord.id),
+          eq(orderSubmissions.userId, userId),
+        ),
+      )
+      .orderBy(desc(orderSubmissions.submittedAt));
 
     const assetsBySongId = assets.reduce<Record<string, OrderSongAsset[]>>(
       (grouped, asset) => {
@@ -760,6 +784,10 @@ export const getOrderDetailForUser = async ({
       items: orderListItems,
       serviceType,
       songSpecs,
+      latestSubmission: submissions[0]
+        ? toOrderSubmissionSummary(submissions[0])
+        : null,
+      submissionCount: submissions.length,
       uploadsLocked: getUploadsLocked(orderRecord.workflowStatus),
       totalExpectedSourceFiles,
       totalUploadedSourceFiles,
@@ -791,6 +819,8 @@ export const getOrderDetailForUser = async ({
         items: orderListItems,
         serviceType,
         songSpecs: [],
+        latestSubmission: null,
+        submissionCount: 0,
         uploadsLocked: true,
         totalExpectedSourceFiles: 0,
         totalUploadedSourceFiles: 0,

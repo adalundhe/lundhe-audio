@@ -94,9 +94,20 @@ export interface OrderSongSpec {
   deliverableAssets: OrderSongAsset[];
 }
 
+export interface OrderSubmissionSummary {
+  id: string;
+  orderId: string;
+  userId: string;
+  uploadBucketKey: string;
+  downloadBucketKey: string | null;
+  submittedAt: string;
+}
+
 export interface OrderDetail extends OrderListItem {
   serviceType: OrderServiceType;
   songSpecs: OrderSongSpec[];
+  latestSubmission: OrderSubmissionSummary | null;
+  submissionCount: number;
   uploadsLocked: boolean;
   totalExpectedSourceFiles: number;
   totalUploadedSourceFiles: number;

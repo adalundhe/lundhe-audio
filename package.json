@@ -18,6 +18,7 @@
     "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
+    "postinstall": "node src/scripts/patch-next-browserslist-warning.mjs",
     "preview": "next build && next start",
     "start": "next start -p 3001",
     "typecheck": "tsc --noEmit"
