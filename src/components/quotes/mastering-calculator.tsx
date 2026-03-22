@@ -14,6 +14,7 @@ import { useCartActions, useCartState } from "~/hooks/use-shopping-cart"
 import { useUser } from "@clerk/nextjs"
 import { createOrUpdateCart } from "~/actions/cart/create-or-update-cart"
 import { useRouter } from "next/navigation"
+import { useRouteTransition } from "~/components/route-transition-provider"
 
 const STEPS = ["Project Size", "Add Ons", "Delivery", "Summary"]
 
@@ -21,6 +22,7 @@ const STEPS = ["Project Size", "Add Ons", "Delivery", "Summary"]
 export function MasteringCalculator() {
 
   const router = useRouter()
+  const { startRouteTransition } = useRouteTransition()
   const { quoteData, currentStep, setCurrentStep, reset } = useMasteringQuote(useShallow(state => state))
   const { addQuote } = useCartActions()
 
@@ -63,9 +65,12 @@ export function MasteringCalculator() {
       })
 
       if (!userId || !isSignedIn) {
+        startRouteTransition()
         router.push("/sign-in")
+        return
       }
 
+      startRouteTransition()
       router.push("/checkout")
     }
   }

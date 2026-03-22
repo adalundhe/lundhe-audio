@@ -8,9 +8,11 @@ import { Input } from '~/components/ui/input'
 import { ScaleLoader } from '~/components/ui/scale-loader'
 import { useClerk } from '@clerk/nextjs'
 import SignInContinueLoading from './loading'
+import { useRouteTransition } from '~/components/route-transition-provider'
 
 export default function SignInContinuePage() {
   const router = useRouter()
+  const { startRouteTransition } = useRouteTransition()
   // Use `useSignUp()` hook to access the `SignUp` object
   // `missing_requirements` and `missingFields` are only available on the `SignUp` object
   const { isLoaded, signUp, setActive } = useSignUp()
@@ -24,7 +26,10 @@ export default function SignInContinuePage() {
 
 //   // Protect the page from users who are not in the sign-up flow
 //   // such as users who visited this route directly
-  if (!signUp.id) router.push('/sign-in')
+  if (!signUp.id) {
+    startRouteTransition()
+    router.push('/sign-in')
+  }
 
   const status = signUp?.status
   const missingFields =  signUp?.missingFields ?? []
@@ -47,15 +52,18 @@ export default function SignInContinuePage() {
             if (session?.currentTask) {
               // Check for tasks and navigate to custom UI to help users resolve them
               // See https://clerk.com/docs/guides/development/custom-flows/overview#session-tasks
+              startRouteTransition()
               router.push('/sign-in/tasks')
               return
             }
 
+            startRouteTransition()
             router.push('/account')
        
           },
         })
 
+        startRouteTransition()
         router.push("/account")
 
         return

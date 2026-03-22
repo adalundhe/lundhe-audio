@@ -1,8 +1,5 @@
-
-import { ScaleLoader } from "~/components/ui/scale-loader";
+import { RouteTransitionOverlay } from "~/components/route-transition-overlay";
 
 export default function SignInContinueLoading() {
-    return (
-        <ScaleLoader/>
-    )
+  return <RouteTransitionOverlay />;
 }

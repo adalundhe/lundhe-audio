@@ -557,7 +557,10 @@ export const GearTable = ({
                               header.column.columnDef.header,
                               header.getContext()
                             )}
-                        <ColumnResizer header={header} />
+                        <ColumnResizer
+                          header={header}
+                          enabled={header.index < headerGroup.headers.length - 1}
+                        />
                       </TableHead>
                     )
                   })}

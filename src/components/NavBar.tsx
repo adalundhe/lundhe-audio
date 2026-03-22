@@ -1,4 +1,5 @@
 "use client"
+import * as React from "react";
 import { Menu } from 'lucide-react'
 import {
     Accordion,
@@ -28,7 +29,7 @@ import { ScrollArea } from "~/components/ui/scroll-area";
 import NavBarImage from "./NavBarImage";
 import { ModeToggle } from './ModeToggle';
 import { CartDropdown } from './cart/cart-dropdown';
-import { SignedIn, SignedOut, useClerk } from '@clerk/nextjs'
+import { useClerk, useUser } from '@clerk/nextjs'
 import { Button } from './ui/button';
 import { User } from 'lucide-react';
 import Link from 'next/link';
@@ -43,12 +44,27 @@ const courierPrime = Courier_Prime({
     weight: "400",
     subsets: ['latin']
   })
-  
-
-
-export const NavBar = () => {
+const topLevelLinkClassName =
+    `${navigationMenuLinkStyle()} min-h-12 w-full items-center bg-transparent px-0`;
+const topLevelRowClassName =
+    "min-h-12 w-full px-2";
+const nestedLinkClassName =
+    `${navigationMenuLinkStyle()} min-h-10 w-full items-center bg-transparent px-0`;
+export const NavBar = ({ initialSignedIn }: { initialSignedIn: boolean }) => {
 
     const { signOut } = useClerk()
+    const { isLoaded, isSignedIn } = useUser()
+    const [resolvedSignedIn, setResolvedSignedIn] = React.useState(initialSignedIn)
+
+    React.useEffect(() => {
+        if (isLoaded) {
+            setResolvedSignedIn(Boolean(isSignedIn))
+        }
+    }, [isLoaded, isSignedIn])
+
+    const showSignedInControls = isLoaded
+        ? Boolean(isSignedIn)
+        : resolvedSignedIn
 
     return (
         (
@@ -70,7 +86,7 @@ export const NavBar = () => {
                         </div>
                         <div className='col-span-10 flex flex-col items-center justify-center px-4 h-full'>
                             <div className='flex ml-auto gap-4'>
-                                <SignedIn>
+                                {showSignedInControls ? (
                                     <Tooltip>
                                         <TooltipTrigger className='rounded-sm py-2 px-2 hover:text-white hover:bg-black dark:hover:bg-white dark:hover:text-black'>   
                                             <Link href={"/account"}>
@@ -80,47 +96,47 @@ export const NavBar = () => {
                                         <TooltipContent className={`${courierPrime.className} p-0 border dark:border-white tooltip-content`}>
                                            <ThemeProvider>
                                                 <div className='dark:bg-black dark:text-white p-2 text-md'>
-                                                    Go to my account
+                                                   Go to my account
                                                 </div>
                                            </ThemeProvider>
                                         </TooltipContent>
                                     </Tooltip>
-                                </SignedIn>
-                                <SignedIn>
+                                ) : null}
+                                {showSignedInControls ? (
                                     <CartDropdown/>
-                                </SignedIn>
+                                ) : null}
                                 <ModeToggle align='end' />      
                             </div>   
                         </div>
                     </div>       
                     <NavigationMenuContent>
-                        <div  className={`border-t h-[100vh] lg:mt-[34px] w-[100vw] flex flex-col w-full no-scroll text-lg font-light bg-white dark:bg-black`}>
+                        <div  className={`border-t h-[100vh] lg:mt-[34px] w-[100vw] flex flex-col w-full no-scroll bg-background text-foreground text-lg font-light`}>
                             <ScrollArea className={`h-[60vh]`}>
                                 <Accordion defaultValue="home" type="single" collapsible className="flex flex-col w-full">
-                                    <SignedOut>
-                                        <AccordionItem value='sign-in-or-up' className='px-2'>
-                                                <Button className='border border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black my-4'>
-                                                    <NavigationMenuLink href='/sign-in' className='underline-none'>
+                                    {!showSignedInControls ? (
+                                        <AccordionItem value='sign-in-or-up' className='px-2 py-2'>
+                                                <Button asChild className='min-h-12 border border-black px-4 dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black'>
+                                                    <Link href='/sign-in' className='underline-none'>
                                                         sign in
-                                                    </NavigationMenuLink>
+                                                    </Link>
                                                 </Button>
                                         </AccordionItem>
-                                    </SignedOut>
-                                    <SignedIn>
-                                        <AccordionItem value='sign-out' className='px-2'>
-                                            <Button className='border border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black my-4' onClick={() => signOut()}>
+                                    ) : null}
+                                    {showSignedInControls ? (
+                                        <AccordionItem value='sign-out' className='px-2 py-2'>
+                                            <Button className='min-h-12 border border-black px-4 dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black' onClick={() => signOut()}>
                                                 sign out
                                             </Button>
                                         </AccordionItem>
-                                    </SignedIn>
-                                    <AccordionItem value="home" className={"py-2 px-2 h-[40px] w-full flex grow-1 items-center space-x-2"}>
-                                        <NavigationMenuLink href="/" className={navigationMenuLinkStyle()}>
-                                            home
+                                    ) : null}
+                                    <AccordionItem value="home" className={topLevelRowClassName}>
+                                        <NavigationMenuLink asChild className={topLevelLinkClassName}>
+                                            <Link href="/">home</Link>
                                         </NavigationMenuLink>
                                     </AccordionItem>
-                                    <AccordionItem value="studio" className="px-2">
+                                    <AccordionItem value="studio" className={topLevelRowClassName}>
                                         <AccordionTrigger 
-                                            className="p-0 cursor-default py-2 text-lg font-light"
+                                            className="min-h-12 w-full cursor-default px-0 py-0 text-lg font-light"
                                             chevronSide="left"
                                         >   
                                             <div className="flex items-center space-x-2 cursor-default">
@@ -132,30 +148,30 @@ export const NavBar = () => {
                                         <AccordionContent className="p-0">
                                             <Separator/>     
                                             <ul className="list-none pl-4">
-                                                <li className="w-full py-2 flex items-center space-x-2 grow-1"> 
+                                                <li className="flex min-h-10 w-full items-center space-x-2"> 
                                                     {/* <PiInfoFill /> */}                   
-                                                    <NavigationMenuLink href='/studio/about' className={navigationMenuLinkStyle()} >
-                                                        about
+                                                    <NavigationMenuLink asChild className={nestedLinkClassName} >
+                                                        <Link href='/studio/about'>about</Link>
                                                     </NavigationMenuLink>
                                                 </li>
                                                 <Separator/>
-                                                <li className="w-full py-2 flex items-center space-x-2 grow-1">
+                                                <li className="flex min-h-10 w-full items-center space-x-2">
                                                     {/* <GiGearHammer /> */}
-                                                    <NavigationMenuLink href="/studio/gear" className={navigationMenuLinkStyle()}>
-                                                        gear
+                                                    <NavigationMenuLink asChild className={nestedLinkClassName}>
+                                                        <Link href="/studio/gear">gear</Link>
                                                     </NavigationMenuLink>
                                                 </li>
                                             </ul>
                                         </AccordionContent>
                                     </AccordionItem>
-                                    <AccordionItem value="blog" className="py-2 px-2 h-[40px] w-full flex grow-1 items-center space-x-2">
+                                    <AccordionItem value="blog" className={topLevelRowClassName}>
                                         {/* <IoMdContact/> */}
-                                        <NavigationMenuLink href="/blog" className="cursor-pointer hover:underline">
-                                            blog
+                                        <NavigationMenuLink asChild className={topLevelLinkClassName}>
+                                            <Link href="/blog">blog</Link>
                                         </NavigationMenuLink>
                                     </AccordionItem>
-                                    <AccordionItem value='services' className='px-2'>
-                                        <AccordionTrigger className="p-0 cursor-default py-2 text-lg font-light" chevronSide="left">   
+                                    <AccordionItem value='services' className={topLevelRowClassName}>
+                                        <AccordionTrigger className="min-h-12 w-full cursor-default px-0 py-0 text-lg font-light" chevronSide="left">   
                                             <div className="flex items-center space-x-2 cursor-default">
                                                 <p className="hover:underline">
                                                     services
@@ -165,22 +181,22 @@ export const NavBar = () => {
                                         <AccordionContent className="p-0">  
                                             <Separator/>        
                                             <ul className="list-none pl-4">              
-                                                <li className="w-full py-2 flex items-center space-x-2 grow-1">
-                                                    <NavigationMenuLink href="/services/mastering" className={navigationMenuLinkStyle()}>
-                                                        mastering
+                                                <li className="flex min-h-10 w-full items-center space-x-2">
+                                                    <NavigationMenuLink asChild className={nestedLinkClassName}>
+                                                        <Link href="/services/mastering">mastering</Link>
                                                     </NavigationMenuLink>
                                                 </li>
                                                 <Separator/>
-                                                <li className="w-full py-2 flex items-center space-x-2 grow-1">
-                                                    <NavigationMenuLink href="/services/mixing" className={navigationMenuLinkStyle()}>
-                                                        mixing
+                                                <li className="flex min-h-10 w-full items-center space-x-2">
+                                                    <NavigationMenuLink asChild className={nestedLinkClassName}>
+                                                        <Link href="/services/mixing">mixing</Link>
                                                     </NavigationMenuLink>
                                                 </li>
                                             </ul>
                                         </AccordionContent>
                                     </AccordionItem>
-                                    <AccordionItem value="legal" className="px-2">
-                                        <AccordionTrigger className="p-0 cursor-default py-2 text-lg font-light" chevronSide="left">   
+                                    <AccordionItem value="legal" className={topLevelRowClassName}>
+                                        <AccordionTrigger className="min-h-12 w-full cursor-default px-0 py-0 text-lg font-light" chevronSide="left">   
                                             <div className="flex items-center space-x-2 cursor-default">
                                                 <p className="hover:underline">
                                                     legal
@@ -190,23 +206,23 @@ export const NavBar = () => {
                                         <AccordionContent className="p-0">  
                                             <Separator/>        
                                             <ul className="list-none pl-4">
-                                                <li className="w-full py-2 flex items-center space-x-2 grow-1">
-                                                    <NavigationMenuLink href="/legal/privacy" className={navigationMenuLinkStyle()}>
-                                                        privacy
+                                                <li className="flex min-h-10 w-full items-center space-x-2">
+                                                    <NavigationMenuLink asChild className={nestedLinkClassName}>
+                                                        <Link href="/legal/privacy">privacy</Link>
                                                     </NavigationMenuLink>
                                                 </li>
                                                 <Separator/>
-                                                <li className="w-full py-2 flex items-center space-x-2 grow-1">
-                                                    <NavigationMenuLink href="/legal/terms-of-service" className={navigationMenuLinkStyle()}>
-                                                        terms of service
+                                                <li className="flex min-h-10 w-full items-center space-x-2">
+                                                    <NavigationMenuLink asChild className={nestedLinkClassName}>
+                                                        <Link href="/legal/terms-of-service">terms of service</Link>
                                                     </NavigationMenuLink>
                                                 </li>
                                             </ul>
                                         </AccordionContent>
                                     </AccordionItem>
-                                    <AccordionItem value="contact" className="py-2 px-2 h-[40px] w-full flex grow-1 items-center space-x-2">
-                                        <NavigationMenuLink href="/contact" className="cursor-pointer hover:underline">
-                                            contact
+                                    <AccordionItem value="contact" className={topLevelRowClassName}>
+                                        <NavigationMenuLink asChild className={topLevelLinkClassName}>
+                                            <Link href="/contact">contact</Link>
                                         </NavigationMenuLink>
                                     </AccordionItem>
                                 </Accordion>

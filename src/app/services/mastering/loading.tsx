@@ -1,8 +1,5 @@
-import { StudioCalculatorSkeleton } from "~/components/quotes/studio-calculator-skeleton"
+import { RouteTransitionOverlay } from "~/components/route-transition-overlay";
 
-
-export default async function QuotesLoader() {
-    return (
-        <StudioCalculatorSkeleton />
-    )
+export default function MasteringLoading() {
+  return <RouteTransitionOverlay />;
 }

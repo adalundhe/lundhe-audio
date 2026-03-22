@@ -3,6 +3,7 @@ import { Courier_Prime } from 'next/font/google';
 import Script from 'next/script';
 import { Footer } from "~/components/Footer";
 import { NavBar } from "~/components/NavBar";
+import { RouteTransitionProvider } from "~/components/route-transition-provider";
 import { env } from "~/env";
 import { TRPCReactProvider } from "~/trpc/react";
 import { CartStoreProvider } from "~/components/cart/cart-provider"
@@ -59,8 +60,8 @@ const fetchCart = async (user: User | null, authorized?: SessionAuthWithRedirect
     }
 
     const [cartItemsData, cartDiscountsData] = await Promise.all([
-      db.select().from(cartItems).where(eq(cartItems.id, cartData.id)),
-      db.select().from(cartDiscounts).where(eq(cartDiscounts.id, cartData.id))
+      db.select().from(cartItems).where(eq(cartItems.cartId, cartData.id)),
+      db.select().from(cartDiscounts).where(eq(cartDiscounts.cartId, cartData.id))
     ])
 
 
@@ -97,6 +98,14 @@ const fetchCart = async (user: User | null, authorized?: SessionAuthWithRedirect
         count: discount.count,
         description: discount.description,
         addedAt: new Date(discount.created_timestamp).getTime(),
+        items: (() => {
+          try {
+            const parsed = JSON.parse(discount.items)
+            return Array.isArray(parsed) ? parsed.filter((item): item is string => typeof item === "string") : []
+          } catch {
+            return []
+          }
+        })(),
       })) as AppliedDiscount[],
       total: cartData.total,
       subtotal: cartData.subtotal,
@@ -119,6 +128,7 @@ export default async function RootLayout ({
 
   const authorized = await auth()
   const user = await currentUser()
+  const isSignedIn = Boolean(authorized.userId && authorized.sessionId)
 
   const [productsData, optionsData, discountsData, cartData] = await Promise.all([
     db.select().from(products).where(
@@ -168,12 +178,14 @@ export default async function RootLayout ({
                           options: optionsData,
                           discounts: discountsData,
                         }} initData={cartData}>
-                          <NavBar />
-                          <div className={`flex flex-col h-full`}>
-                                  {children}
-                          </div>
-                          <Footer />
-                          <ScrollToTop minHeight={100} scrollTo={0}/>               
+                          <RouteTransitionProvider>
+                            <NavBar initialSignedIn={isSignedIn} />
+                            <div className={`flex flex-col h-full`}>
+                                    {children}
+                            </div>
+                            <Footer />
+                            <ScrollToTop minHeight={100} scrollTo={0}/>
+                          </RouteTransitionProvider>
                         </CartStoreProvider>          
                       </TRPCReactProvider>
                     </TooltipProvider>

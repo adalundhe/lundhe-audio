@@ -299,7 +299,7 @@ function CartContent({ onClose }: { onClose: () => void }) {
 
           <div className="flex gap-2 pt-2">
             <Button size="sm" className="flex-1 text-red-600 hover:bg-red-600/30 border border-red-600" onClick={() => {
-              clearCart(async (_, totals)  => {
+              clearCart(async (items, totals)  => {
                 if (userId && isSignedIn) {
                   removeOrCreateCart({
                     ...cart,
