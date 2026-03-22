@@ -15,6 +15,7 @@ import { useCartActions, useCartState } from "~/hooks/use-shopping-cart"
 import { SignedIn, SignedOut, useUser } from "@clerk/nextjs"
 import { redirect, useRouter } from "next/navigation"
 import { createOrUpdateCart } from "~/actions/cart/create-or-update-cart"
+import { useRouteTransition } from "~/components/route-transition-provider"
 
 export type { Song, AddOns, DeliveryOptions }
 
@@ -24,6 +25,7 @@ const STEPS = ["Project Size", "Add Ons", "Delivery", "Summary"]
 export function StudioCalculator() {
 
   const router = useRouter()
+  const { startRouteTransition } = useRouteTransition()
   const { quoteData, currentStep, setCurrentStep, reset } = useMixingQuote(useShallow(state => state))
 
   const { addQuote } = useCartActions()
@@ -67,6 +69,7 @@ export function StudioCalculator() {
       })
 
       if (!userId || !isSignedIn) {
+        startRouteTransition()
         router.push("/sign-in")
       }
 
@@ -106,6 +109,7 @@ export function StudioCalculator() {
                   <Button onClick={() => {
                     handleSubmit()
                     reset()
+                    startRouteTransition()
                     redirect("/checkout")
                   }} size="lg" className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">
                     Add to Cart
@@ -115,6 +119,7 @@ export function StudioCalculator() {
                   <Button onClick={() => {
                     handleSubmit()
                     reset()
+                    startRouteTransition()
                     redirect("/sign-in")
                   }} size="lg" className="border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">
                     Add to Cart

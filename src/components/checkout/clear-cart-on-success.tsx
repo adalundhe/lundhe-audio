@@ -18,11 +18,11 @@ export function ClearCartOnSuccess({
     return null
   }
 
-  const { clearCart, items, ...cart } = useCart(useShallow(state => state))
+  const { clearCart, ...cart } = useCart(useShallow(state => state))
   const {user, isSignedIn} = useUser()
 
   useEffect(() => {
-    clearCart(async (_, totals)  => {
+    clearCart(async (items, totals)  => {
         if (user?.id && isSignedIn) {
             removeOrCreateCart({
                 ...cart,

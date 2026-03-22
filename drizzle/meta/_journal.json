@@ -148,6 +148,41 @@
       "when": 1765695469220,
       "tag": "0020_careless_ezekiel",
       "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "6",
+      "when": 1774042989190,
+      "tag": "0021_add_orders_account_history",
+      "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "6",
+      "when": 1774046580000,
+      "tag": "0022_solid_cart_discount_items",
+      "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "6",
+      "when": 1774050180000,
+      "tag": "0023_add_order_workflow_status",
+      "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "6",
+      "when": 1774062000000,
+      "tag": "0024_add_order_song_specs_and_assets",
+      "breakpoints": true
+    },
+    {
+      "idx": 25,
+      "version": "6",
+      "when": 1774150800000,
+      "tag": "0025_add_order_archive_download_sessions",
+      "breakpoints": true
     }
   ]
 }

@@ -181,7 +181,7 @@ export function createCartStore(pricingData: PricingData, initCart?: CartInitDat
 
           const newItems = [...get().items, newItem]
           const totals = calculateTotals(newItems, get().discountData)
-          submit([newItem], totals)
+          submit(newItems, totals)
 
           set({
             items: newItems,
@@ -217,7 +217,7 @@ export function createCartStore(pricingData: PricingData, initCart?: CartInitDat
           const newItems = items.filter((item) => item.id !== id)
           const totals = calculateTotals(newItems, get().discountData)
 
-          submit(items.filter(item => item.id === id), totals)
+          submit(newItems, totals)
 
           set({
             items: newItems,

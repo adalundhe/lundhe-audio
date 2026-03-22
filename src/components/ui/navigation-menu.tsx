@@ -11,7 +11,7 @@ const NavigationMenu = React.forwardRef<
   <NavigationMenuPrimitive.Root
     ref={ref}
     className={cn(
-      "relative z-10 flex flex-1 items-center justify-center w-full [&>div]:w-full space-x-2",
+      "relative z-50 flex w-full flex-1 items-center justify-center space-x-2 [&>div]:w-full",
       className
     )}
     {...props}
@@ -100,7 +100,7 @@ const NavigationMenuContent = React.forwardRef<
   <NavigationMenuPrimitive.Content
     ref={ref}
     className={cn(
-      "bg-transparent w-full left-0 top-0 data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 lg:absolute",
+      "bg-transparent w-full left-0 top-0 z-50 data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 lg:absolute",
       className
     )}
     {...props}
@@ -116,7 +116,7 @@ const NavigationSubMenuContent = React.forwardRef<
   <NavigationMenuPrimitive.Content
     ref={ref}
     className={cn(
-      "bg-transparent absolute",
+      "bg-transparent absolute z-50",
       className
     )}
     {...props}
@@ -131,7 +131,11 @@ const NavigationMenuViewport = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Viewport>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Viewport>
 >(({ className, ...props }, ref) => (
-  <div className={cn("absolute left-[-8px] lg:left-0 top-[90px] lg:top-[96px] lg:top-[62px] flex justify-center w-full")}>
+  <div
+    className={cn(
+      "absolute left-[-8px] top-[90px] z-50 flex w-full justify-center lg:left-0 lg:top-[62px]",
+    )}
+  >
     <NavigationMenuPrimitive.Viewport
       className={cn(
         "ml-0 relative w-full lg:h-fit h-[100vh] lg:rounded-sm border bg-popover text-popover-foreground shadow data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 ",
@@ -168,4 +172,3 @@ NavigationMenuIndicator.displayName =
 export {
   NavigationMenu, NavigationMenuContent, NavigationMenuIndicator, NavigationMenuItem, NavigationMenuLink, navigationMenuLinkStyle, NavigationMenuList, NavigationMenuSub, NavigationMenuTrigger, navigationMenuTriggerStyle, NavigationMenuViewport, NavigationSubMenuContent, NavigationSubMenuTrigger
 };
-
