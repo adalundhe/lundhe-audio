@@ -3657,7 +3657,7 @@
         "description": "Compact desktop monophonic analog semi-modular generative synthesizer",
         "type": "analog monosynth",
         "group": "keyboards/samplers",
-        "quantity": 1,
+        "quantity": 4,
         "manufacturer": "Moog Music",
         "created_timestamp": "Fri March 30 2025 23:03:43 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Tue Mar 17 2026 22:29:57 GMT+0000 (Coordinated Universal Time)"
@@ -3668,7 +3668,7 @@
         "description": "Compact desktop monophonic analog semi-modular synthesizer",
         "type": "analog monosynth",
         "group": "keyboards/samplers",
-        "quantity": 1,
+        "quantity": 6,
         "manufacturer": "Moog Music",
         "created_timestamp": "Fri March 30 2025 23:03:43 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Tue Mar 17 2026 22:29:57 GMT+0000 (Coordinated Universal Time)"
@@ -3679,7 +3679,7 @@
         "description": "Compact desktop monophonic analog semi-modular drum machine",
         "type": "analog drum machine",
         "group": "keyboards/samplers",
-        "quantity": 2,
+        "quantity": 5,
         "manufacturer": "Moog Music",
         "created_timestamp": "Fri March 30 2025 23:03:43 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Tue Mar 17 2026 22:29:57 GMT+0000 (Coordinated Universal Time)"
@@ -3756,7 +3756,7 @@
         "description": "Compact desktop monophonic semi-modular analog generative polyrhythmic synthesizer",
         "type": "analog monosynth",
         "group": "keyboards/samplers",
-        "quantity": 1,
+        "quantity": 5,
         "manufacturer": "Moog Music",
         "created_timestamp": "Fri March 30 2025 23:03:44 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Tue Mar 17 2026 22:29:57 GMT+0000 (Coordinated Universal Time)"
@@ -9260,5 +9260,69 @@
         "manufacturer": "Summit Audio",
         "created_timestamp": "Tue Mar 17 2026 22:29:57 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Tue Mar 17 2026 22:29:57 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+        "name": "Erica Synths Xenodrive",
+        "description": "Digital distortion and waveshaping pedal",
+        "group": "pedals",
+        "type": "distortion pedal",
+        "quantity": 1,
+        "manufacturer": "Erica Synths"
+    },
+    {
+        "name": "Crumar Spirit",
+        "description": "Reissue of legendary Italian monosynth",
+        "type": "analog monosynth",
+        "group": "keyboards/samplers",
+        "quantity": 1,
+        "manufacturer": "Crumar"
+    },
+    {
+        "name": "Frap Tools Magnolia",
+        "description": "Thru-Zero FM polyphonic analog synthesizer",
+        "type": "analog polysynth",
+        "group": "keyboards/samplers",
+        "quantity": 1,
+        "manufacturer": "Frap Tools"
+    },
+    {
+        "name": "UDO DMNO",
+        "description": "Eight-voice hybrid polyphonic analog synthesizer",
+        "type": "hybrid polysynth",
+        "group": "keyboards/samplers",
+        "quantity": 1,
+        "manufacturer": "UDO Audio"
+    },
+    {
+        "name": "True Systems Precision 8",
+        "description": "Eight-channel preamp with M/S decoding",
+        "type": "preamp",
+        "group": "preamp/DI",
+        "quantity": 1,
+        "manufacturer": "True Systems"
+    },
+    {
+        "name": "Neumann v402 Preamp",
+        "description": "Two-channel transformerless preamp",
+        "type": "preamp",
+        "group": "preamp/DI",
+        "quantity": 1,
+        "manufacturer": "Neumann"
+    },
+    {
+        "name": "AMS RMX16 500-Series",
+        "description": "Digital 500-series reverb unit",
+        "type": "reverb",
+        "group": "effects",
+        "quantity": 1,
+        "manufacturer": "AMS Neve"
+    },
+    {
+        "name": "Ensoniq ASR-X Pro",
+        "description": "Classic 90s sampler and groove box",
+        "type": "sampler",
+        "group": "keyboards/samplers",
+        "quantity": 1,
+        "manufacturer": "Ensoniq"
     }
 ]
