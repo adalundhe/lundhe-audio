@@ -9356,5 +9356,13 @@
         "group": "microphones",
         "quantity": 1,
         "manufacturer": "AEA Ribbon Mics"
+    },
+    {
+        "name": "Chompi Club Chompi Sampler",
+        "description": "Portable botique sampler",
+        "type": "sampler",
+        "group": "keyboards/samplers",
+        "quantity": 1,
+        "manufacturer": "Chase Bliss Audio"
     }
 ]
