@@ -3668,7 +3668,7 @@
         "description": "Compact desktop monophonic analog semi-modular synthesizer",
         "type": "analog monosynth",
         "group": "keyboards/samplers",
-        "quantity": 6,
+        "quantity": 8,
         "manufacturer": "Moog Music",
         "created_timestamp": "Fri March 30 2025 23:03:43 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Tue Mar 17 2026 22:29:57 GMT+0000 (Coordinated Universal Time)"
@@ -3679,7 +3679,7 @@
         "description": "Compact desktop monophonic analog semi-modular drum machine",
         "type": "analog drum machine",
         "group": "keyboards/samplers",
-        "quantity": 5,
+        "quantity": 8,
         "manufacturer": "Moog Music",
         "created_timestamp": "Fri March 30 2025 23:03:43 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Tue Mar 17 2026 22:29:57 GMT+0000 (Coordinated Universal Time)"
@@ -3756,7 +3756,7 @@
         "description": "Compact desktop monophonic semi-modular analog generative polyrhythmic synthesizer",
         "type": "analog monosynth",
         "group": "keyboards/samplers",
-        "quantity": 5,
+        "quantity": 8,
         "manufacturer": "Moog Music",
         "created_timestamp": "Fri March 30 2025 23:03:44 GMT+0000 (Coordinated Universal Time)",
         "updated_timestamp": "Tue Mar 17 2026 22:29:57 GMT+0000 (Coordinated Universal Time)"
@@ -9324,5 +9324,37 @@
         "group": "keyboards/samplers",
         "quantity": 1,
         "manufacturer": "Ensoniq"
+    },
+    {
+        "name": "Sebatron VPM Quad Plus",
+        "description": "Quad-channel tube/valve microphone preamp and DI",
+        "type": "preamp",
+        "group": "preamp/DI",
+        "quantity": 1,
+        "manufacturer": "Sebatron Audio"
+    },
+    {
+        "name": "Monheim Bottle",
+        "description": "Recreation of the classic Blue Bottle valve microphone",
+        "type": "ldc microphone",
+        "group": "microphones",
+        "quantity": 1,
+        "manufacturer": "Monheim Microphones"
+    },
+    {
+        "name": "RuperNeve Designs Shelford Channel",
+        "description": "Modern classic transformer-driven channel strip and preamp/DI",
+        "type": "channel strip",
+        "group": "preamp/DI",
+        "quantity": 2,
+        "manufacturer": "Rupert Neve Designs"
+    },
+    {
+        "name": "AEA KU4",
+        "description": "Modern-voiced supercardioid ribbon microphone",
+        "type": "ribbon microphone",
+        "group": "microphones",
+        "quantity": 1,
+        "manufacturer": "AEA Ribbon Mics"
     }
 ]
