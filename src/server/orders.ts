@@ -162,6 +162,91 @@ export const upsertCheckoutOrder = async (input: CheckoutOrderRecordInput) => {
   }
 };
 
+export interface AdminOrderListItem extends OrderListItem {
+  userId: string;
+}
+
+export interface AdminOrdersQueryResult {
+  orders: AdminOrderListItem[];
+  isAvailable: boolean;
+}
+
+/**
+ * Admin-only: list every order in the system, regardless of which user it
+ * belongs to. Caller is responsible for the role check (use `adminProcedure`
+ * in tRPC, or `getCurrentUserRole` in a server component).
+ */
+export const getAllOrdersForAdmin =
+  async (): Promise<AdminOrdersQueryResult> => {
+    try {
+      const allOrders = await db
+        .select()
+        .from(orders)
+        .orderBy(desc(orders.ordered_timestamp));
+
+      if (allOrders.length === 0) {
+        return {
+          orders: [],
+          isAvailable: true,
+        };
+      }
+
+      const items = await db
+        .select()
+        .from(orderItems)
+        .where(
+          inArray(
+            orderItems.orderId,
+            allOrders.map((order) => order.id),
+          ),
+        )
+        .orderBy(asc(orderItems.created_timestamp));
+
+      const itemsByOrderId = items.reduce<
+        Record<string, OrderListItem["items"]>
+      >((grouped, item) => {
+        grouped[item.orderId] ??= [];
+        grouped[item.orderId]?.push({
+          id: item.id,
+          name: item.name,
+          quantity: item.quantity,
+          total: item.totalPrice,
+        });
+        return grouped;
+      }, {});
+
+      return {
+        orders: allOrders.map((order) => ({
+          id: order.id,
+          userId: order.userId,
+          checkoutSessionId: order.checkoutSessionId,
+          paymentIntentId: order.paymentIntentId,
+          customerEmail: order.customerEmail,
+          checkoutStatus: order.status,
+          workflowStatus: order.workflowStatus,
+          paymentStatus: order.paymentStatus,
+          currency: order.currency,
+          subtotal: order.subtotal,
+          discount: order.discount,
+          total: order.total,
+          itemCount: order.itemCount,
+          orderedAt: order.ordered_timestamp,
+          items: itemsByOrderId[order.id] ?? [],
+        })),
+        isAvailable: true,
+      };
+    } catch (error) {
+      if (isMissingOrdersSchemaError(error)) {
+        return {
+          orders: [],
+          isAvailable: false,
+        };
+      }
+
+      throw error;
+    }
+  };
+
 export const getOrdersForUser = async (
   userId: string,
 ): Promise<OrdersQueryResult> => {

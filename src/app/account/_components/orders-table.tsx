@@ -22,8 +22,6 @@ import {
 import { format, formatDistanceToNowStrict } from "date-fns";
 import {
   AlertCircle,
-  ArrowDown,
-  ArrowUp,
   ArrowUpDown,
   ChevronDown,
 } from "lucide-react";
@@ -139,18 +137,6 @@ const defaultColumnOrder: ColumnOrderState = [
   "serviceType",
 ];
 
-const getColumnId = (column: OrdersColumnDef) => {
-  if (typeof column.id === "string") {
-    return column.id;
-  }
-
-  if (typeof column.accessorKey === "string") {
-    return column.accessorKey;
-  }
-
-  return null;
-};
-
 const getServiceType = (order: OrderListItem): OrderServiceType => {
   const names = order.items.map((item) => item.name.toLowerCase());
   const hasMixing = names.some((name) => /\bmix(ing)?\b/.test(name));
@@ -250,16 +236,20 @@ const WorkflowStatusBadge = ({
   </Badge>
 );
 
-const SortIcon = ({ direction }: { direction: false | "asc" | "desc" }) => {
+const handleSortToggle = (column: Column<OrderListItem, unknown>) => {
+  const direction = column.getIsSorted();
+
   if (direction === "asc") {
-    return <ArrowUp className="h-[1.1em] w-[1.1em]" />;
+    column.toggleSorting(true);
+    return;
   }
 
   if (direction === "desc") {
-    return <ArrowDown className="h-[1.1em] w-[1.1em]" />;
+    column.clearSorting();
+    return;
   }
 
-  return <ArrowUpDown className="h-[1.1em] w-[1.1em]" />;
+  column.toggleSorting(false);
 };
 
 type CellAlignment = "start" | "end";
@@ -271,7 +261,7 @@ const getCellAlignment = (columnId: string): CellAlignment =>
 
 const getTableCellClassName = (columnId: string) =>
   cn(
-    "align-top py-4 whitespace-normal [overflow-wrap:anywhere]",
+    "align-top py-4 whitespace-nowrap",
     getCellAlignment(columnId) === "end" && "text-right",
   );
 
@@ -285,7 +275,7 @@ const CellStack = ({
 }>) => (
   <div
     className={cn(
-      "flex min-h-12 w-full min-w-0 flex-col justify-start gap-1.5 overflow-hidden whitespace-normal [overflow-wrap:anywhere]",
+      "flex min-h-12 w-full min-w-0 flex-col justify-start gap-1.5 overflow-hidden whitespace-nowrap",
       align === "end" ? "items-end text-right" : "items-start text-left",
       className,
     )}
@@ -304,7 +294,7 @@ const CellValue = ({
 }>) => (
   <div
     className={cn(
-      "flex min-h-12 w-full min-w-0 items-start overflow-hidden whitespace-normal [overflow-wrap:anywhere]",
+      "flex min-h-12 w-full min-w-0 items-start overflow-hidden whitespace-nowrap",
       align === "end" ? "justify-end text-right" : "justify-start text-left",
       className,
     )}
@@ -325,10 +315,10 @@ const SortableHeader = ({
   <Button
     variant="ghost"
     className={cn(
-      "flex h-auto w-full whitespace-normal px-0 hover:bg-transparent",
+      "flex h-auto w-full whitespace-nowrap px-0 hover:bg-transparent",
       align === "end" ? "justify-end text-right" : "justify-start text-left",
     )}
-    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+    onClick={() => handleSortToggle(column)}
   >
     <div
       className={cn(
@@ -336,16 +326,11 @@ const SortableHeader = ({
         align === "end" ? "justify-end" : "justify-start",
       )}
     >
-      <span className="min-w-0 break-words text-left leading-tight">
+      <span className="min-w-0 whitespace-nowrap text-left leading-tight">
         {label}
       </span>
-      <div
-        className={cn(
-          "flex h-[1.5em] w-[1.5em] shrink-0 items-center justify-center",
-          column.getIsSorted() && "text-foreground",
-        )}
-      >
-        <SortIcon direction={column.getIsSorted()} />
+      <div className="flex h-[1.5em] w-[1.5em] shrink-0 items-center justify-center">
+        <ArrowUpDown className="h-[1.1em] w-[1.1em]" />
       </div>
     </div>
   </Button>
@@ -355,7 +340,7 @@ const OrdersServiceCell = ({ order }: { order: OrderListItem }) => {
   const services = getDisplayServices(order);
 
   return (
-    <CellValue className="flex-wrap gap-2">
+    <CellValue className="gap-2">
       {services.map((service) => (
         <Badge key={service} variant="outline" className="w-fit">
           {serviceTypeLabels[service]}
@@ -374,7 +359,7 @@ const OrdersNameCell = ({ order }: { order: OrderListItem }) => {
     <CellStack className="min-w-0 gap-2">
       {visibleNames.map((name) => (
         <div key={name} className="flex min-w-0 items-start">
-          <p className="min-w-0 break-words leading-snug">{name}</p>
+          <p className="min-w-0 whitespace-nowrap leading-snug">{name}</p>
         </div>
       ))}
       {remainingNames > 0 && (
@@ -496,7 +481,7 @@ const columns: OrdersColumnDef[] = [
         <p className="font-mono text-sm font-medium">
           #{row.original.checkoutSessionId.slice(-8).toUpperCase()}
         </p>
-        <p className="break-all text-xs leading-snug text-muted-foreground">
+        <p className="whitespace-nowrap text-xs leading-snug text-muted-foreground">
           {row.original.checkoutSessionId}
         </p>
       </CellStack>
@@ -544,7 +529,7 @@ const columns: OrdersColumnDef[] = [
     header: ({ column }) => <SortableHeader column={column} label="Payment" />,
     cell: ({ row }) => (
       <CellValue>
-        <span className="break-words">
+        <span className="whitespace-nowrap">
           {row.original.paymentStatus.replaceAll("_", " ")}
         </span>
       </CellValue>
@@ -559,7 +544,7 @@ const columns: OrdersColumnDef[] = [
     header: () => <span className="px-2">Email</span>,
     cell: ({ row }) => (
       <CellValue>
-        <span className="block break-words">
+        <span className="block whitespace-nowrap">
           {row.original.customerEmail ?? "No email"}
         </span>
       </CellValue>
@@ -586,201 +571,6 @@ const columns: OrdersColumnDef[] = [
   },
 ];
 
-const allColumnIds = columns
-  .map((column) => getColumnId(column))
-  .filter((columnId): columnId is string => columnId !== null);
-
-const columnSizingMeta = Object.fromEntries(
-  columns
-    .map((column) => {
-      const columnId = getColumnId(column);
-
-      if (!columnId) {
-        return null;
-      }
-
-      return [
-        columnId,
-        {
-          size: column.size ?? 150,
-          minSize: column.minSize ?? 20,
-          maxSize: column.maxSize ?? Number.POSITIVE_INFINITY,
-        },
-      ] as const;
-    })
-    .filter(
-      (
-        entry,
-      ): entry is readonly [
-        string,
-        { size: number; minSize: number; maxSize: number },
-      ] => entry !== null,
-    ),
-);
-
-const clampColumnWidth = (value: number, min: number, max: number) =>
-  Math.max(min, Math.min(max, value));
-
-const getVisibleColumnIds = (
-  columnOrder: ColumnOrderState,
-  columnVisibility: VisibilityState,
-) => {
-  const orderedColumnIds = [
-    ...columnOrder.filter((columnId) => allColumnIds.includes(columnId)),
-    ...allColumnIds.filter((columnId) => !columnOrder.includes(columnId)),
-  ];
-
-  return orderedColumnIds.filter(
-    (columnId) => columnVisibility[columnId] !== false,
-  );
-};
-
-const getMinimumTableWidth = (visibleColumnIds: string[]) =>
-  visibleColumnIds.reduce((totalWidth, columnId) => {
-    return totalWidth + (columnSizingMeta[columnId]?.minSize ?? 20);
-  }, 0);
-
-const columnSizingStatesMatch = (
-  left: ColumnSizingState,
-  right: ColumnSizingState,
-) => {
-  const keys = new Set([...Object.keys(left), ...Object.keys(right)]);
-
-  for (const key of keys) {
-    if (Math.abs((left[key] ?? 0) - (right[key] ?? 0)) > 0.5) {
-      return false;
-    }
-  }
-
-  return true;
-};
-
-const normalizeColumnSizing = (
-  sizing: ColumnSizingState,
-  visibleColumnIds: string[],
-  targetWidth: number,
-) => {
-  if (visibleColumnIds.length === 0 || targetWidth <= 0) {
-    return sizing;
-  }
-
-  const widths = visibleColumnIds.map((columnId) => {
-    const meta = columnSizingMeta[columnId] ?? {
-      size: 150,
-      minSize: 20,
-      maxSize: Number.POSITIVE_INFINITY,
-    };
-
-    return {
-      id: columnId,
-      size: clampColumnWidth(
-        sizing[columnId] ?? meta.size,
-        meta.minSize,
-        meta.maxSize,
-      ),
-      minSize: meta.minSize,
-      maxSize: meta.maxSize,
-    };
-  });
-
-  const totalWidth = widths.reduce((sum, column) => sum + column.size, 0);
-
-  if (totalWidth > targetWidth) {
-    let overflow = totalWidth - targetWidth;
-    let shrinkableColumns = widths.filter(
-      (column) => column.size > column.minSize,
-    );
-
-    while (overflow > 0.5 && shrinkableColumns.length > 0) {
-      const totalShrinkableWidth = shrinkableColumns.reduce(
-        (sum, column) => sum + (column.size - column.minSize),
-        0,
-      );
-
-      if (totalShrinkableWidth <= 0) {
-        break;
-      }
-
-      let consumedWidth = 0;
-
-      for (const column of shrinkableColumns) {
-        const availableShrink = column.size - column.minSize;
-        const shrinkAmount = Math.min(
-          availableShrink,
-          overflow * (availableShrink / totalShrinkableWidth),
-        );
-
-        column.size -= shrinkAmount;
-        consumedWidth += shrinkAmount;
-      }
-
-      if (consumedWidth <= 0) {
-        break;
-      }
-
-      overflow -= consumedWidth;
-      shrinkableColumns = widths.filter(
-        (column) => column.size > column.minSize,
-      );
-    }
-  } else if (totalWidth < targetWidth) {
-    let remainingWidth = targetWidth - totalWidth;
-    const serviceColumn = widths.find((column) => column.id === "name");
-
-    if (serviceColumn && serviceColumn.size < serviceColumn.maxSize) {
-      const growth = Math.min(
-        remainingWidth,
-        serviceColumn.maxSize - serviceColumn.size,
-      );
-      serviceColumn.size += growth;
-      remainingWidth -= growth;
-    }
-
-    let growableColumns = widths.filter(
-      (column) => column.size < column.maxSize,
-    );
-
-    while (remainingWidth > 0.5 && growableColumns.length > 0) {
-      const totalGrowableWidth = growableColumns.reduce(
-        (sum, column) => sum + (column.maxSize - column.size),
-        0,
-      );
-
-      if (totalGrowableWidth <= 0) {
-        break;
-      }
-
-      let addedWidth = 0;
-
-      for (const column of growableColumns) {
-        const availableGrowth = column.maxSize - column.size;
-        const growthAmount = Math.min(
-          availableGrowth,
-          remainingWidth * (availableGrowth / totalGrowableWidth),
-        );
-
-        column.size += growthAmount;
-        addedWidth += growthAmount;
-      }
-
-      if (addedWidth <= 0) {
-        break;
-      }
-
-      remainingWidth -= addedWidth;
-      growableColumns = widths.filter((column) => column.size < column.maxSize);
-    }
-  }
-
-  return widths.reduce<ColumnSizingState>(
-    (nextSizing, column) => {
-      nextSizing[column.id] = column.size;
-      return nextSizing;
-    },
-    { ...sizing },
-  );
-};
-
 export function OrdersTable({
   orders,
   ordersAvailable,
@@ -788,7 +578,6 @@ export function OrdersTable({
   orders: OrderListItem[];
   ordersAvailable: boolean;
 }) {
-  const tableViewportRef = React.useRef<HTMLDivElement | null>(null);
   const router = useRouter();
   const { startRouteTransition } = useRouteTransition();
   const [sorting, setSorting] = React.useState<SortingState>([
@@ -809,65 +598,9 @@ export function OrdersTable({
     pageSize: 10,
   });
   const [columnSizing, setColumnSizing] = React.useState<ColumnSizingState>({});
-  const [containerWidth, setContainerWidth] = React.useState(0);
   const [activeTab, setActiveTab] = React.useState<"status" | "service">(
     "status",
   );
-
-  const visibleColumnIds = React.useMemo(
-    () => getVisibleColumnIds(columnOrder, columnVisibility),
-    [columnOrder, columnVisibility],
-  );
-  const minimumTableWidth = React.useMemo(
-    () => getMinimumTableWidth(visibleColumnIds),
-    [visibleColumnIds],
-  );
-  const targetTableWidth = React.useMemo(
-    () => Math.max(containerWidth, minimumTableWidth),
-    [containerWidth, minimumTableWidth],
-  );
-
-  React.useEffect(() => {
-    const node = tableViewportRef.current;
-
-    if (!node) {
-      return;
-    }
-
-    const updateWidth = () => {
-      setContainerWidth(node.clientWidth);
-    };
-
-    updateWidth();
-
-    const observer = new ResizeObserver(() => {
-      updateWidth();
-    });
-
-    observer.observe(node);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
-  React.useEffect(() => {
-    if (targetTableWidth <= 0) {
-      return;
-    }
-
-    setColumnSizing((currentSizing) => {
-      const nextSizing = normalizeColumnSizing(
-        currentSizing,
-        visibleColumnIds,
-        targetTableWidth,
-      );
-
-      return columnSizingStatesMatch(currentSizing, nextSizing)
-        ? currentSizing
-        : nextSizing;
-    });
-  }, [targetTableWidth, visibleColumnIds]);
 
   const table = useReactTable({
     data: orders,
@@ -879,18 +612,7 @@ export function OrdersTable({
     onColumnVisibilityChange: setColumnVisibility,
     onColumnOrderChange: setColumnOrder,
     onPaginationChange: setPagination,
-    onColumnSizingChange: (updater) => {
-      setColumnSizing((currentSizing) => {
-        const nextSizing =
-          typeof updater === "function" ? updater(currentSizing) : updater;
-
-        return normalizeColumnSizing(
-          nextSizing,
-          visibleColumnIds,
-          targetTableWidth,
-        );
-      });
-    },
+    onColumnSizingChange: setColumnSizing,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -923,7 +645,7 @@ export function OrdersTable({
     );
 
   return (
-    <Card className="h-full">
+    <Card className="flex flex-col xl:h-full">
       <CardHeader>
         <CardTitle>Booked Services</CardTitle>
         <CardDescription>
@@ -931,7 +653,7 @@ export function OrdersTable({
           order date, and total.
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-1 flex-col">
         {!ordersAvailable && (
           <Alert className="mb-4 border-amber-500/40 bg-amber-500/10 text-amber-900 dark:text-amber-200">
             <AlertCircle className="!h-4 !w-4" />
@@ -947,7 +669,7 @@ export function OrdersTable({
           </Alert>
         )}
 
-        <div className="w-full">
+        <div className="w-full flex flex-1 flex-col">
           <div className="flex items-center gap-x-8 py-4">
             <Input
               placeholder="Filter session names..."
@@ -1165,18 +887,9 @@ export function OrdersTable({
             </DropdownMenu>
           </div>
 
-          <div className="w-full">
-            <div
-              ref={tableViewportRef}
-              className="w-full overflow-x-auto rounded-md border"
-            >
-              <table
-                className="caption-bottom text-sm"
-                style={{
-                  width: targetTableWidth > 0 ? targetTableWidth : "100%",
-                  minWidth: "100%",
-                }}
-              >
+          <div className="w-full xl:flex xl:min-h-0 xl:flex-1 xl:flex-col">
+            <div className="w-full overflow-x-auto rounded-md border xl:flex-1 xl:overflow-y-auto">
+              <table className="h-full w-max min-w-full caption-bottom text-sm">
                 <TableHeader>
                   {table.getHeaderGroups().map((headerGroup) => (
                     <TableRow key={headerGroup.id}>
@@ -1184,7 +897,7 @@ export function OrdersTable({
                         <TableHead
                           key={header.id}
                           className={cn(
-                            "relative align-top py-3 whitespace-normal [overflow-wrap:anywhere]",
+                            "relative align-top py-3 whitespace-nowrap",
                             getCellAlignment(header.column.id) === "end" &&
                               "text-right",
                           )}
@@ -1265,7 +978,7 @@ export function OrdersTable({
             </div>
           </div>
 
-          <div className="flex items-center justify-end py-4">
+          <div className="flex items-center justify-end py-4 xl:shrink-0">
             <div className="w-1/3">
               {table.getState().pagination.pageIndex + 1} of{" "}
               {table.getPageCount()}

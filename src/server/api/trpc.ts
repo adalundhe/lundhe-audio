@@ -8,13 +8,13 @@
  */
 
 import { initTRPC, TRPCError } from "@trpc/server";
-import { type Session } from "next-auth";
 import superjson from "superjson";
 import { ZodError } from "zod";
 import { type NextRequest } from "next/server";
 
-// import { auth } from "~/server/auth";
 import { db } from "~/server/db/client";
+import { getCurrentUserRole } from "~/server/auth/roles";
+import type { UserRole } from "~/types/roles";
 
 /**
  * 1. CONTEXT
@@ -24,9 +24,14 @@ import { db } from "~/server/db/client";
  * These allow you to access things when processing a request, like the database, the session, etc.
  */
 
+interface AuthContext {
+  userId: string | null;
+  role: UserRole;
+}
+
 interface CreateContextOptions {
-  session: Session | null;
-  headers?: Headers
+  auth: AuthContext;
+  headers?: Headers;
 }
 
 /**
@@ -40,12 +45,9 @@ interface CreateContextOptions {
  * @see https://create.t3.gg/en/usage/trpc#-serverapitrpcts
  */
 const createInnerTRPCContext = (opts: CreateContextOptions) => {
-  
-
   return {
-    session: opts.session,
+    auth: opts.auth,
     db,
-
   };
 };
 
@@ -58,19 +60,18 @@ const createInnerTRPCContext = (opts: CreateContextOptions) => {
 export const createTRPCContext = async (opts: { req: Partial<NextRequest> }) => {
   const { req } = opts;
 
-  // Get the session from the server using the getServerSession wrapper function
-  // const session = await auth({ req, res });
+  const { userId, role } = await getCurrentUserRole();
 
   const innerCtx = createInnerTRPCContext({
-    session: null,
+    auth: { userId, role },
   });
 
   return {
     ...innerCtx,
     url: req.url,
     headers: req.headers,
-    cookies: req.cookies
-  }
+    cookies: req.cookies,
+  };
 };
 
 /**
@@ -152,20 +153,54 @@ export const publicProcedure = t.procedure.use(timingMiddleware);
  * Protected (authenticated) procedure
  *
  * If you want a query or mutation to ONLY be accessible to logged in users, use this. It verifies
- * the session is valid and guarantees `ctx.session.user` is not null.
+ * the session is valid and guarantees `ctx.auth.userId` is not null.
  *
  * @see https://trpc.io/docs/procedures
  */
 export const protectedProcedure = t.procedure
   .use(timingMiddleware)
   .use(({ ctx, next }) => {
-    if (ctx.session === null || ctx.session.user === null) {
+    if (!ctx.auth.userId) {
       throw new TRPCError({ code: "UNAUTHORIZED" });
     }
     return next({
       ctx: {
-        // infers the `session` as non-nullable
-        session: { ...ctx.session, user: ctx.session.user },
+        ...ctx,
+        auth: {
+          ...ctx.auth,
+          userId: ctx.auth.userId,
+        },
+      },
+    });
+  });
+
+/**
+ * Admin-only procedure
+ *
+ * Same authentication guarantees as `protectedProcedure`, plus a role check that the caller has
+ * `publicMetadata.role === "admin"`. The role is read from the JWT session claims set up by the
+ * Clerk JWT template, so this check is free at runtime (no DB hit, no Clerk API call).
+ *
+ * Throws UNAUTHORIZED for anonymous callers and FORBIDDEN for signed-in non-admins so the client
+ * can distinguish "log in" from "you cannot do this".
+ */
+export const adminProcedure = t.procedure
+  .use(timingMiddleware)
+  .use(({ ctx, next }) => {
+    if (!ctx.auth.userId) {
+      throw new TRPCError({ code: "UNAUTHORIZED" });
+    }
+    if (ctx.auth.role !== "admin") {
+      throw new TRPCError({ code: "FORBIDDEN" });
+    }
+    return next({
+      ctx: {
+        ...ctx,
+        auth: {
+          ...ctx.auth,
+          userId: ctx.auth.userId,
+          role: "admin" as const,
+        },
       },
     });
   });

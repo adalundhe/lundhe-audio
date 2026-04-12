@@ -42,6 +42,7 @@ export const equipmentItem = createTable("equipment_item", {
   description: text("description", { length: 255 }).notNull(),
   type: text("type", { length: 255 }).notNull(),
   group: text("group", { length: 255 }).notNull(),
+  price: real("price").notNull().default(0),
   quantity: integer("quantity").notNull(),
   manufacturer: text("manufacturer", { length: 255 }).notNull(),
   created_timestamp: text("created_timestamp")
@@ -60,7 +61,7 @@ export const products = createTable("products", {
     .$defaultFn(() => crypto.randomUUID()),
   name: text("name").notNull(),
   description: text("description"),
-  price: real("price").notNull(),
+  price: real("price").notNull().default(0),
   productType: text("product_type", {
     enum: ["mixing", "mastering", "mixing-and-mastering"],
   }).notNull(),
@@ -80,7 +81,7 @@ export const productOptions = createTable("product_options", {
     .$defaultFn(() => crypto.randomUUID()),
   name: text("name").notNull(),
   description: text("description"),
-  price: real("price").notNull(),
+  price: real("price").notNull().default(0),
   category: text("category", {
     enum: ["addon", "delivery", "track_fee", "length_fee"],
   }).notNull(),
@@ -161,7 +162,7 @@ export const cartItems = createTable("cart_items", {
   name: text("name").notNull(),
   type: text("type", { enum: ["mixing", "mastering", "product"] }).notNull(),
   data: text("data"),
-  price: real("price").notNull(),
+  price: real("price").notNull().default(0),
   quantity: integer("quantity").notNull().default(0),
   created_timestamp: text("created_timestamp")
     .notNull()
@@ -385,6 +386,25 @@ export const orderArchiveDownloadSessions = createTable(
   },
 );
 
+export const coupons = createTable("coupons", {
+  id: text("id", { length: 255 })
+    .notNull()
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  code: text("code", { length: 64 }).notNull().unique(),
+  redeemed: integer("redeemed", { mode: "boolean" })
+    .notNull()
+    .default(false),
+  redeemedAt: text("redeemed_at"),
+  redeemedByUserId: text("redeemed_by_user_id", { length: 255 }),
+  created_timestamp: text("created_timestamp")
+    .notNull()
+    .$defaultFn(() => new Date().toISOString()),
+  updated_timestamp: text("updated_timestamp").default(
+    sql`(current_timestamp)`,
+  ),
+});
+
 // Infer types from schema
 export type Product = typeof products.$inferSelect;
 export type ProductOption = typeof productOptions.$inferSelect;
@@ -399,3 +419,4 @@ export type OrderSongAsset = typeof orderSongAssets.$inferSelect;
 export type OrderSubmission = typeof orderSubmissions.$inferSelect;
 export type OrderArchiveDownloadSession =
   typeof orderArchiveDownloadSessions.$inferSelect;
+export type Coupon = typeof coupons.$inferSelect;

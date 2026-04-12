@@ -10,6 +10,7 @@
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
+    "db:add:equipment-price": "node --env-file=.env src/scripts/add-equipment-price-column.mjs",
     "db:update:equipment": "tsx src/scripts/update-equipment.ts",
     "db:dump:equipment": "tsx src/scripts/dump-equipment.ts $PWD",
     "db:update:products": "tsx src/scripts/update-products.ts $PWD",

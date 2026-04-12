@@ -14,6 +14,7 @@ import rehypeStringify from 'rehype-stringify';
 import remarkParse from 'remark-parse';
 
 const nextConfig = {
+  allowedDevOrigins: ['www.lundhe.audio', 'lundhe.audio'],
   pageExtensions: ['md', 'mdx', 'tsx', 'ts', 'jsx', 'js'],
   transpilePackages: ["geist"],
 };

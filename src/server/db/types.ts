@@ -4,6 +4,7 @@ export type EquipmentItem = {
     description: string
     type: string
     group: string
+    price: number
     manufacturer: string
     quantity: number
     created_timestamp: string

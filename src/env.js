@@ -29,6 +29,7 @@ export const env = createEnv({
     STRIPE_SANDBOX_SECRET_KEY: z.string().optional(),
     LUNDHE_AUDIO_DOMAIN: z.string(),
     STRIPE_SECRET_KEY: z.string(),
+    REVERB_API_TOKEN: z.string(),
     // NEXTAUTH_SECRET:
     //   process.env.NODE_ENV === "production"
     //     ? z.string()
@@ -87,6 +88,7 @@ export const env = createEnv({
     LUNDHE_AUDIO_DOMAIN: process.env.LUNDHE_AUDIO_DOMAIN,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+    REVERB_API_TOKEN: process.env.REVERB_API_TOKEN
     // NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN: process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN,
     // NEXT_PUBLIC_SHOPIFY_STOREFRONT_API_ACCESS_TOKEN: process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_API_ACCESS_TOKEN,
     // NEXT_PUBLIC_SHOPIFY_APP_COUNTRY_ISO_CODE: process.env.NEXT_PUBLIC_SHOPIFY_APP_COUNTRY_ISO_CODE,

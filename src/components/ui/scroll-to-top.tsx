@@ -24,7 +24,7 @@ export function ScrollToTop({
 
   return (
     <div
-        className={`fixed -left-1 md:left-4 lg:left-10 flex transition-all ease-in-out duration-1000 ${visible ? 'bottom-10' : '-bottom-80'}`}
+        className={`fixed z-[70] -left-1 md:left-4 lg:left-10 flex transition-all ease-in-out duration-1000 ${visible ? 'bottom-10' : '-bottom-80'}`}
     >
       
         <Button

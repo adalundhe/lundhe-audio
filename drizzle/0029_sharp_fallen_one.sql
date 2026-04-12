@@ -1,0 +1,3 @@
+-- No-op migration.
+-- The actual equipment_item.price DDL lives in 0028_add_equipment_price.sql.
+-- This file only exists to pair with the generated 0029 snapshot state.
