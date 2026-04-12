@@ -10,6 +10,7 @@ import {
   sqliteTableCreator,
   text,
   integer,
+  real,
 } from "drizzle-orm/sqlite-core";
 // import { type AdapterAccount } from "next-auth/adapters";
 
@@ -60,6 +61,7 @@ const equipmentItem = createTable(
     description: text("description", { length: 255 }).notNull(),
     type: text("type", { length: 255 }).notNull(),
     group: text("group", { length: 255 }).notNull(),
+    price: real("price").notNull().default(0),
     quantity: integer('quantity').notNull(),
     manufacturer: text("manufacturer", { length: 255 }).notNull(),
     created_timestamp: text('created_timestamp').notNull().$defaultFn(() => new Date().toString()),

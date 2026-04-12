@@ -9,6 +9,7 @@ import {
   sqliteTableCreator,
   text,
   integer,
+  real,
 } from "drizzle-orm/sqlite-core";
 
 /**
@@ -53,6 +54,7 @@ const equipmentItem = createTable(
     description: text("description", { length: 255 }).notNull(),
     type: text("type", { length: 255 }).notNull(),
     group: text("group", { length: 255 }).notNull(),
+    price: real("price").notNull().default(0),
     quantity: integer('quantity').notNull(),
     manufacturer: text("manufacturer", { length: 255 }).notNull(),
     created_timestamp: text('created_timestamp').notNull().$defaultFn(() => new Date().toString()),
@@ -71,16 +73,30 @@ const db = drizzle(client, { schema: {
   contactRequestor: contactRequestor,
 } });
 
+type LegacyGearItem = (typeof Gear)[number] & {
+  price?: number;
+  id?: string;
+  created_timestamp?: string;
+  updated_timestamp?: string;
+};
+
+const normalizeCurrency = (value: unknown): number => {
+  const parsed = typeof value === "number" ? value : Number(value);
+  if (!Number.isFinite(parsed) || parsed < 0) return 0;
+  return Number(parsed.toFixed(2));
+};
+
 const updateEquipment = async () => {
 
   const created = new Date().toString()
 
-  const updated = Gear.map(item => item.id ? item : {
+  const updated = (Gear as LegacyGearItem[]).map(item => ({
     ...item,
-    id: randomUUID(),
-    created_timestamp: created,
-    updated_timestamp: created,
-  })
+    price: normalizeCurrency(item.price),
+    id: item.id ?? randomUUID(),
+    created_timestamp: item.created_timestamp ?? created,
+    updated_timestamp: item.updated_timestamp ?? created,
+  }))
   
   const items = Gear.length;
   const updates: Array<Promise<ResultSet>> =[]
