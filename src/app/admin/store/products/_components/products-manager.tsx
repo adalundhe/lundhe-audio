@@ -624,6 +624,7 @@ export function ProductsManager({
             <AdminDataTable
               data={productList}
               columns={productColumns}
+              footerControlsLayout="stacked-mobile"
               searchColumnId="search"
               searchPlaceholder="Search products..."
               emptyMessage="No results."
@@ -826,6 +827,7 @@ export function ProductsManager({
             <AdminDataTable
               data={optionsForCurrentType}
               columns={optionColumns}
+              footerControlsLayout="stacked-mobile"
               searchColumnId="search"
               searchPlaceholder="Search options..."
               emptyMessage="No results."

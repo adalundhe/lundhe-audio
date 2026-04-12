@@ -428,6 +428,7 @@ export function DiscountsManager({
             <AdminDataTable
               data={discountList}
               columns={discountColumns}
+              footerControlsLayout="stacked-mobile"
               searchColumnId="search"
               searchPlaceholder="Search discounts..."
               emptyMessage="No results."
