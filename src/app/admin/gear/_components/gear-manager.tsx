@@ -1530,6 +1530,7 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
                 data={priceGuideMatches}
                 columns={priceGuideColumns}
                 stateResetKey={priceGuideTableResetKey}
+                footerControlsLayout="stacked-mobile"
                 searchColumnId="search"
                 searchPlaceholder="Search fetched prices..."
                 emptyMessage="Fetch prices to load Reverb matches."
@@ -1801,6 +1802,7 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
             <AdminDataTable
               data={gear}
               columns={inventoryColumns}
+              footerControlsLayout="stacked-mobile"
               searchColumnId="search"
               searchPlaceholder="Search gear..."
               emptyMessage="No results."

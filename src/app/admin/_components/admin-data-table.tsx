@@ -160,6 +160,7 @@ export function AdminDataTable<TData>({
   onRowClick,
   stateResetKey,
   paginationStorageKey,
+  footerControlsLayout = "default",
 }: {
   data: TData[];
   columns: AdminDataTableColumnDef<TData>[];
@@ -176,6 +177,7 @@ export function AdminDataTable<TData>({
   onRowClick?: (row: TData) => void;
   stateResetKey?: string | number;
   paginationStorageKey?: string;
+  footerControlsLayout?: "default" | "stacked-mobile";
 }) {
   const [sorting, setSorting] = React.useState<SortingState>(initialSorting);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -549,9 +551,29 @@ export function AdminDataTable<TData>({
             {table.getFilteredRowModel().rows.length} rows
           </div>
         </div>
-        <div className="flex w-full flex-wrap items-center justify-center gap-2 sm:ml-auto sm:w-auto sm:justify-end">
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-muted-foreground">Page</span>
+        <div
+          className={cn(
+            "flex w-full flex-wrap items-center justify-center gap-2 sm:ml-auto sm:w-auto sm:justify-end",
+            footerControlsLayout === "stacked-mobile" &&
+              "flex-col gap-4 sm:flex-row sm:items-center sm:gap-3",
+          )}
+        >
+          <div
+            className={cn(
+              "flex items-center gap-2",
+              footerControlsLayout === "stacked-mobile" &&
+                "flex-col items-center gap-1.5 sm:flex-row sm:items-center sm:gap-2",
+            )}
+          >
+            <span
+              className={cn(
+                "text-sm text-muted-foreground",
+                footerControlsLayout === "stacked-mobile" &&
+                  "text-xs uppercase tracking-wider",
+              )}
+            >
+              Page
+            </span>
             <Input
               type="number"
               inputMode="numeric"
@@ -573,8 +595,22 @@ export function AdminDataTable<TData>({
               className="h-8 w-20"
             />
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-muted-foreground">Rows</span>
+          <div
+            className={cn(
+              "flex items-center gap-2",
+              footerControlsLayout === "stacked-mobile" &&
+                "flex-col items-center gap-1.5 sm:flex-row sm:items-center sm:gap-2",
+            )}
+          >
+            <span
+              className={cn(
+                "text-sm text-muted-foreground",
+                footerControlsLayout === "stacked-mobile" &&
+                  "text-xs uppercase tracking-wider",
+              )}
+            >
+              Rows
+            </span>
             <Select
               value={String(table.getState().pagination.pageSize)}
               onValueChange={(value) => table.setPageSize(Number(value))}
@@ -591,26 +627,28 @@ export function AdminDataTable<TData>({
               </SelectContent>
             </Select>
           </div>
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            className="hover:underline"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            Previous
-          </Button>
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            className="hover:underline"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            Next
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="hover:underline"
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+            >
+              Previous
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="hover:underline"
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+            >
+              Next
+            </Button>
+          </div>
         </div>
       </div>
     </div>
