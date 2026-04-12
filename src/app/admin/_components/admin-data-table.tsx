@@ -59,6 +59,7 @@ const courierPrime = Courier_Prime({
 export type AdminDataTableColumnDef<TData> = ColumnDef<TData> & {
   id?: string;
   accessorKey?: string;
+  showHeaderDivider?: boolean;
 };
 
 export interface AdminDataTableFilterTab<TData> {
@@ -158,9 +159,12 @@ export function AdminDataTable<TData>({
   filterTabs = [],
   getRowClassName,
   onRowClick,
+  isRowExpanded,
+  renderExpandedRow,
   stateResetKey,
   paginationStorageKey,
   footerControlsLayout = "default",
+  footerLeftContent,
 }: {
   data: TData[];
   columns: AdminDataTableColumnDef<TData>[];
@@ -175,9 +179,12 @@ export function AdminDataTable<TData>({
   filterTabs?: AdminDataTableFilterTab<TData>[];
   getRowClassName?: (row: Row<TData>) => string | undefined;
   onRowClick?: (row: TData) => void;
+  isRowExpanded?: (row: Row<TData>) => boolean;
+  renderExpandedRow?: (row: Row<TData>) => React.ReactNode;
   stateResetKey?: string | number;
   paginationStorageKey?: string;
   footerControlsLayout?: "default" | "stacked-mobile";
+  footerLeftContent?: React.ReactNode;
 }) {
   const [sorting, setSorting] = React.useState<SortingState>(initialSorting);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -193,9 +200,11 @@ export function AdminDataTable<TData>({
     pageIndex: 0,
     pageSize: 10,
   });
+  const [scrollViewportWidth, setScrollViewportWidth] = React.useState(0);
   const [activeTab, setActiveTab] = React.useState(
     filterTabs[0]?.value ?? "default",
   );
+  const scrollViewportRef = React.useRef<HTMLDivElement | null>(null);
   const initialSortingRef = React.useRef(initialSorting);
   const initialColumnVisibilityRef = React.useRef(initialColumnVisibility);
   const initialColumnOrderRef = React.useRef(initialColumnOrder ?? []);
@@ -211,6 +220,26 @@ export function AdminDataTable<TData>({
       setActiveTab(filterTabs[0]!.value);
     }
   }, [activeTab, filterTabs]);
+
+  React.useEffect(() => {
+    const node = scrollViewportRef.current;
+    if (!node || typeof ResizeObserver === "undefined") {
+      return;
+    }
+
+    const updateWidth = () => {
+      setScrollViewportWidth(node.clientWidth);
+    };
+
+    updateWidth();
+
+    const observer = new ResizeObserver(updateWidth);
+    observer.observe(node);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   const invisibleColumnsRef = React.useRef(invisibleColumns);
   const handleSortingChange = React.useCallback(
@@ -456,78 +485,114 @@ export function AdminDataTable<TData>({
         </DropdownMenu>
       </div>
 
-      <div className="w-full overflow-x-auto rounded-md border">
+      <div ref={scrollViewportRef} className="w-full overflow-x-auto rounded-md border">
         <table className="w-max min-w-full caption-bottom text-sm">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead
-                    key={header.id}
-                    className="relative whitespace-nowrap p-0 align-middle"
-                    style={{
-                      width: header.column.getSize(),
-                      minWidth: header.column.columnDef.minSize,
-                      maxWidth: header.column.columnDef.maxSize,
-                    }}
-                  >
-                    <div className="flex min-h-10 w-full items-center px-2">
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
-                    </div>
-                    <ColumnResizer
-                      header={header}
-                      enabled={header.index < headerGroup.headers.length - 1}
-                    />
-                  </TableHead>
+                  (() => {
+                    const columnDef =
+                      header.column.columnDef as AdminDataTableColumnDef<TData>;
+
+                    return (
+                      <TableHead
+                        key={header.id}
+                        className="relative whitespace-nowrap p-0 align-middle"
+                        style={{
+                          width: header.column.getSize(),
+                          minWidth: columnDef.minSize,
+                          maxWidth: columnDef.maxSize,
+                        }}
+                      >
+                        <div className="flex min-h-10 w-full items-center px-2">
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(columnDef.header, header.getContext())}
+                        </div>
+                        <ColumnResizer
+                          header={header}
+                          enabled={
+                            header.index < headerGroup.headers.length - 1 &&
+                            columnDef.showHeaderDivider !== false
+                          }
+                        />
+                      </TableHead>
+                    );
+                  })()
                 ))}
               </TableRow>
             ))}
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows.length > 0 ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  className={cn(
-                    onRowClick && "cursor-pointer",
-                    getRowClassName?.(row),
-                  )}
-                  onClick={onRowClick ? () => onRowClick(row.original) : undefined}
-                  onKeyDown={
-                    onRowClick
-                      ? (event) => {
-                          if (event.key === "Enter" || event.key === " ") {
-                            event.preventDefault();
-                            onRowClick(row.original);
-                          }
-                        }
-                      : undefined
-                  }
-                  tabIndex={onRowClick ? 0 : undefined}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell
-                      key={cell.id}
-                      className="whitespace-nowrap"
-                      style={{
-                        width: cell.column.getSize(),
-                        minWidth: cell.column.columnDef.minSize,
-                        maxWidth: cell.column.columnDef.maxSize,
-                      }}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
+              table.getRowModel().rows.map((row) => {
+                const expanded = isRowExpanded?.(row) ?? false;
+
+                return (
+                  <React.Fragment key={row.id}>
+                    <TableRow
+                      className={cn(
+                        onRowClick && "cursor-pointer",
+                        getRowClassName?.(row),
                       )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
+                      onClick={onRowClick ? () => onRowClick(row.original) : undefined}
+                      onKeyDown={
+                        onRowClick
+                          ? (event) => {
+                              if (event.key === "Enter" || event.key === " ") {
+                                event.preventDefault();
+                                onRowClick(row.original);
+                              }
+                            }
+                          : undefined
+                      }
+                      tabIndex={onRowClick ? 0 : undefined}
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell
+                          key={cell.id}
+                          className="whitespace-nowrap"
+                          style={{
+                            width: cell.column.getSize(),
+                            minWidth: cell.column.columnDef.minSize,
+                            maxWidth: cell.column.columnDef.maxSize,
+                          }}
+                        >
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext(),
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                    {expanded && renderExpandedRow ? (
+                      <TableRow className="hover:bg-transparent">
+                        <TableCell
+                          colSpan={table.getVisibleLeafColumns().length}
+                          className="p-0 align-top"
+                        >
+                          <div
+                            className="sticky left-0 z-10 min-w-0 overflow-hidden bg-muted/20"
+                            style={
+                              scrollViewportWidth > 0
+                                ? {
+                                    width: scrollViewportWidth,
+                                    maxWidth: scrollViewportWidth,
+                                  }
+                                : undefined
+                            }
+                          >
+                            <div className="px-4 py-4 motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-top-2 motion-safe:duration-300">
+                              {renderExpandedRow(row)}
+                            </div>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ) : null}
+                  </React.Fragment>
+                );
+              })
             ) : (
               <TableRow>
                 <TableCell
@@ -542,115 +607,91 @@ export function AdminDataTable<TData>({
         </table>
       </div>
 
-      <div className="flex flex-col items-center gap-3 py-4 sm:flex-row sm:flex-wrap sm:justify-end">
-        <div className="flex flex-col items-center gap-1 text-center sm:min-w-[6rem] sm:items-start sm:text-left">
-          <div className="text-sm">
-            {currentPage} of {pageCount}
+        <div className="flex flex-col items-center gap-3 py-4 sm:flex-row sm:flex-wrap sm:justify-end">
+          <div className="flex w-full items-center justify-end py-4">
+            <div className="w-1/3 whitespace-nowrap">
+              {currentPage} of {pageCount}
+            </div>
+            <div className="w-1/3 whitespace-nowrap text-center text-sm text-muted-foreground">
+              {table.getFilteredRowModel().rows.length} rows
+            </div>
+            <div className="flex w-1/3 items-center justify-end space-x-2">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="hover:underline"
+                onClick={() => table.previousPage()}
+                disabled={!table.getCanPreviousPage()}
+              >
+                Previous
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="hover:underline"
+                onClick={() => table.nextPage()}
+                disabled={!table.getCanNextPage()}
+              >
+                Next
+              </Button>
+            </div>
           </div>
-          <div className="text-sm text-muted-foreground">
-            {table.getFilteredRowModel().rows.length} rows
-          </div>
-        </div>
-        <div
-          className={cn(
-            "flex w-full flex-wrap items-center justify-center gap-2 sm:ml-auto sm:w-auto sm:justify-end",
-            footerControlsLayout === "stacked-mobile" &&
-              "flex-col gap-4 sm:flex-row sm:items-center sm:gap-3",
-          )}
-        >
-          <div
-            className={cn(
-              "flex items-center gap-2",
-              footerControlsLayout === "stacked-mobile" &&
-                "flex-col items-center gap-1.5 sm:flex-row sm:items-center sm:gap-2",
-            )}
-          >
-            <span
+          <div className="flex md:flex-row flex-col w-full md:items-start items-center gap-3">
+            {footerLeftContent ? (
+              <div className="flex md:w-1/2 w-full items-start md:justify-start justify-center">
+                {footerLeftContent}
+              </div>
+            ) : null}
+            <div
               className={cn(
-                "text-sm text-muted-foreground",
-                footerControlsLayout === "stacked-mobile" &&
-                  "text-xs uppercase tracking-wider",
+                "flex gap-4",
+                footerLeftContent ? "md:w-1/2 w-full md:justify-end justify-center" : "w-full justify-center",
               )}
             >
-              Page
-            </span>
-            <Input
-              type="number"
-              inputMode="numeric"
-              min={1}
-              max={pageCount}
-              value={pageJumpValue}
-              onChange={(event) =>
-                setPageJumpValue(event.target.value.replace(/[^\d]/g, ""))
-              }
-              onBlur={() => commitPageJump(pageJumpValue)}
-              onKeyDown={(event) => {
-                if (event.key !== "Enter") {
-                  return;
-                }
+              <div className="flex flex-col items-center gap-1.5 sm:flex-row sm:items-center sm:gap-2">
+                <Input
+                  type="number"
+                  inputMode="numeric"
+                  min={1}
+                  max={pageCount}
+                  value={pageJumpValue}
+                  onChange={(event) =>
+                    setPageJumpValue(event.target.value.replace(/[^\d]/g, ""))
+                  }
+                  onBlur={() => commitPageJump(pageJumpValue)}
+                  onKeyDown={(event) => {
+                    if (event.key !== "Enter") {
+                      return;
+                    }
 
-                event.preventDefault();
-                commitPageJump(pageJumpValue);
-              }}
-              className="h-8 w-20"
-            />
-          </div>
-          <div
-            className={cn(
-              "flex items-center gap-2",
-              footerControlsLayout === "stacked-mobile" &&
-                "flex-col items-center gap-1.5 sm:flex-row sm:items-center sm:gap-2",
-            )}
-          >
-            <span
-              className={cn(
-                "text-sm text-muted-foreground",
-                footerControlsLayout === "stacked-mobile" &&
-                  "text-xs uppercase tracking-wider",
-              )}
-            >
-              Rows
-            </span>
-            <Select
-              value={String(table.getState().pagination.pageSize)}
-              onValueChange={(value) => table.setPageSize(Number(value))}
-            >
-              <SelectTrigger className="h-8 w-20">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent className={courierPrime.className}>
-                {[10, 20, 50, 100].map((size) => (
-                  <SelectItem key={size} value={String(size)}>
-                    {size}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="flex items-center gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              className="hover:underline"
-              onClick={() => table.previousPage()}
-              disabled={!table.getCanPreviousPage()}
-            >
-              Previous
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              className="hover:underline"
-              onClick={() => table.nextPage()}
-              disabled={!table.getCanNextPage()}
-            >
-              Next
-            </Button>
+                    event.preventDefault();
+                    commitPageJump(pageJumpValue);
+                  }}
+                  className="h-8 w-20"
+                />
+              </div>
+              <div className="flex flex-col items-center gap-1.5 sm:flex-row sm:items-center sm:gap-2">
+                <Select
+                  value={String(table.getState().pagination.pageSize)}
+                  onValueChange={(value) => table.setPageSize(Number(value))}
+                >
+                  <SelectTrigger className="h-8 w-20">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className={courierPrime.className}>
+                    {[10, 20, 50, 100].map((size) => (
+                      <SelectItem key={size} value={String(size)}>
+                        {size}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
     </div>
   );
 }

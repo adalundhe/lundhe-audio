@@ -33,18 +33,20 @@ interface NavLink {
   icon: React.ComponentType<{ className?: string }>;
 }
 
-const topLevelLinks: NavLink[] = [
-  { href: "/admin/coupons", label: "Generate Coupon", icon: Ticket },
-  { href: "/admin/gear", label: "Manage Gear", icon: Wrench },
-];
-
 const storeLinks: NavLink[] = [
   { href: "/admin/store/products", label: "Products", icon: Package },
   { href: "/admin/store/discounts", label: "Discounts", icon: Percent },
+  { href: "/admin/coupons", label: "Generate Coupon", icon: Ticket },
+];
+
+const studioLinks: NavLink[] = [
+  { href: "/admin/gear", label: "Manage Gear", icon: Wrench },
 ];
 
 const linkClassName =
-  "flex w-full items-center justify-start gap-2 rounded-md px-3 py-2 text-sm transition-colors hover:bg-muted";
+  "flex min-w-0 w-full items-center justify-start gap-2 overflow-hidden rounded-md border border-transparent px-3 py-2 text-sm transition-colors hover:bg-muted";
+const childLinkClassName =
+  "flex min-w-0 w-full items-center justify-start gap-2 overflow-hidden rounded-md border border-transparent bg-muted/20 px-3 py-2 text-sm transition-colors hover:bg-accent/35";
 const desktopSidebarStorageKey = "admin-sidebar-desktop-open";
 
 const AdminSidebarNav = ({
@@ -54,16 +56,23 @@ const AdminSidebarNav = ({
   pathname: string;
   onNavigate?: () => void;
 }) => {
-  const isOnStore = pathname.startsWith("/admin/store");
+  const isOnStore =
+    pathname.startsWith("/admin/store") || pathname.startsWith("/admin/coupons");
+  const isOnStudio = pathname.startsWith("/admin/gear");
   const [expandedItem, setExpandedItem] = React.useState<string | undefined>(
-    isOnStore ? "store" : undefined,
+    isOnStore ? "store" : isOnStudio ? "studio" : undefined,
   );
 
   React.useEffect(() => {
     if (isOnStore) {
       setExpandedItem("store");
+      return;
     }
-  }, [isOnStore]);
+
+    if (isOnStudio) {
+      setExpandedItem("studio");
+    }
+  }, [isOnStore, isOnStudio]);
 
   const isActive = (href: string) =>
     pathname === href || pathname.startsWith(`${href}/`);
@@ -73,47 +82,65 @@ const AdminSidebarNav = ({
       <div className="px-3 pb-2 pt-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
         Admin
       </div>
-      {topLevelLinks.map((link) => {
-        const Icon = link.icon;
-        return (
-          <Link
-            key={link.href}
-            href={link.href}
-            onClick={onNavigate}
-            className={cn(
-              linkClassName,
-              isActive(link.href)
-                ? "bg-muted font-medium text-foreground"
-                : "text-muted-foreground",
-            )}
-          >
-            <Icon className="!h-[16px] !w-[16px]" />
-            {link.label}
-          </Link>
-        );
-      })}
       <Accordion
         type="single"
         collapsible
         value={expandedItem}
         onValueChange={(value) => setExpandedItem(value || undefined)}
-        className="px-0"
+        className="flex flex-col gap-1 px-0"
       >
-        <AccordionItem value="store" className="border-none">
+        <AccordionItem value="studio" className="group/studio border-none">
           <AccordionTrigger
             chevronSide="left"
             className={cn(
-              "w-full items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors hover:bg-muted hover:no-underline",
+              "w-full items-center gap-2 rounded-md border border-transparent px-3 py-2 text-sm transition-colors hover:bg-muted hover:no-underline group-hover/studio:bg-muted",
+              isOnStudio
+                ? "border-border/70 bg-muted font-medium text-foreground shadow-[inset_0_0_0_1px_hsl(var(--border)/0.35)]"
+                : "text-muted-foreground group-hover/studio:border-border/50 group-hover/studio:text-foreground",
+            )}
+          >
+            <Wrench className="!h-[16px] !w-[16px]" />
+            <span className="flex-1 text-left">Manage Studio</span>
+          </AccordionTrigger>
+          <AccordionContent className="w-full pb-1 pt-1">
+            <div className="ml-4 flex min-w-0 flex-col gap-1">
+              {studioLinks.map((link) => {
+                const Icon = link.icon;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={onNavigate}
+                    className={cn(
+                      childLinkClassName,
+                      isActive(link.href)
+                        ? "border-border/70 bg-accent/55 font-medium text-foreground shadow-[inset_0_0_0_1px_hsl(var(--border)/0.3)]"
+                        : "text-muted-foreground",
+                    )}
+                  >
+                    <Icon className="!h-[16px] !w-[16px]" />
+                    <span className="min-w-0 truncate">{link.label}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="store" className="group/store border-none">
+          <AccordionTrigger
+            chevronSide="left"
+            className={cn(
+              "w-full items-center gap-2 rounded-md border border-transparent px-3 py-2 text-sm transition-colors hover:bg-muted hover:no-underline group-hover/store:bg-muted",
               isOnStore
-                ? "bg-muted font-medium text-foreground"
-                : "text-muted-foreground",
+                ? "border-border/70 bg-muted font-medium text-foreground shadow-[inset_0_0_0_1px_hsl(var(--border)/0.35)]"
+                : "text-muted-foreground group-hover/store:border-border/50 group-hover/store:text-foreground",
             )}
           >
             <Store className="!h-[16px] !w-[16px]" />
             <span className="flex-1 text-left">Manage Store</span>
           </AccordionTrigger>
           <AccordionContent className="w-full pb-1 pt-1">
-            <div className="ml-4 flex w-full flex-col gap-1 border-l pl-2">
+            <div className="ml-4 flex min-w-0 flex-col gap-1">
               {storeLinks.map((link) => {
                 const Icon = link.icon;
                 return (
@@ -122,14 +149,14 @@ const AdminSidebarNav = ({
                     href={link.href}
                     onClick={onNavigate}
                     className={cn(
-                      linkClassName,
+                      childLinkClassName,
                       isActive(link.href)
-                        ? "bg-muted font-medium text-foreground"
+                        ? "border-border/70 bg-accent/55 font-medium text-foreground shadow-[inset_0_0_0_1px_hsl(var(--border)/0.3)]"
                         : "text-muted-foreground",
                     )}
                   >
                     <Icon className="!h-[16px] !w-[16px]" />
-                    {link.label}
+                    <span className="min-w-0 truncate">{link.label}</span>
                   </Link>
                 );
               })}

@@ -42,9 +42,21 @@ export const equipmentItem = createTable("equipment_item", {
   description: text("description", { length: 255 }).notNull(),
   type: text("type", { length: 255 }).notNull(),
   group: text("group", { length: 255 }).notNull(),
+  status: text("status", {
+    enum: ["active", "inactive", "out-of-order"],
+  })
+    .notNull()
+    .default("active"),
   price: real("price").notNull().default(0),
   quantity: integer("quantity").notNull(),
   manufacturer: text("manufacturer", { length: 255 }).notNull(),
+  location: text("location", { length: 255 }).notNull().default(""),
+  room: text("room", { length: 255 }).notNull().default(""),
+  rack: text("rack", { length: 255 }).notNull().default(""),
+  shelf: text("shelf", { length: 255 }).notNull().default(""),
+  slot: text("slot", { length: 255 }).notNull().default(""),
+  storageCase: text("storage_case", { length: 255 }).notNull().default(""),
+  notes: text("notes").notNull().default(""),
   created_timestamp: text("created_timestamp")
     .notNull()
     .$defaultFn(() => new Date().toString()),
@@ -52,6 +64,74 @@ export const equipmentItem = createTable("equipment_item", {
     sql`(current_timestamp)`,
   ),
 });
+
+export const equipmentServiceLog = createTable(
+  "equipment_service_log",
+  {
+    id: text("id", { length: 255 })
+      .notNull()
+      .primaryKey()
+      .$defaultFn(() => crypto.randomUUID()),
+    equipmentItemId: text("equipment_item_id", { length: 255 })
+      .notNull()
+      .references(() => equipmentItem.id, { onDelete: "cascade" }),
+    serviceType: text("service_type", { length: 255 }).notNull(),
+    serviceDate: text("service_date").notNull(),
+    warrantyUntil: text("warranty_until").notNull().default(""),
+    notes: text("notes").notNull().default(""),
+    createdTimestamp: text("created_timestamp")
+      .notNull()
+      .$defaultFn(() => new Date().toISOString()),
+    updatedTimestamp: text("updated_timestamp").default(
+      sql`(current_timestamp)`,
+    ),
+  },
+  (table) => ({
+    equipmentItemIdIdx: index("equipment_service_log_equipment_item_id_idx").on(
+      table.equipmentItemId,
+    ),
+    serviceDateIdx: index("equipment_service_log_service_date_idx").on(
+      table.serviceDate,
+    ),
+  }),
+);
+
+export const wishlistGearItem = createTable(
+  "wishlist_gear_item",
+  {
+    id: text("id", { length: 255 })
+      .notNull()
+      .primaryKey()
+      .$defaultFn(() => crypto.randomUUID()),
+    name: text("name", { length: 255 }).notNull(),
+    description: text("description", { length: 255 }).notNull(),
+    type: text("type", { length: 255 }).notNull(),
+    group: text("group", { length: 255 }).notNull(),
+    status: text("status", {
+      enum: ["researching", "watching", "ready-to-buy"],
+    })
+      .notNull()
+      .default("watching"),
+    targetPrice: real("target_price").notNull().default(0),
+    quantity: integer("quantity").notNull().default(1),
+    manufacturer: text("manufacturer", { length: 255 }).notNull(),
+    notes: text("notes").notNull().default(""),
+    created_timestamp: text("created_timestamp")
+      .notNull()
+      .$defaultFn(() => new Date().toString()),
+    updated_timestamp: text("updated_timestamp").default(
+      sql`(current_timestamp)`,
+    ),
+  },
+  (table) => ({
+    nameIdx: index("wishlist_gear_item_name_idx").on(table.name),
+    statusIdx: index("wishlist_gear_item_status_idx").on(table.status),
+    typeIdx: index("wishlist_gear_item_type_idx").on(table.type),
+    manufacturerIdx: index("wishlist_gear_item_manufacturer_idx").on(
+      table.manufacturer,
+    ),
+  }),
+);
 
 // Products table - base products like "song mix" and "high track count mix"
 export const products = createTable("products", {

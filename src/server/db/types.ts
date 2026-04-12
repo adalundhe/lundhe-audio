@@ -4,9 +4,32 @@ export type EquipmentItem = {
     description: string
     type: string
     group: string
+    status: "active" | "inactive" | "out-of-order"
     price: number
     manufacturer: string
     quantity: number
+    location: string
+    room: string
+    rack: string
+    shelf: string
+    slot: string
+    storageCase: string
+    notes: string
+    created_timestamp: string
+    updated_timestamp: string | null
+}
+
+export type WishlistGearItem = {
+    id: string
+    name: string
+    description: string
+    type: string
+    group: string
+    status: "researching" | "watching" | "ready-to-buy"
+    targetPrice: number
+    quantity: number
+    manufacturer: string
+    notes: string
     created_timestamp: string
     updated_timestamp: string | null
 }
