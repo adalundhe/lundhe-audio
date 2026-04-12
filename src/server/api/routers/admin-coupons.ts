@@ -1,5 +1,6 @@
 import { TRPCError } from "@trpc/server";
 import { randomBytes } from "node:crypto";
+import { z } from "zod";
 
 import { adminProcedure, createTRPCRouter } from "~/server/api/trpc";
 import { coupons } from "~/server/db/schema";
@@ -23,18 +24,28 @@ const isUniqueViolation = (error: unknown) => {
   return /unique/i.test(error.message) && /code/i.test(error.message);
 };
 
+const couponInputSchema = z.object({
+  code: z.string().trim().min(1, "Coupon code is required."),
+  couponType: z.enum(["flat", "percentage"]),
+  amount: z.number().positive("Amount must be greater than 0."),
+});
+
 export const adminCouponsRouter = createTRPCRouter({
-  generate: adminProcedure.mutation(async ({ ctx }) => {
-    // Retry on the (very unlikely) chance two generated codes collide. Bail
-    // after a few attempts so a misconfigured DB can't spin forever.
-    for (let attempt = 0; attempt < MAX_GENERATION_ATTEMPTS; attempt += 1) {
-      const code = generateCandidateCode();
+  generate: adminProcedure.mutation(() => ({
+    code: generateCandidateCode(),
+  })),
+
+  create: adminProcedure
+    .input(couponInputSchema)
+    .mutation(async ({ ctx, input }) => {
       try {
         const inserted = await ctx.db
           .insert(coupons)
           .values({
             id: crypto.randomUUID(),
-            code,
+            code: input.code.trim().toUpperCase(),
+            couponType: input.couponType,
+            amount: Number(input.amount.toFixed(2)),
           })
           .returning()
           .get();
@@ -42,18 +53,20 @@ export const adminCouponsRouter = createTRPCRouter({
         return {
           id: inserted.id,
           code: inserted.code,
+          couponType: inserted.couponType,
+          amount: inserted.amount,
           createdAt: inserted.created_timestamp,
         };
       } catch (error) {
-        if (isUniqueViolation(error)) continue;
+        if (isUniqueViolation(error)) {
+          throw new TRPCError({
+            code: "CONFLICT",
+            message:
+              "That coupon code already exists. Generate a new code and try again.",
+          });
+        }
+
         throw error;
       }
-    }
-
-    throw new TRPCError({
-      code: "INTERNAL_SERVER_ERROR",
-      message:
-        "Could not generate a unique coupon code after several attempts. Try again.",
-    });
-  }),
+    }),
 });

@@ -392,6 +392,12 @@ export const coupons = createTable("coupons", {
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
   code: text("code", { length: 64 }).notNull().unique(),
+  couponType: text("coupon_type", {
+    enum: ["flat", "percentage"],
+  })
+    .notNull()
+    .default("flat"),
+  amount: real("amount").notNull().default(0),
   redeemed: integer("redeemed", { mode: "boolean" })
     .notNull()
     .default(false),
