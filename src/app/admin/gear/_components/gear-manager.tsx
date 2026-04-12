@@ -1211,15 +1211,15 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
   );
 
   return (
-    <div className="flex flex-col gap-6">
-      <Card>
+    <div className="flex min-w-0 flex-col gap-6">
+      <Card className="min-w-0">
         <CardHeader>
           <CardTitle>Inventory Summary</CardTitle>
           <CardDescription>
             Live totals across the current studio gear inventory.
           </CardDescription>
         </CardHeader>
-        <CardContent className="flex flex-col gap-4">
+        <CardContent className="flex min-w-0 flex-col gap-4">
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
             <div className="rounded-md border px-4 py-3">
               <div className="text-xs uppercase tracking-wider text-muted-foreground">
@@ -1365,7 +1365,7 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="min-w-0">
         <CardHeader>
           <CardTitle>{isEditing ? "Edit Gear Item" : "Add Gear Item"}</CardTitle>
           <CardDescription>
@@ -1374,14 +1374,14 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
               : "Fill in the form to add a new piece of gear."}
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="min-w-0">
           {error ? (
             <div className="mb-4 rounded-md border border-destructive/50 bg-destructive/10 px-3 py-2 text-sm text-destructive">
               {error}
             </div>
           ) : null}
           <form
-            className="grid gap-4 sm:grid-cols-2"
+            className="grid min-w-0 gap-4 sm:grid-cols-2"
             onSubmit={handleSubmit}
             noValidate
           >
@@ -1479,7 +1479,7 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
                 required
               />
             </div>
-            <div className="flex flex-col gap-3 sm:col-span-2">
+            <div className="flex min-w-0 flex-col gap-3 sm:col-span-2">
               <div className="flex flex-col gap-1.5">
                 <Label htmlFor="gear-reverb-query">Reverb Pricing</Label>
                 <div className="flex flex-col gap-2 sm:flex-row">
@@ -1716,7 +1716,7 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
                   },
                 ]}
               />
-              <div className="flex flex-col gap-2 rounded-md border px-3 py-3 text-sm sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex min-w-0 flex-col gap-2 rounded-md border px-3 py-3 text-sm sm:flex-row sm:items-center sm:justify-between">
                 <div className="text-muted-foreground">
                   {priceGuideMatches.length === 0
                     ? "No Reverb matches loaded."
@@ -1724,8 +1724,8 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
                         priceGuideMatches.length === 1 ? "" : "es"
                       } loaded. ${selectedPriceGuideCount} selected.`}
                 </div>
-                <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-                  <span className="text-muted-foreground">
+                <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center">
+                  <span className="min-w-0 text-muted-foreground">
                     {selectedAveragePrice === null
                       ? selectedPriceGuideCount > 0
                         ? "Selected rows without a price are ignored in the average."
@@ -1744,12 +1744,12 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-2 sm:col-span-2">
+            <div className="flex flex-col gap-2 sm:col-span-2 sm:flex-row sm:flex-wrap sm:items-center">
               <Button
                 type="submit"
                 size={"sm"}
                 disabled={upsertMutation.isPending || !isFormComplete}
-                className="align-middle flex gap-1 border border-black dark:border-white hover:border-green-500 hover:text-green-500 hover:bg-green-50 dark:hover:bg-green-950/30"
+                className="flex w-full gap-1 border border-black align-middle dark:border-white hover:border-green-500 hover:bg-green-50 hover:text-green-500 dark:hover:bg-green-950/30 sm:w-auto"
               >
                 {upsertMutation.isPending ? (
                   <Loader2 className="mr-2 !h-[16px] !w-[16px] animate-spin" />
@@ -1765,7 +1765,7 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
                   size={"sm"}
                   onClick={handleClearForm}
                   disabled={upsertMutation.isPending}
-                  className="align-middle flex gap-1 text-red-600 hover:bg-red-600/30 border border-red-600" 
+                  className="flex w-full gap-1 border border-red-600 align-middle text-red-600 hover:bg-red-600/30 sm:w-auto" 
                 >
                   <X className="mr-2 !h-[16px] !w-[16px]" />
                   Cancel
@@ -1775,7 +1775,7 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
                   size={"sm"}
                   onClick={handleClearForm}
                   disabled={upsertMutation.isPending}
-                  className="align-middle flex gap-1 text-red-600 hover:bg-red-600/30 border border-red-600" 
+                  className="flex w-full gap-1 border border-red-600 align-middle text-red-600 hover:bg-red-600/30 sm:w-auto" 
                 >
                   <X className="mr-2 !h-[16px] !w-[16px]" />
                   Clear
@@ -1786,7 +1786,7 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="min-w-0">
         <CardHeader>
           <CardTitle>Inventory</CardTitle>
           <CardDescription>
@@ -1794,7 +1794,7 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
             edit.
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="min-w-0">
           {gear.length === 0 ? (
             <p className="text-sm text-muted-foreground">No gear yet.</p>
           ) : (

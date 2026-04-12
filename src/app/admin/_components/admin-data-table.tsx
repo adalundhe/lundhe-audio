@@ -359,7 +359,7 @@ export function AdminDataTable<TData>({
   );
 
   return (
-    <div className="flex flex-col">
+    <div className="flex min-w-0 flex-col">
       <div className="flex flex-wrap items-center gap-3 py-4 sm:gap-x-8">
         <Input
           placeholder={searchPlaceholder}
@@ -540,14 +540,16 @@ export function AdminDataTable<TData>({
         </table>
       </div>
 
-      <div className="flex flex-wrap items-center justify-end gap-3 py-4">
-        <div className="min-w-[6rem] text-sm">
-          {currentPage} of {pageCount}
+      <div className="flex flex-col items-center gap-3 py-4 sm:flex-row sm:flex-wrap sm:justify-end">
+        <div className="flex flex-col items-center gap-1 text-center sm:min-w-[6rem] sm:items-start sm:text-left">
+          <div className="text-sm">
+            {currentPage} of {pageCount}
+          </div>
+          <div className="text-sm text-muted-foreground">
+            {table.getFilteredRowModel().rows.length} rows
+          </div>
         </div>
-        <div className="min-w-[6rem] text-sm text-muted-foreground sm:text-center">
-          {table.getFilteredRowModel().rows.length} rows
-        </div>
-        <div className="ml-auto flex flex-wrap items-center justify-end gap-2">
+        <div className="flex w-full flex-wrap items-center justify-center gap-2 sm:ml-auto sm:w-auto sm:justify-end">
           <div className="flex items-center gap-2">
             <span className="text-sm text-muted-foreground">Page</span>
             <Input

@@ -27,8 +27,8 @@ export default async function AdminLayout({
     <Layout>
       <div className="relative w-full">
         <AdminSidebar />
-        <div className="mx-auto w-full max-w-7xl py-6 xl:w-11/12">
-          <div className="flex w-full flex-col items-stretch">{children}</div>
+        <div className="mx-auto w-full max-w-7xl min-w-0 py-6 xl:w-11/12">
+          <div className="flex w-full min-w-0 flex-col items-stretch">{children}</div>
         </div>
       </div>
     </Layout>
