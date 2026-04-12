@@ -1,17 +1,14 @@
+import { Suspense } from "react";
 import { unstable_noStore as noStore } from "next/cache";
 
-import { createCaller } from "~/server/api/root";
-import { createTRPCContext } from "~/server/api/trpc";
-
-import { GearManager } from "./_components/gear-manager";
+import { GearManagerBoundary } from "./_components/gear-manager-boundary";
+import { GearManagerLoading } from "./_components/gear-manager-loading";
+import { GearManagerSection } from "./_components/gear-manager-section";
 
 export const dynamic = "force-dynamic";
 
-export default async function AdminGearPage() {
+export default function AdminGearPage() {
   noStore();
-
-  const trpc = createCaller(await createTRPCContext({ req: {} }));
-  const gear = await trpc.adminGear.list();
 
   return (
     <div className="mx-auto flex w-full min-w-0 max-w-6xl flex-col gap-6 px-4 sm:px-6">
@@ -22,7 +19,11 @@ export default async function AdminGearPage() {
         </p>
       </div>
 
-      <GearManager initialGear={gear} />
+      <GearManagerBoundary>
+        <Suspense fallback={<GearManagerLoading />}>
+          <GearManagerSection />
+        </Suspense>
+      </GearManagerBoundary>
     </div>
   );
 }
