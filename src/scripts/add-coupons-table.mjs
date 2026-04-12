@@ -24,6 +24,8 @@ try {
       CREATE TABLE \`coupons\` (
         \`id\` text(255) PRIMARY KEY NOT NULL,
         \`code\` text(64) NOT NULL,
+        \`coupon_type\` text NOT NULL DEFAULT 'flat',
+        \`amount\` real NOT NULL DEFAULT 0,
         \`redeemed\` integer DEFAULT false NOT NULL,
         \`redeemed_at\` text,
         \`redeemed_by_user_id\` text(255),
@@ -31,6 +33,24 @@ try {
         \`updated_timestamp\` text DEFAULT (current_timestamp)
       )
     `);
+  }
+
+  const columnInfo = await client.execute("PRAGMA table_info(`coupons`)");
+  const hasCouponTypeColumn = columnInfo.rows.some(
+    (row) => row.name === "coupon_type",
+  );
+  const hasAmountColumn = columnInfo.rows.some((row) => row.name === "amount");
+
+  if (!hasCouponTypeColumn) {
+    await client.execute(
+      "ALTER TABLE `coupons` ADD COLUMN `coupon_type` text NOT NULL DEFAULT 'flat'",
+    );
+  }
+
+  if (!hasAmountColumn) {
+    await client.execute(
+      "ALTER TABLE `coupons` ADD COLUMN `amount` real NOT NULL DEFAULT 0",
+    );
   }
 
   const indexResult = await client.execute(
@@ -45,7 +65,7 @@ try {
   }
 
   console.log(
-    `Coupons table ready. Created table: ${String(!hasCouponsTable)}. Created index: ${String(!hasCodeIndex)}.`,
+    `Coupons table ready. Created table: ${String(!hasCouponsTable)}. Added coupon_type: ${String(!hasCouponTypeColumn)}. Added amount: ${String(!hasAmountColumn)}. Created index: ${String(!hasCodeIndex)}.`,
   );
 } finally {
   client.close();

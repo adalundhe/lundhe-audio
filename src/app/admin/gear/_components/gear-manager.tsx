@@ -204,6 +204,40 @@ const hasActiveInventoryFilters = (table: ReactTable<GearItem>) =>
   ((table.getColumn("type")?.getFilterValue() ?? "") as string) !== "" ||
   ((table.getColumn("manufacturer")?.getFilterValue() ?? "") as string) !== "";
 
+const SectionAccordionCard = ({
+  value,
+  title,
+  description,
+  contentClassName,
+  children,
+}: React.PropsWithChildren<{
+  value: string;
+  title: string;
+  description: React.ReactNode;
+  contentClassName?: string;
+}>) => (
+  <AccordionItem value={value} className="border-none">
+    <Card className="min-w-0">
+      <AccordionTrigger
+        chevronSide="none"
+        className="w-full justify-between px-6 py-6 hover:no-underline"
+      >
+        <div className="flex min-w-0 flex-col items-start gap-1 text-left">
+          <div className="text-lg font-semibold leading-none tracking-tight">
+            {title}
+          </div>
+          <div className="text-sm text-muted-foreground">{description}</div>
+        </div>
+      </AccordionTrigger>
+      <AccordionContent className="pb-0 pt-0">
+        <CardContent className={cn("min-w-0", contentClassName)}>
+          {children}
+        </CardContent>
+      </AccordionContent>
+    </Card>
+  </AccordionItem>
+);
+
 const ValueAccordionSelect = ({
   id,
   label,
@@ -219,12 +253,13 @@ const ValueAccordionSelect = ({
   value: string;
   options: string[];
   placeholder: string;
-  addLabel: string;
+  addLabel?: string;
   onChange: (value: string) => void;
-  onAdd: (value: string) => void;
+  onAdd?: (value: string) => void;
 }) => {
   const [open, setOpen] = React.useState(false);
   const [draftValue, setDraftValue] = React.useState("");
+  const canAdd = Boolean(addLabel && onAdd);
 
   const handleSelect = (nextValue: string) => {
     onChange(nextValue);
@@ -234,6 +269,10 @@ const ValueAccordionSelect = ({
   const handleAdd = () => {
     const nextValue = draftValue.trim();
     if (!nextValue) {
+      return;
+    }
+
+    if (!onAdd) {
       return;
     }
 
@@ -292,32 +331,34 @@ const ValueAccordionSelect = ({
               </div>
             )}
           </div>
-          <Separator />
-          <div className="space-y-2 p-3">
-            <Input
-              value={draftValue}
-              onChange={(event) => setDraftValue(event.target.value)}
-              onKeyDown={(event) => {
-                if (event.key === "Enter") {
-                  event.preventDefault();
-                  handleAdd();
-                }
-              }}
-              placeholder={`Add a new ${label.toLocaleLowerCase()}...`}
-            />
-            <div
-              className="w-full flex justify-center"
-            >
-              <Button
-                className="cursor-pointer text-center px-4 py-2 dark:hover:bg-white dark:hover:text-black border dark:border-white border-black rounded-sm dark:text-white text-black"
-                onClick={handleAdd}
-                disabled={!draftValue.trim()}
-              >
-                <Plus className="mr-2 !h-[16px] !w-[16px]" />
-                {addLabel}
-              </Button>
-           </div>
-          </div>
+          {canAdd ? (
+            <>
+              <Separator />
+              <div className="space-y-2 p-3">
+                <Input
+                  value={draftValue}
+                  onChange={(event) => setDraftValue(event.target.value)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                      event.preventDefault();
+                      handleAdd();
+                    }
+                  }}
+                  placeholder={`Add a new ${label.toLocaleLowerCase()}...`}
+                />
+                <div className="flex w-full justify-center">
+                  <Button
+                    className="cursor-pointer rounded-sm border border-black px-4 py-2 text-center text-black dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black"
+                    onClick={handleAdd}
+                    disabled={!draftValue.trim()}
+                  >
+                    <Plus className="mr-2 !h-[16px] !w-[16px]" />
+                    {addLabel}
+                  </Button>
+                </div>
+              </div>
+            </>
+          ) : null}
         </PopoverContent>
       </Popover>
     </div>
@@ -345,6 +386,12 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
   );
   const [customGearTypes, setCustomGearTypes] = React.useState<string[]>([]);
   const [customGearGroups, setCustomGearGroups] = React.useState<string[]>([]);
+  const [typeRenameTarget, setTypeRenameTarget] = React.useState("");
+  const [typeRenameValue, setTypeRenameValue] = React.useState("");
+  const [groupRenameTarget, setGroupRenameTarget] = React.useState("");
+  const [groupRenameValue, setGroupRenameValue] = React.useState("");
+  const [newTypeValue, setNewTypeValue] = React.useState("");
+  const [newGroupValue, setNewGroupValue] = React.useState("");
   const draftHydratedRef = React.useRef(false);
 
   React.useEffect(() => {
@@ -701,6 +748,66 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
     onSettled: () => setPendingDeleteId(null),
   });
 
+  const renameFacetMutation = api.adminGear.renameFacet.useMutation({
+    onMutate: () => setError(null),
+    onSuccess: ({ field, currentValue, nextValue }) => {
+      const normalizedCurrentValue = normalizeOptionValue(currentValue);
+
+      if (field === "type") {
+        setGear((current) =>
+          current.map((item) =>
+            normalizeOptionValue(item.type) === normalizedCurrentValue
+              ? normalizeGearItem({ ...item, type: nextValue })
+              : item,
+          ),
+        );
+        setForm((current) =>
+          normalizeOptionValue(current.type) === normalizedCurrentValue
+            ? { ...current, type: nextValue }
+            : current,
+        );
+        setCustomGearTypes((current) =>
+          mergeUniqueOptions(
+            current.filter(
+              (option) => normalizeOptionValue(option) !== normalizedCurrentValue,
+            ),
+            [nextValue],
+          ),
+        );
+        setTypeRenameTarget("");
+        setTypeRenameValue("");
+      } else {
+        setGear((current) =>
+          current.map((item) =>
+            normalizeOptionValue(item.group) === normalizedCurrentValue
+              ? normalizeGearItem({ ...item, group: nextValue })
+              : item,
+          ),
+        );
+        setForm((current) =>
+          normalizeOptionValue(current.group) === normalizedCurrentValue
+            ? { ...current, group: nextValue }
+            : current,
+        );
+        setCustomGearGroups((current) =>
+          mergeUniqueOptions(
+            current.filter(
+              (option) => normalizeOptionValue(option) !== normalizedCurrentValue,
+            ),
+            [nextValue],
+          ),
+        );
+        setGroupRenameTarget("");
+        setGroupRenameValue("");
+      }
+
+      React.startTransition(() => {
+        router.refresh();
+      });
+    },
+    onError: (err) => setError(err.message),
+  });
+
   const priceGuideSearchMutation = api.adminGear.searchPriceGuide.useMutation({
     onMutate: () => {
       setPricingError(null);
@@ -757,6 +864,96 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
     setForm(nextForm);
     setError(null);
     resetPricingLookup([nextForm.manufacturer.trim(), nextForm.name.trim()].filter(Boolean).join(" "));
+  };
+
+  const isTypeRenameValid =
+    typeRenameTarget.trim() !== "" &&
+    typeRenameValue.trim() !== "" &&
+    normalizeOptionValue(typeRenameTarget) !== normalizeOptionValue(typeRenameValue);
+  const isGroupRenameValid =
+    groupRenameTarget.trim() !== "" &&
+    groupRenameValue.trim() !== "" &&
+    normalizeOptionValue(groupRenameTarget) !== normalizeOptionValue(groupRenameValue);
+
+  const handleRenameFacet = async (field: "type" | "group") => {
+    const currentValue = field === "type" ? typeRenameTarget : groupRenameTarget;
+    const nextValue = field === "type" ? typeRenameValue : groupRenameValue;
+
+    if (
+      currentValue.trim() === "" ||
+      nextValue.trim() === "" ||
+      normalizeOptionValue(currentValue) === normalizeOptionValue(nextValue)
+    ) {
+      return;
+    }
+
+    await renameFacetMutation.mutateAsync({
+      field,
+      currentValue,
+      nextValue: nextValue.trim(),
+    });
+  };
+
+  const handleAddFacet = (field: "type" | "group") => {
+    if (field === "type") {
+      const nextValue = newTypeValue.trim();
+      if (!nextValue) {
+        return;
+      }
+
+      setCustomGearTypes((current) => mergeUniqueOptions(current, [nextValue]));
+      setTypeRenameTarget(nextValue);
+      setTypeRenameValue(nextValue);
+      setNewTypeValue("");
+      return;
+    }
+
+    const nextValue = newGroupValue.trim();
+    if (!nextValue) {
+      return;
+    }
+
+    setCustomGearGroups((current) => mergeUniqueOptions(current, [nextValue]));
+    setGroupRenameTarget(nextValue);
+    setGroupRenameValue(nextValue);
+    setNewGroupValue("");
+  };
+
+  const handleDeleteFacet = (field: "type" | "group") => {
+    if (field === "type") {
+      const normalizedTarget = normalizeOptionValue(typeRenameTarget);
+      if (!normalizedTarget || selectedTypeUsageCount > 0) {
+        return;
+      }
+
+      setCustomGearTypes((current) =>
+        current.filter(
+          (option) => normalizeOptionValue(option) !== normalizedTarget,
+        ),
+      );
+      if (normalizeOptionValue(form.type) === normalizedTarget) {
+        setForm((current) => ({ ...current, type: "" }));
+      }
+      setTypeRenameTarget("");
+      setTypeRenameValue("");
+      return;
+    }
+
+    const normalizedTarget = normalizeOptionValue(groupRenameTarget);
+    if (!normalizedTarget || selectedGroupUsageCount > 0) {
+      return;
+    }
+
+    setCustomGearGroups((current) =>
+      current.filter(
+        (option) => normalizeOptionValue(option) !== normalizedTarget,
+      ),
+    );
+    if (normalizeOptionValue(form.group) === normalizedTarget) {
+      setForm((current) => ({ ...current, group: "" }));
+    }
+    setGroupRenameTarget("");
+    setGroupRenameValue("");
   };
 
   const handleClearForm = () => {
@@ -849,6 +1046,28 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
     () => mergeUniqueOptions(gearGroups, customGearGroups),
     [customGearGroups, gearGroups],
   );
+  const typeUsageCounts = React.useMemo(
+    () =>
+      gear.reduce((counts, item) => {
+        const key = normalizeOptionValue(item.type);
+        counts.set(key, (counts.get(key) ?? 0) + 1);
+        return counts;
+      }, new Map<string, number>()),
+    [gear],
+  );
+  const groupUsageCounts = React.useMemo(
+    () =>
+      gear.reduce((counts, item) => {
+        const key = normalizeOptionValue(item.group);
+        counts.set(key, (counts.get(key) ?? 0) + 1);
+        return counts;
+      }, new Map<string, number>()),
+    [gear],
+  );
+  const selectedTypeUsageCount =
+    typeUsageCounts.get(normalizeOptionValue(typeRenameTarget)) ?? 0;
+  const selectedGroupUsageCount =
+    groupUsageCounts.get(normalizeOptionValue(groupRenameTarget)) ?? 0;
 
   const inventoryColumns = React.useMemo<AdminDataTableColumnDef<GearItem>[]>(
     () => [
@@ -1211,15 +1430,17 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
   );
 
   return (
-    <div className="flex min-w-0 flex-col gap-6">
-      <Card className="min-w-0">
-        <CardHeader>
-          <CardTitle>Inventory Summary</CardTitle>
-          <CardDescription>
-            Live totals across the current studio gear inventory.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="flex min-w-0 flex-col gap-4">
+    <Accordion
+      type="multiple"
+      defaultValue={["summary", "editor", "taxonomy", "inventory"]}
+      className="flex min-w-0 flex-col gap-6"
+    >
+      <SectionAccordionCard
+        value="summary"
+        title="Inventory Summary"
+        description="Live totals across the current studio gear inventory."
+        contentClassName="flex min-w-0 flex-col gap-4"
+      >
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
             <div className="rounded-md border px-4 py-3">
               <div className="text-xs uppercase tracking-wider text-muted-foreground">
@@ -1300,8 +1521,8 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
                     className="w-full last:border-b-0"
                   >
                     <AccordionTrigger
-                      chevronSide="left"
-                      className="w-full items-start px-4 py-3 hover:no-underline sm:items-center"
+                      chevronSide="none"
+                      className="w-full justify-between items-start px-4 py-3 hover:no-underline sm:items-center"
                     >
                       <div className="flex w-full flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
                         <div className="font-medium">{group.label}</div>
@@ -1362,19 +1583,18 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
               </div>
             )}
           </div>
-        </CardContent>
-      </Card>
+      </SectionAccordionCard>
 
-      <Card className="min-w-0">
-        <CardHeader>
-          <CardTitle>{isEditing ? "Edit Gear Item" : "Add Gear Item"}</CardTitle>
-          <CardDescription>
-            {isEditing
-              ? `Editing "${form.name || "(unnamed)"}". Save to update or clear to start over.`
-              : "Fill in the form to add a new piece of gear."}
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="min-w-0">
+      <SectionAccordionCard
+        value="editor"
+        title={isEditing ? "Edit Gear Item" : "Add Gear Item"}
+        description={
+          isEditing
+            ? `Editing "${form.name || "(unnamed)"}". Save to update or clear to start over.`
+            : "Fill in the form to add a new piece of gear."
+        }
+        contentClassName="min-w-0"
+      >
           {error ? (
             <div className="mb-4 rounded-md border border-destructive/50 bg-destructive/10 px-3 py-2 text-sm text-destructive">
               {error}
@@ -1784,18 +2004,14 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
               )}
             </div>
           </form>
-        </CardContent>
-      </Card>
+      </SectionAccordionCard>
 
-      <Card className="min-w-0">
-        <CardHeader>
-          <CardTitle>Inventory</CardTitle>
-          <CardDescription>
-            {gear.length} item{gear.length === 1 ? "" : "s"}. Click a row to
-            edit.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="min-w-0">
+      <SectionAccordionCard
+        value="inventory"
+        title="Inventory"
+        description={`${gear.length} item${gear.length === 1 ? "" : "s"}. Click a row to edit.`}
+        contentClassName="min-w-0"
+      >
           {gear.length === 0 ? (
             <p className="text-sm text-muted-foreground">No gear yet.</p>
           ) : (
@@ -1893,8 +2109,8 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
                                 value={group}
                               >
                                 <AccordionTrigger
-                                  chevronSide="left"
-                                  className="h-[2.5em] w-fit flex md:hover:underline hover:no-underline"
+                                  chevronSide="none"
+                                  className="h-[2.5em] w-full justify-between md:hover:underline hover:no-underline"
                                 >
                                   {group}
                                 </AccordionTrigger>
@@ -2002,8 +2218,8 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
                               value={group}
                             >
                               <AccordionTrigger
-                                chevronSide="left"
-                                className="h-[2.5em] w-fit flex md:hover:underline hover:no-underline"
+                                chevronSide="none"
+                                className="h-[2.5em] w-full justify-between md:hover:underline hover:no-underline"
                               >
                                 {group}
                               </AccordionTrigger>
@@ -2059,8 +2275,181 @@ export function GearManager({ initialGear }: { initialGear: GearItem[] }) {
               ]}
             />
           )}
-        </CardContent>
-      </Card>
-    </div>
+      </SectionAccordionCard>
+
+      <SectionAccordionCard
+        value="taxonomy"
+        title="Manage Types & Groups"
+        description="Add new values, rename existing ones across the current gear inventory, or delete unused custom values."
+        contentClassName="min-w-0"
+      >
+        <div className="grid gap-4 lg:grid-cols-2">
+          <div className="rounded-md border p-4">
+            <div className="mb-3">
+              <div className="text-sm font-medium">Types</div>
+              <div className="text-xs text-muted-foreground">
+                Add a new type, rename an existing one everywhere it is used, or delete an unused custom type.
+              </div>
+            </div>
+            <div className="flex flex-col gap-3">
+              <ValueAccordionSelect
+                id="rename-gear-type"
+                label="Current Type"
+                value={typeRenameTarget}
+                options={availableGearTypes}
+                placeholder="Choose a type to rename"
+                onChange={(nextValue) => {
+                  setTypeRenameTarget(nextValue);
+                  setTypeRenameValue(nextValue);
+                }}
+              />
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor="rename-gear-type-value">New Type Name</Label>
+                <Input
+                  id="rename-gear-type-value"
+                  value={typeRenameValue}
+                  onChange={(event) => setTypeRenameValue(event.target.value)}
+                  placeholder="Enter the renamed type"
+                />
+              </div>
+              <Button
+                type="button"
+                onClick={() => void handleRenameFacet("type")}
+                disabled={
+                  !isTypeRenameValid ||
+                  (renameFacetMutation.isPending &&
+                    renameFacetMutation.variables?.field === "type")
+                }
+                className="w-full sm:w-fit border border-violet-500 text-violet-500 hover:bg-violet-800/30"
+              >
+                {renameFacetMutation.isPending &&
+                renameFacetMutation.variables?.field === "type" ? (
+                  <Loader2 className="mr-2 !h-[16px] !w-[16px] animate-spin" />
+                ) : (
+                  <Save className="mr-2 !h-[16px] !w-[16px]" />
+                )}
+                Rename Type
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => handleDeleteFacet("type")}
+                disabled={typeRenameTarget.trim() === "" || selectedTypeUsageCount > 0}
+                className="w-full sm:w-fit border border-red-500 text-red-500 hover:bg-red-800/30"
+              >
+                <Trash2 className="mr-2 !h-[16px] !w-[16px]" />
+                Delete Type
+              </Button>
+              <div className="text-xs text-muted-foreground">
+                {selectedTypeUsageCount > 0
+                  ? "This type is currently used by gear items, so rename it instead of deleting it."
+                  : "Unused custom types can be deleted here."}
+              </div>
+              <Separator />
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor="new-gear-type-value">Add New Type</Label>
+                <Input
+                  id="new-gear-type-value"
+                  value={newTypeValue}
+                  onChange={(event) => setNewTypeValue(event.target.value)}
+                  placeholder="Enter a new type"
+                />
+              </div>
+              <Button
+                type="button"
+                onClick={() => handleAddFacet("type")}
+                disabled={!newTypeValue.trim()}
+                className="w-full sm:w-fit border border-green-500 text-green-500 hover:bg-green-800/30"
+              >
+                <Plus className="mr-2 !h-[16px] !w-[16px]" />
+                Add Type
+              </Button>
+            </div>
+          </div>
+          <div className="rounded-md border p-4">
+            <div className="mb-3">
+              <div className="text-sm font-medium">Groups</div>
+              <div className="text-xs text-muted-foreground">
+                Add a new group, rename an existing one everywhere it is used, or delete an unused custom group.
+              </div>
+            </div>
+            <div className="flex flex-col gap-3">
+              <ValueAccordionSelect
+                id="rename-gear-group"
+                label="Current Group"
+                value={groupRenameTarget}
+                options={availableGearGroups}
+                placeholder="Choose a group to rename"
+                onChange={(nextValue) => {
+                  setGroupRenameTarget(nextValue);
+                  setGroupRenameValue(nextValue);
+                }}
+              />
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor="rename-gear-group-value">New Group Name</Label>
+                <Input
+                  id="rename-gear-group-value"
+                  value={groupRenameValue}
+                  onChange={(event) => setGroupRenameValue(event.target.value)}
+                  placeholder="Enter the renamed group"
+                />
+              </div>
+              <Button
+                type="button"
+                onClick={() => void handleRenameFacet("group")}
+                disabled={
+                  !isGroupRenameValid ||
+                  (renameFacetMutation.isPending &&
+                    renameFacetMutation.variables?.field === "group")
+                }
+                className="w-full sm:w-fit  border border-violet-500 text-violet-500 hover:bg-violet-800/30"
+              >
+                {renameFacetMutation.isPending &&
+                renameFacetMutation.variables?.field === "group" ? (
+                  <Loader2 className="mr-2 !h-[16px] !w-[16px] animate-spin" />
+                ) : (
+                  <Save className="mr-2 !h-[16px] !w-[16px]" />
+                )}
+                Rename Group
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => handleDeleteFacet("group")}
+                disabled={groupRenameTarget.trim() === "" || selectedGroupUsageCount > 0}
+                className="w-full sm:w-fit border border-red-500 text-red-500 hover:bg-red-800/30"
+              >
+                <Trash2 className="mr-2 !h-[16px] !w-[16px]" />
+                Delete Group
+              </Button>
+              <div className="text-xs text-muted-foreground">
+                {selectedGroupUsageCount > 0
+                  ? "This group is currently used by gear items, so rename it instead of deleting it."
+                  : "Unused custom groups can be deleted here."}
+              </div>
+              <Separator />
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor="new-gear-group-value">Add New Group</Label>
+                <Input
+                  id="new-gear-group-value"
+                  value={newGroupValue}
+                  onChange={(event) => setNewGroupValue(event.target.value)}
+                  placeholder="Enter a new group"
+                />
+              </div>
+              <Button
+                type="button"
+                onClick={() => handleAddFacet("group")}
+                disabled={!newGroupValue.trim()}
+                className="w-full sm:w-fit border border-green-500 text-green-500 hover:bg-green-800/30"
+              >
+                <Plus className="mr-2 !h-[16px] !w-[16px]" />
+                Add Group
+              </Button>
+            </div>
+          </div>
+        </div>
+      </SectionAccordionCard>
+    </Accordion>
   );
 }

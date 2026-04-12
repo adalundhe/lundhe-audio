@@ -14,7 +14,8 @@ export default function AdminCouponsPage() {
       <div className="flex flex-col items-center gap-2 text-center sm:items-start sm:text-left">
         <h1 className="text-2xl font-semibold">Generate Coupon</h1>
         <p className="max-w-2xl text-sm text-muted-foreground">
-          Create a unique, single-use coupon code.
+          Generate a unique, single-use coupon code and save it when the details
+          are ready.
         </p>
       </div>
 
@@ -22,8 +23,8 @@ export default function AdminCouponsPage() {
         <CardHeader>
           <CardTitle>New code</CardTitle>
           <CardDescription>
-            Each click generates a fresh, non-reusable code stored in the
-            coupons table.
+            Choose the coupon type and amount, generate a code, then save it to
+            the coupons table when you are ready.
           </CardDescription>
         </CardHeader>
         <CardContent>

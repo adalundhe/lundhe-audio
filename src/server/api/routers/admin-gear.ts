@@ -1,5 +1,5 @@
 import { TRPCError } from "@trpc/server";
-import { asc, eq } from "drizzle-orm";
+import { asc, eq, sql } from "drizzle-orm";
 import { z } from "zod";
 
 import { env } from "~/env.js";
@@ -134,6 +134,12 @@ const gearInputSchema = z.object({
   manufacturer: z.string().trim().min(1, "Manufacturer is required"),
 });
 
+const renameGearFacetSchema = z.object({
+  field: z.enum(["type", "group"]),
+  currentValue: z.string().trim().min(1, "Current value is required"),
+  nextValue: z.string().trim().min(1, "New value is required"),
+});
+
 export const adminGearRouter = createTRPCRouter({
   list: adminProcedure.query(async ({ ctx }) => {
     const gear = await ctx.db
@@ -256,5 +262,33 @@ export const adminGearRouter = createTRPCRouter({
       }
 
       return { id: deleted.id };
+    }),
+
+  renameFacet: adminProcedure
+    .input(renameGearFacetSchema)
+    .mutation(async ({ ctx, input }) => {
+      const nextValue = input.nextValue.trim();
+      const normalizedCurrentValue = input.currentValue.trim().toLocaleLowerCase();
+      const column =
+        input.field === "type" ? equipmentItem.type : equipmentItem.group;
+      const now = new Date().toString();
+
+      const renamed = await ctx.db
+        .update(equipmentItem)
+        .set({
+          [input.field]: nextValue,
+          updated_timestamp: now,
+        })
+        .where(
+          sql`lower(trim(${column})) = ${normalizedCurrentValue}`,
+        )
+        .returning();
+
+      return {
+        field: input.field,
+        currentValue: input.currentValue.trim(),
+        nextValue,
+        updatedCount: renamed.length,
+      };
     }),
 });
