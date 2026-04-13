@@ -105,7 +105,10 @@ export function ZoomableTimeChartFrame({
     <div className={cn("mt-4 flex min-w-0 flex-col gap-3", className)}>
       <div className="flex flex-col gap-3">
         <div className="grid min-w-0 gap-2 sm:grid-cols-[minmax(0,10rem)_minmax(0,10rem)_auto] sm:items-end">
-          <div className={cn("flex min-w-0 flex-col gap-1", mobileRangeControlWidthClass)}>
+          <div className={cn(
+              "flex min-w-0 flex-col gap-1 sm:w-auto sm:min-w-fit",
+              mobileRangeControlWidthClass,
+          )}>
             <span className="text-xs uppercase tracking-wider text-muted-foreground">
               From
             </span>
@@ -118,7 +121,10 @@ export function ZoomableTimeChartFrame({
               className="h-8 w-full sm:w-fit overflow-hidden"
             />
           </div>
-          <div className={cn("flex min-w-0 flex-col gap-1", mobileRangeControlWidthClass)}>
+          <div className={cn(
+              "flex min-w-0 flex-col gap-1 sm:w-auto sm:min-w-fit",
+              mobileRangeControlWidthClass,
+          )}>
             <span className="text-xs uppercase tracking-wider text-muted-foreground">
               To
             </span>
