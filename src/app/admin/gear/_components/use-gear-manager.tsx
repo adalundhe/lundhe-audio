@@ -66,7 +66,7 @@ import { Progress } from "~/components/ui/progress";
 import { Separator } from "~/components/ui/separator";
 import { cn } from "~/lib/utils";
 import { api } from "~/trpc/react";
-import { ChartFilterDropdown, type ChartFilterOption } from "./chart-filter-dropdown";
+import { type ChartFilterOption } from "./chart-filter-panel";
 import {
   type GearDetailsFormState,
   type GearFormState,
