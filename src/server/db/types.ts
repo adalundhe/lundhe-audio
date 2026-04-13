@@ -9,6 +9,11 @@ export type EquipmentItem = {
     manufacturer: string
     quantity: number
     location: string
+    serialNumber: string
+    acquiredFrom: string
+    purchaseDate: string
+    purchaseSource: string
+    referenceNumber: string
     room: string
     rack: string
     shelf: string
@@ -17,6 +22,18 @@ export type EquipmentItem = {
     notes: string
     created_timestamp: string
     updated_timestamp: string | null
+}
+
+export type EquipmentItemMediaAsset = {
+    id: string
+    equipmentItemId: string
+    assetType: "photo" | "document"
+    fileName: string
+    contentType: string
+    byteSize: number
+    storageUri: string
+    createdTimestamp: string
+    updatedTimestamp: string | null
 }
 
 export type WishlistGearItem = {

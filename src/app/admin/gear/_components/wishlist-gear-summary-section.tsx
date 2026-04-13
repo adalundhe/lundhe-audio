@@ -1,21 +1,23 @@
 "use client";
 
 import * as React from "react";
+import { type ChartConfig } from "~/components/ui/chart";
 
 import { WishlistGearSummaryCharts } from "./wishlist-gear-summary-charts";
 import { WishlistGearSummaryGroupBreakdown } from "./wishlist-gear-summary-group-breakdown";
 import { WishlistGearSummaryStats } from "./wishlist-gear-summary-stats";
+import { type ManufacturerRadialDatum } from "./manufacturer-radial-chart-helpers";
 import {
   type WishlistSpendByGroupAreaChart,
   type WishlistSpendPoint,
   type WishlistSummary,
   type WishlistValuePoint,
 } from "./wishlist-gear-summary-types";
-import { type ChartConfig } from "~/components/ui/chart";
 
 interface WishlistGearSummarySectionProps {
   summary: WishlistSummary;
   valueDistributionChartData: WishlistValuePoint[];
+  manufacturerRadialChartData: ManufacturerRadialDatum[];
   valueChartConfig: ChartConfig;
   spendOverTimeChartData: WishlistSpendPoint[];
   spendTimelineChartConfig: ChartConfig;
@@ -28,6 +30,7 @@ export const WishlistGearSummarySection = React.memo(
   function WishlistGearSummarySection({
     summary,
     valueDistributionChartData,
+    manufacturerRadialChartData,
     valueChartConfig,
     spendOverTimeChartData,
     spendTimelineChartConfig,
@@ -43,6 +46,7 @@ export const WishlistGearSummarySection = React.memo(
         />
         <WishlistGearSummaryCharts
           valueDistributionChartData={valueDistributionChartData}
+          manufacturerRadialChartData={manufacturerRadialChartData}
           valueChartConfig={valueChartConfig}
           spendOverTimeChartData={spendOverTimeChartData}
           spendTimelineChartConfig={spendTimelineChartConfig}

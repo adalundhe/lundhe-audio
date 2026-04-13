@@ -4,6 +4,7 @@ import * as React from "react";
 import { type ChartConfig } from "~/components/ui/chart";
 import { GearSummaryCharts } from "./gear-summary-charts";
 import { GearSummaryGroupBreakdown } from "./gear-summary-group-breakdown";
+import { type ManufacturerRadialDatum } from "./manufacturer-radial-chart-helpers";
 import { GearSummaryStats } from "./gear-summary-stats";
 import { SectionAccordionCard } from "./section-accordion-card";
 
@@ -50,6 +51,7 @@ type SpendByGroupAreaChart = {
 export const GearSummarySection = React.memo(function GearSummarySection({
   inventorySummary,
   inventoryValueDistributionChartData,
+  inventoryManufacturerRadialChartData,
   inventoryValueChartConfig,
   spendOverTimeChartData,
   spendTimelineChartConfig,
@@ -60,6 +62,7 @@ export const GearSummarySection = React.memo(function GearSummarySection({
 }: {
   inventorySummary: InventorySummary;
   inventoryValueDistributionChartData: InventoryValuePoint[];
+  inventoryManufacturerRadialChartData: ManufacturerRadialDatum[];
   inventoryValueChartConfig: ChartConfig;
   spendOverTimeChartData: SpendPoint[];
   spendTimelineChartConfig: ChartConfig;
@@ -81,6 +84,7 @@ export const GearSummarySection = React.memo(function GearSummarySection({
       />
       <GearSummaryCharts
         inventoryValueDistributionChartData={inventoryValueDistributionChartData}
+        inventoryManufacturerRadialChartData={inventoryManufacturerRadialChartData}
         inventoryValueChartConfig={inventoryValueChartConfig}
         spendOverTimeChartData={spendOverTimeChartData}
         spendTimelineChartConfig={spendTimelineChartConfig}

@@ -9,6 +9,8 @@ import {
   type AdminDataTableColumnDef,
 } from "~/app/admin/_components/admin-data-table";
 import { Button } from "~/components/ui/button";
+import { type ChartConfig } from "~/components/ui/chart";
+import { type ManufacturerRadialDatum } from "./manufacturer-radial-chart-helpers";
 import { SectionAccordionCard } from "./section-accordion-card";
 import { WishlistGearSummarySection } from "./wishlist-gear-summary-section";
 import type {
@@ -20,7 +22,6 @@ import type {
   WishlistSummary,
   WishlistValuePoint,
 } from "./wishlist-gear-summary-types";
-import type { ChartConfig } from "~/components/ui/chart";
 
 interface WishlistGearSectionProps {
   items: WishlistGearItem[];
@@ -29,6 +30,7 @@ interface WishlistGearSectionProps {
   openNewRow: () => void;
   summary: WishlistSummary;
   valueDistributionChartData: WishlistValuePoint[];
+  manufacturerRadialChartData: ManufacturerRadialDatum[];
   valueChartConfig: ChartConfig;
   spendOverTimeChartData: WishlistSpendPoint[];
   spendTimelineChartConfig: ChartConfig;
@@ -53,6 +55,7 @@ export const WishlistGearSection = React.memo(function WishlistGearSection({
   openNewRow,
   summary,
   valueDistributionChartData,
+  manufacturerRadialChartData,
   valueChartConfig,
   spendOverTimeChartData,
   spendTimelineChartConfig,
@@ -82,6 +85,7 @@ export const WishlistGearSection = React.memo(function WishlistGearSection({
         <WishlistGearSummarySection
           summary={summary}
           valueDistributionChartData={valueDistributionChartData}
+          manufacturerRadialChartData={manufacturerRadialChartData}
           valueChartConfig={valueChartConfig}
           spendOverTimeChartData={spendOverTimeChartData}
           spendTimelineChartConfig={spendTimelineChartConfig}

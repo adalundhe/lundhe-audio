@@ -447,7 +447,7 @@ export const getStoredObjectBytes = async ({
 }: {
   bucket: string;
   key: string;
-  range: string;
+  range?: string;
 }) => {
   const client = getOrderUploadS3Client();
   const response = await client.send(

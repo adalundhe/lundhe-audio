@@ -6,6 +6,7 @@ import { Accordion } from "~/components/ui/accordion";
 import { GearEditorForm } from "./gear-editor-form";
 import { GearInventoryTable } from "./gear-inventory-section";
 import { GearInventoryDetailsPanel } from "./gear-inventory-details-panel";
+import { GearMediaSection } from "./gear-media-section";
 import { type GearItem } from "./gear-manager-types";
 import { GearPricingSection } from "./gear-pricing-section";
 import { GearSelectedTitleHistorySection } from "./gear-selected-title-history-section";
@@ -44,6 +45,9 @@ export function GearManager({
         inventoryValueDistributionChartData={
           state.inventoryValueDistributionChartData
         }
+        inventoryManufacturerRadialChartData={
+          state.inventoryManufacturerRadialChartData
+        }
         inventoryValueChartConfig={state.inventoryValueChartConfig}
         spendOverTimeChartData={state.spendOverTimeChartData}
         spendTimelineChartConfig={state.spendTimelineChartConfig}
@@ -59,11 +63,15 @@ export function GearManager({
             selectedInventoryItemId={state.selectedInventoryItemId}
             handleSelectRow={state.handleSelectRow}
             inventoryFilterTabs={state.inventoryFilterTabs}
-            renderExpandedInventoryRow={(item: GearItem) => (
+            renderExpandedInventoryRow={(item: GearItem) => {
+              const liveItem =
+                state.gear.find((gearItem) => gearItem.id === item.id) ?? item;
+
+              return (
               <GearInventoryDetailsPanel
-                item={item}
+                item={liveItem}
                 editorSection={
-                  state.isCreatingInline || state.form.id === item.id ? (
+                  state.isCreatingInline || state.form.id === liveItem.id ? (
                     <GearEditorForm
                       isEditing
                       form={state.form}
@@ -191,10 +199,21 @@ export function GearManager({
                 mergeUniqueOptions={state.mergeUniqueOptions}
                 updateStatusMutation={state.updateStatusMutation}
                 handleStatusChange={state.handleStatusChange}
+                mediaSection={
+                  state.selectedInventoryItemId === liveItem.id ? (
+                    <GearMediaSection
+                      key={liveItem.id}
+                      item={liveItem}
+                      onAssetCreated={state.handleMediaAssetCreated}
+                      onAssetDeleted={state.handleMediaAssetDeleted}
+                    />
+                  ) : null
+                }
                 serviceLogSection={
-                  state.isCreatingInline && state.selectedInventoryItemId === item.id ? null : (
+                  state.isCreatingInline &&
+                  state.selectedInventoryItemId === liveItem.id ? null : (
                     <GearServiceLogSection
-                      item={item}
+                      item={liveItem}
                       serviceLogError={state.serviceLogError}
                       isServiceLogEditorOpen={state.isServiceLogEditorOpen}
                       serviceLogForm={state.serviceLogForm}
@@ -218,7 +237,7 @@ export function GearManager({
                 handleSaveDetails={state.handleSaveDetails}
                 resetDetails={state.resetInlineEditState}
               />
-            )}
+            )}}
           />
         }
       />
@@ -230,6 +249,7 @@ export function GearManager({
         openNewRow={wishlistState.openNewRow}
         summary={wishlistState.wishlistSummary}
         valueDistributionChartData={wishlistState.wishlistValueDistributionChartData}
+        manufacturerRadialChartData={wishlistState.wishlistManufacturerRadialChartData}
         valueChartConfig={wishlistState.wishlistValueChartConfig}
         spendOverTimeChartData={wishlistState.wishlistSpendOverTimeChartData}
         spendTimelineChartConfig={wishlistState.wishlistSpendTimelineChartConfig}

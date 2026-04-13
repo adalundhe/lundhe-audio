@@ -51,6 +51,15 @@ export const equipmentItem = createTable("equipment_item", {
   quantity: integer("quantity").notNull(),
   manufacturer: text("manufacturer", { length: 255 }).notNull(),
   location: text("location", { length: 255 }).notNull().default(""),
+  serialNumber: text("serial_number", { length: 255 }).notNull().default(""),
+  acquiredFrom: text("acquired_from", { length: 255 }).notNull().default(""),
+  purchaseDate: text("purchase_date").notNull().default(""),
+  purchaseSource: text("purchase_source", { length: 255 })
+    .notNull()
+    .default(""),
+  referenceNumber: text("reference_number", { length: 255 })
+    .notNull()
+    .default(""),
   room: text("room", { length: 255 }).notNull().default(""),
   rack: text("rack", { length: 255 }).notNull().default(""),
   shelf: text("shelf", { length: 255 }).notNull().default(""),
@@ -92,6 +101,43 @@ export const equipmentServiceLog = createTable(
     ),
     serviceDateIdx: index("equipment_service_log_service_date_idx").on(
       table.serviceDate,
+    ),
+  }),
+);
+
+export const equipmentItemMediaAsset = createTable(
+  "equipment_item_media_asset",
+  {
+    id: text("id", { length: 255 })
+      .notNull()
+      .primaryKey()
+      .$defaultFn(() => crypto.randomUUID()),
+    equipmentItemId: text("equipment_item_id", { length: 255 })
+      .notNull()
+      .references(() => equipmentItem.id, { onDelete: "cascade" }),
+    assetType: text("asset_type", {
+      enum: ["photo", "document"],
+    }).notNull(),
+    fileName: text("file_name", { length: 255 }).notNull(),
+    contentType: text("content_type", { length: 255 }).notNull(),
+    byteSize: integer("byte_size").notNull(),
+    storageUri: text("storage_uri").notNull().unique(),
+    createdTimestamp: text("created_timestamp")
+      .notNull()
+      .$defaultFn(() => new Date().toISOString()),
+    updatedTimestamp: text("updated_timestamp").default(
+      sql`(current_timestamp)`,
+    ),
+  },
+  (table) => ({
+    equipmentItemIdIdx: index("equipment_item_media_asset_equipment_item_id_idx").on(
+      table.equipmentItemId,
+    ),
+    assetTypeIdx: index("equipment_item_media_asset_asset_type_idx").on(
+      table.assetType,
+    ),
+    fileNameIdx: index("equipment_item_media_asset_file_name_idx").on(
+      table.fileName,
     ),
   }),
 );
