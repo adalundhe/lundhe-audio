@@ -102,7 +102,7 @@ export function ZoomableTimeChartFrame({
   return (
     <div className={cn("mt-4 flex min-w-0 flex-col gap-3", className)}>
       <div className="flex flex-col gap-3">
-        <div className="grid gap-2 sm:grid-cols-[minmax(0,10rem)_minmax(0,10rem)_auto] sm:items-end">
+        <div className="grid min-w-0 gap-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] sm:items-end">
           <div className="flex min-w-0 flex-col gap-1">
             <span className="text-xs uppercase tracking-wider text-muted-foreground">
               From
@@ -113,7 +113,7 @@ export function ZoomableTimeChartFrame({
               min={formatDateInputValue(dataDomain?.[0])}
               max={formatDateInputValue(dataDomain?.[1])}
               onChange={(event) => setFromDate(event.target.value)}
-              className="h-8"
+              className="h-8 min-w-0 max-w-full"
             />
           </div>
           <div className="flex min-w-0 flex-col gap-1">
@@ -126,7 +126,7 @@ export function ZoomableTimeChartFrame({
               min={formatDateInputValue(dataDomain?.[0])}
               max={formatDateInputValue(dataDomain?.[1])}
               onChange={(event) => setToDate(event.target.value)}
-              className="h-8"
+              className="h-8 min-w-0 max-w-full"
             />
           </div>
           <Button
