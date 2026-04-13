@@ -104,7 +104,7 @@ export function ZoomableTimeChartFrame({
   return (
     <div className={cn("mt-4 flex min-w-0 flex-col gap-3", className)}>
       <div className="flex flex-col gap-3">
-        <div className="grid min-w-0 gap-2 sm:grid-cols-[minmax(0,10rem)_minmax(0,10rem)_auto] sm:items-end">
+        <div className="flex sm:flex-row flex-col gap-2 items-end">
           <div className={cn(
               "flex min-w-0 flex-col gap-1 sm:w-auto sm:min-w-fit box-border",
               mobileRangeControlWidthClass,
