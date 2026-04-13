@@ -95,9 +95,9 @@ export function ZoomableTimeChartFrame({
     return nextStart !== null && nextEnd !== null && nextStart > nextEnd;
   }, [fromDate, toDate]);
   const controlButtonClassName =
-    "h-8 border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black";
+    "w-[36px] h-[36px] py-2 px-2 border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black";
   const resetButtonClassName =
-    "h-8 border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black";
+    "w-[36px] h-[36px] py-2 px-2 border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black";
   const mobileRangeControlWidthClass =
     "mx-auto w-full max-w-[18rem] sm:mx-0 sm:max-w-none";
 
@@ -118,7 +118,6 @@ export function ZoomableTimeChartFrame({
               min={formatDateInputValue(dataDomain?.[0])}
               max={formatDateInputValue(dataDomain?.[1])}
               onChange={(event) => setFromDate(event.target.value)}
-              className="h-8 w-full sm:w-fit overflow-hidden"
             />
           </div>
           <div className={cn(
@@ -159,7 +158,6 @@ export function ZoomableTimeChartFrame({
         <div className="flex items-center justify-center gap-2 sm:flex-wrap sm:justify-start">
           <Button
             type="button"
-            size="sm"
             variant="outline"
             onClick={panLeft}
             disabled={!isZoomed}
@@ -170,7 +168,6 @@ export function ZoomableTimeChartFrame({
           </Button>
           <Button
             type="button"
-            size="sm"
             variant="outline"
             onClick={zoomOut}
             disabled={!canZoomOut}
@@ -181,7 +178,6 @@ export function ZoomableTimeChartFrame({
           </Button>
           <Button
             type="button"
-            size="sm"
             variant="outline"
             onClick={() => {
               resetZoom();
@@ -198,7 +194,6 @@ export function ZoomableTimeChartFrame({
           </Button>
           <Button
             type="button"
-            size="sm"
             variant="outline"
             onClick={zoomIn}
             disabled={!canZoomIn}
@@ -209,7 +204,6 @@ export function ZoomableTimeChartFrame({
           </Button>
           <Button
             type="button"
-            size="sm"
             variant="outline"
             onClick={panRight}
             disabled={!isZoomed}

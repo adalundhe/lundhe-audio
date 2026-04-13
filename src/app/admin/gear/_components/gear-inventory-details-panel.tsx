@@ -73,7 +73,7 @@ export const GearInventoryDetailsPanel = React.memo(
 
         <div className="min-w-0 space-y-6">
           <div className="space-y-4">
-            <div className="grid gap-3">
+            <div className="flex flex-col gap-3">
               <div className="flex flex-col gap-1.5">
                 <Label>Status</Label>
                 <div
