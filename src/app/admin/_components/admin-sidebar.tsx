@@ -210,19 +210,20 @@ export const AdminSidebar = () => {
     <>
       <div className="md:hidden">
         <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-          {!mobileOpen ? (
-            <div className="pb-4">
-              <Button
-                type="button"
-                aria-label="Open admin navigation"
-                aria-expanded={false}
-                onClick={() => setMobileOpen(true)}
-                className="flex h-8 w-8 items-center justify-center rounded-full border bg-background/95 p-0 shadow-lg backdrop-blur supports-[backdrop-filter]:bg-background/80"
-              >
-                <ChevronRight className="!h-[16px] !w-[16px]" />
-              </Button>
-            </div>
-          ) : null}
+          <div className="pb-4">
+            <Button
+              type="button"
+              aria-label="Open admin navigation"
+              aria-expanded={mobileOpen}
+              onClick={() => setMobileOpen(true)}
+              className={cn(
+                "flex h-8 w-8 items-center justify-center rounded-full border bg-background/95 p-0 shadow-lg backdrop-blur supports-[backdrop-filter]:bg-background/80",
+                mobileOpen && "pointer-events-none invisible",
+              )}
+            >
+              <ChevronRight className="!h-[16px] !w-[16px]" />
+            </Button>
+          </div>
           <SheetContent
             side="left"
             className="!left-0 !right-0 !top-[calc(7rem+1px)] !bottom-0 !h-auto !w-auto !max-w-none overflow-hidden rounded-none border-r-0 bg-background/95 px-3 pb-4 pt-12 shadow-2xl supports-[backdrop-filter]:bg-background/80 [&>button.absolute:first-child]:hidden"

@@ -670,7 +670,7 @@ export function OrdersTable({
         )}
 
         <div className="w-full flex flex-1 flex-col">
-          <div className="flex items-center gap-x-8 py-4">
+          <div className="flex flex-wrap items-center gap-4 py-4">
             <Input
               placeholder="Filter session names..."
               value={

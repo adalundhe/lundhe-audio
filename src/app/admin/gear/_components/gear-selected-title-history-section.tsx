@@ -11,7 +11,8 @@ import {
   ChartTooltip,
 } from "~/components/ui/chart";
 import type { ModelHistoryPoint } from "./gear-manager-types";
-import { ChartFilterDropdown, type ChartFilterOption } from "./chart-filter-dropdown";
+import { type ChartFilterOption } from "./chart-filter-panel";
+import { PriceHistoryFilters } from "./price-history-filters";
 import { ZoomableTimeChartFrame } from "./zoomable-time-chart-frame";
 
 type TitleQuery = {
@@ -125,55 +126,56 @@ export const GearSelectedTitleHistorySection = React.memo(
         </div>
         {selectedTitleQueries.length > 0 ? (
           <div className="mt-3 flex flex-col gap-3 motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-top-2 motion-safe:duration-300">
-            <div className="flex flex-wrap gap-2">
-              <ChartFilterDropdown
-                label="Sources"
-                options={availableModelHistorySourceOptions}
-                selectedKeys={resolvedVisibleModelHistorySources}
-                onChange={(nextKeys) =>
-                  setVisibleModelHistorySources(
-                    nextKeys as Array<"Listing" | "Price Guide">,
-                  )
-                }
-              />
-              <ChartFilterDropdown
-                label="Titles"
-                options={availableModelHistoryTitleOptions}
-                selectedKeys={resolvedVisibleModelHistoryTitleKeys}
-                onChange={setVisibleModelHistoryTitleKeys}
-              />
-              <ChartFilterDropdown
-                label="Models"
-                options={availableModelHistorySeriesOptions}
-                selectedKeys={resolvedVisibleModelHistoryModelKeys}
-                onChange={setVisibleModelHistoryModelKeys}
-              />
-              <ChartFilterDropdown
-                label="Make"
-                options={availableModelHistoryManufacturerOptions}
-                selectedKeys={resolvedVisibleModelHistoryManufacturerKeys}
-                onChange={setVisibleModelHistoryManufacturerKeys}
-              />
-              <ChartFilterDropdown
-                label="Year"
-                options={availableModelHistoryYearOptions}
-                selectedKeys={resolvedVisibleModelHistoryYearKeys}
-                onChange={setVisibleModelHistoryYearKeys}
-                grouping="decade"
-              />
-              <ChartFilterDropdown
-                label="Condition"
-                options={availableModelHistoryConditionOptions}
-                selectedKeys={resolvedVisibleModelHistoryConditionKeys}
-                onChange={setVisibleModelHistoryConditionKeys}
-              />
-              <ChartFilterDropdown
-                label="Category"
-                options={availableModelHistoryCategoryOptions}
-                selectedKeys={resolvedVisibleModelHistoryCategoryKeys}
-                onChange={setVisibleModelHistoryCategoryKeys}
-              />
-            </div>
+            <PriceHistoryFilters
+              facets={[
+                {
+                  label: "Sources",
+                  options: availableModelHistorySourceOptions,
+                  selectedKeys: resolvedVisibleModelHistorySources,
+                  onChange: (nextKeys) =>
+                    setVisibleModelHistorySources(
+                      nextKeys as Array<"Listing" | "Price Guide"> | null,
+                    ),
+                },
+                {
+                  label: "Titles",
+                  options: availableModelHistoryTitleOptions,
+                  selectedKeys: resolvedVisibleModelHistoryTitleKeys,
+                  onChange: setVisibleModelHistoryTitleKeys,
+                },
+                {
+                  label: "Models",
+                  options: availableModelHistorySeriesOptions,
+                  selectedKeys: resolvedVisibleModelHistoryModelKeys,
+                  onChange: setVisibleModelHistoryModelKeys,
+                },
+                {
+                  label: "Make",
+                  options: availableModelHistoryManufacturerOptions,
+                  selectedKeys: resolvedVisibleModelHistoryManufacturerKeys,
+                  onChange: setVisibleModelHistoryManufacturerKeys,
+                },
+                {
+                  label: "Year",
+                  options: availableModelHistoryYearOptions,
+                  selectedKeys: resolvedVisibleModelHistoryYearKeys,
+                  onChange: setVisibleModelHistoryYearKeys,
+                  grouping: "decade",
+                },
+                {
+                  label: "Condition",
+                  options: availableModelHistoryConditionOptions,
+                  selectedKeys: resolvedVisibleModelHistoryConditionKeys,
+                  onChange: setVisibleModelHistoryConditionKeys,
+                },
+                {
+                  label: "Category",
+                  options: availableModelHistoryCategoryOptions,
+                  selectedKeys: resolvedVisibleModelHistoryCategoryKeys,
+                  onChange: setVisibleModelHistoryCategoryKeys,
+                },
+              ]}
+            />
             <div className="text-xs text-muted-foreground">
               Filter the chart by source, returned title, model, make, year,
               condition, and category.
