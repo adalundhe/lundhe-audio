@@ -98,11 +98,16 @@ export default function generateManufacturerCircles({
     return [];
   }
 
+  const isNarrowLayout = width < 640;
   const minDimension = Math.min(width, height);
   const maxValue = Math.max(...data.map((entry) => entry.value), 1);
-  const minRadius = Math.max(8, Math.min(minDimension * 0.028, 12));
-  const maxRadius = Math.min(minDimension * 0.19, 78);
-  const padding = 28;
+  const minRadius = isNarrowLayout
+    ? Math.max(5, Math.min(minDimension * 0.018, 8))
+    : Math.max(8, Math.min(minDimension * 0.028, 12));
+  const maxRadius = isNarrowLayout
+    ? Math.min(minDimension * 0.155, 54)
+    : Math.min(minDimension * 0.19, 78);
+  const padding = isNarrowLayout ? 18 : 28;
   const placementOrder = [...data].sort(
     (left, right) =>
       hashSeed(`${left.label}:placement`) - hashSeed(`${right.label}:placement`) ||
@@ -113,7 +118,8 @@ export default function generateManufacturerCircles({
     const radius = Number(
       (
         minRadius +
-        Math.pow(normalizedValue, 1.35) * (maxRadius - minRadius)
+        Math.pow(normalizedValue, isNarrowLayout ? 1.42 : 1.35) *
+          (maxRadius - minRadius)
       ).toFixed(2),
     );
     const anchorX = clamp(
@@ -161,8 +167,8 @@ export default function generateManufacturerCircles({
   });
 
   const relaxed = [...circles];
-  const overlapFactor = 0.84;
-  const anchorPull = 0.045;
+  const overlapFactor = isNarrowLayout ? 0.82 : 0.84;
+  const anchorPull = isNarrowLayout ? 0.032 : 0.045;
 
   for (let iteration = 0; iteration < 120; iteration += 1) {
     for (let index = 0; index < relaxed.length; index += 1) {
