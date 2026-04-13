@@ -98,12 +98,14 @@ export function ZoomableTimeChartFrame({
     "h-8 border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black";
   const resetButtonClassName =
     "h-8 border hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black";
+  const mobileRangeControlWidthClass =
+    "mx-auto w-full max-w-[18rem] sm:mx-0 sm:max-w-none";
 
   return (
     <div className={cn("mt-4 flex min-w-0 flex-col gap-3", className)}>
       <div className="flex flex-col gap-3">
         <div className="grid min-w-0 gap-2 sm:grid-cols-[minmax(0,10rem)_minmax(0,10rem)_auto] sm:items-end">
-          <div className="flex w-full min-w-0 flex-col gap-1">
+          <div className={cn("flex min-w-0 flex-col gap-1", mobileRangeControlWidthClass)}>
             <span className="text-xs uppercase tracking-wider text-muted-foreground">
               From
             </span>
@@ -113,10 +115,10 @@ export function ZoomableTimeChartFrame({
               min={formatDateInputValue(dataDomain?.[0])}
               max={formatDateInputValue(dataDomain?.[1])}
               onChange={(event) => setFromDate(event.target.value)}
-              className="h-8 w-full"
+              className="h-8 w-full sm:w-fit overflow-hidden"
             />
           </div>
-          <div className="flex w-full min-w-0 flex-col gap-1">
+          <div className={cn("flex min-w-0 flex-col gap-1", mobileRangeControlWidthClass)}>
             <span className="text-xs uppercase tracking-wider text-muted-foreground">
               To
             </span>
@@ -126,10 +128,15 @@ export function ZoomableTimeChartFrame({
               min={formatDateInputValue(dataDomain?.[0])}
               max={formatDateInputValue(dataDomain?.[1])}
               onChange={(event) => setToDate(event.target.value)}
-              className="h-8 w-full"
+              className="h-8 w-full sm:w-fit overflow-hidden"
             />
           </div>
-          <div className="flex w-full min-w-0 flex-col gap-1 sm:w-auto sm:min-w-fit">
+          <div
+            className={cn(
+              "flex min-w-0 flex-col gap-1 sm:w-auto sm:min-w-fit",
+              mobileRangeControlWidthClass,
+            )}
+          >
             <span className="sr-only">Apply range</span>
             <Button
               type="button"
