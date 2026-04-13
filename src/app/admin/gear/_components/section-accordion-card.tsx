@@ -20,10 +20,10 @@ export function SectionAccordionCard({
 }>) {
   return (
     <AccordionItem value={value} className="border-none">
-      <Card className="min-w-0">
+      <div className="min-w-0 border-none flex flex-col gap-2">
         <AccordionTrigger
           chevronSide="none"
-          className="w-full justify-between px-6 py-6 hover:no-underline"
+          className="w-full justify-between py-6 px-4 hover:no-underline border rounded-sm"
         >
           <div className="flex min-w-0 flex-col items-start gap-1 text-left">
             <div className="text-lg font-semibold leading-none tracking-tight">
@@ -37,7 +37,7 @@ export function SectionAccordionCard({
             {children}
           </CardContent>
         </AccordionContent>
-      </Card>
+      </div>
     </AccordionItem>
   );
 }

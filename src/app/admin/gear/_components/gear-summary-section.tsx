@@ -76,7 +76,7 @@ export const GearSummarySection = React.memo(function GearSummarySection({
       value="summary"
       title="Inventory Summary"
       description="Live totals across the current studio gear inventory."
-      contentClassName="flex min-w-0 flex-col gap-4"
+      contentClassName="flex min-w-0 flex-col gap-4 px-0"
     >
       <GearSummaryStats
         inventorySummary={inventorySummary}

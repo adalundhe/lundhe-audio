@@ -38,7 +38,7 @@ export function GearManager({
     <Accordion
       type="multiple"
       defaultValue={["summary"]}
-      className="flex min-w-0 flex-col gap-6"
+      className="flex min-w-0 flex-col gap-6 px-0"
     >
       <GearSummarySection
         inventorySummary={state.inventorySummary}

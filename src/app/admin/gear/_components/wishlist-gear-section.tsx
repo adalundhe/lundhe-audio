@@ -73,9 +73,9 @@ export const WishlistGearSection = React.memo(function WishlistGearSection({
       value="wishlist"
       title="Wishlist / Acquisition Pipeline"
       description={`${items.length} item${items.length === 1 ? "" : "s"}. Track gear you want to buy, refine target pricing, and promote ready items into the studio inventory.`}
-      contentClassName="min-w-0"
+      contentClassName="min-w-0 px-0"
     >
-      <div className="flex min-w-0 flex-col gap-6">
+      <div className="flex min-w-0 flex-col gap-6 px-0">
         {loadError ? (
           <div className="rounded-md border border-destructive/50 bg-destructive/10 px-3 py-2 text-sm text-destructive">
             {loadError}
