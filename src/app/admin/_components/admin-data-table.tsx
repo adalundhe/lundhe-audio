@@ -391,7 +391,7 @@ export function AdminDataTable<TData>({
 
   return (
     <div className="flex min-w-0 flex-col">
-      <div className="flex flex-wrap items-center gap-3 py-4 sm:gap-x-8">
+      <div className="flex flex-wrap items-center gap-4 py-4">
         <Input
           placeholder={searchPlaceholder}
           value={(table.getColumn(searchColumnId)?.getFilterValue() as string) ?? ""}
@@ -609,7 +609,7 @@ export function AdminDataTable<TData>({
 
         <div className="flex flex-col items-center gap-3 py-4 sm:flex-row sm:flex-wrap sm:justify-end">
           <div className="flex md:flex-row flex-col items-center md:justify-end py-2 w-full md:gap-0 gap-2">
-            <div className="md:w-1/3 w-full flex flex-row md:justify-start justify-center">
+            <div className="md:w-1/3 w-full flex flex-row justify-center">
               {table.getState().pagination.pageIndex + 1} of{" "} {table.getPageCount()}
               </div>
               <div className="md:w-1/3  flex flex-row justify-center text-sm text-muted-foreground text-center">
