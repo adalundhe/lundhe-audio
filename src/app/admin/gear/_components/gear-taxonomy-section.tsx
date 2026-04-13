@@ -18,7 +18,7 @@ export const GearTaxonomySection = React.memo(function GearTaxonomySection({
       value="taxonomy"
       title="Manage Types, Groups, Manufacturers & Locations"
       description="Add new values, rename existing ones across the current gear inventory, or delete unused custom values."
-      contentClassName="min-w-0"
+      contentClassName="min-w-0 px-0"
     >
       <Accordion
         type="multiple"

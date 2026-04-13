@@ -289,7 +289,7 @@ export const GearTable = ({
 
   return (
     <div className="w-full h-[600px]">
-      <div className="flex items-center py-4 gap-x-8">
+      <div className="flex md:flex-row flex-col py-4 gap-x-8">
         <Input
           placeholder="Filter gear..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
@@ -298,29 +298,30 @@ export const GearTable = ({
           }
           className="max-w-md justify-self-start"
         />
-        <DropdownMenu modal={false}>
-          <DropdownMenuTrigger asChild className="p-0 ml-auto">
-            <Button className="w-fit flex">
-              <div className="w-fit h-full flex gap-4 items-center justify-center">
-                Filter
-                <div className="w-[1.5em] h-[1.5em]">
-                  <ChevronDown />
+        <div className="flex flex-row space-x-2 w-full md:justify-end">
+          <DropdownMenu modal={false}>
+            <DropdownMenuTrigger asChild className="p-0">
+              <Button className="w-fit flex">
+                <div className="w-fit h-full flex gap-4 items-center justify-center">
+                  Filter
+                  <div className="w-[1.5em] h-[1.5em]">
+                    <ChevronDown />
+                  </div>
                 </div>
-              </div>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className={`${courierPrime.className} py-0 px-0 h-[330px] w-[272px]`}>
-          <Tabs 
-            className="w-full"
-            value={activeTab}
-            onValueChange={(value) => setActiveTab(value as 'type' | 'brand')}
-          >
-            <TabsList className="w-full rounded-none p-0 h-full">
-              <TabsTrigger value="type" className="rounded-none w-1/2">Type</TabsTrigger>
-              <TabsTrigger value="brand" className="rounded-none w-1/2">Brand</TabsTrigger>
-            </TabsList>
-            <Separator className="w-full"/>
-            <TabsContent value="type" className="mt-0 w-full h-[300px]">
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className={`${courierPrime.className} py-0 px-0 h-[330px] w-[272px]`}>
+            <Tabs 
+              className="w-full"
+              value={activeTab}
+              onValueChange={(value) => setActiveTab(value as 'type' | 'brand')}
+            >
+              <TabsList className="w-full rounded-none p-0 h-full">
+                <TabsTrigger value="type" className="rounded-none w-1/2">Type</TabsTrigger>
+                <TabsTrigger value="brand" className="rounded-none w-1/2">Brand</TabsTrigger>
+              </TabsList>
+              <Separator className="w-full"/>
+              <TabsContent value="type" className="mt-0 w-full h-[300px]">
                 <ScrollArea className="h-full w-full px-4">
                   <Button
                     className="p-0 h-[2.5em] w-fit flex md:hover:underline hover:no-underline"
@@ -502,37 +503,38 @@ export const GearTable = ({
                 </Tabs>
               </DropdownMenuContent>
             </DropdownMenu>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button className="w-fit flex p-0 border-none outline-none">
-              <div className="w-fit h-full flex gap-4 items-center justify-end">
-                Columns
-                <div className="w-[1.5em] h-[1.5em]">
-                  <ChevronDown />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button className="w-fit flex p-0 border-none outline-none">
+                <div className="w-fit h-full flex gap-4 items-center justify-end">
+                  Columns
+                  <div className="w-[1.5em] h-[1.5em]">
+                    <ChevronDown />
+                  </div>
                 </div>
-              </div>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className={courierPrime.className}>
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide() && !invisibleColumns.current.includes(column.id))
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                )
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className={courierPrime.className}>
+              {table
+                .getAllColumns()
+                .filter((column) => column.getCanHide() && !invisibleColumns.current.includes(column.id))
+                .map((column) => {
+                  return (
+                    <DropdownMenuCheckboxItem
+                      key={column.id}
+                      className="capitalize"
+                      checked={column.getIsVisible()}
+                      onCheckedChange={(value) =>
+                        column.toggleVisibility(!!value)
+                      }
+                    >
+                      {column.id}
+                    </DropdownMenuCheckboxItem>
+                  )
+                })}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
       <div className="w-full h-[420px]">
         <div className="rounded-md border w-full">
@@ -615,14 +617,14 @@ export const GearTable = ({
           </Table>
         </div>
       </div>
-      <div className="flex items-center justify-end py-4">
-        <div className="w-1/3">
-        {table.getState().pagination.pageIndex + 1} of{" "} {table.getPageCount()}
-        </div>
-        <div className="w-1/3 text-sm text-muted-foreground text-center">
-          {table.getFilteredRowModel().rows.length} rows
-        </div>
-        <div className="space-x-2 w-1/3 flex items-center justify-end">
+      <div className="flex md:flex-row flex-col items-center md:justify-end py-2 w-full md:gap-0 gap-2">
+        <div className="md:w-1/3 w-full flex flex-row md:justify-start justify-center">
+          {table.getState().pagination.pageIndex + 1} of{" "} {table.getPageCount()}
+          </div>
+          <div className="md:w-1/3  flex flex-row justify-center text-sm text-muted-foreground text-center">
+            {table.getFilteredRowModel().rows.length} rows
+          </div>
+        <div className="space-x-2 md:w-1/3  flex flex-row md:justify-end justify-center items-center">
           <Button
             variant="outline"
             size="sm"

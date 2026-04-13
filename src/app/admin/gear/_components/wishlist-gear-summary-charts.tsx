@@ -37,7 +37,7 @@ export const WishlistGearSummaryCharts = React.memo(
   }: WishlistGearSummaryChartsProps) {
     return (
       <>
-        <div className="grid gap-4 xl:grid-cols-2">
+        <div className="flex gap-4 md:flex-row flex-col">
           <ValueDistributionRadarCard
             title="Target Value Distribution"
             description="Group-level target value based on target price multiplied by desired quantity."

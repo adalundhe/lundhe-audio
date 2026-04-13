@@ -608,16 +608,15 @@ export function AdminDataTable<TData>({
       </div>
 
         <div className="flex flex-col items-center gap-3 py-4 sm:flex-row sm:flex-wrap sm:justify-end">
-          <div className="flex w-full items-center justify-end py-4">
-            <div className="w-1/3 whitespace-nowrap">
-              {currentPage} of {pageCount}
-            </div>
-            <div className="w-1/3 whitespace-nowrap text-center text-sm text-muted-foreground">
-              {table.getFilteredRowModel().rows.length} rows
-            </div>
-            <div className="flex w-1/3 items-center justify-end space-x-2">
+          <div className="flex md:flex-row flex-col items-center md:justify-end py-2 w-full md:gap-0 gap-2">
+            <div className="md:w-1/3 w-full flex flex-row md:justify-start justify-center">
+              {table.getState().pagination.pageIndex + 1} of{" "} {table.getPageCount()}
+              </div>
+              <div className="md:w-1/3  flex flex-row justify-center text-sm text-muted-foreground text-center">
+                {table.getFilteredRowModel().rows.length} rows
+              </div>
+            <div className="space-x-2 md:w-1/3  flex flex-row md:justify-end justify-center items-center">
               <Button
-                type="button"
                 variant="outline"
                 size="sm"
                 className="hover:underline"
@@ -627,7 +626,6 @@ export function AdminDataTable<TData>({
                 Previous
               </Button>
               <Button
-                type="button"
                 variant="outline"
                 size="sm"
                 className="hover:underline"

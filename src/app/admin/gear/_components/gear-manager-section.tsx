@@ -50,7 +50,7 @@ export async function GearManagerSection() {
     );
   } catch (error) {
     return (
-      <Card className="min-w-0 border-destructive/40">
+      <div className="min-w-0 border-destructive/40">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-destructive">
             <AlertTriangle className="!h-[16px] !w-[16px]" />
@@ -66,7 +66,7 @@ export async function GearManagerSection() {
             {getErrorMessage(error)}
           </div>
         </CardContent>
-      </Card>
+      </div>
     );
   }
 }

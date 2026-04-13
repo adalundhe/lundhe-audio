@@ -19,7 +19,7 @@ export default function AdminGearError({
   reset: () => void;
 }) {
   return (
-    <div className="mx-auto flex w-full min-w-0 max-w-6xl flex-col gap-6 px-4 sm:px-6">
+    <div className="mx-auto flex w-full min-w-0 max-w-6xl flex-col">
       <div className="flex flex-col items-center gap-2 text-center sm:items-start sm:text-left">
         <h1 className="text-2xl font-semibold">Manage Gear</h1>
         <p className="max-w-2xl text-sm text-muted-foreground">
