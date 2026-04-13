@@ -15,6 +15,7 @@ import {
   type GearItem,
   type GearStatus,
 } from "./gear-manager-types";
+import { GearOwnershipSection } from "./gear-ownership-section";
 import { GearServiceLogSection } from "./gear-service-log-section";
 import { ValueAccordionSelect } from "./value-accordion-select";
 
@@ -31,6 +32,7 @@ interface GearInventoryDetailsPanelProps {
     isPending: boolean;
   };
   handleStatusChange: (status: GearStatus) => void;
+  mediaSection?: React.ReactNode;
   serviceLogSection: React.ReactNode;
   isDetailsDirty: boolean;
   isEditorDirty: boolean;
@@ -52,6 +54,7 @@ export const GearInventoryDetailsPanel = React.memo(
     mergeUniqueOptions,
     updateStatusMutation,
     handleStatusChange,
+    mediaSection,
     serviceLogSection,
     isDetailsDirty,
     isEditorDirty,
@@ -181,14 +184,29 @@ export const GearInventoryDetailsPanel = React.memo(
 
           {serviceLogSection}
 
+          {mediaSection ? (
+            <>
+              <Separator />
+              {mediaSection}
+            </>
+          ) : null}
+
+          <Separator />
+
+          <GearOwnershipSection
+            itemId={item.id}
+            detailsForm={detailsForm}
+            setDetailsForm={setDetailsForm}
+          />
+
           <Separator />
 
           <div className="space-y-4">
             <div className="flex flex-col gap-1">
               <div className="text-sm font-medium">Notes</div>
               <div className="text-xs text-muted-foreground">
-                Capture setup quirks, serials, patching notes, or anything else
-                worth keeping with the item.
+                Capture setup quirks, patching notes, or anything else worth
+                keeping with the item.
               </div>
             </div>
             <div className="flex flex-col gap-1.5">

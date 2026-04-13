@@ -71,6 +71,7 @@ import {
   type GearDetailsFormState,
   type GearFormState,
   type GearItem,
+  type GearMediaAsset,
   type GearServiceLog,
   type GearStatus,
   type ModelHistoryPoint,
@@ -78,6 +79,7 @@ import {
   type ServiceLogFormState,
   gearStatusMetadata,
 } from "./gear-manager-types";
+import { buildManufacturerRadialData } from "./manufacturer-radial-chart-helpers";
 import { GroupedValueAccordionSelect } from "./grouped-value-accordion-select";
 import { ValueAccordionSelect } from "./value-accordion-select";
 
@@ -103,6 +105,11 @@ const emptyForm: GearFormState = {
 const emptyDetailsForm: GearDetailsFormState = {
   status: "active",
   location: "",
+  serialNumber: "",
+  acquiredFrom: "",
+  purchaseDate: "",
+  purchaseSource: "",
+  referenceNumber: "",
   notes: "",
 };
 const emptyServiceLogForm: ServiceLogFormState = {
@@ -146,6 +153,11 @@ const normalizeGearItem = (gear: GearItem): GearItem => ({
       .map((value) => normalizeText(value))
       .filter(Boolean)
       .join(" / "),
+  serialNumber: normalizeText(gear.serialNumber),
+  acquiredFrom: normalizeText(gear.acquiredFrom),
+  purchaseDate: normalizeText(gear.purchaseDate),
+  purchaseSource: normalizeText(gear.purchaseSource),
+  referenceNumber: normalizeText(gear.referenceNumber),
   room: [
     gear.room,
     gear.rack,
@@ -176,6 +188,15 @@ const normalizeGearItem = (gear: GearItem): GearItem => ({
       notes: normalizeText(log.notes),
     }))
     .sort((left, right) => right.serviceDate.localeCompare(left.serviceDate)),
+  mediaAssets: [...gear.mediaAssets]
+    .map((asset) => ({
+      ...asset,
+      fileName: normalizeText(asset.fileName),
+      contentType: normalizeText(asset.contentType),
+      storageUri: normalizeText(asset.storageUri),
+      byteSize: normalizeQuantity(asset.byteSize),
+    }))
+    .sort((left, right) => left.fileName.localeCompare(right.fileName)),
 });
 
 const formFromGear = (gear: GearItem): GearFormState => ({
@@ -192,6 +213,11 @@ const formFromGear = (gear: GearItem): GearFormState => ({
 const detailsFormFromGear = (gear: GearItem): GearDetailsFormState => ({
   status: gear.status,
   location: gear.location,
+  serialNumber: gear.serialNumber,
+  acquiredFrom: gear.acquiredFrom,
+  purchaseDate: gear.purchaseDate,
+  purchaseSource: gear.purchaseSource,
+  referenceNumber: gear.referenceNumber,
   notes: gear.notes,
 });
 
@@ -212,6 +238,11 @@ const draftGearFromState = ({
   manufacturer: form.manufacturer.trim(),
   status: details.status,
   location: details.location.trim(),
+  serialNumber: details.serialNumber.trim(),
+  acquiredFrom: details.acquiredFrom.trim(),
+  purchaseDate: details.purchaseDate.trim(),
+  purchaseSource: details.purchaseSource.trim(),
+  referenceNumber: details.referenceNumber.trim(),
   room: "",
   rack: "",
   shelf: "",
@@ -221,6 +252,7 @@ const draftGearFromState = ({
   created_timestamp: "",
   updated_timestamp: null,
   serviceLogs: [],
+  mediaAssets: [],
 });
 
 const parseNumber = (value: string): number | null => {
@@ -828,6 +860,11 @@ export function useGearManager({ initialGear }: { initialGear: GearItem[] }) {
       return (
         emptyDetailsForm.status !== detailsForm.status ||
         emptyDetailsForm.location !== detailsForm.location ||
+        emptyDetailsForm.serialNumber !== detailsForm.serialNumber ||
+        emptyDetailsForm.acquiredFrom !== detailsForm.acquiredFrom ||
+        emptyDetailsForm.purchaseDate !== detailsForm.purchaseDate ||
+        emptyDetailsForm.purchaseSource !== detailsForm.purchaseSource ||
+        emptyDetailsForm.referenceNumber !== detailsForm.referenceNumber ||
         emptyDetailsForm.notes !== detailsForm.notes
       );
     }
@@ -840,6 +877,11 @@ export function useGearManager({ initialGear }: { initialGear: GearItem[] }) {
     return (
       currentDetails.status !== detailsForm.status ||
       currentDetails.location !== detailsForm.location ||
+      currentDetails.serialNumber !== detailsForm.serialNumber ||
+      currentDetails.acquiredFrom !== detailsForm.acquiredFrom ||
+      currentDetails.purchaseDate !== detailsForm.purchaseDate ||
+      currentDetails.purchaseSource !== detailsForm.purchaseSource ||
+      currentDetails.referenceNumber !== detailsForm.referenceNumber ||
       currentDetails.notes !== detailsForm.notes
     );
   }, [detailsForm, isCreatingInline, selectedInventoryItem]);
@@ -1068,6 +1110,18 @@ export function useGearManager({ initialGear }: { initialGear: GearItem[] }) {
       }))
       .sort((left, right) => right.inventoryValue - left.inventoryValue);
   }, [inventorySummary.groups]);
+  const inventoryManufacturerRadialChartData = React.useMemo(
+    () =>
+      buildManufacturerRadialData({
+        items: gear,
+        getManufacturer: (item) => item.manufacturer,
+        getValue: (item) =>
+          normalizeCurrency(item.price) * normalizeQuantity(item.quantity),
+        getQuantity: (item) => normalizeQuantity(item.quantity),
+        normalizeManufacturer: normalizeOptionValue,
+      }),
+    [gear],
+  );
   const spendOverTimeChartData = React.useMemo(
     () =>
       gear
@@ -1669,6 +1723,38 @@ export function useGearManager({ initialGear }: { initialGear: GearItem[] }) {
     onError: (err) => setError(err.message),
     onSettled: () => setPendingDeleteId(null),
   });
+
+  const handleMediaAssetCreated = React.useCallback(
+    (itemId: string, asset: GearMediaAsset) => {
+      setGear((current) =>
+        current.map((item) =>
+          item.id === itemId
+            ? normalizeGearItem({
+                ...item,
+                mediaAssets: [...item.mediaAssets, asset],
+              })
+            : item,
+        ),
+      );
+    },
+    [],
+  );
+
+  const handleMediaAssetDeleted = React.useCallback(
+    (itemId: string, assetId: string) => {
+      setGear((current) =>
+        current.map((item) =>
+          item.id === itemId
+            ? {
+                ...item,
+                mediaAssets: item.mediaAssets.filter((asset) => asset.id !== assetId),
+              }
+            : item,
+        ),
+      );
+    },
+    [],
+  );
 
   const updateDetailsMutation = api.adminGear.updateDetails.useMutation({
     onMutate: () => setDetailsError(null),
@@ -2314,6 +2400,11 @@ export function useGearManager({ initialGear }: { initialGear: GearItem[] }) {
       id: targetId,
       status: detailsForm.status,
       location: detailsForm.location,
+      serialNumber: detailsForm.serialNumber,
+      acquiredFrom: detailsForm.acquiredFrom,
+      purchaseDate: detailsForm.purchaseDate,
+      purchaseSource: detailsForm.purchaseSource,
+      referenceNumber: detailsForm.referenceNumber,
       notes: detailsForm.notes,
     });
   };
@@ -2752,6 +2843,10 @@ export function useGearManager({ initialGear }: { initialGear: GearItem[] }) {
             row.description,
             row.manufacturer,
             row.location,
+            row.serialNumber,
+            row.acquiredFrom,
+            row.purchaseSource,
+            row.referenceNumber,
             row.type,
             row.group,
             row.notes,
@@ -3455,6 +3550,7 @@ export function useGearManager({ initialGear }: { initialGear: GearItem[] }) {
   return {
     inventorySummary,
     inventoryValueDistributionChartData,
+    inventoryManufacturerRadialChartData,
     inventoryValueChartConfig,
     spendOverTimeChartData,
     spendTimelineChartConfig,
@@ -3528,6 +3624,8 @@ export function useGearManager({ initialGear }: { initialGear: GearItem[] }) {
     detailsError,
     detailsForm,
     setDetailsForm,
+    handleMediaAssetCreated,
+    handleMediaAssetDeleted,
     availableLocations,
     setCustomLocations,
     updateStatusMutation,

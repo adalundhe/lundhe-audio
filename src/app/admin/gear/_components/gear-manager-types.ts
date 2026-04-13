@@ -4,10 +4,13 @@ import type { RouterOutputs } from "~/trpc/react";
 
 export type GearItem = RouterOutputs["adminGear"]["list"][number];
 export type GearServiceLog = GearItem["serviceLogs"][number];
+export type GearMediaAsset = GearItem["mediaAssets"][number];
 export type PriceGuideMatch = RouterOutputs["adminGear"]["searchPriceGuide"][number];
 export type ModelHistoryPoint =
   RouterOutputs["adminGear"]["searchModelHistory"]["matches"][number];
 export type GearStatus = GearItem["status"];
+export type GearMediaUploadInstruction =
+  RouterOutputs["adminGear"]["prepareMediaUpload"];
 
 export interface GearFormState {
   id: string | null;
@@ -23,6 +26,11 @@ export interface GearFormState {
 export interface GearDetailsFormState {
   status: GearStatus;
   location: string;
+  serialNumber: string;
+  acquiredFrom: string;
+  purchaseDate: string;
+  purchaseSource: string;
+  referenceNumber: string;
   notes: string;
 }
 
@@ -71,4 +79,3 @@ export const gearStatusOrder: GearStatus[] = [
   "inactive",
   "out-of-order",
 ];
-

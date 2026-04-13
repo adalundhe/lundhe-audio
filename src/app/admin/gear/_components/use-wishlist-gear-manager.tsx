@@ -61,6 +61,7 @@ import {
   wishlistDetailsFormFromItem,
   wishlistFormFromItem,
 } from "./wishlist-gear-helpers";
+import { buildManufacturerRadialData } from "./manufacturer-radial-chart-helpers";
 import {
   type WishlistGearDetailsFormState,
   type WishlistGearFormState,
@@ -449,6 +450,18 @@ export function useWishlistGearManager({
         }))
         .sort((left, right) => right.targetValue - left.targetValue),
     [wishlistSummary.groups],
+  );
+  const wishlistManufacturerRadialChartData = React.useMemo(
+    () =>
+      buildManufacturerRadialData({
+        items,
+        getManufacturer: (item) => item.manufacturer,
+        getValue: (item) =>
+          normalizeCurrency(item.targetPrice) * normalizeQuantity(item.quantity),
+        getQuantity: (item) => normalizeQuantity(item.quantity),
+        normalizeManufacturer: normalizeOptionValue,
+      }),
+    [items],
   );
   const wishlistSpendOverTimeChartData = React.useMemo<WishlistSpendPoint[]>(
     () =>
@@ -2229,6 +2242,7 @@ export function useWishlistGearManager({
   return {
     wishlistSummary,
     wishlistValueDistributionChartData,
+    wishlistManufacturerRadialChartData,
     wishlistValueChartConfig,
     wishlistSpendOverTimeChartData,
     wishlistSpendTimelineChartConfig,

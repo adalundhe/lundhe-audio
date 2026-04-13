@@ -5,10 +5,22 @@ import { z } from "zod";
 import { env } from "~/env.js";
 import { adminProcedure, createTRPCRouter } from "~/server/api/trpc";
 import {
+  gearMediaBucketName,
+  inferGearMediaAssetType,
+  prepareGearMediaMultipartUpload,
+} from "~/server/gear-media-storage";
+import {
   equipmentItem,
+  equipmentItemMediaAsset,
   equipmentServiceLog,
   wishlistGearItem,
 } from "~/server/db/schema";
+import {
+  abortMultipartUpload,
+  completeMultipartUpload,
+  deleteStoredObjectByUri,
+  getStoredObjectUri,
+} from "~/server/storage/s3";
 
 const gearStatusSchema = z.enum(["active", "inactive", "out-of-order"]);
 const wishlistStatusSchema = z.enum([
@@ -16,6 +28,7 @@ const wishlistStatusSchema = z.enum([
   "watching",
   "ready-to-buy",
 ]);
+const gearMediaAssetTypeSchema = z.enum(["photo", "document"]);
 type GearStatus = z.infer<typeof gearStatusSchema>;
 type WishlistStatus = z.infer<typeof wishlistStatusSchema>;
 
@@ -44,13 +57,18 @@ const normalizeWishlistStatus = (value: unknown): WishlistStatus => {
   return parsed.success ? parsed.data : "watching";
 };
 
+const normalizeGearMediaAssetType = (value: unknown) => {
+  const parsed = gearMediaAssetTypeSchema.safeParse(value);
+  return parsed.success ? parsed.data : "document";
+};
+
 const isMissingTableError = (error: unknown, tableName: string) =>
   error instanceof Error &&
   error.message.toLocaleLowerCase().includes(`no such table: ${tableName}`);
 
 const isMissingEquipmentDetailSchemaError = (error: unknown) =>
   error instanceof Error &&
-  /(no such table: equipment_service_log|no such column: .*status|no such column: .*location|no such column: .*room|no such column: .*rack|no such column: .*shelf|no such column: .*slot|no such column: .*storage_case|no such column: .*notes)/i.test(
+  /(no such table: equipment_service_log|no such table: equipment_item_media_asset|no such column: .*status|no such column: .*location|no such column: .*serial_number|no such column: .*acquired_from|no such column: .*purchase_date|no such column: .*purchase_source|no such column: .*reference_number|no such column: .*room|no such column: .*rack|no such column: .*shelf|no such column: .*slot|no such column: .*storage_case|no such column: .*notes)/i.test(
     error.message,
   );
 
@@ -59,7 +77,7 @@ const rethrowEquipmentDetailSchemaError = (error: unknown): never => {
     throw new TRPCError({
       code: "BAD_REQUEST",
       message:
-        "The gear detail schema has not been added to the database yet. Run `pnpm run db:add:equipment-details`.",
+        "The gear detail/media schema has not been added to the database yet. Run `pnpm run db:add:gear-media`.",
     });
   }
 
@@ -84,12 +102,44 @@ const rethrowWishlistSchemaError = (error: unknown): never => {
   throw error;
 };
 
+const normalizeGearMediaAssetRecord = <
+  T extends {
+    id: unknown;
+    equipmentItemId?: unknown;
+    assetType: unknown;
+    fileName: unknown;
+    contentType: unknown;
+    byteSize: unknown;
+    storageUri: unknown;
+    createdTimestamp?: unknown;
+    updatedTimestamp?: unknown;
+  },
+>(
+  record: T,
+) => ({
+  ...record,
+  id: normalizeText(record.id),
+  equipmentItemId: normalizeText(record.equipmentItemId),
+  assetType: normalizeGearMediaAssetType(record.assetType),
+  fileName: normalizeText(record.fileName),
+  contentType: normalizeText(record.contentType),
+  byteSize: normalizeQuantity(record.byteSize),
+  storageUri: normalizeText(record.storageUri),
+  createdTimestamp: normalizeText(record.createdTimestamp),
+  updatedTimestamp: normalizeText(record.updatedTimestamp),
+});
+
 const normalizeGearRecord = <
   T extends {
     price: unknown;
     quantity: unknown;
     status?: unknown;
     location?: unknown;
+    serialNumber?: unknown;
+    acquiredFrom?: unknown;
+    purchaseDate?: unknown;
+    purchaseSource?: unknown;
+    referenceNumber?: unknown;
     room?: unknown;
     rack?: unknown;
     shelf?: unknown;
@@ -97,6 +147,7 @@ const normalizeGearRecord = <
     storageCase?: unknown;
     notes?: unknown;
     serviceLogs?: unknown;
+    mediaAssets?: unknown;
   },
 >(
   record: T,
@@ -105,6 +156,11 @@ const normalizeGearRecord = <
   quantity: number;
   status: GearStatus;
   location: string;
+  serialNumber: string;
+  acquiredFrom: string;
+  purchaseDate: string;
+  purchaseSource: string;
+  referenceNumber: string;
   room: string;
   rack: string;
   shelf: string;
@@ -112,12 +168,18 @@ const normalizeGearRecord = <
   storageCase: string;
   notes: string;
   serviceLogs: ReturnType<typeof normalizeServiceLogRecord>[];
+  mediaAssets: ReturnType<typeof normalizeGearMediaAssetRecord>[];
 } => ({
   ...record,
   price: normalizeCurrency(record.price),
   quantity: normalizeQuantity(record.quantity),
   status: normalizeGearStatus(record.status),
   location: normalizeText(record.location),
+  serialNumber: normalizeText(record.serialNumber),
+  acquiredFrom: normalizeText(record.acquiredFrom),
+  purchaseDate: normalizeText(record.purchaseDate),
+  purchaseSource: normalizeText(record.purchaseSource),
+  referenceNumber: normalizeText(record.referenceNumber),
   room: normalizeText(record.room),
   rack: normalizeText(record.rack),
   shelf: normalizeText(record.shelf),
@@ -126,6 +188,9 @@ const normalizeGearRecord = <
   notes: normalizeText(record.notes),
   serviceLogs: Array.isArray(record.serviceLogs)
     ? record.serviceLogs.map(normalizeServiceLogRecord)
+    : [],
+  mediaAssets: Array.isArray(record.mediaAssets)
+    ? record.mediaAssets.map(normalizeGearMediaAssetRecord)
     : [],
 });
 
@@ -406,6 +471,11 @@ const gearDetailsInputSchema = z.object({
   id: z.string().trim().min(1, "Gear item id is required"),
   status: gearStatusSchema.default("active"),
   location: z.string().optional(),
+  serialNumber: z.string().optional(),
+  acquiredFrom: z.string().optional(),
+  purchaseDate: z.string().optional(),
+  purchaseSource: z.string().optional(),
+  referenceNumber: z.string().optional(),
   notes: z.string().optional(),
 });
 
@@ -423,6 +493,40 @@ const wishlistStatusInputSchema = z.object({
 const gearStatusInputSchema = z.object({
   id: z.string().trim().min(1, "Gear item id is required"),
   status: gearStatusSchema.default("active"),
+});
+
+const gearMediaUploadInputSchema = z.object({
+  equipmentItemId: z.string().trim().min(1, "Gear item id is required"),
+  fileName: z.string().trim().min(1, "File name is required"),
+  byteSize: z.number().int().positive("File size must be greater than 0"),
+  contentType: z.string().optional(),
+});
+
+const gearMediaUploadCompleteInputSchema = z.object({
+  equipmentItemId: z.string().trim().min(1, "Gear item id is required"),
+  mediaId: z.string().trim().min(1, "Media id is required"),
+  fileName: z.string().trim().min(1, "File name is required"),
+  byteSize: z.number().int().positive("File size must be greater than 0"),
+  contentType: z.string().optional(),
+  objectKey: z.string().trim().min(1, "Object key is required"),
+  uploadId: z.string().trim().min(1, "Upload id is required"),
+  completedParts: z
+    .array(
+      z.object({
+        partNumber: z.number().int().min(1),
+        eTag: z.string().trim().min(1),
+      }),
+    )
+    .min(1, "At least one uploaded part is required"),
+});
+
+const abortGearMediaUploadInputSchema = z.object({
+  objectKey: z.string().trim().min(1, "Object key is required"),
+  uploadId: z.string().trim().min(1, "Upload id is required"),
+});
+
+const deleteGearMediaAssetInputSchema = z.object({
+  id: z.string().trim().min(1, "Media asset id is required"),
 });
 
 const gearServiceLogInputSchema = z.object({
@@ -453,10 +557,15 @@ const promoteWishlistGearInputSchema = z.object({
 
 export const adminGearRouter = createTRPCRouter({
   list: adminProcedure.query(async ({ ctx }) => {
-    const gear = await ctx.db
-      .select()
-      .from(equipmentItem)
-      .orderBy(asc(equipmentItem.name));
+    let gear: typeof equipmentItem.$inferSelect[] = [];
+    try {
+      gear = await ctx.db
+        .select()
+        .from(equipmentItem)
+        .orderBy(asc(equipmentItem.name));
+    } catch (error) {
+      rethrowEquipmentDetailSchemaError(error);
+    }
 
     let serviceLogs: typeof equipmentServiceLog.$inferSelect[] = [];
     try {
@@ -469,7 +578,22 @@ export const adminGearRouter = createTRPCRouter({
         );
     } catch (error) {
       if (!isMissingTableError(error, "equipment_service_log")) {
-        throw error;
+        rethrowEquipmentDetailSchemaError(error);
+      }
+    }
+
+    let mediaAssets: typeof equipmentItemMediaAsset.$inferSelect[] = [];
+    try {
+      mediaAssets = await ctx.db
+        .select()
+        .from(equipmentItemMediaAsset)
+        .orderBy(
+          asc(equipmentItemMediaAsset.assetType),
+          asc(equipmentItemMediaAsset.fileName),
+        );
+    } catch (error) {
+      if (!isMissingTableError(error, "equipment_item_media_asset")) {
+        rethrowEquipmentDetailSchemaError(error);
       }
     }
 
@@ -481,11 +605,20 @@ export const adminGearRouter = createTRPCRouter({
       },
       {} as Record<string, ReturnType<typeof normalizeServiceLogRecord>[]>,
     );
+    const mediaAssetsByItemId = mediaAssets.reduce(
+      (grouped, asset) => {
+        grouped[asset.equipmentItemId] ??= [];
+        grouped[asset.equipmentItemId]!.push(normalizeGearMediaAssetRecord(asset));
+        return grouped;
+      },
+      {} as Record<string, ReturnType<typeof normalizeGearMediaAssetRecord>[]>,
+    );
 
     return gear.map((item) =>
       normalizeGearRecord({
         ...item,
         serviceLogs: logsByItemId[item.id] ?? [],
+        mediaAssets: mediaAssetsByItemId[item.id] ?? [],
       }),
     );
   }),
@@ -503,6 +636,29 @@ export const adminGearRouter = createTRPCRouter({
 
     return wishlist.map((item) => normalizeWishlistRecord(item));
   }),
+
+  listMediaAssets: adminProcedure
+    .input(
+      z.object({
+        equipmentItemId: z.string().trim().min(1, "Gear item id is required."),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      try {
+        const mediaAssets = await ctx.db
+          .select()
+          .from(equipmentItemMediaAsset)
+          .where(eq(equipmentItemMediaAsset.equipmentItemId, input.equipmentItemId))
+          .orderBy(
+            asc(equipmentItemMediaAsset.assetType),
+            asc(equipmentItemMediaAsset.fileName),
+          );
+
+        return mediaAssets.map(normalizeGearMediaAssetRecord);
+      } catch (error) {
+        rethrowEquipmentDetailSchemaError(error);
+      }
+    }),
 
   searchPriceGuide: adminProcedure
     .input(
@@ -720,6 +876,11 @@ export const adminGearRouter = createTRPCRouter({
           .set({
             status: input.status,
             location: normalizeText(input.location),
+            serialNumber: normalizeText(input.serialNumber),
+            acquiredFrom: normalizeText(input.acquiredFrom),
+            purchaseDate: normalizeText(input.purchaseDate),
+            purchaseSource: normalizeText(input.purchaseSource),
+            referenceNumber: normalizeText(input.referenceNumber),
             notes: normalizeText(input.notes),
             updated_timestamp: now,
           })
@@ -826,6 +987,159 @@ export const adminGearRouter = createTRPCRouter({
       }
 
       return normalizeGearRecord(updated);
+    }),
+
+  prepareMediaUpload: adminProcedure
+    .input(gearMediaUploadInputSchema)
+    .mutation(async ({ ctx, input }) => {
+      const gearItem = await ctx.db
+        .select({
+          id: equipmentItem.id,
+          name: equipmentItem.name,
+          manufacturer: equipmentItem.manufacturer,
+        })
+        .from(equipmentItem)
+        .where(eq(equipmentItem.id, input.equipmentItemId))
+        .get();
+
+      if (!gearItem) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Gear item not found.",
+        });
+      }
+
+      const mediaId = crypto.randomUUID();
+      const contentType = normalizeText(input.contentType) || "application/octet-stream";
+      const upload = await prepareGearMediaMultipartUpload({
+        byteSize: input.byteSize,
+        contentType,
+        equipmentItemId: gearItem.id,
+        fileName: input.fileName,
+        manufacturer: gearItem.manufacturer,
+        mediaId,
+        name: gearItem.name,
+      });
+
+      return {
+        assetType: inferGearMediaAssetType({
+          contentType,
+          fileName: input.fileName,
+        }),
+        bucket: gearMediaBucketName,
+        byteSize: input.byteSize,
+        contentType,
+        fileName: input.fileName.trim(),
+        mediaId,
+        objectKey: upload.objectKey,
+        partSizeBytes: upload.partSizeBytes,
+        parts: upload.parts,
+        uploadId: upload.uploadId,
+      };
+    }),
+
+  completeMediaUpload: adminProcedure
+    .input(gearMediaUploadCompleteInputSchema)
+    .mutation(async ({ ctx, input }) => {
+      const gearItem = await ctx.db
+        .select({ id: equipmentItem.id })
+        .from(equipmentItem)
+        .where(eq(equipmentItem.id, input.equipmentItemId))
+        .get();
+
+      if (!gearItem) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Gear item not found.",
+        });
+      }
+
+      const contentType = normalizeText(input.contentType) || "application/octet-stream";
+      await completeMultipartUpload({
+        bucket: gearMediaBucketName,
+        completedParts: input.completedParts.map((part) => ({
+          ETag: part.eTag,
+          PartNumber: part.partNumber,
+        })),
+        key: input.objectKey,
+        uploadId: input.uploadId,
+      });
+
+      let createdAsset;
+      try {
+        createdAsset = await ctx.db
+          .insert(equipmentItemMediaAsset)
+          .values({
+            id: input.mediaId,
+            equipmentItemId: input.equipmentItemId,
+            assetType: inferGearMediaAssetType({
+              contentType,
+              fileName: input.fileName,
+            }),
+            fileName: input.fileName.trim(),
+            contentType,
+            byteSize: input.byteSize,
+            storageUri: getStoredObjectUri({
+              bucket: gearMediaBucketName,
+              key: input.objectKey,
+            }),
+            createdTimestamp: new Date().toISOString(),
+          })
+          .returning()
+          .get();
+      } catch (error) {
+        rethrowEquipmentDetailSchemaError(error);
+      }
+
+      if (!createdAsset) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Unable to save uploaded gear media.",
+        });
+      }
+
+      return normalizeGearMediaAssetRecord(createdAsset);
+    }),
+
+  abortMediaUpload: adminProcedure
+    .input(abortGearMediaUploadInputSchema)
+    .mutation(async ({ input }) => {
+      await abortMultipartUpload({
+        bucket: gearMediaBucketName,
+        key: input.objectKey,
+        uploadId: input.uploadId,
+      });
+
+      return { success: true };
+    }),
+
+  deleteMediaAsset: adminProcedure
+    .input(deleteGearMediaAssetInputSchema)
+    .mutation(async ({ ctx, input }) => {
+      let deletedAsset;
+      try {
+        deletedAsset = await ctx.db
+          .delete(equipmentItemMediaAsset)
+          .where(eq(equipmentItemMediaAsset.id, input.id))
+          .returning()
+          .get();
+      } catch (error) {
+        rethrowEquipmentDetailSchemaError(error);
+      }
+
+      if (!deletedAsset) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Media asset not found.",
+        });
+      }
+
+      await deleteStoredObjectByUri(deletedAsset.storageUri);
+
+      return {
+        equipmentItemId: deletedAsset.equipmentItemId,
+        id: deletedAsset.id,
+      };
     }),
 
   addServiceLog: adminProcedure

@@ -64,8 +64,7 @@ export function ValueAccordionSelect({
           <Button
             id={id}
             type="button"
-            variant="ghost"
-            className="flex min-h-10 w-full items-center justify-between rounded-md border bg-background px-3 py-2 font-normal hover:bg-muted/50"
+            className="flex h-9 w-full items-center justify-between rounded-md border border-input bg-transparent px-3 py-2 text-sm font-normal shadow-sm hover:bg-transparent"
           >
             <span className={cn("truncate", !value && "text-muted-foreground")}>
               {value || placeholder}
