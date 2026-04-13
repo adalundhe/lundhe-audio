@@ -39,7 +39,7 @@ export const TimeScatterChartCard = React.memo(function TimeScatterChartCard({
   abbreviateCurrency,
 }: TimeScatterChartCardProps) {
   return (
-    <div className="rounded-md border px-4 py-4">
+    <div className="rounded-md border px-4 py-4 md:w-1/2">
       <div className="flex flex-col gap-1">
         <div className="text-sm font-medium">{title}</div>
         <div className="text-xs text-muted-foreground">{description}</div>

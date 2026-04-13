@@ -41,7 +41,7 @@ export const ValueDistributionRadarCard = React.memo(
     formatCurrency,
   }: ValueDistributionRadarCardProps) {
     return (
-      <div className="rounded-md border px-4 py-4">
+      <div className="rounded-md border px-4 py-4 md:w-1/2">
         <div className="flex flex-col gap-1">
           <div className="text-sm font-medium">{title}</div>
           <div className="text-xs text-muted-foreground">{description}</div>
@@ -49,11 +49,13 @@ export const ValueDistributionRadarCard = React.memo(
         {data.length === 0 ? (
           <div className="py-10 text-sm text-muted-foreground">{emptyMessage}</div>
         ) : (
-          <ChartContainer config={config} className="mt-4 h-[20rem] w-full">
+          <ChartContainer
+            config={config}
+            className="md:mt-4 md:h-[24rem] w-full sm:h-[20rem] h-[20rem]"
+          >
             <RadarChart
               data={data}
-              margin={{ top: 12, right: 12, bottom: 12, left: 12 }}
-              outerRadius="72%"
+              outerRadius="100%"
             >
               <ChartTooltip
                 cursor={false}
@@ -69,7 +71,7 @@ export const ValueDistributionRadarCard = React.memo(
                 }
               />
               <PolarGrid />
-              <PolarAngleAxis dataKey={labelKey} />
+              <PolarAngleAxis dataKey={labelKey} tick={false} axisLine={false} />
               <PolarRadiusAxis tick={false} axisLine={false} />
               <Radar
                 dataKey={dataKey}

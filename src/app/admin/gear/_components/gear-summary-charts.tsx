@@ -44,7 +44,7 @@ export const GearSummaryCharts = React.memo(function GearSummaryCharts({
 }: GearSummaryChartsProps) {
   return (
     <>
-      <div className="flex gap-4 flex-col">
+      <div className="flex gap-4 md:flex-row flex-col">
         <ValueDistributionRadarCard
           title="Inventory Value Distribution"
           description="Group-level value distribution based on price multiplied by quantity."

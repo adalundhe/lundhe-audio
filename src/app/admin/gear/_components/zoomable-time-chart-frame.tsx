@@ -118,6 +118,7 @@ export function ZoomableTimeChartFrame({
               min={formatDateInputValue(dataDomain?.[0])}
               max={formatDateInputValue(dataDomain?.[1])}
               onChange={(event) => setFromDate(event.target.value)}
+              className="h-8 w-full sm:w-fit overflow-hidden py-1"
             />
           </div>
           <div className={cn(
@@ -133,7 +134,7 @@ export function ZoomableTimeChartFrame({
               min={formatDateInputValue(dataDomain?.[0])}
               max={formatDateInputValue(dataDomain?.[1])}
               onChange={(event) => setToDate(event.target.value)}
-              className="h-8 w-full sm:w-fit overflow-hidden"
+              className="h-8 w-full sm:w-fit overflow-hidden py-1"
             />
           </div>
           <div
