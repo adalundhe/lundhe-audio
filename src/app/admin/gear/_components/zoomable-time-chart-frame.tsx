@@ -102,8 +102,8 @@ export function ZoomableTimeChartFrame({
   return (
     <div className={cn("mt-4 flex min-w-0 flex-col gap-3", className)}>
       <div className="flex flex-col gap-3">
-        <div className="grid min-w-0 gap-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] sm:items-end">
-          <div className="flex min-w-0 flex-col gap-1">
+        <div className="grid min-w-0 gap-2 sm:grid-cols-[minmax(0,10rem)_minmax(0,10rem)_auto] sm:items-end">
+          <div className="flex w-full min-w-0 flex-col gap-1">
             <span className="text-xs uppercase tracking-wider text-muted-foreground">
               From
             </span>
@@ -113,10 +113,10 @@ export function ZoomableTimeChartFrame({
               min={formatDateInputValue(dataDomain?.[0])}
               max={formatDateInputValue(dataDomain?.[1])}
               onChange={(event) => setFromDate(event.target.value)}
-              className="h-8 min-w-0 max-w-full"
+              className="h-8 w-full"
             />
           </div>
-          <div className="flex min-w-0 flex-col gap-1">
+          <div className="flex w-full min-w-0 flex-col gap-1">
             <span className="text-xs uppercase tracking-wider text-muted-foreground">
               To
             </span>
@@ -126,19 +126,22 @@ export function ZoomableTimeChartFrame({
               min={formatDateInputValue(dataDomain?.[0])}
               max={formatDateInputValue(dataDomain?.[1])}
               onChange={(event) => setToDate(event.target.value)}
-              className="h-8 min-w-0 max-w-full"
+              className="h-8 w-full"
             />
           </div>
-          <Button
-            type="button"
-            size="sm"
-            variant="outline"
-            onClick={handleApplyDateRange}
-            disabled={hasInvalidDateRange}
-            className={cn(controlButtonClassName, "w-full sm:w-fit")}
-          >
-            Apply Range
-          </Button>
+          <div className="flex w-full min-w-0 flex-col gap-1 sm:w-auto sm:min-w-fit">
+            <span className="sr-only">Apply range</span>
+            <Button
+              type="button"
+              size="sm"
+              variant="outline"
+              onClick={handleApplyDateRange}
+              disabled={hasInvalidDateRange}
+              className={cn(controlButtonClassName, "h-8 w-full sm:w-fit")}
+            >
+              Apply Range
+            </Button>
+          </div>
         </div>
         <div className="flex items-center justify-center gap-2 sm:flex-wrap sm:justify-start">
           <Button

@@ -62,7 +62,21 @@ export const ManufacturerBubbleChart = React.memo(function ManufacturerBubbleCha
   >({});
   const tooltipRef = React.useRef<HTMLDivElement | null>(null);
   const initializedLayoutKeyRef = React.useRef<string | null>(null);
-  const chartHeight = 360;
+  const chartHeight = React.useMemo(() => {
+    if (containerWidth <= 0) {
+      return 360;
+    }
+
+    if (containerWidth < 420) {
+      return 460;
+    }
+
+    if (containerWidth < 640) {
+      return 420;
+    }
+
+    return 360;
+  }, [containerWidth]);
 
   const syncDraggingItems = React.useCallback(
     (
