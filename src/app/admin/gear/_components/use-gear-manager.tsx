@@ -61,7 +61,6 @@ import {
   PopoverTrigger,
 } from "~/components/ui/popover";
 import { Checkbox } from "~/components/ui/checkbox";
-import { DropdownMenuCheckboxItem } from "~/components/ui/dropdown-menu";
 import { Progress } from "~/components/ui/progress";
 import { Separator } from "~/components/ui/separator";
 import { cn } from "~/lib/utils";
@@ -3234,20 +3233,11 @@ export function useGearManager({ initialGear }: { initialGear: GearItem[] }) {
         label: "Type",
         render: (table: ReactTable<GearItem>) => (
           <FilterTabPanel>
-            <DropdownMenuCheckboxItem
-              side="right"
-              className={cn(
-                "h-[2.5em] w-full border-none pl-0 capitalize outline-none hover:bg-white hover:underline dark:hover:bg-black",
-                !hasActiveInventoryFilters(table) &&
-                  "text-cyan-500 hover:text-cyan-500 dark:hover:text-cyan-500",
-              )}
-              checked={!hasActiveInventoryFilters(table)}
-              onCheckedChange={() => clearInventoryTableFilters(table)}
-            >
-              <Button type="button" className="p-0">
-                All
-              </Button>
-            </DropdownMenuCheckboxItem>
+            <SimpleFilterOption
+              active={!hasActiveInventoryFilters(table)}
+              label="All"
+              onToggle={() => clearInventoryTableFilters(table)}
+            />
             <Button
               type="button"
               className={cn(
@@ -3290,14 +3280,13 @@ export function useGearManager({ initialGear }: { initialGear: GearItem[] }) {
                       </AccordionTrigger>
                       <AccordionContent className="p-0">
                         <Separator className="mb-2 w-1/4" />
-                        <DropdownMenuCheckboxItem
-                          side="right"
-                          className="w-full border-none pl-0 capitalize outline-none hover:bg-white hover:underline dark:hover:bg-black"
-                          checked={
+                        <SimpleFilterOption
+                          active={
                             (table.getColumn("group")?.getFilterValue() ?? "") === group &&
                             (table.getColumn("type")?.getFilterValue() ?? "") === ""
                           }
-                          onCheckedChange={() => {
+                          label={`all ${group}`}
+                          onToggle={() => {
                             const typeFilter =
                               (table.getColumn("type")?.getFilterValue() ?? "") as string;
                             const groupFilter =
@@ -3310,22 +3299,17 @@ export function useGearManager({ initialGear }: { initialGear: GearItem[] }) {
                               table.setColumnFilters([{ id: "group", value: group }]);
                             }
                           }}
-                        >
-                          <Button type="button" className="h-[1.5em] p-0">
-                            {`all ${group}`}
-                          </Button>
-                        </DropdownMenuCheckboxItem>
+                        />
                         {groupedTypes.map((type) => (
-                          <DropdownMenuCheckboxItem
-                            side="right"
+                          <SimpleFilterOption
                             key={`${group}-${type}`}
-                            className="w-full border-none pl-0 capitalize outline-none hover:bg-white hover:underline dark:hover:bg-black"
-                            checked={
+                            active={
                               (table.getColumn("group")?.getFilterValue() ?? "") ===
                                 group &&
                               (table.getColumn("type")?.getFilterValue() ?? "") === type
                             }
-                            onCheckedChange={() => {
+                            label={type}
+                            onToggle={() => {
                               const typeFilter =
                                 (table.getColumn("type")?.getFilterValue() ?? "") as string;
                               const groupFilter =
@@ -3341,11 +3325,7 @@ export function useGearManager({ initialGear }: { initialGear: GearItem[] }) {
                                 ]);
                               }
                             }}
-                          >
-                            <Button type="button" className="h-[1.5em] p-0">
-                              {type}
-                            </Button>
-                          </DropdownMenuCheckboxItem>
+                          />
                         ))}
                       </AccordionContent>
                     </AccordionItem>
@@ -3360,20 +3340,11 @@ export function useGearManager({ initialGear }: { initialGear: GearItem[] }) {
         label: "Brand",
         render: (table: ReactTable<GearItem>) => (
           <FilterTabPanel>
-            <DropdownMenuCheckboxItem
-              side="right"
-              className={cn(
-                "h-[2.5em] w-full border-none pl-0 capitalize outline-none hover:bg-white hover:underline dark:hover:bg-black",
-                !hasActiveInventoryFilters(table) &&
-                  "text-cyan-500 hover:text-cyan-500 dark:hover:text-cyan-500",
-              )}
-              checked={!hasActiveInventoryFilters(table)}
-              onCheckedChange={() => clearInventoryTableFilters(table)}
-            >
-              <Button type="button" className="p-0">
-                All
-              </Button>
-            </DropdownMenuCheckboxItem>
+            <SimpleFilterOption
+              active={!hasActiveInventoryFilters(table)}
+              label="All"
+              onToggle={() => clearInventoryTableFilters(table)}
+            />
             <Separator />
             <Accordion type="single" collapsible className="flex w-full flex-col">
               {Object.keys(manufacturerGroups)
@@ -3395,20 +3366,14 @@ export function useGearManager({ initialGear }: { initialGear: GearItem[] }) {
                         ?.slice()
                         .sort((left, right) => left.localeCompare(right))
                         .map((manufacturer) => (
-                          <DropdownMenuCheckboxItem
-                            side="right"
+                          <SimpleFilterOption
                             key={manufacturer}
-                            className={cn(
-                              "w-full border-none pl-0 capitalize outline-none hover:bg-white hover:underline dark:hover:bg-black",
-                              (table.getColumn("manufacturer")?.getFilterValue() ?? "") ===
-                                manufacturer &&
-                                "text-cyan-500 hover:text-cyan-500 dark:hover:text-cyan-500",
-                            )}
-                            checked={
+                            active={
                               (table.getColumn("manufacturer")?.getFilterValue() ?? "") ===
                               manufacturer
                             }
-                            onCheckedChange={() => {
+                            label={manufacturer}
+                            onToggle={() => {
                               const selectedManufacturer =
                                 (table.getColumn("manufacturer")?.getFilterValue() ??
                                   "") as string;
@@ -3425,11 +3390,7 @@ export function useGearManager({ initialGear }: { initialGear: GearItem[] }) {
                                 ]);
                               }
                             }}
-                          >
-                            <Button type="button" className="h-[1.5em] p-0">
-                              {manufacturer}
-                            </Button>
-                          </DropdownMenuCheckboxItem>
+                          />
                         ))}
                     </AccordionContent>
                   </AccordionItem>

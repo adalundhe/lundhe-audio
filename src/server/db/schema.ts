@@ -142,6 +142,68 @@ export const equipmentItemMediaAsset = createTable(
   }),
 );
 
+export const gearManifest = createTable(
+  "gear_manifest",
+  {
+    id: text("id", { length: 255 })
+      .notNull()
+      .primaryKey()
+      .$defaultFn(() => crypto.randomUUID()),
+    name: text("name", { length: 255 }).notNull(),
+    notes: text("notes").notNull().default(""),
+    partCount: integer("part_count").notNull().default(1),
+    created_timestamp: text("created_timestamp")
+      .notNull()
+      .$defaultFn(() => new Date().toString()),
+    updated_timestamp: text("updated_timestamp").default(
+      sql`(current_timestamp)`,
+    ),
+  },
+  (table) => ({
+    nameIdx: index("gear_manifest_name_idx").on(table.name),
+    createdTimestampIdx: index("gear_manifest_created_timestamp_idx").on(
+      table.created_timestamp,
+    ),
+  }),
+);
+
+export const gearManifestEntry = createTable(
+  "gear_manifest_entry",
+  {
+    id: text("id", { length: 255 })
+      .notNull()
+      .primaryKey()
+      .$defaultFn(() => crypto.randomUUID()),
+    manifestId: text("manifest_id", { length: 255 })
+      .notNull()
+      .references(() => gearManifest.id, { onDelete: "cascade" }),
+    equipmentItemId: text("equipment_item_id", { length: 255 })
+      .notNull()
+      .references(() => equipmentItem.id),
+    itemOrder: integer("item_order").notNull().default(0),
+    itemName: text("item_name", { length: 255 }).notNull(),
+    manufacturer: text("manufacturer", { length: 255 }).notNull(),
+    type: text("type", { length: 255 }).notNull(),
+    group: text("group", { length: 255 }).notNull(),
+    quantity: integer("quantity").notNull().default(1),
+    createdTimestamp: text("created_timestamp")
+      .notNull()
+      .$defaultFn(() => new Date().toISOString()),
+    updatedTimestamp: text("updated_timestamp").default(
+      sql`(current_timestamp)`,
+    ),
+  },
+  (table) => ({
+    manifestIdIdx: index("gear_manifest_entry_manifest_id_idx").on(
+      table.manifestId,
+    ),
+    equipmentItemIdIdx: index("gear_manifest_entry_equipment_item_id_idx").on(
+      table.equipmentItemId,
+    ),
+    itemOrderIdx: index("gear_manifest_entry_item_order_idx").on(table.itemOrder),
+  }),
+);
+
 export const wishlistGearItem = createTable(
   "wishlist_gear_item",
   {

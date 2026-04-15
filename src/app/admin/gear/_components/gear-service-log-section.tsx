@@ -3,16 +3,17 @@
 import * as React from "react";
 import { AlertCircle, Loader2, Pencil, Plus, Save, Trash2, X } from "lucide-react";
 
+import {
+  type AdminDataTableColumnDef,
+  AdminDataTable,
+  FilterTabPanel,
+  SimpleFilterOption,
+  SortableHeader,
+} from "~/app/admin/_components/admin-data-table";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
-import {
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "~/components/ui/table";
+import { Separator } from "~/components/ui/separator";
 import { Textarea } from "~/components/ui/textarea";
 import type { GearItem, GearServiceLog, ServiceLogFormState } from "./gear-manager-types";
 
@@ -56,6 +57,227 @@ export const GearServiceLogSection = React.memo(function GearServiceLogSection({
   openNewServiceLogEditor,
   openEditServiceLogEditor,
 }: GearServiceLogSectionProps) {
+  const availableServiceTypes = React.useMemo(
+    () =>
+      [...new Map(
+        item.serviceLogs
+          .map((serviceLog) => serviceLog.serviceType.trim())
+          .filter(Boolean)
+          .map((value) => [value.toLocaleLowerCase(), value]),
+      ).values()].sort((left, right) => left.localeCompare(right)),
+    [item.serviceLogs],
+  );
+
+  const serviceLogColumns = React.useMemo<AdminDataTableColumnDef<GearServiceLog>[]>(
+    () => [
+      {
+        accessorKey: "serviceType",
+        filterFn: "equalsString",
+        size: 220,
+        minSize: 180,
+        maxSize: 320,
+        header: ({ column }) => (
+          <SortableHeader column={column} label="Service Type" />
+        ),
+        cell: ({ row }) => (
+          <div className="truncate text-sm font-medium">
+            {row.original.serviceType}
+          </div>
+        ),
+      },
+      {
+        accessorKey: "serviceDate",
+        size: 160,
+        minSize: 130,
+        maxSize: 220,
+        header: ({ column }) => (
+          <SortableHeader column={column} label="Service Date" />
+        ),
+        cell: ({ row }) => (
+          <div className="truncate text-sm">{row.original.serviceDate}</div>
+        ),
+      },
+      {
+        accessorKey: "warrantyUntil",
+        id: "warrantyUntil",
+        filterFn: (row, _, filterValue: "with" | "without" | "") => {
+          const hasWarranty = row.original.warrantyUntil.trim() !== "";
+          if (filterValue === "with") return hasWarranty;
+          if (filterValue === "without") return !hasWarranty;
+          return true;
+        },
+        size: 180,
+        minSize: 150,
+        maxSize: 240,
+        header: ({ column }) => (
+          <SortableHeader column={column} label="Warranty Until" />
+        ),
+        cell: ({ row }) => (
+          <div className="truncate text-sm text-muted-foreground">
+            {row.original.warrantyUntil || "—"}
+          </div>
+        ),
+      },
+      {
+        accessorKey: "notes",
+        size: 420,
+        minSize: 260,
+        maxSize: 640,
+        enableSorting: false,
+        header: () => (
+          <div className="flex h-full w-full items-center justify-start gap-3 text-left text-muted-foreground">
+            Notes
+          </div>
+        ),
+        cell: ({ row }) => (
+          <div className="max-w-[28rem] truncate text-sm text-muted-foreground" title={row.original.notes || "—"}>
+            {row.original.notes || "—"}
+          </div>
+        ),
+      },
+      {
+        id: "search",
+        accessorFn: (row) =>
+          [
+            row.serviceType,
+            row.serviceDate,
+            row.warrantyUntil,
+            row.notes,
+          ].join(" "),
+        filterFn: "includesString",
+        enableHiding: true,
+      },
+      {
+        id: "actions",
+        enableHiding: false,
+        enableSorting: false,
+        size: 70,
+        minSize: 70,
+        maxSize: 70,
+        header: () => <div className="w-fit" />,
+        cell: ({ row }) => (
+          <div
+            className="flex justify-end"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="pointer-events-none inline-flex items-center gap-1 rounded-md border bg-background/95 p-1 opacity-0 shadow-sm transition-opacity group-hover:pointer-events-auto group-hover:opacity-100">
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                disabled={
+                  deleteServiceLogMutation.isPending ||
+                  addServiceLogMutation.isPending ||
+                  updateServiceLogMutation.isPending
+                }
+                onClick={() => openEditServiceLogEditor(row.original)}
+                className="h-7 px-2"
+              >
+                <Pencil className="mr-1 !h-[16px] !w-[16px]" />
+                Edit
+              </Button>
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                disabled={deleteServiceLogMutation.isPending}
+                onClick={() =>
+                  void deleteServiceLogMutation.mutateAsync({ id: row.original.id })
+                }
+                className="h-7 px-2 text-destructive hover:text-destructive"
+              >
+                <Trash2 className="mr-1 !h-[16px] !w-[16px]" />
+                Delete
+              </Button>
+            </div>
+          </div>
+        ),
+      },
+    ],
+    [
+      addServiceLogMutation.isPending,
+      deleteServiceLogMutation,
+      openEditServiceLogEditor,
+      updateServiceLogMutation.isPending,
+    ],
+  );
+
+  const serviceLogFilterTabs = React.useMemo(
+    () => [
+      {
+        value: "serviceType",
+        label: "Service Type",
+        render: (table: import("@tanstack/react-table").Table<GearServiceLog>) => (
+          <FilterTabPanel>
+            <SimpleFilterOption
+              active={(table.getColumn("serviceType")?.getFilterValue() ?? "") === ""}
+              label="All"
+              onToggle={() => table.getColumn("serviceType")?.setFilterValue("")}
+            />
+            <Separator />
+            {availableServiceTypes.map((serviceType) => (
+              <SimpleFilterOption
+                key={serviceType}
+                active={
+                  (table.getColumn("serviceType")?.getFilterValue() ?? "") ===
+                  serviceType
+                }
+                label={serviceType}
+                onToggle={() =>
+                  table.getColumn("serviceType")?.setFilterValue(
+                    (table.getColumn("serviceType")?.getFilterValue() ?? "") ===
+                      serviceType
+                      ? ""
+                      : serviceType,
+                  )
+                }
+              />
+            ))}
+          </FilterTabPanel>
+        ),
+      },
+      {
+        value: "warranty",
+        label: "Warranty",
+        render: (table: import("@tanstack/react-table").Table<GearServiceLog>) => (
+          <FilterTabPanel>
+            <SimpleFilterOption
+              active={(table.getColumn("warrantyUntil")?.getFilterValue() ?? "") === ""}
+              label="All"
+              onToggle={() => table.getColumn("warrantyUntil")?.setFilterValue("")}
+            />
+            <Separator />
+            <SimpleFilterOption
+              active={(table.getColumn("warrantyUntil")?.getFilterValue() ?? "") === "with"}
+              label="With Warranty"
+              onToggle={() =>
+                table.getColumn("warrantyUntil")?.setFilterValue(
+                  (table.getColumn("warrantyUntil")?.getFilterValue() ?? "") ===
+                    "with"
+                    ? ""
+                    : "with",
+                )
+              }
+            />
+            <SimpleFilterOption
+              active={(table.getColumn("warrantyUntil")?.getFilterValue() ?? "") === "without"}
+              label="Without Warranty"
+              onToggle={() =>
+                table.getColumn("warrantyUntil")?.setFilterValue(
+                  (table.getColumn("warrantyUntil")?.getFilterValue() ?? "") ===
+                    "without"
+                    ? ""
+                    : "without",
+                )
+              }
+            />
+          </FilterTabPanel>
+        ),
+      },
+    ],
+    [availableServiceTypes],
+  );
+
   return (
     <div className="space-y-4">
       <div className="flex flex-col gap-1">
@@ -168,84 +390,33 @@ export const GearServiceLogSection = React.memo(function GearServiceLogSection({
         </div>
       ) : null}
 
-      <div className="overflow-x-auto rounded-md border">
-        <table className="w-max min-w-full caption-bottom text-sm">
-          <TableHeader>
-            <TableRow>
-              <TableHead className="whitespace-nowrap">Service Type</TableHead>
-              <TableHead className="whitespace-nowrap">Service Date</TableHead>
-              <TableHead className="whitespace-nowrap">Warranty Until</TableHead>
-              <TableHead className="min-w-[18rem] whitespace-nowrap">Notes</TableHead>
-              <TableHead className="w-0 whitespace-nowrap" />
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {item.serviceLogs.length === 0 ? (
-              <TableRow>
-                <TableCell colSpan={5} className="whitespace-normal text-muted-foreground">
-                  <div className="flex items-start gap-2 py-1">
-                    <AlertCircle className="mt-0.5 !h-[16px] !w-[16px] shrink-0" />
-                    <span>No service history logged yet for this item.</span>
-                  </div>
-                </TableCell>
-              </TableRow>
-            ) : (
-              item.serviceLogs.map((serviceLog) => (
-                <TableRow key={serviceLog.id} className="group align-top">
-                  <TableCell className="whitespace-nowrap font-medium">
-                    {serviceLog.serviceType}
-                  </TableCell>
-                  <TableCell className="whitespace-nowrap">
-                    {serviceLog.serviceDate}
-                  </TableCell>
-                  <TableCell className="whitespace-nowrap text-muted-foreground">
-                    {serviceLog.warrantyUntil || "—"}
-                  </TableCell>
-                  <TableCell className="text-muted-foreground">
-                    <div className="max-w-[28rem] truncate" title={serviceLog.notes || "—"}>
-                      {serviceLog.notes || "—"}
-                    </div>
-                  </TableCell>
-                  <TableCell className="whitespace-nowrap text-right align-middle">
-                    <div className="flex justify-end">
-                      <div className="pointer-events-none inline-flex items-center gap-1 rounded-md border bg-background/95 p-1 opacity-0 shadow-sm transition-opacity group-hover:pointer-events-auto group-hover:opacity-100">
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          size="sm"
-                          disabled={
-                            deleteServiceLogMutation.isPending ||
-                            addServiceLogMutation.isPending ||
-                            updateServiceLogMutation.isPending
-                          }
-                          onClick={() => openEditServiceLogEditor(serviceLog)}
-                          className="h-7 px-2"
-                        >
-                          <Pencil className="mr-1 !h-[16px] !w-[16px]" />
-                          Edit
-                        </Button>
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          size="sm"
-                          disabled={deleteServiceLogMutation.isPending}
-                          onClick={() =>
-                            void deleteServiceLogMutation.mutateAsync({ id: serviceLog.id })
-                          }
-                          className="h-7 px-2 text-destructive hover:text-destructive"
-                        >
-                          <Trash2 className="mr-1 !h-[16px] !w-[16px]" />
-                          Delete
-                        </Button>
-                      </div>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))
-            )}
-          </TableBody>
-        </table>
-      </div>
+      <AdminDataTable
+        data={item.serviceLogs}
+        columns={serviceLogColumns}
+        searchColumnId="search"
+        searchPlaceholder="Search service log..."
+        emptyMessage="No service history logged yet for this item."
+        initialSorting={[{ id: "serviceDate", desc: true }]}
+        initialColumnVisibility={{ search: false }}
+        initialColumnOrder={[
+          "serviceType",
+          "serviceDate",
+          "warrantyUntil",
+          "notes",
+          "search",
+          "actions",
+        ]}
+        invisibleColumns={["search"]}
+        columnLabels={{
+          serviceType: "service type",
+          serviceDate: "service date",
+          warrantyUntil: "warranty until",
+          notes: "notes",
+        }}
+        filterTabs={serviceLogFilterTabs}
+        stateResetKey={item.id}
+        getRowClassName={() => "group align-top"}
+      />
 
       <div className="flex justify-start">
         <Button
@@ -262,4 +433,3 @@ export const GearServiceLogSection = React.memo(function GearServiceLogSection({
     </div>
   );
 });
-
