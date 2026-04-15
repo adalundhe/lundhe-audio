@@ -36,6 +36,29 @@ export type EquipmentItemMediaAsset = {
     updatedTimestamp: string | null
 }
 
+export type GearManifest = {
+    id: string
+    name: string
+    notes: string
+    partCount: number
+    created_timestamp: string
+    updated_timestamp: string | null
+}
+
+export type GearManifestEntry = {
+    id: string
+    manifestId: string
+    equipmentItemId: string
+    itemOrder: number
+    itemName: string
+    manufacturer: string
+    type: string
+    group: string
+    quantity: number
+    createdTimestamp: string
+    updatedTimestamp: string | null
+}
+
 export type WishlistGearItem = {
     id: string
     name: string

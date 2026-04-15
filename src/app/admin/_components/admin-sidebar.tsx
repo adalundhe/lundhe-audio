@@ -8,6 +8,7 @@ import {
   ChevronRight,
   Package,
   Percent,
+  QrCode,
   Store,
   Ticket,
   Wrench,
@@ -41,6 +42,7 @@ const storeLinks: NavLink[] = [
 
 const studioLinks: NavLink[] = [
   { href: "/admin/gear", label: "Manage Gear", icon: Wrench },
+  { href: "/admin/manifests", label: "Manage Manifests", icon: QrCode },
 ];
 
 const linkClassName =
@@ -58,7 +60,8 @@ const AdminSidebarNav = ({
 }) => {
   const isOnStore =
     pathname.startsWith("/admin/store") || pathname.startsWith("/admin/coupons");
-  const isOnStudio = pathname.startsWith("/admin/gear");
+  const isOnStudio =
+    pathname.startsWith("/admin/gear") || pathname.startsWith("/admin/manifests");
   const [expandedItem, setExpandedItem] = React.useState<string | undefined>(
     isOnStore ? "store" : isOnStudio ? "studio" : undefined,
   );

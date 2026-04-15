@@ -21,7 +21,6 @@ import {
 import { Button } from "~/components/ui/button";
 import { type ChartConfig } from "~/components/ui/chart";
 import { Checkbox } from "~/components/ui/checkbox";
-import { DropdownMenuCheckboxItem } from "~/components/ui/dropdown-menu";
 import { Separator } from "~/components/ui/separator";
 import { cn } from "~/lib/utils";
 import { api } from "~/trpc/react";
@@ -1871,20 +1870,11 @@ export function useWishlistGearManager({
         label: "Type",
         render: (table: ReactTable<WishlistGearItem>) => (
           <FilterTabPanel>
-            <DropdownMenuCheckboxItem
-              side="right"
-              className={cn(
-                "h-[2.5em] w-full border-none pl-0 capitalize outline-none hover:bg-white hover:underline dark:hover:bg-black",
-                !hasActiveWishlistFilters(table) &&
-                  "text-cyan-500 hover:text-cyan-500 dark:hover:text-cyan-500",
-              )}
-              checked={!hasActiveWishlistFilters(table)}
-              onCheckedChange={() => clearWishlistTableFilters(table)}
-            >
-              <Button type="button" className="p-0">
-                All
-              </Button>
-            </DropdownMenuCheckboxItem>
+            <SimpleFilterOption
+              active={!hasActiveWishlistFilters(table)}
+              label="All"
+              onToggle={() => clearWishlistTableFilters(table)}
+            />
             <Separator />
             <Accordion type="single" collapsible className="flex w-full flex-col">
               {Object.keys(wishlistByGroup)
@@ -1910,14 +1900,13 @@ export function useWishlistGearManager({
                       </AccordionTrigger>
                       <AccordionContent className="p-0">
                         <Separator className="mb-2 w-1/4" />
-                        <DropdownMenuCheckboxItem
-                          side="right"
-                          className="w-full border-none pl-0 capitalize outline-none hover:bg-white hover:underline dark:hover:bg-black"
-                          checked={
+                        <SimpleFilterOption
+                          active={
                             (table.getColumn("group")?.getFilterValue() ?? "") === group &&
                             (table.getColumn("type")?.getFilterValue() ?? "") === ""
                           }
-                          onCheckedChange={() => {
+                          label={`all ${group}`}
+                          onToggle={() => {
                             const typeFilter =
                               (table.getColumn("type")?.getFilterValue() ?? "") as string;
                             const groupFilter =
@@ -1930,22 +1919,17 @@ export function useWishlistGearManager({
                               table.setColumnFilters([{ id: "group", value: group }]);
                             }
                           }}
-                        >
-                          <Button type="button" className="h-[1.5em] p-0">
-                            {`all ${group}`}
-                          </Button>
-                        </DropdownMenuCheckboxItem>
+                        />
                         {groupedTypes.map((type) => (
-                          <DropdownMenuCheckboxItem
-                            side="right"
+                          <SimpleFilterOption
                             key={`${group}-${type}`}
-                            className="w-full border-none pl-0 capitalize outline-none hover:bg-white hover:underline dark:hover:bg-black"
-                            checked={
+                            active={
                               (table.getColumn("group")?.getFilterValue() ?? "") ===
                                 group &&
                               (table.getColumn("type")?.getFilterValue() ?? "") === type
                             }
-                            onCheckedChange={() => {
+                            label={type}
+                            onToggle={() => {
                               const typeFilter =
                                 (table.getColumn("type")?.getFilterValue() ?? "") as string;
                               const groupFilter =
@@ -1961,11 +1945,7 @@ export function useWishlistGearManager({
                                 ]);
                               }
                             }}
-                          >
-                            <Button type="button" className="h-[1.5em] p-0">
-                              {type}
-                            </Button>
-                          </DropdownMenuCheckboxItem>
+                          />
                         ))}
                       </AccordionContent>
                     </AccordionItem>
@@ -1980,20 +1960,11 @@ export function useWishlistGearManager({
         label: "Brand",
         render: (table: ReactTable<WishlistGearItem>) => (
           <FilterTabPanel>
-            <DropdownMenuCheckboxItem
-              side="right"
-              className={cn(
-                "h-[2.5em] w-full border-none pl-0 capitalize outline-none hover:bg-white hover:underline dark:hover:bg-black",
-                !hasActiveWishlistFilters(table) &&
-                  "text-cyan-500 hover:text-cyan-500 dark:hover:text-cyan-500",
-              )}
-              checked={!hasActiveWishlistFilters(table)}
-              onCheckedChange={() => clearWishlistTableFilters(table)}
-            >
-              <Button type="button" className="p-0">
-                All
-              </Button>
-            </DropdownMenuCheckboxItem>
+            <SimpleFilterOption
+              active={!hasActiveWishlistFilters(table)}
+              label="All"
+              onToggle={() => clearWishlistTableFilters(table)}
+            />
             <Separator />
             <Accordion type="single" collapsible className="flex w-full flex-col">
               {Object.keys(manufacturerGroups)
@@ -2009,15 +1980,14 @@ export function useWishlistGearManager({
                     <AccordionContent className="p-0">
                       <Separator className="mb-2 w-1/4" />
                       {manufacturerGroups[group]?.map((manufacturer) => (
-                        <DropdownMenuCheckboxItem
-                          side="right"
+                        <SimpleFilterOption
                           key={manufacturer}
-                          className="w-full border-none pl-0 capitalize outline-none hover:bg-white hover:underline dark:hover:bg-black"
-                          checked={
+                          active={
                             (table.getColumn("manufacturer")?.getFilterValue() ?? "") ===
                             manufacturer
                           }
-                          onCheckedChange={() => {
+                          label={manufacturer}
+                          onToggle={() => {
                             const currentManufacturer =
                               (table.getColumn("manufacturer")?.getFilterValue() ??
                                 "") as string;
@@ -2031,11 +2001,7 @@ export function useWishlistGearManager({
                               ]);
                             }
                           }}
-                        >
-                          <Button type="button" className="h-[1.5em] p-0">
-                            {manufacturer}
-                          </Button>
-                        </DropdownMenuCheckboxItem>
+                        />
                       ))}
                     </AccordionContent>
                   </AccordionItem>
