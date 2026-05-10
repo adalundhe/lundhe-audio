@@ -54,20 +54,12 @@ export function GearManager({
         spendByGroupAreaChart={state.spendByGroupAreaChart}
         formatCurrency={state.formatCurrency}
         abbreviateCurrency={state.abbreviateCurrency}
-        inventorySection={
-          <GearInventoryTable
-            inventoryTableData={state.inventoryTableData}
-            isCreatingInline={state.isCreatingInline}
-            openNewRow={state.openNewRow}
-            inventoryColumns={state.inventoryColumns}
-            selectedInventoryItemId={state.selectedInventoryItemId}
-            handleSelectRow={state.handleSelectRow}
-            inventoryFilterTabs={state.inventoryFilterTabs}
-            renderExpandedInventoryRow={(item: GearItem) => {
-              const liveItem =
-                state.gear.find((gearItem) => gearItem.id === item.id) ?? item;
+        inventorySection={(() => {
+          const renderInventoryEditorPanel = (item: GearItem) => {
+            const liveItem =
+              state.gear.find((gearItem) => gearItem.id === item.id) ?? item;
 
-              return (
+            return (
               <GearInventoryDetailsPanel
                 item={liveItem}
                 editorSection={
@@ -237,30 +229,30 @@ export function GearManager({
                 handleSaveDetails={state.handleSaveDetails}
                 resetDetails={state.resetInlineEditState}
               />
-            )}}
-          />
-        }
+            );
+          };
+          return (
+            <GearInventoryTable
+              inventoryTableData={state.inventoryTableData}
+              isCreatingInline={state.isCreatingInline}
+              openNewRow={state.openNewRow}
+              inventoryColumns={state.inventoryColumns}
+              selectedInventoryItemId={state.selectedInventoryItemId}
+              handleSelectRow={state.handleSelectRow}
+              inventoryFilterTabs={state.inventoryFilterTabs}
+              renderExpandedInventoryRow={renderInventoryEditorPanel}
+              inlineCreateSection={
+                state.isCreatingInline
+                  ? renderInventoryEditorPanel(state.draftInventoryItem)
+                  : null
+              }
+            />
+          );
+        })()}
       />
 
-      <WishlistGearSection
-        items={wishlistState.items}
-        loadError={wishlistLoadError}
-        isCreatingInline={wishlistState.isCreatingInline}
-        openNewRow={wishlistState.openNewRow}
-        summary={wishlistState.wishlistSummary}
-        valueDistributionChartData={wishlistState.wishlistValueDistributionChartData}
-        manufacturerRadialChartData={wishlistState.wishlistManufacturerRadialChartData}
-        valueChartConfig={wishlistState.wishlistValueChartConfig}
-        spendOverTimeChartData={wishlistState.wishlistSpendOverTimeChartData}
-        spendTimelineChartConfig={wishlistState.wishlistSpendTimelineChartConfig}
-        spendByGroupAreaChart={wishlistState.wishlistSpendByGroupAreaChart}
-        formatCurrency={wishlistState.formatCurrency}
-        abbreviateCurrency={wishlistState.abbreviateCurrency}
-        columns={wishlistState.columns}
-        selectedItemId={wishlistState.selectedItemId}
-        handleSelectRow={wishlistState.handleSelectRow}
-        filterTabs={wishlistState.filterTabs}
-        renderExpandedRow={(item) => (
+      {(() => {
+        const renderWishlistEditorPanel = (item: WishlistGearItem) => (
           <WishlistGearInventoryDetailsPanel
             item={item}
             detailsForm={wishlistState.detailsForm}
@@ -409,8 +401,35 @@ export function GearManager({
               ) : null
             }
           />
-        )}
-      />
+        );
+        return (
+          <WishlistGearSection
+            items={wishlistState.items}
+            loadError={wishlistLoadError}
+            isCreatingInline={wishlistState.isCreatingInline}
+            openNewRow={wishlistState.openNewRow}
+            summary={wishlistState.wishlistSummary}
+            valueDistributionChartData={wishlistState.wishlistValueDistributionChartData}
+            manufacturerRadialChartData={wishlistState.wishlistManufacturerRadialChartData}
+            valueChartConfig={wishlistState.wishlistValueChartConfig}
+            spendOverTimeChartData={wishlistState.wishlistSpendOverTimeChartData}
+            spendTimelineChartConfig={wishlistState.wishlistSpendTimelineChartConfig}
+            spendByGroupAreaChart={wishlistState.wishlistSpendByGroupAreaChart}
+            formatCurrency={wishlistState.formatCurrency}
+            abbreviateCurrency={wishlistState.abbreviateCurrency}
+            columns={wishlistState.columns}
+            selectedItemId={wishlistState.selectedItemId}
+            handleSelectRow={wishlistState.handleSelectRow}
+            filterTabs={wishlistState.filterTabs}
+            renderExpandedRow={renderWishlistEditorPanel}
+            inlineCreateSection={
+              wishlistState.isCreatingInline
+                ? renderWishlistEditorPanel(wishlistState.draftItem)
+                : null
+            }
+          />
+        );
+      })()}
 
       <GearTaxonomySection state={state.taxonomyState} />
     </Accordion>

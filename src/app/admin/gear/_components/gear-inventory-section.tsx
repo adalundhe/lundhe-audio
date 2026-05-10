@@ -25,6 +25,7 @@ interface GearInventorySectionProps {
     render: (table: import("@tanstack/react-table").Table<GearItem>) => React.ReactNode;
   }>;
   renderExpandedInventoryRow: (item: GearItem) => React.ReactNode;
+  inlineCreateSection?: React.ReactNode;
 }
 
 interface GearInventoryTableProps
@@ -39,9 +40,15 @@ export const GearInventoryTable = React.memo(function GearInventoryTable({
   handleSelectRow,
   inventoryFilterTabs,
   renderExpandedInventoryRow,
+  inlineCreateSection,
 }: GearInventoryTableProps) {
   return (
     <div className="flex min-w-0 flex-col gap-4">
+      {inlineCreateSection ? (
+        <div className="rounded-md border border-dashed border-foreground/40 bg-muted/20 px-4 py-4">
+          {inlineCreateSection}
+        </div>
+      ) : null}
       <AdminDataTable
         data={inventoryTableData}
         columns={inventoryColumns}
@@ -112,6 +119,7 @@ export const GearInventorySection = React.memo(function GearInventorySection({
   handleSelectRow,
   inventoryFilterTabs,
   renderExpandedInventoryRow,
+  inlineCreateSection,
 }: GearInventorySectionProps) {
   return (
     <SectionAccordionCard
@@ -129,6 +137,7 @@ export const GearInventorySection = React.memo(function GearInventorySection({
         handleSelectRow={handleSelectRow}
         inventoryFilterTabs={inventoryFilterTabs}
         renderExpandedInventoryRow={renderExpandedInventoryRow}
+        inlineCreateSection={inlineCreateSection}
       />
     </SectionAccordionCard>
   );

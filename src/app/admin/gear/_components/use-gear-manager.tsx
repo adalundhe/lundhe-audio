@@ -820,10 +820,7 @@ export function useGearManager({ initialGear }: { initialGear: GearItem[] }) {
       }),
     [detailsForm, form],
   );
-  const inventoryTableData = React.useMemo(
-    () => (isCreatingInline ? [...gear, draftInventoryItem] : gear),
-    [draftInventoryItem, gear, isCreatingInline],
-  );
+  const inventoryTableData = gear;
   const resetServiceLogEditor = React.useCallback(() => {
     setServiceLogForm(emptyServiceLogForm);
     setServiceLogError(null);
@@ -3576,6 +3573,7 @@ export function useGearManager({ initialGear }: { initialGear: GearItem[] }) {
     pendingModelHistoryKeys,
     gear,
     inventoryTableData,
+    draftInventoryItem,
     isCreatingInline,
     inventoryColumns,
     selectedInventoryItemId,
