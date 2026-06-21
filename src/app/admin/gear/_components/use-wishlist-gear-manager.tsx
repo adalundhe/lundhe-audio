@@ -295,10 +295,7 @@ export function useWishlistGearManager({
       }),
     [detailsForm, form],
   );
-  const displayedItems = React.useMemo(
-    () => (isCreatingInline ? [...items, draftItem] : items),
-    [draftItem, isCreatingInline, items],
-  );
+  const displayedItems = items;
 
   const pricingQuery = React.useMemo(
     () =>
@@ -2226,6 +2223,7 @@ export function useWishlistGearManager({
     wishlistSpendTimelineChartConfig,
     wishlistSpendByGroupAreaChart,
     items: displayedItems,
+    draftItem,
     isCreatingInline,
     isEditing,
     form,

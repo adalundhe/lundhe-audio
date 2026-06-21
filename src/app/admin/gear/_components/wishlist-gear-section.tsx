@@ -46,6 +46,7 @@ interface WishlistGearSectionProps {
     render: (table: ReactTable<WishlistGearItem>) => React.ReactNode;
   }>;
   renderExpandedRow: (item: WishlistGearItem) => React.ReactNode;
+  inlineCreateSection?: React.ReactNode;
 }
 
 export const WishlistGearSection = React.memo(function WishlistGearSection({
@@ -67,6 +68,7 @@ export const WishlistGearSection = React.memo(function WishlistGearSection({
   handleSelectRow,
   filterTabs,
   renderExpandedRow,
+  inlineCreateSection,
 }: WishlistGearSectionProps) {
   return (
     <SectionAccordionCard
@@ -93,6 +95,12 @@ export const WishlistGearSection = React.memo(function WishlistGearSection({
           formatCurrency={formatCurrency}
           abbreviateCurrency={abbreviateCurrency}
         />
+
+        {inlineCreateSection ? (
+          <div className="rounded-md border border-dashed border-foreground/40 bg-muted/20 px-4 py-4">
+            {inlineCreateSection}
+          </div>
+        ) : null}
 
         <AdminDataTable
           data={items}
