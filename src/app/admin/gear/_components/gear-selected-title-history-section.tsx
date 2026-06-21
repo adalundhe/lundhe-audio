@@ -26,7 +26,7 @@ type HistorySeries = {
   data: Array<ModelHistoryPoint & { occurredAtLabel?: string }>;
 };
 
-interface GearSelectedTitleHistorySectionProps {
+export interface GearSelectedTitleHistorySectionProps {
   selectedTitleQueries: TitleQuery[];
   availableModelHistorySourceOptions: ChartFilterOption[];
   resolvedVisibleModelHistorySources: Array<"Listing" | "Price Guide">;

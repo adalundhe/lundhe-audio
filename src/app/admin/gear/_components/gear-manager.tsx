@@ -8,8 +8,7 @@ import { GearInventoryTable } from "./gear-inventory-section";
 import { GearInventoryDetailsPanel } from "./gear-inventory-details-panel";
 import { GearMediaSection } from "./gear-media-section";
 import { type GearItem } from "./gear-manager-types";
-import { GearPricingSection } from "./gear-pricing-section";
-import { GearSelectedTitleHistorySection } from "./gear-selected-title-history-section";
+import { GearPricingPanel } from "./gear-pricing-panel";
 import { GearServiceLogSection } from "./gear-service-log-section";
 import { GearSummarySection } from "./gear-summary-section";
 import { GearTaxonomySection } from "./gear-taxonomy-section";
@@ -73,7 +72,9 @@ export function GearManager({
                       handleClearForm={state.handleClearForm}
                       isFormComplete={state.isFormComplete}
                       upsertMutation={state.upsertMutation}
-                      availableManufacturerGroups={state.availableManufacturerGroups}
+                      availableManufacturerGroups={
+                        state.availableManufacturerGroups
+                      }
                       availableGearTypes={state.availableGearTypes}
                       availableGearGroups={state.availableGearGroups}
                       setCustomManufacturers={state.setCustomManufacturers}
@@ -83,101 +84,106 @@ export function GearManager({
                       handleNumberInputWheel={state.handleNumberInputWheel}
                       showActions={false}
                       pricingSection={
-                        <GearPricingSection
+                        <GearPricingPanel
                           pricingError={state.pricingError}
                           priceGuideMatches={state.priceGuideMatches}
                           priceGuideColumns={state.priceGuideColumns}
-                          priceGuideTableResetKey={state.priceGuideTableResetKey}
+                          priceGuideTableResetKey={
+                            state.priceGuideTableResetKey
+                          }
                           priceGuideFilterTabs={state.priceGuideFilterTabs}
                           selectedPriceGuideIds={state.selectedPriceGuideIds}
-                          selectedPriceGuideCount={state.selectedPriceGuideCount}
+                          selectedPriceGuideCount={
+                            state.selectedPriceGuideCount
+                          }
                           selectedAveragePrice={state.selectedAveragePrice}
-                          handleApplyAveragePrice={state.handleApplyAveragePrice}
+                          handleApplyAveragePrice={
+                            state.handleApplyAveragePrice
+                          }
                           handleTogglePriceGuide={state.handleTogglePriceGuide}
                           formatCurrency={state.formatCurrency}
-                          historySection={
-                            <GearSelectedTitleHistorySection
-                              selectedTitleQueries={state.selectedTitleQueries}
-                              availableModelHistorySourceOptions={
-                                state.availableModelHistorySourceOptions
-                              }
-                              resolvedVisibleModelHistorySources={
-                                state.resolvedVisibleModelHistorySources
-                              }
-                              setVisibleModelHistorySources={
-                                state.setVisibleModelHistorySources
-                              }
-                              availableModelHistoryTitleOptions={
-                                state.availableModelHistoryTitleOptions
-                              }
-                              resolvedVisibleModelHistoryTitleKeys={
-                                state.resolvedVisibleModelHistoryTitleKeys
-                              }
-                              setVisibleModelHistoryTitleKeys={
-                                state.setVisibleModelHistoryTitleKeys
-                              }
-                              availableModelHistorySeriesOptions={
-                                state.availableModelHistorySeriesOptions
-                              }
-                              resolvedVisibleModelHistoryModelKeys={
-                                state.resolvedVisibleModelHistoryModelKeys
-                              }
-                              setVisibleModelHistoryModelKeys={
-                                state.setVisibleModelHistoryModelKeys
-                              }
-                              availableModelHistoryManufacturerOptions={
-                                state.availableModelHistoryManufacturerOptions
-                              }
-                              resolvedVisibleModelHistoryManufacturerKeys={
-                                state.resolvedVisibleModelHistoryManufacturerKeys
-                              }
-                              setVisibleModelHistoryManufacturerKeys={
-                                state.setVisibleModelHistoryManufacturerKeys
-                              }
-                              availableModelHistoryYearOptions={
-                                state.availableModelHistoryYearOptions
-                              }
-                              resolvedVisibleModelHistoryYearKeys={
-                                state.resolvedVisibleModelHistoryYearKeys
-                              }
-                              setVisibleModelHistoryYearKeys={
-                                state.setVisibleModelHistoryYearKeys
-                              }
-                              availableModelHistoryConditionOptions={
-                                state.availableModelHistoryConditionOptions
-                              }
-                              resolvedVisibleModelHistoryConditionKeys={
-                                state.resolvedVisibleModelHistoryConditionKeys
-                              }
-                              setVisibleModelHistoryConditionKeys={
-                                state.setVisibleModelHistoryConditionKeys
-                              }
-                              availableModelHistoryCategoryOptions={
-                                state.availableModelHistoryCategoryOptions
-                              }
-                              resolvedVisibleModelHistoryCategoryKeys={
-                                state.resolvedVisibleModelHistoryCategoryKeys
-                              }
-                              setVisibleModelHistoryCategoryKeys={
-                                state.setVisibleModelHistoryCategoryKeys
-                              }
-                              modelHistoryError={state.modelHistoryError}
-                              selectedModelHistoryChartData={
-                                state.selectedModelHistoryChartData
-                              }
-                              isModelHistoryLoading={state.isModelHistoryLoading}
-                              filteredSelectedModelHistoryCount={
-                                state.filteredSelectedModelHistoryCount
-                              }
-                              selectedModelHistoryChartConfig={
-                                state.selectedModelHistoryChartConfig
-                              }
-                              selectedModelHistorySeries={state.selectedModelHistorySeries}
-                              pendingModelHistoryKeys={state.pendingModelHistoryKeys}
-                              formatCurrency={state.formatCurrency}
-                              abbreviateCurrency={state.abbreviateCurrency}
-                            />
+                          selectedTitleQueries={state.selectedTitleQueries}
+                          availableModelHistorySourceOptions={
+                            state.availableModelHistorySourceOptions
                           }
+                          resolvedVisibleModelHistorySources={
+                            state.resolvedVisibleModelHistorySources
+                          }
+                          setVisibleModelHistorySources={
+                            state.setVisibleModelHistorySources
+                          }
+                          availableModelHistoryTitleOptions={
+                            state.availableModelHistoryTitleOptions
+                          }
+                          resolvedVisibleModelHistoryTitleKeys={
+                            state.resolvedVisibleModelHistoryTitleKeys
+                          }
+                          setVisibleModelHistoryTitleKeys={
+                            state.setVisibleModelHistoryTitleKeys
+                          }
+                          availableModelHistorySeriesOptions={
+                            state.availableModelHistorySeriesOptions
+                          }
+                          resolvedVisibleModelHistoryModelKeys={
+                            state.resolvedVisibleModelHistoryModelKeys
+                          }
+                          setVisibleModelHistoryModelKeys={
+                            state.setVisibleModelHistoryModelKeys
+                          }
+                          availableModelHistoryManufacturerOptions={
+                            state.availableModelHistoryManufacturerOptions
+                          }
+                          resolvedVisibleModelHistoryManufacturerKeys={
+                            state.resolvedVisibleModelHistoryManufacturerKeys
+                          }
+                          setVisibleModelHistoryManufacturerKeys={
+                            state.setVisibleModelHistoryManufacturerKeys
+                          }
+                          availableModelHistoryYearOptions={
+                            state.availableModelHistoryYearOptions
+                          }
+                          resolvedVisibleModelHistoryYearKeys={
+                            state.resolvedVisibleModelHistoryYearKeys
+                          }
+                          setVisibleModelHistoryYearKeys={
+                            state.setVisibleModelHistoryYearKeys
+                          }
+                          availableModelHistoryConditionOptions={
+                            state.availableModelHistoryConditionOptions
+                          }
+                          resolvedVisibleModelHistoryConditionKeys={
+                            state.resolvedVisibleModelHistoryConditionKeys
+                          }
+                          setVisibleModelHistoryConditionKeys={
+                            state.setVisibleModelHistoryConditionKeys
+                          }
+                          availableModelHistoryCategoryOptions={
+                            state.availableModelHistoryCategoryOptions
+                          }
+                          resolvedVisibleModelHistoryCategoryKeys={
+                            state.resolvedVisibleModelHistoryCategoryKeys
+                          }
+                          setVisibleModelHistoryCategoryKeys={
+                            state.setVisibleModelHistoryCategoryKeys
+                          }
+                          modelHistoryError={state.modelHistoryError}
+                          selectedModelHistoryChartData={
+                            state.selectedModelHistoryChartData
+                          }
+                          isModelHistoryLoading={state.isModelHistoryLoading}
+                          filteredSelectedModelHistoryCount={
+                            state.filteredSelectedModelHistoryCount
+                          }
+                          selectedModelHistoryChartConfig={
+                            state.selectedModelHistoryChartConfig
+                          }
+                          selectedModelHistorySeries={
+                            state.selectedModelHistorySeries
+                          }
+                          pendingModelHistoryKeys={
+                            state.pendingModelHistoryKeys
+                          }
+                          abbreviateCurrency={state.abbreviateCurrency}
                         />
                       }
                     />
@@ -269,7 +275,8 @@ export function GearManager({
             handlePromote={wishlistState.handlePromote}
             resetDetails={wishlistState.resetInlineEditState}
             editorSection={
-              wishlistState.isCreatingInline || wishlistState.form.id === item.id ? (
+              wishlistState.isCreatingInline ||
+              wishlistState.form.id === item.id ? (
                 <GearEditorForm
                   idPrefix={`wishlist-inline-${item.id}`}
                   isEditing
@@ -294,107 +301,112 @@ export function GearManager({
                   priceLabel="Target Price (USD)"
                   quantityLabel="Desired Quantity"
                   pricingSection={
-                    <GearPricingSection
+                    <GearPricingPanel
                       pricingError={wishlistState.pricingError}
                       priceGuideMatches={wishlistState.priceGuideMatches}
                       priceGuideColumns={wishlistState.priceGuideColumns}
-                      priceGuideTableResetKey={wishlistState.priceGuideTableResetKey}
+                      priceGuideTableResetKey={
+                        wishlistState.priceGuideTableResetKey
+                      }
                       priceGuideFilterTabs={wishlistState.priceGuideFilterTabs}
-                      selectedPriceGuideIds={wishlistState.selectedPriceGuideIds}
-                      selectedPriceGuideCount={wishlistState.selectedPriceGuideCount}
+                      selectedPriceGuideIds={
+                        wishlistState.selectedPriceGuideIds
+                      }
+                      selectedPriceGuideCount={
+                        wishlistState.selectedPriceGuideCount
+                      }
                       selectedAveragePrice={wishlistState.selectedAveragePrice}
                       handleApplyAveragePrice={
                         wishlistState.handleApplyAveragePrice
                       }
-                      handleTogglePriceGuide={wishlistState.handleTogglePriceGuide}
-                      formatCurrency={wishlistState.formatCurrency}
-                      historySection={
-                        <GearSelectedTitleHistorySection
-                          selectedTitleQueries={wishlistState.selectedTitleQueries}
-                          availableModelHistorySourceOptions={
-                            wishlistState.availableModelHistorySourceOptions
-                          }
-                          resolvedVisibleModelHistorySources={
-                            wishlistState.resolvedVisibleModelHistorySources
-                          }
-                          setVisibleModelHistorySources={
-                            wishlistState.setVisibleModelHistorySources
-                          }
-                          availableModelHistoryTitleOptions={
-                            wishlistState.availableModelHistoryTitleOptions
-                          }
-                          resolvedVisibleModelHistoryTitleKeys={
-                            wishlistState.resolvedVisibleModelHistoryTitleKeys
-                          }
-                          setVisibleModelHistoryTitleKeys={
-                            wishlistState.setVisibleModelHistoryTitleKeys
-                          }
-                          availableModelHistorySeriesOptions={
-                            wishlistState.availableModelHistorySeriesOptions
-                          }
-                          resolvedVisibleModelHistoryModelKeys={
-                            wishlistState.resolvedVisibleModelHistoryModelKeys
-                          }
-                          setVisibleModelHistoryModelKeys={
-                            wishlistState.setVisibleModelHistoryModelKeys
-                          }
-                          availableModelHistoryManufacturerOptions={
-                            wishlistState.availableModelHistoryManufacturerOptions
-                          }
-                          resolvedVisibleModelHistoryManufacturerKeys={
-                            wishlistState.resolvedVisibleModelHistoryManufacturerKeys
-                          }
-                          setVisibleModelHistoryManufacturerKeys={
-                            wishlistState.setVisibleModelHistoryManufacturerKeys
-                          }
-                          availableModelHistoryYearOptions={
-                            wishlistState.availableModelHistoryYearOptions
-                          }
-                          resolvedVisibleModelHistoryYearKeys={
-                            wishlistState.resolvedVisibleModelHistoryYearKeys
-                          }
-                          setVisibleModelHistoryYearKeys={
-                            wishlistState.setVisibleModelHistoryYearKeys
-                          }
-                          availableModelHistoryConditionOptions={
-                            wishlistState.availableModelHistoryConditionOptions
-                          }
-                          resolvedVisibleModelHistoryConditionKeys={
-                            wishlistState.resolvedVisibleModelHistoryConditionKeys
-                          }
-                          setVisibleModelHistoryConditionKeys={
-                            wishlistState.setVisibleModelHistoryConditionKeys
-                          }
-                          availableModelHistoryCategoryOptions={
-                            wishlistState.availableModelHistoryCategoryOptions
-                          }
-                          resolvedVisibleModelHistoryCategoryKeys={
-                            wishlistState.resolvedVisibleModelHistoryCategoryKeys
-                          }
-                          setVisibleModelHistoryCategoryKeys={
-                            wishlistState.setVisibleModelHistoryCategoryKeys
-                          }
-                          modelHistoryError={wishlistState.modelHistoryError}
-                          selectedModelHistoryChartData={
-                            wishlistState.selectedModelHistoryChartData
-                          }
-                          isModelHistoryLoading={wishlistState.isModelHistoryLoading}
-                          filteredSelectedModelHistoryCount={
-                            wishlistState.filteredSelectedModelHistoryCount
-                          }
-                          selectedModelHistoryChartConfig={
-                            wishlistState.selectedModelHistoryChartConfig
-                          }
-                          selectedModelHistorySeries={
-                            wishlistState.selectedModelHistorySeries
-                          }
-                          pendingModelHistoryKeys={
-                            wishlistState.pendingModelHistoryKeys
-                          }
-                          formatCurrency={wishlistState.formatCurrency}
-                          abbreviateCurrency={wishlistState.abbreviateCurrency}
-                        />
+                      handleTogglePriceGuide={
+                        wishlistState.handleTogglePriceGuide
                       }
+                      formatCurrency={wishlistState.formatCurrency}
+                      selectedTitleQueries={wishlistState.selectedTitleQueries}
+                      availableModelHistorySourceOptions={
+                        wishlistState.availableModelHistorySourceOptions
+                      }
+                      resolvedVisibleModelHistorySources={
+                        wishlistState.resolvedVisibleModelHistorySources
+                      }
+                      setVisibleModelHistorySources={
+                        wishlistState.setVisibleModelHistorySources
+                      }
+                      availableModelHistoryTitleOptions={
+                        wishlistState.availableModelHistoryTitleOptions
+                      }
+                      resolvedVisibleModelHistoryTitleKeys={
+                        wishlistState.resolvedVisibleModelHistoryTitleKeys
+                      }
+                      setVisibleModelHistoryTitleKeys={
+                        wishlistState.setVisibleModelHistoryTitleKeys
+                      }
+                      availableModelHistorySeriesOptions={
+                        wishlistState.availableModelHistorySeriesOptions
+                      }
+                      resolvedVisibleModelHistoryModelKeys={
+                        wishlistState.resolvedVisibleModelHistoryModelKeys
+                      }
+                      setVisibleModelHistoryModelKeys={
+                        wishlistState.setVisibleModelHistoryModelKeys
+                      }
+                      availableModelHistoryManufacturerOptions={
+                        wishlistState.availableModelHistoryManufacturerOptions
+                      }
+                      resolvedVisibleModelHistoryManufacturerKeys={
+                        wishlistState.resolvedVisibleModelHistoryManufacturerKeys
+                      }
+                      setVisibleModelHistoryManufacturerKeys={
+                        wishlistState.setVisibleModelHistoryManufacturerKeys
+                      }
+                      availableModelHistoryYearOptions={
+                        wishlistState.availableModelHistoryYearOptions
+                      }
+                      resolvedVisibleModelHistoryYearKeys={
+                        wishlistState.resolvedVisibleModelHistoryYearKeys
+                      }
+                      setVisibleModelHistoryYearKeys={
+                        wishlistState.setVisibleModelHistoryYearKeys
+                      }
+                      availableModelHistoryConditionOptions={
+                        wishlistState.availableModelHistoryConditionOptions
+                      }
+                      resolvedVisibleModelHistoryConditionKeys={
+                        wishlistState.resolvedVisibleModelHistoryConditionKeys
+                      }
+                      setVisibleModelHistoryConditionKeys={
+                        wishlistState.setVisibleModelHistoryConditionKeys
+                      }
+                      availableModelHistoryCategoryOptions={
+                        wishlistState.availableModelHistoryCategoryOptions
+                      }
+                      resolvedVisibleModelHistoryCategoryKeys={
+                        wishlistState.resolvedVisibleModelHistoryCategoryKeys
+                      }
+                      setVisibleModelHistoryCategoryKeys={
+                        wishlistState.setVisibleModelHistoryCategoryKeys
+                      }
+                      modelHistoryError={wishlistState.modelHistoryError}
+                      selectedModelHistoryChartData={
+                        wishlistState.selectedModelHistoryChartData
+                      }
+                      isModelHistoryLoading={
+                        wishlistState.isModelHistoryLoading
+                      }
+                      filteredSelectedModelHistoryCount={
+                        wishlistState.filteredSelectedModelHistoryCount
+                      }
+                      selectedModelHistoryChartConfig={
+                        wishlistState.selectedModelHistoryChartConfig
+                      }
+                      selectedModelHistorySeries={
+                        wishlistState.selectedModelHistorySeries
+                      }
+                      pendingModelHistoryKeys={
+                        wishlistState.pendingModelHistoryKeys
+                      }
+                      abbreviateCurrency={wishlistState.abbreviateCurrency}
                     />
                   }
                 />
@@ -409,11 +421,19 @@ export function GearManager({
             isCreatingInline={wishlistState.isCreatingInline}
             openNewRow={wishlistState.openNewRow}
             summary={wishlistState.wishlistSummary}
-            valueDistributionChartData={wishlistState.wishlistValueDistributionChartData}
-            manufacturerRadialChartData={wishlistState.wishlistManufacturerRadialChartData}
+            valueDistributionChartData={
+              wishlistState.wishlistValueDistributionChartData
+            }
+            manufacturerRadialChartData={
+              wishlistState.wishlistManufacturerRadialChartData
+            }
             valueChartConfig={wishlistState.wishlistValueChartConfig}
-            spendOverTimeChartData={wishlistState.wishlistSpendOverTimeChartData}
-            spendTimelineChartConfig={wishlistState.wishlistSpendTimelineChartConfig}
+            spendOverTimeChartData={
+              wishlistState.wishlistSpendOverTimeChartData
+            }
+            spendTimelineChartConfig={
+              wishlistState.wishlistSpendTimelineChartConfig
+            }
             spendByGroupAreaChart={wishlistState.wishlistSpendByGroupAreaChart}
             formatCurrency={wishlistState.formatCurrency}
             abbreviateCurrency={wishlistState.abbreviateCurrency}

@@ -22,12 +22,14 @@ import { Button } from "~/components/ui/button";
 import { type ChartConfig } from "~/components/ui/chart";
 import { Checkbox } from "~/components/ui/checkbox";
 import { Separator } from "~/components/ui/separator";
+import { useDebouncedValue } from "~/hooks/use-debounced-value";
 import { cn } from "~/lib/utils";
 import { api } from "~/trpc/react";
-import type {
-  GearItem,
-  ModelHistoryPoint,
-  PriceGuideMatch,
+import {
+  type GearItem,
+  type ModelHistoryPoint,
+  type PriceGuideMatch,
+  PRICING_QUERY_DEBOUNCE_MS,
 } from "./gear-manager-types";
 import type { ChartFilterOption } from "./chart-filter-dropdown";
 import {
@@ -218,6 +220,11 @@ export function useWishlistGearManager({
     setForm((current) => (wishlistFormsEqual(current, nextForm) ? current : nextForm));
   }, []);
 
+  // Live mirror of `form` so stable callbacks can read the latest values
+  // without taking `form` as a dependency (which changes on every keystroke).
+  const formRef = React.useRef(form);
+  formRef.current = form;
+
   const isEditing = form.id !== null;
   const isCreatingInline = selectedItemId === NEW_WISHLIST_ROW_ID && form.id === null;
   const parsedPrice = parseNumber(form.price);
@@ -298,7 +305,12 @@ export function useWishlistGearManager({
       }).trim(),
     [form.manufacturer, form.name],
   );
-  const deferredPricingQuery = React.useDeferredValue(pricingQuery);
+  // Idle-debounce the typing-driven query so the Reverb search and its
+  // table/charts only update once the user pauses.
+  const deferredPricingQuery = useDebouncedValue(
+    pricingQuery,
+    PRICING_QUERY_DEBOUNCE_MS,
+  );
 
   const selectedPriceGuideMatches = React.useMemo(
     () =>
@@ -769,6 +781,13 @@ export function useWishlistGearManager({
   });
   const modelHistorySearchMutation = api.adminGear.searchModelHistory.useMutation();
 
+  // Hold the mutation in a ref so the search effect does not re-run (and tear
+  // down/re-arm) on every render just because tRPC returns a fresh object.
+  const priceGuideSearchMutationRef = React.useRef(priceGuideSearchMutation);
+  priceGuideSearchMutationRef.current = priceGuideSearchMutation;
+
+  // deferredPricingQuery is already idle-debounced upstream, so fire the search
+  // as soon as it settles to a new, non-empty value.
   React.useEffect(() => {
     if (!deferredPricingQuery) {
       if (priceGuideMatches.length > 0 || selectedPriceGuideIds.length > 0 || pricingError) {
@@ -790,19 +809,9 @@ export function useWishlistGearManager({
       return;
     }
 
-    const timeoutId = window.setTimeout(() => {
-      if (
-        deferredPricingQuery !== latestPricingRequestRef.current &&
-        deferredPricingQuery !== lastCompletedPricingQueryRef.current
-      ) {
-        priceGuideSearchMutation.mutate({ query: deferredPricingQuery });
-      }
-    }, 350);
-
-    return () => window.clearTimeout(timeoutId);
+    priceGuideSearchMutationRef.current.mutate({ query: deferredPricingQuery });
   }, [
     priceGuideMatches.length,
-    priceGuideSearchMutation,
     pricingError,
     deferredPricingQuery,
     selectedPriceGuideIds.length,
@@ -1392,19 +1401,22 @@ export function useWishlistGearManager({
     setDetailsError(null);
   }, [handleClearForm, isCreatingInline, replaceForm, selectedItem]);
 
-  const handleApplyAveragePrice = (event?: React.MouseEvent<HTMLButtonElement>) => {
-    event?.preventDefault();
-    event?.stopPropagation();
+  const handleApplyAveragePrice = React.useCallback(
+    (event?: React.MouseEvent<HTMLButtonElement>) => {
+      event?.preventDefault();
+      event?.stopPropagation();
 
-    if (selectedAveragePrice === null) {
-      return;
-    }
+      if (selectedAveragePrice === null) {
+        return;
+      }
 
-    replaceForm({
-      ...form,
-      price: selectedAveragePrice.toFixed(2),
-    });
-  };
+      replaceForm({
+        ...formRef.current,
+        price: selectedAveragePrice.toFixed(2),
+      });
+    },
+    [replaceForm, selectedAveragePrice],
+  );
 
   const handleStatusChange = React.useCallback(
     (status: WishlistStatus) => {

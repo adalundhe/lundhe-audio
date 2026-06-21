@@ -16,7 +16,7 @@ type FilterTab = {
   render: (table: ReactTable<PriceGuideMatch>) => React.ReactNode;
 };
 
-interface GearPricingSectionProps {
+export interface GearPricingSectionProps {
   pricingError: string | null;
   priceGuideMatches: PriceGuideMatch[];
   priceGuideColumns: AdminDataTableColumnDef<PriceGuideMatch>[];
