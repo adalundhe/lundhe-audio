@@ -63,6 +63,7 @@ import {
 import { Checkbox } from "~/components/ui/checkbox";
 import { Progress } from "~/components/ui/progress";
 import { Separator } from "~/components/ui/separator";
+import { useDebouncedValue } from "~/hooks/use-debounced-value";
 import { cn } from "~/lib/utils";
 import { api } from "~/trpc/react";
 import { type ChartFilterOption } from "./chart-filter-panel";
@@ -76,6 +77,7 @@ import {
   type ModelHistoryPoint,
   type PriceGuideMatch,
   type ServiceLogFormState,
+  PRICING_QUERY_DEBOUNCE_MS,
   gearStatusMetadata,
 } from "./gear-manager-types";
 import { buildManufacturerRadialData } from "./manufacturer-radial-chart-helpers";
@@ -908,13 +910,24 @@ export function useGearManager({ initialGear }: { initialGear: GearItem[] }) {
     serviceLogForm.serviceType.trim() !== "" &&
     serviceLogForm.serviceDate.trim() !== "";
   const isEditingServiceLog = editingServiceLogId !== null;
-  const defaultPricingQuery = buildDefaultReverbPricingQuery({
-    manufacturer: form.manufacturer,
-    name: form.name,
-  });
+  const defaultPricingQuery = React.useMemo(
+    () =>
+      buildDefaultReverbPricingQuery({
+        manufacturer: form.manufacturer,
+        name: form.name,
+      }).trim(),
+    [form.manufacturer, form.name],
+  );
+  // Idle-debounce the typing-driven query so the Reverb search and its
+  // table/charts only update once the user pauses. Manual/hydrate paths
+  // (resetPricingLookup, draft hydration) still set pricingQuery immediately.
+  const debouncedDefaultPricingQuery = useDebouncedValue(
+    defaultPricingQuery,
+    PRICING_QUERY_DEBOUNCE_MS,
+  );
   React.useEffect(() => {
-    setPricingQuery(defaultPricingQuery.trim());
-  }, [defaultPricingQuery]);
+    setPricingQuery(debouncedDefaultPricingQuery);
+  }, [debouncedDefaultPricingQuery]);
   const selectedPriceGuideMatches = React.useMemo(
     () =>
       priceGuideMatches.filter(
@@ -1995,6 +2008,13 @@ export function useGearManager({ initialGear }: { initialGear: GearItem[] }) {
   });
   const modelHistorySearchMutation = api.adminGear.searchModelHistory.useMutation();
 
+  // Hold the mutation in a ref so the search effect does not re-run (and tear
+  // down/re-arm) on every render just because tRPC returns a fresh object.
+  const priceGuideSearchMutationRef = React.useRef(priceGuideSearchMutation);
+  priceGuideSearchMutationRef.current = priceGuideSearchMutation;
+
+  // pricingQuery is already idle-debounced upstream, so fire the search as soon
+  // as it settles to a new, non-empty value.
   React.useEffect(() => {
     const query = pricingQuery.trim();
 
@@ -2022,21 +2042,9 @@ export function useGearManager({ initialGear }: { initialGear: GearItem[] }) {
       return;
     }
 
-    const timeoutId = window.setTimeout(() => {
-      if (
-        query !== latestPricingRequestRef.current &&
-        query !== lastCompletedPricingQueryRef.current
-      ) {
-        priceGuideSearchMutation.mutate({ query });
-      }
-    }, 350);
-
-    return () => {
-      window.clearTimeout(timeoutId);
-    };
+    priceGuideSearchMutationRef.current.mutate({ query });
   }, [
     priceGuideMatches.length,
-    priceGuideSearchMutation,
     pricingError,
     pricingQuery,
     selectedPriceGuideIds.length,
@@ -2516,20 +2524,23 @@ export function useGearManager({ initialGear }: { initialGear: GearItem[] }) {
     });
   }, []);
 
-  const handleApplyAveragePrice = (event?: React.MouseEvent<HTMLButtonElement>) => {
-    event?.preventDefault();
-    event?.stopPropagation();
+  const handleApplyAveragePrice = React.useCallback(
+    (event?: React.MouseEvent<HTMLButtonElement>) => {
+      event?.preventDefault();
+      event?.stopPropagation();
 
-    if (selectedAveragePrice === null) {
-      return;
-    }
+      if (selectedAveragePrice === null) {
+        return;
+      }
 
-    setError(null);
-    setForm((current) => ({
-      ...current,
-      price: selectedAveragePrice.toFixed(2),
-    }));
-  };
+      setError(null);
+      setForm((current) => ({
+        ...current,
+        price: selectedAveragePrice.toFixed(2),
+      }));
+    },
+    [selectedAveragePrice],
+  );
 
   const gearTypes = React.useMemo(
     () => [...new Set(gear.map((item) => item.type))].sort(),

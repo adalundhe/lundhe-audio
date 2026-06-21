@@ -12,6 +12,13 @@ export type GearStatus = GearItem["status"];
 export type GearMediaUploadInstruction =
   RouterOutputs["adminGear"]["prepareMediaUpload"];
 
+/**
+ * Idle delay (ms) before a form's name/manufacturer change is committed to the
+ * Reverb pricing query. Keeps typing responsive: the price-guide search and its
+ * table/charts only re-render once the user pauses.
+ */
+export const PRICING_QUERY_DEBOUNCE_MS = 1000;
+
 export interface GearFormState {
   id: string | null;
   name: string;
